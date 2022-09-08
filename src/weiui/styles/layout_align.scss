@@ -1,0 +1,23 @@
+@each $short, $long in start flex-start, end flex-end, center center, baseline baseline,
+  stretch stretch
+{
+  .items-#{$short} {
+    align-items: $long;
+  }
+}
+
+@each $short, $long in start flex-start, end flex-end, center center, between space-between,
+  around space-around, evenly space-evenly
+{
+  .content-#{$short} {
+    align-content: $long;
+  }
+}
+
+@each $short, $long in auto auto, start flex-start, end flex-end, center center, baseline baseline,
+  stretch stretch
+{
+  .self-#{$short} {
+    align-self: $long;
+  }
+}

@@ -1,0 +1,35 @@
+.flex {
+  display: flex;
+  flex-direction: row;
+}
+
+@each $short, $long in row row, row-reverse row-reverse, col column, col-reverse column-reverse {
+  .flex-#{$short} {
+    flex-direction: $long;
+  }
+}
+
+@each $val in wrap, wrap-reverse, nowrap {
+  .flex-#{$val} {
+    flex-wrap: $val;
+  }
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+@each $short, $long in start flex-start, end flex-end, center center, between space-between,
+  around space-around, evenly space-evenly
+{
+  .justify-#{$short} {
+    justify-content: $long;
+  }
+}
+
+// 定义flex等分
+@for $i from 0 through 12 {
+  .flex-#{$i} {
+    flex: $i;
+  }
+}

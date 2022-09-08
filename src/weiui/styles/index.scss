@@ -1,0 +1,11 @@
+@import './color.scss';
+@import './layout.scss';
+
+page {
+  // 页面背景色
+  --color-page-bg-gray: #f2f3f5;
+
+  @each $name, $color in $colors {
+    --color-#{$name}: #{$color};
+  }
+}

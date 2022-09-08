@@ -1,0 +1,92 @@
+@import './layout_flex.scss';
+@import './layout_align.scss';
+@import './layout_justify.scss';
+@import './layout_margin.scss';
+@import './layout_font.scss';
+@import './layout_border.scss';
+@import './layout_float.scss';
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+// nvue不能用标签命名样式，不能放在微信组件中，否则微信开发工具会报警告，无法使用标签名当做选择器
+/* #ifndef APP-NVUE */
+image {
+  display: inline-block;
+}
+
+// 在weex，也即nvue中，所有元素默认为border-box
+view,
+text {
+  box-sizing: border-box;
+}
+/* #endif */
+
+.width-full {
+  width: 100%;
+}
+.width-min {
+  width: min-content;
+}
+.width-max {
+  width: max-content;
+}
+
+.width-50 {
+  width: 50%;
+}
+
+.height-full {
+  height: 100%;
+}
+
+.block {
+  display: block;
+}
+
+.color-primary {
+  color: var(--color-primary);
+}
+
+.text-white {
+  color: #fff;
+}
+
+.text-black {
+  color: #323233;
+}
+.text-black-2 {
+  color: #646566;
+}
+.text-black-3 {
+  color: #969799;
+}
+.text-black-4 {
+  color: #7d7e80;
+}
+.text-black-5 {
+  color: #666666;
+}
+
+.text-gray {
+  color: #eee;
+}
+.text-yellow {
+  color: var(--color-warning);
+}
+.text-red {
+  color: var(--color-danger);
+}
+
+.bg-white {
+  background-color: #fff;
+}
+
+.bg-hover {
+  background-color: #f7f8f9 !important;
+}

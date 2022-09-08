@@ -1,0 +1,19 @@
+@each $short, $long in start flex-start, end flex-end, center center, stretch stretch {
+  .justify-items-#{$short} {
+    justify-items: $long;
+  }
+}
+
+@each $short, $long in start flex-start, end flex-end, center center, between space-between,
+  around space-around, evenly space-evenly
+{
+  .justify-#{$short} {
+    justify-content: $long;
+  }
+}
+
+@each $short in auto, start, end, center, baseline, stretch {
+  .justify-self-#{$short} {
+    justify-self: $short;
+  }
+}

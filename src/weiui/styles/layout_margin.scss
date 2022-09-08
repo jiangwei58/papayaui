@@ -1,0 +1,40 @@
+// 定义内外边距，历遍1-80
+@for $i from 0 through 80 {
+  // 只要双数和能被5除尽的数
+  @if $i % 2 == 0 or $i % 5 == 0 {
+    .m-#{$i} {
+      margin: $i + rpx !important;
+    }
+
+    .p-#{$i} {
+      padding: $i + rpx !important;
+    }
+
+    .mx-#{$i} {
+      margin-left: $i + rpx;
+      margin-right: $i + rpx;
+    }
+    .my-#{$i} {
+      margin-top: $i + rpx;
+      margin-bottom: $i + rpx;
+    }
+    .px-#{$i} {
+      padding-left: $i + rpx;
+      padding-right: $i + rpx;
+    }
+    .py-#{$i} {
+      padding-top: $i + rpx;
+      padding-bottom: $i + rpx;
+    }
+
+    @each $short, $long in l left, t top, r right, b bottom {
+      .m#{$short}-#{$i} {
+        margin-#{$long}: $i + rpx !important;
+      }
+
+      .p#{$short}-#{$i} {
+        padding-#{$long}: $i + rpx !important;
+      }
+    }
+  }
+}

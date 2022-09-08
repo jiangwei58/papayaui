@@ -1,0 +1,17 @@
+{
+  "pages": [
+    {
+      "path": "pages/example/index",
+      "style": {
+        "navigationBarTitleText": "示例"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "weiui",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#F2F3F5",
+    "usingComponents": {}
+  }
+}

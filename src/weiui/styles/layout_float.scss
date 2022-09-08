@@ -1,0 +1,12 @@
+@each $val in left, right, none {
+  .float-#{$val} {
+    float: $val;
+  }
+}
+
+.clearfix:after {
+  content: '';
+  display: block;
+  visibility: hidden;
+  clear: both;
+}

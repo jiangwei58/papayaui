@@ -1,0 +1,74 @@
+/* start--Retina 屏幕下的 1px 边框--start */
+.border,
+.border-bottom,
+.border-left,
+.border-right,
+.border-top,
+.border-top-bottom {
+  position: relative;
+}
+
+.border-bottom:after,
+.border-left:after,
+.border-right:after,
+.border-top-bottom:after,
+.border-top:after,
+.border:after {
+  /* #ifndef APP-NVUE */
+  content: ' ';
+  /* #endif */
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  box-sizing: border-box;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  // 多加0.1%，能解决有时候边框缺失的问题
+  width: 199.8%;
+  height: 199.7%;
+  transform: scale(0.5, 0.5);
+  border: 0 solid #e4e7ed;
+  z-index: 2;
+}
+
+.border-top:after {
+  border-top-width: 1px;
+}
+
+.border-left:after {
+  border-left-width: 1px;
+}
+
+.border-right:after {
+  border-right-width: 1px;
+}
+
+.border-bottom:after {
+  border-bottom-width: 1px;
+}
+
+.border-top-bottom:after {
+  border-width: 1px 0;
+}
+
+.border:after {
+  border-width: 1px;
+}
+/* end--Retina 屏幕下的 1px 边框--end */
+
+// 定义圆角
+@for $i from 3 through 35 {
+  .rounded-#{$i} {
+    border-radius: #{$i}rpx;
+  }
+}
+
+// 盒子模型
+.box-border {
+  box-sizing: border-box;
+}
+
+.box-content {
+  box-sizing: content-box;
+}

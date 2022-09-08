@@ -1,0 +1,15 @@
+// 主色
+$color-primary: #009c5d;
+// 警告色
+$color-warning: #faab0c;
+// 危险色
+$color-danger: #fa1919;
+// 错误色
+$color-error: #ee0a24;
+
+$colors: (
+  primary: $color-primary,
+  warning: $color-warning,
+  danger: $color-danger,
+  error: $color-error,
+);
