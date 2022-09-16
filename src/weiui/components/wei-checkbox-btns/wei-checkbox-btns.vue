@@ -1,16 +1,20 @@
 <template>
   <view
-    class="wei-checkbox-btns"
-    :style="{ gridTemplateColumns: `repeat(${column}, 1fr)`, gap: getUnitValue(gap) }"
+    class="wei-checkbox-btns grid"
+    :class="[`grid-cols-${column}`]"
+    :style="{ gap: getUnitValue(gap) }"
   >
     <view
       v-for="(item, index) in options"
       :key="index"
-      class="wei-checkbox-btn"
+      class="wei-checkbox-btn text-30 text-black rounded-4 text-center"
       :class="{
-        active: Array.isArray(modelValue)
-          ? modelValue.includes(item[valueKey])
-          : item[valueKey] === modelValue,
+        active:
+          typeof modelValue !== 'undefined'
+            ? Array.isArray(modelValue)
+              ? modelValue.includes(item[valueKey])
+              : item[valueKey] === modelValue
+            : false,
       }"
       :style="{ backgroundColor: bgColor, borderColor: bgColor }"
       @tap="onSelect(item, index)"
@@ -38,13 +42,13 @@ interface OwnProps {
 
 const props = withDefaults(defineProps<OwnProps>(), {
   column: 3,
-  gap: '0',
+  gap: '20',
   modelValue: undefined,
   options: () => [],
   labelKey: 'label',
   valueKey: 'value',
   multiple: false,
-  bgColor: '#fff',
+  bgColor: '#F2F3F5',
 })
 
 const emit = defineEmits<{
@@ -82,14 +86,9 @@ const onSelect = (item: WeiCheckboxItem, index: number) => {
 
 <style lang="scss" scoped>
 .wei-checkbox-btns {
-  display: grid;
   .wei-checkbox-btn {
     line-height: 64rpx;
     height: 64rpx;
-    font-size: 30rpx;
-    color: var(--text-color-black);
-    border-radius: 4rpx;
-    text-align: center;
     border-width: 2rpx;
     border-style: solid;
     &.active {

@@ -6,7 +6,12 @@
       </view>
     </WeiSticky>
 
-    <view class="relative">
+    <view
+      class="relative"
+      :style="{
+        height: partialContent ? `calc(100vh - ${headerHeight}px - ${bottomHeight}px)` : 'auto',
+      }"
+    >
       <slot></slot>
 
       <WeiWatermark
@@ -31,19 +36,20 @@
 </template>
 
 <script lang="ts" setup>
+import { getCurrentInstance, nextTick, onMounted, ref, toRefs } from 'vue'
 import useRect from '../../hooks/useRect'
-import timeFormat from '../../utils/timeFormat'
-import { computed, getCurrentInstance, nextTick, onMounted, ref, toRefs } from 'vue'
 import WeiSafeBottom from '../wei-safe-bottom/wei-safe-bottom.vue'
 import WeiSticky from '../wei-sticky/wei-sticky.vue'
 import WeiWatermark from '../wei-watermark/wei-watermark.vue'
 
 interface OwnProps {
-  safeBottom?: boolean
-  headerBgColor?: string
-  bgColor?: string
-  showFixedBottom?: boolean
-  showWatermark?: boolean
+  safeBottom?: boolean // 是否填充底部安全区
+  headerBgColor?: string // 头部背景色
+  bgColor?: string // 背景色
+  showFixedBottom?: boolean // 是否显示固定底部
+  showWatermark?: boolean // 是否显示水印
+  watermarkContents?: string[] // 水印内容
+  partialContent?: boolean // 是否局部内容布局，默认内容在页面，使用页面滚动；如需内容区只占中间部分设为true
 }
 
 const props = withDefaults(defineProps<OwnProps>(), {
@@ -52,17 +58,22 @@ const props = withDefaults(defineProps<OwnProps>(), {
   bgColor: 'transparent',
   showFixedBottom: true,
   showWatermark: false,
+  watermarkContents: () => [],
 })
 
 const { showWatermark } = toRefs(props)
 
-const bottomHeight = ref(34)
+const headerHeight = ref<number>(0)
+const bottomHeight = ref<number>(34)
 
 const internalInstance = getCurrentInstance()
 
 const updateHeight = () => {
   nextTick(() => {
     if (!internalInstance) return
+    useRect(internalInstance, '.container-header').then((res) => {
+      headerHeight.value = res.height || 0
+    })
     useRect(internalInstance, '.container-bottom-fixed').then((res) => {
       bottomHeight.value = res.height || 0
     })
@@ -71,12 +82,6 @@ const updateHeight = () => {
 
 onMounted(() => {
   updateHeight()
-})
-
-const watermarkContents = computed<string[]>(() => {
-  const name = `姓名 2021040201`
-  const time = timeFormat(new Date().getTime(), 'YYYY-MM-DD HH:mm:ss')
-  return [name, time]
 })
 
 defineExpose({
