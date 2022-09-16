@@ -1,0 +1,74 @@
+.grid {
+  display: grid;
+}
+
+// 列数
+@for $i from 0 through 12 {
+  @if $i == 0 {
+    $i: none;
+  }
+  .grid-cols-#{$i} {
+    grid-template-columns: repeat($i, minmax(0, 1fr));
+  }
+}
+
+// 行数
+@for $i from 0 through 6 {
+  @if $i == 0 {
+    $i: none;
+  }
+  .grid-rows-#{$i} {
+    grid-template-rows: repeat($i, minmax(0, 1fr));
+  }
+}
+
+@each $short, $long in col column, row row {
+  // 占用格数
+  @for $i from 1 through 12 {
+    .#{$short}-span-#{$i} {
+      grid-#{$long}: span $i / span $i;
+    }
+  }
+  .#{$short}-auto {
+    grid-#{$long}: auto;
+  }
+  .#{$short}-span-full {
+    grid-#{$long}: 1 / -1;
+  }
+
+  // 起始格
+  @for $i from 0 through 13 {
+    @if $i == 0 {
+      $i: auto;
+    }
+    .#{$short}-start-#{$i} {
+      grid-#{$long}-start: $i;
+    }
+  }
+
+  // 结束格
+  @for $i from 0 through 13 {
+    @if $i == 0 {
+      $i: auto;
+    }
+    .#{$short}-end-#{$i} {
+      grid-#{$long}-end: $i;
+    }
+  }
+}
+
+// 间隔
+@for $i from 0 through 30 {
+  // 只要双数和能被5除尽的数
+  @if $i % 2 == 0 or $i % 5 == 0 {
+    .gap-#{$i} {
+      gap: $i + rpx;
+    }
+    .gap-x-#{$i} {
+      column-gap: $i + rpx;
+    }
+    .gap-y-#{$i} {
+      row-gap: $i + rpx;
+    }
+  }
+}

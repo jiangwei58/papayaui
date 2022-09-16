@@ -5,6 +5,7 @@
 @import './layout_font.scss';
 @import './layout_border.scss';
 @import './layout_float.scss';
+@import './layout_grid.scss';
 
 .relative {
   position: relative;
@@ -27,6 +28,10 @@ text {
 }
 /* #endif */
 
+.block {
+  display: block;
+}
+
 .width-full {
   width: 100%;
 }
@@ -36,7 +41,6 @@ text {
 .width-max {
   width: max-content;
 }
-
 .width-50 {
   width: 50%;
 }
@@ -45,42 +49,27 @@ text {
   height: 100%;
 }
 
-.block {
-  display: block;
-}
-
 .color-primary {
   color: var(--color-primary);
-}
-
-.text-white {
-  color: #fff;
-}
-
-.text-black {
-  color: #323233;
-}
-.text-black-2 {
-  color: #646566;
-}
-.text-black-3 {
-  color: #969799;
-}
-.text-black-4 {
-  color: #7d7e80;
-}
-.text-black-5 {
-  color: #666666;
-}
-
-.text-gray {
-  color: #eee;
 }
 .text-yellow {
   color: var(--color-warning);
 }
 .text-red {
   color: var(--color-danger);
+}
+.text-white {
+  color: #fff;
+}
+
+.text-black {
+  color: var(--color-text-black);
+}
+.text-black-2 {
+  color: var(--color-text-black-2);
+}
+.text-black-3 {
+  color: var(--color-text-black-3);
 }
 
 .bg-white {

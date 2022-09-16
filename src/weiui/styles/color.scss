@@ -7,9 +7,16 @@ $color-danger: #fa1919;
 // 错误色
 $color-error: #ee0a24;
 
+$color-text-black: #323233;
+$color-text-black-2: #646566;
+$color-text-black-3: #969799;
+
 $colors: (
   primary: $color-primary,
   warning: $color-warning,
   danger: $color-danger,
   error: $color-error,
+  text-black: $color-text-black,
+  text-black-2: $color-text-black-2,
+  text-black-3: $color-text-black-3,
 );
