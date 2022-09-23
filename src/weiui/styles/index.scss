@@ -15,4 +15,10 @@ page {
   --tabs-font-size: 14px;
   --tabs-line-width: 80rpx;
   --tabs-line-height: 6rpx;
+  // checkbox-btns
+  --checkbox-btns-height: 64rpx;
+  // number-input
+  --number-input-text-color: var(--color-primary);
+  --number-input-disabled: #323233;
+  --number-input-placeholder-color: #c8c9cc;
 }
