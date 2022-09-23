@@ -1,0 +1,23 @@
+{
+  "id": "3668565",
+  "name": "weiui",
+  "font_family": "wei-iconfont",
+  "css_prefix_text": "wei-icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "10678407",
+      "name": "close",
+      "font_class": "close",
+      "unicode": "e6dc",
+      "unicode_decimal": 59100
+    },
+    {
+      "icon_id": "21712692",
+      "name": "success",
+      "font_class": "success",
+      "unicode": "e6b6",
+      "unicode_decimal": 59062
+    }
+  ]
+}

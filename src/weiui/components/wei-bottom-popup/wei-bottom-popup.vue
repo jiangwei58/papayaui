@@ -7,19 +7,24 @@
     @change="onChange"
   >
     <view class="popup-wrapper flex flex-col" :style="{ height: getUnitValue(height) }">
-      <view class="header width-full flex items-center justify-center border-bottom py-26">
+      <view class="header width-full flex items-center justify-center border-bottom">
         <text class="text-32 leading-40 text-block font-w-500 mr-8">{{ title }}</text>
         <slot name="after-title"></slot>
-        <view class="close-icon-wrapper">
-          <view class="close-icon"></view>
+        <view class="close-icon-wrapper flex items-center">
+          <!-- <view class="close-icon"></view> -->
+          <WeiIcon name="close" size="24px" />
         </view>
       </view>
 
-      <view class="popup-body width-full height-full px-26">
-        <slot></slot>
-        <!-- <tob-button class="btn" shape="circle" @click="$emit('ok')">{{ btnText }}</tob-button> -->
+      <view class="flex flex-col height-full">
+        <view class="flex-1" style="overflow: hidden">
+          <slot></slot>
+        </view>
+
+        <view v-if="$slots.footer" class="footer">
+          <slot name="footer"></slot>
+        </view>
       </view>
-      <WeiSafeBottom />
     </view>
   </UniPopup>
 </template>
@@ -28,7 +33,7 @@
 import { ref, toRefs, watch } from 'vue'
 import UniPopup from '../uni-popup/uni-popup.vue'
 import { getUnitValue } from '../../utils/common'
-import WeiSafeBottom from '../wei-safe-bottom/wei-safe-bottom.vue'
+import WeiIcon from '../wei-icon/wei-icon.vue'
 
 interface OwnProps {
   modelValue: boolean
@@ -56,13 +61,19 @@ const emit = defineEmits<{
 
 const popupRef = ref()
 
-watch(modelValue, (newVal) => {
-  if (newVal) {
-    popupRef.value?.open()
-  } else {
-    popupRef.value?.close()
-  }
-})
+watch(
+  modelValue,
+  (newVal) => {
+    if (newVal) {
+      popupRef.value?.open()
+    } else {
+      popupRef.value?.close()
+    }
+  },
+  {
+    immediate: true,
+  },
+)
 
 const onChange = ({ show }: { show: boolean; type: string }) => {
   if (!show) {
@@ -78,11 +89,16 @@ const onChange = ({ show }: { show: boolean; type: string }) => {
   background-color: #fff;
   border-radius: 24rpx 24rpx 0 0;
 
+  .header {
+    height: 96rpx;
+  }
+
   .close-icon-wrapper {
     position: absolute;
     top: 0;
     right: 0;
-    padding: 26rpx;
+    height: 100%;
+    padding: 0 26rpx;
   }
   .close-icon {
     $iconSize: 32rpx;
@@ -115,6 +131,11 @@ const onChange = ({ show }: { show: boolean; type: string }) => {
     left: 24rpx;
     right: 24rpx;
     bottom: 26rpx;
+  }
+
+  .footer {
+    width: 100%;
+    flex-shrink: 0;
   }
 }
 </style>

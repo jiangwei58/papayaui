@@ -1,3 +1,6 @@
+type SyncErrorType = Error | string
+type SyncValidateResult = boolean | SyncErrorType
+
 export type FormRulesMap<T> = {
   [key in keyof T]?: FormRuleItem[]
 }
@@ -9,7 +12,7 @@ export interface FormRuleItem {
   min?: number
   max?: number
   pattern?: RegExp
-  validator?: (value: any, callback: (error?: string | Error) => void) => void
+  validator?: (value: any, callback: (error?: SyncErrorType) => void) => SyncValidateResult | void
   message?: string
 }
 
@@ -51,6 +54,9 @@ export const validateToString = async <T = Record<string, unknown>>(
     if (!fieldRules) continue
 
     for (const ruleItem of fieldRules) {
+      if (typeof ruleItem.message === 'undefined') {
+        ruleItem.message = '校验错误'
+      }
       // 必填
       if (ruleItem.required && isEmptyValue(fieldValue)) {
         throw ruleItem.message
@@ -59,14 +65,17 @@ export const validateToString = async <T = Record<string, unknown>>(
       if (typeof ruleItem.validator === 'function') {
         const validatorFunc = ruleItem.validator
         await new Promise<void>((resolve, reject) => {
-          const callback = (error?: string | Error) => {
+          const callback = (error?: SyncValidateResult) => {
             if (typeof error === 'undefined') {
               resolve()
+            } else if (typeof error === 'boolean') {
+              error ? resolve() : reject(ruleItem.message)
             } else {
               reject(typeof error === 'string' ? error : error.message)
             }
           }
-          validatorFunc(fieldValue, callback)
+          const result = validatorFunc(fieldValue, callback)
+          callback(result ?? ruleItem.message)
         })
       }
     }

@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts" setup>
-import { EventDetail } from '../../interface'
+import { EventDetail } from '../../types'
 import { getUnitValue } from '../../utils/common'
 import { toRefs, ref, watch } from 'vue'
 

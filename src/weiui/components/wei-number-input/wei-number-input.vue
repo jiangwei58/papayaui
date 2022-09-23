@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts" setup>
-import { EventDetail } from '../../interface'
+import { EventDetail } from '../../types'
 import { nextTick, toRefs } from 'vue'
 interface OwnProps {
   modelValue?: string | number | undefined

@@ -1,3 +1,4 @@
+@import './vars.scss';
 @import './color.scss';
 @import './layout.scss';
 
@@ -8,4 +9,10 @@ page {
   @each $name, $color in $colors {
     --color-#{$name}: #{$color};
   }
+
+  // tabs
+  --tabs-height: 44px;
+  --tabs-font-size: 14px;
+  --tabs-line-width: 80rpx;
+  --tabs-line-height: 6rpx;
 }

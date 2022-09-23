@@ -13,4 +13,5 @@ onHide(() => {
 </script>
 <style lang="scss">
 @import './weiui/styles/index.scss';
+@import './weiui/fonts/iconfont.css';
 </style>
