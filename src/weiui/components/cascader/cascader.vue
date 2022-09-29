@@ -6,11 +6,19 @@
     @close="onClose"
     @confirm="onOk"
   >
-    <view class="content">
-      <view v-if="show" class="tab">
+    <view class="content flex flex-col">
+      <view v-if="show" class="tab flex-shrink-0">
         <Tabs v-model="tabCurrent" :tabs="tabList" label-key="name" :scrollable="true" />
       </view>
-      <scroll-view scroll-y :scroll-top="scrollTop" class="height-full pt-12" @scroll="onScroll">
+      <Search v-if="showSearch" v-model="searchText" class="flex-shrink-0" />
+      <scroll-view
+        scroll-y
+        :scroll-top="scrollTop"
+        class="flex-1"
+        :class="{ 'pt-12': !showSearch }"
+        style="overflow: hidden"
+        @scroll="onScroll"
+      >
         <view
           v-for="(item, index) in currentData"
           :key="index"
@@ -45,6 +53,7 @@ import { computed, watch, toRefs, ref, nextTick } from 'vue'
 import BottomPopup from '../bottom-popup/bottom-popup.vue'
 import Tabs from '../tabs/tabs.vue'
 import Icon from '../icon/icon.vue'
+import Search from '../search/search.vue'
 
 type TreeNode = any
 
@@ -57,6 +66,7 @@ interface OwnProps {
   valueKey?: string
   childrenKey?: string
   max?: number
+  showSearch?: boolean // 是否显示搜索
   confirmButton?: boolean
   load?: (level: number, node?: TreeNode) => TreeNode[] | Promise<TreeNode[]>
 }
@@ -80,11 +90,13 @@ const emit = defineEmits<{
   (event: 'change', item: TreeNode): void
 }>()
 
-const { show, data, labelKey, childrenKey, max, confirmButton, load } = toRefs(props)
+const { show, data, labelKey, childrenKey, max, confirmButton, showSearch, load } = toRefs(props)
 
 const tabCurrent = ref<number>(0)
 const oldScrollTop = ref<number>(0)
 const scrollTop = ref<number>(0)
+
+const searchText = ref<string>('')
 const treeData = ref<TreeNode[]>(data.value)
 const currentIndexs = ref<number[]>([])
 const loading = ref<boolean>(false)
@@ -113,7 +125,9 @@ const currentData = computed(() => {
   for (let i = 1; i <= tabCurrent.value; i++) {
     currentData = currentData[currentIndexs.value[i - 1]][childrenKey.value] || []
   }
-  return currentData
+  return showSearch
+    ? currentData.filter((item) => item[labelKey.value].indexOf(searchText.value) !== -1)
+    : currentData
 })
 
 watch(show, async (newVal, oldVal) => {

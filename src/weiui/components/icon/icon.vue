@@ -1,8 +1,8 @@
 <template>
   <view
     :class="computedClass('iconfont', `icon-${name}`)"
-    :style="{ fontSize: getUnitValue(size), color }"
-  ></view>
+    :style="{ display: block ? 'block' : 'inline-block', fontSize: getUnitValue(size), color }"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -13,6 +13,7 @@ interface OwnProps {
   name: string
   size?: string
   color?: string
+  block?: boolean
 }
 
 withDefaults(defineProps<OwnProps>(), {
@@ -24,6 +25,8 @@ withDefaults(defineProps<OwnProps>(), {
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
 .#{$prefix}-iconfont {
-  display: inline;
+  position: relative;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
 }
 </style>

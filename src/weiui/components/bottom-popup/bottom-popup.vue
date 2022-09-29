@@ -7,16 +7,16 @@
     @change="onChange"
   >
     <view class="popup-wrapper flex flex-col" :style="{ height: getUnitValue(height) }">
-      <view class="header width-full flex items-center justify-center border-bottom">
+      <view class="header width-full flex items-center justify-center border-bottom flex-shrink-0">
         <text class="text-32 leading-40 text-block font-w-500 mr-8">{{ title }}</text>
         <slot name="after-title"></slot>
-        <view class="close-icon-wrapper flex items-center">
+        <view class="close-icon-wrapper flex items-center" @click="onChange({ show: false })">
           <!-- <view class="close-icon"></view> -->
           <Icon name="close" size="24px" />
         </view>
       </view>
 
-      <view class="flex flex-col height-full">
+      <view class="flex flex-col flex-1" style="overflow: hidden">
         <view class="flex-1" style="overflow: hidden">
           <slot></slot>
         </view>
