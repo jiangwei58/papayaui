@@ -16,6 +16,13 @@
     <view :class="computedClass('cell__value')">
       <slot v-if="$slots.default" />
       <text v-else>{{ value }}</text>
+      <view
+        v-if="errorMessage"
+        :class="computedClass('cell__error-message')"
+        :style="{ textAlign: valueAlign }"
+      >
+        {{ errorMessage }}
+      </view>
     </view>
     <Icon
       v-if="isLink"
@@ -41,9 +48,18 @@ export interface CellProps {
   required?: boolean
   center?: boolean
   icon?: string // 前面的图标
+  valueAlign?: 'left' | 'center' | 'right' // 内容对齐方式
+  errorMessage?: string // 错误信息
 }
 
-defineProps<CellProps>()
+withDefaults(defineProps<CellProps>(), {
+  title: '',
+  value: '',
+  titleWidth: undefined,
+  icon: '',
+  valueAlign: 'right',
+  errorMessage: '',
+})
 
 const emit = defineEmits<{
   (event: 'click'): void
@@ -97,5 +113,10 @@ const emit = defineEmits<{
 }
 .#{$prefix}-cell__icon {
   font-weight: bold;
+}
+.#{$prefix}-cell__error-message {
+  color: var(--color-error);
+  font-size: 12px;
+  text-align: left;
 }
 </style>

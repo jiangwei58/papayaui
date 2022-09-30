@@ -2,6 +2,7 @@
   <BottomPopup
     :model-value="show"
     :title="title"
+    :height="height"
     @update:model-value="emit('update:show', $event as boolean)"
     @close="onClose"
     @confirm="onOk"
@@ -22,7 +23,7 @@
         <view
           v-for="(item, index) in currentData"
           :key="index"
-          class="list-item flex justify-between px-32 py-20 text-30 leading-40"
+          class="list-item flex items-center justify-between px-32 py-20 text-28 leading-40"
           :class="{ 'color-primary': index === currentIndexs[tabCurrent] }"
           hover-class="bg-hover"
           @tap="onSelect(index)"
@@ -33,6 +34,7 @@
             v-if="index === currentIndexs[tabCurrent]"
             name="success"
             color="var(--color-primary)"
+            block
           />
         </view>
         <view v-if="loading" class="height-full flex flex-col items-center justify-center">
@@ -40,7 +42,7 @@
         </view>
         <view
           v-if="!currentData.length"
-          class="height-full flex flex-col items-center justify-center text-30 text-black-2"
+          class="height-full flex flex-col items-center justify-center text-28 text-black-2"
         >
           无数据
         </view>
@@ -61,6 +63,7 @@ type TreeNode = any
 interface OwnProps {
   modelValue?: number
   show?: boolean
+  height?: string
   title?: string
   data?: TreeNode[]
   labelKey?: string
@@ -68,20 +71,21 @@ interface OwnProps {
   childrenKey?: string
   max?: number
   showSearch?: boolean // 是否显示搜索
-  confirmButton?: boolean
+  multiple?: boolean
   load?: (level: number, node?: TreeNode) => TreeNode[] | Promise<TreeNode[]>
 }
 
 const props = withDefaults(defineProps<OwnProps>(), {
   modelValue: undefined,
   show: false,
+  height: undefined,
   title: '',
   data: () => [],
   labelKey: 'label',
   valueKey: 'value',
   childrenKey: 'children',
-  max: 3,
-  confirmButton: false,
+  max: Number.MAX_SAFE_INTEGER,
+  multiple: false,
   load: () => [],
 })
 
@@ -91,7 +95,7 @@ const emit = defineEmits<{
   (event: 'change', item: TreeNode): void
 }>()
 
-const { show, data, labelKey, childrenKey, max, confirmButton, showSearch, load } = toRefs(props)
+const { show, data, labelKey, childrenKey, max, multiple, showSearch, load } = toRefs(props)
 
 const tabCurrent = ref<number>(0)
 const oldScrollTop = ref<number>(0)
@@ -175,7 +179,7 @@ const onSelect = async (valueIndex: number) => {
       scrollTop.value = 0
     })
   } else {
-    if (!confirmButton.value) {
+    if (!multiple.value) {
       onOk()
     }
   }

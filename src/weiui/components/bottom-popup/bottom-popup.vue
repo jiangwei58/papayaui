@@ -7,10 +7,13 @@
     @change="onChange"
   >
     <view class="popup-wrapper flex flex-col" :style="{ height: getUnitValue(height) }">
-      <view class="header width-full flex items-center justify-center border-bottom flex-shrink-0">
+      <view class="header width-full flex items-center justify-center flex-shrink-0">
         <text class="text-32 leading-40 text-block font-w-500 mr-8">{{ title }}</text>
         <slot name="after-title"></slot>
-        <view class="close-icon-wrapper flex items-center" @click="onChange({ show: false })">
+        <view
+          class="close-icon-wrapper flex items-center"
+          @click="onChange({ show: false, type: '' })"
+        >
           <!-- <view class="close-icon"></view> -->
           <Icon name="close" size="24px" />
         </view>
@@ -90,6 +93,7 @@ const onChange = ({ show }: { show: boolean; type: string }) => {
   border-radius: 24rpx 24rpx 0 0;
 
   .header {
+    position: relative;
     height: 96rpx;
   }
 
