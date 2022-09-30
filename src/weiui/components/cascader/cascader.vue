@@ -27,7 +27,8 @@
           hover-class="bg-hover"
           @tap="onSelect(index)"
         >
-          {{ item[labelKey] }}
+          <slot v-if="$slots.default" :item="item" />
+          <text v-else>{{ item[labelKey] }}</text>
           <Icon
             v-if="index === currentIndexs[tabCurrent]"
             name="success"
