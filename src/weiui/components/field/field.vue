@@ -35,6 +35,7 @@ withDefaults(defineProps<OwnProps>(), {
   modelValue: '',
   type: 'text',
   placeholder: '',
+  valueAlign: 'right',
 })
 
 const emit = defineEmits<{

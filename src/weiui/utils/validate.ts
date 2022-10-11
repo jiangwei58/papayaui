@@ -1,8 +1,16 @@
 type SyncErrorType = Error | string
 type SyncValidateResult = boolean | SyncErrorType
 
-export type FormRulesMap<T> = {
-  [key in keyof T]?: FormRuleItem[]
+export type FormRuleMap<T> = {
+  [key in keyof T]?: FormRuleMapItem[]
+}
+
+export interface FormRuleMapItem {
+  label: string
+  placeholder?: string
+  type?: 'input' | 'select'
+  rules: FormRuleItem | FormRuleItem[]
+  [key: string]: any
 }
 
 export interface FormRuleItem {
@@ -45,7 +53,7 @@ const isEmptyValue = (value: any) => {
 }
 
 export const validateToString = async <T = Record<string, unknown>>(
-  rules: FormRulesMap<T>,
+  rules: FormRuleMap<T>,
   formData: T,
 ): Promise<string | void> => {
   for (const key in rules) {

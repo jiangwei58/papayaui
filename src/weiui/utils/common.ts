@@ -18,3 +18,27 @@ export const convertQueryToString = (
   }
   return queryArray.join(suffix)
 }
+
+/** 获取值类型 */
+export const getValueType = (value: any): string =>
+  Object.prototype.toString
+    .call(value)
+    .replace(/^\[object\s(.+)\]$/, '$1')
+    .toLowerCase()
+
+/** 判断是否为空 */
+export const isEmptyValue = (value: any) => {
+  if (value === undefined || value === null) {
+    return true
+  }
+  if (typeof value === 'string' && !value) {
+    return true
+  }
+  if (Array.isArray(value) && !value.length) {
+    return true
+  }
+  if (getValueType(value) === 'object' && !Object.keys(value).length) {
+    return true
+  }
+  return false
+}
