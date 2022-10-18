@@ -4,8 +4,12 @@ import { FormRuleItem, FormRuleMapItem } from './useFormValidate'
 const MESSAGE_RULE_OBJ = {
   inputRequired: '请输入%s',
   selectRequired: '请选择%s',
-  max: '%s仅可输入%l个以内的字符',
-  maxLength: '%s的长度不能超过%l',
+  min: '%s不能小于%l',
+  max: '%s不能大于%l',
+  minMax: '%s必须大于%min且小于%max',
+  minLength: '%s的长度不能超过%l',
+  maxLength: '%s的长度不能低于%l',
+  minMaxLength: '%s的长度应该为%min~%max',
   pattern: '%s格式不正确',
 }
 
@@ -50,12 +54,30 @@ const generateMessage = (
   if (typeof item.required !== 'undefined') {
     return getRuleMessage(type === 'input' ? 'inputRequired' : 'selectRequired', text)
   }
+
+  if (typeof item.min !== 'undefined' && typeof item.max !== 'undefined') {
+    return getRuleMessage('minMax', text, { min: item.min.toString(), max: item.max.toString() })
+  }
+  if (typeof item.min !== 'undefined') {
+    return getRuleMessage('max', text, { l: item.min.toString() })
+  }
   if (typeof item.max !== 'undefined') {
     return getRuleMessage('max', text, { l: item.max.toString() })
+  }
+
+  if (typeof item.minLength !== 'undefined' && typeof item.maxLength !== 'undefined') {
+    return getRuleMessage('minMaxLength', text, {
+      min: item.minLength.toString(),
+      max: item.maxLength.toString(),
+    })
+  }
+  if (typeof item.minLength !== 'undefined') {
+    return getRuleMessage('maxLength', text, { l: item.minLength.toString() })
   }
   if (typeof item.maxLength !== 'undefined') {
     return getRuleMessage('maxLength', text, { l: item.maxLength.toString() })
   }
+
   if (typeof item.pattern !== 'undefined') {
     return getRuleMessage('pattern', text)
   }

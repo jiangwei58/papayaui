@@ -1,11 +1,11 @@
 import { ref } from 'vue'
 import { getDefaultMessage } from './message'
 import {
-  ruleWithMinMax,
-  ruleWithMinMaxLength,
-  ruleWithPattern,
-  ruleWithRequired,
-  ruleWithValidator,
+  requiredValidator,
+  minMaxValidator,
+  minMaxLengthValidator,
+  patternValidator,
+  customValidator,
 } from './validator'
 
 export type SyncErrorType = Error | string
@@ -16,27 +16,44 @@ export type FormRulesMap<T> = {
 }
 
 export interface FormRuleMapItem {
+  /** 表单项的名称 */
   label: string
+  /** 输入或选择提示 */
   placeholder?: string
+  /** 类型，影响提示内容（如：input时提示请输入xxx，select时提示请选择xxx） */
   type?: 'input' | 'select'
+  /** 校验规则 */
   rules: FormRuleItem | FormRuleItem[]
+  /** 额外字段，主要用于使用动态模板字段 */
   [key: string]: any
 }
 
 export interface FormRuleItem {
+  /** 是否必填 */
   required?: boolean
+  /** 最小长度 */
   minLength?: number
+  /** 最大长度 */
   maxLength?: number
+  /** 最小值 */
   min?: number
+  /** 最大值 */
   max?: number
+  /** 正则表达式 */
   pattern?: RegExp
+  /**
+   * 自定义校验，支持直接返回boolean，或者错误信息，还可以使用callback方式(主要用于异步情况)
+   * @param value 此项的值,类型需自己具体指定
+   * @param {Function} callback 回调处理方式，推荐异步情况使用
+   */
   validator?: (value: any, callback: (error?: SyncErrorType) => void) => SyncValidateResult | void
+  /** 错误提示 */
   message?: string
 }
 
 /**
- * 表单规则数据生成
- * @description 在常规表单规则基础上封装，生成一套统一规则的表单名称、输入提示、错误提示等。
+ * 表单校验hooks
+ * @description 表单校验，统一规则的表单名称、输入提示、错误提示等。
  * ```javascript
  * // 支持动态标识替换
  * {
@@ -48,11 +65,11 @@ export interface FormRuleItem {
  */
 export default <T = Record<string, unknown>>(formData: T, rulesMap: FormRulesMap<T>) => {
   const _tools = [
-    ruleWithRequired,
-    ruleWithMinMax,
-    ruleWithMinMaxLength,
-    ruleWithPattern,
-    ruleWithValidator,
+    requiredValidator,
+    minMaxValidator,
+    minMaxLengthValidator,
+    patternValidator,
+    customValidator,
   ]
   const errorMap = ref<{ [key in keyof T]?: string }>({})
 
@@ -106,7 +123,6 @@ export default <T = Record<string, unknown>>(formData: T, rulesMap: FormRulesMap
       allResult.push(validateField(key))
     }
     return Promise.all(allResult).then((res) => {
-      console.log('eeeee', res)
       return res.every((item) => !!item)
     })
   }
