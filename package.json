@@ -1,7 +1,4 @@
 {
-  "name": "@pagodaui/weiui",
-  "version": "0.0.2",
-  "description": "适用于uniapp的ui扩展库",
   "scripts": {
     "dev:app": "uni -p app",
     "dev:custom": "uni -p",
@@ -71,21 +68,5 @@
     "sass": "^1.49.10",
     "typescript": "^4.6.2",
     "vite": "^2.9.14"
-  },
-  "keywords": [
-    "uniapp"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jiangwei58/weiui"
-  },
-  "bugs": {
-    "url": "https://github.com/jiangwei58/weiui/issues"
-  },
-  "homepage": "https://github.com/jiangwei58/weiui",
-  "files": [
-    "src/weiui"
-  ],
-  "author": "jiangw",
-  "license": "MIT"
+  }
 }

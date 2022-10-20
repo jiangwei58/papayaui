@@ -1,4 +1,4 @@
-import { isEmptyValue } from '@/weiui/utils/common'
+import { isEmptyValue } from '@/lib/utils/common'
 import { FormRuleItem, SyncValidateResult } from './useFormValidate'
 
 type ValidatorFunc = (

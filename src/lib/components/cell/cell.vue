@@ -36,8 +36,8 @@
 </template>
 
 <script lang="ts" setup>
-import { getUnitValue } from '@/weiui/utils/common'
-import { computedClass } from '@/weiui/utils/style'
+import { getUnitValue } from '../../utils/common'
+import { computedClass } from '../../utils/style'
 import Icon from '../icon/icon.vue'
 
 export interface CellProps {

@@ -43,7 +43,7 @@ import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import sticky from '../sticky/sticky.vue'
 import watermark from '../watermark/watermark.vue'
 
-interface OwnProps {
+interface ContainerProps {
   safeBottom?: boolean // 是否填充底部安全区
   headerBgColor?: string // 头部背景色
   bgColor?: string // 背景色
@@ -53,7 +53,7 @@ interface OwnProps {
   partialContent?: boolean // 是否局部内容布局，默认内容在页面，使用页面滚动；如需内容区只占中间部分设为true
 }
 
-const props = withDefaults(defineProps<OwnProps>(), {
+const props = withDefaults(defineProps<ContainerProps>(), {
   safeBottom: true,
   headerBgColor: 'transparent',
   bgColor: 'transparent',

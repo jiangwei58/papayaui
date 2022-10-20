@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computedClass } from '@/weiui/utils/style'
+import { computedClass } from '../../utils/style'
 import Field from '../field/field.vue'
 
 interface OwnProps {

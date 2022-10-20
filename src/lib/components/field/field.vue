@@ -16,9 +16,10 @@
 </template>
 
 <script lang="ts" setup>
-import { EventDetail } from '@/weiui/types'
-import { computedClass } from '@/weiui/utils/style'
-import Cell, { CellProps } from '../cell/cell.vue'
+import { EventDetail } from '../../types'
+import { computedClass } from '../../utils/style'
+import Cell from '../cell/cell.vue'
+import { CellProps } from '../cell/cell.vue'
 
 interface OwnProps
   extends Pick<

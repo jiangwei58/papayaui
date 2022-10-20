@@ -1,7 +1,7 @@
-export default () => {
+export default (count = 8) => {
   const accountInfo = uni.getAccountInfoSync()
   const envVersion = accountInfo.miniProgram.envVersion
-  let _tapCount = 0
+  let _tapCount = count
 
   const toEnv = () => {
     if (envVersion === 'release') return
