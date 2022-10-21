@@ -42,3 +42,19 @@ export const isEmptyValue = (value: any) => {
   }
   return false
 }
+
+/** 通用树形数据递归调用 */
+export const loopTree = <T>(
+  treeData: T[],
+  iterate: (item: T) => void | boolean,
+  childrenKey: keyof T = 'children' as keyof T,
+) => {
+  for (const item of treeData) {
+    if (iterate(item) === false) {
+      break
+    }
+    if ((item[childrenKey] as unknown as T[])?.length) {
+      loopTree(item[childrenKey] as unknown as T[], iterate, childrenKey)
+    }
+  }
+}
