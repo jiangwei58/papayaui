@@ -85,10 +85,10 @@ const onChange = () => {
   }
 
   &.up .sort-up {
-    border-bottom-color: var(--color-primary);
+    border-bottom-color: _var(color-primary);
   }
   &.down .sort-down {
-    border-top-color: var(--color-primary);
+    border-top-color: _var(color-primary);
   }
 }
 </style>

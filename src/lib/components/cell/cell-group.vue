@@ -18,11 +18,11 @@ defineProps<OwnProps>()
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
 .#{$prefix}-cell-group {
-  background-color: var(--cell-group-bg-color);
+  background-color: _var(cell-group-bg-color);
   &.#{$prefix}-cell-group--inset {
-    margin: 0 var(--cell-group-margin-x);
+    margin: 0 _var(cell-group-margin-x);
     overflow: hidden;
-    border-radius: var(--cell-group-rounded);
+    border-radius: _var(cell-group-rounded);
   }
 }
 </style>

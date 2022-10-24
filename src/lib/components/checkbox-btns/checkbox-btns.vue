@@ -92,13 +92,13 @@ const onSelect = (item: WeiCheckboxItem, index: number) => {
 @import '../../styles/vars.scss';
 .#{$prefix}-checkbox-btns {
   .#{$prefix}-checkbox-btn {
-    line-height: var(--checkbox-btns-height);
+    line-height: _var(checkbox-btns-height);
     border-width: 2rpx;
     border-style: solid;
     &.active {
-      color: var(--color-primary);
+      color: _var(color-primary);
       background-color: rgba(0, 156, 93, 0.1) !important;
-      border-color: var(--color-primary) !important;
+      border-color: _var(color-primary) !important;
     }
   }
 }

@@ -7,28 +7,10 @@ page {
   --color-page-bg-gray: #f2f3f5;
 
   @each $name, $color in $colors {
-    --color-#{$name}: #{$color};
+    --#{$prefix}-color-#{$name}: #{$color};
   }
 
-  // tabs
-  --tabs-height: 44px;
-  --tabs-font-size: 14px;
-  --tabs-line-width: 80rpx;
-  --tabs-line-height: 6rpx;
-  // checkbox-btns
-  --checkbox-btns-height: 64rpx;
-  // number-input
-  --number-input-text-color: var(--color-primary);
-  --number-input-disabled: #323233;
-  --number-input-placeholder-color: #c8c9cc;
-  // cell
-  --cell-padding-x: 16px;
-  --cell-padding-y: 10px;
-  --cell-font-size: 14px;
-  --cell-line-height: 24px;
-  --cell-bg-color: #fff;
-  // cell-group
-  --cell-group-margin-x: 16px;
-  --cell-group-rounded: 8px;
-  --cell-group-bg-color: 8px;
+  @each $name, $var in $componentVars {
+    --#{$prefix}-#{$name}: #{$var};
+  }
 }

@@ -6,6 +6,7 @@
 @import './layout_border.scss';
 @import './layout_float.scss';
 @import './layout_grid.scss';
+@import './vars.scss';
 
 .relative {
   position: relative;
@@ -44,32 +45,30 @@ text {
 .width-50 {
   width: 50%;
 }
-
 .height-full {
   height: 100%;
 }
 
 .color-primary {
-  color: var(--color-primary);
+  color: _var(color-primary);
 }
 .text-yellow {
-  color: var(--color-warning);
+  color: _var(color-warning);
 }
 .text-red {
-  color: var(--color-danger);
+  color: _var(color-danger);
 }
 .text-white {
   color: #fff;
 }
-
 .text-black {
-  color: var(--color-text-black);
+  color: _var(color-text-black);
 }
 .text-black-2 {
-  color: var(--color-text-black-2);
+  color: _var(color-text-black-2);
 }
 .text-black-3 {
-  color: var(--color-text-black-3);
+  color: _var(color-text-black-3);
 }
 
 .bg-white {

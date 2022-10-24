@@ -6,7 +6,7 @@
         :type="type"
         :value="modelValue"
         :placeholder="placeholder"
-        placeholder-style="color:var(--color-text-black-3)"
+        :placeholder-style="`color:var(--${PREFIX}-color-text-black-3)`"
         :style="{ textAlign: valueAlign }"
         @input="onInput"
         @blur="emit('blur', $event as unknown as EventDetail<string>)"
@@ -17,7 +17,7 @@
 
 <script lang="ts" setup>
 import { EventDetail } from '../../types'
-import { computedClass } from '../../utils/style'
+import { computedClass, PREFIX } from '../../utils/style'
 import Cell from '../cell/cell.vue'
 import { CellProps } from '../cell/cell.vue'
 
@@ -57,6 +57,6 @@ const onInput = (payload: Event) => {
 .#{$prefix}-field {
 }
 .#{$prefix}-field__input {
-  color: var(--color-text-black);
+  color: _var(color-text-black);
 }
 </style>

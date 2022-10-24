@@ -123,7 +123,7 @@ const onChangeTab = (index: number) => {
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
 .#{$prefix}-tabs {
-  height: var(--tabs-height);
+  height: _var(tabs-height);
   padding: 0 8px;
   &.scrollable .#{$prefix}-tab {
     flex: 1 0 auto;
@@ -148,12 +148,12 @@ const onChangeTab = (index: number) => {
   justify-content: center;
   box-sizing: border-box;
   padding: 0 4px;
-  color: var(--color-text-black-2);
-  font-size: var(--tabs-font-size);
+  color: _var(color-text-black-2);
+  font-size: _var(tabs-font-size);
   line-height: 20px;
-  min-width: var(--tabs-line-width);
+  min-width: _var(tabs-line-width);
   &.active {
-    color: var(--color-text-black);
+    color: _var(color-text-black);
     font-weight: 500;
   }
 }
@@ -162,9 +162,9 @@ const onChangeTab = (index: number) => {
   bottom: 0;
   left: 0;
   z-index: 1;
-  width: var(--tabs-line-width);
-  height: var(--tabs-line-height);
-  background-color: var(--color-primary);
+  width: _var(tabs-line-width);
+  height: _var(tabs-line-height);
+  background-color: _var(color-primary);
   border-radius: 3rpx;
 }
 </style>

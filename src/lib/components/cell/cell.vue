@@ -70,14 +70,14 @@ const emit = defineEmits<{
 @import '../../styles/vars.scss';
 .#{$prefix}-cell {
   position: relative;
-  padding: var(--cell-padding-y) var(--cell-padding-x);
-  background-color: var(--cell-bg-color);
-  color: var(--color-text-black);
-  font-size: var(--cell-font-size);
-  line-height: var(--cell-line-height);
+  padding: _var(cell-padding-y) _var(cell-padding-x);
+  background-color: _var(cell-bg-color);
+  color: _var(color-text-black);
+  font-size: _var(cell-font-size);
+  line-height: _var(cell-line-height);
   overflow: hidden;
   &.#{$prefix}-cell__clickable:active {
-    background-color: var(--color-page-bg-gray);
+    background-color: _var(color-page-bg-gray);
   }
   &.#{$prefix}-cell--required::before {
     position: absolute;
@@ -91,9 +91,9 @@ const emit = defineEmits<{
     box-sizing: border-box;
     content: ' ';
     pointer-events: none;
-    right: var(--cell-padding-x);
+    right: _var(cell-padding-x);
     bottom: 0;
-    left: var(--cell-padding-x);
+    left: _var(cell-padding-x);
     border-bottom: 1px solid #ebedf0;
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
@@ -106,7 +106,7 @@ const emit = defineEmits<{
 .#{$prefix}-cell__value {
   position: relative;
   overflow: hidden;
-  color: var(--color-text-black-3);
+  color: _var(color-text-black-3);
   text-align: right;
   vertical-align: middle;
   word-wrap: break-word;
@@ -115,7 +115,7 @@ const emit = defineEmits<{
   font-weight: bold;
 }
 .#{$prefix}-cell__error-message {
-  color: var(--color-error);
+  color: _var(color-error);
   font-size: 12px;
   text-align: left;
 }

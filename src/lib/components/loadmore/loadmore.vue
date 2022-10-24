@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computedClass } from '../../utils/style'
+import { computedClass, PREFIX } from '../../utils/style'
 
 export interface LoadStatus {
   loadmore: string
@@ -50,7 +50,7 @@ interface OwnProps {
 withDefaults(defineProps<OwnProps>(), {
   config: () => ({ loadmore: '轻轻上拉', loading: '加载中...', nomore: '没有更多了' }),
   status: 'loadmore',
-  color: 'var(--color-primary)',
+  color: `var(--${PREFIX}-color-primary)`,
   textColor: '#646566',
   iconSize: 20,
 })

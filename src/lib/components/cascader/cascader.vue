@@ -33,7 +33,7 @@
           <Icon
             v-if="index === currentIndexs[tabCurrent]"
             name="success"
-            color="var(--color-primary)"
+            :color="`var(--${PREFIX}-color-primary)`"
             block
           />
         </view>
@@ -57,21 +57,34 @@ import BottomPopup from '../bottom-popup/bottom-popup.vue'
 import Tabs from '../tabs/tabs.vue'
 import Icon from '../icon/icon.vue'
 import Search from '../search/search.vue'
+import { PREFIX } from '@/lib/utils/style'
 
 type TreeNode = any
+type TreeNodeValue = number | string
 
 interface OwnProps {
-  modelValue?: number
+  modelValue?: TreeNodeValue
+  /** 显示状态 */
   show?: boolean
+  /** 高度 */
   height?: string
+  /** 标题 */
   title?: string
+  /** 树形数据 */
   data?: TreeNode[]
+  /** 数据标题的字段名 */
   labelKey?: string
+  /** 数据值的字段名 */
   valueKey?: string
+  /** 数据子级节点的字段名 */
   childrenKey?: string
+  /** 最大层级，把哪一层级作为叶子节点 */
   max?: number
-  showSearch?: boolean // 是否显示搜索
+  /** 是否显示搜索 */
+  showSearch?: boolean
+  /** 是否多选 */
   multiple?: boolean
+  /** 动态获取下一级节点数据 */
   load?: (level: number, node?: TreeNode) => TreeNode[] | Promise<TreeNode[]>
 }
 
@@ -91,11 +104,12 @@ const props = withDefaults(defineProps<OwnProps>(), {
 
 const emit = defineEmits<{
   (event: 'update:show', show: boolean): void
-  (event: 'update:value', id: number): void
+  (event: 'update:modelValue', value: TreeNodeValue): void
   (event: 'change', item: TreeNode): void
 }>()
 
-const { show, data, labelKey, childrenKey, max, multiple, showSearch, load } = toRefs(props)
+const { show, data, labelKey, valueKey, childrenKey, max, multiple, showSearch, load } =
+  toRefs(props)
 
 const tabCurrent = ref<number>(0)
 const oldScrollTop = ref<number>(0)
@@ -138,7 +152,7 @@ const currentData = computed(() => {
 watch(show, async (newVal, oldVal) => {
   if (newVal !== oldVal && newVal) {
     if (!treeData.value.length) {
-      getData()
+      treeData.value = await getData()
     }
   }
 })
@@ -187,7 +201,7 @@ const onSelect = async (valueIndex: number) => {
 
 const onOk = () => {
   const item = currentData.value[currentIndexs.value[max.value - 1]]
-  emit('update:value', item.id)
+  emit('update:modelValue', item[valueKey.value])
   emit('change', item)
   onClose()
 }

@@ -92,7 +92,7 @@ const onBlur = async (e: any) => {
   background-color: initial;
   border: 0;
   box-sizing: border-box;
-  color: var(--number-input-text-color);
+  color: _var(number-input-text-color);
   height: 48rpx;
   line-height: inherit;
   margin: 0;
@@ -102,10 +102,10 @@ const onBlur = async (e: any) => {
   resize: none;
   width: 100%;
   &.disabled {
-    --number-input-text-color: var(--number-input-disabled);
+    --#{$prefix}-number-input-text-color: _var(number-input-disabled);
   }
   :deep(.#{$prefix}-number-input-placeholder) {
-    color: var(--number-input-placeholder-color);
+    color: _var(number-input-placeholder-color);
   }
 }
 </style>
