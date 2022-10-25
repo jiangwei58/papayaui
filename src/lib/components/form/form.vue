@@ -8,7 +8,7 @@
 import { FormItemExtraParams, FormRules, useFormValidate } from '@/lib'
 import { computedClass } from '@/lib/utils/style'
 import { computed, provide, ref, toRefs } from 'vue'
-import { FormItemInstance } from './form-item.vue'
+import { FormItemInstance } from '../form-item/form-item.vue'
 
 interface OwnProps {
   form?: any

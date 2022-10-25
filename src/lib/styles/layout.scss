@@ -82,3 +82,22 @@ text {
 .clickable-hover {
   background-color: #f2f3f5;
 }
+
+.safe-buttom-padding {
+  padding-bottom: 0;
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.base-btn {
+  color: #fff;
+  background: _var(color-primary);
+  font-size: 16px;
+  line-height: 44px;
+  border: 1px solid _var(color-primary);
+  border-radius: 4px;
+  box-sizing: border-box;
+  &.button-hover {
+    opacity: 0.8;
+  }
+}

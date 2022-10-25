@@ -82,8 +82,6 @@ interface OwnProps {
   max?: number
   /** 是否显示搜索 */
   showSearch?: boolean
-  /** 是否多选 */
-  multiple?: boolean
   /** 动态获取下一级节点数据 */
   load?: (level: number, node?: TreeNode) => TreeNode[] | Promise<TreeNode[]>
 }
@@ -98,7 +96,6 @@ const props = withDefaults(defineProps<OwnProps>(), {
   valueKey: 'value',
   childrenKey: 'children',
   max: Number.MAX_SAFE_INTEGER,
-  multiple: false,
   load: () => [],
 })
 
@@ -108,8 +105,7 @@ const emit = defineEmits<{
   (event: 'change', item: TreeNode): void
 }>()
 
-const { show, data, labelKey, valueKey, childrenKey, max, multiple, showSearch, load } =
-  toRefs(props)
+const { show, data, labelKey, valueKey, childrenKey, max, showSearch, load } = toRefs(props)
 
 const tabCurrent = ref<number>(0)
 const oldScrollTop = ref<number>(0)
@@ -193,9 +189,7 @@ const onSelect = async (valueIndex: number) => {
       scrollTop.value = 0
     })
   } else {
-    if (!multiple.value) {
-      onOk()
-    }
+    onOk()
   }
 }
 

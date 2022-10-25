@@ -30,9 +30,9 @@ const emit = defineEmits<{
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
 .#{$prefix}-search {
-  --cell-bg-color: _var(color-page-bg-gray);
-  --cell-padding-x: 8px;
-  --cell-padding-y: 5px;
+  --#{$prefix}-cell-bg-color: var(--color-page-bg-gray);
+  --#{$prefix}-cell-padding-x: 8px;
+  --#{$prefix}-cell-padding-y: 5px;
   padding: 10px 12px;
   background-color: #fff;
 }
