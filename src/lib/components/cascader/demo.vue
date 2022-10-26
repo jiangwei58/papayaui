@@ -1,17 +1,20 @@
 <template>
-  <view>静态数据</view>
-  <view>当前值：{{ value }}</view>
-  <button @click="onChangeVisible">打开</button>
-  <Cascader v-model:show="visible" v-model="value" :data="syncTreeData" :max="2" />
+  <DocDemoBlock title="基础用法">
+    <CellGroup inset>
+      <Cell title="静态数据" :value="value" is-link @click="onChangeVisible" />
+      <Cell title="动态数据" :value="asyncValue" is-link @click="onAsyncChangeVisible" />
+    </CellGroup>
 
-  <view class="mt-30">动态数据</view>
-  <view>当前值：{{ asyncValue }}</view>
-  <button @click="onAsyncChangeVisible">打开</button>
-  <Cascader v-model:show="asyncVisible" v-model="asyncValue" :max="6" :load="onLoad" />
+    <Cascader v-model:show="visible" v-model="value" :data="syncTreeData" />
+    <Cascader v-model:show="asyncVisible" v-model="asyncValue" :max-level="3" :load="onLoad" />
+  </DocDemoBlock>
 </template>
 
 <script lang="ts" setup>
+import DocDemoBlock from '../../doc/doc-demo-block.vue'
 import { ref } from 'vue'
+import CellGroup from '../cell-group/cell-group.vue'
+import Cell from '../cell/cell.vue'
 import Cascader from './cascader.vue'
 
 type NodeItem = { label: string; value: string; children: NodeItem[] }
@@ -39,7 +42,7 @@ const onLoad = (_level: number, node: NodeItem) => {
   return new Promise<NodeItem[]>((resolve) => {
     setTimeout(() => {
       resolve(
-        new Array(10).fill(0).map((_item, index) => {
+        new Array(20).fill(0).map((_item, index) => {
           const path = node ? `${node.value}-${index}` : index
           return { label: `节点: ${path}`, value: path } as NodeItem
         }),

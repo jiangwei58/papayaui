@@ -5,7 +5,7 @@
       class="var(--color-page-bg-gray)"
       icon="search"
       placeholder="请输入搜索关键词"
-      input-align="left"
+      value-align="left"
       center
       @update:model-value="emit('update:modelValue', $event)"
     />

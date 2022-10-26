@@ -24,10 +24,11 @@ import { CellProps } from '../cell/cell.vue'
 interface OwnProps
   extends Pick<
     CellProps,
-    'title' | 'titleWidth' | 'required' | 'icon' | 'center' | 'valueAlign' | 'errorMessage'
+    'title' | 'titleWidth' | 'required' | 'icon' | 'center' | 'errorMessage'
   > {
   modelValue?: string
   type?: 'text' | 'number' | 'idcard' | 'textarea' | 'digit'
+  valueAlign?: CellProps['valueAlign']
   placeholder?: string
   disabled?: boolean
 }
@@ -55,8 +56,8 @@ const onInput = (payload: Event) => {
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
 .#{$prefix}-field {
-}
-.#{$prefix}-field__input {
-  color: _var(color-text-black);
+  .#{$prefix}-field__input {
+    color: _var(color-text-black);
+  }
 }
 </style>

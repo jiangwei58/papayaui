@@ -36,11 +36,12 @@
         >
           无数据
         </view>
+        <SafeBottom v-if="!multiple" />
       </scroll-view>
       <view v-if="multiple" class="footer px-26 py-15 flex-shrink-0">
         <button class="base-btn" @click="onOk()">确定</button>
       </view>
-      <SafeBottom />
+      <SafeBottom v-if="multiple" />
     </view>
   </BottomPopup>
 </template>
@@ -57,7 +58,7 @@ type NodeItem = any
 type NodeItemValue = number | string
 
 interface OwnProps {
-  modelValue?: NodeItemValue
+  modelValue?: NodeItemValue | NodeItemValue[]
   /** 显示状态 */
   show?: boolean
   /** 高度 */
@@ -96,7 +97,7 @@ const emit = defineEmits<{
   (event: 'change', item: NodeItem | NodeItem[]): void
 }>()
 
-const { show, data, labelKey, valueKey, multiple, showSearch, load } = toRefs(props)
+const { show, modelValue, data, labelKey, valueKey, multiple, showSearch, load } = toRefs(props)
 
 const searchText = ref<string>('')
 const options = ref<NodeItem[]>(data.value)
@@ -112,8 +113,18 @@ watch(show, async (newVal, oldVal) => {
     if (!options.value.length) {
       options.value = await getData()
     }
+    init()
   }
 })
+
+const init = () => {
+  const defaultValues = Array.isArray(modelValue.value) ? modelValue.value : [modelValue.value]
+  defaultValues.forEach((value) => {
+    if (typeof value !== 'undefined') {
+      selectedSet.value.add(value)
+    }
+  })
+}
 
 const getData = async (level = 0, node?: NodeItem) => {
   try {

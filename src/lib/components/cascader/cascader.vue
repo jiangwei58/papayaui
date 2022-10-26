@@ -79,7 +79,7 @@ interface OwnProps {
   /** 数据子级节点的字段名 */
   childrenKey?: string
   /** 最大层级，把哪一层级作为叶子节点 */
-  max?: number
+  maxLevel?: number
   /** 是否显示搜索 */
   showSearch?: boolean
   /** 动态获取下一级节点数据 */
@@ -95,8 +95,8 @@ const props = withDefaults(defineProps<OwnProps>(), {
   labelKey: 'label',
   valueKey: 'value',
   childrenKey: 'children',
-  max: Number.MAX_SAFE_INTEGER,
-  load: () => [],
+  maxLevel: Number.MAX_SAFE_INTEGER,
+  load: undefined,
 })
 
 const emit = defineEmits<{
@@ -105,7 +105,7 @@ const emit = defineEmits<{
   (event: 'change', item: TreeNode): void
 }>()
 
-const { show, data, labelKey, valueKey, childrenKey, max, showSearch, load } = toRefs(props)
+const { show, data, labelKey, valueKey, childrenKey, maxLevel, showSearch, load } = toRefs(props)
 
 const tabCurrent = ref<number>(0)
 const oldScrollTop = ref<number>(0)
@@ -128,7 +128,7 @@ const tabList = computed(() => {
       tabList.push({ name: currentData[currentIndexs.value[i]][labelKey.value] })
     }
   }
-  if (tabList.length < max.value) {
+  if (tabList.length < maxLevel.value) {
     tabList.push({ name: '请选择' })
   }
   return tabList
@@ -155,6 +155,7 @@ watch(show, async (newVal, oldVal) => {
 
 const getData = async (level = 0, node?: TreeNode) => {
   try {
+    if (typeof load.value !== 'function') throw new Error('未传请求函数')
     loading.value = true
     let res = load.value(level, node)
     if (res instanceof Promise) {
@@ -177,24 +178,31 @@ const onSelect = async (valueIndex: number) => {
   newIndexs.splice(tabCurrent.value, currentIndexs.value.length, valueIndex)
   currentIndexs.value = newIndexs
   const currentNode = currentData.value[valueIndex]
-  if (currentNode && newIndexs.length < max.value) {
-    if (!currentNode[childrenKey.value]?.length) {
+  // 达到设置的最大层级时直接完成
+  if (newIndexs.length >= maxLevel.value) {
+    onOk()
+    return
+  }
+  // 根据有无子节点判断
+  if (!currentNode[childrenKey.value]?.length) {
+    if (typeof load.value === 'function') {
       getData(tabCurrent.value + 1, currentNode).then((res) => {
         currentNode[childrenKey.value] = res
       })
+    } else {
+      onOk()
+      return
     }
-    tabCurrent.value += 1
-    scrollTop.value = oldScrollTop.value
-    nextTick(function () {
-      scrollTop.value = 0
-    })
-  } else {
-    onOk()
   }
+  tabCurrent.value += 1
+  scrollTop.value = oldScrollTop.value
+  nextTick(function () {
+    scrollTop.value = 0
+  })
 }
 
 const onOk = () => {
-  const item = currentData.value[currentIndexs.value[max.value - 1]]
+  const item = currentData.value[currentIndexs.value[currentIndexs.value.length - 1]]
   emit('update:modelValue', item[valueKey.value])
   emit('change', item)
   onClose()
