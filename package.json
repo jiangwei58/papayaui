@@ -1,6 +1,6 @@
 {
   "name": "@pagodaui/weiui",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "适用于uniapp的ui扩展库",
   "scripts": {
     "dev:app": "uni -p app",
