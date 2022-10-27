@@ -102,7 +102,7 @@ const onBlur = async (e: any) => {
   resize: none;
   width: 100%;
   &.disabled {
-    --#{$prefix}-number-input-text-color: _var(number-input-disabled);
+    @include _setVar(number-input-text-color, _var(number-input-disabled));
   }
   :deep(.#{$prefix}-number-input-placeholder) {
     color: _var(number-input-placeholder-color);

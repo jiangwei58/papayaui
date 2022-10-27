@@ -4,6 +4,10 @@ $prefix: wei;
   @return var(--#{$prefix}-#{$varName});
 }
 
+@mixin _setVar($varName, $value) {
+  --#{$prefix}-#{$varName}: #{$value};
+}
+
 $componentVars: (
   // tabs
   tabs-height: 44px,

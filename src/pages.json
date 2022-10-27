@@ -13,6 +13,12 @@
       }
     },
     {
+      "path": "lib/components/button/demo",
+      "style": {
+        "navigationBarTitleText": "Button 按钮"
+      }
+    },
+    {
       "path": "lib/components/cascader/demo",
       "style": {
         "navigationBarTitleText": "Cascader 级联选择"

@@ -1,5 +1,5 @@
 <template>
-  <Cell :class="computedClass('field')" v-bind="$props">
+  <Cell :class="computedClass('field', { 'only-input': onlyInput })" v-bind="$props">
     <view :class="computedClass('field__body')">
       <input
         :class="computedClass('field__input')"
@@ -28,10 +28,16 @@ interface OwnProps
     'title' | 'titleWidth' | 'required' | 'icon' | 'center' | 'errorMessage'
   > {
   modelValue?: string
+  /** 输入框类型 */
   type?: 'text' | 'number' | 'idcard' | 'textarea' | 'digit'
+  /** 值对齐方式 */
   valueAlign?: CellProps['valueAlign']
+  /** 输入提示 */
   placeholder?: string
+  /** 是否禁用 */
   disabled?: boolean
+  /** 是否只用输入框（主要用于表单情况） */
+  onlyInput?: boolean
 }
 
 withDefaults(defineProps<OwnProps>(), {
@@ -60,6 +66,10 @@ const onInput = (payload: Event) => {
 .#{$prefix}-field {
   .#{$prefix}-field__input {
     color: _var(color-text-black);
+  }
+  &.#{$prefix}-only-input {
+    @include _setVar(cell-padding-y, 0);
+    @include _setVar(cell-padding-x, 0);
   }
 }
 </style>

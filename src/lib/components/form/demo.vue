@@ -3,11 +3,12 @@
     <Form ref="formRef" :form="formData" :rules="rules">
       <CellGroup inset>
         <FormItem prop="name" label="名称" required>
-          <input v-model="formData.name" />
+          <input v-model="formData.name" placeholder="请输入" />
         </FormItem>
 
         <FormItem prop="desc" label="描述">
-          <input v-model="formData.desc" />
+          <!-- 可以使用field组件的输入框模式 -->
+          <Field v-model="formData.desc" placeholder="请输入" only-input />
         </FormItem>
       </CellGroup>
 
@@ -24,6 +25,7 @@ import FormItem from '../form-item/form-item.vue'
 import Form from './form.vue'
 import ButtonComponent from '../button/button.vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
+import Field from '../field/field.vue'
 
 interface FormData {
   name: string

@@ -17,7 +17,8 @@
 <script lang="ts" setup>
 import DocDemoBlock from '../../lib/doc/doc-demo-block.vue'
 import DocNavBlockCell from '../../lib/doc/doc-nav-block-cell.vue'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import pageConfig from '../../pages.json'
 
 interface NavGroupItem {
   title: string
@@ -29,17 +30,31 @@ interface NavItem {
   path: string
 }
 
-const navList = ref<NavGroupItem[]>([
-  {
-    title: '基础组件',
-    list: [
-      { title: 'Container 页面容器', path: '/lib/components/container/demo' },
-      { title: 'Cascader 级联选择', path: '/lib/components/cascader/demo' },
-      { title: 'PickerPopup 选择弹窗', path: '/lib/components/picker-popup/demo' },
-      { title: 'Form 表单', path: '/lib/components/form/demo' },
-    ],
-  },
-])
+const navList = ref<NavGroupItem[]>([])
+
+onMounted(() => {
+  const group: Record<string, { title: string; index: number }> = {
+    components: { title: '基础组件', index: 0 },
+  }
+  const data: NavGroupItem[] = []
+  pageConfig.pages.forEach((page) => {
+    for (const key in group) {
+      if (!data[group[key].index]) {
+        data[group[key].index] = {
+          title: group[key].title,
+          list: [],
+        }
+      }
+      if (page.path.includes(key)) {
+        data[group[key].index].list.push({
+          title: page.style.navigationBarTitleText,
+          path: `/${page.path}`,
+        })
+      }
+    }
+  })
+  navList.value = data
+})
 </script>
 
 <style lang="scss" scoped></style>
