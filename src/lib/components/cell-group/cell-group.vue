@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computedClass } from '@/lib/utils/style'
+import { computedClass } from '../../utils/style'
 
 interface OwnProps {
   /** 是否展示为圆角卡片风格 */

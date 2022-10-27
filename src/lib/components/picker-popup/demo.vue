@@ -44,7 +44,7 @@ const syncOptions = new Array(20)
   .map((_item, index) => ({ label: index.toString(), value: index.toString() }))
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 page {
   background-color: var(--color-page-bg-gray);
 }

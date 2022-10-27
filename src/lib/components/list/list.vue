@@ -1,14 +1,14 @@
 <template>
   <view class="width-full" :class="computedClass('list-wrapper')">
     <slot></slot>
-    <WeiLoadmore v-if="status" :status="status" :config="loadStatusConfig" />
+    <Loadmore v-if="status" :status="status" :config="loadStatusConfig" />
   </view>
 </template>
 
 <script lang="ts" setup>
 import { toRefs } from 'vue'
 import { computedClass } from '../../utils/style'
-import WeiLoadmore, { LoadStatus } from '../loadmore/loadmore.vue'
+import Loadmore, { LoadStatus } from '../loadmore/loadmore.vue'
 
 interface OwnProps {
   status?: keyof LoadStatus

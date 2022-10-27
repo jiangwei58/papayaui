@@ -96,10 +96,10 @@ defineExpose({
   width: 100%;
   min-height: 100vh;
 }
-.#{$prefix}container-header {
+.#{$prefix}-container-header {
   width: 100%;
 }
-.#{$prefix}container-bottom-fixed {
+.#{$prefix}-container-bottom-fixed {
   position: fixed;
   width: 100%;
   left: 0;

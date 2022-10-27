@@ -9,7 +9,8 @@
         :placeholder-style="`color:var(--${PREFIX}-color-text-black-3)`"
         :style="{ textAlign: valueAlign }"
         @input="onInput"
-        @blur="emit('blur', $event as unknown as EventDetail<string>)"
+        @blur="emit('blur', $event)"
+        @confirm="emit('confirm', $event)"
       />
     </view>
   </Cell>
@@ -43,7 +44,8 @@ withDefaults(defineProps<OwnProps>(), {
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
   (event: 'input', value: string): void
-  (event: 'blur', value: EventDetail<string>): void
+  (event: 'blur', value: FocusEvent): void
+  (event: 'confirm', value: EventDetail<{ value: string }>): void
 }>()
 
 const onInput = (payload: Event) => {

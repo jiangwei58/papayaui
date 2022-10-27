@@ -1,4 +1,4 @@
-import { isEmptyValue } from '@/lib/utils/common'
+import { isEmptyValue } from '../../utils/common'
 import { FormRuleItem, SyncValidateResult } from './useFormValidate'
 
 type ValidatorFunc = (

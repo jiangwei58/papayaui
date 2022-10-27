@@ -5,6 +5,30 @@
       "style": {
         "navigationBarTitleText": "示例"
       }
+    },
+    {
+      "path": "lib/components/container/demo",
+      "style": {
+        "navigationBarTitleText": "Container 页面容器"
+      }
+    },
+    {
+      "path": "lib/components/cascader/demo",
+      "style": {
+        "navigationBarTitleText": "Cascader 级联选择"
+      }
+    },
+    {
+      "path": "lib/components/picker-popup/demo",
+      "style": {
+        "navigationBarTitleText": "PickerPopup 级联选择"
+      }
+    },
+    {
+      "path": "lib/components/form/demo",
+      "style": {
+        "navigationBarTitleText": "Form 级联选择"
+      }
     }
   ],
   "globalStyle": {

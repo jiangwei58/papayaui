@@ -8,11 +8,13 @@
       value-align="left"
       center
       @update:model-value="emit('update:modelValue', $event)"
+      @confirm="emit('confirm', $event)"
     />
   </view>
 </template>
 
 <script lang="ts" setup>
+import { EventDetail } from '../../types'
 import { computedClass } from '../../utils/style'
 import Field from '../field/field.vue'
 
@@ -24,6 +26,7 @@ defineProps<OwnProps>()
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
+  (event: 'confirm', value: EventDetail<{ value: string }>): void
 }>()
 </script>
 

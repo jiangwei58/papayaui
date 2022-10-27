@@ -57,7 +57,7 @@ import BottomPopup from '../bottom-popup/bottom-popup.vue'
 import Tabs from '../tabs/tabs.vue'
 import Icon from '../icon/icon.vue'
 import Search from '../search/search.vue'
-import { PREFIX } from '@/lib/utils/style'
+import { PREFIX } from '../../utils/style'
 
 type TreeNode = any
 type TreeNodeValue = number | string

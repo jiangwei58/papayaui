@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts" setup>
-import { FormItemExtraParams, FormRules, useFormValidate } from '@/lib'
-import { computedClass } from '@/lib/utils/style'
+import { FormItemExtraParams, FormRules, useFormValidate } from '../../'
+import { computedClass } from '../../utils/style'
 import { computed, provide, ref, toRefs } from 'vue'
 import { FormItemInstance } from '../form-item/form-item.vue'
 
@@ -39,14 +39,10 @@ const getChildrenProps = (children: FormItemInstance[]) => {
 const baseValidate = (keys?: string[]) => {
   formExtraData.value = getChildrenProps(children)
   return formValidate.value.validate({ keys }).then(({ isValid, errorMap }) => {
-    if (!isValid) {
-      children.forEach((child) => {
-        const error = errorMap[child.props.prop as string]
-        if (error) {
-          child.errorMessage.value = error
-        }
-      })
-    }
+    children.forEach((child) => {
+      const error = errorMap[child.props.prop as string]
+      child.errorMessage.value = error || ''
+    })
     return { isValid, errorMap }
   })
 }

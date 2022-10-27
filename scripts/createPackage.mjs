@@ -14,6 +14,7 @@ const getPackageJson = () => {
   delete json.scripts
   delete json.devDependencies
   json['files'] = [
+    '/doc',
     '/components',
     '/fonts',
     '/hooks',

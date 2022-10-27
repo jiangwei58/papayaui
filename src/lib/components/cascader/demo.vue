@@ -53,3 +53,8 @@ const onLoad = (_level: number, node: NodeItem) => {
 </script>
 
 <style lang="scss" scoped></style>
+<style lang="scss">
+page {
+  background-color: var(--color-page-bg-gray);
+}
+</style>

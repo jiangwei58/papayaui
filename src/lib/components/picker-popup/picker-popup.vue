@@ -39,7 +39,7 @@
         <SafeBottom v-if="!multiple" />
       </scroll-view>
       <view v-if="multiple" class="footer px-26 py-15 flex-shrink-0">
-        <button class="base-btn" @click="onOk()">确定</button>
+        <ButtonComponent type="primary" @click="onOk()">确定</ButtonComponent>
       </view>
       <SafeBottom v-if="multiple" />
     </view>
@@ -51,8 +51,9 @@ import { watch, toRefs, ref, computed } from 'vue'
 import BottomPopup from '../bottom-popup/bottom-popup.vue'
 import Icon from '../icon/icon.vue'
 import Search from '../search/search.vue'
-import { PREFIX } from '@/lib/utils/style'
+import { PREFIX } from '../../utils/style'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
+import ButtonComponent from '../button/button.vue'
 
 type NodeItem = any
 type NodeItemValue = number | string
