@@ -1,4 +1,10 @@
 {
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^wei-(.*)": "@/packages/components/$1/$1.vue"
+    }
+  },
   "pages": [
     {
       "path": "pages/example/index",
@@ -7,33 +13,33 @@
       }
     },
     {
-      "path": "lib/components/container/demo",
+      "path": "packages/components/container/demo",
       "style": {
         "navigationBarTitleText": "Container 页面容器"
       }
     },
     {
-      "path": "lib/components/button/demo",
+      "path": "packages/components/button/demo",
       "style": {
         "navigationBarTitleText": "Button 按钮"
       }
     },
     {
-      "path": "lib/components/cascader/demo",
+      "path": "packages/components/cascader/demo",
       "style": {
         "navigationBarTitleText": "Cascader 级联选择"
       }
     },
     {
-      "path": "lib/components/picker-popup/demo",
+      "path": "packages/components/picker-popup/demo",
       "style": {
-        "navigationBarTitleText": "PickerPopup 级联选择"
+        "navigationBarTitleText": "PickerPopup 选择弹窗"
       }
     },
     {
-      "path": "lib/components/form/demo",
+      "path": "packages/components/form/demo",
       "style": {
-        "navigationBarTitleText": "Form 级联选择"
+        "navigationBarTitleText": "Form 表单"
       }
     }
   ],

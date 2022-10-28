@@ -31,7 +31,7 @@ const getPackageJson = () => {
 const writePackage = (packageJSON) => {
   const writeFilePath = path.resolve(
     url.fileURLToPath(import.meta.url),
-    '../../src/lib/package.json',
+    '../../src/packages/package.json',
   )
   const steam = fs.createWriteStream(writeFilePath)
 

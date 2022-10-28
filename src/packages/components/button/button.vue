@@ -41,7 +41,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   height: '40px',
   fontSize: '16px',
   round: '4px',
-  syncClick: () => {},
+  syncClick: undefined,
 })
 
 const emit = defineEmits<{

@@ -15,8 +15,8 @@
 </template>
 
 <script lang="ts" setup>
-import DocDemoBlock from '../../lib/doc/doc-demo-block.vue'
-import DocNavBlockCell from '../../lib/doc/doc-nav-block-cell.vue'
+import DocDemoBlock from '../../packages/doc/doc-demo-block.vue'
+import DocNavBlockCell from '../../packages/doc/doc-nav-block-cell.vue'
 import { onMounted, ref } from 'vue'
 import pageConfig from '../../pages.json'
 
