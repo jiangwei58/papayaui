@@ -10,8 +10,9 @@
     @click="emit('click')"
   >
     <Icon v-if="icon" :name="icon" block class="mr-4" />
-    <view v-if="!!title" :class="computedClass('cell__title')">
-      <text>{{ title }}</text>
+    <view v-if="!!title || $slots.title" :class="computedClass('cell__title')">
+      <slot v-if="$slots.title" name="title" />
+      <text v-else>{{ title }}</text>
     </view>
     <view :class="computedClass('cell__value')">
       <slot v-if="$slots.default" />
@@ -41,15 +42,24 @@ import { computedClass } from '../../utils/style'
 import Icon from '../icon/icon.vue'
 
 export interface CellProps {
+  /** 标题 */
   title?: string
+  /** 内容 */
   value?: string
+  /** 标题宽度 */
   titleWidth?: string
+  /** 是否显示箭头，为true同时有点击反馈 */
   isLink?: boolean
+  /** 是否显示必填标识 */
   required?: boolean
+  /** 内容居中 */
   center?: boolean
-  icon?: string // 前面的图标
-  valueAlign?: 'left' | 'center' | 'right' // 内容对齐方式
-  errorMessage?: string // 错误信息
+  /** 前面的图标 */
+  icon?: string
+  /** 内容对齐方式 */
+  valueAlign?: 'left' | 'center' | 'right'
+  /** 错误信息 */
+  errorMessage?: string
 }
 
 withDefaults(defineProps<CellProps>(), {

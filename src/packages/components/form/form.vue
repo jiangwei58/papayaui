@@ -11,7 +11,9 @@ import { computed, provide, ref, toRefs } from 'vue'
 import { FormItemInstance } from '../form-item/form-item.vue'
 
 interface OwnProps {
+  /** 表单数据 */
   form?: any
+  /** 校验规则 */
   rules?: FormRules<any>
 }
 

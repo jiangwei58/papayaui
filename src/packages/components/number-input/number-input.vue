@@ -19,13 +19,20 @@ import { computedClass } from '../../utils/style'
 
 interface OwnProps {
   modelValue?: string | number | undefined
+  /** 是否禁用 */
   disabled?: boolean
+  /** 输入提示 */
   placeholder?: string
+  /** 内容对齐方式 */
   align?: 'left' | 'center' | 'right'
-  min?: number // 最小值
-  max?: number // 最大值
-  intLength?: number // 整数位长度
-  precision?: number // 小数位长度
+  /** 最小值 */
+  min?: number
+  /** 最大值 */
+  max?: number
+  /** 整数位长度 */
+  intLength?: number
+  /** 小数位长度 */
+  precision?: number
 }
 
 const props = withDefaults(defineProps<OwnProps>(), {

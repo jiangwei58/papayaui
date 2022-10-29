@@ -22,7 +22,9 @@ import { computedClass } from '../../utils/style'
 const systemInfo = uni.getSystemInfoSync()
 
 interface OwnProps {
+  /** 标题 */
   title?: string
+  /** 背景色 */
   bgColor?: string
 }
 

@@ -40,10 +40,13 @@ import Icon from '../icon/icon.vue'
 
 interface OwnProps {
   modelValue: boolean
+  /** 标题 */
   title?: string
+  /** 弹窗高度 */
   height?: string
+  /** 是否可以点击空白处关闭 */
   maskCloseAble?: boolean
-  btnText?: string
+  /** 是否留出底部安全距离 */
   safeArea?: boolean
 }
 
@@ -52,7 +55,6 @@ const props = withDefaults(defineProps<OwnProps>(), {
   title: undefined,
   height: '80vh',
   maskCloseAble: true,
-  btnText: '确定',
   safeArea: false,
 })
 

@@ -21,17 +21,24 @@
 import { ref, toRefs, onMounted, getCurrentInstance, watch } from 'vue'
 import { computedClass } from '../../utils/style'
 
-interface OwnProps {
-  width: number
-  height: number
-  top: number
-  opacity: number
-  fontsize: number
-  zindex: number
-  contents: string[]
+interface WatermarkProps {
+  /** 单个水印宽度 */
+  width?: number
+  /** 单个水印高度 */
+  height?: number
+  /** 水印内容距离画布顶部的距离 */
+  top?: number
+  /** 水印透明度 */
+  opacity?: number
+  /** 水印字体大小 */
+  fontsize?: number
+  /** 水印元素层级 */
+  zindex?: number
+  /** 水印内容，数组的每个元素代表每一行的内容 */
+  contents?: string[]
 }
 
-const props = withDefaults(defineProps<OwnProps>(), {
+const props = withDefaults(defineProps<WatermarkProps>(), {
   width: 125,
   height: 125,
   top: 50,

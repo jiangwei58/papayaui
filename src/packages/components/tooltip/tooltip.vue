@@ -37,7 +37,9 @@ import useRect from '../../hooks/useRect'
 import { computedClass } from '../../utils/style'
 
 interface OwnProps {
+  /** 悬浮内容 */
   text?: string
+  /** 宽度 */
   width?: string
 }
 

@@ -19,9 +19,45 @@
       }
     },
     {
+      "path": "packages/components/icon/demo",
+      "style": {
+        "navigationBarTitleText": "icon 图标"
+      }
+    },
+    {
       "path": "packages/components/button/demo",
       "style": {
         "navigationBarTitleText": "Button 按钮"
+      }
+    },
+    {
+      "path": "packages/components/cell/demo",
+      "style": {
+        "navigationBarTitleText": "Cell 单元格"
+      }
+    },
+    {
+      "path": "packages/components/field/demo",
+      "style": {
+        "navigationBarTitleText": "Field 输入框"
+      }
+    },
+    {
+      "path": "packages/components/number-input/demo",
+      "style": {
+        "navigationBarTitleText": "NumberInput 数值输入框"
+      }
+    },
+    {
+      "path": "packages/components/search/demo",
+      "style": {
+        "navigationBarTitleText": "Search 搜索框"
+      }
+    },
+    {
+      "path": "packages/components/checkbox-btns/demo",
+      "style": {
+        "navigationBarTitleText": "CheckboxBtns 多选按钮组"
       }
     },
     {
@@ -37,9 +73,33 @@
       }
     },
     {
+      "path": "packages/components/tabs/demo",
+      "style": {
+        "navigationBarTitleText": "Tabs 标签页"
+      }
+    },
+    {
       "path": "packages/components/form/demo",
       "style": {
         "navigationBarTitleText": "Form 表单"
+      }
+    },
+    {
+      "path": "packages/components/tooltip/demo",
+      "style": {
+        "navigationBarTitleText": "tooltip 悬浮提示"
+      }
+    },
+    {
+      "path": "packages/components/sticky/demo",
+      "style": {
+        "navigationBarTitleText": "sticky 粘性布局"
+      }
+    },
+    {
+      "path": "packages/components/watermark/demo",
+      "style": {
+        "navigationBarTitleText": "Watermark 水印"
       }
     }
   ],

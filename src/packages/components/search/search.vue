@@ -4,7 +4,7 @@
       :model-value="modelValue"
       class="var(--color-page-bg-gray)"
       icon="search"
-      placeholder="请输入搜索关键词"
+      :placeholder="placeholder"
       value-align="left"
       center
       @update:model-value="emit('update:modelValue', $event)"
@@ -20,9 +20,14 @@ import Field from '../field/field.vue'
 
 interface OwnProps {
   modelValue?: string
+  /** 输入提示 */
+  placeholder?: string
 }
 
-defineProps<OwnProps>()
+withDefaults(defineProps<OwnProps>(), {
+  modelValue: undefined,
+  placeholder: '请输入搜索关键词',
+})
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void

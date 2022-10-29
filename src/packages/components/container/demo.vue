@@ -1,22 +1,22 @@
 <template>
-  <Container>
+  <wei-container>
     <template #header>
-      <Search @confirm="onSearch" />
+      <wei-search @confirm="onSearch" />
     </template>
 
     <view>
       <view v-for="item in list" :key="item.id" class="px-26">
         <view class="border-bottom" style="line-height: 88rpx">{{ item.label }}</view>
       </view>
-      <Loadmore :status="loadStatus" />
+      <wei-loadmore :status="loadStatus" />
     </view>
 
     <template #bottom>
       <view class="px-26 py-12">
-        <ButtonComponent type="primary">确定</ButtonComponent>
+        <wei-button type="primary">确定</wei-button>
       </view>
     </template>
-  </Container>
+  </wei-container>
 </template>
 
 <script lang="ts" setup>
@@ -24,10 +24,6 @@ import { onReachBottom } from '@dcloudio/uni-app'
 import { onMounted } from 'vue'
 import { useList } from '../../hooks'
 import { EventDetail } from '../../types'
-import ButtonComponent from '../button/button.vue'
-import Loadmore from '../loadmore/loadmore.vue'
-import Search from '../search/search.vue'
-import Container from './container.vue'
 
 interface ListItem {
   id: number

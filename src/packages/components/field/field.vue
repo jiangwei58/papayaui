@@ -43,7 +43,7 @@ interface OwnProps
 withDefaults(defineProps<OwnProps>(), {
   modelValue: '',
   type: 'text',
-  placeholder: '',
+  placeholder: '请输入',
   valueAlign: 'right',
 })
 
@@ -65,7 +65,7 @@ const onInput = (payload: Event) => {
 @import '../../styles/vars.scss';
 .#{$prefix}-field {
   .#{$prefix}-field__input {
-    color: _var(color-text-black);
+    color: _var(color-primary);
   }
   &.#{$prefix}-only-input {
     @include _setVar(cell-padding-y, 0);

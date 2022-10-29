@@ -1,31 +1,27 @@
 <template>
   <DocDemoBlock title="基础用法">
-    <Form ref="formRef" :form="formData" :rules="rules">
-      <CellGroup inset>
-        <FormItem prop="name" label="名称" required>
+    <wei-form ref="formRef" :form="formData" :rules="rules">
+      <wei-cell-group inset>
+        <wei-form-item prop="name" label="名称" required>
           <input v-model="formData.name" placeholder="请输入" />
-        </FormItem>
+        </wei-form-item>
 
-        <FormItem prop="desc" label="描述">
+        <wei-form-item prop="desc" label="描述">
           <!-- 可以使用field组件的输入框模式 -->
-          <Field v-model="formData.desc" placeholder="请输入" only-input />
-        </FormItem>
-      </CellGroup>
+          <wei-field v-model="formData.desc" placeholder="请输入" only-input />
+        </wei-form-item>
+      </wei-cell-group>
 
-      <ButtonComponent class="block px-32 pt-30" @click="onValidate">提交</ButtonComponent>
-    </Form>
+      <wei-button class="block px-32 pt-30" @click="onValidate">提交</wei-button>
+    </wei-form>
   </DocDemoBlock>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { FormRules } from '../../hooks'
-import CellGroup from '../cell-group/cell-group.vue'
-import FormItem from '../form-item/form-item.vue'
 import Form from './form.vue'
-import ButtonComponent from '../button/button.vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import Field from '../field/field.vue'
 
 interface FormData {
   name: string

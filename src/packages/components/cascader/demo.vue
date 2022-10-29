@@ -1,21 +1,18 @@
 <template>
   <DocDemoBlock title="基础用法">
-    <CellGroup inset>
-      <Cell title="静态数据" :value="value" is-link @click="onChangeVisible" />
-      <Cell title="动态数据" :value="asyncValue" is-link @click="onAsyncChangeVisible" />
-    </CellGroup>
+    <wei-cell-group inset>
+      <wei-cell title="静态数据" :value="value" is-link @click="onChangeVisible" />
+      <wei-cell title="动态数据" :value="asyncValue" is-link @click="onAsyncChangeVisible" />
+    </wei-cell-group>
 
-    <Cascader v-model:show="visible" v-model="value" :data="syncTreeData" />
-    <Cascader v-model:show="asyncVisible" v-model="asyncValue" :max-level="3" :load="onLoad" />
+    <wei-cascader v-model:show="visible" v-model="value" :data="syncTreeData" />
+    <wei-cascader v-model:show="asyncVisible" v-model="asyncValue" :max-level="3" :load="onLoad" />
   </DocDemoBlock>
 </template>
 
 <script lang="ts" setup>
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
 import { ref } from 'vue'
-import CellGroup from '../cell-group/cell-group.vue'
-import Cell from '../cell/cell.vue'
-import Cascader from './cascader.vue'
 
 type NodeItem = { label: string; value: string; children: NodeItem[] }
 

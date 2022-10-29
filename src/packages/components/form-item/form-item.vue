@@ -15,7 +15,9 @@ export interface FormItemInstance extends Omit<ComponentInternalInstance, 'props
 }
 
 export interface FormItemProps extends CellProps {
+  /** 校验对应的字段名 */
   prop?: string
+  /** 标签名 */
   label?: string
 }
 

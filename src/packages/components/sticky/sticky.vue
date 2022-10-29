@@ -96,7 +96,7 @@ export default defineComponent({
         if (this.cssSticky) {
           style.position = 'sticky'
           style.zIndex = +this.uZindex
-          style.top = this.stickyTop
+          style.top = this.stickyTop + 'px'
         } else {
           style.height = this.fixed ? this.height + 'px' : 'auto'
         }

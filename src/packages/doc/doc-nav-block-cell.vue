@@ -38,7 +38,7 @@ const toPage = () => {
   color: #323233;
   font-weight: 600;
   font-size: 14px;
-  line-height: 40px;
+  line-height: 44px;
   background: #f7f8fa;
   border-radius: 99px;
   transition: background 0.3s;

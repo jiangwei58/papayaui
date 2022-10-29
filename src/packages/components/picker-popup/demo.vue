@@ -1,22 +1,22 @@
 <template>
   <DocDemoBlock title="基础用法">
-    <CellGroup inset>
-      <Cell title="单选" :value="singleValue" is-link @click="singleVisible = true" />
-      <Cell
+    <wei-cell-group inset>
+      <wei-cell title="单选" :value="singleValue" is-link @click="singleVisible = true" />
+      <wei-cell
         title="多选"
         :value="multipleValue.toString()"
         is-link
         @click="multipleVisible = true"
       />
-    </CellGroup>
+    </wei-cell-group>
 
-    <PickerPopup
+    <wei-picker-popup
       v-model:show="singleVisible"
       v-model="singleValue"
       :data="syncOptions"
       show-search
     />
-    <PickerPopup
+    <wei-picker-popup
       v-model:show="multipleVisible"
       v-model="multipleValue"
       :data="syncOptions"
@@ -29,9 +29,6 @@
 <script lang="ts" setup>
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
 import { ref } from 'vue'
-import CellGroup from '../cell-group/cell-group.vue'
-import Cell from '../cell/cell.vue'
-import PickerPopup from './picker-popup.vue'
 
 const singleVisible = ref<boolean>(false)
 const singleValue = ref<string>()

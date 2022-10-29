@@ -40,10 +40,15 @@ export interface LoadStatus {
 }
 
 interface OwnProps {
+  /** 加载状态配置{loadmore, loading, nomore} */
   config?: LoadStatus
+  /** 当前状态 */
   status?: keyof LoadStatus
+  /** 加载图标颜色 */
   color?: string
+  /** 文字颜色 */
   textColor?: string
+  /** 加载图标大小 */
   iconSize?: number
 }
 

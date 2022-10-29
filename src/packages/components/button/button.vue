@@ -38,7 +38,7 @@ interface ButtonProps {
 const props = withDefaults(defineProps<ButtonProps>(), {
   type: 'primary',
   width: '100%',
-  height: '40px',
+  height: '42px',
   fontSize: '16px',
   round: '4px',
   syncClick: undefined,
@@ -93,6 +93,9 @@ const onClick = async (event: MouseEvent) => {
     transform: translate(-50%, -50%);
     opacity: 0;
     content: ' ';
+  }
+  &::after {
+    border: 0;
   }
   &.#{$prefix}-button--hover {
     &::before {

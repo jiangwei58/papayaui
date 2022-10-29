@@ -35,8 +35,11 @@ type TabItem = Record<string, any>
 
 interface OwnProps {
   modelValue?: number
+  /** 标签页列表数据 */
   tabs: TabItem[]
+  /** 标题对应字段名 */
   labelKey?: string
+  /** 是否滚动 */
   scrollable?: boolean
 }
 

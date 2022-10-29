@@ -34,13 +34,20 @@ import { computedClass } from '../../utils/style'
 export type WeiCheckboxItem = Record<string, unknown>
 
 interface OwnProps {
+  /** 列数 */
   column?: number
+  /** 间隔 */
   gap?: string
   modelValue?: any
+  /** 选项列表 */
   options?: WeiCheckboxItem[]
+  /** 标题对应字段名 */
   labelKey?: string
+  /** 内容对应字段名 */
   valueKey?: string
+  /** 是否多选 */
   multiple?: boolean
+  /** 背景色 */
   bgColor?: string
 }
 
