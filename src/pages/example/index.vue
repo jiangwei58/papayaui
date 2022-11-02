@@ -12,6 +12,7 @@
       :path="item.path"
     />
   </DocDemoBlock>
+  <view class="safe-buttom-padding" />
 </template>
 
 <script lang="ts" setup>
@@ -34,23 +35,27 @@ const navList = ref<NavGroupItem[]>([])
 
 onMounted(() => {
   const group: Record<string, { title: string; index: number }> = {
-    components: { title: '基础组件', index: 0 },
+    layout: { title: '布局组件', index: 0 },
+    base: { title: '基础组件', index: 1 },
+    form: { title: '表单组件', index: 2 },
+    nav: { title: '导航组件', index: 3 },
+    show: { title: '展示组件', index: 4 },
   }
   const data: NavGroupItem[] = []
   pageConfig.pages.forEach((page) => {
-    for (const key in group) {
-      if (!data[group[key].index]) {
-        data[group[key].index] = {
-          title: group[key].title,
-          list: [],
-        }
+    if (!page.type) return
+    const classify = group[page.type]
+    if (!data[classify.index]) {
+      data[classify.index] = {
+        title: classify.title,
+        list: [],
       }
-      if (page.path.includes(key)) {
-        data[group[key].index].list.push({
-          title: page.style.navigationBarTitleText,
-          path: `/${page.path}`,
-        })
-      }
+    }
+    if (page.path.startsWith('packages')) {
+      data[classify.index].list.push({
+        title: page.style.navigationBarTitleText,
+        path: `/${page.path}`,
+      })
     }
   })
   navList.value = data
