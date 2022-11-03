@@ -29,5 +29,7 @@ $componentVars: (
   // cell-group
   cell-group-margin-x: 16px,
   cell-group-rounded: 8px,
-  cell-group-bg-color: 8px
+  cell-group-bg-color: 8px,
+  // field
+  field-input-color: _var(color-primary)
 );

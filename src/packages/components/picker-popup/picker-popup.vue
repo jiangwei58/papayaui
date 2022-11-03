@@ -8,7 +8,12 @@
     @confirm="onOk"
   >
     <view class="content flex flex-col">
-      <Search v-if="showSearch" v-model="searchText" class="flex-shrink-0" />
+      <Search
+        v-if="showSearch"
+        :model-value="searchText"
+        class="flex-shrink-0"
+        @update:model-value="onChangeSearch"
+      />
       <scroll-view scroll-y class="flex-1" style="overflow: hidden">
         <view
           v-for="(item, index) in filterOptions"
@@ -28,10 +33,10 @@
           />
         </view>
         <view v-if="loading" class="height-full flex flex-col items-center justify-center">
-          <van-loading size="24px" vertical>加载中...</van-loading>
+          <loadmore :status="LoadStatusEnum.LOADING" />
         </view>
         <view
-          v-if="!filterOptions.length"
+          v-if="!filterOptions.length && !loading"
           class="height-full flex flex-col items-center justify-center text-28 text-black-2"
         >
           无数据
@@ -54,20 +59,22 @@ import Search from '../search/search.vue'
 import { PREFIX } from '../../utils/style'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import ButtonComponent from '../button/button.vue'
+import Loadmore from '../loadmore/loadmore.vue'
+import { LoadStatusEnum } from '../../hooks/useList'
 
-type NodeItem = any
-type NodeItemValue = number | string
+type Option = any
+type OptionValue = number | string
 
 interface OwnProps {
-  modelValue?: NodeItemValue | NodeItemValue[]
+  modelValue?: OptionValue | OptionValue[]
   /** 显示状态 */
   show?: boolean
   /** 高度 */
   height?: string
   /** 标题 */
   title?: string
-  /** 树形数据 */
-  data?: NodeItem[]
+  /** 选项数据 */
+  data?: Option[]
   /** 数据标题的字段名 */
   labelKey?: string
   /** 数据值的字段名 */
@@ -77,7 +84,9 @@ interface OwnProps {
   /** 是否多选 */
   multiple?: boolean
   /** 动态获取下一级节点数据 */
-  load?: (level: number, node?: NodeItem) => NodeItem[] | Promise<NodeItem[]>
+  load?: (query?: string) => Option[] | Promise<Option[]>
+  /** 是否远程搜索 */
+  remote?: boolean
 }
 
 const props = withDefaults(defineProps<OwnProps>(), {
@@ -90,29 +99,32 @@ const props = withDefaults(defineProps<OwnProps>(), {
   valueKey: 'value',
   multiple: false,
   load: () => [],
+  remote: false,
 })
 
 const emit = defineEmits<{
   (event: 'update:show', show: boolean): void
-  (event: 'update:modelValue', value: NodeItemValue | NodeItemValue[]): void
-  (event: 'change', item: NodeItem | NodeItem[]): void
+  (event: 'update:modelValue', value: OptionValue | OptionValue[]): void
+  (event: 'change', item: Option | Option[]): void
 }>()
 
-const { show, modelValue, data, labelKey, valueKey, multiple, showSearch, load } = toRefs(props)
+const { show, modelValue, data, labelKey, valueKey, multiple, showSearch, load, remote } =
+  toRefs(props)
 
 const searchText = ref<string>('')
-const options = ref<NodeItem[]>(data.value)
-const selectedSet = ref<Set<NodeItemValue>>(new Set())
+const options = ref<Option[]>(data.value)
+const selectedSet = ref<Set<OptionValue>>(new Set())
 const loading = ref<boolean>(false)
 
 const filterOptions = computed(() => {
+  if (remote.value) return options.value
   return options.value.filter((item) => item[labelKey.value].indexOf(searchText.value) !== -1)
 })
 
 watch(show, async (newVal, oldVal) => {
   if (newVal !== oldVal && newVal) {
     if (!options.value.length) {
-      options.value = await getData()
+      getData()
     }
     init()
   }
@@ -127,25 +139,36 @@ const init = () => {
   })
 }
 
-const getData = async (level = 0, node?: NodeItem) => {
+const getData = async () => {
   try {
+    options.value = []
     loading.value = true
-    let res = load.value(level, node)
+    let res = load.value(searchText.value)
     if (res instanceof Promise) {
       res = await res
     }
-    loading.value = false
-    return res
+    options.value = res
   } catch (e) {
-    loading.value = false
-    return []
+    options.value = []
+  }
+  loading.value = false
+  return options.value
+}
+
+const onChangeSearch = (text: string) => {
+  searchText.value = text
+  if (remote.value) {
+    getData()
   }
 }
 
-const onSelect = async (value: NodeItemValue) => {
+const onSelect = async (value: OptionValue) => {
   if (selectedSet.value.has(value)) {
     selectedSet.value.delete(value)
   } else {
+    if (!multiple.value) {
+      selectedSet.value.clear()
+    }
     selectedSet.value.add(value)
   }
   if (!multiple.value) {

@@ -65,7 +65,7 @@ const onInput = (payload: Event) => {
 @import '../../styles/vars.scss';
 .#{$prefix}-field {
   .#{$prefix}-field__input {
-    color: _var(color-primary);
+    color: _var(field-input-color);
   }
   &.#{$prefix}-only-input {
     @include _setVar(cell-padding-y, 0);

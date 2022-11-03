@@ -38,6 +38,7 @@ const emit = defineEmits<{
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
 .#{$prefix}-search {
+  @include _setVar(field-input-color, _var(color-text-black));
   @include _setVar(cell-bg-color, var(--color-page-bg-gray));
   @include _setVar(cell-padding-x, 8px);
   @include _setVar(cell-padding-y, 8px);

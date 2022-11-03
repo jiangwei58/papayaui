@@ -38,7 +38,7 @@
           />
         </view>
         <view v-if="loading" class="height-full flex flex-col items-center justify-center">
-          <van-loading size="24px" vertical>加载中...</van-loading>
+          <loadmore :status="LoadStatusEnum.LOADING" />
         </view>
         <view
           v-if="!currentData.length"
@@ -57,6 +57,8 @@ import BottomPopup from '../bottom-popup/bottom-popup.vue'
 import Tabs from '../tabs/tabs.vue'
 import Icon from '../icon/icon.vue'
 import Search from '../search/search.vue'
+import Loadmore from '../loadmore/loadmore.vue'
+import { LoadStatusEnum } from '../../hooks/useList'
 import { PREFIX } from '../../utils/style'
 
 type TreeNode = any

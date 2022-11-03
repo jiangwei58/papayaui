@@ -24,11 +24,51 @@
       show-search
     />
   </DocDemoBlock>
+
+  <DocDemoBlock title="远程数据">
+    <wei-cell-group inset>
+      <wei-cell
+        title="远程数据"
+        :value="singleValue"
+        is-link
+        @click="
+          () => {
+            remoteVisible = true
+            remote = false
+          }
+        "
+      />
+      <wei-cell
+        title="远程搜索"
+        :value="singleValue"
+        is-link
+        @click="
+          () => {
+            remoteVisible = true
+            remote = true
+          }
+        "
+      />
+    </wei-cell-group>
+
+    <wei-picker-popup
+      v-model:show="remoteVisible"
+      v-model="singleValue"
+      :load="onLoad"
+      show-search
+      :remote="remote"
+    />
+  </DocDemoBlock>
 </template>
 
 <script lang="ts" setup>
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
 import { ref } from 'vue'
+
+interface optionItem {
+  label: string
+  value: string
+}
 
 const singleVisible = ref<boolean>(false)
 const singleValue = ref<string>()
@@ -39,6 +79,24 @@ const multipleValue = ref<string[]>([])
 const syncOptions = new Array(20)
   .fill(0)
   .map((_item, index) => ({ label: index.toString(), value: index.toString() }))
+
+const remoteVisible = ref<boolean>(false)
+const remote = ref<boolean>(false)
+
+const onLoad = (query?: string) => {
+  return new Promise<optionItem[]>((resolve) => {
+    setTimeout(() => {
+      resolve(
+        new Array(20).fill(0).map((_item, index) => {
+          return {
+            label: `${query ? `${query}搜索结果` : '选项'}: ${index}`,
+            value: index.toString(),
+          }
+        }),
+      )
+    }, 600)
+  })
+}
 </script>
 
 <style lang="scss">
