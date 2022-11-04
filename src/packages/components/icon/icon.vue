@@ -2,6 +2,7 @@
   <view
     :class="computedClass('iconfont', `icon-${name}`)"
     :style="{ display: block ? 'block' : 'inline-block', fontSize: getUnitValue(size), color }"
+    @click="emit('click', $event)"
   />
 </template>
 
@@ -20,6 +21,10 @@ withDefaults(defineProps<OwnProps>(), {
   size: '16px',
   color: '#969799',
 })
+
+const emit = defineEmits<{
+  (event: 'click', value: Event): void
+}>()
 </script>
 
 <style lang="scss" scoped>

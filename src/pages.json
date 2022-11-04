@@ -48,6 +48,20 @@
       "type": "base"
     },
     {
+      "path": "packages/components/popup/demo",
+      "style": {
+        "navigationBarTitleText": "Popup 弹出层"
+      },
+      "type": "base"
+    },
+    {
+      "path": "packages/components/section/demo",
+      "style": {
+        "navigationBarTitleText": "Section 标题栏"
+      },
+      "type": "base"
+    },
+    {
       "path": "packages/components/form/demo",
       "style": {
         "navigationBarTitleText": "Form 表单"

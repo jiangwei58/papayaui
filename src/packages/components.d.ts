@@ -23,6 +23,8 @@ import Sticky from './components/sticky/sticky.vue'
 import Tabs from './components/tabs/tabs.vue'
 import Tooltip from './components/tooltip/tooltip.vue'
 import Watermark from './components/watermark/watermark.vue'
+import Popup from './components/popup/popup.vue'
+import Section from './components/section/section.vue'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
@@ -51,5 +53,7 @@ declare module '@vue/runtime-core' {
     'wei-tabs': typeof Tabs
     'wei-tooltip': typeof Tooltip
     'wei-watermark': typeof Watermark
+    'wei-popup': typeof Popup
+    'wei-section': typeof Section
   }
 }
