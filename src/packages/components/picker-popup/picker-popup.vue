@@ -130,6 +130,10 @@ watch(show, async (newVal, oldVal) => {
   }
 })
 
+watch(data, (newVal) => {
+  options.value = newVal
+})
+
 const init = () => {
   const defaultValues = Array.isArray(modelValue.value) ? modelValue.value : [modelValue.value]
   defaultValues.forEach((value) => {

@@ -155,6 +155,10 @@ watch(show, async (newVal, oldVal) => {
   }
 })
 
+watch(data, (newVal) => {
+  treeData.value = newVal
+})
+
 const getData = async (level = 0, node?: TreeNode) => {
   try {
     if (typeof load.value !== 'function') throw new Error('未传请求函数')
