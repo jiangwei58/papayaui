@@ -7,8 +7,11 @@
     :type="precision ? 'digit' : 'number'"
     :placeholder-class="computedClass('number-input-placeholder')"
     :disabled="disabled"
+    :focus="focus"
+    :auto-blur="autoBlur"
     @input="onInput"
     @blur="onBlur"
+    @focus="onFocus"
   />
 </template>
 
@@ -33,6 +36,10 @@ interface OwnProps {
   intLength?: number
   /** 小数位长度 */
   precision?: number
+  /** 获取焦点 */
+  focus?: boolean
+  /** 键盘收起时，是否自动失去焦点 */
+  autoBlur?: boolean
 }
 
 const props = withDefaults(defineProps<OwnProps>(), {
@@ -50,6 +57,7 @@ const { modelValue, placeholder, precision, intLength, min, max } = toRefs(props
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
+  (event: 'focus', value: EventDetail<{ value: OwnProps['modelValue']; height: number }>): void
 }>()
 
 const minAndMax = (val: number) => {
@@ -90,6 +98,10 @@ const onBlur = async (e: any) => {
     val = result.toFixed(precision.value)
   }
   emit('update:modelValue', val)
+}
+
+const onFocus = (e: FocusEvent) => {
+  emit('focus', e as unknown as EventDetail<{ value: OwnProps['modelValue']; height: number }>)
 }
 </script>
 
