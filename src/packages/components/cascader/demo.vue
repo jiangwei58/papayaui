@@ -1,8 +1,13 @@
 <template>
   <DocDemoBlock title="基础用法">
     <wei-cell-group inset>
-      <wei-cell title="静态数据" :value="value" is-link @click="onChangeVisible" />
-      <wei-cell title="动态数据" :value="asyncValue" is-link @click="onAsyncChangeVisible" />
+      <wei-cell title="静态数据" :value="value.join('/')" is-link @click="onChangeVisible" />
+      <wei-cell
+        title="动态数据"
+        :value="asyncValue.join('/')"
+        is-link
+        @click="onAsyncChangeVisible"
+      />
     </wei-cell-group>
 
     <wei-cascader v-model:show="visible" v-model="value" :data="syncTreeData" />
@@ -13,15 +18,17 @@
 <script lang="ts" setup>
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
 import { ref } from 'vue'
+import { CascaderNode } from './cascader.vue'
 
 type NodeItem = { label: string; value: string; children: NodeItem[] }
 
 const visible = ref<boolean>(false)
-const value = ref<string>()
+const value = ref<string[]>([])
 
 const syncTreeData = [
   { label: '1', value: '1', children: [{ label: '1-1', value: '1-1' }] },
   { label: '2', value: '2', children: [{ label: '2-2', value: '2-2' }] },
+  { label: '3', value: '3', children: [] },
 ]
 
 const onChangeVisible = () => {
@@ -29,18 +36,18 @@ const onChangeVisible = () => {
 }
 
 const asyncVisible = ref<boolean>(false)
-const asyncValue = ref<string>()
+const asyncValue = ref<string[]>([])
 
 const onAsyncChangeVisible = () => {
   asyncVisible.value = !asyncVisible.value
 }
 
-const onLoad = (_level: number, node: NodeItem) => {
+const onLoad = (node: CascaderNode<NodeItem>) => {
   return new Promise<NodeItem[]>((resolve) => {
     setTimeout(() => {
       resolve(
         new Array(20).fill(0).map((_item, index) => {
-          const path = node ? `${node.value}-${index}` : index
+          const path = node.props ? `${node.props.value}-${index}` : index
           return { label: `节点: ${path}`, value: path } as NodeItem
         }),
       )

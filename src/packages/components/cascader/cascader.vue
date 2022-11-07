@@ -61,11 +61,16 @@ import Loadmore from '../loadmore/loadmore.vue'
 import { LoadStatusEnum } from '../../hooks/useList'
 import { PREFIX } from '../../utils/style'
 
-type TreeNode = any
-type TreeNodeValue = number | string
+export interface CascaderNode<T = any> {
+  props: T
+  level: number
+}
+
+type CascaderOption = any
+type CascaderValue = number | string
 
 interface OwnProps {
-  modelValue?: TreeNodeValue
+  modelValue?: CascaderValue[]
   /** 显示状态 */
   show?: boolean
   /** 高度 */
@@ -73,19 +78,21 @@ interface OwnProps {
   /** 标题 */
   title?: string
   /** 树形数据 */
-  data?: TreeNode[]
+  data?: CascaderOption[]
   /** 数据标题的字段名 */
   labelKey?: string
   /** 数据值的字段名 */
   valueKey?: string
   /** 数据子级节点的字段名 */
   childrenKey?: string
+  /** 叶子节点 */
+  isLeaf?: string | ((item: CascaderOption) => boolean)
   /** 最大层级，把哪一层级作为叶子节点 */
   maxLevel?: number
   /** 是否显示搜索 */
   showSearch?: boolean
   /** 动态获取下一级节点数据 */
-  load?: (level: number, node?: TreeNode) => TreeNode[] | Promise<TreeNode[]>
+  load?: (node: CascaderNode) => CascaderOption[] | Promise<CascaderOption[]>
 }
 
 const props = withDefaults(defineProps<OwnProps>(), {
@@ -99,22 +106,24 @@ const props = withDefaults(defineProps<OwnProps>(), {
   childrenKey: 'children',
   maxLevel: Number.MAX_SAFE_INTEGER,
   load: undefined,
+  isLeaf: undefined,
 })
 
 const emit = defineEmits<{
   (event: 'update:show', show: boolean): void
-  (event: 'update:modelValue', value: TreeNodeValue): void
-  (event: 'change', item: TreeNode): void
+  (event: 'update:modelValue', value: CascaderValue[]): void
+  (event: 'change', value: CascaderValue[], items: CascaderOption[], tabIndex: number): void
 }>()
 
-const { show, data, labelKey, valueKey, childrenKey, maxLevel, showSearch, load } = toRefs(props)
+const { show, data, labelKey, valueKey, childrenKey, maxLevel, showSearch, load, isLeaf } =
+  toRefs(props)
 
 const tabCurrent = ref<number>(0)
 const oldScrollTop = ref<number>(0)
 const scrollTop = ref<number>(0)
 
 const searchText = ref<string>('')
-const treeData = ref<TreeNode[]>(data.value)
+const treeData = ref<CascaderOption[]>(data.value)
 const currentIndexs = ref<number[]>([])
 const loading = ref<boolean>(false)
 
@@ -159,11 +168,11 @@ watch(data, (newVal) => {
   treeData.value = newVal
 })
 
-const getData = async (level = 0, node?: TreeNode) => {
+const getData = async (level = 0, nodeProps?: CascaderOption) => {
   try {
     if (typeof load.value !== 'function') throw new Error('未传请求函数')
     loading.value = true
-    let res = load.value(level, node)
+    let res = load.value({ props: nodeProps, level })
     if (res instanceof Promise) {
       res = await res
     }
@@ -179,6 +188,16 @@ const onScroll = (e: any) => {
   oldScrollTop.value = e.detail.scrollTop
 }
 
+const getNodeIsLeft = (item: CascaderOption): boolean => {
+  if (typeof isLeaf.value === 'string') {
+    return !!item[isLeaf.value]
+  }
+  if (typeof isLeaf.value === 'function') {
+    return isLeaf.value(item)
+  }
+  return !item[childrenKey.value]?.length
+}
+
 const onSelect = async (valueIndex: number) => {
   const newIndexs = [...currentIndexs.value]
   newIndexs.splice(tabCurrent.value, currentIndexs.value.length, valueIndex)
@@ -190,7 +209,7 @@ const onSelect = async (valueIndex: number) => {
     return
   }
   // 根据有无子节点判断
-  if (!currentNode[childrenKey.value]?.length) {
+  if (getNodeIsLeft(currentNode)) {
     if (typeof load.value === 'function') {
       getData(tabCurrent.value + 1, currentNode).then((res) => {
         currentNode[childrenKey.value] = res
@@ -208,9 +227,22 @@ const onSelect = async (valueIndex: number) => {
 }
 
 const onOk = () => {
-  const item = currentData.value[currentIndexs.value[currentIndexs.value.length - 1]]
-  emit('update:modelValue', item[valueKey.value])
-  emit('change', item)
+  let currentNode: CascaderOption
+  const selectedOptions = currentIndexs.value.reduce<CascaderOption[]>(
+    (result, curIndex, index) => {
+      if (index === 0) {
+        currentNode = treeData.value[curIndex]
+      } else {
+        currentNode = currentNode[childrenKey.value][curIndex]
+      }
+      result.push({ ...currentNode, [childrenKey.value]: undefined })
+      return result
+    },
+    [],
+  )
+  const values = selectedOptions.map((item) => item[valueKey.value])
+  emit('update:modelValue', values)
+  emit('change', values, selectedOptions, tabCurrent.value)
   onClose()
 }
 
