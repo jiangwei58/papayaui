@@ -3,8 +3,8 @@ import { ComponentInternalInstance } from 'vue'
 function useRect(
   component: ComponentInternalInstance,
   selector: string,
-  all?: false,
-): Promise<Required<UniApp.NodeInfo>>
+  all: false,
+): Promise<Required<UniApp.NodeInfo> | null>
 function useRect(
   component: ComponentInternalInstance,
   selector: string,
@@ -14,17 +14,16 @@ function useRect(
   component: ComponentInternalInstance,
   selector: string,
   all?: boolean,
-): Promise<Required<UniApp.NodeInfo> | Required<UniApp.NodeInfo>[]> {
+): Promise<(Required<UniApp.NodeInfo> | null) | Required<UniApp.NodeInfo>[]> {
   return new Promise((resolve) => {
     uni
       .createSelectorQuery()
       .in(component)
       [all ? 'selectAll' : 'select'](selector)
       .boundingClientRect((rect) => {
-        if (all && Array.isArray(rect) && rect.length) {
-          resolve(rect)
-        }
-        if (!all && rect) {
+        if (all) {
+          resolve(rect as Required<UniApp.NodeInfo>[])
+        } else {
           resolve(rect as Required<UniApp.NodeInfo>)
         }
       })
