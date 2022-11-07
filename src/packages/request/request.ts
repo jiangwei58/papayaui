@@ -130,10 +130,11 @@ class Request {
             if (result !== false) {
               resolve(result)
             } else {
-              reject()
+              reject(response)
             }
           } else {
-            interceptorItem.reject(reject)
+            interceptorItem.reject(response)
+            reject()
           }
         }
       }

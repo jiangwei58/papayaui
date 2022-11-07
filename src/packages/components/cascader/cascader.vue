@@ -41,35 +41,37 @@
           <loadmore :status="LoadStatusEnum.LOADING" />
         </view>
         <view
-          v-if="!currentData.length"
+          v-if="!currentData.length && !loading"
           class="height-full flex flex-col items-center justify-center text-28 text-black-2"
         >
           无数据
         </view>
+        <SafeBottom v-if="safeAreaInsetBottom" />
       </scroll-view>
     </view>
   </BottomPopup>
 </template>
 
 <script lang="ts" setup>
-import { computed, watch, toRefs, ref, nextTick } from 'vue'
-import BottomPopup from '../bottom-popup/bottom-popup.vue'
-import Tabs from '../tabs/tabs.vue'
-import Icon from '../icon/icon.vue'
-import Search from '../search/search.vue'
-import Loadmore from '../loadmore/loadmore.vue'
+import { computed, nextTick, ref, watch, toRefs } from 'vue'
 import { LoadStatusEnum } from '../../hooks/useList'
 import { PREFIX } from '../../utils/style'
+import BottomPopup from '../bottom-popup/bottom-popup.vue'
+import Icon from '../icon/icon.vue'
+import Loadmore from '../loadmore/loadmore.vue'
+import SafeBottom from '../safe-bottom/safe-bottom.vue'
+import Search from '../search/search.vue'
+import Tabs from '../tabs/tabs.vue'
 
 export interface CascaderNode<T = any> {
   props: T
   level: number
 }
 
-type CascaderOption = any
-type CascaderValue = number | string
+export type CascaderOption = any
+export type CascaderValue = number | string
 
-interface OwnProps {
+export interface CascaderProps {
   modelValue?: CascaderValue[]
   /** 显示状态 */
   show?: boolean
@@ -93,20 +95,23 @@ interface OwnProps {
   showSearch?: boolean
   /** 动态获取下一级节点数据 */
   load?: (node: CascaderNode) => CascaderOption[] | Promise<CascaderOption[]>
+  /** 底部安全距离 */
+  safeAreaInsetBottom?: boolean
 }
 
-const props = withDefaults(defineProps<OwnProps>(), {
+const props = withDefaults(defineProps<CascaderProps>(), {
   modelValue: undefined,
   show: false,
   height: undefined,
   title: '',
-  data: () => [],
+  data: undefined,
   labelKey: 'label',
   valueKey: 'value',
   childrenKey: 'children',
   maxLevel: Number.MAX_SAFE_INTEGER,
   load: undefined,
   isLeaf: undefined,
+  safeAreaInsetBottom: true,
 })
 
 const emit = defineEmits<{
@@ -115,16 +120,16 @@ const emit = defineEmits<{
   (event: 'change', value: CascaderValue[], items: CascaderOption[], tabIndex: number): void
 }>()
 
-const { show, data, labelKey, valueKey, childrenKey, maxLevel, showSearch, load, isLeaf } =
-  toRefs(props)
+const { show, data } = toRefs(props)
 
 const tabCurrent = ref<number>(0)
 const oldScrollTop = ref<number>(0)
 const scrollTop = ref<number>(0)
 
 const searchText = ref<string>('')
-const treeData = ref<CascaderOption[]>(data.value)
+const treeData = ref<CascaderOption[]>([])
 const currentIndexs = ref<number[]>([])
+const treeMaxLevel = ref<number>(props.maxLevel)
 const loading = ref<boolean>(false)
 
 const tabList = computed(() => {
@@ -133,13 +138,13 @@ const tabList = computed(() => {
   let currentData = treeData.value
   for (let i = 0; i < currentIndexs.value.length; i++) {
     if (i !== 0) {
-      currentData = currentData[currentIndexs.value[i - 1]][childrenKey.value] || []
+      currentData = currentData[currentIndexs.value[i - 1]][props.childrenKey] || []
     }
     if (currentData) {
-      tabList.push({ name: currentData[currentIndexs.value[i]][labelKey.value] })
+      tabList.push({ name: currentData[currentIndexs.value[i]][props.labelKey] })
     }
   }
-  if (tabList.length < maxLevel.value) {
+  if (tabList.length < treeMaxLevel.value) {
     tabList.push({ name: '请选择' })
   }
   return tabList
@@ -149,20 +154,29 @@ const currentData = computed(() => {
   if (!treeData.value.length) return []
   let currentData = treeData.value
   for (let i = 1; i <= tabCurrent.value; i++) {
-    currentData = currentData[currentIndexs.value[i - 1]][childrenKey.value] || []
+    currentData = currentData[currentIndexs.value[i - 1]][props.childrenKey] || []
   }
-  return showSearch
-    ? currentData.filter((item) => item[labelKey.value].indexOf(searchText.value) !== -1)
+  return props.showSearch
+    ? currentData.filter((item) => item[props.labelKey].indexOf(searchText.value) !== -1)
     : currentData
 })
 
 watch(show, async (newVal, oldVal) => {
   if (newVal !== oldVal && newVal) {
-    if (!treeData.value.length) {
-      treeData.value = await getData()
-    }
+    init()
   }
 })
+
+const init = async () => {
+  if (treeData.value.length) return
+  if (typeof props.data !== 'undefined') {
+    treeData.value = props.data
+  } else if (typeof props.load === 'function') {
+    treeData.value = await getData()
+  } else {
+    console.warn('data or load is required')
+  }
+}
 
 watch(data, (newVal) => {
   treeData.value = newVal
@@ -170,9 +184,8 @@ watch(data, (newVal) => {
 
 const getData = async (level = 0, nodeProps?: CascaderOption) => {
   try {
-    if (typeof load.value !== 'function') throw new Error('未传请求函数')
     loading.value = true
-    let res = load.value({ props: nodeProps, level })
+    let res = props.load({ props: nodeProps, level })
     if (res instanceof Promise) {
       res = await res
     }
@@ -188,14 +201,14 @@ const onScroll = (e: any) => {
   oldScrollTop.value = e.detail.scrollTop
 }
 
-const getNodeIsLeft = (item: CascaderOption): boolean => {
-  if (typeof isLeaf.value === 'string') {
-    return !!item[isLeaf.value]
+const getNodeIsLeaf = (item: CascaderOption): boolean => {
+  if (typeof props.isLeaf === 'string') {
+    return !!item[props.isLeaf]
   }
-  if (typeof isLeaf.value === 'function') {
-    return isLeaf.value(item)
+  if (typeof props.isLeaf === 'function') {
+    return props.isLeaf(item)
   }
-  return !item[childrenKey.value]?.length
+  return !item[props.childrenKey]?.length
 }
 
 const onSelect = async (valueIndex: number) => {
@@ -204,15 +217,15 @@ const onSelect = async (valueIndex: number) => {
   currentIndexs.value = newIndexs
   const currentNode = currentData.value[valueIndex]
   // 达到设置的最大层级时直接完成
-  if (newIndexs.length >= maxLevel.value) {
+  if (newIndexs.length >= props.maxLevel) {
     onOk()
     return
   }
   // 根据有无子节点判断
-  if (getNodeIsLeft(currentNode)) {
-    if (typeof load.value === 'function') {
+  if (getNodeIsLeaf(currentNode)) {
+    if (typeof props.load === 'function') {
       getData(tabCurrent.value + 1, currentNode).then((res) => {
-        currentNode[childrenKey.value] = res
+        currentNode[props.childrenKey] = res
       })
     } else {
       onOk()
@@ -233,22 +246,23 @@ const onOk = () => {
       if (index === 0) {
         currentNode = treeData.value[curIndex]
       } else {
-        currentNode = currentNode[childrenKey.value][curIndex]
+        currentNode = currentNode[props.childrenKey][curIndex]
       }
-      result.push({ ...currentNode, [childrenKey.value]: undefined })
+      result.push({ ...currentNode, [props.childrenKey]: undefined })
       return result
     },
     [],
   )
-  const values = selectedOptions.map((item) => item[valueKey.value])
+  const values = selectedOptions.map((item) => item[props.valueKey])
+  treeMaxLevel.value = currentIndexs.value.length
   emit('update:modelValue', values)
   emit('change', values, selectedOptions, tabCurrent.value)
   onClose()
 }
 
 const onClose = () => {
-  currentIndexs.value = []
-  tabCurrent.value = 0
+  // currentIndexs.value = []
+  // tabCurrent.value = 0
   emit('update:show', false)
 }
 </script>

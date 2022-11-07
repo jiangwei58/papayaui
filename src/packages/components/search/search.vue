@@ -18,13 +18,13 @@ import { EventDetail } from '../../types'
 import { computedClass } from '../../utils/style'
 import Field from '../field/field.vue'
 
-interface OwnProps {
+export interface SearchProps {
   modelValue?: string
   /** 输入提示 */
   placeholder?: string
 }
 
-withDefaults(defineProps<OwnProps>(), {
+withDefaults(defineProps<SearchProps>(), {
   modelValue: undefined,
   placeholder: '请输入搜索关键词',
 })

@@ -17,10 +17,10 @@
 
 <script lang="ts" setup>
 import { EventDetail } from '../../types'
-import { nextTick, toRefs } from 'vue'
+import { nextTick } from 'vue'
 import { computedClass } from '../../utils/style'
 
-interface OwnProps {
+export interface NumberInputProps {
   modelValue?: string | number | undefined
   /** 是否禁用 */
   disabled?: boolean
@@ -42,7 +42,7 @@ interface OwnProps {
   autoBlur?: boolean
 }
 
-const props = withDefaults(defineProps<OwnProps>(), {
+const props = withDefaults(defineProps<NumberInputProps>(), {
   modelValue: '',
   disabled: false,
   placeholder: '请输入',
@@ -53,19 +53,20 @@ const props = withDefaults(defineProps<OwnProps>(), {
   intLength: Number.MAX_SAFE_INTEGER.toString().length,
 })
 
-const { modelValue, placeholder, precision, intLength, min, max } = toRefs(props)
-
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
-  (event: 'focus', value: EventDetail<{ value: OwnProps['modelValue']; height: number }>): void
+  (
+    event: 'focus',
+    value: EventDetail<{ value: NumberInputProps['modelValue']; height: number }>,
+  ): void
 }>()
 
 const minAndMax = (val: number) => {
-  if (typeof min.value !== 'undefined') {
-    val = Math.max(min.value, val)
+  if (typeof props.min !== 'undefined') {
+    val = Math.max(props.min, val)
   }
-  if (typeof max.value !== 'undefined') {
-    val = Math.min(max.value, val)
+  if (typeof props.max !== 'undefined') {
+    val = Math.min(props.max, val)
   }
   return val
 }
@@ -76,9 +77,9 @@ const onInput = (e: any) => {
   // 根据整数位和小数位处理值
   val = val.replace(/[^\d.]/g, '')
   const valSplit = val.split('.').slice(0, 2)
-  valSplit[0] = valSplit[0].slice(0, intLength.value)
-  if (typeof valSplit[1] !== 'undefined' && precision.value) {
-    valSplit[1] = valSplit[1].slice(0, precision.value)
+  valSplit[0] = valSplit[0].slice(0, props.intLength)
+  if (typeof valSplit[1] !== 'undefined' && props.precision) {
+    valSplit[1] = valSplit[1].slice(0, props.precision)
   } else {
     valSplit.splice(1, 1)
   }
@@ -91,17 +92,20 @@ const onBlur = async (e: any) => {
     const numberVal = parseFloat(val)
     const result = minAndMax(numberVal)
     // 防止处理后modelValue前后值一样视图不更新
-    if (result === parseFloat(modelValue.value.toString()) && result !== numberVal) {
-      emit('update:modelValue', numberVal.toFixed(precision.value))
+    if (result === parseFloat(props.modelValue.toString()) && result !== numberVal) {
+      emit('update:modelValue', numberVal.toFixed(props.precision))
       await nextTick()
     }
-    val = result.toFixed(precision.value)
+    val = result.toFixed(props.precision)
   }
   emit('update:modelValue', val)
 }
 
 const onFocus = (e: FocusEvent) => {
-  emit('focus', e as unknown as EventDetail<{ value: OwnProps['modelValue']; height: number }>)
+  emit(
+    'focus',
+    e as unknown as EventDetail<{ value: NumberInputProps['modelValue']; height: number }>,
+  )
 }
 </script>
 

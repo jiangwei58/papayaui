@@ -21,7 +21,7 @@
 import { ref, toRefs, onMounted, getCurrentInstance, watch } from 'vue'
 import { computedClass } from '../../utils/style'
 
-interface WatermarkProps {
+export interface WatermarkProps {
   /** 单个水印宽度 */
   width?: number
   /** 单个水印高度 */
@@ -48,7 +48,7 @@ const props = withDefaults(defineProps<WatermarkProps>(), {
   contents: () => [],
 })
 
-const { width, top, opacity, fontsize, contents } = toRefs(props)
+const { contents } = toRefs(props)
 
 const internalInstance = getCurrentInstance()
 const src = ref<string>('')
@@ -79,11 +79,11 @@ const createWatermark = (textList: string[]) => {
       ctx.scale(dpr, dpr)
 
       ctx.rotate((-20 * Math.PI) / 180)
-      ctx.fillStyle = `rgba(0,0,0,${opacity.value})`
-      ctx.font = `${fontsize.value}px`
+      ctx.fillStyle = `rgba(0,0,0,${props.opacity})`
+      ctx.font = `${props.fontsize}px`
       ctx.textAlign = 'center'
       textList.forEach((text, index) => {
-        ctx.fillText(text, res[0].width / 2 - 20, top.value + index * 16)
+        ctx.fillText(text, res[0].width / 2 - 20, props.top + index * 16)
       })
 
       src.value = canvas.toDataURL()

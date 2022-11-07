@@ -41,9 +41,9 @@ import { getUnitValue } from '../../utils/common'
 import { computedClass } from '../../utils/style'
 import { toRefs, ref, watch } from 'vue'
 
-type columnItem = string | Record<string, any>
+export type columnItem = string | Record<string, any>
 
-interface OwnProps {
+export interface PickerViewProps {
   columns?: columnItem[]
   showToolbar?: boolean
   title?: string
@@ -52,7 +52,7 @@ interface OwnProps {
   defaultIndex?: number
 }
 
-const props = withDefaults(defineProps<OwnProps>(), {
+const props = withDefaults(defineProps<PickerViewProps>(), {
   modelValue: () => [],
   columns: () => [],
   showToolbar: true,
@@ -69,7 +69,7 @@ const emit = defineEmits<{
   (event: 'cancel'): void
 }>()
 
-const { columns, valueKey, defaultIndex } = toRefs(props)
+const { defaultIndex } = toRefs(props)
 
 const pickerIndexs = ref<number[]>([0])
 
@@ -84,7 +84,7 @@ watch(
 )
 
 const optionText = (item: columnItem) => {
-  return typeof item === 'object' ? item[valueKey.value] : item
+  return typeof item === 'object' ? item[props.valueKey] : item
 }
 
 const onChange = (event: EventDetail<{ value: number[] }>) => {

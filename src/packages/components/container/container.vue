@@ -36,14 +36,14 @@
 </template>
 
 <script lang="ts" setup>
-import { getCurrentInstance, nextTick, onMounted, ref, toRefs } from 'vue'
+import { getCurrentInstance, nextTick, onMounted, ref } from 'vue'
 import useRect from '../../hooks/useRect'
 import { computedClass } from '../../utils/style'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import sticky from '../sticky/sticky.vue'
 import watermark from '../watermark/watermark.vue'
 
-interface ContainerProps {
+export interface ContainerProps {
   /** 是否填充底部安全区 */
   safeBottom?: boolean
   /** 头部背景色 */
@@ -60,7 +60,7 @@ interface ContainerProps {
   partialContent?: boolean
 }
 
-const props = withDefaults(defineProps<ContainerProps>(), {
+withDefaults(defineProps<ContainerProps>(), {
   safeBottom: true,
   headerBgColor: 'transparent',
   bgColor: 'transparent',
@@ -68,8 +68,6 @@ const props = withDefaults(defineProps<ContainerProps>(), {
   showWatermark: false,
   watermarkContents: () => [],
 })
-
-const { showWatermark } = toRefs(props)
 
 const headerHeight = ref<number>(0)
 const bottomHeight = ref<number>(34)
@@ -80,10 +78,14 @@ const updateHeight = () => {
   nextTick(() => {
     if (!internalInstance) return
     useRect(internalInstance, `.${computedClass('container-header')}`).then((res) => {
-      headerHeight.value = res.height || 0
+      if (res) {
+        headerHeight.value = res.height || 0
+      }
     })
     useRect(internalInstance, `.${computedClass('container-bottom-fixed')}`).then((res) => {
-      bottomHeight.value = res.height || 0
+      if (res) {
+        bottomHeight.value = res.height || 0
+      }
     })
   })
 }

@@ -7,7 +7,7 @@
     <view
       v-for="(item, index) in options"
       :key="index"
-      class="text-30 text-black rounded-4 text-center"
+      class="text-black rounded-4 text-center"
       :class="[
         computedClass('checkbox-btn'),
         {
@@ -21,26 +21,26 @@
       ]"
       :style="{ backgroundColor: bgColor, borderColor: bgColor }"
       @tap="onSelect(item, index)"
-      >{{ item[labelKey] }}</view
     >
+      {{ item[labelKey] }}
+    </view>
   </view>
 </template>
 
 <script lang="ts" setup>
-import { toRefs } from 'vue'
 import { getUnitValue } from '../../utils/common'
 import { computedClass } from '../../utils/style'
 
-export type WeiCheckboxItem = Record<string, unknown>
+export type CheckboxItem = Record<string, unknown>
 
-interface OwnProps {
+export interface CheckboxProps {
   /** 列数 */
   column?: number
   /** 间隔 */
   gap?: string
   modelValue?: any
   /** 选项列表 */
-  options?: WeiCheckboxItem[]
+  options?: CheckboxItem[]
   /** 标题对应字段名 */
   labelKey?: string
   /** 内容对应字段名 */
@@ -51,7 +51,7 @@ interface OwnProps {
   bgColor?: string
 }
 
-const props = withDefaults(defineProps<OwnProps>(), {
+const props = withDefaults(defineProps<CheckboxProps>(), {
   column: 3,
   gap: '20',
   modelValue: undefined,
@@ -63,33 +63,31 @@ const props = withDefaults(defineProps<OwnProps>(), {
 })
 
 const emit = defineEmits<{
-  (event: 'update:modelValue', value: OwnProps['modelValue']): void
+  (event: 'update:modelValue', value: CheckboxProps['modelValue']): void
   (event: 'change', item: any, index: number): void
 }>()
 
-const { modelValue, options, valueKey, multiple } = toRefs(props)
-
-const onSelect = (item: WeiCheckboxItem, index: number) => {
-  if (multiple.value && Array.isArray(modelValue.value)) {
+const onSelect = (item: CheckboxItem, index: number) => {
+  if (props.multiple && Array.isArray(props.modelValue)) {
     let exist = false
-    const newVal = modelValue.value.filter((val) => {
-      if (val === item[valueKey.value]) {
+    const newVal = props.modelValue.filter((val) => {
+      if (val === item[props.valueKey]) {
         exist = true
         return false
       }
       return true
     })
     if (!exist) {
-      newVal.push(item[valueKey.value])
+      newVal.push(item[props.valueKey])
     }
     emit('update:modelValue', newVal)
     emit(
       'change',
-      options.value.filter((option) => newVal.includes(option.value)),
+      props.options.filter((option) => newVal.includes(option.value)),
       index,
     )
   } else {
-    emit('update:modelValue', item[valueKey.value])
+    emit('update:modelValue', item[props.valueKey])
     emit('change', item, index)
   }
 }
@@ -99,6 +97,7 @@ const onSelect = (item: WeiCheckboxItem, index: number) => {
 @import '../../styles/vars.scss';
 .#{$prefix}-checkbox-btns {
   .#{$prefix}-checkbox-btn {
+    font-size: _var(checkbox-btns-font-size);
     line-height: _var(checkbox-btns-height);
     border-width: 2rpx;
     border-style: solid;

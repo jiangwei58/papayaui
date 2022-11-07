@@ -36,14 +36,14 @@ import { computed, getCurrentInstance, nextTick, ref, watch } from 'vue'
 import useRect from '../../hooks/useRect'
 import { computedClass } from '../../utils/style'
 
-interface OwnProps {
+export interface TooltipProps {
   /** 悬浮内容 */
   text?: string
   /** 宽度 */
   width?: string
 }
 
-withDefaults(defineProps<OwnProps>(), {
+withDefaults(defineProps<TooltipProps>(), {
   text: '',
   width: '300',
 })
@@ -78,10 +78,14 @@ watch(show, (newVal) => {
   if (instance && newVal) {
     nextTick(() => {
       useRect(instance, `.${computedClass('tooltip')}`).then((res) => {
-        tooltipRect.value = res
+        if (res) {
+          tooltipRect.value = res
+        }
       })
       useRect(instance, `.${computedClass('tooltip-wapper')}`).then((res) => {
-        tooltipContentWidth.value = res.width || 0
+        if (res) {
+          tooltipContentWidth.value = res.width || 0
+        }
       })
     })
   }

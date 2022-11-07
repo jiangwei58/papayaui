@@ -31,9 +31,9 @@
 import { computedClass } from '../../utils/style'
 import { getCurrentInstance, nextTick, ref, toRefs, watch } from 'vue'
 
-type TabItem = Record<string, any>
+export type TabItem = Record<string, any>
 
-interface OwnProps {
+export interface TabsProps {
   modelValue?: number
   /** 标签页列表数据 */
   tabs: TabItem[]
@@ -43,7 +43,7 @@ interface OwnProps {
   scrollable?: boolean
 }
 
-const props = withDefaults(defineProps<OwnProps>(), {
+const props = withDefaults(defineProps<TabsProps>(), {
   modelValue: 0,
   tabs: () => [],
   labelKey: 'label',
@@ -55,7 +55,7 @@ const emit = defineEmits<{
   (event: 'change', item: TabItem): void
 }>()
 
-const { tabs, modelValue, scrollable } = toRefs(props)
+const { tabs, modelValue } = toRefs(props)
 
 const internalInstance = getCurrentInstance()
 
@@ -110,7 +110,7 @@ const getTabItemWidth = () => {
       // 滑块作移动的位置
       lineOffsetLeft.value = lineLeft + currentWidth / 2
       // 计算滚动的距离左侧的位置
-      if (scrollable.value) {
+      if (props.scrollable) {
         lineScrollLeft.value = lineOffsetLeft.value - containerWidth / 2
       }
     })

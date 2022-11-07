@@ -6,21 +6,18 @@
 </template>
 
 <script lang="ts" setup>
-import { toRefs } from 'vue'
 import { computedClass } from '../../utils/style'
 import Loadmore, { LoadStatus } from '../loadmore/loadmore.vue'
 
-interface OwnProps {
+export interface ListProps {
   status?: keyof LoadStatus
   loadStatusConfig?: LoadStatus
 }
 
-const props = withDefaults(defineProps<OwnProps>(), {
+withDefaults(defineProps<ListProps>(), {
   status: undefined,
   loadStatusConfig: () => ({ loadmore: '', loading: '加载中...', nomore: '没有更多了' }),
 })
-
-const { status } = toRefs(props)
 </script>
 
 <style lang="scss" scoped></style>

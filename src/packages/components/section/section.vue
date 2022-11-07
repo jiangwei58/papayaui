@@ -17,7 +17,7 @@
 import { CSSProperties } from 'vue'
 import { computedClass } from '../../utils/style'
 
-interface SectionProps {
+export interface SectionProps {
   title?: string
   bgColor?: CSSProperties['background-color']
 }

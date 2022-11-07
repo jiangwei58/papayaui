@@ -35,12 +35,12 @@ import { computedClass } from '../../utils/style'
 import { computed, getCurrentInstance, nextTick, ref, watch } from 'vue'
 import useRect from '../../hooks/useRect'
 
-interface OwnProps {
+export interface PopoverProps {
   text?: string
   width?: string
 }
 
-withDefaults(defineProps<OwnProps>(), {
+withDefaults(defineProps<PopoverProps>(), {
   text: '',
   width: '300',
 })
@@ -75,10 +75,14 @@ watch(show, (newVal) => {
   if (instance && newVal) {
     nextTick(() => {
       useRect(instance, `.${computedClass('popover')}`).then((res) => {
-        tooltipRect.value = res
+        if (res) {
+          tooltipRect.value = res
+        }
       })
       useRect(instance, `.${computedClass('popover-wapper')}`).then((res) => {
-        tooltipContentWidth.value = res.width || 0
+        if (res) {
+          tooltipContentWidth.value = res.width || 0
+        }
       })
     })
   }

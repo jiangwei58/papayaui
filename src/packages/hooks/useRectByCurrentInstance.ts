@@ -3,7 +3,7 @@ import useRect from './useRect'
 
 function useRectByCurrentInstance(
   selector: string,
-  all: false,
+  all?: false,
 ): Promise<Required<UniApp.NodeInfo> | null>
 function useRectByCurrentInstance(selector: string, all: true): Promise<Required<UniApp.NodeInfo>[]>
 function useRectByCurrentInstance(

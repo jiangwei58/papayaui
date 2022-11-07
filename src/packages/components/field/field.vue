@@ -22,7 +22,7 @@ import { computedClass, PREFIX } from '../../utils/style'
 import Cell from '../cell/cell.vue'
 import { CellProps } from '../cell/cell.vue'
 
-interface OwnProps
+export interface FieldProps
   extends Pick<
     CellProps,
     'title' | 'titleWidth' | 'required' | 'icon' | 'center' | 'errorMessage'
@@ -40,7 +40,7 @@ interface OwnProps
   onlyInput?: boolean
 }
 
-withDefaults(defineProps<OwnProps>(), {
+withDefaults(defineProps<FieldProps>(), {
   modelValue: '',
   type: 'text',
   placeholder: '请输入',

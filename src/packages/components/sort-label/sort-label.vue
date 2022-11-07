@@ -15,23 +15,23 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, toRefs } from 'vue'
+import { computed } from 'vue'
 import { computedClass } from '../../utils/style'
 
 export type Sort = 'up' | 'down' | undefined
+
+export interface SortLabelProps {
+  modelValue?: string
+  title?: string
+  datakey: string
+}
 
 enum SortTypeEnum {
   UP = ':asc',
   DOWN = ':desc',
 }
 
-interface OwnProps {
-  modelValue?: string
-  title?: string
-  datakey: string
-}
-
-const props = withDefaults(defineProps<OwnProps>(), {
+const props = withDefaults(defineProps<SortLabelProps>(), {
   modelValue: undefined,
   title: '',
 })
@@ -41,10 +41,8 @@ const emit = defineEmits<{
   (event: 'change', key: string, sort?: string): void
 }>()
 
-const { modelValue, title, datakey } = toRefs(props)
-
 const sort = computed<Sort>(() => {
-  const value = modelValue.value || ''
+  const value = props.modelValue || ''
   if (value.endsWith(SortTypeEnum.DOWN)) {
     return 'down'
   } else if (value.endsWith(SortTypeEnum.UP)) {
@@ -57,12 +55,12 @@ const sort = computed<Sort>(() => {
 const onChange = () => {
   let newVal: string | undefined
   if (sort.value === 'down') {
-    newVal = `${datakey.value}${SortTypeEnum.UP}`
+    newVal = `${props.datakey}${SortTypeEnum.UP}`
   } else {
-    newVal = `${datakey.value}${SortTypeEnum.DOWN}`
+    newVal = `${props.datakey}${SortTypeEnum.DOWN}`
   }
   emit('update:modelValue', newVal)
-  emit('change', datakey.value, newVal)
+  emit('change', props.datakey, newVal)
 }
 </script>
 

@@ -16,7 +16,7 @@ import { getUnitValue } from '../../utils/common'
 import { computed, ref, StyleValue } from 'vue'
 import { computedClass } from '../../utils/style'
 
-interface ButtonProps {
+export interface ButtonProps {
   /** 按钮类型 */
   type?: 'primary' | 'warning' | 'danger' | 'default'
   /** 按钮宽度 */

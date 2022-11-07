@@ -65,7 +65,7 @@
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
 import { ref } from 'vue'
 
-interface optionItem {
+interface OptionItem {
   label: string
   value: string
 }
@@ -84,7 +84,7 @@ const remoteVisible = ref<boolean>(false)
 const remote = ref<boolean>(false)
 
 const onLoad = (query?: string) => {
-  return new Promise<optionItem[]>((resolve) => {
+  return new Promise<OptionItem[]>((resolve) => {
     setTimeout(() => {
       resolve(
         new Array(20).fill(0).map((_item, index) => {

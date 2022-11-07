@@ -10,14 +10,14 @@
 import { getUnitValue } from '../../utils/common'
 import { computedClass } from '../../utils/style'
 
-interface OwnProps {
+export interface IconProps {
   name: string
   size?: string
   color?: string
   block?: boolean
 }
 
-withDefaults(defineProps<OwnProps>(), {
+withDefaults(defineProps<IconProps>(), {
   size: '16px',
   color: '#969799',
 })

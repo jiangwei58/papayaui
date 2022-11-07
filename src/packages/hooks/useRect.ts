@@ -3,7 +3,7 @@ import { ComponentInternalInstance } from 'vue'
 function useRect(
   component: ComponentInternalInstance,
   selector: string,
-  all: false,
+  all?: false,
 ): Promise<Required<UniApp.NodeInfo> | null>
 function useRect(
   component: ComponentInternalInstance,

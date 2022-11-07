@@ -62,10 +62,10 @@ import ButtonComponent from '../button/button.vue'
 import Loadmore from '../loadmore/loadmore.vue'
 import { LoadStatusEnum } from '../../hooks/useList'
 
-type Option = any
-type OptionValue = number | string
+export type Option = any
+export type OptionValue = number | string
 
-interface OwnProps {
+export interface PickerPopupProps {
   modelValue?: OptionValue | OptionValue[]
   /** 显示状态 */
   show?: boolean
@@ -89,7 +89,7 @@ interface OwnProps {
   remote?: boolean
 }
 
-const props = withDefaults(defineProps<OwnProps>(), {
+const props = withDefaults(defineProps<PickerPopupProps>(), {
   modelValue: undefined,
   show: false,
   height: undefined,
@@ -108,17 +108,16 @@ const emit = defineEmits<{
   (event: 'change', item: Option | Option[]): void
 }>()
 
-const { show, modelValue, data, labelKey, valueKey, multiple, showSearch, load, remote } =
-  toRefs(props)
+const { show, data } = toRefs(props)
 
 const searchText = ref<string>('')
-const options = ref<Option[]>(data.value)
+const options = ref<Option[]>(props.data)
 const selectedSet = ref<Set<OptionValue>>(new Set())
 const loading = ref<boolean>(false)
 
 const filterOptions = computed(() => {
-  if (remote.value) return options.value
-  return options.value.filter((item) => item[labelKey.value].indexOf(searchText.value) !== -1)
+  if (props.remote) return options.value
+  return options.value.filter((item) => item[props.labelKey].indexOf(searchText.value) !== -1)
 })
 
 watch(show, async (newVal, oldVal) => {
@@ -135,7 +134,7 @@ watch(data, (newVal) => {
 })
 
 const init = () => {
-  const defaultValues = Array.isArray(modelValue.value) ? modelValue.value : [modelValue.value]
+  const defaultValues = Array.isArray(props.modelValue) ? props.modelValue : [props.modelValue]
   defaultValues.forEach((value) => {
     if (typeof value !== 'undefined') {
       selectedSet.value.add(value)
@@ -147,7 +146,7 @@ const getData = async () => {
   try {
     options.value = []
     loading.value = true
-    let res = load.value(searchText.value)
+    let res = props.load(searchText.value)
     if (res instanceof Promise) {
       res = await res
     }
@@ -161,7 +160,7 @@ const getData = async () => {
 
 const onChangeSearch = (text: string) => {
   searchText.value = text
-  if (remote.value) {
+  if (props.remote) {
     getData()
   }
 }
@@ -170,20 +169,20 @@ const onSelect = async (value: OptionValue) => {
   if (selectedSet.value.has(value)) {
     selectedSet.value.delete(value)
   } else {
-    if (!multiple.value) {
+    if (!props.multiple) {
       selectedSet.value.clear()
     }
     selectedSet.value.add(value)
   }
-  if (!multiple.value) {
+  if (!props.multiple) {
     onOk()
   }
 }
 
 const onOk = () => {
-  const selectedNodes = options.value.filter((item) => selectedSet.value.has(item[valueKey.value]))
-  emit('update:modelValue', multiple.value ? [...selectedSet.value] : [...selectedSet.value][0])
-  emit('change', multiple.value ? selectedNodes : selectedNodes[0])
+  const selectedNodes = options.value.filter((item) => selectedSet.value.has(item[props.valueKey]))
+  emit('update:modelValue', props.multiple ? [...selectedSet.value] : [...selectedSet.value][0])
+  emit('change', props.multiple ? selectedNodes : selectedNodes[0])
   onClose()
 }
 

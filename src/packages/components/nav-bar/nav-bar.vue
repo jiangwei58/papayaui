@@ -17,12 +17,10 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineProps, withDefaults, toRefs, CSSProperties } from 'vue'
+import { computed, defineProps, withDefaults, CSSProperties } from 'vue'
 import { computedClass } from '../../utils/style'
 
-const systemInfo = uni.getSystemInfoSync()
-
-interface OwnProps {
+export interface NavBarProps {
   /** 标题 */
   title?: string
   /** 背景色 */
@@ -31,16 +29,16 @@ interface OwnProps {
   safeAreaInsetTop: boolean
 }
 
-const props = withDefaults(defineProps<OwnProps>(), {
+const systemInfo = uni.getSystemInfoSync()
+
+const props = withDefaults(defineProps<NavBarProps>(), {
   title: '标题',
   bgColor: '#fff',
   safeAreaInsetTop: false,
 })
 
-const { title, bgColor, safeAreaInsetTop } = toRefs(props)
-
 const statusBarHeight = computed<CSSProperties['padding-top']>(() => {
-  return safeAreaInsetTop.value ? systemInfo.statusBarHeight + 'px' : 0
+  return props.safeAreaInsetTop ? systemInfo.statusBarHeight + 'px' : 0
 })
 const contentHeight = computed(() => {
   const height = systemInfo.platform === 'ios' ? 44 : 48

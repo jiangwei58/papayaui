@@ -39,7 +39,7 @@ export interface LoadStatus {
   nomore: string
 }
 
-interface OwnProps {
+export interface LoadmoreProps {
   /** 加载状态配置{loadmore, loading, nomore} */
   config?: LoadStatus
   /** 当前状态 */
@@ -52,7 +52,7 @@ interface OwnProps {
   iconSize?: number
 }
 
-withDefaults(defineProps<OwnProps>(), {
+withDefaults(defineProps<LoadmoreProps>(), {
   config: () => ({ loadmore: '轻轻上拉', loading: '加载中...', nomore: '没有更多了' }),
   status: 'loadmore',
   color: `var(--${PREFIX}-color-primary)`,

@@ -74,7 +74,7 @@ const emit = defineEmits<{
   (event: 'change', value: PopupProps['show']): void
 }>()
 
-const { show, position, width, height, bgColor, round, isMaskClick } = toRefs(props)
+const { show } = toRefs(props)
 
 let _timer: number | null = null
 const showTrans = ref<boolean>(false)
@@ -118,7 +118,7 @@ const transStyle = computed<CSSProperties>(() => {
   }
   return {
     position: 'fixed',
-    ...typeStyleObj[position.value],
+    ...typeStyleObj[props.position],
   }
 })
 
@@ -130,11 +130,11 @@ const animateType = computed<string[]>(() => {
     right: ['slide-right'],
     center: ['zoom-out', 'fade'],
   }
-  return animateObj[position.value]
+  return animateObj[props.position]
 })
 
 const popupClass = computed(() => {
-  return position.value
+  return props.position
 })
 
 const popupWrapperStyle = computed<CSSProperties>(() => {
@@ -146,16 +146,16 @@ const popupWrapperStyle = computed<CSSProperties>(() => {
     center: '16px',
   }
   return {
-    width: ['left', 'right', 'center'].includes(position.value) ? width.value : '100vw',
-    height: ['top', 'bottom', 'center'].includes(position.value) ? height.value : '100vh',
-    backgroundColor: bgColor.value,
-    borderRadius: round?.value ? radiusObj[position.value] : 0,
+    width: ['left', 'right', 'center'].includes(props.position) ? props.width : '100vw',
+    height: ['top', 'bottom', 'center'].includes(props.position) ? props.height : '100vh',
+    backgroundColor: props.bgColor,
+    borderRadius: props.round ? radiusObj[props.position] : 0,
   }
 })
 
 const onMaskTap = () => {
   emit('maskClick')
-  if (!isMaskClick.value) return
+  if (!props.isMaskClick) return
   onClose()
 }
 
