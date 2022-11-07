@@ -2,12 +2,19 @@ import interceptor from './request.interceptor'
 import { merge } from './utils'
 
 export interface RequestConfig extends UniApp.RequestOptions {
+  /** 基础url地址 */
   baseUrl: string
+  /** 是否显示加载状态 */
   showLoading?: boolean
+  /** 加载状态类型（model：小程序中间加载模态框，navigation：页面标题显示加载状态(默认)） */
   loadingType?: 'modal' | 'navigation'
+  /** 加载文案（仅model模式有效） */
   loadingText?: string
+  /** 请求超过多少时间显示加载状态（毫秒） */
   loadingTime?: number
+  /** 加载状态是否需要全屏遮罩（防止加载中点击其他元素） */
   loadingMask?: boolean
+  /** 判断是否请求失败（默认：200） */
   validateStatus: (status: number) => boolean
 }
 
@@ -116,9 +123,9 @@ class Request {
           return
         }
 
-        const isFailed = newConfig.validateStatus(response.statusCode)
+        const isSucceed = newConfig.validateStatus(response.statusCode)
         for (const interceptorItem of this.interceptor.response.list) {
-          if (isFailed) {
+          if (isSucceed) {
             const result = await interceptorItem.resolve(response, newConfig)
             if (result !== false) {
               resolve(result)
