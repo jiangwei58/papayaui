@@ -1,7 +1,6 @@
 <template>
   <view class="demo-button">
     <DocDemoBlock title="基础用法" card>
-      <!-- 声明为ButtonComponent是为了防止和原生button冲突，项目中使用时有带前缀 -->
       <wei-button type="primary">主要按钮</wei-button>
       <wei-button type="warning">警告按钮</wei-button>
       <wei-button type="danger">危险按钮</wei-button>

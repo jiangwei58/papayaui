@@ -5,7 +5,15 @@
     :hover-class="computedClass('button--hover')"
     :disabled="disabled"
     :plain="plain"
-    @click="onClick"
+    :open-type="openType"
+    @getphonenumber="emit('getphonenumber', $event)"
+    @getuserinfo="emit('getuserinfo', $event)"
+    @error="emit('error', $event)"
+    @opensetting="emit('opensetting', $event)"
+    @launchapp="emit('launchapp', $event)"
+    @contact="emit('contact', $event)"
+    @chooseavatar="emit('chooseavatar', $event)"
+    @tap="onClick"
   >
     <slot />
   </button>
@@ -33,6 +41,36 @@ export interface ButtonProps {
   plain?: boolean
   /** 同步点击（主要用于防止异步事件多次触发） */
   syncClick?: (...args: any[]) => any | Promise<any>
+  /** 微信开放能力[文档](https://developers.weixin.qq.com/miniprogram/dev/component/button.html) */
+  openType?:
+    | 'contact'
+    | 'share'
+    | 'getPhoneNumber'
+    | 'getUserInfo'
+    | 'launchApp'
+    | 'openSetting'
+    | 'feedback'
+    | 'chooseAvatar'
+  /** 按住后多久出现点击态，单位毫秒 */
+  hoverStartTime?: number
+  /** 手指松开后点击态保留时间，单位毫秒 */
+  hoverStayTime?: number
+  /** 打开 APP 时，向 APP 传递的参数，open-type=launchApp时有效 */
+  appParameter?: string
+  /** 指定是否阻止本节点的祖先节点出现点击态 */
+  hoverStopPropagation?: boolean
+  /** 指定返回用户信息的语言，zh_CN 简体中文，zh_TW 繁体中文，en 英文。 */
+  lang?: 'zh_CN' | 'zh_TW' | 'en'
+  /** 会话来源，open-type="contact"时有效 */
+  sessionFrom?: string
+  /** 会话内消息卡片标题，open-type="contact"时有效 */
+  sendMessageTitle?: string
+  /** 会话内消息卡片点击跳转小程序路径，open-type="contact"时有效 */
+  sendMessagePath?: string
+  /** 会话内消息卡片图片，open-type="contact"时有效 */
+  sendMessageImg?: string
+  /** 是否显示会话内消息卡片，设置此参数为 true，用户进入客服会话会在右下角显示"可能要发送的小程序"提示，用户点击后可以快速发送小程序消息，open-type="contact"时有效 */
+  showMessageCard?: boolean
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -42,10 +80,26 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   fontSize: '16px',
   round: '4px',
   syncClick: undefined,
+  openType: undefined,
+  hoverStartTime: undefined,
+  hoverStayTime: undefined,
+  appParameter: undefined,
+  lang: undefined,
+  sessionFrom: undefined,
+  sendMessageTitle: undefined,
+  sendMessagePath: undefined,
+  sendMessageImg: undefined,
 })
 
 const emit = defineEmits<{
   (event: 'click', value: Event): void
+  (event: 'getphonenumber', res: any): void
+  (event: 'getuserinfo', res: any): void
+  (event: 'error', res: any): void
+  (event: 'opensetting', res: any): void
+  (event: 'launchapp', res: any): void
+  (event: 'contact', res: any): void
+  (event: 'chooseavatar', res: any): void
 }>()
 
 const localLoading = ref<boolean>()
