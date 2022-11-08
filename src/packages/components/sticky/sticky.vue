@@ -125,7 +125,7 @@ export default defineComponent({
       return style
     },
     uZindex() {
-      return this.zIndex ? this.zIndex : 970
+      return this.zIndex ? this.zIndex : 97
     },
   },
   mounted() {

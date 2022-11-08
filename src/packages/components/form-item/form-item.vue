@@ -1,6 +1,12 @@
 <template>
-  <Cell v-if="!$slots.default" :title="label" :error-message="errorMessage" v-bind="$props"></Cell>
-  <Cell v-else :title="label" :error-message="errorMessage" v-bind="$props">
+  <Cell
+    v-if="!$slots.default"
+    :title="label"
+    :error-message="errorMessage"
+    v-bind="$props"
+    @click="emit('click')"
+  />
+  <Cell v-else :title="label" :error-message="errorMessage" v-bind="$props" @click="emit('click')">
     <slot />
   </Cell>
 </template>
@@ -22,6 +28,10 @@ export interface FormItemProps extends CellProps {
 }
 
 defineProps<FormItemProps>()
+
+const emit = defineEmits<{
+  (event: 'click'): void
+}>()
 
 const p_children = inject<FormItemInstance[]>('children')
 

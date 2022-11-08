@@ -10,15 +10,25 @@
           <!-- 可以使用field组件的输入框模式 -->
           <wei-field v-model="formData.desc" placeholder="请输入" only-input />
         </wei-form-item>
+        <wei-form-item
+          prop="gender"
+          label="性别"
+          :value="genderText"
+          required
+          is-link
+          @click="onChangeGenderVisible"
+        />
       </wei-cell-group>
 
       <wei-button class="block px-32 pt-30" @click="onValidate">提交</wei-button>
     </wei-form>
   </DocDemoBlock>
+
+  <wei-picker-popup v-model="formData.gender" v-model:show="genderVisible" :data="genderOptions" />
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { FormRules } from '../../hooks'
 import Form from './form.vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
@@ -26,9 +36,20 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 interface FormData {
   name: string
   desc: string
+  gender?: 1 | 0
 }
 
 const formRef = ref<InstanceType<typeof Form>>()
+
+const genderOptions = [
+  { label: '男', value: 1 },
+  { label: '女', value: 0 },
+]
+const genderText = computed(() => {
+  const findItem = genderOptions.find((item) => item.value === formData.value.gender)
+  return findItem ? findItem.label : ''
+})
+const genderVisible = ref<boolean>(false)
 
 const formData = ref<FormData>({
   name: '',
@@ -43,6 +64,11 @@ const rules: FormRules<FormData> = {
     },
     message: '{{label}}开头必须是"1"',
   },
+  gender: { required: true, message: '请选择{{label}}' },
+}
+
+const onChangeGenderVisible = () => {
+  genderVisible.value = true
 }
 
 const onValidate = async () => {
