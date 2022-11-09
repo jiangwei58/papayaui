@@ -1,4 +1,4 @@
-import ButtomPopup from './components/bottom-popup/bottom-popup.vue'
+import BottomPopup from './components/bottom-popup/bottom-popup.vue'
 import Button from './components/button/button.vue'
 import Cascader from './components/cascader/cascader.vue'
 import CellGroup from './components/cell-group/cell-group.vue'
@@ -32,7 +32,7 @@ declare module '@vue/runtime-core' {
     'wei-cell': typeof Cell
     'wei-cell-group': typeof CellGroup
     'wei-button': typeof Button
-    'wei-buttom-popup': typeof ButtomPopup
+    'wei-bottom-popup': typeof BottomPopup
     'wei-cascader': typeof Cascader
     'wei-checkbox-btns': typeof CheckboxBtns
     'wei-field': typeof Field
