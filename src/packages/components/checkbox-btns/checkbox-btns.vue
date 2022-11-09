@@ -7,7 +7,7 @@
     <view
       v-for="(item, index) in options"
       :key="index"
-      class="text-black rounded-4 text-center"
+      class="text-black text-center"
       :class="[
         computedClass('checkbox-btn'),
         {
@@ -19,7 +19,11 @@
               : false,
         },
       ]"
-      :style="{ backgroundColor: bgColor, borderColor: bgColor }"
+      :style="{
+        backgroundColor: bgColor,
+        borderColor: bgColor,
+        borderRadius: round === true ? getUnitValue('100') : getUnitValue(round),
+      }"
       @tap="onSelect(item, index)"
     >
       {{ item[labelKey] }}
@@ -49,6 +53,8 @@ export interface CheckboxProps {
   multiple?: boolean
   /** 背景色 */
   bgColor?: string
+  /** 圆角大小, 值为true时半圆角 */
+  round?: true | string
 }
 
 const props = withDefaults(defineProps<CheckboxProps>(), {
@@ -60,6 +66,7 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
   valueKey: 'value',
   multiple: false,
   bgColor: '#F2F3F5',
+  round: '4rpx',
 })
 
 const emit = defineEmits<{
