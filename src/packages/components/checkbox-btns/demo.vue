@@ -8,7 +8,7 @@
   </DocDemoBlock>
 
   <DocDemoBlock title="自定义布局" card>
-    <wei-checkbox-btns v-model="selectedValue3" :options="getData(8)" :column="4" gap="10" />
+    <wei-checkbox-btns v-model="selectedValue3" :options="getData(8)" :column="4" gap="10" round />
   </DocDemoBlock>
 </template>
 

@@ -55,6 +55,13 @@
       "type": "base"
     },
     {
+      "path": "packages/components/bottom-popup/demo",
+      "style": {
+        "navigationBarTitleText": "BottomPopup 底部弹出层"
+      },
+      "type": "base"
+    },
+    {
       "path": "packages/components/section/demo",
       "style": {
         "navigationBarTitleText": "Section 标题栏"

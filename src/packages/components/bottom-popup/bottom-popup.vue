@@ -3,10 +3,14 @@
     ref="popupRef"
     type="bottom"
     :is-mask-click="maskCloseAble"
-    :safe-area="safeArea"
+    :safe-area="false"
     @change="onChange"
   >
-    <view class="popup-wrapper flex flex-col" :style="{ height: getUnitValue(height) }">
+    <view
+      class="popup-wrapper flex flex-col"
+      :class="{ 'safe-buttom-padding': safeAreaInsetBottom }"
+      :style="{ height: getUnitValue(height) }"
+    >
       <view class="header width-full flex items-center justify-center flex-shrink-0">
         <text class="text-32 leading-40 text-block font-w-500 mr-8">{{ title }}</text>
         <slot name="after-title"></slot>
@@ -38,7 +42,7 @@ import UniPopup from '../uni-popup/uni-popup.vue'
 import { getUnitValue } from '../../utils/common'
 import Icon from '../icon/icon.vue'
 
-interface OwnProps {
+export interface BottomPopupProps {
   modelValue: boolean
   /** 标题 */
   title?: string
@@ -47,21 +51,21 @@ interface OwnProps {
   /** 是否可以点击空白处关闭 */
   maskCloseAble?: boolean
   /** 是否留出底部安全距离 */
-  safeArea?: boolean
+  safeAreaInsetBottom?: boolean
 }
 
-const props = withDefaults(defineProps<OwnProps>(), {
+const props = withDefaults(defineProps<BottomPopupProps>(), {
   modelValue: false,
   title: undefined,
   height: '80vh',
   maskCloseAble: true,
-  safeArea: false,
+  safeAreaInsetBottom: true,
 })
 
 const { modelValue } = toRefs(props)
 
 const emit = defineEmits<{
-  (event: 'update:modelValue', value: OwnProps['modelValue']): void
+  (event: 'update:modelValue', value: BottomPopupProps['modelValue']): void
 }>()
 
 const popupRef = ref()

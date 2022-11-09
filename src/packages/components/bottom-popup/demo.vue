@@ -1,0 +1,42 @@
+<template>
+  <DocDemoBlock title="基础用法">
+    <wei-cell-group inset>
+      <wei-cell title="基础用法" is-link @click="visible = true" />
+      <wei-cell title="自定义底部" is-link @click="visible2 = true" />
+    </wei-cell-group>
+
+    <wei-bottom-popup v-model="visible" title="标题">
+      <view class="px-20">{{ text }}</view>
+    </wei-bottom-popup>
+    <wei-bottom-popup v-model="visible2" title="标题">
+      <view class="px-20">{{ text }}</view>
+      <template #footer>
+        <view class="flex justify-around px-26">
+          <wei-button type="default" style="width: 50%">取消</wei-button>
+          <wei-button class="ml-15" style="width: 50%">确定</wei-button>
+        </view>
+      </template>
+    </wei-bottom-popup>
+  </DocDemoBlock>
+</template>
+
+<script lang="ts" setup>
+import DocDemoBlock from '../../doc/doc-demo-block.vue'
+import { computed, ref } from 'vue'
+
+const visible = ref<boolean>(false)
+const visible2 = ref<boolean>(false)
+
+const text = computed(() => {
+  return new Array(100)
+    .fill(0)
+    .map(() => '内容')
+    .join('')
+})
+</script>
+
+<style lang="scss">
+page {
+  background-color: var(--color-page-bg-gray);
+}
+</style>

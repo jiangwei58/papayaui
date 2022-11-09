@@ -3,6 +3,7 @@
     :model-value="show"
     :title="title"
     :height="height"
+    :safe-area-inset-bottom="false"
     @update:model-value="emit('update:show', $event as boolean)"
     @close="onClose"
     @confirm="onOk"
