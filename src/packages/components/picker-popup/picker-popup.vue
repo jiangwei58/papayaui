@@ -3,6 +3,7 @@
     :model-value="show"
     :title="title"
     :height="height"
+    :safe-area-inset-bottom="false"
     @update:model-value="emit('update:show', $event as boolean)"
     @close="onClose"
     @confirm="onOk"
@@ -14,7 +15,12 @@
         class="flex-shrink-0"
         @update:model-value="onChangeSearch"
       />
-      <scroll-view scroll-y class="flex-1" style="overflow: hidden">
+      <scroll-view
+        scroll-y
+        class="flex-1"
+        style="overflow: hidden"
+        @scrolltolower="onScrolltolower"
+      >
         <view
           v-for="(item, index) in filterOptions"
           :key="index"
@@ -32,22 +38,23 @@
             block
           />
         </view>
-        <view v-if="loading" class="height-full flex flex-col items-center justify-center">
-          <loadmore :status="LoadStatusEnum.LOADING" />
-        </view>
         <view
-          v-if="!filterOptions.length && !loading"
-          class="height-full flex flex-col items-center justify-center text-28 text-black-2"
+          v-if="!filterOptions.length || !!pagination"
+          class="flex flex-col justify-center"
+          :class="{ 'height-full': !filterOptions.length }"
         >
-          无数据
+          <loadmore :status="loadStatus" :config="{ nomore: '无数据' }" />
         </view>
-        <SafeBottom v-if="!multiple" />
+        <SafeBottom v-if="safeAreaInsetBottom && !multiple" />
       </scroll-view>
-      <view v-if="multiple" class="footer px-26 py-15 flex-shrink-0">
+    </view>
+
+    <template v-if="safeAreaInsetBottom && multiple" #footer>
+      <view class="px-26 pt-15 flex-shrink-0">
         <ButtonComponent type="primary" @click="onOk()">确定</ButtonComponent>
       </view>
-      <SafeBottom v-if="multiple" />
-    </view>
+      <SafeBottom />
+    </template>
   </BottomPopup>
 </template>
 
@@ -60,7 +67,7 @@ import { PREFIX } from '../../utils/style'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import ButtonComponent from '../button/button.vue'
 import Loadmore from '../loadmore/loadmore.vue'
-import { LoadStatusEnum } from '../../hooks/useList'
+import useList, { UseListData } from '../../hooks/useList'
 
 export type Option = any
 export type OptionValue = number | string
@@ -84,9 +91,13 @@ export interface PickerPopupProps {
   /** 是否多选 */
   multiple?: boolean
   /** 动态获取下一级节点数据 */
-  load?: (query?: string) => Option[] | Promise<Option[]>
+  load?: (query?: string, pageNumber?: number, pageSize?: number) => Option[] | Promise<Option[]>
   /** 是否远程搜索 */
   remote?: boolean
+  /** 是否支持分页 */
+  pagination?: boolean | Partial<Pick<UseListData<Option>, 'pageNumber' | 'pageSize'>>
+  /** 是否留出底部安全距离 */
+  safeAreaInsetBottom?: boolean
 }
 
 const props = withDefaults(defineProps<PickerPopupProps>(), {
@@ -98,8 +109,10 @@ const props = withDefaults(defineProps<PickerPopupProps>(), {
   labelKey: 'label',
   valueKey: 'value',
   multiple: false,
-  load: () => [],
+  load: undefined,
   remote: false,
+  pagination: false,
+  safeAreaInsetBottom: true,
 })
 
 const emit = defineEmits<{
@@ -111,9 +124,16 @@ const emit = defineEmits<{
 const { show, data } = toRefs(props)
 
 const searchText = ref<string>('')
-const options = ref<Option[]>(props.data)
 const selectedSet = ref<Set<OptionValue>>(new Set())
 const loading = ref<boolean>(false)
+
+const {
+  list: options,
+  pageNumber,
+  pageSize,
+  loadStatus,
+  getListData,
+} = useList<Option>(typeof props.pagination === 'object' ? props.pagination : undefined)
 
 const filterOptions = computed(() => {
   if (props.remote) return options.value
@@ -129,9 +149,15 @@ watch(show, async (newVal, oldVal) => {
   }
 })
 
-watch(data, (newVal) => {
-  options.value = newVal
-})
+watch(
+  data,
+  (newVal) => {
+    options.value = newVal
+  },
+  {
+    immediate: true,
+  },
+)
 
 const init = () => {
   const defaultValues = Array.isArray(props.modelValue) ? props.modelValue : [props.modelValue]
@@ -143,24 +169,29 @@ const init = () => {
 }
 
 const getData = async () => {
-  try {
-    options.value = []
-    loading.value = true
-    let res = props.load(searchText.value)
+  loading.value = true
+  return getListData(async () => {
+    let res = props.load?.(searchText.value, pageNumber.value, pageSize.value)
     if (res instanceof Promise) {
       res = await res
     }
-    options.value = res
-  } catch (e) {
-    options.value = []
-  }
-  loading.value = false
-  return options.value
+    loading.value = false
+    return {
+      list: res ?? [],
+    }
+  })
+}
+
+const onScrolltolower = () => {
+  if (!props.pagination) return
+  pageNumber.value += 1
+  getData()
 }
 
 const onChangeSearch = (text: string) => {
   searchText.value = text
   if (props.remote) {
+    pageNumber.value = 0
     getData()
   }
 }

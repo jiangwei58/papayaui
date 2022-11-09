@@ -21,16 +21,17 @@
     <text class="loadmore_text" :style="{ color: textColor }">
       {{
         status === 'loadmore'
-          ? config.loadmore
+          ? localConfig.loadmore
           : status === 'loading'
-          ? config.loading
-          : config.nomore
+          ? localConfig.loading
+          : localConfig.nomore
       }}
     </text>
   </view>
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
 import { computedClass, PREFIX } from '../../utils/style'
 
 export interface LoadStatus {
@@ -41,7 +42,7 @@ export interface LoadStatus {
 
 export interface LoadmoreProps {
   /** 加载状态配置{loadmore, loading, nomore} */
-  config?: LoadStatus
+  config?: Partial<LoadStatus>
   /** 当前状态 */
   status?: keyof LoadStatus
   /** 加载图标颜色 */
@@ -52,12 +53,21 @@ export interface LoadmoreProps {
   iconSize?: number
 }
 
-withDefaults(defineProps<LoadmoreProps>(), {
-  config: () => ({ loadmore: '轻轻上拉', loading: '加载中...', nomore: '没有更多了' }),
+const props = withDefaults(defineProps<LoadmoreProps>(), {
+  config: undefined,
   status: 'loadmore',
   color: `var(--${PREFIX}-color-primary)`,
   textColor: '#646566',
   iconSize: 20,
+})
+
+const localConfig = computed<LoadStatus>(() => {
+  return {
+    loadmore: '轻轻上拉',
+    loading: '加载中...',
+    nomore: '没有更多了',
+    ...props.config,
+  }
 })
 </script>
 

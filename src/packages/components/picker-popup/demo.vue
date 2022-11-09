@@ -59,6 +59,21 @@
       :remote="remote"
     />
   </DocDemoBlock>
+
+  <DocDemoBlock title="远程分页数据">
+    <wei-cell-group inset>
+      <wei-cell title="分页数据" :value="singleValue2" is-link @click="remoteVisible2 = true" />
+    </wei-cell-group>
+
+    <wei-picker-popup
+      v-model:show="remoteVisible2"
+      v-model="singleValue2"
+      :load="onLoad2"
+      show-search
+      remote
+      pagination
+    />
+  </DocDemoBlock>
 </template>
 
 <script lang="ts" setup>
@@ -91,6 +106,24 @@ const onLoad = (query?: string) => {
           return {
             label: `${query ? `${query}搜索结果` : '选项'}: ${index}`,
             value: index.toString(),
+          }
+        }),
+      )
+    }, 600)
+  })
+}
+
+const remoteVisible2 = ref<boolean>(false)
+const singleValue2 = ref<string>()
+const onLoad2 = (query?: string, pageNumber?: number, pageSize?: number) => {
+  return new Promise<OptionItem[]>((resolve) => {
+    setTimeout(() => {
+      resolve(
+        new Array(pageSize).fill(0).map((_item, index) => {
+          const num = index + (pageNumber ?? 0) * (pageSize ?? 10)
+          return {
+            label: `${query ? `${query}搜索结果` : '选项'}: ${num}`,
+            value: num.toString(),
           }
         }),
       )
