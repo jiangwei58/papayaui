@@ -1,8 +1,8 @@
 @font-face {
   font-family: "wei-iconfont"; /* Project id 3668565 */
-  src: url('iconfont.woff2?t=1664352310501') format('woff2'),
-       url('iconfont.woff?t=1664352310501') format('woff'),
-       url('iconfont.ttf?t=1664352310501') format('truetype');
+  src: url('iconfont.woff2?t=1668156609463') format('woff2'),
+       url('iconfont.woff?t=1668156609463') format('woff'),
+       url('iconfont.ttf?t=1668156609463') format('truetype');
 }
 
 .wei-iconfont {
@@ -11,6 +11,50 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.wei-icon-arrow-right:before {
+  content: "\e7eb";
+}
+
+.wei-icon-arrow-left:before {
+  content: "\e7ec";
+}
+
+.wei-icon-arrow-up:before {
+  content: "\e7ed";
+}
+
+.wei-icon-arrow-down:before {
+  content: "\e7ee";
+}
+
+.wei-icon-caret-down:before {
+  content: "\e8ec";
+}
+
+.wei-icon-caret-up:before {
+  content: "\e8ed";
+}
+
+.wei-icon-caret-right:before {
+  content: "\e8ee";
+}
+
+.wei-icon-caret-left:before {
+  content: "\e8ef";
+}
+
+.wei-icon-filter:before {
+  content: "\e7c7";
+}
+
+.wei-icon-copy:before {
+  content: "\e7bc";
+}
+
+.wei-icon-delete:before {
+  content: "\e7c3";
 }
 
 .wei-icon-up:before {
