@@ -43,7 +43,8 @@ import { getUnitValue } from '../../utils/common'
 import Icon from '../icon/icon.vue'
 
 export interface BottomPopupProps {
-  modelValue: boolean
+  /** 是否显示弹窗 */
+  show: boolean
   /** 标题 */
   title?: string
   /** 弹窗高度 */
@@ -55,23 +56,23 @@ export interface BottomPopupProps {
 }
 
 const props = withDefaults(defineProps<BottomPopupProps>(), {
-  modelValue: false,
+  show: false,
   title: undefined,
   height: '80vh',
   maskCloseAble: true,
   safeAreaInsetBottom: true,
 })
 
-const { modelValue } = toRefs(props)
+const { show } = toRefs(props)
 
 const emit = defineEmits<{
-  (event: 'update:modelValue', value: BottomPopupProps['modelValue']): void
+  (event: 'update:show', value: BottomPopupProps['show']): void
 }>()
 
 const popupRef = ref()
 
 watch(
-  modelValue,
+  show,
   (newVal) => {
     if (newVal) {
       popupRef.value?.open()
@@ -86,7 +87,7 @@ watch(
 
 const onChange = ({ show }: { show: boolean; type: string }) => {
   if (!show) {
-    emit('update:modelValue', false)
+    emit('update:show', false)
   }
 }
 </script>

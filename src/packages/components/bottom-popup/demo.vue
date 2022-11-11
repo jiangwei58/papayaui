@@ -5,10 +5,10 @@
       <wei-cell title="自定义底部" is-link @click="visible2 = true" />
     </wei-cell-group>
 
-    <wei-bottom-popup v-model="visible" title="标题">
+    <wei-bottom-popup v-model:show="visible" title="标题">
       <view class="px-20">{{ text }}</view>
     </wei-bottom-popup>
-    <wei-bottom-popup v-model="visible2" title="标题">
+    <wei-bottom-popup v-model:show="visible2" title="标题">
       <view class="px-20">{{ text }}</view>
       <template #footer>
         <view class="flex justify-around px-26">
