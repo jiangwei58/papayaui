@@ -6,11 +6,14 @@
     ]"
     class="flex"
     hover-class="clickable-hover"
-    :style="{ width: titleWidth ? getUnitValue(titleWidth) : 'auto' }"
     @click="emit('click')"
   >
     <Icon v-if="icon" :name="icon" block class="mr-4" />
-    <view v-if="!!title || $slots.title" :class="computedClass('cell__title')">
+    <view
+      v-if="!!title || $slots.title"
+      :class="computedClass('cell__title')"
+      :style="{ flex: titleWidth ? `0 ${getUnitValue(titleWidth)}` : '1' }"
+    >
       <slot v-if="$slots.title" name="title" />
       <text v-else>{{ title }}</text>
     </view>
