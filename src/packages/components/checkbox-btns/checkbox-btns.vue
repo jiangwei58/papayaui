@@ -26,7 +26,8 @@
       }"
       @tap="onSelect(item, index)"
     >
-      {{ item[labelKey] }}
+      <slot v-if="$slots.default" :item="item" :index="index" />
+      <text v-else>{{ item[labelKey] }}</text>
     </view>
   </view>
 </template>
@@ -35,7 +36,7 @@
 import { getUnitValue } from '../../utils/common'
 import { computedClass } from '../../utils/style'
 
-export type CheckboxItem = Record<string, unknown>
+export type CheckboxItem = any
 
 export interface CheckboxProps {
   /** 列数 */
@@ -105,7 +106,7 @@ const onSelect = (item: CheckboxItem, index: number) => {
 .#{$prefix}-checkbox-btns {
   .#{$prefix}-checkbox-btn {
     font-size: _var(checkbox-btns-font-size);
-    line-height: _var(checkbox-btns-height);
+    padding: _var(checkbox-btns-padding);
     border-width: 2rpx;
     border-style: solid;
     &.active {

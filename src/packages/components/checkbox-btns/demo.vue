@@ -10,6 +10,15 @@
   <DocDemoBlock title="自定义布局" card>
     <wei-checkbox-btns v-model="selectedValue3" :options="getData(8)" :column="4" gap="10" round />
   </DocDemoBlock>
+
+  <DocDemoBlock title="自定义内容" card>
+    <wei-checkbox-btns v-model="selectedValue4" :options="getData(8)">
+      <template #default="{ item, index }">
+        <wei-icon :name="index % 2 === 0 ? 'success' : 'close'" />
+        <text>{{ item.label }}</text>
+      </template>
+    </wei-checkbox-btns>
+  </DocDemoBlock>
 </template>
 
 <script lang="ts" setup>
@@ -24,6 +33,7 @@ interface Option {
 const selectedValue1 = ref<Option['value']>()
 const selectedValue2 = ref<Option['value'][]>([])
 const selectedValue3 = ref<Option['value']>()
+const selectedValue4 = ref<Option['value']>()
 
 const getData = (count: number) => {
   return new Array(count).fill(0).map((_item, index) => {
