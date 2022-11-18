@@ -11,12 +11,7 @@
       :class="[
         computedClass('checkbox-btn'),
         {
-          active:
-            typeof modelValue !== 'undefined'
-              ? Array.isArray(modelValue)
-                ? modelValue.includes(item[valueKey])
-                : item[valueKey] === modelValue
-              : false,
+          active: typeof modelValue !== 'undefined' ? isSelected(item[valueKey]) : false,
         },
       ]"
       :style="{
@@ -33,17 +28,20 @@
 </template>
 
 <script lang="ts" setup>
+import useSelect from '../../core/useSelect'
 import { getUnitValue } from '../../utils/common'
 import { computedClass } from '../../utils/style'
 
 export type CheckboxItem = any
+export type CheckboxValue = any
 
 export interface CheckboxProps {
   /** 列数 */
   column?: number
   /** 间隔 */
   gap?: string
-  modelValue?: any
+  /** 选中值 */
+  modelValue?: CheckboxValue
   /** 选项列表 */
   options?: CheckboxItem[]
   /** 标题对应字段名 */
@@ -72,32 +70,25 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: CheckboxProps['modelValue']): void
-  (event: 'change', item: any, index: number): void
+  (event: 'change', item: CheckboxItem, index: number): void
 }>()
 
+const {
+  selectedItems,
+  selectedValues,
+  onSelect: _onSelect,
+  isSelected,
+} = useSelect<CheckboxItem, CheckboxValue>({
+  options: props.options,
+  valueKey: props.valueKey,
+  defaultValue: props.modelValue,
+  multiple: props.multiple,
+})
+
 const onSelect = (item: CheckboxItem, index: number) => {
-  if (props.multiple && Array.isArray(props.modelValue)) {
-    let exist = false
-    const newVal = props.modelValue.filter((val) => {
-      if (val === item[props.valueKey]) {
-        exist = true
-        return false
-      }
-      return true
-    })
-    if (!exist) {
-      newVal.push(item[props.valueKey])
-    }
-    emit('update:modelValue', newVal)
-    emit(
-      'change',
-      props.options.filter((option) => newVal.includes(option.value)),
-      index,
-    )
-  } else {
-    emit('update:modelValue', item[props.valueKey])
-    emit('change', item, index)
-  }
+  _onSelect(item[props.valueKey])
+  emit('update:modelValue', selectedValues.value)
+  emit('change', selectedItems.value, index)
 }
 </script>
 

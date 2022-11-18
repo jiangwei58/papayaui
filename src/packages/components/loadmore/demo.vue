@@ -19,7 +19,7 @@
 
 <script lang="ts" setup>
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import { LoadStatusEnum } from '../../hooks/useList'
+import { LoadStatusEnum } from '../../core/useList'
 
 const customConfig = { loadmore: '给我上划', loading: '努力加载...', nomore: '真的没有了' }
 </script>

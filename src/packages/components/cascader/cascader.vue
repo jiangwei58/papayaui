@@ -55,7 +55,7 @@
 
 <script lang="ts" setup>
 import { computed, nextTick, ref, watch, toRefs } from 'vue'
-import { LoadStatusEnum } from '../../hooks/useList'
+import { LoadStatusEnum } from '../../core/useList'
 import { PREFIX } from '../../utils/style'
 import BottomPopup from '../bottom-popup/bottom-popup.vue'
 import Icon from '../icon/icon.vue'

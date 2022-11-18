@@ -11,9 +11,9 @@
     <view class="content flex flex-col">
       <Search
         v-if="showSearch"
-        :model-value="searchText"
+        v-model="searchText"
         class="flex-shrink-0"
-        @update:model-value="onChangeSearch"
+        @confirm="onConfirmSearch"
       />
       <scroll-view
         scroll-y
@@ -25,14 +25,14 @@
           v-for="(item, index) in filterOptions"
           :key="index"
           class="list-item flex items-center justify-between px-32 py-20 text-28 leading-40"
-          :class="{ 'color-primary': selectedSet.has(item[valueKey]) }"
+          :class="{ 'color-primary': isSelected(item[valueKey]) }"
           hover-class="bg-hover"
           @tap="onSelect(item[valueKey])"
         >
           <slot v-if="$slots.default" :item="item" />
           <text v-else>{{ item[labelKey] }}</text>
           <Icon
-            v-if="selectedSet.has(item[valueKey])"
+            v-if="isSelected(item[valueKey])"
             name="success"
             :color="`var(--${PREFIX}-color-primary)`"
             block
@@ -67,7 +67,8 @@ import { PREFIX } from '../../utils/style'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import ButtonComponent from '../button/button.vue'
 import Loadmore from '../loadmore/loadmore.vue'
-import useList, { UseListData } from '../../hooks/useList'
+import useList, { UseListData } from '../../core/useList'
+import useSelect from '../../core/useSelect'
 
 export type Option = any
 export type OptionValue = number | string
@@ -124,8 +125,6 @@ const emit = defineEmits<{
 const { show, data } = toRefs(props)
 
 const searchText = ref<string>('')
-const selectedSet = ref<Set<OptionValue>>(new Set())
-const loading = ref<boolean>(false)
 
 const {
   list: options,
@@ -134,6 +133,18 @@ const {
   loadStatus,
   getListData,
 } = useList<Option>(typeof props.pagination === 'object' ? props.pagination : undefined)
+
+const {
+  selectedItems,
+  selectedValues,
+  isSelected,
+  onSelect: _onSelect,
+} = useSelect<Option, OptionValue>({
+  options,
+  valueKey: props.valueKey,
+  defaultValue: props.modelValue,
+  multiple: props.multiple,
+})
 
 const filterOptions = computed(() => {
   if (props.remote) return options.value
@@ -145,7 +156,6 @@ watch(show, async (newVal, oldVal) => {
     if (!options.value.length) {
       getData()
     }
-    init()
   }
 })
 
@@ -159,23 +169,12 @@ watch(
   },
 )
 
-const init = () => {
-  const defaultValues = Array.isArray(props.modelValue) ? props.modelValue : [props.modelValue]
-  defaultValues.forEach((value) => {
-    if (typeof value !== 'undefined') {
-      selectedSet.value.add(value)
-    }
-  })
-}
-
 const getData = async () => {
-  loading.value = true
   return getListData(async () => {
     let res = props.load?.(searchText.value, pageNumber.value, pageSize.value)
     if (res instanceof Promise) {
       res = await res
     }
-    loading.value = false
     return {
       list: res ?? [],
     }
@@ -188,8 +187,7 @@ const onScrolltolower = () => {
   getData()
 }
 
-const onChangeSearch = (text: string) => {
-  searchText.value = text
+const onConfirmSearch = () => {
   if (props.remote) {
     pageNumber.value = 0
     getData()
@@ -197,28 +195,18 @@ const onChangeSearch = (text: string) => {
 }
 
 const onSelect = async (value: OptionValue) => {
-  if (selectedSet.value.has(value)) {
-    selectedSet.value.delete(value)
-  } else {
-    if (!props.multiple) {
-      selectedSet.value.clear()
-    }
-    selectedSet.value.add(value)
-  }
-  if (!props.multiple) {
+  if (_onSelect(value) && !props.multiple) {
     onOk()
   }
 }
 
 const onOk = () => {
-  const selectedNodes = options.value.filter((item) => selectedSet.value.has(item[props.valueKey]))
-  emit('update:modelValue', props.multiple ? [...selectedSet.value] : [...selectedSet.value][0])
-  emit('change', props.multiple ? selectedNodes : selectedNodes[0])
+  emit('update:modelValue', selectedValues.value)
+  emit('change', selectedItems.value)
   onClose()
 }
 
 const onClose = () => {
-  selectedSet.value.clear()
   emit('update:show', false)
 }
 </script>

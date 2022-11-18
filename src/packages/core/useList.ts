@@ -1,4 +1,4 @@
-import { reactive, toRefs } from 'vue'
+import { computed, reactive, toRefs } from 'vue'
 
 export enum LoadStatusEnum {
   LOADMORE = 'loadmore',
@@ -28,6 +28,10 @@ export default <T = any>(
     pageSize: 10,
     isEmpty: false,
     ...defaultData,
+  })
+
+  const loading = computed<boolean>(() => {
+    return state.loadStatus === LoadStatusEnum.LOADING
   })
 
   const getListData = async (fun: () => Promise<UseListResult<T>>) => {
@@ -64,6 +68,7 @@ export default <T = any>(
 
   return {
     ...toRefs(state),
+    loading,
     getListData,
   }
 }
