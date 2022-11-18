@@ -13,18 +13,7 @@ const getPackageJson = () => {
   }
   delete json.scripts
   delete json.devDependencies
-  json['files'] = [
-    '/doc',
-    '/components',
-    '/fonts',
-    '/hooks',
-    '/request',
-    '/styles',
-    '/types',
-    '/utils',
-    '*.ts',
-    '*.scss',
-  ]
+  json['files'] = ['*']
   return json
 }
 
