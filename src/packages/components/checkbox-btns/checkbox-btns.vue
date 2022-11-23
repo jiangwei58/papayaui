@@ -28,6 +28,7 @@
 </template>
 
 <script lang="ts" setup>
+import { toRefs } from 'vue'
 import useSelect from '../../core/useSelect'
 import { getUnitValue } from '../../utils/common'
 import { computedClass } from '../../utils/style'
@@ -73,20 +74,22 @@ const emit = defineEmits<{
   (event: 'change', item: CheckboxItem, index: number): void
 }>()
 
+const { options, valueKey, modelValue, multiple } = toRefs(props)
+
 const {
   selectedItems,
   selectedValues,
   onSelect: _onSelect,
   isSelected,
 } = useSelect<CheckboxItem, CheckboxValue>({
-  options: props.options,
-  valueKey: props.valueKey,
-  defaultValue: props.modelValue,
-  multiple: props.multiple,
+  options,
+  valueKey,
+  defaultValue: modelValue,
+  multiple,
 })
 
 const onSelect = (item: CheckboxItem, index: number) => {
-  _onSelect(item[props.valueKey])
+  _onSelect(item[valueKey.value])
   emit('update:modelValue', selectedValues.value)
   emit('change', selectedItems.value, index)
 }

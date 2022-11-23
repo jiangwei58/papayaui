@@ -5,15 +5,12 @@ export const getUnitValue = (val: string, unit = 'rpx') => {
 }
 
 /** 转换对象为字符串参数值 */
-export const convertQueryToString = (
-  params: Record<string, string | number | undefined>,
-  suffix = '&',
-) => {
+export const convertQueryToString = <T extends object>(params: T, suffix = '&') => {
   const queryArray: string[] = []
   for (const key in params) {
     const value = params[key]
     if (typeof value !== 'undefined') {
-      queryArray.push(`${key}=${value.toString()}`)
+      queryArray.push(`${key}=${value?.toString()}`)
     }
   }
   return queryArray.join(suffix)

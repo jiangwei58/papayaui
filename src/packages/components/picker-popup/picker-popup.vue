@@ -122,7 +122,7 @@ const emit = defineEmits<{
   (event: 'change', item: Option | Option[]): void
 }>()
 
-const { show, data } = toRefs(props)
+const { show, data, modelValue, labelKey, valueKey, multiple } = toRefs(props)
 
 const searchText = ref<string>('')
 
@@ -141,14 +141,14 @@ const {
   onSelect: _onSelect,
 } = useSelect<Option, OptionValue>({
   options,
-  valueKey: props.valueKey,
-  defaultValue: props.modelValue,
-  multiple: props.multiple,
+  valueKey,
+  defaultValue: modelValue,
+  multiple,
 })
 
 const filterOptions = computed(() => {
   if (props.remote) return options.value
-  return options.value.filter((item) => item[props.labelKey].indexOf(searchText.value) !== -1)
+  return options.value.filter((item) => item[labelKey.value]?.indexOf(searchText.value) !== -1)
 })
 
 watch(show, async (newVal, oldVal) => {
@@ -195,7 +195,7 @@ const onConfirmSearch = () => {
 }
 
 const onSelect = async (value: OptionValue) => {
-  if (_onSelect(value) && !props.multiple) {
+  if (_onSelect(value) && !multiple.value) {
     onOk()
   }
 }

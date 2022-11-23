@@ -1,8 +1,9 @@
-import { computed, isRef, Ref, ref, toRef, watch } from 'vue'
+import { computed, Ref, ref, toRef, watch } from 'vue'
+import { IncludeRefs } from '../types'
 
 export interface UseSelectProps<T, V> {
   /** 选项数据 */
-  options: T[] | Ref<T[]>
+  options: T[]
   /** 默认数据 */
   defaultValue?: V | V[]
   /** 数据值的字段名 */
@@ -13,24 +14,31 @@ export interface UseSelectProps<T, V> {
   inverse?: boolean
 }
 
-export default <T, V>(props: UseSelectProps<T, V>) => {
-  const { defaultValue, valueKey = 'value' as keyof T, multiple, inverse } = props
+export default <T, V>(props: IncludeRefs<UseSelectProps<T, V>>) => {
+  type OwnProps = UseSelectProps<T, V>
 
-  const options = (isRef(props.options) ? props.options : toRef(props, 'options')) as Ref<T[]>
+  const options = toRef(props, 'options') as Ref<OwnProps['options']>
+  const defaultValue = toRef(props, 'defaultValue', []) as Ref<Required<OwnProps>['defaultValue']>
+  const valueKey = toRef(props, 'valueKey', 'value' as OwnProps['valueKey']) as Ref<
+    Required<OwnProps>['valueKey']
+  >
+  const multiple = toRef(props, 'multiple') as Ref<OwnProps['multiple']>
+  const inverse = toRef(props, 'inverse') as Ref<OwnProps['inverse']>
+
   const selectedSet = ref<Set<V>>(new Set())
 
   const selectedItems = computed<T | T[]>(() => {
-    const result = options.value.filter((item) => selectedSet.value.has(item[valueKey] as V))
-    return multiple ? result : result[0]
+    const result = options.value.filter((item) => selectedSet.value.has(item[valueKey.value] as V))
+    return multiple.value ? result : result[0]
   })
 
   const selectedValues = computed<V | V[]>(() => {
     const result = [...selectedSet.value.values()]
-    return multiple ? result : result[0]
+    return multiple.value ? result : result[0]
   })
 
   watch(
-    () => defaultValue ?? [],
+    defaultValue,
     (value) => {
       const defaultValues = Array.isArray(value) ? value : [value]
       defaultValues.forEach((value) => {
@@ -50,10 +58,10 @@ export default <T, V>(props: UseSelectProps<T, V>) => {
 
   const onSelect = (value: V) => {
     if (selectedSet.value.has(value)) {
-      ;(multiple ? true : inverse) && selectedSet.value.delete(value)
+      ;(multiple.value ? true : inverse.value) && selectedSet.value.delete(value)
       return false
     } else {
-      if (!multiple) {
+      if (!multiple.value) {
         selectedSet.value.clear()
       }
       selectedSet.value.add(value)
