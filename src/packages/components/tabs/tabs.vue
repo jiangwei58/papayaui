@@ -1,5 +1,5 @@
 <template>
-  <view :class="[computedClass('tabs'), { scrollable }]">
+  <view :class="[computedClass('tabs'), { scrollable, shrink }]">
     <scroll-view
       id="tabsScrollContainer"
       :class="computedClass('tabs-scroll')"
@@ -41,6 +41,8 @@ export interface TabsProps {
   labelKey?: string
   /** 是否滚动 */
   scrollable?: boolean
+  /** 是否开启左侧收缩布局 */
+  shrink?: boolean
 }
 
 const props = withDefaults(defineProps<TabsProps>(), {
@@ -131,6 +133,9 @@ const onChangeTab = (index: number) => {
   &.scrollable .#{$prefix}-tab {
     flex: 1 0 auto;
     padding: 0 12px;
+  }
+  &.shrink .#{$prefix}-tab {
+    flex: none;
   }
 }
 .#{$prefix}-tabs-scroll {

@@ -9,15 +9,14 @@
     @confirm="onOk"
   >
     <view class="content flex flex-col">
+      <Search v-if="showSearch" v-model="searchText" class="search flex-shrink-0" />
       <view v-if="show" class="tab flex-shrink-0">
-        <Tabs v-model="tabCurrent" :tabs="tabList" label-key="name" :scrollable="true" />
+        <Tabs v-model="tabCurrent" :tabs="tabList" label-key="name" scrollable shrink />
       </view>
-      <Search v-if="showSearch" v-model="searchText" class="flex-shrink-0" />
       <scroll-view
         scroll-y
         :scroll-top="scrollTop"
-        class="flex-1"
-        :class="{ 'pt-12': !showSearch }"
+        class="flex-1 pt-10"
         style="overflow: hidden"
         @scroll="onScroll"
       >
@@ -49,6 +48,7 @@
         </view>
         <SafeBottom v-if="safeAreaInsetBottom" />
       </scroll-view>
+      <view style="display: none">{{ flattenTreeData }}</view>
     </view>
   </BottomPopup>
 </template>
@@ -73,6 +73,7 @@ export type CascaderOption = any
 export type CascaderValue = number | string
 
 export interface CascaderProps {
+  /** 值 */
   modelValue?: CascaderValue[]
   /** 显示状态 */
   show?: boolean
@@ -157,9 +158,26 @@ const currentData = computed(() => {
   for (let i = 1; i <= tabCurrent.value; i++) {
     currentData = currentData[currentIndexs.value[i - 1]][props.childrenKey] || []
   }
-  return props.showSearch
-    ? currentData.filter((item) => item[props.labelKey].indexOf(searchText.value) !== -1)
-    : currentData
+  return currentData
+})
+
+const flattenTreeData = computed(() => {
+  const result: CascaderOption[] = []
+  const loop = (list: CascaderOption[], paths: string[] = []) => {
+    list.forEach((item) => {
+      const newItem = {
+        label: item[props.labelKey],
+        value: item[props.valueKey],
+        paths: paths.concat(item[props.valueKey]),
+      }
+      result.push(newItem)
+      if (item[props.childrenKey]?.length) {
+        loop(item[props.childrenKey], newItem.paths)
+      }
+    })
+  }
+  loop(treeData.value)
+  return result
 })
 
 watch(show, async (newVal, oldVal) => {
@@ -269,14 +287,12 @@ const onClose = () => {
 </script>
 
 <style lang="scss" scoped>
+@import '../../styles/vars.scss';
 .content {
   position: relative;
   height: 100%;
-  padding-top: 90rpx;
 }
-.tab {
-  position: absolute;
-  top: 0;
-  left: 0;
+.search {
+  @include _setVar(search-padding, 0 12px);
 }
 </style>

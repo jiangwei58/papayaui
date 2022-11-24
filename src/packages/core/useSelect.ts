@@ -41,6 +41,7 @@ export default <T, V>(props: IncludeRefs<UseSelectProps<T, V>>) => {
     defaultValue,
     (value) => {
       const defaultValues = Array.isArray(value) ? value : [value]
+      selectedSet.value.clear()
       defaultValues.forEach((value) => {
         if (typeof value !== 'undefined') {
           selectedSet.value.add(value)

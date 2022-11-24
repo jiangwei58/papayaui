@@ -13,6 +13,25 @@
     <wei-cascader v-model:show="visible" v-model="value" :data="syncTreeData" />
     <wei-cascader v-model:show="asyncVisible" v-model="asyncValue" :max-level="3" :load="onLoad" />
   </DocDemoBlock>
+
+  <DocDemoBlock title="搜索">
+    <wei-cell-group inset>
+      <wei-cell
+        title="搜索数据"
+        :value="searchValue.join('/')"
+        is-link
+        @click="onSearchChangeVisible"
+      />
+    </wei-cell-group>
+
+    <wei-cascader
+      v-model:show="searchVisible"
+      v-model="searchValue"
+      show-search
+      :max-level="3"
+      :load="onLoad"
+    />
+  </DocDemoBlock>
 </template>
 
 <script lang="ts" setup>
@@ -47,12 +66,19 @@ const onLoad = (node: CascaderNode<NodeItem>) => {
     setTimeout(() => {
       resolve(
         new Array(20).fill(0).map((_item, index) => {
-          const path = node.props ? `${node.props.value}-${index}` : index
+          const path = node.props ? `${node.props.value}-${index}` : index.toString()
           return { label: `节点: ${path}`, value: path } as NodeItem
         }),
       )
     }, 300)
   })
+}
+
+const searchVisible = ref<boolean>(false)
+const searchValue = ref<string[]>([])
+
+const onSearchChangeVisible = () => {
+  searchVisible.value = !searchVisible.value
 }
 </script>
 

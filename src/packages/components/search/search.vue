@@ -42,7 +42,7 @@ const emit = defineEmits<{
   @include _setVar(cell-bg-color, var(--color-page-bg-gray));
   @include _setVar(cell-padding-x, 8px);
   @include _setVar(cell-padding-y, 8px);
-  padding: 10px 12px;
+  padding: _var(search-padding);
   background-color: #fff;
 }
 </style>
