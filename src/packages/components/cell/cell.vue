@@ -1,7 +1,11 @@
 <template>
   <view
     :class="[
-      computedClass('cell', { cell__clickable: isLink, 'cell--required': required }),
+      computedClass('cell', {
+        cell__clickable: isLink,
+        'cell--required': required,
+        'cell--border': border,
+      }),
       `items-${center ? 'center' : 'start'}`,
     ]"
     class="flex"
@@ -63,6 +67,8 @@ export interface CellProps {
   valueAlign?: 'left' | 'center' | 'right'
   /** 错误信息 */
   errorMessage?: string
+  /** 是否显示下边框 */
+  border?: boolean
 }
 
 withDefaults(defineProps<CellProps>(), {
@@ -72,6 +78,7 @@ withDefaults(defineProps<CellProps>(), {
   icon: '',
   valueAlign: 'right',
   errorMessage: '',
+  border: true,
 })
 
 const emit = defineEmits<{
@@ -99,7 +106,7 @@ const emit = defineEmits<{
     font-size: 14px;
     content: '*';
   }
-  &::after {
+  &.#{$prefix}-cell--border::after {
     position: absolute;
     box-sizing: border-box;
     content: ' ';
