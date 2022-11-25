@@ -66,9 +66,15 @@ export default <T = any>(
     }
   }
 
+  const reset = () => {
+    state.pageNumber = 0
+    state.list = []
+  }
+
   return {
     ...toRefs(state),
     loading,
     getListData,
+    reset,
   }
 }

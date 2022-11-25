@@ -99,6 +99,8 @@ export interface PickerPopupProps {
   pagination?: boolean | Partial<Pick<UseListData<Option>, 'pageNumber' | 'pageSize'>>
   /** 是否留出底部安全距离 */
   safeAreaInsetBottom?: boolean
+  /** 每次打开重新加载数据 */
+  initData?: boolean
 }
 
 const props = withDefaults(defineProps<PickerPopupProps>(), {
@@ -120,6 +122,7 @@ const emit = defineEmits<{
   (event: 'update:show', show: boolean): void
   (event: 'update:modelValue', value: OptionValue | OptionValue[]): void
   (event: 'change', item: Option | Option[]): void
+  (event: 'close'): void
 }>()
 
 const { show, data, modelValue, labelKey, valueKey, multiple } = toRefs(props)
@@ -153,6 +156,9 @@ const filterOptions = computed(() => {
 
 watch(show, async (newVal, oldVal) => {
   if (newVal !== oldVal && newVal) {
+    if (props.initData) {
+      onReset()
+    }
     if (!options.value.length) {
       getData()
     }
@@ -208,7 +214,17 @@ const onOk = () => {
 
 const onClose = () => {
   emit('update:show', false)
+  emit('close')
 }
+
+const onReset = () => {
+  pageNumber.value = 0
+  options.value = []
+}
+
+defineExpose({
+  onReset,
+})
 </script>
 
 <style lang="scss" scoped>

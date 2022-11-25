@@ -46,7 +46,7 @@ const props = withDefaults(defineProps<NumberInputProps>(), {
   modelValue: '',
   disabled: false,
   placeholder: '请输入',
-  align: 'left',
+  align: 'right',
   min: undefined,
   max: undefined,
   precision: 0,
