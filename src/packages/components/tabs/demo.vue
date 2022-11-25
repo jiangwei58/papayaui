@@ -6,6 +6,10 @@
   <DocDemoBlock title="多个滚动">
     <wei-tabs v-model="tabActive2" :tabs="getData(10)" scrollable />
   </DocDemoBlock>
+
+  <DocDemoBlock title="自定义索引值">
+    <wei-tabs v-model="tabActive3" :tabs="getData(3)" value-key="name" />
+  </DocDemoBlock>
 </template>
 
 <script lang="ts" setup>
@@ -22,12 +26,14 @@ const getData = (count: number) => {
     return {
       label: `标签${index}`,
       value: index,
+      name: index,
     }
   })
 }
 
 const tabActive = ref<number>(0)
 const tabActive2 = ref<number>(0)
+const tabActive3 = ref<number>(0)
 </script>
 
 <style lang="scss" scoped></style>

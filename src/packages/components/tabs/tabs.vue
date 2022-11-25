@@ -10,8 +10,8 @@
         <view
           v-for="(item, index) in tabs"
           :key="index"
-          :class="[computedClass('tab'), { active: index === modelValue }]"
-          @click="onChangeTab(index)"
+          :class="[computedClass('tab'), { active: isActive(item, index) }]"
+          @click="onChangeTab(item, index)"
         >
           {{ item[labelKey] }}
         </view>
@@ -31,7 +31,7 @@
 import { computedClass } from '../../utils/style'
 import { getCurrentInstance, nextTick, ref, toRefs, watch } from 'vue'
 
-export type TabItem = Record<string, any>
+export type TabItem = any
 
 export interface TabsProps {
   modelValue?: number
@@ -39,6 +39,8 @@ export interface TabsProps {
   tabs: TabItem[]
   /** 标题对应字段名 */
   labelKey?: string
+  /** 值对应字段名 */
+  valueKey?: string
   /** 是否滚动 */
   scrollable?: boolean
   /** 是否开启左侧收缩布局 */
@@ -49,6 +51,7 @@ const props = withDefaults(defineProps<TabsProps>(), {
   modelValue: 0,
   tabs: () => [],
   labelKey: 'label',
+  valueKey: 'value',
   scrollable: false,
 })
 
@@ -74,6 +77,12 @@ watch(
     immediate: true,
   },
 )
+
+const isActive = (item: TabItem, index: number) => {
+  return typeof item[props.valueKey] !== 'undefined'
+    ? item[props.valueKey] === modelValue.value
+    : index === modelValue.value
+}
 
 // 获取左移动位置
 const getTabItemWidth = () => {
@@ -119,9 +128,12 @@ const getTabItemWidth = () => {
     .exec()
 }
 
-const onChangeTab = (index: number) => {
-  emit('update:modelValue', index)
-  emit('change', tabs.value[index])
+const onChangeTab = (item: TabItem, index: number) => {
+  emit(
+    'update:modelValue',
+    typeof item[props.valueKey] !== 'undefined' ? item[props.valueKey] : index,
+  )
+  emit('change', item)
 }
 </script>
 
@@ -130,6 +142,7 @@ const onChangeTab = (index: number) => {
 .#{$prefix}-tabs {
   height: _var(tabs-height);
   padding: 0 8px;
+  background-color: #fff;
   &.scrollable .#{$prefix}-tab {
     flex: 1 0 auto;
     padding: 0 12px;
@@ -146,7 +159,6 @@ const onChangeTab = (index: number) => {
   display: flex;
   height: 100%;
   user-select: none;
-  background-color: #fff;
 }
 .#{$prefix}-tab {
   position: relative;
