@@ -3,6 +3,7 @@
     :class="computedClass('section')"
     class="flex items-center"
     :style="{ backgroundColor: bgColor }"
+    @click="emit('click', $event)"
   >
     <view :class="computedClass('section-line')"></view>
     <view :class="computedClass('section-title')">
@@ -24,8 +25,12 @@ export interface SectionProps {
 
 withDefaults(defineProps<SectionProps>(), {
   title: '',
-  bgColor: '#fff',
+  bgColor: 'transparent',
 })
+
+const emit = defineEmits<{
+  (event: 'click', value: Event): void
+}>()
 </script>
 
 <style lang="scss" scoped>
