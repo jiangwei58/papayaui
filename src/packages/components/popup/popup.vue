@@ -33,6 +33,7 @@
 
 <script lang="ts" setup>
 import { computed, CSSProperties, ref, toRefs, watch } from 'vue'
+import { getUnitValue } from '../../utils'
 import { computedClass } from '../../utils/style'
 import Icon from '../icon/icon.vue'
 import UniTransition from '../uni-transition/uni-transition.vue'
@@ -107,10 +108,10 @@ const transStyle = computed<CSSProperties>(() => {
     left: { top: 0, left: 0, bottom: 0 },
     right: { top: 0, right: 0, bottom: 0 },
     center: {
-      bottom: 0,
-      left: 0,
-      right: 0,
-      top: 0,
+      top: '50%',
+      left: '50%',
+      marginTop: `calc(-${getUnitValue(props.height)} / 2)`,
+      marginLeft: `calc(-${getUnitValue(props.width)} / 2)`,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -146,8 +147,12 @@ const popupWrapperStyle = computed<CSSProperties>(() => {
     center: '16px',
   }
   return {
-    width: ['left', 'right', 'center'].includes(props.position) ? props.width : '100vw',
-    height: ['top', 'bottom', 'center'].includes(props.position) ? props.height : '100vh',
+    width: ['left', 'right', 'center'].includes(props.position)
+      ? getUnitValue(props.width)
+      : '100vw',
+    height: ['top', 'bottom', 'center'].includes(props.position)
+      ? getUnitValue(props.height)
+      : '100vh',
     backgroundColor: props.bgColor,
     borderRadius: props.round ? radiusObj[props.position] : 0,
   }
