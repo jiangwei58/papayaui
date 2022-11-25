@@ -48,7 +48,6 @@
         </view>
         <SafeBottom v-if="safeAreaInsetBottom" />
       </scroll-view>
-      <view style="display: none">{{ flattenTreeData }}</view>
     </view>
   </BottomPopup>
 </template>
@@ -161,24 +160,24 @@ const currentData = computed(() => {
   return currentData
 })
 
-const flattenTreeData = computed(() => {
-  const result: CascaderOption[] = []
-  const loop = (list: CascaderOption[], paths: string[] = []) => {
-    list.forEach((item) => {
-      const newItem = {
-        label: item[props.labelKey],
-        value: item[props.valueKey],
-        paths: paths.concat(item[props.valueKey]),
-      }
-      result.push(newItem)
-      if (item[props.childrenKey]?.length) {
-        loop(item[props.childrenKey], newItem.paths)
-      }
-    })
-  }
-  loop(treeData.value)
-  return result
-})
+// const flattenTreeData = computed(() => {
+//   const result: CascaderOption[] = []
+//   const loop = (list: CascaderOption[], paths: string[] = []) => {
+//     list.forEach((item) => {
+//       const newItem = {
+//         label: item[props.labelKey],
+//         value: item[props.valueKey],
+//         paths: paths.concat(item[props.valueKey]),
+//       }
+//       result.push(newItem)
+//       if (item[props.childrenKey]?.length) {
+//         loop(item[props.childrenKey], newItem.paths)
+//       }
+//     })
+//   }
+//   loop(treeData.value)
+//   return result
+// })
 
 watch(show, async (newVal, oldVal) => {
   if (newVal !== oldVal && newVal) {

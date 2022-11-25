@@ -3,7 +3,11 @@
     <wei-form ref="formRef" :form="formData" :rules="rules">
       <wei-cell-group inset>
         <wei-form-item prop="name" label="名称" required>
-          <input v-model="formData.name" placeholder="请输入" />
+          <input
+            v-model="formData.name"
+            placeholder="请输入"
+            :placeholder-style="`color:var(--${PREFIX}-number-input-placeholder-color)`"
+          />
         </wei-form-item>
 
         <wei-form-item prop="desc" label="描述">
@@ -18,6 +22,12 @@
           is-link
           @click="onChangeGenderVisible"
         />
+        <wei-form-item prop="age" label="年龄">
+          <wei-number-input v-model="formData.age" />
+        </wei-form-item>
+        <wei-form-item prop="comment" label="评论">
+          <wei-field v-model="formData.comment" type="textarea" placeholder="请输入" only-input />
+        </wei-form-item>
       </wei-cell-group>
 
       <wei-button class="block px-32 pt-30" @click="onValidate">提交</wei-button>
@@ -32,11 +42,14 @@ import { computed, ref } from 'vue'
 import { FormRules } from '../../hooks'
 import Form from './form.vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
+import { PREFIX } from '../../utils/style'
 
 interface FormData {
   name: string
   desc: string
   gender?: 1 | 0
+  age: string
+  comment: string
 }
 
 const formRef = ref<InstanceType<typeof Form>>()
@@ -54,6 +67,8 @@ const genderVisible = ref<boolean>(false)
 const formData = ref<FormData>({
   name: '',
   desc: '',
+  age: '',
+  comment: '',
 })
 
 const rules: FormRules<FormData> = {

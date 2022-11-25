@@ -1,13 +1,30 @@
 <template>
-  <Cell :class="computedClass('field', { 'only-input': onlyInput })" v-bind="$props">
+  <Cell
+    :class="computedClass('field', { 'only-input': onlyInput })"
+    :border="false"
+    v-bind="$props"
+  >
     <view :class="computedClass('field__body')">
       <input
+        v-if="type !== 'textarea'"
         :class="computedClass('field__input')"
         :type="type"
         :value="modelValue"
         :placeholder="placeholder"
-        :placeholder-style="`color:var(--${PREFIX}-color-text-black-3)`"
+        :placeholder-style="`color:var(--${PREFIX}-number-input-placeholder-color)`"
         :style="{ textAlign: valueAlign }"
+        @input="onInput"
+        @blur="emit('blur', $event)"
+        @confirm="emit('confirm', $event)"
+      />
+      <textarea
+        v-else
+        :class="computedClass('field__input')"
+        :value="modelValue"
+        :placeholder="placeholder"
+        :placeholder-style="`color:var(--${PREFIX}-number-input-placeholder-color)`"
+        :style="{ textAlign: valueAlign, width: '100%' }"
+        auto-height
         @input="onInput"
         @blur="emit('blur', $event)"
         @confirm="emit('confirm', $event)"
@@ -70,6 +87,21 @@ const onInput = (payload: Event) => {
   &.#{$prefix}-only-input {
     @include _setVar(cell-padding-y, 0);
     @include _setVar(cell-padding-x, 0);
+  }
+  .#{$prefix}-textarea {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    color: #323233;
+    line-height: inherit;
+    text-align: left;
+    background-color: transparent;
+    border: 0;
+    resize: none;
+    font: inherit;
   }
 }
 </style>
