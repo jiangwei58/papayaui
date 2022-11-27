@@ -9,8 +9,13 @@
     @confirm="onOk"
   >
     <view class="content flex flex-col">
-      <Search v-if="showSearch" v-model="searchText" class="search flex-shrink-0" />
-      <view v-if="show" class="tab flex-shrink-0">
+      <Search
+        v-if="showSearch"
+        v-model="searchText"
+        class="search flex-shrink-0"
+        @confirm="onSearch"
+      />
+      <view v-if="show" v-show="!searchText" class="tab flex-shrink-0">
         <Tabs v-model="tabCurrent" :tabs="tabList" label-key="name" scrollable shrink />
       </view>
       <scroll-view
@@ -26,7 +31,7 @@
           class="list-item flex items-center justify-between px-32 py-20 text-28 leading-40"
           :class="{ 'color-primary': index === currentIndexs[tabCurrent] }"
           hover-class="bg-hover"
-          @tap="onSelect(index)"
+          @tap="onSelect(item, index)"
         >
           <slot v-if="$slots.default" :item="item" />
           <text v-else>{{ item[labelKey] }}</text>
@@ -71,6 +76,12 @@ export interface CascaderNode<T = any> {
 export type CascaderOption = any
 export type CascaderValue = number | string
 
+export type SearchNode = {
+  label: string
+  paths: number[]
+  _isSearch: boolean
+}
+
 export interface CascaderProps {
   /** 值 */
   modelValue?: CascaderValue[]
@@ -96,6 +107,8 @@ export interface CascaderProps {
   showSearch?: boolean
   /** 动态获取下一级节点数据 */
   load?: (node: CascaderNode) => CascaderOption[] | Promise<CascaderOption[]>
+  /** 远程搜索 */
+  loadSearch?: (searchText: string) => CascaderOption[] | Promise<CascaderOption[]>
   /** 底部安全距离 */
   safeAreaInsetBottom?: boolean
 }
@@ -111,6 +124,7 @@ const props = withDefaults(defineProps<CascaderProps>(), {
   childrenKey: 'children',
   maxLevel: Number.MAX_SAFE_INTEGER,
   load: undefined,
+  loadSearch: undefined,
   isLeaf: undefined,
   safeAreaInsetBottom: true,
 })
@@ -153,31 +167,33 @@ const tabList = computed(() => {
 
 const currentData = computed(() => {
   if (!treeData.value.length) return []
-  let currentData = treeData.value
+  if (typeof props.loadSearch === 'undefined' && searchText.value) return flattenTreeData.value
+  let data = treeData.value
   for (let i = 1; i <= tabCurrent.value; i++) {
-    currentData = currentData[currentIndexs.value[i - 1]][props.childrenKey] || []
+    data = data[currentIndexs.value[i - 1]][props.childrenKey] || []
   }
-  return currentData
+  return data
 })
 
-// const flattenTreeData = computed(() => {
-//   const result: CascaderOption[] = []
-//   const loop = (list: CascaderOption[], paths: string[] = []) => {
-//     list.forEach((item) => {
-//       const newItem = {
-//         label: item[props.labelKey],
-//         value: item[props.valueKey],
-//         paths: paths.concat(item[props.valueKey]),
-//       }
-//       result.push(newItem)
-//       if (item[props.childrenKey]?.length) {
-//         loop(item[props.childrenKey], newItem.paths)
-//       }
-//     })
-//   }
-//   loop(treeData.value)
-//   return result
-// })
+const flattenTreeData = computed<SearchNode[]>(() => {
+  const result: SearchNode[] = []
+  const loop = (list: CascaderOption[], prefixLabel = '', paths: number[] = []) => {
+    list.forEach((item, index) => {
+      const newItem = {
+        label: `${prefixLabel}${prefixLabel ? '/' : ''}${item[props.labelKey]}`,
+        paths: paths.concat(index),
+        _isSearch: true,
+      }
+      if (item[props.childrenKey]?.length) {
+        loop(item[props.childrenKey], newItem.label, newItem.paths)
+      } else {
+        newItem.label.includes(searchText.value) && result.push(newItem)
+      }
+    })
+  }
+  loop(treeData.value)
+  return result
+})
 
 watch(show, async (newVal, oldVal) => {
   if (newVal !== oldVal && newVal) {
@@ -219,7 +235,8 @@ const onScroll = (e: any) => {
   oldScrollTop.value = e.detail.scrollTop
 }
 
-const getNodeIsLeaf = (item: CascaderOption): boolean => {
+// 判断是否叶子节点
+const isLeafNode = (item: CascaderOption): boolean => {
   if (typeof props.isLeaf === 'string') {
     return !!item[props.isLeaf]
   }
@@ -229,7 +246,14 @@ const getNodeIsLeaf = (item: CascaderOption): boolean => {
   return !item[props.childrenKey]?.length
 }
 
-const onSelect = async (valueIndex: number) => {
+const onSearch = () => {}
+
+const onSelect = async (item: CascaderOption, valueIndex: number) => {
+  if (item._isSearch) {
+    currentIndexs.value = item.paths
+    onOk()
+    return
+  }
   const newIndexs = [...currentIndexs.value]
   newIndexs.splice(tabCurrent.value, currentIndexs.value.length, valueIndex)
   currentIndexs.value = newIndexs
@@ -240,7 +264,7 @@ const onSelect = async (valueIndex: number) => {
     return
   }
   // 根据有无子节点判断
-  if (getNodeIsLeaf(currentNode)) {
+  if (isLeafNode(currentNode)) {
     if (typeof props.load === 'function') {
       getData(tabCurrent.value + 1, currentNode).then((res) => {
         currentNode[props.childrenKey] = res
@@ -252,7 +276,7 @@ const onSelect = async (valueIndex: number) => {
   }
   tabCurrent.value += 1
   scrollTop.value = oldScrollTop.value
-  nextTick(function () {
+  nextTick(() => {
     scrollTop.value = 0
   })
 }
