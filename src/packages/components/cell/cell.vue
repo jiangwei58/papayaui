@@ -10,7 +10,7 @@
     ]"
     class="flex"
     hover-class="clickable-hover"
-    @click="emit('click')"
+    @click="onClick"
   >
     <Icon v-if="icon" :name="icon" block class="mr-4" />
     <view
@@ -52,7 +52,7 @@ export interface CellProps {
   /** 标题 */
   title?: string
   /** 内容 */
-  value?: string
+  value?: string | number | boolean
   /** 标题宽度 */
   titleWidth?: string
   /** 是否显示箭头，为true同时有点击反馈 */
@@ -71,7 +71,7 @@ export interface CellProps {
   border?: boolean
 }
 
-withDefaults(defineProps<CellProps>(), {
+const props = withDefaults(defineProps<CellProps>(), {
   title: '',
   value: '',
   titleWidth: undefined,
@@ -82,8 +82,13 @@ withDefaults(defineProps<CellProps>(), {
 })
 
 const emit = defineEmits<{
-  (event: 'click'): void
+  (event: 'click', value: MouseEvent): void
 }>()
+
+const onClick = (event: MouseEvent) => {
+  if (!props.isLink) return
+  emit('click', event)
+}
 </script>
 
 <style lang="scss" scoped>
