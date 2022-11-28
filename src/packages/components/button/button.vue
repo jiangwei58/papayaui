@@ -114,6 +114,7 @@ const customStyle = computed<StyleValue>(() => {
 })
 
 const onClick = async (event: MouseEvent) => {
+  if (localLoading.value) return
   if (typeof props.syncClick === 'function') {
     const result = props.syncClick()
     if (result instanceof Promise) {
