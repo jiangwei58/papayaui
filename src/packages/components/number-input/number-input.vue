@@ -12,6 +12,7 @@
     @input="onInput"
     @blur="onBlur"
     @focus="onFocus"
+    @confirm="onConfirm"
   />
 </template>
 
@@ -59,6 +60,11 @@ const emit = defineEmits<{
     event: 'focus',
     value: EventDetail<{ value: NumberInputProps['modelValue']; height: number }>,
   ): void
+  (
+    event: 'blur',
+    value: EventDetail<{ value: NumberInputProps['modelValue']; cursor: number }>,
+  ): void
+  (event: 'confirm', value: EventDetail<{ value: NumberInputProps['modelValue'] }>): void
 }>()
 
 const minAndMax = (val: number) => {
@@ -87,7 +93,7 @@ const onInput = (e: any) => {
 }
 
 const onBlur = async (e: any) => {
-  let val = (e as EventDetail<{ value: string }>).detail.value
+  let val = (e as EventDetail<{ value: string; cursor: number }>).detail.value
   if (val) {
     const numberVal = parseFloat(val)
     const result = minAndMax(numberVal)
@@ -99,6 +105,7 @@ const onBlur = async (e: any) => {
     val = result.toFixed(props.precision)
   }
   emit('update:modelValue', val)
+  emit('blur', e)
 }
 
 const onFocus = (e: FocusEvent) => {
@@ -106,6 +113,10 @@ const onFocus = (e: FocusEvent) => {
     'focus',
     e as unknown as EventDetail<{ value: NumberInputProps['modelValue']; height: number }>,
   )
+}
+
+const onConfirm = (e: any) => {
+  emit('confirm', e)
 }
 </script>
 

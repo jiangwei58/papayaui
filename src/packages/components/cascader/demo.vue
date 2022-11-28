@@ -10,17 +10,25 @@
       />
     </wei-cell-group>
 
-    <wei-cascader v-model:show="visible" v-model="value" :data="syncTreeData" />
-    <wei-cascader v-model:show="asyncVisible" v-model="asyncValue" :max-level="3" :load="onLoad" />
+    <wei-cascader v-model:show="visible" v-model="value" :data="syncTreeData" show-search />
+    <wei-cascader v-model:show="asyncVisible" v-model="asyncValue" :load="onLoad" />
   </DocDemoBlock>
 
   <DocDemoBlock title="搜索">
     <wei-cell-group inset>
       <wei-cell
-        title="搜索数据"
+        title="本地搜索"
         :value="searchValue.join('/')"
         is-link
         @click="onSearchChangeVisible"
+      />
+    </wei-cell-group>
+    <wei-cell-group inset>
+      <wei-cell
+        title="远程搜索"
+        :value="searchValue.join('/')"
+        is-link
+        @click="onSearchChangeVisible(true)"
       />
     </wei-cell-group>
 
@@ -28,8 +36,8 @@
       v-model:show="searchVisible"
       v-model="searchValue"
       show-search
-      :max-level="3"
       :load="onLoad"
+      :load-search="searchRemote ? onLoadSearch : undefined"
     />
   </DocDemoBlock>
 </template>
@@ -39,7 +47,7 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 import { ref } from 'vue'
 import { CascaderNode } from './cascader.vue'
 
-type NodeItem = { label: string; value: string; children: NodeItem[] }
+type NodeItem = { label: string; value: string; leaf?: boolean; children?: NodeItem[] }
 
 const visible = ref<boolean>(false)
 const value = ref<string[]>([])
@@ -67,7 +75,7 @@ const onLoad = (node: CascaderNode<NodeItem>) => {
       resolve(
         new Array(20).fill(0).map((_item, index) => {
           const path = node.props ? `${node.props.value}-${index}` : index.toString()
-          return { label: `节点: ${path}`, value: path } as NodeItem
+          return { label: `节点${path}`, value: path, leaf: node.level === 2 } as NodeItem
         }),
       )
     }, 300)
@@ -76,9 +84,19 @@ const onLoad = (node: CascaderNode<NodeItem>) => {
 
 const searchVisible = ref<boolean>(false)
 const searchValue = ref<string[]>([])
+const searchRemote = ref<boolean>(false)
 
-const onSearchChangeVisible = () => {
+const onSearchChangeVisible = (remote = false) => {
+  searchRemote.value = remote
   searchVisible.value = !searchVisible.value
+}
+
+const onLoadSearch = (searchText: string) => {
+  return new Promise<NodeItem[]>((resolve) => {
+    setTimeout(() => {
+      resolve([{ label: `搜索结果${searchText}`, value: '0' }])
+    }, 1000)
+  })
 }
 </script>
 

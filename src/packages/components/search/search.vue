@@ -7,7 +7,7 @@
       :placeholder="placeholder"
       value-align="left"
       center
-      @update:model-value="emit('update:modelValue', $event)"
+      @update:model-value="onUpdate"
       @confirm="emit('confirm', $event)"
     />
   </view>
@@ -31,8 +31,14 @@ withDefaults(defineProps<SearchProps>(), {
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
+  (event: 'change', value: string): void
   (event: 'confirm', value: EventDetail<{ value: string }>): void
 }>()
+
+const onUpdate = (value: string) => {
+  emit('update:modelValue', value)
+  emit('change', value)
+}
 </script>
 
 <style lang="scss" scoped>
