@@ -22,8 +22,6 @@
         is-link
         @click="onSearchChangeVisible"
       />
-    </wei-cell-group>
-    <wei-cell-group inset>
       <wei-cell
         title="远程搜索"
         :value="searchValue.join('/')"

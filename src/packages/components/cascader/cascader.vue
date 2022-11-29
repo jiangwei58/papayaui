@@ -311,7 +311,7 @@ const onSelect = async (_item: CascaderOption, valueIndex: number) => {
     return
   }
   // 动态数据
-  if (typeof props.load === 'function') {
+  if (!currentNode[props.childrenKey]?.length && typeof props.load === 'function') {
     getData(tabCurrent.value + 1, currentNode).then((res) => {
       currentNode[props.childrenKey] = res
     })
