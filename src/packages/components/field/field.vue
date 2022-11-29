@@ -33,7 +33,7 @@
         :value="modelValue"
         :placeholder="placeholder"
         :placeholder-style="`color:var(--${PREFIX}-number-input-placeholder-color)`"
-        :style="{ textAlign: valueAlign, width: '100%' }"
+        :style="{ textAlign: valueAlign, width: '100%', height: getUnitValue(height) }"
         :auto-height="autoHeight"
         :maxlength="maxlength"
         :focus="focus"
@@ -54,6 +54,7 @@
 
 <script lang="ts" setup>
 import { EventDetail } from '../../types'
+import { getUnitValue } from '../../utils'
 import { computedClass, PREFIX } from '../../utils/style'
 import Cell from '../cell/cell.vue'
 import { CellProps } from '../cell/cell.vue'
@@ -96,6 +97,8 @@ export interface FieldProps
   alwaysEmbed?: boolean
   /** focus时，点击页面的时候不收起键盘 */
   holdKeyboard?: boolean
+  /** 高度（textarea生效）*/
+  height?: string
 }
 
 withDefaults(defineProps<FieldProps>(), {
@@ -108,6 +111,8 @@ withDefaults(defineProps<FieldProps>(), {
   cursor: undefined,
   selectionStart: undefined,
   selectionEnd: undefined,
+  adjustPosition: true,
+  height: '75px',
 })
 
 const emit = defineEmits<{
