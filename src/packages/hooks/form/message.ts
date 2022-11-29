@@ -17,11 +17,12 @@ export const replaceMessage = (
   message: string,
   data: Record<string, string | number | undefined> = {},
 ) => {
-  const values = message.match(/(?<=\{\{).+?(?=\}\})/g)
+  // const values = message.match(/(?<=\{\{).+?(?=\}\})/g) // safari不支持
+  const values = message.match(/\{\{.+?\}\}/g)
   values?.forEach((val) => {
-    const keyVal = data[val]
+    const keyVal = data[val.replace(/[{}]/g, '')]
     if (typeof keyVal !== 'undefined') {
-      message = message.replace(`{{${val}}}`, keyVal.toString())
+      message = message.replace(val, keyVal.toString())
     }
   })
   return message
