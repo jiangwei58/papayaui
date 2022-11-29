@@ -21,6 +21,11 @@ const props = withDefaults(defineProps<FormProps>(), {
   form: () => {},
   rules: () => ({} as FormRules<any>),
 })
+
+const emit = defineEmits<{
+  (event: 'reset'): void
+}>()
+
 const { form, rules } = toRefs(props)
 
 const formExtraData = ref<FormItemExtraParams<any>>()
@@ -58,6 +63,7 @@ const validateField = (key: string) => {
 }
 
 const reset = () => {
+  emit('reset')
   formValidate.value.clearValidate()
 }
 
