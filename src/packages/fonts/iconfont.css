@@ -1,8 +1,8 @@
 @font-face {
   font-family: "wei-iconfont"; /* Project id 3668565 */
-  src: url('iconfont.woff2?t=1668156609463') format('woff2'),
-       url('iconfont.woff?t=1668156609463') format('woff'),
-       url('iconfont.ttf?t=1668156609463') format('truetype');
+  src: url('iconfont.woff2?t=1669792630417') format('woff2'),
+       url('iconfont.woff?t=1669792630417') format('woff'),
+       url('iconfont.ttf?t=1669792630417') format('truetype');
 }
 
 .wei-iconfont {
@@ -11,6 +11,98 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.wei-icon-edit-square:before {
+  content: "\e791";
+}
+
+.wei-icon-creditcard:before {
+  content: "\e7de";
+}
+
+.wei-icon-edit:before {
+  content: "\e7e1";
+}
+
+.wei-icon-propertysafety:before {
+  content: "\e7c0";
+}
+
+.wei-icon-transaction:before {
+  content: "\e786";
+}
+
+.wei-icon-database:before {
+  content: "\e7b0";
+}
+
+.wei-icon-filedone:before {
+  content: "\e7b6";
+}
+
+.wei-icon-filesync:before {
+  content: "\e7b7";
+}
+
+.wei-icon-setting:before {
+  content: "\e78e";
+}
+
+.wei-icon-filesearch:before {
+  content: "\e7b4";
+}
+
+.wei-icon-solution:before {
+  content: "\e7b5";
+}
+
+.wei-icon-bulb-fill:before {
+  content: "\e866";
+}
+
+.wei-icon-star-fill:before {
+  content: "\e86a";
+}
+
+.wei-icon-question-circle:before {
+  content: "\e782";
+}
+
+.wei-icon-star:before {
+  content: "\e7df";
+}
+
+.wei-icon-minus:before {
+  content: "\e7fd";
+}
+
+.wei-icon-plus:before {
+  content: "\e8fe";
+}
+
+.wei-icon-message:before {
+  content: "\e78a";
+}
+
+.wei-icon-cart:before {
+  content: "\e600";
+}
+
+.wei-icon-clear:before {
+  content: "\e7fc";
+}
+
+.wei-icon-bulb:before {
+  content: "\e7c4";
+}
+
+.wei-icon-location:before {
+  content: "\e790";
+}
+
+.wei-icon-calendar:before {
+  content: "\e7d3";
 }
 
 .wei-icon-arrow-right:before {
@@ -55,6 +147,10 @@
 
 .wei-icon-delete:before {
   content: "\e7c3";
+}
+
+.wei-icon-check-circle:before {
+  content: "\e77d";
 }
 
 .wei-icon-up:before {
