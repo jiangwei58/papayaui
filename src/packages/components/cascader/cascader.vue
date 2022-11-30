@@ -97,7 +97,7 @@ export interface CascaderNode<T = any> {
 }
 
 export type CascaderOption = any
-export type CascaderValue = number | string
+export type CascaderValue = any
 
 export type SearchNode = {
   label: string

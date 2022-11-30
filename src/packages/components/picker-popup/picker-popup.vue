@@ -51,7 +51,7 @@
 
     <template v-if="safeAreaInsetBottom && multiple" #footer>
       <view class="px-26 pt-15 flex-shrink-0">
-        <ButtonComponent type="primary" @click="onOk()">确定</ButtonComponent>
+        <ButtonComponent type="primary" @click="onOk()">{{ confirmButtonText }}</ButtonComponent>
       </view>
       <SafeBottom />
     </template>
@@ -101,6 +101,8 @@ export interface PickerPopupProps {
   safeAreaInsetBottom?: boolean
   /** 每次打开重新加载数据 */
   initData?: boolean
+  /** 确认按钮的文案 */
+  confirmButtonText?: string
 }
 
 const props = withDefaults(defineProps<PickerPopupProps>(), {
@@ -116,6 +118,7 @@ const props = withDefaults(defineProps<PickerPopupProps>(), {
   remote: false,
   pagination: false,
   safeAreaInsetBottom: true,
+  confirmButtonText: '确定',
 })
 
 const emit = defineEmits<{

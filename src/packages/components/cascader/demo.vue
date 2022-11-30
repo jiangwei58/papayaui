@@ -20,7 +20,7 @@
         title="本地搜索"
         :value="searchValue.join('/')"
         is-link
-        @click="onSearchChangeVisible"
+        @click="onSearchChangeVisible()"
       />
       <wei-cell
         title="远程搜索"
