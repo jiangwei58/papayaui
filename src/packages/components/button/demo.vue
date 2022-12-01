@@ -17,14 +17,30 @@
     </DocDemoBlock>
 
     <DocDemoBlock title="圆角" card>
-      <wei-button type="primary" round>按钮</wei-button>
-      <wei-button type="primary" round="20">按钮</wei-button>
+      <wei-button type="primary" round>圆角按钮</wei-button>
+      <wei-button type="primary" round="20">圆角按钮</wei-button>
     </DocDemoBlock>
 
     <DocDemoBlock title="镂空按钮" card>
-      <wei-button type="primary" plain>按钮</wei-button>
-      <wei-button type="warning" plain>按钮</wei-button>
-      <wei-button type="danger" plain>按钮</wei-button>
+      <wei-button type="primary" plain>镂空按钮</wei-button>
+      <wei-button type="warning" plain>镂空按钮</wei-button>
+      <wei-button type="danger" plain>镂空按钮</wei-button>
+    </DocDemoBlock>
+
+    <DocDemoBlock title="加载状态" card>
+      <wei-button type="primary" loading>加载状态</wei-button>
+    </DocDemoBlock>
+
+    <DocDemoBlock title="图标" card>
+      <wei-button type="primary" icon="edit">图标按钮</wei-button>
+    </DocDemoBlock>
+
+    <DocDemoBlock title="块级元素" card>
+      <wei-button type="primary" block>块级元素</wei-button>
+    </DocDemoBlock>
+
+    <DocDemoBlock title="点击加载（等待promise）" card>
+      <wei-button type="primary" :sync-click="onClick">点击加载</wei-button>
     </DocDemoBlock>
   </view>
   <wei-safe-bottom />
@@ -32,12 +48,20 @@
 
 <script lang="ts" setup>
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
+
+const onClick = () => {
+  return new Promise<void>((resolve) => {
+    setTimeout(() => {
+      resolve()
+    }, 2000)
+  })
+}
 </script>
 
 <style lang="scss">
 .demo-button {
   button {
-    margin-bottom: 10px;
+    margin: 0 16px 16px 0;
   }
 }
 </style>

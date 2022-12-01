@@ -15,7 +15,25 @@
     @chooseavatar="emit('chooseavatar', $event)"
     @tap="onClick"
   >
-    <slot />
+    <view class="height-full flex items-center justify-center">
+      <Loadmore
+        v-if="localLoading"
+        :class="computedClass('button-icon')"
+        status="loading"
+        color="inherit"
+        icon-size="1.2em"
+        :show-text="false"
+      />
+      <Icon
+        v-if="icon && !localLoading"
+        :class="computedClass('button-icon')"
+        :name="icon"
+        size="1.2em"
+        color="inherit"
+        style="font-size: inherit"
+      />
+      <slot />
+    </view>
   </button>
 </template>
 
@@ -23,6 +41,8 @@
 import { getUnitValue } from '../../utils/common'
 import { computed, ref, StyleValue } from 'vue'
 import { computedClass } from '../../utils/style'
+import Icon from '../icon/icon.vue'
+import Loadmore from '../loadmore/loadmore.vue'
 
 export interface ButtonProps {
   /** 按钮类型 */
@@ -33,12 +53,18 @@ export interface ButtonProps {
   height?: string
   /** 字体大小 */
   fontSize?: string
+  /** 是否为块级元素 */
+  block?: boolean
+  /** 是否显示为加载状态 */
+  loading?: boolean
   /** 是否禁用 */
   disabled?: boolean
   /** 圆角大小, 值为true时半圆角 */
   round?: true | string
   /** 是否镂空样式 */
   plain?: boolean
+  /** 图标 */
+  icon?: string
   /** 同步点击（主要用于防止异步事件多次触发） */
   syncClick?: (...args: any[]) => any | Promise<any>
   /** 微信开放能力[文档](https://developers.weixin.qq.com/miniprogram/dev/component/button.html) */
@@ -75,10 +101,11 @@ export interface ButtonProps {
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   type: 'primary',
-  width: '100%',
+  width: 'auto',
   height: '42px',
-  fontSize: '16px',
-  round: '4px',
+  fontSize: '14px',
+  round: '3px',
+  icon: undefined,
   syncClick: undefined,
   openType: undefined,
   hoverStartTime: undefined,
@@ -102,25 +129,27 @@ const emit = defineEmits<{
   (event: 'chooseavatar', res: any): void
 }>()
 
-const localLoading = ref<boolean>()
+const clickLoading = ref<boolean>()
+const localLoading = computed(() => props.loading || clickLoading.value)
 
 const customStyle = computed<StyleValue>(() => {
   return {
-    width: getUnitValue(props.width),
-    lineHeight: getUnitValue(props.height),
+    display: props.block ? 'block' : 'inline-block',
+    width: props.block ? '100%' : getUnitValue(props.width),
+    height: getUnitValue(props.height),
     fontSize: getUnitValue(props.fontSize),
     borderRadius: props.round === true ? getUnitValue(props.height) : getUnitValue(props.round),
   }
 })
 
 const onClick = async (event: MouseEvent) => {
-  if (localLoading.value) return
+  if (clickLoading.value) return
   if (typeof props.syncClick === 'function') {
     const result = props.syncClick()
     if (result instanceof Promise) {
-      localLoading.value = true
+      clickLoading.value = true
       await result.finally(() => {
-        localLoading.value = false
+        clickLoading.value = false
       })
     }
   } else {
@@ -150,7 +179,10 @@ const onClick = async (event: MouseEvent) => {
     content: ' ';
   }
   &::after {
-    border: 0;
+    border: none;
+  }
+  .#{$prefix}-button-icon {
+    margin-right: 4px;
   }
   &.#{$prefix}-button--hover {
     &::before {

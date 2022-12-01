@@ -2,23 +2,23 @@
   <view :class="computedClass('loadmore')">
     <view
       v-if="status === 'loading'"
-      :style="{ width: iconSize + 'px', height: iconSize + 'px' }"
+      :style="{ width: getUnitValue(iconSize), height: getUnitValue(iconSize) }"
       class="loadmore_img loadmore_img_weixin"
     >
       <view
         class="loadmore_img-icon"
-        :style="{ borderTopColor: color, borderTopWidth: iconSize / 12 }"
+        :style="{ borderTopColor: color, borderTopWidth: 20 / 12 }"
       ></view>
       <view
         class="loadmore_img-icon"
-        :style="{ borderTopColor: color, borderTopWidth: iconSize / 12 }"
+        :style="{ borderTopColor: color, borderTopWidth: 20 / 12 }"
       ></view>
       <view
         class="loadmore_img-icon"
-        :style="{ borderTopColor: color, borderTopWidth: iconSize / 12 }"
+        :style="{ borderTopColor: color, borderTopWidth: 20 / 12 }"
       ></view>
     </view>
-    <text class="loadmore_text" :style="{ color: textColor }">
+    <text v-if="showText" class="loadmore_text" :style="{ color: textColor }">
       {{
         status === 'loadmore'
           ? localConfig.loadmore
@@ -32,6 +32,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
+import { getUnitValue } from '../../utils'
 import { computedClass, PREFIX } from '../../utils/style'
 
 export interface LoadStatus {
@@ -50,7 +51,9 @@ export interface LoadmoreProps {
   /** 文字颜色 */
   textColor?: string
   /** 加载图标大小 */
-  iconSize?: number
+  iconSize?: string
+  /** 显示文字 */
+  showText?: boolean
 }
 
 const props = withDefaults(defineProps<LoadmoreProps>(), {
@@ -58,7 +61,8 @@ const props = withDefaults(defineProps<LoadmoreProps>(), {
   status: 'loadmore',
   color: `var(--${PREFIX}-color-primary)`,
   textColor: '#646566',
-  iconSize: 20,
+  iconSize: '20px',
+  showText: true,
 })
 
 const localConfig = computed<LoadStatus>(() => {
