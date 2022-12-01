@@ -9,6 +9,7 @@
     :disabled="disabled"
     :focus="focus"
     :auto-blur="autoBlur"
+    :adjust-position="adjustPosition"
     @input="onInput"
     @blur="onBlur"
     @focus="onFocus"
@@ -41,6 +42,8 @@ export interface NumberInputProps {
   focus?: boolean
   /** 键盘收起时，是否自动失去焦点 */
   autoBlur?: boolean
+  /** 键盘弹起时，是否自动上推页面 */
+  adjustPosition?: boolean
 }
 
 const props = withDefaults(defineProps<NumberInputProps>(), {
