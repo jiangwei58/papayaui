@@ -33,6 +33,8 @@
 
     <DocDemoBlock title="图标" card>
       <wei-button type="primary" icon="edit">图标按钮</wei-button>
+      <wei-button type="primary" icon="edit"></wei-button>
+      <wei-button type="primary" icon="edit" width="42px" height="42px" round></wei-button>
     </DocDemoBlock>
 
     <DocDemoBlock title="块级元素" card>

@@ -18,7 +18,7 @@
     <view class="height-full flex items-center justify-center">
       <Loadmore
         v-if="localLoading"
-        :class="computedClass('button-icon')"
+        class="mr-4"
         status="loading"
         color="inherit"
         icon-size="1.2em"
@@ -26,7 +26,7 @@
       />
       <Icon
         v-if="icon && !localLoading"
-        :class="computedClass('button-icon')"
+        :class="{ 'mr-4': $slots.default }"
         :name="icon"
         size="1.2em"
         color="inherit"
@@ -180,9 +180,6 @@ const onClick = async (event: MouseEvent) => {
   }
   &::after {
     border: none;
-  }
-  .#{$prefix}-button-icon {
-    margin-right: 4px;
   }
   &.#{$prefix}-button--hover {
     &::before {
