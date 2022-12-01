@@ -1,8 +1,8 @@
 @font-face {
   font-family: "wei-iconfont"; /* Project id 3668565 */
-  src: url('iconfont.woff2?t=1669792630417') format('woff2'),
-       url('iconfont.woff?t=1669792630417') format('woff'),
-       url('iconfont.ttf?t=1669792630417') format('truetype');
+  src: url('iconfont.woff2?t=1669901784366') format('woff2'),
+       url('iconfont.woff?t=1669901784366') format('woff'),
+       url('iconfont.ttf?t=1669901784366') format('truetype');
 }
 
 .wei-iconfont {
@@ -11,6 +11,34 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.wei-icon-save:before {
+  content: "\e792";
+}
+
+.wei-icon-close-square:before {
+  content: "\e793";
+}
+
+.wei-icon-detail:before {
+  content: "\e794";
+}
+
+.wei-icon-check-square:before {
+  content: "\e7a8";
+}
+
+.wei-icon-file-text:before {
+  content: "\e7b9";
+}
+
+.wei-icon-download:before {
+  content: "\e7ef";
+}
+
+.wei-icon-check-circle-fill:before {
+  content: "\e844";
 }
 
 .wei-icon-edit-square:before {
