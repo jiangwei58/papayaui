@@ -29,7 +29,6 @@ defineProps<OwnProps>()
   }
   .doc-demo-block__card {
     margin: 12px 12px 0;
-    overflow: hidden;
   }
 }
 </style>

@@ -25,6 +25,7 @@ import Tooltip from './components/tooltip/tooltip.vue'
 import Watermark from './components/watermark/watermark.vue'
 import Popup from './components/popup/popup.vue'
 import Section from './components/section/section.vue'
+import Badge from './components/badge/badge.vue'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
@@ -55,5 +56,6 @@ declare module '@vue/runtime-core' {
     'wei-watermark': typeof Watermark
     'wei-popup': typeof Popup
     'wei-section': typeof Section
+    'wei-badge': typeof Badge
   }
 }

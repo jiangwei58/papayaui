@@ -125,6 +125,13 @@
       "type": "nav"
     },
     {
+      "path": "packages/components/badge/demo",
+      "style": {
+        "navigationBarTitleText": "Badge 徽标"
+      },
+      "type": "show"
+    },
+    {
       "path": "packages/components/picker-popup/demo",
       "style": {
         "navigationBarTitleText": "PickerPopup 选择弹窗"
