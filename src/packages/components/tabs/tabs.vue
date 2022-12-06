@@ -33,8 +33,10 @@ import { getCurrentInstance, nextTick, ref, toRefs, watch } from 'vue'
 
 export type TabItem = any
 
+export type TabItemValue = number | string
+
 export interface TabsProps {
-  modelValue?: number
+  modelValue?: TabItemValue
   /** 标签页列表数据 */
   tabs: TabItem[]
   /** 标题对应字段名 */
@@ -56,7 +58,7 @@ const props = withDefaults(defineProps<TabsProps>(), {
 })
 
 const emit = defineEmits<{
-  (event: 'update:modelValue', current: number): void
+  (event: 'update:modelValue', current: TabItemValue): void
   (event: 'change', item: TabItem): void
 }>()
 
@@ -71,7 +73,7 @@ watch(
   [tabs, modelValue],
   async () => {
     await nextTick()
-    getTabItemWidth()
+    updateTabItemWidth()
   },
   {
     immediate: true,
@@ -85,7 +87,7 @@ const isActive = (item: TabItem, index: number) => {
 }
 
 // 获取左移动位置
-const getTabItemWidth = () => {
+const updateTabItemWidth = () => {
   const query = uni.createSelectorQuery().in(internalInstance)
   let containerWidth = 0
   // 获取容器的宽度
@@ -135,6 +137,10 @@ const onChangeTab = (item: TabItem, index: number) => {
   )
   emit('change', item)
 }
+
+defineExpose({
+  update: updateTabItemWidth,
+})
 </script>
 
 <style lang="scss" scoped>

@@ -173,7 +173,6 @@ const onClick = async (event: MouseEvent) => {
     border: inherit;
     border-color: #000;
     border-radius: inherit;
-    -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     opacity: 0;
     content: ' ';

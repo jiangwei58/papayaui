@@ -106,7 +106,7 @@ withDefaults(defineProps<FieldProps>(), {
   type: 'text',
   placeholder: '请输入',
   valueAlign: 'right',
-  maxlength: undefined,
+  maxlength: -1,
   confirmType: undefined,
   cursor: undefined,
   selectionStart: undefined,
