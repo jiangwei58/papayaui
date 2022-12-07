@@ -1,30 +1,30 @@
 <template>
   <DocDemoBlock title="基础用法">
     <wei-cell-group inset>
-      <wei-cell title="静态数据" :value="value.join('/')" is-link @click="onChangeVisible" />
+      <wei-cell title="静态数据" :value="value.toString()" is-link @click="onChangeVisible" />
       <wei-cell
         title="动态数据"
-        :value="asyncValue.join('/')"
+        :value="asyncValue.toString()"
         is-link
         @click="onAsyncChangeVisible"
       />
     </wei-cell-group>
 
-    <wei-cascader v-model:show="visible" v-model="value" :data="syncTreeData" show-search />
-    <wei-cascader v-model:show="asyncVisible" v-model="asyncValue" :load="onLoad" />
+    <wei-cascader v-model:show="visible" v-model="value" :options="syncTreeData" show-search />
+    <wei-cascader v-model:show="asyncVisible" v-model="asyncValue" :lazy-load="onLoad" />
   </DocDemoBlock>
 
   <DocDemoBlock title="搜索">
     <wei-cell-group inset>
       <wei-cell
         title="本地搜索"
-        :value="searchValue.join('/')"
+        :value="searchValue.toString()"
         is-link
         @click="onSearchChangeVisible()"
       />
       <wei-cell
         title="远程搜索"
-        :value="searchValue.join('/')"
+        :value="searchValue.toString()"
         is-link
         @click="onSearchChangeVisible(true)"
       />
@@ -34,15 +34,35 @@
       v-model:show="searchVisible"
       v-model="searchValue"
       show-search
-      :load="onLoad"
-      :load-search="searchRemote ? onLoadSearch : undefined"
+      :lazy-load="onLoad"
+      :lazy-search="searchRemote ? onLoadSearch : undefined"
+    />
+  </DocDemoBlock>
+
+  <DocDemoBlock title="多选">
+    <wei-cell-group inset>
+      <wei-cell
+        title="多选"
+        :value="multipleValue.join('/')"
+        is-link
+        @click="onMultipleChangeVisible()"
+      />
+    </wei-cell-group>
+
+    <wei-cascader
+      v-model:show="multipleVisible"
+      v-model="multipleValue"
+      :lazy-load="onLoad"
+      multiple
+      show-search
+      :lazy-search="onLoadSearch"
     />
   </DocDemoBlock>
 </template>
 
 <script lang="ts" setup>
-import DocDemoBlock from '../../doc/doc-demo-block.vue'
 import { ref } from 'vue'
+import DocDemoBlock from '../../doc/doc-demo-block.vue'
 import { CascaderNode } from './cascader.vue'
 
 type NodeItem = { label: string; value: string; leaf?: boolean; children?: NodeItem[] }
@@ -50,11 +70,18 @@ type NodeItem = { label: string; value: string; leaf?: boolean; children?: NodeI
 const visible = ref<boolean>(false)
 const value = ref<string[]>([])
 
-const syncTreeData = [
-  { label: '1', value: '1', children: [{ label: '1-1', value: '1-1' }] },
-  { label: '2', value: '2', children: [{ label: '2-2', value: '2-2' }] },
-  { label: '3', value: '3', children: [] },
-]
+const nodeCount = 20
+const syncTreeData = new Array(nodeCount).fill(0).map((_item, index) => {
+  const key: string = index.toString()
+  const children =
+    index !== nodeCount - 1
+      ? new Array(nodeCount).fill(0).map((_child, childIndex) => {
+          const childKey = `${key}-${childIndex}`
+          return { label: childKey, value: childKey }
+        })
+      : []
+  return { label: key, value: key, children }
+})
 
 const onChangeVisible = () => {
   visible.value = !visible.value
@@ -92,9 +119,16 @@ const onSearchChangeVisible = (remote = false) => {
 const onLoadSearch = (searchText: string) => {
   return new Promise<NodeItem[]>((resolve) => {
     setTimeout(() => {
-      resolve([{ label: `搜索结果${searchText}`, value: '0' }])
+      resolve([{ label: `搜索结果${searchText}`, value: '000000' }])
     }, 1000)
   })
+}
+
+const multipleVisible = ref<boolean>(false)
+const multipleValue = ref<string[]>([])
+
+const onMultipleChangeVisible = () => {
+  multipleVisible.value = !multipleVisible.value
 }
 </script>
 

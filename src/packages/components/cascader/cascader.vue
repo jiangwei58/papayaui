@@ -6,17 +6,16 @@
     :safe-area-inset-bottom="false"
     @update:show="emit('update:show', $event as boolean)"
     @close="onClose"
-    @confirm="onOk"
   >
-    <view class="content flex flex-col">
+    <view :class="computedClass('cascader-content')" class="flex flex-col">
       <Search
         v-if="showSearch"
         v-model="searchText"
-        class="search flex-shrink-0"
-        @confirm="onSearchChange"
+        :class="computedClass('cascader-search')"
+        class="flex-shrink-0"
       />
       <view v-if="show" class="tab flex-shrink-0">
-        <Tabs v-model="tabCurrent" :tabs="tabList" label-key="name" scrollable shrink />
+        <Tabs v-model="tabActive" :tabs="tabList" label-key="name" scrollable shrink />
       </view>
       <scroll-view
         scroll-y
@@ -25,23 +24,19 @@
         style="overflow: hidden"
         @scroll="onScroll"
       >
-        <view
+        <ListItem
           v-for="(item, index) in currentData"
-          :key="index"
-          class="list-item flex items-center justify-between px-32 py-20 text-28 leading-40"
-          :class="{ 'color-primary': index === currentIndexs[tabCurrent] }"
-          hover-class="bg-hover"
-          @tap="onSelect(item, index)"
+          :key="`${tabActive}-${index}`"
+          :selected="
+            tabActive < tabList.length - 1
+              ? index === currentIndexs[tabActive]
+              : isSelected(item[_fieldNames.value])
+          "
+          @select="onSelect(item, index)"
         >
           <slot v-if="$slots.default" :item="item" />
-          <text v-else>{{ item[labelKey] }}</text>
-          <Icon
-            v-if="index === currentIndexs[tabCurrent]"
-            name="success"
-            :color="`var(--${PREFIX}-color-primary)`"
-            block
-          />
-        </view>
+          <text v-else>{{ item[_fieldNames.label] }}</text>
+        </ListItem>
         <view v-if="loading" class="height-full flex flex-col items-center justify-center">
           <loadmore :status="LoadStatusEnum.LOADING" />
         </view>
@@ -51,45 +46,60 @@
         >
           无数据
         </view>
-        <SafeBottom v-if="safeAreaInsetBottom" />
+        <SafeBottom v-if="safeAreaInsetBottom && !multiple" />
       </scroll-view>
-      <!-- 搜索结果 -->
-      <scroll-view v-if="!!searchText" scroll-y class="search-view">
-        <view
-          v-for="(item, index) in searchData"
-          :key="index"
-          class="list-item flex items-center justify-between px-32 py-20 text-28 leading-40"
-          hover-class="bg-hover"
-          @tap="onSearchSelect(item)"
-        >
-          <text>{{ item.label }}</text>
-        </view>
-        <view v-if="searchLoading" class="height-full flex flex-col items-center justify-center">
-          <loadmore :status="LoadStatusEnum.LOADING" />
-        </view>
-        <view
-          v-if="!searchData.length && !searchLoading"
-          class="height-full flex flex-col items-center justify-center text-28 text-black-2"
-        >
-          无数据
-        </view>
-        <SafeBottom v-if="safeAreaInsetBottom" />
-      </scroll-view>
+      <SearchView
+        ref="searchViewRef"
+        :show="localState.isSearch"
+        :options="treeData"
+        :field-names="_fieldNames"
+        :search-text="searchText"
+        :lazy-search="lazySearch"
+        :is-selected="isSelected"
+        :safe-area-inset-bottom="safeAreaInsetBottom && !multiple"
+        @select="onSelectSearch"
+      />
     </view>
+    <template v-if="safeAreaInsetBottom && multiple" #footer>
+      <view class="px-26 pt-15 flex flex-shrink-0">
+        <ButtonComponent type="default" block style="width: 30%" @click="onReset()">
+          {{ resetButtonText }}
+        </ButtonComponent>
+        <ButtonComponent
+          class="ml-16"
+          type="primary"
+          block
+          :disabled="!selectedValues.length"
+          style="width: 70%"
+          @click="onConfirm()"
+        >
+          {{
+            confirmButtonText ?? selectedValues.length
+              ? `已选中${selectedValues.length}个`
+              : '请选择'
+          }}
+        </ButtonComponent>
+      </view>
+      <SafeBottom />
+    </template>
   </BottomPopup>
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, ref, watch, toRefs } from 'vue'
+import { computed, nextTick, ref, toRaw, toRefs, watch } from 'vue'
 import { LoadStatusEnum } from '../../core/useList'
+import useTree, { UseTreeFieldNames } from '../../core/useTree'
 import { EventDetail } from '../../types'
-import { PREFIX } from '../../utils/style'
+import { computedClass } from '../../utils/style'
 import BottomPopup from '../bottom-popup/bottom-popup.vue'
-import Icon from '../icon/icon.vue'
+import ButtonComponent from '../button/button.vue'
 import Loadmore from '../loadmore/loadmore.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import Search from '../search/search.vue'
 import Tabs from '../tabs/tabs.vue'
+import ListItem from './list-item.vue'
+// import ListView from './list-view.vue'
+import SearchView, { SearchNode } from './search-view.vue'
 
 export interface CascaderNode<T = any> {
   props: T
@@ -98,11 +108,6 @@ export interface CascaderNode<T = any> {
 
 export type CascaderOption = any
 export type CascaderValue = any
-
-export type SearchNode = {
-  label: string
-  paths: number[]
-}
 
 export interface CascaderProps {
   /** 值 */
@@ -113,26 +118,26 @@ export interface CascaderProps {
   height?: string
   /** 标题 */
   title?: string
-  /** 树形数据 */
-  data?: CascaderOption[]
-  /** 数据标题的字段名 */
-  labelKey?: string
-  /** 数据值的字段名 */
-  valueKey?: string
-  /** 数据子级节点的字段名 */
-  childrenKey?: string
-  /** 叶子节点 */
-  leaf?: string | ((item: CascaderOption) => boolean)
+  /** 可选项数据源 */
+  options?: CascaderOption[]
+  /** 自定义 options 结构中的字段 */
+  fieldNames?: Partial<UseTreeFieldNames<CascaderOption>>
   /** 最大层级，把哪一层级作为叶子节点 */
   maxLevel?: number
+  /** 是否多选 */
+  multiple?: boolean
   /** 是否显示搜索 */
   showSearch?: boolean
   /** 动态获取下一级节点数据 */
-  load?: (node: CascaderNode) => CascaderOption[] | Promise<CascaderOption[]>
+  lazyLoad?: (node: CascaderNode) => CascaderOption[] | Promise<CascaderOption[]>
   /** 远程搜索 */
-  loadSearch?: (searchText: string) => CascaderOption[] | Promise<CascaderOption[]>
+  lazySearch?: (searchText: string) => CascaderOption[] | Promise<CascaderOption[]>
   /** 底部安全距离 */
   safeAreaInsetBottom?: boolean
+  /** 确定按钮文案，多选时默认数量显示的文案也要自己定义 */
+  confirmButtonText?: string
+  /** 重置按钮文案 */
+  resetButtonText?: string
 }
 
 const props = withDefaults(defineProps<CascaderProps>(), {
@@ -140,71 +145,88 @@ const props = withDefaults(defineProps<CascaderProps>(), {
   show: false,
   height: undefined,
   title: '',
-  data: undefined,
-  labelKey: 'label',
-  valueKey: 'value',
-  childrenKey: 'children',
+  options: undefined,
+  fieldNames: undefined,
   maxLevel: Number.MAX_SAFE_INTEGER,
-  load: undefined,
-  loadSearch: undefined,
-  leaf: undefined,
+  multiple: false,
+  lazyLoad: undefined,
+  lazySearch: undefined,
   safeAreaInsetBottom: true,
+  confirmButtonText: undefined,
+  resetButtonText: '重置',
 })
 
 const emit = defineEmits<{
   (event: 'update:show', show: boolean): void
   (event: 'update:modelValue', value: CascaderValue[]): void
-  (event: 'change', value: CascaderValue[], items: CascaderOption[], tabIndex: number): void
+  (
+    event: 'change',
+    value: CascaderValue[],
+    items: CascaderOption[],
+    extra: { tabIndex: number; isSearch: boolean },
+  ): void
 }>()
 
-const { show, data } = toRefs(props)
+const { show, options, fieldNames, multiple } = toRefs(props)
 
-const tabCurrent = ref<number>(0)
-const oldScrollTop = ref<number>(0)
+const {
+  treeData,
+  fieldNames: _fieldNames,
+  selectedMap,
+  selectedValues,
+  getChildren,
+  setChildren,
+  isLeafNode,
+  setSelect,
+  clearSelect,
+  isSelected,
+} = useTree<CascaderOption, CascaderValue>({
+  options,
+  fieldNames,
+  multiple,
+})
+const tabActive = ref<number>(0)
+const tabMaxLevel = ref<number>(0)
+let oldScrollTop = 0
 const scrollTop = ref<number>(0)
 
-const treeData = ref<CascaderOption[]>([])
 const loading = ref<boolean>(false)
 const currentIndexs = ref<number[]>([])
-const treeMaxLevel = ref<number>(props.maxLevel)
 
+const searchViewRef = ref<InstanceType<typeof SearchView>>()
 const searchText = ref<string>('')
-const searchRemoteData = ref<CascaderOption[]>([])
-const searchLoading = ref<boolean>(false)
+
+const localState = computed(() => {
+  return {
+    isLazyLoad: typeof props.lazyLoad === 'function',
+    isLazySearch: typeof props.lazySearch === 'function',
+    isSearch: !!searchText.value,
+  }
+})
 
 const tabList = computed(() => {
+  if (searchText.value) return []
   if (!treeData.value.length || !currentIndexs.value.length) return [{ name: '请选择' }]
   const tabList = []
   let currentData = treeData.value
-  for (let i = 0; i < currentIndexs.value.length; i++) {
+  const maxLength = Math.max(tabActive.value + 1, tabMaxLevel.value + 1, currentIndexs.value.length)
+  for (let i = 0; i < maxLength; i++) {
     if (i !== 0) {
-      currentData = currentData[currentIndexs.value[i - 1]][props.childrenKey] || []
+      currentData = currentData[currentIndexs.value[i - 1]][_fieldNames.value.children] || []
     }
-    if (currentData) {
-      tabList.push({ name: currentData[currentIndexs.value[i]][props.labelKey] })
-    }
-  }
-  if (tabList.length < treeMaxLevel.value) {
-    tabList.push({ name: '请选择' })
+    const index: number | undefined = currentIndexs.value[i]
+    const name =
+      typeof index !== 'undefined'
+        ? currentData[currentIndexs.value[i]][_fieldNames.value.label]
+        : '请选择'
+    tabList.push({ name })
   }
   return tabList
 })
 
 const currentData = computed(() => {
-  if (!treeData.value.length) return []
-  let data = treeData.value
-  for (let i = 1; i <= tabCurrent.value; i++) {
-    data = data[currentIndexs.value[i - 1]][props.childrenKey] || []
-  }
-  return data
-})
-
-const searchData = computed<SearchNode[]>(() => {
-  if (!searchText.value) return []
-  if (typeof props.loadSearch !== 'undefined') {
-    return getFlattenTreeData(searchRemoteData.value)
-  }
-  return getFlattenTreeData(treeData.value).filter((item) => item.label.includes(searchText.value))
+  const path = currentIndexs.value.slice(0, tabActive.value)
+  return getChildren(path)
 })
 
 watch(show, async (newVal, oldVal) => {
@@ -215,23 +237,17 @@ watch(show, async (newVal, oldVal) => {
 
 const init = async () => {
   if (treeData.value.length) return
-  if (typeof props.data !== 'undefined') {
-    treeData.value = props.data
-  } else if (typeof props.load === 'function') {
-    treeData.value = await getData()
+  if (localState.value.isLazyLoad) {
+    setChildren(await getData())
   } else {
-    console.warn('data or load is required')
+    console.warn('data or lazyLoad is required')
   }
 }
-
-watch(data, (newVal) => {
-  treeData.value = newVal
-})
 
 const getData = async (level = 0, nodeProps?: CascaderOption) => {
   try {
     loading.value = true
-    let res = props.load({ props: nodeProps, level })
+    let res = props.lazyLoad({ props: nodeProps, level })
     if (res instanceof Promise) {
       res = await res
     }
@@ -243,115 +259,104 @@ const getData = async (level = 0, nodeProps?: CascaderOption) => {
   }
 }
 
-const getFlattenTreeData = (data: CascaderOption[]) => {
-  const result: SearchNode[] = []
-  const loop = (list: CascaderOption[], prefixLabel = '', paths: number[] = []) => {
-    list.forEach((item, index) => {
-      const newItem = {
-        label: `${prefixLabel}${prefixLabel ? '/' : ''}${item[props.labelKey]}`,
-        paths: paths.concat(index),
-      }
-      if (item[props.childrenKey]?.length) {
-        loop(item[props.childrenKey], newItem.label, newItem.paths)
-      } else {
-        result.push(newItem)
-      }
-    })
-  }
-  loop(data)
-  return result
+const onScroll = (e: EventDetail<{ scrollTop: number }>) => {
+  oldScrollTop = e.detail.scrollTop
 }
 
-const onScroll = (e: any) => {
-  oldScrollTop.value = e.detail.scrollTop
-}
-
-// 判断是否叶子节点
-const isLeafNode = (item: CascaderOption): boolean => {
-  if (typeof props.leaf === 'function') {
-    return props.leaf(item)
-  }
-  const leafKey = (props.leaf || 'leaf') as keyof CascaderOption
-  if (typeof item[leafKey] !== 'undefined') {
-    return !!item[leafKey]
-  }
-  return !item[props.childrenKey]?.length
-}
-
-const onSearchChange = async (
-  e: EventDetail<{
-    value: string
-  }>,
-) => {
-  if (typeof props.loadSearch !== 'undefined') {
-    searchRemoteData.value = []
-    searchLoading.value = true
-    let res = props.loadSearch(e.detail.value)
-    if (res instanceof Promise) {
-      res = await res
-    }
-    searchLoading.value = false
-    searchRemoteData.value = res
-  }
-}
-
-const onSelect = async (_item: CascaderOption, valueIndex: number) => {
-  const newIndexs = [...currentIndexs.value]
-  newIndexs.splice(tabCurrent.value, currentIndexs.value.length, valueIndex)
-  currentIndexs.value = newIndexs
+const onSelect = async (item: CascaderOption, valueIndex: number) => {
   const currentNode = currentData.value[valueIndex]
+  currentIndexs.value.splice(tabActive.value, currentIndexs.value.length, valueIndex)
   // 达到设置的最大层级时直接完成
-  if (newIndexs.length >= props.maxLevel) {
-    onOk()
+  if (currentIndexs.value.length >= props.maxLevel) {
+    onSelectFinish(item)
     return
   }
   // 根据有无子节点判断
   if (isLeafNode(currentNode)) {
-    onOk()
+    onSelectFinish(item)
     return
   }
   // 动态数据
-  if (!currentNode[props.childrenKey]?.length && typeof props.load === 'function') {
-    getData(tabCurrent.value + 1, currentNode).then((res) => {
-      currentNode[props.childrenKey] = res
+  if (!currentNode[_fieldNames.value.children]?.length && localState.value.isLazyLoad) {
+    getData(tabActive.value + 1, currentNode).then((res) => {
+      setChildren(res, currentNode)
     })
   }
-  tabCurrent.value += 1
-  scrollTop.value = oldScrollTop.value
+  tabActive.value += 1
+  tabMaxLevel.value = tabActive.value
+  scrollTop.value = oldScrollTop
   nextTick(() => {
     scrollTop.value = 0
   })
 }
 
-const onSearchSelect = (item: CascaderOption) => {
-  currentIndexs.value = item.paths
-  onOk()
+const onSelectSearch = (item: SearchNode) => {
+  if (!localState.value.isLazySearch) {
+    currentIndexs.value = item.__path
+    onSelectFinish(item)
+  } else {
+    onSelectFinish(item, item.__path)
+  }
 }
 
-const onOk = () => {
-  let currentNode: CascaderOption
-  const selectedOptions = currentIndexs.value.reduce<CascaderOption[]>(
-    (result, curIndex, index) => {
-      if (index === 0) {
-        currentNode = treeData.value[curIndex]
-      } else {
-        currentNode = currentNode[props.childrenKey][curIndex]
+const onSelectFinish = (item: CascaderOption, path: number[] = [...currentIndexs.value]) => {
+  if (setSelect(item, path) && !multiple.value) {
+    onConfirm()
+  }
+}
+
+const onConfirm = () => {
+  const newSelectedOptions: CascaderOption[] = []
+  const newSelectedValues: CascaderValue[] = []
+
+  const paths = [...selectedMap.value.values()]
+
+  if (localState.value.isSearch && localState.value.isLazySearch) {
+    // 远程搜索数据场景
+    const data = searchViewRef.value?.searchData ?? []
+    paths.forEach((path, index) => {
+      if (path.length > 1) return
+      newSelectedOptions[index] = []
+      newSelectedValues[index] = []
+      const node: CascaderOption = data[path[0]]
+      newSelectedOptions[index].push(node)
+      newSelectedValues[index].push(node[_fieldNames.value.value])
+    })
+  } else {
+    // 本地数据或已经加载到本地数据的场景
+    paths.forEach((path, index) => {
+      newSelectedOptions[index] = []
+      newSelectedValues[index] = []
+      let data = treeData.value
+      for (let i = 0; i < path.length; i++) {
+        const node = toRaw(data[path[i]])
+        newSelectedOptions[index].push(node)
+        newSelectedValues[index].push(node[_fieldNames.value.value])
+        if (i < path.length - 1) {
+          data = node[_fieldNames.value.children]
+        }
       }
-      result.push({ ...currentNode, [props.childrenKey]: undefined })
-      return result
-    },
-    [],
-  )
-  const values = selectedOptions.map((item) => item[props.valueKey])
-  treeMaxLevel.value = currentIndexs.value.length
+    })
+  }
+
+  const values = multiple.value ? newSelectedValues : newSelectedValues[0]
   emit('update:modelValue', values)
-  emit('change', values, selectedOptions, tabCurrent.value)
+  emit('change', values, multiple.value ? newSelectedOptions : newSelectedOptions[0], {
+    tabIndex: tabActive.value,
+    isSearch: localState.value.isSearch,
+  })
   onClose()
+}
+
+const onReset = () => {
+  tabActive.value = 0
+  currentIndexs.value = []
+  clearSelect()
 }
 
 const onClose = () => {
   // currentIndexs.value = []
-  // tabCurrent.value = 0
+  // tabActive.value = 0
   searchText.value = ''
   emit('update:show', false)
 }
@@ -359,21 +364,11 @@ const onClose = () => {
 
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
-.content {
+.#{$prefix}-cascader-content {
   position: relative;
   height: 100%;
 }
-.search {
+.#{$prefix}-cascader-search {
   @include _setVar(search-padding, 0 12px);
-}
-
-.search-view {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: 2;
-  width: 100%;
-  height: calc(100% - 50px);
-  background-color: #fff;
 }
 </style>
