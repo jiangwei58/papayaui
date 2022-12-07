@@ -13,7 +13,7 @@
         v-if="showSearch"
         v-model="searchText"
         class="flex-shrink-0"
-        @confirm="onConfirmSearch"
+        @change="debounceSearchChange"
       />
       <scroll-view
         scroll-y
@@ -69,6 +69,7 @@ import ButtonComponent from '../button/button.vue'
 import Loadmore from '../loadmore/loadmore.vue'
 import useList, { UseListData } from '../../core/useList'
 import useSelect from '../../core/useSelect'
+import { debounce } from '../../utils/common'
 
 export type Option = any
 export type OptionValue = number | string
@@ -196,12 +197,13 @@ const onScrolltolower = () => {
   getData()
 }
 
-const onConfirmSearch = () => {
+const onSearchChange = () => {
   if (props.remote) {
     pageNumber.value = 0
     getData()
   }
 }
+const debounceSearchChange = debounce(onSearchChange, 300)
 
 const onSelect = async (value: OptionValue) => {
   if (_onSelect(value) && !multiple.value) {

@@ -55,3 +55,16 @@ export const loopTree = <T>(
     }
   }
 }
+
+/** 防抖 */
+export const debounce = (fn: (...args: any[]) => any, delay = 0) => {
+  let t: number | null = null
+  return (...innerArgs: any[]) => {
+    if (t !== null) {
+      clearTimeout(t)
+    }
+    t = setTimeout(() => {
+      fn(...innerArgs)
+    }, delay)
+  }
+}
