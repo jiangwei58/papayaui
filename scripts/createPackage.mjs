@@ -23,10 +23,7 @@ const writePackage = (packageJSON) => {
     '../../src/packages/package.json',
   )
   const steam = fs.createWriteStream(writeFilePath)
-
-  let content = JSON.stringify(packageJSON)
-  content = content.replace(/([{,])/g, '$1\n')
-
+  const content = JSON.stringify(packageJSON, undefined, 2)
   steam.write(content)
   steam.end()
   console.log(`created ${writeFilePath}`)
