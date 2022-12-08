@@ -1,10 +1,10 @@
 <template>
   <DocDemoBlock title="基础用法">
-    <wei-tooltip text="悬浮内容悬浮内容悬浮内容" style="width: 100px">
+    <pa-tooltip text="悬浮内容悬浮内容悬浮内容" style="width: 100px">
       <view>
         内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
       </view>
-    </wei-tooltip>
+    </pa-tooltip>
   </DocDemoBlock>
 </template>
 

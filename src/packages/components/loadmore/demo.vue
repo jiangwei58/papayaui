@@ -1,19 +1,19 @@
 <template>
   <DocDemoBlock title="基础用法">
-    <wei-loadmore :status="LoadStatusEnum.LOADMORE" />
-    <wei-loadmore :status="LoadStatusEnum.LOADING" />
-    <wei-loadmore :status="LoadStatusEnum.NOMORE" />
+    <pa-loadmore :status="LoadStatusEnum.LOADMORE" />
+    <pa-loadmore :status="LoadStatusEnum.LOADING" />
+    <pa-loadmore :status="LoadStatusEnum.NOMORE" />
   </DocDemoBlock>
 
   <DocDemoBlock title="自定义文案">
-    <wei-loadmore :config="customConfig" :status="LoadStatusEnum.LOADMORE" />
-    <wei-loadmore :config="customConfig" :status="LoadStatusEnum.LOADING" />
-    <wei-loadmore :config="customConfig" :status="LoadStatusEnum.NOMORE" />
+    <pa-loadmore :config="customConfig" :status="LoadStatusEnum.LOADMORE" />
+    <pa-loadmore :config="customConfig" :status="LoadStatusEnum.LOADING" />
+    <pa-loadmore :config="customConfig" :status="LoadStatusEnum.NOMORE" />
   </DocDemoBlock>
 
   <DocDemoBlock title="颜色">
-    <wei-loadmore :status="LoadStatusEnum.LOADING" color="red" />
-    <wei-loadmore :status="LoadStatusEnum.LOADING" text-color="red" />
+    <pa-loadmore :status="LoadStatusEnum.LOADING" color="red" />
+    <pa-loadmore :status="LoadStatusEnum.LOADING" text-color="red" />
   </DocDemoBlock>
 </template>
 

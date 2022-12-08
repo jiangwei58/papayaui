@@ -1,4 +1,4 @@
-$prefix: wei;
+$prefix: pa;
 
 @function _var($varName) {
   @return var(--#{$prefix}-#{$varName});

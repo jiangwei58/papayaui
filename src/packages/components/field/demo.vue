@@ -1,6 +1,6 @@
 <template>
   <DocDemoBlock title="基础用法">
-    <wei-field title="输入框" />
+    <pa-field title="输入框" />
   </DocDemoBlock>
 </template>
 

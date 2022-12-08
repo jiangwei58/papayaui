@@ -1,36 +1,36 @@
 <template>
   <DocDemoBlock title="基础用法">
-    <wei-cell-group inset>
-      <wei-cell title="静态数据" :value="value.toString()" is-link @click="onChangeVisible" />
-      <wei-cell
+    <pa-cell-group inset>
+      <pa-cell title="静态数据" :value="value.toString()" is-link @click="onChangeVisible" />
+      <pa-cell
         title="动态数据"
         :value="asyncValue.toString()"
         is-link
         @click="onAsyncChangeVisible"
       />
-    </wei-cell-group>
+    </pa-cell-group>
 
-    <wei-cascader v-model:show="visible" v-model="value" :options="syncTreeData" show-search />
-    <wei-cascader v-model:show="asyncVisible" v-model="asyncValue" :lazy-load="onLoad" />
+    <pa-cascader v-model:show="visible" v-model="value" :options="syncTreeData" show-search />
+    <pa-cascader v-model:show="asyncVisible" v-model="asyncValue" :lazy-load="onLoad" />
   </DocDemoBlock>
 
   <DocDemoBlock title="搜索">
-    <wei-cell-group inset>
-      <wei-cell
+    <pa-cell-group inset>
+      <pa-cell
         title="本地搜索"
         :value="searchValue.toString()"
         is-link
         @click="onSearchChangeVisible()"
       />
-      <wei-cell
+      <pa-cell
         title="远程搜索"
         :value="searchValue.toString()"
         is-link
         @click="onSearchChangeVisible(true)"
       />
-    </wei-cell-group>
+    </pa-cell-group>
 
-    <wei-cascader
+    <pa-cascader
       v-model:show="searchVisible"
       v-model="searchValue"
       show-search
@@ -40,16 +40,16 @@
   </DocDemoBlock>
 
   <DocDemoBlock title="多选">
-    <wei-cell-group inset>
-      <wei-cell
+    <pa-cell-group inset>
+      <pa-cell
         title="多选"
         :value="multipleValue.join('/')"
         is-link
         @click="onMultipleChangeVisible()"
       />
-    </wei-cell-group>
+    </pa-cell-group>
 
-    <wei-cascader
+    <pa-cascader
       v-model:show="multipleVisible"
       v-model="multipleValue"
       :lazy-load="onLoad"

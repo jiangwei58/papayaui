@@ -2,7 +2,7 @@
   "easycom": {
     "autoscan": true,
     "custom": {
-      "^wei-(.*)": "@/packages/components/$1/$1.vue"
+      "^pa-(.*)": "@/packages/components/$1/$1.vue"
     }
   },
   "pages": [
@@ -162,7 +162,7 @@
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "weiui",
+    "navigationBarTitleText": "papayaui",
     "navigationBarBackgroundColor": "#FFFFFF",
     "backgroundColor": "#F2F3F5",
     "usingComponents": {}

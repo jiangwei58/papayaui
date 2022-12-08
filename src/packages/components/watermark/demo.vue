@@ -1,5 +1,5 @@
 <template>
-  <wei-watermark :contents="['姓名', '2022-10-29 23:59']" />
+  <pa-watermark :contents="['papayaui-watermark', '2022-10-29 23:59']" />
 
   <view class="p-30" style="height: 100vh">{{ text }}</view>
 </template>

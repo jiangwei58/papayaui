@@ -1,15 +1,15 @@
 <template>
   <DocDemoBlock title="基础用法" />
-  <wei-nav-bar title="页面标题" />
+  <pa-nav-bar title="页面标题" />
 
   <DocDemoBlock title="自定义" />
-  <wei-nav-bar>
+  <pa-nav-bar>
     <view class="flex items-center justify-center height-full">
-      <wei-icon name="search" />
+      <pa-icon name="search" />
       <text>页面标题</text>
-      <wei-button height="54">按钮</wei-button>
+      <pa-button height="54">按钮</pa-button>
     </view>
-  </wei-nav-bar>
+  </pa-nav-bar>
 </template>
 
 <script lang="ts" setup>

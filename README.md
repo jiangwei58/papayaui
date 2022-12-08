@@ -1,4 +1,4 @@
-# weiui
+# papayaui
 
 适用于 uniapp 的 ui 框架
 
@@ -7,11 +7,11 @@
 ### 安装
 
 ```
-npm i @pagodaui/weiui
+npm i papayaui
 
 or
 
-yarn add @pagodaui/weiui
+yarn add papayaui
 ```
 
 ### SCSS
@@ -36,8 +36,8 @@ yarn add sass -D
 ```html
 <style lang="scss">
   /* 注意要写在第一行，同时给style标签加入lang="scss"属性 */
-  @import '@pagodaui/weiui/index.scss';
-  @import '@pagodaui/weiui/fonts/iconfont.css'; // 引入字体图标
+  @import 'papayaui/index.scss';
+  @import 'papayaui/fonts/iconfont.css'; // 引入字体图标
 </style>
 ```
 
@@ -56,7 +56,7 @@ yarn add sass -D
   "easycom": {
     "autoscan": true,
     "custom": {
-      "^wei-(.*)": "@pagodaui/weiui/components/$1/$1.vue"
+      "^pa-(.*)": "papayaui/components/$1/$1.vue"
     }
   },
 
@@ -72,5 +72,5 @@ yarn add sass -D
 > 在`env.d.ts`中上方引入，可以得到代码提示
 
 ```typescript
-/// <reference types="@pagodaui/weiui/components" />
+/// <reference types="papayaui/components" />
 ```

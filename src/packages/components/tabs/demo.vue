@@ -1,14 +1,14 @@
 <template>
   <DocDemoBlock title="基础用法">
-    <wei-tabs v-model="tabActive" :tabs="getData(3)" />
+    <pa-tabs v-model="tabActive" :tabs="getData(3)" />
   </DocDemoBlock>
 
   <DocDemoBlock title="多个滚动">
-    <wei-tabs v-model="tabActive2" :tabs="getData(10)" scrollable />
+    <pa-tabs v-model="tabActive2" :tabs="getData(10)" scrollable />
   </DocDemoBlock>
 
   <DocDemoBlock title="自定义索引值">
-    <wei-tabs v-model="tabActive3" :tabs="getData(3)" value-key="name" />
+    <pa-tabs v-model="tabActive3" :tabs="getData(3)" value-key="name" />
   </DocDemoBlock>
 </template>
 

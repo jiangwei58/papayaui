@@ -1,22 +1,22 @@
 <template>
   <DocDemoBlock title="基础用法">
-    <wei-cell-group inset>
-      <wei-cell title="单选" :value="singleValue" is-link @click="singleVisible = true" />
-      <wei-cell
+    <pa-cell-group inset>
+      <pa-cell title="单选" :value="singleValue" is-link @click="singleVisible = true" />
+      <pa-cell
         title="多选"
         :value="multipleValue.toString()"
         is-link
         @click="multipleVisible = true"
       />
-    </wei-cell-group>
+    </pa-cell-group>
 
-    <wei-picker-popup
+    <pa-picker-popup
       v-model:show="singleVisible"
       v-model="singleValue"
       :data="syncOptions"
       show-search
     />
-    <wei-picker-popup
+    <pa-picker-popup
       v-model:show="multipleVisible"
       v-model="multipleValue"
       :data="syncOptions"
@@ -26,8 +26,8 @@
   </DocDemoBlock>
 
   <DocDemoBlock title="远程数据">
-    <wei-cell-group inset>
-      <wei-cell
+    <pa-cell-group inset>
+      <pa-cell
         title="远程数据"
         :value="singleValue"
         is-link
@@ -38,7 +38,7 @@
           }
         "
       />
-      <wei-cell
+      <pa-cell
         title="远程搜索"
         :value="singleValue"
         is-link
@@ -49,9 +49,9 @@
           }
         "
       />
-    </wei-cell-group>
+    </pa-cell-group>
 
-    <wei-picker-popup
+    <pa-picker-popup
       v-model:show="remoteVisible"
       v-model="singleValue"
       :load="onLoad"
@@ -61,11 +61,11 @@
   </DocDemoBlock>
 
   <DocDemoBlock title="远程分页数据">
-    <wei-cell-group inset>
-      <wei-cell title="分页数据" :value="singleValue2" is-link @click="remoteVisible2 = true" />
-    </wei-cell-group>
+    <pa-cell-group inset>
+      <pa-cell title="分页数据" :value="singleValue2" is-link @click="remoteVisible2 = true" />
+    </pa-cell-group>
 
-    <wei-picker-popup
+    <pa-picker-popup
       v-model:show="remoteVisible2"
       v-model="singleValue2"
       :load="onLoad2"

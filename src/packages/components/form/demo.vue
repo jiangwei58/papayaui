@@ -1,20 +1,20 @@
 <template>
   <DocDemoBlock title="基础用法">
-    <wei-form ref="formRef" :form="formData" :rules="rules">
-      <wei-cell-group inset>
-        <wei-form-item prop="name" label="名称" required>
+    <pa-form ref="formRef" :form="formData" :rules="rules">
+      <pa-cell-group inset>
+        <pa-form-item prop="name" label="名称" required>
           <input
             v-model="formData.name"
             placeholder="请输入"
             :placeholder-style="`color:var(--${PREFIX}-number-input-placeholder-color)`"
           />
-        </wei-form-item>
+        </pa-form-item>
 
-        <wei-form-item prop="desc" label="描述">
+        <pa-form-item prop="desc" label="描述">
           <!-- 可以使用field组件的输入框模式 -->
-          <wei-field v-model="formData.desc" placeholder="请输入" only-input />
-        </wei-form-item>
-        <wei-form-item
+          <pa-field v-model="formData.desc" placeholder="请输入" only-input />
+        </pa-form-item>
+        <pa-form-item
           prop="gender"
           label="性别"
           :value="genderText"
@@ -22,19 +22,19 @@
           is-link
           @click="onChangeGenderVisible"
         />
-        <wei-form-item prop="age" label="年龄">
-          <wei-number-input v-model="formData.age" />
-        </wei-form-item>
-        <wei-form-item prop="comment" label="评论">
-          <wei-field v-model="formData.comment" type="textarea" placeholder="请输入" only-input />
-        </wei-form-item>
-      </wei-cell-group>
+        <pa-form-item prop="age" label="年龄">
+          <pa-number-input v-model="formData.age" />
+        </pa-form-item>
+        <pa-form-item prop="comment" label="评论">
+          <pa-field v-model="formData.comment" type="textarea" placeholder="请输入" only-input />
+        </pa-form-item>
+      </pa-cell-group>
 
-      <wei-button class="block px-32 pt-30" @click="onValidate">提交</wei-button>
-    </wei-form>
+      <pa-button class="block px-32 pt-30" @click="onValidate">提交</pa-button>
+    </pa-form>
   </DocDemoBlock>
 
-  <wei-picker-popup v-model="formData.gender" v-model:show="genderVisible" :data="genderOptions" />
+  <pa-picker-popup v-model="formData.gender" v-model:show="genderVisible" :data="genderOptions" />
 </template>
 
 <script lang="ts" setup>

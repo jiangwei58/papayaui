@@ -1,4 +1,4 @@
-export const PREFIX = 'wei'
+export const PREFIX = 'pa'
 
 export const computedClass = (
   ...classNames: (string | Record<string, boolean | undefined>)[]

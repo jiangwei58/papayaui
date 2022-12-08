@@ -1,16 +1,16 @@
 <template>
   <DocDemoBlock title="基础用法" />
-  <wei-sticky>
+  <pa-sticky>
     <view class="flex justify-start">
-      <wei-button width="200">基础用法</wei-button>
+      <pa-button width="200">基础用法</pa-button>
     </view>
-  </wei-sticky>
+  </pa-sticky>
   <DocDemoBlock title="吸顶距离" />
-  <wei-sticky offset-top="30">
+  <pa-sticky offset-top="30">
     <view class="flex justify-center">
-      <wei-button width="200">吸顶距离</wei-button>
+      <pa-button width="200">吸顶距离</pa-button>
     </view>
-  </wei-sticky>
+  </pa-sticky>
   <view style="height: 200vh"></view>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <DocDemoBlock title="基础用法">
-    <wei-search v-model="text" />
+    <pa-search v-model="text" />
   </DocDemoBlock>
 </template>
 

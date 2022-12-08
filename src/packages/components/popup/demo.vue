@@ -1,32 +1,32 @@
 <template>
   <DocDemoBlock title="基础用法">
-    <wei-cell-group inset>
-      <wei-cell title="顶部弹出" is-link @click="onOpen('top')" />
-      <wei-cell title="底部弹出" is-link @click="onOpen('bottom')" />
-      <wei-cell title="左侧弹出" is-link @click="onOpen('left')" />
-      <wei-cell title="右侧弹出" is-link @click="onOpen('right')" />
-      <wei-cell title="中间弹出" is-link @click="onOpen('center')" />
-    </wei-cell-group>
+    <pa-cell-group inset>
+      <pa-cell title="顶部弹出" is-link @click="onOpen('top')" />
+      <pa-cell title="底部弹出" is-link @click="onOpen('bottom')" />
+      <pa-cell title="左侧弹出" is-link @click="onOpen('left')" />
+      <pa-cell title="右侧弹出" is-link @click="onOpen('right')" />
+      <pa-cell title="中间弹出" is-link @click="onOpen('center')" />
+    </pa-cell-group>
   </DocDemoBlock>
 
   <DocDemoBlock title="关闭按钮">
-    <wei-cell-group inset>
-      <wei-cell title="关闭按钮" is-link @click="onOpen('bottom', true)" />
-    </wei-cell-group>
+    <pa-cell-group inset>
+      <pa-cell title="关闭按钮" is-link @click="onOpen('bottom', true)" />
+    </pa-cell-group>
   </DocDemoBlock>
 
   <DocDemoBlock title="圆角弹窗">
-    <wei-cell-group inset>
-      <wei-cell title="圆角弹窗" is-link @click="onOpen('bottom', true, true)" />
-    </wei-cell-group>
+    <pa-cell-group inset>
+      <pa-cell title="圆角弹窗" is-link @click="onOpen('bottom', true, true)" />
+    </pa-cell-group>
   </DocDemoBlock>
 
-  <wei-popup
+  <pa-popup
     v-model:show="visible"
     :position="position"
     :closeable="closeable"
     :round="round"
-  ></wei-popup>
+  ></pa-popup>
 </template>
 
 <script lang="ts" setup>

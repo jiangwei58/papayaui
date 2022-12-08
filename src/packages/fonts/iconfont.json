@@ -1,8 +1,8 @@
 {
   "id": "3668565",
-  "name": "weiui",
-  "font_family": "wei-iconfont",
-  "css_prefix_text": "wei-icon-",
+  "name": "papayaui",
+  "font_family": "pa-iconfont",
+  "css_prefix_text": "pa-icon-",
   "description": "",
   "glyphs": [
     {

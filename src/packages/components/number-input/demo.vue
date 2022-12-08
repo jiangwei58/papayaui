@@ -1,32 +1,32 @@
 <template>
   <DocDemoBlock title="基础用法">
-    <wei-cell title="单元格">
-      <wei-number-input v-model="input1" placeholder="请输入" align="right" />
-    </wei-cell>
+    <pa-cell title="单元格">
+      <pa-number-input v-model="input1" placeholder="请输入" align="right" />
+    </pa-cell>
   </DocDemoBlock>
 
   <DocDemoBlock title="最大最小值">
-    <wei-cell title="单元格">
-      <wei-number-input v-model="input2" placeholder="请输入" align="right" :min="5" :max="999" />
-    </wei-cell>
+    <pa-cell title="单元格">
+      <pa-number-input v-model="input2" placeholder="请输入" align="right" :min="5" :max="999" />
+    </pa-cell>
   </DocDemoBlock>
 
   <DocDemoBlock title="整数小数位长度限制">
-    <wei-cell title="单元格">
-      <wei-number-input
+    <pa-cell title="单元格">
+      <pa-number-input
         v-model="input3"
         placeholder="请输入"
         align="right"
         :int-length="5"
         :precision="2"
       />
-    </wei-cell>
+    </pa-cell>
   </DocDemoBlock>
 
   <DocDemoBlock title="禁用">
-    <wei-cell title="单元格">
-      <wei-number-input model-value="9999" placeholder="请输入" align="right" disabled />
-    </wei-cell>
+    <pa-cell title="单元格">
+      <pa-number-input model-value="9999" placeholder="请输入" align="right" disabled />
+    </pa-cell>
   </DocDemoBlock>
 </template>
 

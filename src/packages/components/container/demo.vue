@@ -1,22 +1,22 @@
 <template>
-  <wei-container>
+  <pa-container>
     <template #header>
-      <wei-search @confirm="onSearch" />
+      <pa-search @confirm="onSearch" />
     </template>
 
     <view>
       <view v-for="item in list" :key="item.id" class="px-26">
         <view class="border-bottom" style="line-height: 88rpx">{{ item.label }}</view>
       </view>
-      <wei-loadmore :status="loadStatus" />
+      <pa-loadmore :status="loadStatus" />
     </view>
 
     <template #bottom>
       <view class="px-26 py-12">
-        <wei-button type="primary">确定</wei-button>
+        <pa-button type="primary" block>确定</pa-button>
       </view>
     </template>
-  </wei-container>
+  </pa-container>
 </template>
 
 <script lang="ts" setup>
