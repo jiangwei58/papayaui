@@ -1,7 +1,7 @@
 <template>
   <input
     :class="[computedClass('number-input'), { disabled }]"
-    :style="{ textAlign: align }"
+    :style="{ ...customStyle, textAlign: align }"
     :placeholder="placeholder"
     :value="modelValue"
     :type="precision ? 'digit' : 'number'"
@@ -19,7 +19,7 @@
 
 <script lang="ts" setup>
 import { EventDetail } from '../../types'
-import { nextTick } from 'vue'
+import { CSSProperties, nextTick } from 'vue'
 import { computedClass } from '../../utils/style'
 
 export interface NumberInputProps {
@@ -44,6 +44,8 @@ export interface NumberInputProps {
   autoBlur?: boolean
   /** 键盘弹起时，是否自动上推页面 */
   adjustPosition?: boolean
+  /** 定义需要用到的外部样式 */
+  customStyle?: CSSProperties
 }
 
 const props = withDefaults(defineProps<NumberInputProps>(), {
@@ -55,6 +57,7 @@ const props = withDefaults(defineProps<NumberInputProps>(), {
   max: undefined,
   precision: 0,
   intLength: Number.MAX_SAFE_INTEGER.toString().length,
+  customStyle: undefined,
 })
 
 const emit = defineEmits<{
@@ -130,10 +133,10 @@ const onConfirm = (e: any) => {
   border: 0;
   box-sizing: border-box;
   color: _var(number-input-text-color);
-  height: 48rpx;
+  height: _var(number-input-height);
   line-height: inherit;
   margin: 0;
-  min-height: 48rpx;
+  min-height: _var(number-input-height);
   padding: 0;
   position: relative;
   resize: none;
