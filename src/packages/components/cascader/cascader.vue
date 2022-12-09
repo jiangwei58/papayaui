@@ -360,6 +360,15 @@ const onClose = () => {
   searchText.value = ''
   emit('update:show', false)
 }
+
+const onClean = () => {
+  treeData.value = []
+  onReset()
+}
+
+defineExpose({
+  clean: onClean,
+})
 </script>
 
 <style lang="scss" scoped>
