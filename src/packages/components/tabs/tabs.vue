@@ -29,7 +29,7 @@
 
 <script lang="ts" setup>
 import { computedClass } from '../../utils/style'
-import { getCurrentInstance, nextTick, ref, toRefs, watch } from 'vue'
+import { computed, getCurrentInstance, nextTick, ref, toRefs, watch } from 'vue'
 
 export type TabItem = any
 
@@ -53,7 +53,7 @@ const props = withDefaults(defineProps<TabsProps>(), {
   modelValue: 0,
   tabs: () => [],
   labelKey: 'label',
-  valueKey: 'value',
+  valueKey: undefined,
   scrollable: false,
 })
 
@@ -69,6 +69,9 @@ const internalInstance = getCurrentInstance()
 const lineScrollLeft = ref<number>(0)
 const lineOffsetLeft = ref<number>(0)
 
+// 是否自定义值，默认为index
+const isCustomValue = computed<boolean>(() => typeof props.valueKey !== 'undefined')
+
 watch(
   [tabs, modelValue],
   async () => {
@@ -81,9 +84,17 @@ watch(
 )
 
 const isActive = (item: TabItem, index: number) => {
-  return typeof item[props.valueKey] !== 'undefined'
+  return isCustomValue.value
     ? item[props.valueKey] === modelValue.value
     : index === modelValue.value
+}
+
+const getCurrentTabIndex = () => {
+  if (isCustomValue.value) {
+    const index = tabs.value.findIndex((tab) => tab[props.valueKey] === modelValue.value)
+    return index !== -1 ? index : 0
+  }
+  return modelValue.value
 }
 
 // 获取左移动位置
@@ -110,10 +121,11 @@ const updateTabItemWidth = () => {
       let lineLeft = 0
       let currentWidth = 0
       if (nodes) {
+        const valueIndex = getCurrentTabIndex()
         for (let i = 0; i < nodes.length; i++) {
-          if (i < modelValue.value) {
+          if (i < valueIndex) {
             lineLeft += nodes[i].width
-          } else if (i == modelValue.value) {
+          } else if (i == valueIndex) {
             currentWidth = nodes[i].width
           } else {
             break
@@ -131,10 +143,7 @@ const updateTabItemWidth = () => {
 }
 
 const onChangeTab = (item: TabItem, index: number) => {
-  emit(
-    'update:modelValue',
-    typeof item[props.valueKey] !== 'undefined' ? item[props.valueKey] : index,
-  )
+  emit('update:modelValue', isCustomValue.value ? item[props.valueKey] : index)
   emit('change', item)
 }
 
