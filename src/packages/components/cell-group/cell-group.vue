@@ -19,7 +19,7 @@ defineProps<OwnProps>()
 @import '../../styles/vars.scss';
 .#{$prefix}-cell-group {
   background-color: _var(cell-group-bg-color);
-  &.#{$prefix}-cell-group--inset {
+  &--inset {
     margin: 0 _var(cell-group-margin-x);
     overflow: hidden;
     border-radius: _var(cell-group-rounded);

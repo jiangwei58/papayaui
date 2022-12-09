@@ -1,5 +1,5 @@
 <template>
-  <view :class="computedClass('tooltip')">
+  <view :class="computedClass('tooltip', 'tooltip--dark', 'tooltip--bottom')">
     <view @tap="onVisibleChange()">
       <slot></slot>
     </view>
@@ -10,7 +10,6 @@
     ></view>
     <view
       v-show="show"
-      class="dark bottom"
       :class="computedClass('tooltip-wapper')"
       :style="{
         width: getUnitValue(width),
@@ -99,29 +98,29 @@ const onVisibleChange = (visible = !show.value) => {
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
 .#{$prefix}-tooltip {
-  position: relative;
-}
-.#{$prefix}-tooltip-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 8;
-  width: 100vw;
-  height: 100vh;
-  background-color: transparent;
-}
-.#{$prefix}-tooltip-wapper {
   $arrowSize: 20rpx;
-  position: fixed;
-  left: 0;
-  top: 0;
-  margin: 0;
-  z-index: 9;
-  padding: 22rpx 24rpx;
-  border-radius: 8rpx;
-  opacity: 0.9;
-
-  .#{$prefix}-tooltip-arrow {
+  $darkColor: #323233;
+  position: relative;
+  &-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 8;
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
+  }
+  &-wapper {
+    position: fixed;
+    left: 0;
+    top: 0;
+    margin: 0;
+    z-index: 9;
+    padding: 22rpx 24rpx;
+    border-radius: 8rpx;
+    opacity: 0.9;
+  }
+  &-arrow {
     position: absolute;
     width: $arrowSize;
     height: $arrowSize;
@@ -136,29 +135,24 @@ const onVisibleChange = (visible = !show.value) => {
       box-sizing: border-box;
     }
   }
-
-  &.dark {
-    $darkColor: #323233;
+  &--dark &-wapper {
     color: #fff;
     background: $darkColor;
-    .#{$prefix}-tooltip-arrow {
-      &::before {
-        border: 1px solid $darkColor;
-        background: $darkColor;
-        border-bottom-color: transparent !important;
-        border-right-color: transparent !important;
-      }
+  }
+  &--dark &-arrow {
+    &::before {
+      border: 1px solid $darkColor;
+      background: $darkColor;
+      border-bottom-color: transparent !important;
+      border-right-color: transparent !important;
     }
   }
-
-  &.bottom {
+  &--bottom &-arrow {
     $top: calc($arrowSize / 2);
-    .#{$prefix}-tooltip-arrow {
-      left: 50%;
-      top: -$top;
-      margin-left: -$top;
-      border-top-left-radius: 2px;
-    }
+    left: 50%;
+    top: -$top;
+    margin-left: -$top;
+    border-top-left-radius: 2px;
   }
 }
 </style>

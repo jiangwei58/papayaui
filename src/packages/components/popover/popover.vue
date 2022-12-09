@@ -97,64 +97,64 @@ const onVisibleChange = (visible = !show.value) => {
 @import '../../styles/vars.scss';
 .#{$prefix}-popover {
   position: relative;
-}
-.#{$prefix}-popover-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: transparent;
-}
-.#{$prefix}-popover-wapper {
-  $arrowSize: 20rpx;
-  position: fixed;
-  left: 0;
-  top: 0;
-  margin: 0;
-  z-index: 9;
-  padding: 0;
-  border-radius: 8rpx;
-  opacity: 0.9;
-  box-shadow: 0px 0px 5px #dcdee0;
+  &-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
+  }
+  &-wapper {
+    $arrowSize: 20rpx;
+    position: fixed;
+    left: 0;
+    top: 0;
+    margin: 0;
+    z-index: 9;
+    padding: 0;
+    border-radius: 8rpx;
+    opacity: 0.9;
+    box-shadow: 0px 0px 5px #dcdee0;
 
-  .popover-arrow {
-    position: absolute;
-    width: $arrowSize;
-    height: $arrowSize;
-    z-index: -1;
-    &::before {
+    .popover-arrow {
       position: absolute;
       width: $arrowSize;
       height: $arrowSize;
       z-index: -1;
-      content: ' ';
-      transform: rotate(45deg);
-      box-sizing: border-box;
-    }
-  }
-
-  &.light {
-    $darkColor: #323233;
-    color: $darkColor;
-    background: #fff;
-    .popover-arrow {
       &::before {
-        border: 1px solid #fff;
-        background: #fff;
-        border-bottom-color: transparent !important;
-        border-right-color: transparent !important;
+        position: absolute;
+        width: $arrowSize;
+        height: $arrowSize;
+        z-index: -1;
+        content: ' ';
+        transform: rotate(45deg);
+        box-sizing: border-box;
       }
     }
-  }
 
-  &.bottom {
-    $top: calc($arrowSize / 2);
-    .popover-arrow {
-      left: 50%;
-      top: -$top;
-      margin-left: -$top;
-      border-top-left-radius: 2px;
+    &.light {
+      $darkColor: #323233;
+      color: $darkColor;
+      background: #fff;
+      .popover-arrow {
+        &::before {
+          border: 1px solid #fff;
+          background: #fff;
+          border-bottom-color: transparent !important;
+          border-right-color: transparent !important;
+        }
+      }
+    }
+
+    &.bottom {
+      $top: calc($arrowSize / 2);
+      .popover-arrow {
+        left: 50%;
+        top: -$top;
+        margin-left: -$top;
+        border-top-left-radius: 2px;
+      }
     }
   }
 }

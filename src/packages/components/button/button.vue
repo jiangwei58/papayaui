@@ -183,7 +183,7 @@ const onClick = async (event: MouseEvent) => {
   &::after {
     border: none;
   }
-  &.#{$prefix}-button--hover {
+  &--hover {
     &::before {
       opacity: 0.1;
     }

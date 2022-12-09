@@ -7,8 +7,8 @@
     @change="onChange"
   >
     <view
-      class="popup-wrapper flex flex-col"
-      :class="{ 'safe-buttom-padding': safeAreaInsetBottom }"
+      class="flex flex-col"
+      :class="[computedClass('popup-wrapper'), { 'safe-buttom-padding': safeAreaInsetBottom }]"
       :style="{ height: getUnitValue(height) }"
     >
       <view class="header width-full flex items-center justify-center flex-shrink-0">
@@ -41,6 +41,7 @@ import { ref, toRefs, watch } from 'vue'
 import UniPopup from '../uni-popup/uni-popup.vue'
 import { getUnitValue } from '../../utils/common'
 import Icon from '../icon/icon.vue'
+import { computedClass } from '../../utils/style'
 
 export interface BottomPopupProps {
   /** 是否显示弹窗 */
@@ -93,7 +94,8 @@ const onChange = ({ show }: { show: boolean; type: string }) => {
 </script>
 
 <style lang="scss" scoped>
-.popup-wrapper {
+@import '../../styles/vars.scss';
+.#{$prefix}-popup-wrapper {
   position: relative;
   height: 100%;
   background-color: #fff;

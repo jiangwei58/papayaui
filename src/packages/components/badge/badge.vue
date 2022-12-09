@@ -1,14 +1,16 @@
 <template>
-  <view :class="computedClass('badge')">
+  <view
+    :class="
+      computedClass('badge', {
+        'badge--dot': dot,
+        'badge--fixed': !!$slots.default,
+      })
+    "
+  >
     <slot></slot>
     <view
       v-if="visible"
-      :class="
-        computedClass('badge__content', {
-          'badge--dot': dot,
-          'badge--fixed': !!$slots.default,
-        })
-      "
+      :class="computedClass('badge-content')"
       :style="{
         backgroundColor: color,
         top: getUnitValue(offset[0].toString()),
@@ -73,23 +75,23 @@ const value = computed(() => {
 .#{$prefix}-badge {
   position: relative;
   display: inline-block;
-}
-.#{$prefix}-badge__content {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  line-height: 11px;
-  text-align: center;
-  font-size: 11px;
-  color: #fff;
-  padding: 2px 5px;
-  border-radius: 100px;
-  &.#{$prefix}-badge--dot {
+  &-content {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    line-height: 11px;
+    text-align: center;
+    font-size: 11px;
+    color: #fff;
+    padding: 2px 5px;
+    border-radius: 100px;
+  }
+  &--dot &-content {
     padding: 0;
     width: 8px;
     height: 8px;
   }
-  &.#{$prefix}-badge--fixed {
+  &--fixed &-content {
     position: absolute;
     transform: translate(50%, -50%);
     transform-origin: 100%;

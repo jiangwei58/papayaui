@@ -1,6 +1,6 @@
 <template>
   <Cell
-    :class="computedClass('field', { 'only-input': onlyInput })"
+    :class="computedClass('field', { 'field--only-input': onlyInput })"
     :border="false"
     v-bind="$props"
   >
@@ -132,14 +132,14 @@ const onInput = (payload: Event) => {
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
 .#{$prefix}-field {
-  .#{$prefix}-field__input {
+  &__input {
     color: _var(field-input-color);
   }
-  &.#{$prefix}-only-input {
+  &--only-input {
     @include _setVar(cell-padding-y, 0);
     @include _setVar(cell-padding-x, 0);
   }
-  .#{$prefix}-textarea {
+  &__textarea {
     display: block;
     box-sizing: border-box;
     width: 100%;

@@ -197,11 +197,11 @@ const onClear = (e: Event) => {
     top: 0;
     /* #endif */
   }
-  .#{$prefix}-popup__wrapper {
+  &__wrapper {
     position: relative;
   }
 
-  .#{$prefix}-popup__close {
+  &__close {
     position: absolute;
     top: 0;
     right: 0;

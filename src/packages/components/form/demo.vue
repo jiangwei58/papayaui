@@ -30,7 +30,7 @@
         </pa-form-item>
       </pa-cell-group>
 
-      <pa-button class="block px-32 pt-30" @click="onValidate">提交</pa-button>
+      <pa-button class="block px-32 pt-30" block @click="onValidate">提交</pa-button>
     </pa-form>
   </DocDemoBlock>
 
@@ -80,6 +80,7 @@ const rules: FormRules<FormData> = {
     message: '{{label}}开头必须是"1"',
   },
   gender: { required: true, message: '请选择{{label}}' },
+  comment: { max: 30 },
 }
 
 const onChangeGenderVisible = () => {

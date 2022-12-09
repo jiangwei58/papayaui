@@ -165,41 +165,41 @@ defineExpose({
   &.shrink .#{$prefix}-tab {
     flex: none;
   }
-}
-.#{$prefix}-tabs-scroll {
-  height: 100%;
-}
-.#{$prefix}-tabs-wrapper {
-  position: relative;
-  display: flex;
-  height: 100%;
-  user-select: none;
-}
-.#{$prefix}-tab {
-  position: relative;
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  padding: 0 4px;
-  color: _var(color-text-black-2);
-  font-size: _var(tabs-font-size);
-  line-height: 20px;
-  min-width: _var(tabs-line-width);
-  &.active {
-    color: _var(color-text-black);
-    font-weight: 500;
+  &-scroll {
+    height: 100%;
   }
-}
-.#{$prefix}-tabs__line {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: 1;
-  width: _var(tabs-line-width);
-  height: _var(tabs-line-height);
-  background-color: _var(color-primary);
-  border-radius: 3rpx;
+  &-wrapper {
+    position: relative;
+    display: flex;
+    height: 100%;
+    user-select: none;
+  }
+  .#{$prefix}-tab {
+    position: relative;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 0 4px;
+    color: _var(color-text-black-2);
+    font-size: _var(tabs-font-size);
+    line-height: 20px;
+    min-width: _var(tabs-line-width);
+    &.active {
+      color: _var(color-text-black);
+      font-weight: 500;
+    }
+  }
+  &__line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    width: _var(tabs-line-width);
+    height: _var(tabs-line-height);
+    background-color: _var(color-primary);
+    border-radius: 3rpx;
+  }
 }
 </style>

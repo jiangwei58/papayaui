@@ -38,14 +38,14 @@ const emit = defineEmits<{
 .#{$prefix}-section {
   font-weight: 400;
   padding: _var(section-padding);
-  .#{$prefix}-section-line {
+  &-line {
     width: 4px;
     height: 12px;
     border-radius: 10px;
     margin-right: 6px;
     background-color: _var(color-primary);
   }
-  .#{$prefix}-section-title {
+  &-title {
     font-size: _var(section-font-size);
     color: _var(color-text-black);
   }

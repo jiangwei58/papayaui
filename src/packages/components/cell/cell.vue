@@ -101,17 +101,17 @@ const onClick = (event: MouseEvent) => {
   font-size: _var(cell-font-size);
   line-height: _var(cell-line-height);
   overflow: hidden;
-  &.#{$prefix}-cell__clickable:active {
+  &__clickable:active {
     background-color: _var(color-page-bg-gray);
   }
-  &.#{$prefix}-cell--required::before {
+  &--required::before {
     position: absolute;
     left: 8px;
     color: #ee0a24;
     font-size: 14px;
     content: '*';
   }
-  &.#{$prefix}-cell--border::after {
+  &--border::after {
     position: absolute;
     box-sizing: border-box;
     content: ' ';
@@ -123,25 +123,25 @@ const onClick = (event: MouseEvent) => {
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
   }
-}
-.#{$prefix}-cell__title,
-.#{$prefix}-cell__value {
-  flex: 1;
-}
-.#{$prefix}-cell__value {
-  position: relative;
-  overflow: hidden;
-  color: _var(color-text-black-3);
-  text-align: right;
-  vertical-align: middle;
-  word-wrap: break-word;
-}
-.#{$prefix}-cell__icon {
-  font-weight: bold;
-}
-.#{$prefix}-cell__error-message {
-  color: _var(color-error);
-  font-size: 12px;
-  text-align: left;
+  &__title,
+  &__value {
+    flex: 1;
+  }
+  &__value {
+    position: relative;
+    overflow: hidden;
+    color: _var(color-text-black-3);
+    text-align: right;
+    vertical-align: middle;
+    word-wrap: break-word;
+  }
+  &__icon {
+    font-weight: bold;
+  }
+  &__error-message {
+    color: _var(color-error);
+    font-size: 12px;
+    text-align: left;
+  }
 }
 </style>

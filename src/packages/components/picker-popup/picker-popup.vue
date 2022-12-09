@@ -1,5 +1,6 @@
 <template>
   <BottomPopup
+    :class="computedClass('picker-popup')"
     :show="show"
     :title="title"
     :height="height"
@@ -8,7 +9,7 @@
     @close="onClose"
     @confirm="onOk"
   >
-    <view class="content flex flex-col">
+    <view :class="computedClass('picker-popup-content')" class="flex flex-col">
       <Search
         v-if="showSearch"
         v-model="searchText"
@@ -63,7 +64,7 @@ import { watch, toRefs, ref, computed } from 'vue'
 import BottomPopup from '../bottom-popup/bottom-popup.vue'
 import Icon from '../icon/icon.vue'
 import Search from '../search/search.vue'
-import { PREFIX } from '../../utils/style'
+import { computedClass, PREFIX } from '../../utils/style'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import ButtonComponent from '../button/button.vue'
 import Loadmore from '../loadmore/loadmore.vue'
@@ -233,8 +234,11 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
-.content {
-  position: relative;
-  height: 100%;
+@import '../../styles/vars.scss';
+.#{$prefix}-picker-popup {
+  &-content {
+    position: relative;
+    height: 100%;
+  }
 }
 </style>

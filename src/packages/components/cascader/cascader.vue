@@ -373,11 +373,13 @@ defineExpose({
 
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
-.#{$prefix}-cascader-content {
-  position: relative;
-  height: 100%;
-}
-.#{$prefix}-cascader-search {
-  @include _setVar(search-padding, 0 12px);
+.#{$prefix}-cascader {
+  &-content {
+    position: relative;
+    height: 100%;
+  }
+  &-search {
+    @include _setVar(search-padding, 0 12px);
+  }
 }
 </style>

@@ -50,8 +50,8 @@ const contentHeight = computed(() => {
 @import '../../styles/vars.scss';
 .#{$prefix}-nav-bar {
   position: relative;
-}
-.#{$prefix}-nav-bar-content {
-  display: block;
+  &-content {
+    display: block;
+  }
 }
 </style>
