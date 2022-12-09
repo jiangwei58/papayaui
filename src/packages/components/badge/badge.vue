@@ -2,7 +2,7 @@
   <view :class="computedClass('badge')">
     <slot></slot>
     <view
-      v-if="show"
+      v-if="visible"
       :class="
         computedClass('badge__content', {
           'badge--dot': dot,
@@ -48,7 +48,13 @@ const props = withDefaults(defineProps<BadgeProps>(), {
   color: `var(--${PREFIX}-color-danger)`,
   max: undefined,
   offset: () => [0, 0],
+  showZero: false,
   show: true,
+})
+
+const visible = computed<boolean>(() => {
+  if (!props.showZero && Number(props.content) === 0) return false
+  return props.show
 })
 
 const value = computed(() => {
