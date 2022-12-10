@@ -1,3 +1,5 @@
+import { CSSProperties } from 'vue'
+
 export const PREFIX = 'pa'
 
 export const computedClass = (
@@ -16,4 +18,13 @@ export const computedClass = (
     }
   })
   return result.join(' ')
+}
+
+export const computedStyle = (style: CSSProperties) => {
+  for (const key in style) {
+    if (typeof style[key as keyof CSSProperties] === 'undefined') {
+      delete style[key as keyof CSSProperties]
+    }
+  }
+  return style
 }

@@ -1,25 +1,36 @@
 <template>
   <view
     :class="computedClass('iconfont', `icon-${name}`)"
-    :style="{ display: block ? 'block' : 'inline-block', fontSize: getUnitValue(size), color }"
+    :style="
+      computedStyle({
+        display: block ? 'block' : undefined,
+        fontSize: size ? getUnitValue(size) : undefined,
+        color,
+      })
+    "
     @click="emit('click', $event)"
   />
 </template>
 
 <script lang="ts" setup>
+import { CSSProperties } from 'vue'
 import { getUnitValue } from '../../utils/common'
-import { computedClass } from '../../utils/style'
+import { computedClass, computedStyle } from '../../utils/style'
 
 export interface IconProps {
+  /** 图标名称 */
   name: string
+  /** 图标大小 */
   size?: string
-  color?: string
+  /** 图标颜色 */
+  color?: CSSProperties['color']
+  /** 是否块级元素 */
   block?: boolean
 }
 
 withDefaults(defineProps<IconProps>(), {
-  size: '16px',
-  color: '#969799',
+  size: undefined,
+  color: undefined,
 })
 
 const emit = defineEmits<{
@@ -31,6 +42,8 @@ const emit = defineEmits<{
 @import '../../styles/vars.scss';
 .#{$prefix}-iconfont {
   position: relative;
+  display: inline-block;
+  color: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
 }
