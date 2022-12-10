@@ -43,6 +43,7 @@
           v-if="!filterOptions.length || !!pagination"
           class="flex flex-col justify-center"
           :class="{ 'height-full': !filterOptions.length }"
+          @tap="onScrolltolower"
         >
           <loadmore :status="loadStatus" :config="{ nomore: '无数据' }" />
         </view>
