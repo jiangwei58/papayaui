@@ -132,6 +132,13 @@
       "type": "show"
     },
     {
+      "path": "packages/components/steps/demo",
+      "style": {
+        "navigationBarTitleText": "Steps 步骤条"
+      },
+      "type": "show"
+    },
+    {
       "path": "packages/components/picker-popup/demo",
       "style": {
         "navigationBarTitleText": "PickerPopup 选择弹窗"
