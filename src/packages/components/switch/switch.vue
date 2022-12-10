@@ -10,22 +10,15 @@
     @tap="onToggle"
   >
     <view :class="computedClass('switch__node')">
-      <Loadmore
-        v-if="loading"
-        class="pl-16"
-        :config="{ loading: '' }"
-        :status="LoadStatusEnum.LOADING"
-        icon-size="16px"
-      />
+      <LoadingIcon v-if="loading" size="18px" />
     </view>
   </view>
 </template>
 
 <script lang="ts" setup>
 import { computed, CSSProperties } from 'vue'
-import { LoadStatusEnum } from '../../hooks'
 import { computedClass } from '../../utils/style'
-import Loadmore from '../loadmore/loadmore.vue'
+import LoadingIcon from '../loading-icon/loading-icon.vue'
 
 export type SwitchValue = boolean | string | number
 

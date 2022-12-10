@@ -1,24 +1,7 @@
 <template>
   <view :class="computedClass('loadmore')">
-    <view
-      v-if="status === 'loading'"
-      :style="{ width: getUnitValue(iconSize), height: getUnitValue(iconSize) }"
-      class="loadmore_img loadmore_img_weixin"
-    >
-      <view
-        class="loadmore_img-icon"
-        :style="{ borderTopColor: color, borderTopWidth: 20 / 12 }"
-      ></view>
-      <view
-        class="loadmore_img-icon"
-        :style="{ borderTopColor: color, borderTopWidth: 20 / 12 }"
-      ></view>
-      <view
-        class="loadmore_img-icon"
-        :style="{ borderTopColor: color, borderTopWidth: 20 / 12 }"
-      ></view>
-    </view>
-    <text v-if="showText" class="loadmore_text" :style="{ color: textColor }">
+    <LoadingIcon v-if="status === 'loading'" :size="iconSize" :color="color" />
+    <text v-if="showText" :class="computedClass('loadmore__text')" :style="{ color: textColor }">
       {{
         status === 'loadmore'
           ? localConfig.loadmore
@@ -31,9 +14,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
-import { getUnitValue } from '../../utils'
+import { computed, CSSProperties } from 'vue'
 import { computedClass, PREFIX } from '../../utils/style'
+import LoadingIcon from '../loading-icon/loading-icon.vue'
 
 export interface LoadStatus {
   loadmore: string
@@ -47,9 +30,9 @@ export interface LoadmoreProps {
   /** 当前状态 */
   status?: keyof LoadStatus
   /** 加载图标颜色 */
-  color?: string
+  color?: CSSProperties['color']
   /** 文字颜色 */
-  textColor?: string
+  textColor?: CSSProperties['color']
   /** 加载图标大小 */
   iconSize?: string
   /** 显示文字 */
@@ -83,88 +66,9 @@ const localConfig = computed<LoadStatus>(() => {
   height: 40px;
   align-items: center;
   justify-content: center;
-}
-
-.loadmore_text {
-  font-size: 14px;
-  margin-left: 8px;
-}
-
-.loadmore_img {
-  width: 24px;
-  height: 24px;
-}
-
-.loadmore_img_weixin {
-  position: relative;
-  width: 24px;
-  height: 24px;
-  transform: rotate(0deg);
-  animation: loading-ios 1s 0s ease infinite;
-}
-
-.loadmore_img_weixin .loadmore_img-icon {
-  position: absolute;
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: solid 2px transparent;
-  border-top: solid 2px #777777;
-  transform-origin: center;
-}
-
-.loadmore_img_weixin .loadmore_img-icon:nth-child(1) {
-  animation: loading-animation-1 1s 0s linear infinite;
-}
-
-.loadmore_img_weixin .loadmore_img-icon:nth-child(2) {
-  animation: loading-animation-2 1s 0s linear infinite;
-}
-
-.loadmore_img_weixin .loadmore_img-icon:nth-child(3) {
-  animation: loading-animation-3 1s 0s linear infinite;
-}
-
-@keyframes loading-animation-1 {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  50% {
-    transform: rotate(90deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes loading-animation-2 {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  50% {
-    transform: rotate(180deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes loading-animation-3 {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  50% {
-    transform: rotate(270deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
+  &__text {
+    font-size: 14px;
+    margin-left: 8px;
   }
 }
 </style>
