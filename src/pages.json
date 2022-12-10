@@ -104,6 +104,13 @@
       "type": "form"
     },
     {
+      "path": "packages/components/switch/demo",
+      "style": {
+        "navigationBarTitleText": "Switch 开关"
+      },
+      "type": "form"
+    },
+    {
       "path": "packages/components/cascader/demo",
       "style": {
         "navigationBarTitleText": "Cascader 级联选择"

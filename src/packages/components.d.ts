@@ -27,6 +27,7 @@ import Popup from './components/popup/popup.vue'
 import Section from './components/section/section.vue'
 import Badge from './components/badge/badge.vue'
 import Steps from './components/steps/steps.vue'
+import Switch from './components/switch/switch.vue'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
@@ -59,5 +60,6 @@ declare module '@vue/runtime-core' {
     'pa-section': typeof Section
     'pa-badge': typeof Badge
     'pa-steps': typeof Steps
+    'pa-switch': typeof Switch
   }
 }
