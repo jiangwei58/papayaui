@@ -52,7 +52,9 @@
 
     <template v-if="safeAreaInsetBottom && multiple" #footer>
       <view class="px-26 pt-15 flex-shrink-0">
-        <ButtonComponent type="primary" @click="onOk()">{{ confirmButtonText }}</ButtonComponent>
+        <ButtonComponent type="primary" block @click="onOk()">
+          {{ confirmButtonText }}
+        </ButtonComponent>
       </view>
       <SafeBottom />
     </template>
