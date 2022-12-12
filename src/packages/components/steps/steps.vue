@@ -5,23 +5,48 @@
       :key="index"
       :class="
         computedClass('steps-item', {
-          'steps-item--process': index === current,
-          'steps-item--finish': index < current,
+          [`steps-item--${getStatus(index)}`]: true,
         })
       "
+      @tap="emit('click-step', index)"
     >
       <view :class="computedClass('steps-item-head')">
-        <view :class="computedClass('steps-item-line')"></view>
+        <view :class="[computedClass('steps-item-line'), { custom: $slots.icon }]"></view>
         <view :class="computedClass('steps-item-wrapper')">
-          <view :class="computedClass('steps-item-icon')">
-            <Icon v-if="index < current" name="success" size="13px" color="var(color-primary)" />
+          <slot
+            v-if="$slots.icon"
+            name="icon"
+            :item="item"
+            :index="index"
+            :status="getStatus(index)"
+          />
+          <view v-else :class="computedClass('steps-item-icon')">
+            <Icon v-if="index < current" name="success" />
             <text v-else>{{ index + 1 }}</text>
           </view>
         </view>
       </view>
       <view :class="computedClass('steps-item-content')">
-        <view :class="computedClass('steps-item-title')">{{ item.title }}</view>
-        <view :class="computedClass('steps-item-desc')">{{ item.desc }}</view>
+        <view :class="computedClass('steps-item-title')">
+          <slot
+            v-if="$slots.title"
+            name="title"
+            :item="item"
+            :index="index"
+            :status="getStatus(index)"
+          />
+          <text v-else>{{ item.title }}</text>
+        </view>
+        <view :class="computedClass('steps-item-desc')">
+          <slot
+            v-if="$slots.title"
+            name="desc"
+            :item="item"
+            :index="index"
+            :status="getStatus(index)"
+          />
+          <text v-else>{{ item.desc }}</text>
+        </view>
       </view>
     </view>
   </view>
@@ -30,6 +55,9 @@
 <script lang="ts" setup>
 import { computedClass } from '../../utils/style'
 import Icon from '../icon/icon.vue'
+
+/** 步骤状态 */
+export type StepStatus = 'default' | 'process' | 'finish'
 
 export type StepItem = {
   title: string
@@ -43,17 +71,28 @@ export interface StepsProps {
   direction?: 'horizontal' | 'vertical'
 }
 
-withDefaults(defineProps<StepsProps>(), {
+const props = withDefaults(defineProps<StepsProps>(), {
   current: 0,
   steps: () => [],
   direction: 'horizontal',
 })
+
+const getStatus = (index: number): StepStatus => {
+  if (index === props.current) return 'process'
+  if (index < props.current) return 'finish'
+  return 'default'
+}
+
+const emit = defineEmits<{
+  (event: 'click-step', index: number): void
+}>()
 </script>
 
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
 .#{$prefix}-steps {
   $gap: 8px;
+  $iconSize: 20px;
   display: flex;
   &-item {
     flex: 1;
@@ -85,8 +124,8 @@ withDefaults(defineProps<StepsProps>(), {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 20px;
-      height: 20px;
+      width: $iconSize;
+      height: $iconSize;
       font-size: 12px;
       color: _var(color-text-black-3);
       border: 1px solid _var(color-text-black-3);
@@ -152,8 +191,8 @@ withDefaults(defineProps<StepsProps>(), {
       height: 100%;
     }
     &-wrapper {
+      height: 20px + $gap;
       padding-bottom: $gap;
-      background-color: transparent;
     }
     &-content {
       align-items: flex-start;
@@ -162,7 +201,15 @@ withDefaults(defineProps<StepsProps>(), {
     &-line {
       width: 1px;
       height: 100%;
-      top: 0;
+      top: auto;
+      bottom: $gap;
+      height: calc(100% - $gap - $iconSize);
+    }
+  }
+
+  &-item {
+    &-line.custom {
+      bottom: 0;
     }
   }
 }
