@@ -108,6 +108,8 @@ export interface PickerPopupProps {
   initData?: boolean
   /** 确认按钮的文案 */
   confirmButtonText?: string
+  /** 确定后是否重置数据 */
+  resetAfterConfirm?: boolean
 }
 
 const props = withDefaults(defineProps<PickerPopupProps>(), {
@@ -150,6 +152,7 @@ const {
   selectedValues,
   isSelected,
   onSelect: _onSelect,
+  onClear: _onClear,
 } = useSelect<Option, OptionValue>({
   options,
   valueKey,
@@ -219,6 +222,9 @@ const onOk = () => {
   emit('update:modelValue', selectedValues.value)
   emit('change', selectedItems.value)
   onClose()
+  if (props.resetAfterConfirm) {
+    onReset()
+  }
 }
 
 const onClose = () => {
@@ -227,12 +233,18 @@ const onClose = () => {
 }
 
 const onReset = () => {
+  _onClear()
+}
+
+const onClean = () => {
   pageNumber.value = 0
   options.value = []
+  onReset()
 }
 
 defineExpose({
-  onReset,
+  reset: onReset,
+  clean: onClean,
 })
 </script>
 
