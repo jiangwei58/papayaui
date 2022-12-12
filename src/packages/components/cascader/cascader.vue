@@ -138,6 +138,8 @@ export interface CascaderProps {
   confirmButtonText?: string
   /** 重置按钮文案 */
   resetButtonText?: string
+  /** 确定后是否重置数据 */
+  resetAfterConfirm?: boolean
 }
 
 const props = withDefaults(defineProps<CascaderProps>(), {
@@ -346,28 +348,38 @@ const onConfirm = () => {
     isSearch: localState.value.isSearch,
   })
   onClose()
-}
-
-const onReset = () => {
-  tabActive.value = 0
-  currentIndexs.value = []
-  clearSelect()
+  if (props.resetAfterConfirm) {
+    onReset()
+  }
 }
 
 const onClose = () => {
-  // currentIndexs.value = []
-  // tabActive.value = 0
   searchText.value = ''
   emit('update:show', false)
 }
 
+/** 重置数据（清除选中数据，还原tab选中状态） */
+const onReset = () => {
+  tabActive.value = 0
+  currentIndexs.value = []
+  onClearSelected()
+}
+
+/** 清除所有数据 */
 const onClean = () => {
   treeData.value = []
   onReset()
 }
 
+/** 清除选中数据 */
+const onClearSelected = () => {
+  clearSelect()
+}
+
 defineExpose({
   clean: onClean,
+  reset: onReset,
+  clearSelected: onClearSelected,
 })
 </script>
 
