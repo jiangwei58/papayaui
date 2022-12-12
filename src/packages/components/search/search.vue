@@ -7,8 +7,10 @@
       :placeholder="placeholder"
       value-align="left"
       center
+      :clearable="clearable"
       @update:model-value="onUpdate"
       @confirm="emit('confirm', $event)"
+      @clear="emit('clear')"
     />
   </view>
 </template>
@@ -22,17 +24,21 @@ export interface SearchProps {
   modelValue?: string
   /** 输入提示 */
   placeholder?: string
+  /** 是否显示清除控件 */
+  clearable?: boolean
 }
 
 withDefaults(defineProps<SearchProps>(), {
   modelValue: undefined,
   placeholder: '请输入搜索关键词',
+  clearable: true,
 })
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
   (event: 'change', value: string): void
   (event: 'confirm', value: EventDetail<{ value: string }>): void
+  (event: 'clear'): void
 }>()
 
 const onUpdate = (value: string) => {
