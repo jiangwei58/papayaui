@@ -55,6 +55,8 @@ export interface CheckboxProps {
   bgColor?: string
   /** 圆角大小, 值为true时半圆角 */
   round?: true | string
+  /** 是否支持反选 */
+  inverse?: boolean
 }
 
 const props = withDefaults(defineProps<CheckboxProps>(), {
@@ -67,6 +69,7 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
   multiple: false,
   bgColor: '#F2F3F5',
   round: '4rpx',
+  inverse: true,
 })
 
 const emit = defineEmits<{
@@ -74,7 +77,7 @@ const emit = defineEmits<{
   (event: 'change', item: CheckboxItem, index: number): void
 }>()
 
-const { options, valueKey, modelValue, multiple } = toRefs(props)
+const { options, valueKey, modelValue, multiple, inverse } = toRefs(props)
 
 const {
   selectedItems,
@@ -86,6 +89,7 @@ const {
   valueKey,
   defaultValue: modelValue,
   multiple,
+  inverse,
 })
 
 const onSelect = (item: CheckboxItem, index: number) => {
