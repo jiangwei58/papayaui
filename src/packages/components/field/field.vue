@@ -48,6 +48,14 @@
         @blur="emit('blur', $event)"
         @confirm="emit('confirm', $event)"
       />
+      <Icon
+        v-if="clearable && !!modelValue"
+        name="close-circle-fill"
+        class="block ml-15"
+        size="18px"
+        style="height: 18px"
+        @tap="onClear"
+      />
     </view>
   </Cell>
 </template>
@@ -58,6 +66,7 @@ import { getUnitValue } from '../../utils'
 import { computedClass, PREFIX } from '../../utils/style'
 import Cell from '../cell/cell.vue'
 import { CellProps } from '../cell/cell.vue'
+import Icon from '../icon/icon.vue'
 
 export interface FieldProps
   extends Pick<
@@ -73,6 +82,8 @@ export interface FieldProps
   placeholder?: string
   /** 是否禁用 */
   disabled?: boolean
+  /** 是否显示清除控件 */
+  clearable?: boolean
   /** 是否只用输入框（主要用于表单情况） */
   onlyInput?: boolean
   /** 自动高度（textarea生效） */
@@ -120,6 +131,7 @@ const emit = defineEmits<{
   (event: 'input', value: string): void
   (event: 'blur', value: FocusEvent): void
   (event: 'confirm', value: EventDetail<{ value: string }>): void
+  (event: 'clear'): void
 }>()
 
 const onInput = (payload: Event) => {
@@ -127,11 +139,24 @@ const onInput = (payload: Event) => {
   emit('update:modelValue', value)
   emit('input', value)
 }
+
+const onClear = () => {
+  emit('update:modelValue', '')
+  emit('clear')
+}
 </script>
 
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
 .#{$prefix}-field {
+  &__body {
+    display: flex;
+    align-items: center;
+    > input,
+    > textarea {
+      flex: 1;
+    }
+  }
   &__input {
     color: _var(field-input-color);
   }

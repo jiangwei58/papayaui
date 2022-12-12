@@ -3,8 +3,10 @@
     :class="computedClass('iconfont', `icon-${name}`)"
     :style="
       computedStyle({
+        ...customStyle,
         display: block ? 'block' : undefined,
         fontSize: size ? getUnitValue(size) : undefined,
+        lineHeight: size ? getUnitValue(size) : undefined,
         color,
       })
     "
@@ -26,11 +28,14 @@ export interface IconProps {
   color?: CSSProperties['color']
   /** 是否块级元素 */
   block?: boolean
+  /** 自定义样式 */
+  customStyle?: CSSProperties
 }
 
 withDefaults(defineProps<IconProps>(), {
   size: undefined,
   color: undefined,
+  customStyle: undefined,
 })
 
 const emit = defineEmits<{

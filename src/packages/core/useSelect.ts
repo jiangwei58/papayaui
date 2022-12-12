@@ -10,7 +10,7 @@ export interface UseSelectProps<T, V> {
   valueKey?: keyof T
   /** 是否多选 */
   multiple?: boolean
-  /** 是否支持反选（只在单选有效） */
+  /** 是否支持反选（只在单选有效，多选强制支持） */
   inverse?: boolean
 }
 

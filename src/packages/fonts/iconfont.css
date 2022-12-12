@@ -1,8 +1,8 @@
 @font-face {
   font-family: "pa-iconfont"; /* Project id 3668565 */
-  src: url('iconfont.woff2?t=1670502699059') format('woff2'),
-       url('iconfont.woff?t=1670502699059') format('woff'),
-       url('iconfont.ttf?t=1670502699059') format('truetype');
+  src: url('iconfont.woff2?t=1670832958205') format('woff2'),
+       url('iconfont.woff?t=1670832958205') format('woff'),
+       url('iconfont.ttf?t=1670832958205') format('truetype');
 }
 
 .pa-iconfont {
@@ -11,6 +11,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.pa-icon-close-circle-fill:before {
+  content: "\e845";
 }
 
 .pa-icon-minus-square:before {
