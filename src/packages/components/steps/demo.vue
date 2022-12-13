@@ -28,7 +28,7 @@
         <text class="text-black-2">{{ steps[index].desc }}</text>
       </template>
     </pa-steps>
-    <view style="height: 200px; margin-top: 60px">
+    <view style="margin-top: 60px">
       <pa-steps :steps="steps" :current="current" direction="vertical">
         <template #icon="{ index }">
           <view
@@ -43,7 +43,9 @@
           <text class="color-primary">{{ steps[index].title }}-{{ status }}</text>
         </template>
         <template #desc="{ index }">
-          <text class="text-black-2">{{ steps[index].desc }}</text>
+          <view style="height: 50px">
+            <text class="text-black-2">{{ steps[index].desc }}</text>
+          </view>
         </template>
       </pa-steps>
     </view>

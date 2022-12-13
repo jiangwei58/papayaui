@@ -10,7 +10,10 @@
       "
       @tap="emit('click-step', index)"
     >
-      <view :class="computedClass('steps-item-head')">
+      <view
+        :class="computedClass('steps-item-head')"
+        :style="computedStyle({ height: headHeights[index] })"
+      >
         <view :class="[computedClass('steps-item-line'), { custom: $slots.icon }]"></view>
         <view :class="computedClass('steps-item-wrapper')">
           <slot
@@ -39,7 +42,7 @@
         </view>
         <view :class="computedClass('steps-item-desc')">
           <slot
-            v-if="$slots.title"
+            v-if="$slots.desc"
             name="desc"
             :item="item"
             :index="index"
@@ -53,7 +56,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computedClass } from '../../utils/style'
+import { CSSProperties, getCurrentInstance, onMounted, ref, useSlots, watch } from 'vue'
+import { useRect } from '../../hooks'
+import { computedClass, computedStyle } from '../../utils/style'
 import Icon from '../icon/icon.vue'
 
 /** 步骤状态 */
@@ -71,11 +76,20 @@ export interface StepsProps {
   direction?: 'horizontal' | 'vertical'
 }
 
+const instance = getCurrentInstance()
+const slots = useSlots()
+
 const props = withDefaults(defineProps<StepsProps>(), {
   current: 0,
   steps: () => [],
   direction: 'horizontal',
 })
+
+const emit = defineEmits<{
+  (event: 'click-step', index: number): void
+}>()
+
+const headHeights = ref<CSSProperties['height'][]>([])
 
 const getStatus = (index: number): StepStatus => {
   if (index === props.current) return 'process'
@@ -83,9 +97,22 @@ const getStatus = (index: number): StepStatus => {
   return 'default'
 }
 
-const emit = defineEmits<{
-  (event: 'click-step', index: number): void
-}>()
+const updateHeadHeight = async () => {
+  if (!instance || props.direction !== 'vertical' || !slots.icon) return
+  const rects = await useRect(instance, `.${computedClass('steps-item')}`, true)
+  headHeights.value = rects.map((item) => `${item.height}px` || '100%')
+}
+
+watch(
+  () => [props.steps, props.direction, slots.icon],
+  () => {
+    updateHeadHeight()
+  },
+)
+
+onMounted(() => {
+  updateHeadHeight()
+})
 </script>
 
 <style lang="scss" scoped>
@@ -200,10 +227,9 @@ const emit = defineEmits<{
     }
     &-line {
       width: 1px;
-      height: 100%;
+      height: calc(100% - $gap - $iconSize);
       top: auto;
       bottom: $gap;
-      height: calc(100% - $gap - $iconSize);
     }
   }
 
