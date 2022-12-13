@@ -12,8 +12,8 @@
       <view class="px-20">{{ text }}</view>
       <template #footer>
         <view class="flex justify-around px-26">
-          <pa-button type="default" style="width: 50%">取消</pa-button>
-          <pa-button class="ml-15" style="width: 50%">确定</pa-button>
+          <pa-button type="default" block style="width: 50%">取消</pa-button>
+          <pa-button class="ml-15" block style="width: 50%">确定</pa-button>
         </view>
       </template>
     </pa-bottom-popup>

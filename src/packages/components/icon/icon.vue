@@ -6,7 +6,6 @@
         ...customStyle,
         display: block ? 'block' : undefined,
         fontSize: size ? getUnitValue(size) : undefined,
-        lineHeight: size ? getUnitValue(size) : undefined,
         color,
       })
     "
@@ -51,5 +50,6 @@ const emit = defineEmits<{
   color: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
+  vertical-align: middle;
 }
 </style>

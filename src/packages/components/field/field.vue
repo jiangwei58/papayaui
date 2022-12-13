@@ -53,7 +53,6 @@
         name="close-circle-fill"
         class="block ml-15"
         size="18px"
-        style="height: 18px"
         @tap="onClear"
       />
     </view>
