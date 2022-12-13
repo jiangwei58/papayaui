@@ -125,16 +125,19 @@ class Request {
 
         const isSucceed = newConfig.validateStatus(response.statusCode)
         for (const interceptorItem of this.interceptor.response.list) {
-          if (isSucceed) {
+          if (!isSucceed) {
+            interceptorItem.reject(response)
+            return reject()
+          }
+          try {
             const result = await interceptorItem.resolve(response, newConfig)
             if (result !== false) {
               resolve(result)
             } else {
               reject(response)
             }
-          } else {
-            interceptorItem.reject(response)
-            reject()
+          } catch (e) {
+            reject(response)
           }
         }
       }

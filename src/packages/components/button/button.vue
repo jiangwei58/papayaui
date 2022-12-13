@@ -145,15 +145,12 @@ const customStyle = computed<StyleValue>(() => {
 const onClick = async (event: MouseEvent) => {
   if (clickLoading.value) return
   if (typeof props.syncClick === 'function') {
-    try {
-      const result = props.syncClick()
-      if (result instanceof Promise) {
-        clickLoading.value = true
-        await result
+    const result = props.syncClick()
+    if (result instanceof Promise) {
+      clickLoading.value = true
+      result.finally(() => {
         clickLoading.value = false
-      }
-    } catch (e) {
-      clickLoading.value = false
+      })
     }
   } else {
     emit('click', event)
