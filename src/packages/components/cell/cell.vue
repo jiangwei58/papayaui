@@ -12,7 +12,7 @@
     hover-class="clickable-hover"
     @click="onClick"
   >
-    <Icon v-if="icon" :name="icon" block class="mr-4" />
+    <Icon v-if="icon" :name="icon" block :class="computedClass('cell__icon')" class="mr-4" />
     <view
       v-if="!!title || $slots.title"
       :class="computedClass('cell__title')"
@@ -34,7 +34,7 @@
     </view>
     <Icon
       v-if="isLink"
-      :class="computedClass('cell__icon')"
+      :class="computedClass('cell__icon-right')"
       name="right"
       size="18px"
       class="ml-8"
@@ -127,6 +127,7 @@ const onClick = (event: MouseEvent) => {
   &__value {
     flex: 1;
   }
+  &__icon,
   &__title {
     color: _var(color-text-black);
   }
@@ -137,7 +138,7 @@ const onClick = (event: MouseEvent) => {
     vertical-align: middle;
     word-wrap: break-word;
   }
-  &__icon {
+  &__icon-right {
     font-weight: bold;
   }
   &__error-message {

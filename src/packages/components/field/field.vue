@@ -4,12 +4,13 @@
     :border="false"
     v-bind="$props"
   >
-    <view :class="computedClass('field__body')">
+    <view :class="computedClass('field__body')" @tap="emit('click-input', $event)">
       <input
         v-if="type !== 'textarea'"
         :class="computedClass('field__input')"
         :type="type"
         :value="modelValue"
+        :disabled="disabled"
         :placeholder="placeholder"
         :placeholder-style="`color:var(--${PREFIX}-number-input-placeholder-color)`"
         :style="{ textAlign: valueAlign }"
@@ -31,6 +32,7 @@
         v-else
         :class="computedClass('field__input')"
         :value="modelValue"
+        :disabled="disabled"
         :placeholder="placeholder"
         :placeholder-style="`color:var(--${PREFIX}-number-input-placeholder-color)`"
         :style="{ textAlign: valueAlign, width: '100%', height: getUnitValue(height) }"
@@ -131,6 +133,7 @@ const emit = defineEmits<{
   (event: 'blur', value: FocusEvent): void
   (event: 'confirm', value: EventDetail<{ value: string }>): void
   (event: 'clear'): void
+  (event: 'click-input', value: Event): void
 }>()
 
 const onInput = (payload: Event) => {
