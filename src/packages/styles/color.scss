@@ -1,5 +1,7 @@
 // 主色
 $color-primary: #009c5d;
+// 成功色
+$color-success: #07c160;
 // 警告色
 $color-warning: #faab0c;
 // 危险色
@@ -13,6 +15,7 @@ $color-text-black-3: #969799;
 
 $colors: (
   primary: $color-primary,
+  success: $color-success,
   warning: $color-warning,
   danger: $color-danger,
   error: $color-error,

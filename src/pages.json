@@ -146,6 +146,13 @@
       "type": "show"
     },
     {
+      "path": "packages/components/tag/demo",
+      "style": {
+        "navigationBarTitleText": "Tag 标签"
+      },
+      "type": "show"
+    },
+    {
       "path": "packages/components/picker-popup/demo",
       "style": {
         "navigationBarTitleText": "PickerPopup 选择弹窗"
