@@ -21,12 +21,9 @@
     </pa-cell-group>
   </DocDemoBlock>
 
-  <pa-popup
-    v-model:show="visible"
-    :position="position"
-    :closeable="closeable"
-    :round="round"
-  ></pa-popup>
+  <pa-popup v-model:show="visible" :position="position" :closeable="closeable" :round="round">
+    <view style="width: 200px; height: 200px"></view>
+  </pa-popup>
 </template>
 
 <script lang="ts" setup>

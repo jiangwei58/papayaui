@@ -1,9 +1,7 @@
 <template>
   <view
     v-if="state.inited"
-    ref="u-transition"
-    class="u-transition"
-    :class="state.classes"
+    :class="[computedClass('transition'), state.classes]"
     :style="mergeStyle"
     @tap="clickHandler"
     @touchmove="noop"
@@ -15,7 +13,7 @@
 <script lang="ts" setup>
 import { computed, CSSProperties, nextTick, reactive, watch } from 'vue'
 import { noop } from '../../utils/common'
-import { PREFIX } from '../../utils/style'
+import { computedClass, PREFIX } from '../../utils/style'
 
 /**
  * 动画内置的动画模式有如下：
@@ -82,7 +80,7 @@ const emit = defineEmits<{
 
 const state = reactive<{
   inited: boolean // 是否显示/隐藏组件
-  status: string // 记录组件动画的状态
+  status: '' | 'enter' | 'leave' // 记录组件动画的状态
   transitionEnded: boolean // 组件是否结束的标记
   display: boolean // 组件是否展示
   classes: string // 应用的类名
