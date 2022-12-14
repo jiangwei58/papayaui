@@ -56,6 +56,9 @@ export const loopTree = <T>(
   }
 }
 
+/** 空函数 */
+export const noop: (...args: any[]) => any = () => {}
+
 /** 防抖 */
 export const debounce = (fn: (...args: any[]) => any, delay = 0) => {
   let t: number | null = null

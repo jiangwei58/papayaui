@@ -40,6 +40,7 @@ onMounted(() => {
     form: { title: '表单组件', index: 2 },
     nav: { title: '导航组件', index: 3 },
     show: { title: '展示组件', index: 4 },
+    other: { title: '其他组件', index: 5 },
   }
   const data: NavGroupItem[] = []
   pageConfig.pages.forEach((page) => {

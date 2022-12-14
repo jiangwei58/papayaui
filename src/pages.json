@@ -179,6 +179,13 @@
         "navigationBarTitleText": "Watermark 水印"
       },
       "type": "show"
+    },
+    {
+      "path": "packages/components/transition/demo",
+      "style": {
+        "navigationBarTitleText": "Transition 动画"
+      },
+      "type": "other"
     }
   ],
   "globalStyle": {

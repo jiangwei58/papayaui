@@ -1,0 +1,123 @@
+/**
+ * 动画内置的动画模式有如下：
+ * fade：淡入
+ * zoom：缩放
+ * fade-zoom：缩放淡入
+ * fade-up：上滑淡入
+ * fade-down：下滑淡入
+ * fade-left：左滑淡入
+ * fade-right：右滑淡入
+ * slide-up：上滑进入
+ * slide-down：下滑进入
+ * slide-left：左滑进入
+ * slide-right：右滑进入
+ */
+
+@import '../../styles/vars.scss';
+
+$transform-zoom-scale: scale(0.95);
+
+.#{$prefix} {
+  &-fade {
+    &-enter-active,
+    &-leave-active {
+      transition-property: opacity;
+    }
+
+    &-enter,
+    &-leave-to {
+      opacity: 0;
+    }
+
+    &-zoom-enter,
+    &-zoom-leave-to {
+      transform: $transform-zoom-scale;
+      opacity: 0;
+    }
+
+    &-zoom-enter-active,
+    &-zoom-leave-active {
+      transition-property: transform, opacity;
+    }
+
+    &-down-enter-active,
+    &-down-leave-active,
+    &-left-enter-active,
+    &-left-leave-active,
+    &-right-enter-active,
+    &-right-leave-active,
+    &-up-enter-active,
+    &-up-leave-active {
+      transition-property: opacity, transform;
+    }
+
+    &-up-enter,
+    &-up-leave-to {
+      transform: translate3d(0, 100%, 0);
+      opacity: 0;
+    }
+
+    &-down-enter,
+    &-down-leave-to {
+      transform: translate3d(0, -100%, 0);
+      opacity: 0;
+    }
+
+    &-left-enter,
+    &-left-leave-to {
+      transform: translate3d(-100%, 0, 0);
+      opacity: 0;
+    }
+
+    &-right-enter,
+    &-right-leave-to {
+      transform: translate3d(100%, 0, 0);
+      opacity: 0;
+    }
+  }
+
+  &-slide {
+    &-down-enter-active,
+    &-down-leave-active,
+    &-left-enter-active,
+    &-left-leave-active,
+    &-right-enter-active,
+    &-right-leave-active,
+    &-up-enter-active,
+    &-up-leave-active {
+      transition-property: transform;
+    }
+
+    &-up-enter,
+    &-up-leave-to {
+      transform: translate3d(0, 100%, 0);
+    }
+
+    &-down-enter,
+    &-down-leave-to {
+      transform: translate3d(0, -100%, 0);
+    }
+
+    &-left-enter,
+    &-left-leave-to {
+      transform: translate3d(-100%, 0, 0);
+    }
+
+    &-right-enter,
+    &-right-leave-to {
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+
+  &-zoom {
+    &-enter-active,
+    &-leave-active {
+      transition-property: transform;
+    }
+
+    &-enter,
+    &-leave-to {
+      transform: $transform-zoom-scale;
+    }
+  }
+}
