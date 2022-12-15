@@ -23,7 +23,7 @@
 
 <script lang="ts" setup>
 import { ref, toRefs, watch } from 'vue'
-import { UseTreeFieldNames } from '../../core/useTree'
+import { TreeNode, UseTreeFieldNames } from '../../core/useTree'
 import { LoadStatusEnum } from '../../hooks'
 import { debounce } from '../../utils/common'
 import { computedClass } from '../../utils/style'
@@ -42,9 +42,9 @@ export interface CascaderSearchViewProps {
   safeAreaInsetBottom?: boolean
 }
 
-export interface SearchNode extends CascaderOption {
+export interface SearchNode extends TreeNode<CascaderOption> {
   __label: string
-  __path: number[]
+  __remoteSearch: boolean
 }
 
 const props = defineProps<CascaderSearchViewProps>()
@@ -62,19 +62,21 @@ watch(searchText, (newVal) => {
   debounceUpdateData(newVal)
 })
 
-const getFlattenTreeData = (data: CascaderOption[], filterStr?: string) => {
+const getFlattenTreeData = (data: CascaderOption[], remote?: boolean, filterStr?: string) => {
   const result: SearchNode[] = []
-  const loop = (list: CascaderOption[], prefixLabel = '', path: number[] = []) => {
+  const loop = (list: CascaderOption[], prefixLabel = '', parentPath = '') => {
     list.forEach((item, index) => {
-      const newItem: SearchNode = {
-        ...item,
-        __label: `${prefixLabel}${prefixLabel ? '/' : ''}${item[fieldNames.value.label]}`,
-        __path: path.concat(index),
+      const newItem = item as any
+      const node: SearchNode = {
+        ...newItem,
+        __path: parentPath ? `${parentPath}-${index}` : index.toString(),
+        __label: `${prefixLabel}${prefixLabel ? '/' : ''}${newItem[fieldNames.value.label]}`,
+        __remoteSearch: !!remote,
       }
-      if (item[fieldNames.value.children]?.length) {
-        loop(item[fieldNames.value.children], newItem.__label, newItem.__path)
+      if (newItem[fieldNames.value.children]?.length) {
+        loop(newItem[fieldNames.value.children], node.__label, node.__path)
       } else {
-        ;(filterStr ? newItem.__label.includes(filterStr) : true) && result.push(newItem)
+        ;(filterStr ? node.__label.includes(filterStr) : true) && result.push(node)
       }
     })
   }
@@ -94,10 +96,10 @@ const updateData = async (text: string) => {
     if (res instanceof Promise) {
       res = await res
     }
-    searchData.value = getFlattenTreeData(res)
+    searchData.value = getFlattenTreeData(res, true)
     loading.value = false
   } else {
-    searchData.value = getFlattenTreeData(options.value, text)
+    searchData.value = getFlattenTreeData(options.value, false, text)
   }
 }
 const debounceUpdateData = debounce(updateData, 300)

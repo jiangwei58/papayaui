@@ -88,7 +88,7 @@
 <script lang="ts" setup>
 import { computed, nextTick, ref, toRaw, toRefs, watch } from 'vue'
 import { LoadStatusEnum } from '../../core/useList'
-import useTree, { UseTreeFieldNames } from '../../core/useTree'
+import useTree, { TreeNode, UseTreeFieldNames } from '../../core/useTree'
 import { EventDetail } from '../../types'
 import { computedClass } from '../../utils/style'
 import BottomPopup from '../bottom-popup/bottom-popup.vue'
@@ -98,7 +98,6 @@ import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import Search from '../search/search.vue'
 import Tabs from '../tabs/tabs.vue'
 import ListItem from './list-item.vue'
-// import ListView from './list-view.vue'
 import SearchView, { SearchNode } from './search-view.vue'
 
 export interface CascaderNode<T = any> {
@@ -106,7 +105,7 @@ export interface CascaderNode<T = any> {
   level: number
 }
 
-export type CascaderOption = any
+export type CascaderOption = unknown
 export type CascaderValue = any
 
 export interface CascaderProps {
@@ -182,6 +181,7 @@ const {
   setSelect,
   clearSelect,
   isSelected,
+  getNodePath,
 } = useTree<CascaderOption, CascaderValue>({
   options,
   fieldNames,
@@ -265,7 +265,7 @@ const onScroll = (e: EventDetail<{ scrollTop: number }>) => {
   oldScrollTop = e.detail.scrollTop
 }
 
-const onSelect = async (item: CascaderOption, valueIndex: number) => {
+const onSelect = async (item: TreeNode<CascaderOption>, valueIndex: number) => {
   const currentNode = currentData.value[valueIndex]
   currentIndexs.value.splice(tabActive.value, currentIndexs.value.length, valueIndex)
   // 达到设置的最大层级时直接完成
@@ -279,7 +279,10 @@ const onSelect = async (item: CascaderOption, valueIndex: number) => {
     return
   }
   // 动态数据
-  if (!currentNode[_fieldNames.value.children]?.length && localState.value.isLazyLoad) {
+  if (
+    !(currentNode[_fieldNames.value.children] as TreeNode<CascaderOption>[])?.length &&
+    localState.value.isLazyLoad
+  ) {
     getData(tabActive.value + 1, currentNode).then((res) => {
       setChildren(res, currentNode)
     })
@@ -294,52 +297,45 @@ const onSelect = async (item: CascaderOption, valueIndex: number) => {
 
 const onSelectSearch = (item: SearchNode) => {
   if (!localState.value.isLazySearch) {
-    currentIndexs.value = item.__path
-    onSelectFinish(item)
-  } else {
-    onSelectFinish(item, item.__path)
+    currentIndexs.value = getNodePath(item)
   }
+  onSelectFinish(item)
 }
 
-const onSelectFinish = (item: CascaderOption, path: number[] = [...currentIndexs.value]) => {
-  if (setSelect(item, path) && !multiple.value) {
+const onSelectFinish = (item: TreeNode<CascaderOption>) => {
+  if (setSelect(item) && !multiple.value) {
     onConfirm()
   }
 }
 
 const onConfirm = () => {
-  const newSelectedOptions: CascaderOption[] = []
-  const newSelectedValues: CascaderValue[] = []
+  const newSelectedOptions: TreeNode<CascaderOption>[][] = []
+  const newSelectedValues: CascaderValue[][] = []
 
-  const paths = [...selectedMap.value.values()]
+  const selectedNodes = [...selectedMap.value.values()] as TreeNode<SearchNode>[]
+  selectedNodes.forEach((node, index) => {
+    const path = getNodePath(node)
+    newSelectedOptions[index] = []
+    newSelectedValues[index] = []
 
-  if (localState.value.isSearch && localState.value.isLazySearch) {
-    // 远程搜索数据场景
-    const data = searchViewRef.value?.searchData ?? []
-    paths.forEach((path, index) => {
-      if (path.length > 1) return
-      newSelectedOptions[index] = []
-      newSelectedValues[index] = []
-      const node: CascaderOption = data[path[0]]
-      newSelectedOptions[index].push(node)
-      newSelectedValues[index].push(node[_fieldNames.value.value])
-    })
-  } else {
-    // 本地数据或已经加载到本地数据的场景
-    paths.forEach((path, index) => {
-      newSelectedOptions[index] = []
-      newSelectedValues[index] = []
-      let data = treeData.value
+    if (node.__remoteSearch) {
+      // 远程搜索数据场景
+      const nodeRaw = toRaw(node)
+      newSelectedOptions[index].push(nodeRaw)
+      newSelectedValues[index].push(nodeRaw[_fieldNames.value.value])
+    } else {
+      // 本地数据或已经加载到本地数据的场景
+      let curTreeData = treeData.value
       for (let i = 0; i < path.length; i++) {
-        const node = toRaw(data[path[i]])
-        newSelectedOptions[index].push(node)
-        newSelectedValues[index].push(node[_fieldNames.value.value])
+        const nodeRaw = toRaw(curTreeData[path[i]])
+        newSelectedOptions[index].push(nodeRaw)
+        newSelectedValues[index].push(nodeRaw[_fieldNames.value.value])
         if (i < path.length - 1) {
-          data = node[_fieldNames.value.children]
+          curTreeData = nodeRaw[_fieldNames.value.children]
         }
       }
-    })
-  }
+    }
+  })
 
   const values = multiple.value ? newSelectedValues : newSelectedValues[0]
   emit('update:modelValue', values)

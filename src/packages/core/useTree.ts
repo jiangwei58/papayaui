@@ -48,7 +48,7 @@ export default <T, V>(props: IncludeRefs<UseTreeProps<T>>) => {
   const multiple = toRef(props, 'multiple') as Ref<OwnProps['multiple']>
 
   const treeData = ref([]) as Ref<OwnNode[]>
-  const selectedMap = ref<Map<V, number[]>>(new Map())
+  const selectedMap = ref<Map<V, OwnNode>>(new Map())
 
   const selectedValues = computed<V[]>(() => [...selectedMap.value.keys()])
 
@@ -96,7 +96,7 @@ export default <T, V>(props: IncludeRefs<UseTreeProps<T>>) => {
     return !(item[fieldNames.value.children] as OwnNode[] | undefined)?.length
   }
 
-  const setSelect = (item: OwnNode, path: number[]) => {
+  const setSelect = (item: OwnNode) => {
     const value = item[fieldNames.value.value] as V
     if (selectedMap.value.has(value)) {
       multiple.value && selectedMap.value.delete(value)
@@ -105,7 +105,7 @@ export default <T, V>(props: IncludeRefs<UseTreeProps<T>>) => {
       if (!multiple.value) {
         selectedMap.value.clear()
       }
-      selectedMap.value.set(value, path)
+      selectedMap.value.set(value, item)
     }
     return true
   }
@@ -123,6 +123,10 @@ export default <T, V>(props: IncludeRefs<UseTreeProps<T>>) => {
     delete newNode.__level
     delete newNode.__path
     return newNode as T
+  }
+
+  const getNodePath = (node: OwnNode): number[] => {
+    return node.__path.split('-').map((item) => +item)
   }
 
   watch(
@@ -147,5 +151,6 @@ export default <T, V>(props: IncludeRefs<UseTreeProps<T>>) => {
     clearSelect,
     isSelected,
     toRawNode,
+    getNodePath,
   }
 }
