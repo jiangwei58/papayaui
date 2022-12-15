@@ -7,10 +7,30 @@ page {
   --color-page-bg-gray: #f2f3f5;
 
   @each $name, $color in $colors {
-    --#{$prefix}-color-#{$name}: #{$color};
+    @include _setVar(color-#{$name}, $color);
   }
 
   @each $name, $var in $componentVars {
     --#{$prefix}-#{$name}: #{$var};
   }
+}
+
+.color-primary {
+  color: _var(color-primary);
+}
+
+@each $name in white, gray {
+  .bg-#{'' + $name} {
+    background-color: _var(color-#{$name});
+  }
+}
+
+@each $name in white, black, black-2, black-3 {
+  .text-#{'' + $name} {
+    color: _var(color-#{$name});
+  }
+}
+
+.text-red {
+  color: _var(color-danger);
 }

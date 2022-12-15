@@ -1,14 +1,19 @@
 // 主色
-$color-primary: #009c5d;
+$color-primary: #465cff;
 // 成功色
-$color-success: #07c160;
+$color-success: #09be4f;
 // 警告色
-$color-warning: #faab0c;
+$color-warning: #ffb703;
 // 危险色
-$color-danger: #fa1919;
+$color-danger: #ff2b2b;
 // 错误色
 $color-error: #ee0a24;
 
+/** 基础色 */
+$color-white: #fff;
+$color-gray: #f2f3f5;
+
+/** 文字颜色 */
 $color-text-black: #323233;
 $color-text-black-2: #646566;
 $color-text-black-3: #969799;
@@ -19,7 +24,10 @@ $colors: (
   warning: $color-warning,
   danger: $color-danger,
   error: $color-error,
-  text-black: $color-text-black,
-  text-black-2: $color-text-black-2,
-  text-black-3: $color-text-black-3,
+  white: $color-white,
+  gray: $color-gray,
+  black: $color-text-black,
+  black-2: $color-text-black-2,
+  black-3: $color-text-black-3,
+  red: $color-danger,
 );

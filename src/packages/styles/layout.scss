@@ -8,14 +8,6 @@
 @import './layout_grid.scss';
 @import './vars.scss';
 
-.relative {
-  position: relative;
-}
-
-.absolute {
-  position: absolute;
-}
-
 // nvue不能用标签命名样式，不能放在微信组件中，否则微信开发工具会报警告，无法使用标签名当做选择器
 /* #ifndef APP-NVUE */
 image {
@@ -28,6 +20,14 @@ text {
   box-sizing: border-box;
 }
 /* #endif */
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
 
 .block {
   display: block;
@@ -49,38 +49,34 @@ text {
   height: 100%;
 }
 
-.color-primary {
-  color: _var(color-primary);
-}
-.text-yellow {
-  color: _var(color-warning);
-}
-.text-red {
-  color: _var(color-danger);
-}
-.text-white {
-  color: #fff;
-}
-.text-black {
-  color: _var(color-text-black);
-}
-.text-black-2 {
-  color: _var(color-text-black-2);
-}
-.text-black-3 {
-  color: _var(color-text-black-3);
-}
-
-.bg-white {
-  background-color: #fff;
-}
-
 .bg-hover {
   background-color: #f7f8f9 !important;
 }
 
 .clickable-hover {
   background-color: #f2f3f5;
+}
+
+// 点击反馈
+.clickable {
+  position: relative;
+  &::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    border: inherit;
+    border-color: #000;
+    border-radius: inherit;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    content: ' ';
+  }
+  &:active {
+    opacity: 0.2;
+  }
 }
 
 .safe-buttom-padding {
