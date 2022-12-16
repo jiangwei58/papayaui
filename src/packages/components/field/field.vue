@@ -56,7 +56,7 @@
         class="block ml-15"
         size="18px"
         color="#c8c9cc"
-        @tap="onClear"
+        @tap.stop="onClear"
       />
     </view>
   </Cell>
