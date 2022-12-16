@@ -2,7 +2,7 @@
   <view
     :class="
       computedClass('switch', {
-        'switch--on': isActive,
+        'switch--on': isChecked,
         'switch--disabled': disabled,
       })
     "
@@ -16,11 +16,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, CSSProperties } from 'vue'
+import { computed, CSSProperties, toRefs } from 'vue'
+import useSwitch, { SwitchValue as _SwitchValue } from '../../core/useSwitch'
 import { computedClass } from '../../utils/style'
 import LoadingIcon from '../loading-icon/loading-icon.vue'
 
-export type SwitchValue = boolean | string | number
+export type SwitchValue = _SwitchValue
 
 export interface SwitchProps {
   /** 开关状态 */
@@ -52,24 +53,35 @@ const emit = defineEmits<{
   (event: 'change', value: SwitchValue): void
 }>()
 
+const { modelValue, activeValue, inactiveValue, loading, disabled } = toRefs(props)
+
+const {
+  checked,
+  isChecked,
+  onToggle: _onToggle,
+} = useSwitch({
+  modelValue,
+  activeValue,
+  inactiveValue,
+  loading,
+  disabled,
+})
+
 const switchStyle = computed<CSSProperties>(() => {
   const style: CSSProperties = {}
-  if (isActive.value && props.activeColor) {
+  if (isChecked.value && props.activeColor) {
     style.backgroundColor = props.activeColor
   }
-  if (!isActive.value && props.inactiveColor) {
+  if (!isChecked.value && props.inactiveColor) {
     style.backgroundColor = props.inactiveColor
   }
   return style
 })
 
-const isActive = computed<boolean>(() => props.modelValue === props.activeValue)
-
 const onToggle = () => {
-  if (props.loading || props.disabled) return
-  const value = props.modelValue === props.activeValue ? props.inactiveValue : props.activeValue
-  emit('update:modelValue', value)
-  emit('change', value)
+  if (typeof _onToggle() === 'undefined') return
+  emit('update:modelValue', checked.value)
+  emit('change', checked.value)
 }
 </script>
 
