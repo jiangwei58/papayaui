@@ -53,12 +53,8 @@ text {
   background-color: #f7f8f9 !important;
 }
 
-.clickable-hover {
-  background-color: #f2f3f5;
-}
-
 // 点击反馈
-.clickable {
+.clickable--hover {
   position: relative;
   &::before {
     position: absolute;

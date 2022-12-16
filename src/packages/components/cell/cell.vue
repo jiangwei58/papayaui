@@ -9,7 +9,6 @@
       `items-${center ? 'center' : 'start'}`,
     ]"
     class="flex"
-    hover-class="clickable-hover"
     @click="onClick"
   >
     <Icon v-if="icon" :name="icon" block :class="computedClass('cell__icon')" class="mr-4" />
@@ -95,14 +94,14 @@ const onClick = (event: MouseEvent) => {
 @import '../../styles/vars.scss';
 .#{$prefix}-cell {
   position: relative;
-  padding: _var(cell-padding-y) _var(cell-padding-x);
-  background-color: _var(cell-bg-color);
+  padding: _var(cell-padding-y, 10px) _var(cell-padding-x, 16px);
+  background-color: _var(cell-bg-color, #fff);
   color: _var(color-black-3);
-  font-size: _var(cell-font-size);
-  line-height: _var(cell-line-height);
+  font-size: _var(cell-font-size, 14px);
+  line-height: _var(cell-line-height, 24px);
   overflow: hidden;
   &__clickable:active {
-    background-color: _var(color-page-bg-gray);
+    background-color: _var(color-gray);
   }
   &--required::before {
     position: absolute;

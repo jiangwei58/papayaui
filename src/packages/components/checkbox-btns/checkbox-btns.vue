@@ -103,9 +103,9 @@ const onSelect = (item: CheckboxItem, index: number) => {
 @import '../../styles/vars.scss';
 .#{$prefix}-checkbox {
   &-btn {
-    font-size: _var(checkbox-btns-font-size);
-    padding: _var(checkbox-btns-padding);
-    border-width: 2rpx;
+    font-size: _var(checkbox-btns-font-size, 14px);
+    padding: _var(checkbox-btns-padding, 7px 4px);
+    border-width: _var(checkbox-btns-border-width, 2rpx);
     border-style: solid;
     &.active {
       color: _var(color-primary);

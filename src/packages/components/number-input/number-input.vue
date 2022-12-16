@@ -130,23 +130,24 @@ const onConfirm = (e: any) => {
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
 .#{$prefix}-number-input {
+  $input-height: 24px;
   background-color: initial;
   border: 0;
   box-sizing: border-box;
-  color: _var(number-input-text-color);
-  height: _var(number-input-height);
+  color: _var(number-input-text-color, _var(color-primary));
+  height: _var(number-input-height, $input-height);
   line-height: inherit;
   margin: 0;
-  min-height: _var(number-input-height);
+  min-height: _var(number-input-height, $input-height);
   padding: 0;
   position: relative;
   resize: none;
   width: 100%;
   &.disabled {
-    @include _setVar(number-input-text-color, _var(number-input-disabled));
+    @include _setVar(number-input-text-color, _var(number-input-disabled-color, #323233));
   }
   :deep(.#{$prefix}-number-input-placeholder) {
-    color: _var(number-input-placeholder-color);
+    color: _var(number-input-placeholder-color, #c8c9cc);
   }
 }
 </style>

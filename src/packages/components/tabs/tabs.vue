@@ -155,9 +155,10 @@ defineExpose({
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
 .#{$prefix}-tabs {
-  height: _var(tabs-height);
+  $tabs-line-width: 40px;
+  height: _var(tabs-height, 44px);
   padding: 0 8px;
-  background-color: #fff;
+  background-color: _var(tabs-bg-color, #fff);
   &.scrollable .#{$prefix}-tab {
     flex: 1 0 auto;
     padding: 0 12px;
@@ -182,12 +183,12 @@ defineExpose({
     justify-content: center;
     box-sizing: border-box;
     padding: 0 4px;
-    color: _var(color-black-2);
-    font-size: _var(tabs-font-size);
-    line-height: 20px;
-    min-width: _var(tabs-line-width);
+    color: _var(tabs-color, _var(color-black-2));
+    font-size: _var(tabs-font-size, 14px);
+    line-height: _var(tabs-line-height, 20px);
+    min-width: _var(tabs-line-width, $tabs-line-width);
     &.active {
-      color: _var(color-black);
+      color: _var(tabs-color-active, _var(color-black));
       font-weight: 500;
     }
   }
@@ -196,8 +197,8 @@ defineExpose({
     bottom: 0;
     left: 0;
     z-index: 1;
-    width: _var(tabs-line-width);
-    height: _var(tabs-line-height);
+    width: _var(tabs-line-width, $tabs-line-width);
+    height: _var(tabs-line-height, 3px);
     background-color: _var(color-primary);
     border-radius: 3rpx;
   }

@@ -163,7 +163,7 @@ const onClear = () => {
     }
   }
   &__input {
-    color: _var(field-input-color);
+    color: _var(field-input-color, _var(color-primary));
   }
   &--only-input {
     @include _setVar(cell-padding-y, 0);

@@ -2,7 +2,7 @@
   <view
     :class="computedClass('section')"
     class="flex items-center"
-    :style="{ backgroundColor: bgColor }"
+    :style="computedStyle({ backgroundColor: bgColor })"
     @click="emit('click', $event)"
   >
     <view :class="computedClass('section-line')"></view>
@@ -16,7 +16,7 @@
 
 <script lang="ts" setup>
 import { CSSProperties } from 'vue'
-import { computedClass } from '../../utils/style'
+import { computedClass, computedStyle } from '../../utils/style'
 
 export interface SectionProps {
   title?: string
@@ -25,7 +25,7 @@ export interface SectionProps {
 
 withDefaults(defineProps<SectionProps>(), {
   title: '',
-  bgColor: 'transparent',
+  bgColor: undefined,
 })
 
 const emit = defineEmits<{
@@ -37,17 +37,18 @@ const emit = defineEmits<{
 @import '../../styles/vars.scss';
 .#{$prefix}-section {
   font-weight: 400;
-  padding: _var(section-padding);
+  padding: _var(section-padding, 12px 10px);
+  background-color: _var(section-bg-color, transparent);
   &-line {
     width: 4px;
     height: 12px;
     border-radius: 10px;
     margin-right: 6px;
-    background-color: _var(color-primary);
+    background-color: _var(section-line-color, _var(color-primary));
   }
   &-title {
-    font-size: _var(section-font-size);
-    color: _var(color-black);
+    font-size: _var(section-font-size, 14px);
+    color: _var(section-color, _var(color-black));
   }
 }
 </style>
