@@ -10,7 +10,7 @@
         :class="computedClass('field__input')"
         :type="type"
         :value="modelValue"
-        :disabled="disabled"
+        :disabled="disabled || readonly"
         :placeholder="placeholder"
         :placeholder-style="`color:var(--${PREFIX}-number-input-placeholder-color)`"
         :style="{ textAlign: valueAlign }"
@@ -32,7 +32,7 @@
         v-else
         :class="computedClass('field__input')"
         :value="modelValue"
-        :disabled="disabled"
+        :disabled="disabled || readonly"
         :placeholder="placeholder"
         :placeholder-style="`color:var(--${PREFIX}-number-input-placeholder-color)`"
         :style="{ textAlign: valueAlign, width: '100%', height: getUnitValue(height) }"
@@ -51,10 +51,11 @@
         @confirm="emit('confirm', $event)"
       />
       <Icon
-        v-if="clearable && !!modelValue"
+        v-if="!disabled && clearable && !!modelValue"
         name="close-circle-fill"
         class="block ml-15"
         size="18px"
+        color="#c8c9cc"
         @tap="onClear"
       />
     </view>
@@ -83,6 +84,8 @@ export interface FieldProps
   placeholder?: string
   /** 是否禁用 */
   disabled?: boolean
+  /** 是否只读 */
+  readonly?: boolean
   /** 是否显示清除控件 */
   clearable?: boolean
   /** 是否只用输入框（主要用于表单情况） */

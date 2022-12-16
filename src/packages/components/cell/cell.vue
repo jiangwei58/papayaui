@@ -97,7 +97,7 @@ const onClick = (event: MouseEvent) => {
   position: relative;
   padding: _var(cell-padding-y) _var(cell-padding-x);
   background-color: _var(cell-bg-color);
-  color: _var(color-text-black-3);
+  color: _var(color-black-3);
   font-size: _var(cell-font-size);
   line-height: _var(cell-line-height);
   overflow: hidden;
@@ -129,7 +129,7 @@ const onClick = (event: MouseEvent) => {
   }
   &__icon,
   &__title {
-    color: _var(color-text-black);
+    color: _var(color-black);
   }
   &__value {
     position: relative;

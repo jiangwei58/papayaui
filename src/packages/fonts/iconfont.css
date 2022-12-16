@@ -1,8 +1,8 @@
 @font-face {
   font-family: "pa-iconfont"; /* Project id 3668565 */
-  src: url('iconfont.woff2?t=1670832958205') format('woff2'),
-       url('iconfont.woff?t=1670832958205') format('woff'),
-       url('iconfont.ttf?t=1670832958205') format('truetype');
+  src: url('iconfont.woff2?t=1671157202664') format('woff2'),
+       url('iconfont.woff?t=1671157202664') format('woff'),
+       url('iconfont.ttf?t=1671157202664') format('truetype');
 }
 
 .pa-iconfont {
@@ -57,7 +57,7 @@
   content: "\e791";
 }
 
-.pa-icon-creditcard:before {
+.pa-icon-credit-card:before {
   content: "\e7de";
 }
 
@@ -65,7 +65,7 @@
   content: "\e7e1";
 }
 
-.pa-icon-propertysafety:before {
+.pa-icon-property-safety:before {
   content: "\e7c0";
 }
 
@@ -77,11 +77,11 @@
   content: "\e7b0";
 }
 
-.pa-icon-filedone:before {
+.pa-icon-file-done:before {
   content: "\e7b6";
 }
 
-.pa-icon-filesync:before {
+.pa-icon-file-sync:before {
   content: "\e7b7";
 }
 
@@ -89,7 +89,7 @@
   content: "\e78e";
 }
 
-.pa-icon-filesearch:before {
+.pa-icon-file-search:before {
   content: "\e7b4";
 }
 

@@ -186,7 +186,7 @@ const onClick = async (event: MouseEvent) => {
     }
   }
   &.button--default {
-    color: _var(color-text-black);
+    color: _var(color-black);
     background-color: transparent;
     border-color: #ebedf0;
   }
@@ -218,7 +218,7 @@ const onClick = async (event: MouseEvent) => {
     background-color: transparent;
   }
   &[disabled]:not([type]) {
-    color: _var(color-text-black);
+    color: _var(color-black);
     background-color: #c8c9cc;
     border-color: #c8c9cc;
   }

@@ -182,12 +182,12 @@ defineExpose({
     justify-content: center;
     box-sizing: border-box;
     padding: 0 4px;
-    color: _var(color-text-black-2);
+    color: _var(color-black-2);
     font-size: _var(tabs-font-size);
     line-height: 20px;
     min-width: _var(tabs-line-width);
     &.active {
-      color: _var(color-text-black);
+      color: _var(color-black);
       font-weight: 500;
     }
   }

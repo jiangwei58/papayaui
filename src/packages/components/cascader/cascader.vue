@@ -105,7 +105,7 @@ export interface CascaderNode<T = any> {
   level: number
 }
 
-export type CascaderOption = unknown
+export type CascaderOption = any
 export type CascaderValue = any
 
 export interface CascaderProps {
@@ -322,7 +322,7 @@ const onConfirm = () => {
       // 远程搜索数据场景
       const nodeRaw = toRaw(node)
       newSelectedOptions[index].push(nodeRaw)
-      newSelectedValues[index].push(nodeRaw[_fieldNames.value.value])
+      newSelectedValues[index].push(nodeRaw[_fieldNames.value.value as keyof typeof nodeRaw])
     } else {
       // 本地数据或已经加载到本地数据的场景
       let curTreeData = treeData.value

@@ -111,7 +111,7 @@ const getClassNames = (name: string) => {
   }
 }
 
-const onEnter = () => {
+const onEnter = async () => {
   // 动画进入时的类名
   const classNames = getClassNames(props.mode)
   // 定义状态和发出动画进入前事件
@@ -120,15 +120,19 @@ const onEnter = () => {
   state.inited = true
   state.display = true
   state.classes = classNames.enter
-  nextTick(async () => {
-    // 标识动画尚未结束
-    emit('enter')
-    state.transitionEnded = false
-    // 组件动画进入后触发的事件
-    emit('afterEnter')
-    // 赋予组件enter-to类名
-    state.classes = classNames['enter-to']
+  await nextTick()
+  await new Promise<void>((resolve) => {
+    return setTimeout(() => {
+      resolve()
+    }, 1000 / 30)
   })
+  // 标识动画尚未结束
+  emit('enter')
+  state.transitionEnded = false
+  // 组件动画进入后触发的事件
+  emit('afterEnter')
+  // 赋予组件enter-to类名
+  state.classes = classNames['enter-to']
 }
 
 // 动画离场处理

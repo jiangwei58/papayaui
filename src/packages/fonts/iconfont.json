@@ -85,7 +85,7 @@
     {
       "icon_id": "4766921",
       "name": "credit card",
-      "font_class": "creditcard",
+      "font_class": "credit-card",
       "unicode": "e7de",
       "unicode_decimal": 59358
     },
@@ -99,7 +99,7 @@
     {
       "icon_id": "4766512",
       "name": "property safety",
-      "font_class": "propertysafety",
+      "font_class": "property-safety",
       "unicode": "e7c0",
       "unicode_decimal": 59328
     },
@@ -120,14 +120,14 @@
     {
       "icon_id": "4766459",
       "name": "file done",
-      "font_class": "filedone",
+      "font_class": "file-done",
       "unicode": "e7b6",
       "unicode_decimal": 59318
     },
     {
       "icon_id": "4766462",
       "name": "file sync",
-      "font_class": "filesync",
+      "font_class": "file-sync",
       "unicode": "e7b7",
       "unicode_decimal": 59319
     },
@@ -141,7 +141,7 @@
     {
       "icon_id": "4766463",
       "name": "file search",
-      "font_class": "filesearch",
+      "font_class": "file-search",
       "unicode": "e7b4",
       "unicode_decimal": 59316
     },

@@ -16,8 +16,9 @@
         :model-value="modelValue"
         icon="search"
         :disabled="disabled"
+        :readonly="readonly"
         :placeholder="placeholder"
-        value-align="left"
+        :value-align="inputAlign"
         center
         :clearable="clearable"
         @update:model-value="onUpdate"
@@ -44,10 +45,14 @@ export interface SearchProps {
   shape?: 'square' | 'round'
   /** 输入提示 */
   placeholder?: FieldProps['placeholder']
+  /** 输入内容对齐方式 */
+  inputAlign?: 'left' | 'center' | 'right'
   /** 是否显示清除控件 */
   clearable?: FieldProps['clearable']
   /** 是否禁用输入框 */
   disabled?: FieldProps['disabled']
+  /** 是否只读 */
+  readonly?: FieldProps['readonly']
   /** 搜索框背景色 */
   background?: CSSProperties['background-color']
   /** 搜索框内部背景色 */
@@ -58,8 +63,10 @@ withDefaults(defineProps<SearchProps>(), {
   modelValue: undefined,
   shape: 'square',
   placeholder: '请输入搜索关键词',
+  inputAlign: 'left',
   clearable: true,
   disabled: false,
+  readonly: false,
   background: undefined,
   inputBackground: undefined,
 })
@@ -81,7 +88,7 @@ const onUpdate = (value: string) => {
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
 .#{$prefix}-search {
-  @include _setVar(field-input-color, _var(color-text-black));
+  @include _setVar(field-input-color, _var(color-black));
   @include _setVar(cell-bg-color, transparent);
   @include _setVar(cell-padding-x, 8px);
   @include _setVar(cell-padding-y, 8px);

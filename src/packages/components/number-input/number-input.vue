@@ -58,6 +58,7 @@ const props = withDefaults(defineProps<NumberInputProps>(), {
   precision: 0,
   intLength: Number.MAX_SAFE_INTEGER.toString().length,
   customStyle: undefined,
+  adjustPosition: true,
 })
 
 const emit = defineEmits<{

@@ -25,6 +25,9 @@
       </template>
     </pa-search>
   </DocDemoBlock>
+  <DocDemoBlock title="搜索框内容对齐">
+    <pa-search v-model="text" input-align="center" />
+  </DocDemoBlock>
   <DocDemoBlock title="禁用搜索框">
     <pa-search v-model="text" disabled @click-input="onClick" />
   </DocDemoBlock>

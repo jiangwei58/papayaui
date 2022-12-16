@@ -47,7 +47,7 @@ const emit = defineEmits<{
   }
   &-title {
     font-size: _var(section-font-size);
-    color: _var(color-text-black);
+    color: _var(color-black);
   }
 }
 </style>

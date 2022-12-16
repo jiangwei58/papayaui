@@ -154,8 +154,8 @@ onMounted(() => {
       width: $iconSize;
       height: $iconSize;
       font-size: 12px;
-      color: _var(color-text-black-3);
-      border: 1px solid _var(color-text-black-3);
+      color: _var(color-black-3);
+      border: 1px solid _var(color-black-3);
       border-radius: 50%;
       background-color: #fff;
     }
