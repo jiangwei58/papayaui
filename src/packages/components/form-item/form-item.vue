@@ -33,17 +33,20 @@ const emit = defineEmits<{
   (event: 'click'): void
 }>()
 
-const p_children = inject<FormItemInstance[]>('children')
+const p_children = inject<Ref<FormItemInstance[]>>('children')
 
 const instance = getCurrentInstance()
 
 const errorMessage = ref<string>('')
 
-if (instance && p_children) {
-  p_children.push({
-    ...instance,
-    errorMessage,
-  })
+if (instance && p_children?.value) {
+  p_children.value = [
+    ...p_children.value,
+    {
+      ...instance,
+      errorMessage,
+    },
+  ]
 }
 </script>
 

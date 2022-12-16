@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, provide, ref, toRefs } from 'vue'
 import { FormItemExtraParams, FormRules, useFormValidate } from '../../'
 import { computedClass } from '../../utils/style'
-import { computed, provide, ref, toRefs } from 'vue'
 import { FormItemInstance } from '../form-item/form-item.vue'
 
 export interface FormProps {
@@ -28,27 +28,25 @@ const emit = defineEmits<{
 
 const { form, rules } = toRefs(props)
 
-const formExtraData = ref<FormItemExtraParams<any>>()
-const children: FormItemInstance[] = []
+const children = ref<FormItemInstance[]>([])
 provide('children', children)
 
-const formValidate = computed(() => useFormValidate(form.value, rules.value, formExtraData.value))
-
-const getChildrenProps = (children: FormItemInstance[]) => {
-  return children.reduce((result, child) => {
+const formExtraData = computed(() => {
+  return children.value.reduce((result, child) => {
     if (child.props.prop) {
-      result[child.props.prop as string] = child.props as Record<string, string>
+      result[child.props.prop] = child.props as Record<string, string>
     }
     return result
-  }, {} as FormItemExtraParams<any>)
-}
+  }, {} as FormItemExtraParams<Record<string, string>>)
+})
+
+const formValidate = useFormValidate({ formData: form, rules, extraParams: formExtraData })
 
 const baseValidate = (keys?: string[]) => {
-  formExtraData.value = getChildrenProps(children)
-  return formValidate.value.validate({ keys }).then(({ isValid, errorMap }) => {
-    children.forEach((child) => {
+  return formValidate.validate({ keys }).then(({ isValid, errorMap }) => {
+    children.value.forEach((child) => {
       const error = errorMap[child.props.prop as string]
-      child.errorMessage.value = error || ''
+      child.errorMessage = error || ''
     })
     return { isValid, errorMap }
   })
@@ -64,7 +62,7 @@ const validateField = (key: string) => {
 
 const reset = () => {
   emit('reset')
-  formValidate.value.clearValidate()
+  formValidate.clearValidate()
 }
 
 defineExpose({
