@@ -3,6 +3,10 @@
   flex-direction: row;
 }
 
+.inline-flex {
+  display: inline-flex;
+}
+
 @each $short, $long in row row, row-reverse row-reverse, col column, col-reverse column-reverse {
   .flex-#{$short} {
     flex-direction: $long;

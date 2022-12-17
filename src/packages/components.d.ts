@@ -30,6 +30,7 @@ import Steps from './components/steps/steps.vue'
 import Switch from './components/switch/switch.vue'
 import Tag from './components/tag/tag.vue'
 import Transition from './components/transition/transition.vue'
+import InputNumber from './components/input-number/input-number.vue'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
@@ -65,5 +66,6 @@ declare module '@vue/runtime-core' {
     'pa-switch': typeof Switch
     'pa-tag': typeof Tag
     'pa-transition': typeof Transition
+    'pa-input-number': typeof InputNumber
   }
 }

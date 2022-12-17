@@ -104,6 +104,13 @@
       "type": "form"
     },
     {
+      "path": "packages/components/input-number/demo",
+      "style": {
+        "navigationBarTitleText": "InputNumber 数值输入框"
+      },
+      "type": "form"
+    },
+    {
       "path": "packages/components/switch/demo",
       "style": {
         "navigationBarTitleText": "Switch 开关"
