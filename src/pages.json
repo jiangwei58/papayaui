@@ -83,6 +83,13 @@
       "type": "form"
     },
     {
+      "path": "packages/components/textarea/demo",
+      "style": {
+        "navigationBarTitleText": "Textarea 文本域"
+      },
+      "type": "form"
+    },
+    {
       "path": "packages/components/number-input/demo",
       "style": {
         "navigationBarTitleText": "NumberInput 数值输入框"
