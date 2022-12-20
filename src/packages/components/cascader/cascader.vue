@@ -61,7 +61,7 @@
       />
     </view>
     <template v-if="localState.hasConfirm" #footer>
-      <view class="px-26 pt-15 flex flex-shrink-0">
+      <view class="px-26 py-15 flex flex-shrink-0">
         <ButtonComponent type="default" block style="width: 30%" @click="onReset()">
           {{ resetButtonText }}
         </ButtonComponent>
@@ -69,7 +69,7 @@
           class="ml-16"
           type="primary"
           block
-          :disabled="!selectedValues.length"
+          :disabled="!allowEmpty && !selectedValues.length"
           style="width: 70%"
           @click="onConfirm()"
         >
@@ -141,6 +141,8 @@ export interface CascaderProps {
   resetAfterConfirm?: boolean
   /** 是否显示底部确认重置按钮，多选时强制开启 */
   showConfirm?: boolean
+  /** 是否允许空值，只在显示底部操作按钮时有效（通常使用场景是未选中值时允许确认） */
+  allowEmpty?: boolean
 }
 
 const props = withDefaults(defineProps<CascaderProps>(), {

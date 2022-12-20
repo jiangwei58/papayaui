@@ -1,6 +1,6 @@
 <template>
   <view
-    class="flex items-center justify-between px-32 py-20 text-28 leading-40"
+    class="flex items-center justify-between px-32 py-20 text-28"
     :class="[
       computedClass('cascader-list-item'),
       {
