@@ -46,7 +46,7 @@
         >
           无数据
         </view>
-        <SafeBottom v-if="safeAreaInsetBottom && !multiple" />
+        <SafeBottom v-if="safeAreaInsetBottom && !localState.hasConfirm" />
       </scroll-view>
       <SearchView
         ref="searchViewRef"
@@ -56,11 +56,11 @@
         :search-text="searchText"
         :lazy-search="lazySearch"
         :is-selected="isSelected"
-        :safe-area-inset-bottom="safeAreaInsetBottom && !multiple"
+        :safe-area-inset-bottom="safeAreaInsetBottom && !localState.hasConfirm"
         @select="onSelectSearch"
       />
     </view>
-    <template v-if="safeAreaInsetBottom && multiple" #footer>
+    <template v-if="localState.hasConfirm" #footer>
       <view class="px-26 pt-15 flex flex-shrink-0">
         <ButtonComponent type="default" block style="width: 30%" @click="onReset()">
           {{ resetButtonText }}
@@ -80,7 +80,7 @@
           }}
         </ButtonComponent>
       </view>
-      <SafeBottom />
+      <SafeBottom v-if="safeAreaInsetBottom" />
     </template>
   </BottomPopup>
 </template>
@@ -139,6 +139,8 @@ export interface CascaderProps {
   resetButtonText?: string
   /** 确定后是否重置数据 */
   resetAfterConfirm?: boolean
+  /** 是否显示底部确认重置按钮，多选时强制开启 */
+  showConfirm?: boolean
 }
 
 const props = withDefaults(defineProps<CascaderProps>(), {
@@ -166,6 +168,7 @@ const emit = defineEmits<{
     items: CascaderOption[],
     extra: { tabIndex: number; isSearch: boolean },
   ): void
+  (event: 'nodeClick', node: TreeNode<CascaderOption>): void
 }>()
 
 const { show, options, fieldNames, multiple } = toRefs(props)
@@ -203,6 +206,7 @@ const localState = computed(() => {
     isLazyLoad: typeof props.lazyLoad === 'function',
     isLazySearch: typeof props.lazySearch === 'function',
     isSearch: !!searchText.value,
+    hasConfirm: props.multiple || props.showConfirm,
   }
 })
 
@@ -268,6 +272,7 @@ const onScroll = (e: EventDetail<{ scrollTop: number }>) => {
 const onSelect = async (item: TreeNode<CascaderOption>, valueIndex: number) => {
   const currentNode = currentData.value[valueIndex]
   currentIndexs.value.splice(tabActive.value, currentIndexs.value.length, valueIndex)
+  emit('nodeClick', currentNode)
   // 达到设置的最大层级时直接完成
   if (currentIndexs.value.length >= props.maxLevel) {
     onSelectFinish(item)
@@ -303,7 +308,7 @@ const onSelectSearch = (item: SearchNode) => {
 }
 
 const onSelectFinish = (item: TreeNode<CascaderOption>) => {
-  if (setSelect(item) && !multiple.value) {
+  if (setSelect(item) && !localState.value.hasConfirm) {
     onConfirm()
   }
 }
@@ -372,10 +377,18 @@ const onClearSelected = () => {
   clearSelect()
 }
 
+const setCheckedNodes = (node: CascaderOption | CascaderOption[]) => {
+  const nodes = Array.isArray(node) ? node : [node]
+  nodes.forEach((nodeItem) => {
+    setSelect(nodeItem)
+  })
+}
+
 defineExpose({
   clean: onClean,
   reset: onReset,
   clearSelected: onClearSelected,
+  setCheckedNodes,
 })
 </script>
 
