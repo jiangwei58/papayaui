@@ -41,6 +41,13 @@
       "type": "base"
     },
     {
+      "path": "packages/components/image/demo",
+      "style": {
+        "navigationBarTitleText": "Image 图片"
+      },
+      "type": "base"
+    },
+    {
       "path": "packages/components/cell/demo",
       "style": {
         "navigationBarTitleText": "Cell 单元格"
