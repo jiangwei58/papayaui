@@ -32,7 +32,6 @@ export default (props: IncludeRefs<UseSwitchProps>) => {
   const onToggle = () => {
     if (state.loading || state.disabled) return
     checked.value = checked.value === state.activeValue ? state.inactiveValue : state.activeValue
-    uni.vibrateShort({})
     return checked.value
   }
 

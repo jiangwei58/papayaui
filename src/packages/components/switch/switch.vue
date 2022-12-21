@@ -9,6 +9,7 @@
     :style="switchStyle"
     @tap="onToggle"
   >
+    <view :class="computedClass('switch__bg')" />
     <view :class="computedClass('switch__node')">
       <LoadingIcon v-if="loading" size="18px" />
     </view>
@@ -82,24 +83,42 @@ const onToggle = () => {
   if (typeof _onToggle() === 'undefined') return
   emit('update:modelValue', checked.value)
   emit('change', checked.value)
+  if (uni.getSystemInfoSync().platform !== 'devtools') {
+    uni.vibrateShort({})
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
 .#{$prefix}-switch {
-  $duration: 0.3s;
+  $duration: 0.4s;
+  $defaultBgColor: #e6e6e6;
+  $nodeSize: 24px;
+
+  position: relative;
   display: inline-flex;
   align-items: center;
   width: 52px;
   height: 32px;
   line-height: 32px;
-  background-color: #e6e6e6;
+  background-color: $defaultBgColor;
   border-radius: 100px;
   transition: background-color $duration;
+  &__bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100% - ($nodeSize / 2));
+    height: 100%;
+    background-color: $defaultBgColor;
+    border-radius: 100px;
+    transform: scale(1);
+    transition: transform $duration ease;
+  }
   &__node {
-    width: 24px;
-    height: 24px;
+    width: $nodeSize;
+    height: $nodeSize;
     background-color: #fff;
     border-radius: 50%;
     transform: translateX(14%);
@@ -112,6 +131,9 @@ const onToggle = () => {
   &--on {
     background-color: _var(color-primary);
     border-color: _var(color-primary);
+  }
+  &--on &__bg {
+    transform: scale(0);
   }
   &--on &__node {
     width: 24px;
