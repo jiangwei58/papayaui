@@ -1,5 +1,5 @@
 <template>
-  <view :class="computedClass('popover')">
+  <view :class="computedClass('popover', { 'popover--show': show })">
     <view
       v-show="show"
       :class="computedClass('popover-overlay')"
@@ -17,14 +17,17 @@
         opacity: tooltipRect.height && tooltipContentWidth ? '1' : '0',
         top: tooltipRect.top + tooltipRect.height + 12 + 'px',
         left: (contentLeft < 0 ? 0 : contentLeft) + 'px',
+        zIndex,
       }"
-      @tap.stop="onVisibleChange()"
     >
       <view v-if="text" class="text-28 leading-40" style="max-width: 420rpx">
         {{ text }}
       </view>
       <slot name="popover-content"></slot>
-      <view class="popover-arrow" :style="{ transform: `translateX(${arrowLeft}px)` }"></view>
+      <view
+        :class="computedClass('popover-arrow')"
+        :style="{ transform: `translateX(${arrowLeft}px)` }"
+      ></view>
     </view>
   </view>
 </template>
@@ -38,11 +41,13 @@ import useRect from '../../hooks/useRect'
 export interface PopoverProps {
   text?: string
   width?: string
+  zIndex?: number
 }
 
 withDefaults(defineProps<PopoverProps>(), {
   text: '',
   width: '300',
+  zIndex: 9,
 })
 
 const show = ref<boolean>(false)
@@ -96,6 +101,9 @@ const onVisibleChange = (visible = !show.value) => {
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
 .#{$prefix}-popover {
+  $arrowSize: 20rpx;
+  $darkColor: #323233;
+
   position: relative;
   &-overlay {
     position: fixed;
@@ -106,56 +114,51 @@ const onVisibleChange = (visible = !show.value) => {
     background-color: transparent;
   }
   &-wapper {
-    $arrowSize: 20rpx;
     position: fixed;
     left: 0;
     top: 0;
     margin: 0;
-    z-index: 9;
     padding: 0;
     border-radius: 8rpx;
-    opacity: 0.9;
+    opacity: 0.2;
     box-shadow: 0px 0px 5px #dcdee0;
+  }
 
-    .popover-arrow {
+  &-arrow {
+    position: absolute;
+    width: $arrowSize;
+    height: $arrowSize;
+    z-index: -1;
+    &::before {
       position: absolute;
       width: $arrowSize;
       height: $arrowSize;
       z-index: -1;
-      &::before {
-        position: absolute;
-        width: $arrowSize;
-        height: $arrowSize;
-        z-index: -1;
-        content: ' ';
-        transform: rotate(45deg);
-        box-sizing: border-box;
-      }
+      content: ' ';
+      transform: rotate(45deg);
+      box-sizing: border-box;
     }
+  }
 
-    &.light {
-      $darkColor: #323233;
-      color: $darkColor;
+  &-wapper.light {
+    color: $darkColor;
+    background: #fff;
+  }
+  &-wapper.light &-arrow {
+    &::before {
+      border: 1px solid #fff;
       background: #fff;
-      .popover-arrow {
-        &::before {
-          border: 1px solid #fff;
-          background: #fff;
-          border-bottom-color: transparent !important;
-          border-right-color: transparent !important;
-        }
-      }
+      border-bottom-color: transparent !important;
+      border-right-color: transparent !important;
     }
+  }
 
-    &.bottom {
-      $top: calc($arrowSize / 2);
-      .popover-arrow {
-        left: 50%;
-        top: -$top;
-        margin-left: -$top;
-        border-top-left-radius: 2px;
-      }
-    }
+  &-wapper.bottom &-arrow {
+    $top: calc($arrowSize / 2);
+    left: 50%;
+    top: -$top;
+    margin-left: -$top;
+    border-top-left-radius: 2px;
   }
 }
 </style>

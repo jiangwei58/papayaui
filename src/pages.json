@@ -181,6 +181,13 @@
       "type": "show"
     },
     {
+      "path": "packages/components/popover/demo",
+      "style": {
+        "navigationBarTitleText": "Popover 气泡弹出框"
+      },
+      "type": "show"
+    },
+    {
       "path": "packages/components/loadmore/demo",
       "style": {
         "navigationBarTitleText": "Loadmore 加载更多"
