@@ -2,7 +2,7 @@
   <view
     :class="[
       computedClass('cell', {
-        cell__clickable: isLink,
+        'cell--clickable': isLink,
         'cell--required': required,
         'cell--border': border,
       }),
@@ -96,12 +96,40 @@ const onClick = (event: MouseEvent) => {
   position: relative;
   padding: _var(cell-padding-y, 10px) _var(cell-padding-x, 16px);
   background-color: _var(cell-bg-color, #fff);
-  color: _var(color-black-3);
+  color: _var(cell-color, _var(color-black-3));
   font-size: _var(cell-font-size, 14px);
   line-height: _var(cell-line-height, 24px);
   overflow: hidden;
-  &__clickable:active {
+  &__title,
+  &__value {
+    flex: 1;
+  }
+  &__icon,
+  &__title {
+    color: _var(cell-title-color, _var(color-black));
+  }
+  &__value {
+    position: relative;
+    overflow: hidden;
+    text-align: right;
+    vertical-align: middle;
+    word-wrap: break-word;
+    @include _setVar(textarea-padding, 0);
+    @include _setVar(textarea-color, _var(color-primary));
+  }
+  &__icon-right {
+    font-weight: bold;
+  }
+  &__error-message {
+    color: _var(color-error);
+    font-size: 12px;
+    text-align: left;
+  }
+  &--clickable:active {
     background-color: _var(color-gray);
+  }
+  &--clickable &__value {
+    color: _var(cell-value-color, _var(color-primary));
   }
   &--required::before {
     position: absolute;
@@ -121,31 +149,6 @@ const onClick = (event: MouseEvent) => {
     border-bottom: 1px solid #ebedf0;
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
-  }
-  &__title,
-  &__value {
-    flex: 1;
-  }
-  &__icon,
-  &__title {
-    color: _var(color-black);
-  }
-  &__value {
-    position: relative;
-    overflow: hidden;
-    text-align: right;
-    vertical-align: middle;
-    word-wrap: break-word;
-    @include _setVar(textarea-padding, 0);
-    @include _setVar(textarea-color, _var(color-primary));
-  }
-  &__icon-right {
-    font-weight: bold;
-  }
-  &__error-message {
-    color: _var(color-error);
-    font-size: 12px;
-    text-align: left;
   }
 }
 </style>
