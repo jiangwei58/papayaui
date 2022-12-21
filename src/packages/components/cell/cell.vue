@@ -136,6 +136,8 @@ const onClick = (event: MouseEvent) => {
     text-align: right;
     vertical-align: middle;
     word-wrap: break-word;
+    @include _setVar(textarea-padding, 0);
+    @include _setVar(textarea-color, _var(color-primary));
   }
   &__icon-right {
     font-weight: bold;

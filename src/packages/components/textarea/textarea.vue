@@ -125,18 +125,20 @@ const onInput = (e: Event) => {
   display: flex;
   width: 100%;
   background-color: #fff;
-  padding: 10px 25px;
-  font-size: 15px;
-  color: _var(textarea-color, _var(color-text-black));
+  padding: _var(textarea-padding, 10px 25px);
+  font-size: _var(textarea-font-size, 14px);
+  color: _var(textarea-color, _var(color-black));
+  line-height: _var(textarea-line-height, 24px);
   &__textarea {
     font: inherit;
     color: inherit;
+    line-height: inherit;
   }
   &__limit {
     position: absolute;
     right: 15px;
     bottom: 12px;
-    font-size: 14px;
+    font-size: _var(textarea-font-size, 14px);
     color: gray;
   }
   :deep(.#{$prefix}-textarea__placeholder) {
