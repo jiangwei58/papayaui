@@ -115,7 +115,12 @@ const min = computed<number>(() => +props.min)
 const max = computed<number>(() => +props.max)
 const step = computed<number>(() => +props.step)
 
-const { numberVal, getFormatVal, onAdd, onReduce } = useInputNumber({
+const {
+  numberVal,
+  getFormatVal,
+  onAdd: _onAdd,
+  onReduce: _onReduce,
+} = useInputNumber({
   modelValue,
   min,
   max,
@@ -124,6 +129,21 @@ const { numberVal, getFormatVal, onAdd, onReduce } = useInputNumber({
   decimalLength,
   disabled,
 })
+
+const onUpdate = (value: number) => {
+  emit('update:modelValue', value, props.name)
+  emit('change', value, props.name)
+}
+
+const onAdd = () => {
+  _onAdd()
+  onUpdate(numberVal.value)
+}
+
+const onReduce = () => {
+  _onReduce()
+  onUpdate(numberVal.value)
+}
 
 const onInput = (e: unknown) => {
   const detail = (e as EventDetail<{ cursor: number; keyCode: number; value: string }>).detail
@@ -141,8 +161,7 @@ const onBlur = async (e: unknown) => {
       await nextTick()
     }
     event.detail.value = result
-    emit('update:modelValue', result, props.name)
-    emit('change', result, props.name)
+    onUpdate(result)
   }
   emit('blur', event)
 }
