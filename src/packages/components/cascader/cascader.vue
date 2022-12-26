@@ -74,9 +74,8 @@
           @click="onConfirm()"
         >
           {{
-            confirmButtonText ?? selectedValues.length
-              ? `已选中${selectedValues.length}个`
-              : '请选择'
+            confirmButtonText ??
+            (selectedValues.length ? `已选中${selectedValues.length}个` : '请选择')
           }}
         </ButtonComponent>
       </view>
