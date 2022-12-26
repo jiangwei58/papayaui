@@ -9,7 +9,10 @@
     :style="switchStyle"
     @tap="onToggle"
   >
-    <view :class="computedClass('switch__bg')" />
+    <view
+      :class="computedClass('switch__bg')"
+      :style="computedStyle({ backgroundColor: inactiveColor })"
+    />
     <view :class="computedClass('switch__node')">
       <LoadingIcon v-if="loading" size="18px" />
     </view>
@@ -19,7 +22,7 @@
 <script lang="ts" setup>
 import { computed, CSSProperties, toRefs } from 'vue'
 import useSwitch, { SwitchValue as _SwitchValue } from '../../core/useSwitch'
-import { computedClass } from '../../utils/style'
+import { computedClass, computedStyle } from '../../utils/style'
 import LoadingIcon from '../loading-icon/loading-icon.vue'
 
 export type SwitchValue = _SwitchValue
