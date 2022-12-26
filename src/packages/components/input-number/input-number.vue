@@ -86,6 +86,8 @@ export interface InputNumberProps {
   disabled?: boolean
   /** 是否显示控制按钮 */
   controls?: boolean
+  /** 是否开启异步变更，开启后需要手动控制输入值 */
+  asyncChange?: boolean
 }
 
 const props = withDefaults(defineProps<InputNumberProps>(), {
@@ -110,7 +112,7 @@ const emit = defineEmits<{
   (event: 'blur', value: EventDetail<{ value: InputNumberValue; cursor: number }>): void
 }>()
 
-const { modelValue, intLength, decimalLength, disabled } = toRefs(props)
+const { modelValue, intLength, decimalLength } = toRefs(props)
 const min = computed<number>(() => +props.min)
 const max = computed<number>(() => +props.max)
 const step = computed<number>(() => +props.step)
@@ -127,22 +129,25 @@ const {
   step,
   intLength,
   decimalLength,
-  disabled,
 })
 
 const onUpdate = (value: number) => {
-  emit('update:modelValue', value, props.name)
+  if (!props.asyncChange) {
+    emit('update:modelValue', value, props.name)
+  }
   emit('change', value, props.name)
 }
 
 const onAdd = () => {
-  _onAdd()
-  onUpdate(numberVal.value)
+  if (props.disabled || numberVal.value >= max.value) return
+  const newVal = _onAdd(!props.asyncChange)
+  onUpdate(newVal)
 }
 
 const onReduce = () => {
-  _onReduce()
-  onUpdate(numberVal.value)
+  if (props.disabled || numberVal.value <= min.value) return
+  const newVal = _onReduce(!props.asyncChange)
+  onUpdate(newVal)
 }
 
 const onInput = (e: unknown) => {

@@ -59,6 +59,15 @@ export const loopTree = <T>(
 /** 空函数 */
 export const noop: (...args: any[]) => any = () => {}
 
+/** 延迟 */
+export const delay = (timeout: number) => {
+  return new Promise<void>((resolve) => {
+    setTimeout(() => {
+      resolve()
+    }, timeout)
+  })
+}
+
 /** 防抖 */
 export const debounce = (fn: (...args: any[]) => any, delay = 0) => {
   let t: number | null = null

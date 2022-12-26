@@ -16,8 +16,6 @@ export interface UseInputNumberProps {
   intLength?: number
   /** 小数位长度 */
   decimalLength?: number
-  /** 禁用 */
-  disabled?: boolean
 }
 
 export default (props: IncludeRefs<UseInputNumberProps>) => {
@@ -45,8 +43,7 @@ export default (props: IncludeRefs<UseInputNumberProps>) => {
     return formatToString(text, state.intLength, state.decimalLength)
   }
 
-  const onUpdate = (type: 'add' | 'reduce') => {
-    if (state.disabled) return
+  const onUpdate = (type: 'add' | 'reduce', updateValue = true) => {
     let newVal = numberVal.value
     if (type === 'add') {
       newVal += state.step
@@ -57,15 +54,18 @@ export default (props: IncludeRefs<UseInputNumberProps>) => {
     if (state.decimalLength) {
       newVal = parseFloat(newVal.toFixed(state.decimalLength))
     }
-    numberVal.value = newVal
+    if (updateValue) {
+      numberVal.value = newVal
+    }
+    return newVal
   }
 
-  const onAdd = () => {
-    onUpdate('add')
+  const onAdd = (updateValue = true) => {
+    return onUpdate('add', updateValue)
   }
 
-  const onReduce = () => {
-    onUpdate('reduce')
+  const onReduce = (updateValue = true) => {
+    return onUpdate('reduce', updateValue)
   }
 
   return {

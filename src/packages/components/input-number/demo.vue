@@ -18,8 +18,11 @@
     <pa-cell title="禁用输入框">
       <pa-input-number v-model="input6" readonly />
     </pa-cell>
+    <pa-cell title="异步">
+      <pa-input-number :model-value="input7" async-change @change="onChange" />
+    </pa-cell>
     <pa-cell title="只显示输入框">
-      <pa-input-number v-model="input7" :controls="false" input-width="92px" />
+      <pa-input-number v-model="input8" :controls="false" input-width="92px" />
     </pa-cell>
   </DocDemoBlock>
 </template>
@@ -27,6 +30,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
+import { delay } from '../../utils/common'
 
 const input1 = ref<number>(1)
 const input2 = ref<number>(1)
@@ -35,6 +39,18 @@ const input4 = ref<number>(1)
 const input5 = ref<number>(1)
 const input6 = ref<number>(1)
 const input7 = ref<number>(1)
+const input8 = ref<number>(1)
+
+const onChange = async (value: number) => {
+  uni.showToast({
+    icon: 'loading',
+    title: '',
+    duration: 2000,
+  })
+  await delay(2000)
+  input7.value = value
+  uni.hideToast()
+}
 </script>
 
 <style lang="scss" scoped></style>
