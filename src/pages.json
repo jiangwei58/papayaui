@@ -111,6 +111,13 @@
       "type": "form"
     },
     {
+      "path": "packages/components/radio-group/demo",
+      "style": {
+        "navigationBarTitleText": "Radio 单选框"
+      },
+      "type": "form"
+    },
+    {
       "path": "packages/components/checkbox-btns/demo",
       "style": {
         "navigationBarTitleText": "CheckboxBtns 多选按钮组"

@@ -34,6 +34,8 @@ import InputNumber from './components/input-number/input-number.vue'
 import Textarea from './components/textarea/textarea.vue'
 import Image from './components/image/image.vue'
 import LoadingIcon from './components/loading-icon/loading-icon.vue'
+import Radio from './components/radio/radio.vue'
+import RadioGroup from './components/radio-group/radio-group.vue'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
@@ -73,5 +75,7 @@ declare module '@vue/runtime-core' {
     'pa-textarea': typeof Textarea
     'pa-image': typeof Image
     'pa-loading-icon': typeof LoadingIcon
+    'pa-radio': typeof Radio
+    'pa-radio-group': typeof RadioGroup
   }
 }
