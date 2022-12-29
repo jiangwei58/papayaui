@@ -93,8 +93,10 @@ const onClick = (event: MouseEvent) => {
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
 .#{$prefix}-cell {
+  $padding-x: 16px;
+
   position: relative;
-  padding: _var(cell-padding-y, 10px) _var(cell-padding-x, 16px);
+  padding: _var(cell-padding-y, 10px) _var(cell-padding-x, $padding-x);
   background-color: _var(cell-bg-color, #fff);
   color: _var(cell-color, _var(color-black-3));
   font-size: _var(cell-font-size, 14px);
@@ -143,9 +145,9 @@ const onClick = (event: MouseEvent) => {
     box-sizing: border-box;
     content: ' ';
     pointer-events: none;
-    right: _var(cell-padding-x);
+    right: _var(cell-padding-x, $padding-x);
     bottom: 0;
-    left: _var(cell-padding-x);
+    left: _var(cell-padding-x, $padding-x);
     border-bottom: 1px solid #ebedf0;
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);

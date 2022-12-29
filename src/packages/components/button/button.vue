@@ -39,7 +39,7 @@
 
 <script lang="ts" setup>
 import { getUnitValue } from '../../utils/common'
-import { computed, ref, StyleValue } from 'vue'
+import { computed, CSSProperties, ref, StyleValue } from 'vue'
 import { computedClass } from '../../utils/style'
 import Icon from '../icon/icon.vue'
 import Loadmore from '../loadmore/loadmore.vue'
@@ -67,6 +67,8 @@ export interface ButtonProps {
   icon?: string
   /** 同步点击（主要用于防止异步事件多次触发） */
   syncClick?: (...args: any[]) => any | Promise<any>
+  /** 自定义样式 */
+  customStyle?: CSSProperties
   /** 微信开放能力[文档](https://developers.weixin.qq.com/miniprogram/dev/component/button.html) */
   openType?:
     | 'contact'
@@ -107,6 +109,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   round: '3px',
   icon: undefined,
   syncClick: undefined,
+  customStyle: undefined,
   openType: undefined,
   hoverStartTime: undefined,
   hoverStayTime: undefined,
@@ -134,8 +137,11 @@ const localLoading = computed(() => props.loading || clickLoading.value)
 
 const customStyle = computed<StyleValue>(() => {
   return {
+    ...props.customStyle,
     display: props.block ? 'block' : 'inline-block',
-    width: props.block ? '100%' : getUnitValue(props.width),
+    width: props.block
+      ? getUnitValue(props.width === 'auto' ? '100%' : props.width)
+      : getUnitValue(props.width),
     height: getUnitValue(props.height),
     fontSize: getUnitValue(props.fontSize),
     borderRadius: props.round === true ? getUnitValue(props.height) : getUnitValue(props.round),
@@ -161,6 +167,7 @@ const onClick = async (event: MouseEvent) => {
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
 .#{$prefix}-button {
+  padding: _var(button-padding, 12px);
   border: 1px solid transparent;
   box-sizing: border-box;
   &::before {
@@ -187,7 +194,7 @@ const onClick = async (event: MouseEvent) => {
   }
   &.button--default {
     color: _var(color-black);
-    background-color: transparent;
+    background-color: #fff;
     border-color: #ebedf0;
   }
   &.button--primary {
