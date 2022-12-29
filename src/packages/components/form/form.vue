@@ -31,6 +31,16 @@ const { form, rules } = toRefs(props)
 const children = ref<FormItemInstance[]>([])
 provide('children', children)
 
+const formRules = computed(() => {
+  const extraRules = children.value.reduce((result, child) => {
+    if (child.props.prop && child.props.rules) {
+      result[child.props.prop] = child.props.rules
+    }
+    return result
+  }, {} as FormRules<any>)
+  return { ...rules.value, ...extraRules }
+})
+
 const formExtraData = computed(() => {
   return children.value.reduce((result, child) => {
     if (child.props.prop) {
@@ -40,7 +50,11 @@ const formExtraData = computed(() => {
   }, {} as FormItemExtraParams<Record<string, string>>)
 })
 
-const formValidate = useFormValidate({ formData: form, rules, extraParams: formExtraData })
+const formValidate = useFormValidate({
+  formData: form,
+  rules: formRules,
+  extraParams: formExtraData,
+})
 
 const baseValidate = (keys?: string[]) => {
   return formValidate.validate({ keys }).then(({ isValid, errorMap }) => {

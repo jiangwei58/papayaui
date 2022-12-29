@@ -1,8 +1,9 @@
-import Schema, { RuleItem, Rules, Values } from 'async-validator'
+import Schema, { RuleItem, Rules, Rule, Values } from 'async-validator'
 import { ValidateOption } from 'async-validator/dist-types/interface'
 import { computed, Ref, ref, toRef } from 'vue'
 import { IncludeRefs } from '../..'
 import { replaceMessage, validateMessages } from './message'
+import { isObject, isArray } from '../../utils/lang'
 
 export type FormRules<T> = {
   [key in keyof T]?: FormRuleItem | FormRuleItem[]
@@ -33,7 +34,8 @@ export default <T = Values>(props: IncludeRefs<UseFormValidateProps<T>>) => {
   const errorMap = ref<ErrorMap<T>>({})
 
   const validator = computed(() => {
-    const _validator = new Schema(rules.value as Rules)
+    const newRules = convertSchemaRules(formData.value, rules.value)
+    const _validator = new Schema(newRules)
     _validator.messages(validateMessages)
     return _validator
   })
@@ -74,4 +76,48 @@ export default <T = Values>(props: IncludeRefs<UseFormValidateProps<T>>) => {
     clearValidate,
     errorMap,
   }
+}
+
+export const stringSplitToArray = (key: string): string[] => {
+  return key.replace(/\[|(\]\.)/g, '.').split('.')
+}
+
+export const convertSchemaRules = <T>(formData: T, rules: FormRules<T>) => {
+  let newRules: Rules = {}
+  for (const ruleKey in rules) {
+    if (!/[.[\]]/.test(ruleKey)) {
+      newRules[ruleKey] = rules[ruleKey] as Rule
+      continue
+    }
+    const keys = stringSplitToArray(ruleKey)
+
+    let currentObj: any = formData
+    let currentRule: any = newRules
+    for (let i = 0; i < keys.length; i++) {
+      try {
+        const key = keys[i]
+        currentRule[key] = currentRule[key] ?? {}
+        if (i < keys.length - 1) {
+          if (isObject(currentObj[key])) {
+            currentRule[key].type = 'object'
+          } else if (isArray(currentObj[key])) {
+            currentRule[key].type = 'array'
+          } else {
+            console.error(new Error('不支持的类型'))
+            newRules = {}
+            break
+          }
+          currentRule[key].fields = currentRule[key].fields ?? {}
+          currentObj = currentObj[key]
+          currentRule = currentRule[key].fields
+        } else {
+          currentRule[key] = rules[ruleKey]
+        }
+      } catch (e) {
+        console.error(new Error('获取对象值错误'))
+        newRules = {}
+      }
+    }
+  }
+  return newRules
 }

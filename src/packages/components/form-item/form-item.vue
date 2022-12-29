@@ -13,6 +13,7 @@
 
 <script lang="ts" setup>
 import { ComponentInternalInstance, getCurrentInstance, inject, Ref, ref } from 'vue'
+import { FormRuleItem } from '../../hooks/form/useFormValidate'
 import Cell, { CellProps } from '../cell/cell.vue'
 
 export interface FormItemInstance extends Omit<ComponentInternalInstance, 'props'> {
@@ -25,6 +26,8 @@ export interface FormItemProps extends CellProps {
   prop?: string
   /** 标签名 */
   label?: string
+  /** 校验规则 */
+  rules?: FormRuleItem | FormRuleItem[]
 }
 
 defineProps<FormItemProps>()
