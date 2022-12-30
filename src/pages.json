@@ -160,6 +160,13 @@
       "type": "nav"
     },
     {
+      "path": "packages/components/swipe-cell/demo",
+      "style": {
+        "navigationBarTitleText": "SwipeCell 滑动单元格"
+      },
+      "type": "feedback"
+    },
+    {
       "path": "packages/components/badge/demo",
       "style": {
         "navigationBarTitleText": "Badge 徽标"

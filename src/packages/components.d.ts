@@ -36,6 +36,7 @@ import Image from './components/image/image.vue'
 import LoadingIcon from './components/loading-icon/loading-icon.vue'
 import Radio from './components/radio/radio.vue'
 import RadioGroup from './components/radio-group/radio-group.vue'
+import SwipeCell from './components/swipe-cell/swipe-cell.vue'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
@@ -77,5 +78,6 @@ declare module '@vue/runtime-core' {
     'pa-loading-icon': typeof LoadingIcon
     'pa-radio': typeof Radio
     'pa-radio-group': typeof RadioGroup
+    'pa-swipe-cell': typeof SwipeCell
   }
 }
