@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "18736899",
+      "name": "小胖车图片",
+      "font_class": "image",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "18736900",
+      "name": "小胖车图片加载失败",
+      "font_class": "image-error",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
       "icon_id": "4936482",
       "name": "close-circle-fill",
       "font_class": "close-circle-fill",

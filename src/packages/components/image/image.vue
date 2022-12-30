@@ -20,11 +20,11 @@
     />
     <view v-if="status === 'loading'" :class="computedClass('image__loading')">
       <slot v-if="$slots.loading" name="loading" />
-      <text v-else>loading</text>
+      <Icon v-else name="image" size="32px" color="#dcdee0" />
     </view>
     <view v-if="status === 'error'" :class="computedClass('image__error')">
       <slot v-if="$slots.error" name="error" />
-      <text v-else>error</text>
+      <Icon v-else name="image-error" size="32px" color="#dcdee0" />
     </view>
   </view>
 </template>
@@ -33,6 +33,7 @@
 import { ref } from 'vue'
 import { getUnitValue } from '../../utils'
 import { computedClass, computedStyle } from '../../utils/style'
+import Icon from '../icon/icon.vue'
 
 interface ImageProps {
   /** 图片资源地址 */
