@@ -8,7 +8,7 @@
   >
     <textarea
       :class="computedClass('textarea__textarea')"
-      :style="{ height: autoHeight ? 'auto' : getUnitValue(height) }"
+      :style="{ height: autoHeight ? 'auto' : getUnitValue(height), textAlign: inputAlign }"
       :value="modelValue"
       :placeholder="placeholder"
       :placeholder-class="computedClass('textarea__placeholder')"
@@ -43,6 +43,7 @@
 import { EventDetail } from '../../types'
 import { getUnitValue } from '../../utils'
 import { computedClass } from '../../utils/style'
+import { CellProps } from '../cell/cell.vue'
 
 export interface TextareaProps {
   /** 值 */
@@ -51,6 +52,8 @@ export interface TextareaProps {
   placeholder?: string
   /** 输入框高度 */
   height?: string
+  /** 值对齐方式 */
+  inputAlign?: CellProps['valueAlign']
   /** 是否只读 */
   readonly?: boolean
   /** 是否禁用 */
@@ -89,6 +92,7 @@ withDefaults(defineProps<TextareaProps>(), {
   modelValue: undefined,
   placeholder: '请输入',
   height: '70px',
+  inputAlign: 'left',
   maxlength: 140,
   autoHeight: false,
   confirmType: undefined,
@@ -130,6 +134,7 @@ const onInput = (e: Event) => {
   color: _var(textarea-color, _var(color-black));
   line-height: _var(textarea-line-height, 24px);
   &__textarea {
+    width: inherit;
     font: inherit;
     color: inherit;
     line-height: inherit;

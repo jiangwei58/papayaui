@@ -89,6 +89,7 @@ const onUpdate = (value: string) => {
 @import '../../styles/vars.scss';
 .#{$prefix}-search {
   @include _setVar(field-input-color, _var(color-black));
+  @include _setVar(number-input-placeholder-color, #c8c9cc);
   @include _setVar(cell-bg-color, transparent);
   @include _setVar(cell-padding-x, 8px);
   @include _setVar(cell-padding-y, 8px);

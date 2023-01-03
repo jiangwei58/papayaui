@@ -109,6 +109,8 @@ const onLabelClick = () => {
     font-size: $size;
     color: transparent;
     border: 1px solid $gray;
+    transition-property: color, border-color, background-color;
+    transition-duration: 0.2s;
   }
   &__label {
     font-size: _var(radio-font-size, 16px);
