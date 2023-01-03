@@ -12,9 +12,11 @@ export interface UseSelectProps<T, V> {
   multiple?: boolean
   /** 是否支持反选（只在单选有效，多选强制支持） */
   inverse?: boolean
+  /** 最大可选数量 */
+  max?: number
 }
 
-export default <T, V>(props: IncludeRefs<UseSelectProps<T, V>>) => {
+export default <T, V = T>(props: IncludeRefs<UseSelectProps<T, V>>) => {
   type OwnProps = UseSelectProps<T, V>
 
   const options = toRef(props, 'options') as Ref<OwnProps['options']>
@@ -24,6 +26,7 @@ export default <T, V>(props: IncludeRefs<UseSelectProps<T, V>>) => {
   >
   const multiple = toRef(props, 'multiple') as Ref<OwnProps['multiple']>
   const inverse = toRef(props, 'inverse') as Ref<OwnProps['inverse']>
+  const max = toRef(props, 'max') as Ref<OwnProps['max']>
 
   const selectedSet = ref<Set<V>>(new Set())
 
@@ -58,15 +61,20 @@ export default <T, V>(props: IncludeRefs<UseSelectProps<T, V>>) => {
   }
 
   const onSelect = (value: V) => {
+    // 已选中情况
     if (selectedSet.value.has(value)) {
       ;(multiple.value ? true : inverse.value) && selectedSet.value.delete(value)
       return false
-    } else {
-      if (!multiple.value) {
-        selectedSet.value.clear()
-      }
-      selectedSet.value.add(value)
     }
+    // 超过最大选中数量限制情况
+    if (typeof max.value !== 'undefined' && selectedSet.value.size >= max.value) {
+      return false
+    }
+    // 多选判定
+    if (!multiple.value) {
+      selectedSet.value.clear()
+    }
+    selectedSet.value.add(value)
     return true
   }
 

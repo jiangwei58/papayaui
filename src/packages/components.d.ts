@@ -37,6 +37,8 @@ import LoadingIcon from './components/loading-icon/loading-icon.vue'
 import Radio from './components/radio/radio.vue'
 import RadioGroup from './components/radio-group/radio-group.vue'
 import SwipeCell from './components/swipe-cell/swipe-cell.vue'
+import Checkbox from './components/checkbox/checkbox.vue'
+import CheckboxGroup from './components/checkbox-group/checkbox-group.vue'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
@@ -79,5 +81,7 @@ declare module '@vue/runtime-core' {
     'pa-radio': typeof Radio
     'pa-radio-group': typeof RadioGroup
     'pa-swipe-cell': typeof SwipeCell
+    'pa-checkbox': typeof Checkbox
+    'pa-checkbox-group': typeof CheckboxGroup
   }
 }

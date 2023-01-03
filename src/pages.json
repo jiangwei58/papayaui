@@ -118,6 +118,13 @@
       "type": "form"
     },
     {
+      "path": "packages/components/checkbox/demo",
+      "style": {
+        "navigationBarTitleText": "Checkbox 复选框"
+      },
+      "type": "form"
+    },
+    {
       "path": "packages/components/checkbox-btns/demo",
       "style": {
         "navigationBarTitleText": "CheckboxBtns 多选按钮组"
