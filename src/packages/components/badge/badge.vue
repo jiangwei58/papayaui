@@ -13,8 +13,8 @@
       :class="computedClass('badge-content')"
       :style="{
         backgroundColor: color,
-        top: getUnitValue(offset[0].toString()),
-        right: getUnitValue(offset[1].toString()),
+        top: getUnitValue(offset[1].toString()),
+        right: getUnitValue(offset[0].toString()),
       }"
     >
       <slot v-if="$slots.content" name="content"></slot>
@@ -37,7 +37,7 @@ export interface BadgeProps {
   dot?: boolean
   /** max	最大值，超过最大值会显示 {max}+，仅当 content 为数字时有效 */
   max?: number
-  /** 设置徽标的偏移量，数组的两项分别对应水平和垂直方向的偏移量，默认单位为 px */
+  /** 设置徽标的偏移量，数组的两项分别对应水平和垂直方向的偏移量，默认单位为rpx */
   offset?: Array<number | string>
   /** 当 content 为数字 0 或字符串 '0' 时，是否展示徽标 */
   showZero?: boolean
