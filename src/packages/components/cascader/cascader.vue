@@ -169,6 +169,8 @@ const emit = defineEmits<{
     items: CascaderOption[],
     extra: { tabIndex: number; isSearch: boolean },
   ): void
+  (event: 'reset'): void
+  (event: 'confirm'): void
   (event: 'nodeClick', node: TreeNode<CascaderOption>): void
 }>()
 
@@ -349,6 +351,7 @@ const onConfirm = () => {
     tabIndex: tabActive.value,
     isSearch: localState.value.isSearch,
   })
+  emit('confirm')
   onClose()
   if (props.resetAfterConfirm) {
     onReset()
@@ -365,6 +368,7 @@ const onReset = () => {
   tabActive.value = 0
   currentIndexs.value = []
   onClearSelected()
+  emit('reset')
 }
 
 /** 清除所有数据 */
