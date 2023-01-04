@@ -1,26 +1,31 @@
 <template>
-  <view :class="computedClass('popup', `popup--${props.position}`)">
-    <TransitionComponent
-      :show="visible"
+  <view v-if="show" :class="computedClass('popup', `popup--${props.position}`)">
+    <uni-transition
+      key="1"
+      name="overlay"
+      mode-class="fade"
+      :styles="overlayStyle"
       :duration="duration"
-      mode="fade"
-      :custom-style="overlayStyle"
+      :show="showTransition"
       @click="onOverlayClick"
     />
-    <TransitionComponent
-      :show="visible"
+    <uni-transition
+      key="2"
+      :mode-class="transitionModeClass"
+      name="content"
+      :styles="transitionStyle"
       :duration="duration"
-      :mode="animateMode"
-      :custom-style="transitionStyle"
+      :show="showTransition"
       @click="onContentClick"
     >
-      <view :class="computedClass('popup__content')" :style="contentStyle" @tap.stop="noop">
+      <view :class="computedClass('popup__content')" :style="popupContentStyle" @tap.stop="noop">
         <view v-if="closeable" :class="computedClass('popup__close')" @tap.stop="onClose">
           <Icon name="close" size="24px" block />
         </view>
         <slot />
+        <SafeBottom v-if="safeAreaInsetBottom" />
       </view>
-    </TransitionComponent>
+    </uni-transition>
   </view>
 </template>
 
@@ -29,7 +34,8 @@ import { computed, CSSProperties, ref, toRefs, watch } from 'vue'
 import { getUnitValue, noop } from '../../utils'
 import { computedClass } from '../../utils/style'
 import Icon from '../icon/icon.vue'
-import TransitionComponent, { TransitionMode } from '../transition/transition.vue'
+import SafeBottom from '../safe-bottom/safe-bottom.vue'
+import UniTransition from '../uni-transition/uni-transition.vue'
 
 export type PopupPosition = 'top' | 'bottom' | 'left' | 'right' | 'center'
 
@@ -38,7 +44,7 @@ export interface PopupProps {
   /** 弹出方式 */
   position?: PopupPosition
   /** 遮罩打开或收起的动画过渡时间，单位ms */
-  duration?: string | number
+  duration?: number
   /** 是否显示遮罩 */
   overlay?: boolean
   /** 点击遮罩是否关闭弹窗 */
@@ -59,11 +65,12 @@ export interface PopupProps {
 
 const props = withDefaults(defineProps<PopupProps>(), {
   show: false,
-  position: 'bottom',
+  position: 'center',
   duration: 300,
-  overlay: true,
-  closeOnClickOverlay: true,
+  width: undefined,
+  height: undefined,
   bgColor: undefined,
+  closeOnClickOverlay: true,
 })
 
 const emit = defineEmits<{
@@ -77,12 +84,12 @@ const emit = defineEmits<{
 const { show } = toRefs(props)
 
 let _timer: number | null = null
-const visible = ref<boolean>(false)
+const showTransition = ref<boolean>(false)
 
 watch(
   show,
   (newVal) => {
-    visible.value = newVal
+    showTransition.value = newVal
   },
   {
     immediate: true,
@@ -101,7 +108,7 @@ const overlayStyle = computed<CSSProperties>(() => {
 })
 
 const transitionStyle = computed<CSSProperties>(() => {
-  const styleObj: { [key in PopupPosition]: CSSProperties } = {
+  const typeStyleObj: { [key in PopupPosition]: CSSProperties } = {
     top: { top: 0, left: 0, right: 0 },
     bottom: { left: 0, right: 0, bottom: 0 },
     left: { top: 0, left: 0, bottom: 0 },
@@ -118,29 +125,31 @@ const transitionStyle = computed<CSSProperties>(() => {
   return {
     position: 'fixed',
     display: 'flex',
-    ...styleObj[props.position],
+    ...typeStyleObj[props.position],
   }
 })
 
-const animateMode = computed<TransitionMode>(() => {
-  const animateObj: { [key in PopupPosition]: TransitionMode } = {
-    top: 'slide-down',
-    bottom: 'slide-up',
-    left: 'slide-left',
-    right: 'slide-right',
-    center: 'fade-zoom',
+const transitionModeClass = computed<string[]>(() => {
+  const modeObj: { [key in PopupPosition]: string[] } = {
+    top: ['slide-top'],
+    bottom: ['slide-bottom'],
+    left: ['slide-left'],
+    right: ['slide-right'],
+    center: ['zoom-out', 'fade'],
   }
-  console.log('-----', animateObj[props.position])
-  return animateObj[props.position]
+  return modeObj[props.position]
 })
 
-const contentStyle = computed<CSSProperties>(() => {
+const popupContentStyle = computed<CSSProperties>(() => {
   const style: CSSProperties = {}
   if (props.position !== 'center') {
     style.flex = 1
   }
-  if (props.height) {
-    style.height = ['left', 'right'].includes(props.position) ? '100vh' : getUnitValue(props.height)
+  if (props.width && ['left', 'right', 'center'].includes(props.position)) {
+    style.height = getUnitValue(props.width)
+  }
+  if (props.height && ['top', 'bottom', 'center'].includes(props.position)) {
+    style.height = getUnitValue(props.height)
   }
   if (props.bgColor) {
     style.backgroundColor = props.bgColor
@@ -165,20 +174,20 @@ const onOverlayClick = () => {
 }
 
 const onContentClick = () => {
-  // 由于中部弹出时，其transition占据了整个页面相当于遮罩，此时需要发出遮罩点击事件，是否无法通过点击遮罩关闭弹窗
+  // 由于中部弹出时，内容容器占据了整个页面相当于遮罩，此时需要发出遮罩点击事件
   if (props.position === 'center') {
     onOverlayClick()
   }
 }
 
 const onClose = () => {
-  visible.value = false
-  emit('update:show', false)
+  showTransition.value = false
   emit('close')
   if (_timer !== null) {
     clearTimeout(_timer)
   }
   _timer = setTimeout(() => {
+    emit('update:show', false)
     emit('closed')
   }, +props.duration)
 }
@@ -189,9 +198,16 @@ const onClose = () => {
 .#{$prefix}-popup {
   position: fixed;
   z-index: 999;
-  max-height: 100%;
-  overflow-y: auto;
-
+  &--top,
+  &--left,
+  &--right {
+    /* #ifdef H5 */
+    top: var(--window-top);
+    /* #endif */
+    /* #ifndef H5 */
+    top: 0;
+    /* #endif */
+  }
   &__content {
     position: relative;
     background-color: #fff;
@@ -202,6 +218,7 @@ const onClose = () => {
     top: 0;
     right: 0;
     padding: 10px;
+    color: #969799;
   }
 }
 </style>
