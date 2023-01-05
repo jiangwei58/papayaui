@@ -40,7 +40,7 @@
             height: 100%;
             border-radius: 0 100px 100px 0;
             color: #fff;
-            background-color: var(--pa-color-danger);
+            background: linear-gradient(315deg, rgb(73, 143, 242) 0%, rgb(73, 101, 242) 100%);
           "
         >
           自定义内容

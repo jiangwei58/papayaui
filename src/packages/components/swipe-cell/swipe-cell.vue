@@ -1,38 +1,42 @@
 <template>
-  <view
-    :class="computedClass('swipe-cell')"
-    :status="status"
-    :change:status="wxs.statusChange"
-    :extra="extraParams"
-    :change:extra="wxs.extraChange"
-    @touchstart="wxs.touchstart"
-    @touchmove="wxs.touchmove"
-    @touchend="wxs.touchend"
-  >
-    <view :class="computedClass('swipe-cell__content')">
-      <slot />
-    </view>
-    <view :class="computedClass('swipe-cell__right')">
-      <slot v-if="$slots.right" name="right" />
-      <template v-else>
-        <ButtonComponent
-          v-for="(item, index) in options"
-          :key="item.text + index"
-          type="danger"
-          :width="item.style && item.style.width ? getUnitValue(item.style.width) : '60px'"
-          height="100%"
-          round="0"
-          :custom-style="{
-            backgroundColor: item.style
-              ? item.style.backgroundColor
-              : `var(--${PREFIX}-color-danger)`,
-            borderColor: item.style ? item.style.backgroundColor : `var(--${PREFIX}-color-danger)`,
-          }"
-          @click="onBtnClick(index)"
-        >
-          {{ item.text }}
-        </ButtonComponent>
-      </template>
+  <view :class="computedClass('swipe-cell')">
+    <view
+      :class="computedClass('swipe-cell__wrapper')"
+      :status="status"
+      :change:status="wxs.statusChange"
+      :extra="extraParams"
+      :change:extra="wxs.extraChange"
+      @touchstart="wxs.touchstart"
+      @touchmove="wxs.touchmove"
+      @touchend="wxs.touchend"
+    >
+      <view :class="computedClass('swipe-cell__content')">
+        <slot />
+      </view>
+      <view :class="computedClass('swipe-cell__right')">
+        <slot v-if="$slots.right" name="right" />
+        <template v-else>
+          <ButtonComponent
+            v-for="(item, index) in options"
+            :key="item.text + index"
+            type="danger"
+            :width="item.style && item.style.width ? getUnitValue(item.style.width) : '60px'"
+            height="100%"
+            round="0"
+            :custom-style="{
+              backgroundColor: item.style
+                ? item.style.backgroundColor
+                : `var(--${PREFIX}-color-danger)`,
+              borderColor: item.style
+                ? item.style.backgroundColor
+                : `var(--${PREFIX}-color-danger)`,
+            }"
+            @click="onBtnClick(index)"
+          >
+            {{ item.text }}
+          </ButtonComponent>
+        </template>
+      </view>
     </view>
   </view>
 </template>
@@ -240,13 +244,10 @@ module.exports = {
 
 .#{$prefix}-swipe-cell {
   position: relative;
-  // overflow: hidden;
-  touch-action: pan-y;
+  overflow: hidden;
+
   &__content {
     position: relative;
-    z-index: 2;
-    transition-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1);
-    transition-property: transform;
   }
   &__right {
     position: absolute;
