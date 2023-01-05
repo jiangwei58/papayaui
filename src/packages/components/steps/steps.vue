@@ -225,6 +225,10 @@ onMounted(() => {
       align-items: flex-start;
       margin-left: 15px;
     }
+    &-title,
+    &-desc {
+      width: 100%;
+    }
     &-line {
       width: 1px;
       height: calc(100% - $gap - $iconSize);
