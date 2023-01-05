@@ -13,23 +13,26 @@
       <slot />
     </view>
     <view :class="computedClass('swipe-cell__right')">
-      <ButtonComponent
-        v-for="(item, index) in options"
-        :key="item.text + index"
-        type="danger"
-        :width="item.style && item.style.width ? getUnitValue(item.style.width) : '60px'"
-        height="100%"
-        round="0"
-        :custom-style="{
-          backgroundColor: item.style
-            ? item.style.backgroundColor
-            : `var(--${PREFIX}-color-danger)`,
-          borderColor: item.style ? item.style.backgroundColor : `var(--${PREFIX}-color-danger)`,
-        }"
-        @click="onBtnClick(index)"
-      >
-        {{ item.text }}
-      </ButtonComponent>
+      <slot v-if="$slots.right" name="right" />
+      <template v-else>
+        <ButtonComponent
+          v-for="(item, index) in options"
+          :key="item.text + index"
+          type="danger"
+          :width="item.style && item.style.width ? getUnitValue(item.style.width) : '60px'"
+          height="100%"
+          round="0"
+          :custom-style="{
+            backgroundColor: item.style
+              ? item.style.backgroundColor
+              : `var(--${PREFIX}-color-danger)`,
+            borderColor: item.style ? item.style.backgroundColor : `var(--${PREFIX}-color-danger)`,
+          }"
+          @click="onBtnClick(index)"
+        >
+          {{ item.text }}
+        </ButtonComponent>
+      </template>
     </view>
   </view>
 </template>
