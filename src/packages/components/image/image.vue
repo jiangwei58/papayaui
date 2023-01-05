@@ -14,6 +14,7 @@
       :src="src"
       :mode="mode"
       :lazy-load="lazyLoad"
+      :webp="webp"
       :show-menu-by-longpress="showMenuByLongpress"
       @error="onError"
       @load="onLoad"
@@ -48,6 +49,8 @@ interface ImageProps {
   round?: boolean | string
   /** 图片懒加载 */
   lazyLoad?: boolean
+  /** 在系统不支持webp的情况下是否单独启用webp。默认false，只支持网络资源。 */
+  webp?: boolean
   /** 开启长按图片显示识别小程序码菜单 */
   showMenuByLongpress?: boolean
 }
