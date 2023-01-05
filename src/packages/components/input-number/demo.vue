@@ -24,6 +24,16 @@
     <pa-cell title="只显示输入框">
       <pa-input-number v-model="input8" :controls="false" input-width="92px" />
     </pa-cell>
+    <pa-cell title="输入样式">
+      <pa-input-number
+        v-model="input9"
+        :controls="false"
+        block
+        input-align="right"
+        plain
+        placeholder="请输入"
+      />
+    </pa-cell>
   </DocDemoBlock>
 </template>
 
@@ -40,6 +50,7 @@ const input5 = ref<number>(1)
 const input6 = ref<number>(1)
 const input7 = ref<number>(1)
 const input8 = ref<number>(1)
+const input9 = ref<number>(1)
 
 const onChange = async (value: number) => {
   uni.showToast({

@@ -1,11 +1,13 @@
 <template>
   <view
-    :class="
+    :class="[
       computedClass('input-number', {
         'input-number-controls': controls,
-      })
-    "
-    class="inline-flex items-center"
+        'input-number--plain': plain,
+      }),
+      block ? 'flex' : 'inline-flex',
+    ]"
+    class="items-center"
   >
     <view
       v-if="controls"
@@ -88,6 +90,10 @@ export interface InputNumberProps {
   controls?: boolean
   /** 是否开启异步变更，开启后需要手动控制输入值 */
   asyncChange?: boolean
+  /** 是否为块级元素 */
+  block?: boolean
+  /** 朴素样式 */
+  plain?: boolean
 }
 
 const props = withDefaults(defineProps<InputNumberProps>(), {
@@ -207,6 +213,7 @@ const onFocus = (e: unknown) => {
     width: _var(input-number-width, 32px);
     height: $height;
     font-size: _var(input-number-font-size, 14px);
+    color: _var(input-number-color, _var(color-black));
     background-color: $bgColor;
     border-radius: $round;
     :deep(.#{$prefix}-input-number-placeholder) {
@@ -225,6 +232,10 @@ const onFocus = (e: unknown) => {
   &-inner--disabled {
     color: $disabledColor;
     background-color: $disabledBgColor;
+  }
+  &--plain &-inner {
+    color: _var(input-number-color, _var(color-primary));
+    background-color: transparent;
   }
 }
 </style>
