@@ -1,5 +1,8 @@
 <template>
-  <view :class="computedClass('popup', `popup--${props.position}`)">
+  <view
+    :class="[computedClass('popup', `popup--${props.position}`), customClass]"
+    :style="customStyle"
+  >
     <TransitionComponent
       :show="visible"
       :duration="duration"
@@ -58,6 +61,10 @@ export interface PopupProps {
   closeable?: boolean
   /** 是否适配底部安全区 */
   safeAreaInsetBottom?: boolean
+  /** 自定义样式类 */
+  customClass?: string
+  /** 自定义弹出层样式 */
+  customStyle?: string
 }
 
 const props = withDefaults(defineProps<PopupProps>(), {
@@ -69,6 +76,8 @@ const props = withDefaults(defineProps<PopupProps>(), {
   height: undefined,
   closeOnClickOverlay: true,
   bgColor: undefined,
+  customClass: undefined,
+  customStyle: undefined,
 })
 
 const emit = defineEmits<{
