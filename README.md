@@ -6,23 +6,23 @@
 
 ### 安装
 
-```
+```bash
+# 通过 npm 安装
 npm i papayaui
 
-or
-
+# 通过 yarn 安装
 yarn add papayaui
 ```
 
-### SCSS
+### SASS
 
-此 ui 库依赖 SCSS，请确保已经安装
+此 ui 库依赖 SASS，请确保已经安装
 
-```
+```bash
+# 通过 npm 安装
 npm i sass -D
 
-or
-
+# 通过 yarn 安装
 yarn add sass -D
 ```
 
@@ -51,19 +51,13 @@ yarn add sass -D
 > 2. 请确保您的 pages.json 中只有一个 easycom 字段，否则请自行合并多个引入规则。
 
 ```json
-// pages.json
 {
   "easycom": {
     "autoscan": true,
     "custom": {
       "^pa-(.*)": "papayaui/components/$1/$1.vue"
     }
-  },
-
-  // 此为本身已有的内容
-  "pages": [
-    // ......
-  ]
+  }
 }
 ```
 
