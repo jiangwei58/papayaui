@@ -20,11 +20,12 @@
       @after-enter="onAfterEnter"
       @after-leave="onAfterLeave"
     >
-      <view :class="computedClass('popup__content')" :style="contentStyle" @tap.stop="noop">
+      <view :class="[computedClass('popup__content')]" :style="contentStyle" @tap.stop="noop">
         <view v-if="closeable" :class="computedClass('popup__close')" @tap.stop="onClose">
           <Icon name="close" size="24px" block />
         </view>
         <slot />
+        <SafeBottom v-if="safeAreaInsetBottom" />
       </view>
     </TransitionComponent>
   </view>
@@ -35,6 +36,7 @@ import { computed, CSSProperties, ref, toRefs, watch } from 'vue'
 import { getUnitValue, noop } from '../../utils'
 import { computedClass } from '../../utils/style'
 import Icon from '../icon/icon.vue'
+import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import TransitionComponent, { TransitionMode } from '../transition/transition.vue'
 
 export type PopupPosition = 'top' | 'bottom' | 'left' | 'right' | 'center'
@@ -61,6 +63,8 @@ export interface PopupProps {
   closeable?: boolean
   /** 是否适配底部安全区 */
   safeAreaInsetBottom?: boolean
+  /** 是否留出顶部安全距离（状态栏高度） */
+  safeAreaInsetTop?: boolean
   /** 自定义样式类 */
   customClass?: string
   /** 自定义弹出层样式 */
@@ -74,8 +78,9 @@ const props = withDefaults(defineProps<PopupProps>(), {
   overlay: true,
   width: undefined,
   height: undefined,
-  closeOnClickOverlay: true,
   bgColor: undefined,
+  closeOnClickOverlay: true,
+  safeAreaInsetBottom: true,
   customClass: undefined,
   customStyle: undefined,
 })
@@ -91,6 +96,7 @@ const emit = defineEmits<{
 
 const { show } = toRefs(props)
 
+const systemInfo = uni.getSystemInfoSync()
 const visible = ref<boolean>(false)
 
 watch(
@@ -170,6 +176,9 @@ const contentStyle = computed<CSSProperties>(() => {
       center: '16px',
     }
     style.borderRadius = radiusObj[props.position]
+  }
+  if (props.safeAreaInsetTop) {
+    style.paddingTop = systemInfo.statusBarHeight + 'px'
   }
   return style
 })
