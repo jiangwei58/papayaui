@@ -11,3 +11,9 @@ $prefix: pa;
 @mixin _setVar($varName, $value) {
   --#{$prefix}-#{$varName}: #{$value};
 }
+
+@mixin safeBottomPadding($value: 0) {
+  padding-bottom: $value;
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
