@@ -68,6 +68,10 @@ const props = withDefaults(defineProps<RadioProps>(), {
   checkedColor: undefined,
 })
 
+const emit = defineEmits<{
+  (event: 'change', value: RadioValue): void
+}>()
+
 const p_children = inject<Ref<RadioInstance[]>>('radioChildren')
 const p_data = inject<RadioProvideData>('radioData')
 
@@ -80,6 +84,7 @@ if (instance && p_children?.value) {
 const onClick = () => {
   if (props.disabled) return
   p_data?.onSelect(props.name)
+  emit('change', props.name)
 }
 
 const onLabelClick = () => {
@@ -101,6 +106,7 @@ const onLabelClick = () => {
   margin: _var(radio-margin, 0);
 
   &__icon {
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
