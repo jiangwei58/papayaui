@@ -166,6 +166,11 @@ const onBlur = async (e: unknown) => {
   if (event.detail.value) {
     const numVal = Number(event.detail.value)
     const result = minAndMax(numVal, min.value, max.value)
+    // 值没变不发送更新事件
+    if (result === Number(modelValue.value) && result === numVal) {
+      emit('blur', event)
+      return
+    }
     // 防止处理后modelValue前后值一样视图不更新
     if (result === Number(modelValue.value) && result !== numVal) {
       emit('update:modelValue', numVal)
