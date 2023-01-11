@@ -17,7 +17,7 @@
         :key="monthIndex"
         :class="computedClass('calendar__month')"
       >
-        <view :class="computedClass('calendar__month-title')">
+        <view v-if="monthIndex !== 0" :class="computedClass('calendar__month-title')">
           {{ monthItem.date.format('YYYY年M月') }}
         </view>
         <view :class="computedClass('calendar__days')">
@@ -39,12 +39,13 @@
           </view>
         </view>
       </view>
-      <SafeBottom v-if="!showConfirm" />
+      <SafeBottom v-if="!showConfirm && safeAreaInsetBottom" />
     </scroll-view>
-    <view v-if="showConfirm" :class="computedClass('calendar-footer')" class="px-26 pt-15">
+    <view v-if="showConfirm" :class="computedClass('calendar-footer')" class="px-26 py-15">
       <ButtonComponent type="primary" block :disabled="!confirmEnabled" @click="onConfirm">
         {{ confirmEnabled ? confirmText : confirmDisabledText }}
       </ButtonComponent>
+      <SafeBottom v-if="safeAreaInsetBottom" />
     </view>
   </view>
 </template>
@@ -88,6 +89,8 @@ export interface CalendarWrapperProps {
   firstDayOfWeek?: FirstDayOfWeekType
   /** 是否为只读状态，只读状态下不能选择日期 */
   readonly?: boolean
+  /** 是否适配底部安全区 */
+  safeAreaInsetBottom?: boolean
   /** ===当 Calendar 的 type 为 range 时，支持以下 props=== */
   /** 是否允许日期范围的起止时间为同一天 */
   allowSameDay?: boolean
@@ -95,7 +98,23 @@ export interface CalendarWrapperProps {
   maxRange?: number
 }
 
-const props = defineProps<CalendarWrapperProps>()
+const props = withDefaults(defineProps<CalendarWrapperProps>(), {
+  type: 'single',
+  title: '日期选择',
+  minDate: Date.now(),
+  maxDate: Date.now() + 1000 * 60 * 60 * 24 * 365,
+  defaultDate: Date.now(),
+  formatter: undefined,
+  showMark: true,
+  showTitle: true,
+  showSubtitle: true,
+  showConfirm: true,
+  confirmText: '确定',
+  confirmDisabledText: '确定',
+  firstDayOfWeek: 0,
+  safeAreaInsetBottom: true,
+  maxRange: undefined,
+})
 
 const emit = defineEmits<{
   (event: 'confirm', value: Dayjs[]): void
@@ -313,7 +332,6 @@ defineExpose({
 
   &-footer {
     flex-shrink: 0;
-    @include safeBottomPadding(15rpx);
   }
 }
 </style>

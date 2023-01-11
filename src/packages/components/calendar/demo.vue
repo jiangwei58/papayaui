@@ -45,7 +45,14 @@
         title="自定义日期范围"
         :value="values[5]?.toString()"
         is-link
-        @click="onShow({ type: 'single', current: 5, maxDate: dayjs().endOf('month').valueOf() })"
+        @click="
+          onShow({
+            type: 'single',
+            current: 5,
+            minDate: dayjs().startOf('month').valueOf(),
+            maxDate: dayjs().endOf('month').valueOf(),
+          })
+        "
       />
       <pa-cell
         title="自定义按钮文字"
@@ -92,14 +99,9 @@
     </pa-cell-group>
   </DocDemoBlock>
 
-  <!-- <DocDemoBlock title="平铺展示" card>
-    <pa-calendar
-      :poppable="false"
-      :type="state.type"
-      :default-date="state.defaultDate"
-      round="8px"
-    />
-  </DocDemoBlock> -->
+  <DocDemoBlock title="平铺展示" card>
+    <pa-calendar :poppable="false" :default-date="state.defaultDate" round="8px" />
+  </DocDemoBlock>
 
   <pa-calendar
     v-model:show="visible"
@@ -119,7 +121,7 @@
 
 <script lang="ts" setup>
 import dayjs from 'dayjs'
-import { reactive, ref } from 'vue'
+import { ref } from 'vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import { CalendarProps } from './calendar.vue'
@@ -127,22 +129,22 @@ import { CalendarProps } from './calendar.vue'
 type StateProps = CalendarProps & { current?: number }
 
 const visible = ref<boolean>(false)
-const state = reactive<StateProps>({
+const state = ref<StateProps>({
   type: 'single',
   defaultDate: Date.now(),
 })
 const values = ref<Array<string | string[]>>([])
 
 const onShow = (data: StateProps = {}) => {
-  state.defaultDate = Date.now()
+  state.value = {}
   for (const key in data) {
-    state[key as keyof CalendarProps] = data[key as keyof CalendarProps] as any
+    state.value[key as keyof CalendarProps] = data[key as keyof CalendarProps] as any
   }
   visible.value = true
 }
 
 const onConfirm = (value: Date | Date[]) => {
-  values.value[state.current ?? 0] = Array.isArray(value)
+  values.value[state.value.current ?? 0] = Array.isArray(value)
     ? value.map((item) => dayjs(item).format('YYYY-MM-DD'))
     : dayjs(value).format('YYYY-MM-DD')
 }
