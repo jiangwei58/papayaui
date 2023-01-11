@@ -32,10 +32,11 @@
 </template>
 
 <script lang="ts" setup>
-import { ComponentInternalInstance, CSSProperties, getCurrentInstance, inject, Ref } from 'vue'
+import { ComponentInternalInstance, CSSProperties, getCurrentInstance, inject, ref, Ref } from 'vue'
 import { computedClass } from '../../utils/style'
 import IconComponent from '../icon/icon.vue'
 import { CheckboxProvideData } from '../checkbox-group/checkbox-group.vue'
+import { noop } from '../../utils'
 
 export interface CheckboxInstance extends Omit<ComponentInternalInstance, 'props'> {
   props: CheckboxProps
@@ -75,8 +76,8 @@ const emit = defineEmits<{
   (event: 'change', value: boolean, name: CheckboxValue): void
 }>()
 
-const p_children = inject<Ref<CheckboxInstance[]>>('checkboxChildren')
-const p_data = inject<CheckboxProvideData>('checkboxData')
+const p_children = inject<Ref<CheckboxInstance[]>>('checkboxChildren', ref([]))
+const p_data = inject<CheckboxProvideData>('checkboxData', { onSelect: noop, isSelected: noop })
 
 const instance = getCurrentInstance()
 
