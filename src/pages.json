@@ -76,6 +76,13 @@
       "type": "base"
     },
     {
+      "path": "packages/components/calendar/demo",
+      "style": {
+        "navigationBarTitleText": "Calendar 日历"
+      },
+      "type": "form"
+    },
+    {
       "path": "packages/components/form/demo",
       "style": {
         "navigationBarTitleText": "Form 表单"

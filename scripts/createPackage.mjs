@@ -7,7 +7,7 @@ const getPackageJson = () => {
   const dataStr = fs.readFileSync(filePath).toString()
   const json = JSON.parse(dataStr)
   for (const key in json.dependencies) {
-    if (!['async-validator'].includes(key)) {
+    if (!['async-validator', 'dayjs'].includes(key)) {
       delete json.dependencies[key]
     }
   }

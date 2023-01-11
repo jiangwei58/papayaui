@@ -40,7 +40,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import { delay } from '../../utils/common'
+import { sleep } from '../../utils/common'
 
 const input1 = ref<number>(1)
 const input2 = ref<number>(1)
@@ -58,7 +58,7 @@ const onChange = async (value: number) => {
     title: '',
     duration: 2000,
   })
-  await delay(2000)
+  await sleep(2000)
   input7.value = value
   uni.hideToast()
 }

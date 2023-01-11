@@ -59,8 +59,8 @@ export const loopTree = <T>(
 /** 空函数 */
 export const noop: (...args: any[]) => any = () => {}
 
-/** 延迟 */
-export const delay = (timeout: number) => {
+/** 睡眠，延迟执行 */
+export const sleep = (timeout: number) => {
   return new Promise<void>((resolve) => {
     setTimeout(() => {
       resolve()

@@ -58,7 +58,7 @@ export interface PopupProps {
   /** 背景色 */
   bgColor?: CSSProperties['background-color']
   /** 是否圆角 */
-  round?: boolean
+  round?: boolean | string
   /** 是否显示关闭按钮 */
   closeable?: boolean
   /** 是否适配底部安全区 */
@@ -168,12 +168,13 @@ const contentStyle = computed<CSSProperties>(() => {
     style.backgroundColor = props.bgColor
   }
   if (props.round) {
+    const radius = typeof props.round === 'boolean' ? '16px' : getUnitValue(props.round)
     const radiusObj: { [key in PopupPosition]: CSSProperties['border-radius'] } = {
-      top: '0 0 16px 16px',
-      bottom: '16px 16px 0 0',
-      left: '0 16px 16px 0',
-      right: '16px 0 0 16px',
-      center: '16px',
+      top: `0 0 ${radius} ${radius}`,
+      bottom: `${radius} ${radius} 0 0`,
+      left: `0 ${radius} ${radius} 0`,
+      right: `${radius} 0 0 ${radius}`,
+      center: `${radius}`,
     }
     style.borderRadius = radiusObj[props.position]
   }

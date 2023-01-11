@@ -110,6 +110,7 @@ const onLabelClick = () => {
   margin: _var(checkbox-margin, 0);
 
   &__icon {
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
