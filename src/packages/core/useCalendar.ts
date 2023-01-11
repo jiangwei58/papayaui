@@ -55,7 +55,7 @@ export default (props: IncludeRefs<UseCalendarProps>) => {
     ...props,
     type: _porps.type ?? 'single',
     min: _porps.min ?? dayjs().valueOf(),
-    max: _porps.max ?? dayjs().add(365, 'day'),
+    max: _porps.max ?? dayjs().add(6, 'month'),
     defaultDate: _porps.defaultDate ?? dayjs().valueOf(),
     firstDayOfWeek: _porps.firstDayOfWeek ?? 0,
   })

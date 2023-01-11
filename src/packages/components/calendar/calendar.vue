@@ -11,7 +11,12 @@
     @close="emit('close')"
     @closed="emit('closed')"
   >
-    <CalendarWrapper ref="wrapperRef" v-bind="$attrs" @select="onSelect" @confirm="onConfirm" />
+    <CalendarWrapper
+      ref="wrapperRef"
+      v-bind="($props as CalendarWrapperProps)"
+      @select="onSelect"
+      @confirm="onConfirm"
+    />
   </Popup>
   <view
     v-else
@@ -20,7 +25,7 @@
   >
     <CalendarWrapper
       ref="wrapperRef"
-      v-bind="$attrs"
+      v-bind="($props as CalendarWrapperProps)"
       :show-confirm="false"
       :safe-area-inset-bottom="false"
       @select="onSelect"

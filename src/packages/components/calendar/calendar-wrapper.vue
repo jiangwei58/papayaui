@@ -102,7 +102,7 @@ const props = withDefaults(defineProps<CalendarWrapperProps>(), {
   type: 'single',
   title: '日期选择',
   minDate: Date.now(),
-  maxDate: Date.now() + 1000 * 60 * 60 * 24 * 365,
+  maxDate: Date.now() + 1000 * 60 * 60 * 24 * 180,
   defaultDate: Date.now(),
   formatter: undefined,
   showMark: true,
@@ -176,7 +176,7 @@ const onSelect = (dayItem: DayItem) => {
   if (dayItem.type === 'disabled' || props.readonly) return
   _onSelect(dayItem.date)
   emit('select', dayItem)
-  if (!props.showConfirm && confirmEnabled) {
+  if (!props.showConfirm && confirmEnabled.value) {
     onConfirm()
   }
 }
