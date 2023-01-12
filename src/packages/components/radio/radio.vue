@@ -83,7 +83,7 @@ if (instance && p_children?.value) {
 }
 
 const onClick = () => {
-  if (props.disabled) return
+  if (props.disabled || p_data.disabled) return
   p_data?.onSelect(props.name)
   emit('change', props.name)
 }
