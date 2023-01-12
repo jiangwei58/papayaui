@@ -5,6 +5,7 @@
       :class="computedClass('tabs-scroll')"
       scroll-x
       :scroll-left="lineScrollLeft"
+      scroll-with-animation
     >
       <view :class="computedClass('tabs-wrapper')">
         <view
@@ -30,6 +31,7 @@
 <script lang="ts" setup>
 import { computedClass } from '../../utils/style'
 import { computed, getCurrentInstance, nextTick, ref, toRefs, watch } from 'vue'
+import { useRect } from '../../hooks'
 
 export type TabItem = any
 
@@ -85,65 +87,51 @@ watch(
 
 const isActive = (item: TabItem, index: number) => {
   return isCustomValue.value
-    ? item[props.valueKey] === modelValue.value
+    ? item[props.valueKey as keyof TabItem] === modelValue.value
     : index === modelValue.value
 }
 
 const getCurrentTabIndex = () => {
   if (isCustomValue.value) {
-    const index = tabs.value.findIndex((tab) => tab[props.valueKey] === modelValue.value)
+    const index = tabs.value.findIndex(
+      (tab) => tab[props.valueKey as keyof TabItem] === modelValue.value,
+    )
     return index !== -1 ? index : 0
   }
   return modelValue.value
 }
 
 // 获取左移动位置
-const updateTabItemWidth = () => {
-  const query = uni.createSelectorQuery().in(internalInstance)
-  let containerWidth = 0
+const updateTabItemWidth = async () => {
+  if (!internalInstance) return
   // 获取容器的宽度
-  query
-    .select('#tabsScrollContainer')
-    .boundingClientRect((data) => {
-      if (data) {
-        containerWidth = data.width || 0
-      }
-    })
-    .exec()
+  const containerNode = await useRect(internalInstance, '#tabsScrollContainer')
+  if (!containerNode) return
+  const containerWidth = containerNode.width || 0
   // 获取所有的 tab-item 的宽度
-  query
-    .selectAll(`.${computedClass('tab')}`)
-    .boundingClientRect((data) => {
-      if (!data) {
-        return
-      }
-      const nodes = data as Required<UniApp.NodeInfo>[]
-      let lineLeft = 0
-      let currentWidth = 0
-      if (nodes) {
-        const valueIndex = getCurrentTabIndex()
-        for (let i = 0; i < nodes.length; i++) {
-          if (i < valueIndex) {
-            lineLeft += nodes[i].width
-          } else if (i == valueIndex) {
-            currentWidth = nodes[i].width
-          } else {
-            break
-          }
-        }
-      }
-      // 滑块作移动的位置
-      lineOffsetLeft.value = lineLeft + currentWidth / 2
-      // 计算滚动的距离左侧的位置
-      if (props.scrollable) {
-        lineScrollLeft.value = lineOffsetLeft.value - containerWidth / 2
-      }
-    })
-    .exec()
+  const nodes = await useRect(internalInstance, `.${computedClass('tab')}`, true)
+  let lineLeft = 0
+  let currentWidth = 0
+  const currentTabIndex = getCurrentTabIndex()
+  for (let i = 0; i < nodes.length; i++) {
+    if (i < currentTabIndex) {
+      lineLeft += nodes[i].width
+    } else if (i == currentTabIndex) {
+      currentWidth = nodes[i].width
+    } else {
+      break
+    }
+  }
+  // 滑块作移动的位置
+  lineOffsetLeft.value = lineLeft + currentWidth / 2
+  // 计算滚动的距离左侧的位置
+  if (props.scrollable) {
+    lineScrollLeft.value = lineOffsetLeft.value - containerWidth / 2
+  }
 }
 
 const onChangeTab = (item: TabItem, index: number) => {
-  emit('update:modelValue', isCustomValue.value ? item[props.valueKey] : index)
+  emit('update:modelValue', isCustomValue.value ? item[props.valueKey as keyof TabItem] : index)
   emit('change', item)
 }
 
