@@ -1,15 +1,9 @@
 <template>
   <view
     :class="[computedClass('popup', `popup--${props.position}`), customClass]"
-    :style="customStyle"
+    :style="popupStyle"
   >
-    <TransitionComponent
-      :show="visible"
-      :duration="duration"
-      mode="fade"
-      :custom-style="overlayStyle"
-      @click="onOverlayClick"
-    />
+    <Overlay :show="visible" :z-index="0" :duration="+duration" @click="onOverlayClick" />
     <TransitionComponent
       :show="visible"
       :duration="duration"
@@ -25,7 +19,7 @@
           <Icon name="close" size="24px" block />
         </view>
         <slot />
-        <SafeBottom v-if="safeAreaInsetBottom" />
+        <SafeBottom v-if="safeAreaInsetBottom && ['left', 'right', 'bottom'].includes(position)" />
       </view>
     </TransitionComponent>
   </view>
@@ -36,13 +30,17 @@ import { computed, CSSProperties, ref, toRefs, watch } from 'vue'
 import { getUnitValue, noop } from '../../utils'
 import { computedClass } from '../../utils/style'
 import Icon from '../icon/icon.vue'
+import Overlay from '../overlay/overlay.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import TransitionComponent, { TransitionMode } from '../transition/transition.vue'
 
 export type PopupPosition = 'top' | 'bottom' | 'left' | 'right' | 'center'
 
 export interface PopupProps {
+  /** 是否显示 */
   show?: boolean
+  /** z-index层级 */
+  zIndex?: number
   /** 弹出方式 */
   position?: PopupPosition
   /** 遮罩打开或收起的动画过渡时间，单位ms */
@@ -73,9 +71,11 @@ export interface PopupProps {
 
 const props = withDefaults(defineProps<PopupProps>(), {
   show: false,
+  zIndex: 999,
   position: 'bottom',
   duration: 300,
   overlay: true,
+  round: undefined,
   width: undefined,
   height: undefined,
   bgColor: undefined,
@@ -109,15 +109,8 @@ watch(
   },
 )
 
-const overlayStyle = computed<CSSProperties>(() => {
-  return {
-    position: 'fixed',
-    bottom: 0,
-    top: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.4)',
-  }
+const popupStyle = computed<string>(() => {
+  return `z-index:${props.zIndex};${props.customStyle ?? ''}`
 })
 
 const transitionStyle = computed<CSSProperties>(() => {
@@ -220,7 +213,6 @@ const onAfterLeave = () => {
 @import '../../styles/vars.scss';
 .#{$prefix}-popup {
   position: fixed;
-  z-index: 999;
   max-height: 100%;
   overflow-y: auto;
 

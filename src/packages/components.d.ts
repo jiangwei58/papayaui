@@ -42,6 +42,7 @@ import CheckboxGroup from './components/checkbox-group/checkbox-group.vue'
 import Calendar from './components/calendar/calendar.vue'
 import CountTo from './components/count-to/count-to.vue'
 import Empty from './components/empty/empty.vue'
+import Overlay from './components/overlay/overlay.vue'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
@@ -89,5 +90,6 @@ declare module '@vue/runtime-core' {
     'pa-calendar': typeof Calendar
     'pa-count-to': typeof CountTo
     'pa-empty': typeof Empty
+    'pa-overlay': typeof Overlay
   }
 }

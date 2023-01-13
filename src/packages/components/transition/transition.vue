@@ -1,7 +1,7 @@
 <template>
   <view
     v-if="state.inited"
-    :class="[computedClass('transition'), state.classes]"
+    :class="[computedClass('transition'), state.classes, customClass]"
     :style="mergeStyle"
     @tap="clickHandler"
     @touchmove="noop"
@@ -51,6 +51,8 @@ export interface TransitionProps {
   duration?: string | number
   /** 使用的动画过渡函数 */
   timingFunction?: CSSProperties['transitionTimingFunction']
+  /** 自定义class */
+  customClass?: string
   /** 自定义样式 */
   customStyle?: CSSProperties
 }
@@ -59,6 +61,7 @@ const props = withDefaults(defineProps<TransitionProps>(), {
   mode: 'fade',
   duration: 300,
   timingFunction: 'ease-out',
+  customClass: undefined,
   customStyle: undefined,
 })
 
