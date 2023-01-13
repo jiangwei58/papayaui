@@ -40,6 +40,7 @@ import SwipeCell from './components/swipe-cell/swipe-cell.vue'
 import Checkbox from './components/checkbox/checkbox.vue'
 import CheckboxGroup from './components/checkbox-group/checkbox-group.vue'
 import Calendar from './components/calendar/calendar.vue'
+import CountTo from './components/count-to/count-to.vue'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
@@ -85,5 +86,6 @@ declare module '@vue/runtime-core' {
     'pa-checkbox': typeof Checkbox
     'pa-checkbox-group': typeof CheckboxGroup
     'pa-calendar': typeof Calendar
+    'pa-count-to': typeof CountTo
   }
 }
