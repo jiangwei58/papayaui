@@ -3,7 +3,7 @@ import { IncludeRefs } from '../types'
 
 export interface UseSelectProps<T, V> {
   /** 选项数据 */
-  options: T[]
+  options?: T[]
   /** 默认数据 */
   defaultValue?: V | V[]
   /** 数据值的字段名 */
@@ -19,7 +19,7 @@ export interface UseSelectProps<T, V> {
 export default <T, V = T>(props: IncludeRefs<UseSelectProps<T, V>>) => {
   type OwnProps = UseSelectProps<T, V>
 
-  const options = toRef(props, 'options') as Ref<OwnProps['options']>
+  const options = toRef(props, 'options', []) as Ref<Required<OwnProps>['options']>
   const defaultValue = toRef(props, 'defaultValue', []) as Ref<Required<OwnProps>['defaultValue']>
   const valueKey = toRef(props, 'valueKey', 'value' as OwnProps['valueKey']) as Ref<
     Required<OwnProps>['valueKey']

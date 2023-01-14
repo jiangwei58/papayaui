@@ -73,7 +73,7 @@ import { ref } from 'vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 const singleValue = ref<boolean>(false)
-const value = ref<number[]>([])
+const value = ref<number[]>([0])
 
 const options = new Array(3).fill(0).map((_item, index) => ({
   name: index,

@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, provide, ref, toRefs } from 'vue'
+import { provide, toRefs } from 'vue'
 import useSelect from '../../core/useSelect'
 import { computedClass } from '../../utils/style'
-import { CheckboxInstance, CheckboxValue } from '../checkbox/checkbox.vue'
+import { CheckboxValue } from '../checkbox/checkbox.vue'
 
 export interface CheckboxGroupProps {
   /** 标识符 */
@@ -48,16 +48,7 @@ const emit = defineEmits<{
 
 const { modelValue, max } = toRefs(props)
 
-const children = ref<CheckboxInstance[]>([])
-
-const options = computed<CheckboxOption[]>(() => {
-  return children.value.map((child) => ({
-    name: child.props.name ?? '',
-  }))
-})
-
 const { selectedValues, onSelect, isSelected } = useSelect<CheckboxOption, CheckboxValue>({
-  options,
   defaultValue: modelValue,
   multiple: true,
   max,
@@ -69,7 +60,6 @@ const onChildSelect = (value: CheckboxValue) => {
   emit('change', selectedValues.value as CheckboxValue[], props.name)
 }
 
-provide('checkboxChildren', children)
 provide<CheckboxProvideData>('checkboxData', {
   disabled: props.disabled,
   onSelect: onChildSelect,

@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ComponentInternalInstance, CSSProperties, getCurrentInstance, inject, ref, Ref } from 'vue'
+import { ComponentInternalInstance, CSSProperties, inject } from 'vue'
 import { noop } from '../../utils'
 import { computedClass } from '../../utils/style'
 import IconComponent from '../icon/icon.vue'
@@ -73,14 +73,7 @@ const emit = defineEmits<{
   (event: 'change', value: RadioValue): void
 }>()
 
-const p_children = inject<Ref<RadioInstance[]>>('radioChildren', ref([]))
 const p_data = inject<RadioProvideData>('radioData', { onSelect: noop, isSelected: noop })
-
-const instance = getCurrentInstance()
-
-if (instance && p_children?.value) {
-  p_children.value = [...p_children.value, instance]
-}
 
 const onClick = () => {
   if (props.disabled || p_data.disabled) return

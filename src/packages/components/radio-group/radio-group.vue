@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, provide, ref, toRefs } from 'vue'
+import { provide, toRefs } from 'vue'
 import useSelect from '../../core/useSelect'
 import { computedClass } from '../../utils/style'
-import { RadioInstance, RadioValue } from '../radio/radio.vue'
+import { RadioValue } from '../radio/radio.vue'
 
 export interface RadioGroupProps {
   /** 标识符 */
@@ -41,15 +41,7 @@ const emit = defineEmits<{
 
 const { modelValue } = toRefs(props)
 
-const children = ref<RadioInstance[]>([])
-
-const options = computed(() => {
-  return children.value.map((child) => ({
-    name: child.props.name,
-  }))
-})
-
-const { onSelect, isSelected } = useSelect({ options, defaultValue: modelValue })
+const { onSelect, isSelected } = useSelect({ defaultValue: modelValue })
 
 const onChildSelect = (value: RadioValue) => {
   onSelect(value)
@@ -57,7 +49,6 @@ const onChildSelect = (value: RadioValue) => {
   emit('change', value, props.name)
 }
 
-provide('radioChildren', children)
 provide<RadioProvideData>('radioData', {
   disabled: props.disabled,
   onSelect: onChildSelect,

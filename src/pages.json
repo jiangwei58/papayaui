@@ -118,7 +118,7 @@
       "type": "form"
     },
     {
-      "path": "packages/components/radio-group/demo",
+      "path": "packages/components/radio/demo",
       "style": {
         "navigationBarTitleText": "Radio 单选框"
       },
