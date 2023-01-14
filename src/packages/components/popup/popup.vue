@@ -225,6 +225,7 @@ const onAfterLeave = () => {
     position: absolute;
     top: 0;
     right: 0;
+    z-index: 1;
     padding: 10px;
     color: #c8c9cc;
   }
