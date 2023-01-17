@@ -43,6 +43,8 @@ import Calendar from './components/calendar/calendar.vue'
 import CountTo from './components/count-to/count-to.vue'
 import Empty from './components/empty/empty.vue'
 import Overlay from './components/overlay/overlay.vue'
+import Menu from './components/menu/menu.vue'
+import MenuItem from './components/menu-item/menu-item.vue'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
@@ -91,5 +93,7 @@ declare module '@vue/runtime-core' {
     'pa-count-to': typeof CountTo
     'pa-empty': typeof Empty
     'pa-overlay': typeof Overlay
+    'pa-menu': typeof Menu
+    'pa-menu-item': typeof MenuItem
   }
 }

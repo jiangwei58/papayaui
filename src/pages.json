@@ -181,6 +181,13 @@
       "type": "feedback"
     },
     {
+      "path": "packages/components/menu/demo",
+      "style": {
+        "navigationBarTitleText": "Menu 菜单"
+      },
+      "type": "feedback"
+    },
+    {
       "path": "packages/components/swipe-cell/demo",
       "style": {
         "navigationBarTitleText": "SwipeCell 滑动单元格"
