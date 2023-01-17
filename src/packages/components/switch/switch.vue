@@ -14,7 +14,7 @@
       :style="computedStyle({ backgroundColor: inactiveColor })"
     />
     <view :class="computedClass('switch__node')">
-      <LoadingIcon v-if="loading" size="18px" />
+      <LoadingIcon v-if="loading" size="100%" class="block width-full height-full" />
     </view>
   </view>
 </template>
@@ -22,6 +22,7 @@
 <script lang="ts" setup>
 import { computed, CSSProperties, toRefs } from 'vue'
 import useSwitch, { SwitchValue as _SwitchValue } from '../../core/useSwitch'
+import { getUnitValue } from '../../utils'
 import { computedClass, computedStyle } from '../../utils/style'
 import LoadingIcon from '../loading-icon/loading-icon.vue'
 
@@ -42,6 +43,8 @@ export interface SwitchProps {
   loading?: boolean
   /** 加载状态 */
   disabled?: boolean
+  /** 开关尺寸 */
+  size?: string
 }
 
 const props = withDefaults(defineProps<SwitchProps>(), {
@@ -50,6 +53,7 @@ const props = withDefaults(defineProps<SwitchProps>(), {
   inactiveValue: false,
   activeColor: undefined,
   inactiveColor: undefined,
+  size: undefined,
 })
 
 const emit = defineEmits<{
@@ -79,6 +83,9 @@ const switchStyle = computed<CSSProperties>(() => {
   if (!isChecked.value && props.inactiveColor) {
     style.backgroundColor = props.inactiveColor
   }
+  if (props.size) {
+    style.fontSize = getUnitValue(props.size)
+  }
   return style
 })
 
@@ -98,13 +105,14 @@ const onToggle = () => {
   $duration: 0.4s;
   $defaultBgColor: #e6e6e6;
   $nodeSize: 24px;
+  $gap: 4px;
 
   position: relative;
   display: inline-flex;
   align-items: center;
-  width: 52px;
-  height: 32px;
-  line-height: 32px;
+  font-size: _var(switch-size, $nodeSize);
+  width: calc(2em + $gap);
+  padding: $gap 0;
   background-color: $defaultBgColor;
   border-radius: 100px;
   transition: background-color $duration;
@@ -112,7 +120,7 @@ const onToggle = () => {
     position: absolute;
     top: 0;
     right: 0;
-    width: calc(100% - ($nodeSize / 2));
+    width: calc(100% - (1em / 2));
     height: 100%;
     background-color: $defaultBgColor;
     border-radius: 100px;
@@ -120,11 +128,12 @@ const onToggle = () => {
     transition: transform $duration ease;
   }
   &__node {
-    width: $nodeSize;
-    height: $nodeSize;
+    width: 1em;
+    height: 1em;
+    padding: 3px;
     background-color: #fff;
     border-radius: 50%;
-    transform: translateX(14%);
+    transform: translateX($gap);
     transition: transform $duration cubic-bezier(0.3, 1.05, 0.4, 1.05);
 
     display: flex;
@@ -139,8 +148,6 @@ const onToggle = () => {
     transform: scale(0);
   }
   &--on &__node {
-    width: 24px;
-    height: 24px;
     background-color: #fff;
     transform: translateX(100%);
   }

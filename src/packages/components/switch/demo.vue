@@ -8,6 +8,9 @@
   <DocDemoBlock title="加载状态" card>
     <pa-switch v-model="checked" loading />
   </DocDemoBlock>
+  <DocDemoBlock title="自定义大小" card>
+    <pa-switch v-model="checked" size="18px" />
+  </DocDemoBlock>
   <DocDemoBlock title="异步控制" card>
     <pa-switch :model-value="checked" :loading="loading" @change="onChange" />
   </DocDemoBlock>
