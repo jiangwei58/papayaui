@@ -1,28 +1,30 @@
 <template>
-  <view
-    :class="[computedClass('popup', `popup--${props.position}`), customClass]"
-    :style="popupStyle"
+  <Overlay
+    :show="visible"
+    :z-index="zIndex - 1"
+    :duration="duration"
+    :custom-style="overlayStyle"
+    @click="onOverlayClick"
+  />
+  <TransitionComponent
+    :show="visible"
+    :duration="duration"
+    :mode="animateMode"
+    :custom-class="`${computedClass('popup')} ${customClass}`"
+    :custom-style="transitionStyle"
+    @click="onContentClick"
+    @before-enter="onBeforeEnter"
+    @after-enter="onAfterEnter"
+    @after-leave="onAfterLeave"
   >
-    <Overlay :show="visible" :z-index="0" :duration="+duration" @click="onOverlayClick" />
-    <TransitionComponent
-      :show="visible"
-      :duration="duration"
-      :mode="animateMode"
-      :custom-style="transitionStyle"
-      @click="onContentClick"
-      @before-enter="onBeforeEnter"
-      @after-enter="onAfterEnter"
-      @after-leave="onAfterLeave"
-    >
-      <view :class="[computedClass('popup__content')]" :style="contentStyle" @tap.stop="noop">
-        <view v-if="closeable" :class="computedClass('popup__close')" @tap.stop="onClose">
-          <Icon name="close" size="24px" block />
-        </view>
-        <slot />
-        <SafeBottom v-if="safeAreaInsetBottom && ['left', 'right', 'bottom'].includes(position)" />
+    <view :class="computedClass('popup__content')" :style="contentStyle" @tap.stop="noop">
+      <view v-if="closeable" :class="computedClass('popup__close')" @tap.stop="onClose">
+        <Icon name="close" size="24px" block />
       </view>
-    </TransitionComponent>
-  </view>
+      <slot />
+      <SafeBottom v-if="safeAreaInsetBottom && ['left', 'right', 'bottom'].includes(position)" />
+    </view>
+  </TransitionComponent>
 </template>
 
 <script lang="ts" setup>
@@ -32,7 +34,7 @@ import { computedClass } from '../../utils/style'
 import Icon from '../icon/icon.vue'
 import Overlay from '../overlay/overlay.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
-import TransitionComponent, { TransitionMode } from '../transition/transition.vue'
+import TransitionComponent, { TransitionMode, TransitionProps } from '../transition/transition.vue'
 
 export type PopupPosition = 'top' | 'bottom' | 'left' | 'right' | 'center'
 
@@ -44,7 +46,7 @@ export interface PopupProps {
   /** 弹出方式 */
   position?: PopupPosition
   /** 遮罩打开或收起的动画过渡时间，单位ms */
-  duration?: string | number
+  duration?: TransitionProps['duration']
   /** 是否显示遮罩 */
   overlay?: boolean
   /** 点击遮罩是否关闭弹窗 */
@@ -66,7 +68,9 @@ export interface PopupProps {
   /** 自定义样式类 */
   customClass?: string
   /** 自定义弹出层样式 */
-  customStyle?: string
+  customStyle?: CSSProperties
+  /** 自定义遮罩层样式 */
+  overlayStyle?: CSSProperties
 }
 
 const props = withDefaults(defineProps<PopupProps>(), {
@@ -81,8 +85,9 @@ const props = withDefaults(defineProps<PopupProps>(), {
   bgColor: undefined,
   closeOnClickOverlay: true,
   safeAreaInsetBottom: true,
-  customClass: undefined,
+  customClass: '',
   customStyle: undefined,
+  overlayStyle: undefined,
 })
 
 const emit = defineEmits<{
@@ -109,10 +114,6 @@ watch(
   },
 )
 
-const popupStyle = computed<string>(() => {
-  return `z-index:${props.zIndex};${props.customStyle ?? ''}`
-})
-
 const transitionStyle = computed<CSSProperties>(() => {
   const styleObj: { [key in PopupPosition]: CSSProperties } = {
     top: { top: 0, left: 0, right: 0 },
@@ -131,7 +132,9 @@ const transitionStyle = computed<CSSProperties>(() => {
   return {
     position: 'fixed',
     display: 'flex',
+    zIndex: props.zIndex,
     ...styleObj[props.position],
+    ...props.customStyle,
   }
 })
 
@@ -212,10 +215,6 @@ const onAfterLeave = () => {
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
 .#{$prefix}-popup {
-  position: fixed;
-  max-height: 100%;
-  overflow-y: auto;
-
   &__content {
     position: relative;
     background-color: #fff;

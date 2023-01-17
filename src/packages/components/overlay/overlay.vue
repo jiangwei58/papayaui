@@ -14,7 +14,7 @@
 <script lang="ts" setup>
 import { computed, CSSProperties } from 'vue'
 import { computedClass } from '../../utils/style'
-import TransitionComponent from '../transition/transition.vue'
+import TransitionComponent, { TransitionProps } from '../transition/transition.vue'
 
 export interface OverlayProps {
   /** 是否展示遮罩层 */
@@ -22,7 +22,7 @@ export interface OverlayProps {
   /** z-index 层级 */
   zIndex?: number
   /** 动画时长，单位毫秒 */
-  duration?: number
+  duration?: TransitionProps['duration']
   /** 自定义class */
   customClass?: string
   /** 自定义style */
