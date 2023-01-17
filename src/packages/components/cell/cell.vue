@@ -2,11 +2,12 @@
   <view
     :class="[
       computedClass('cell', {
-        'cell--clickable': isLink,
+        'cell--clickable': clickable || isLink,
         'cell--required': required,
         'cell--border': border,
       }),
       `items-${center ? 'center' : 'start'}`,
+      customClass,
     ]"
     class="flex"
     @click="onClick"
@@ -14,13 +15,13 @@
     <Icon v-if="icon" :name="icon" block :class="computedClass('cell__icon')" class="mr-4" />
     <view
       v-if="!!title || $slots.title"
-      :class="computedClass('cell__title')"
+      :class="[computedClass('cell__title'), titleClass]"
       :style="{ flex: titleWidth ? `0 ${getUnitValue(titleWidth)}` : '1' }"
     >
       <slot v-if="$slots.title" name="title" />
       <text v-else>{{ title }}</text>
     </view>
-    <view :class="computedClass('cell__value')">
+    <view :class="[computedClass('cell__value'), valueClass]">
       <slot v-if="$slots.default" />
       <text v-else>{{ value }}</text>
       <view
@@ -31,6 +32,7 @@
         {{ errorMessage }}
       </view>
     </view>
+    <slot v-if="$slots['right-icon'] && !isLink" name="right-icon" />
     <Icon
       v-if="isLink"
       :class="computedClass('cell__icon-right')"
@@ -54,6 +56,8 @@ export interface CellProps {
   value?: string | number | boolean
   /** 标题宽度 */
   titleWidth?: string
+  /** 是否开启点击反馈 */
+  clickable?: boolean
   /** 是否显示箭头，为true同时有点击反馈 */
   isLink?: boolean
   /** 是否显示必填标识 */
@@ -68,6 +72,12 @@ export interface CellProps {
   errorMessage?: string
   /** 是否显示下边框 */
   border?: boolean
+  /** 根节点样式类 */
+  customClass?: string
+  /** 标题样式类 */
+  titleClass?: string
+  /** 右侧内容样式类 */
+  valueClass?: string
 }
 
 const props = withDefaults(defineProps<CellProps>(), {
@@ -78,6 +88,9 @@ const props = withDefaults(defineProps<CellProps>(), {
   valueAlign: 'right',
   errorMessage: '',
   border: true,
+  customClass: '',
+  titleClass: '',
+  valueClass: '',
 })
 
 const emit = defineEmits<{
@@ -85,7 +98,7 @@ const emit = defineEmits<{
 }>()
 
 const onClick = (event: MouseEvent) => {
-  if (!props.isLink) return
+  if (!props.clickable && !props.isLink) return
   emit('click', event)
 }
 </script>
