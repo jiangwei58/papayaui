@@ -45,6 +45,8 @@ import Empty from './components/empty/empty.vue'
 import Overlay from './components/overlay/overlay.vue'
 import Menu from './components/menu/menu.vue'
 import MenuItem from './components/menu-item/menu-item.vue'
+import Sidebar from './components/sidebar/sidebar.vue'
+import SidebarItem from './components/sidebar-item/sidebar-item.vue'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
@@ -95,5 +97,7 @@ declare module '@vue/runtime-core' {
     'pa-overlay': typeof Overlay
     'pa-menu': typeof Menu
     'pa-menu-item': typeof MenuItem
+    'pa-sidebar': typeof Sidebar
+    'pa-sidebar-item': typeof SidebarItem
   }
 }

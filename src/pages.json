@@ -167,6 +167,13 @@
       "type": "nav"
     },
     {
+      "path": "packages/components/sidebar/demo",
+      "style": {
+        "navigationBarTitleText": "Sidebar 侧边导航"
+      },
+      "type": "nav"
+    },
+    {
       "path": "packages/components/tabs/demo",
       "style": {
         "navigationBarTitleText": "Tabs 标签页"
