@@ -3,7 +3,7 @@
     :show="visible"
     :z-index="zIndex - 1"
     :duration="duration"
-    :custom-style="overlayStyle"
+    :custom-style="localOverlayStyle"
     @click="onOverlayClick"
   />
   <TransitionComponent
@@ -113,6 +113,11 @@ watch(
     immediate: true,
   },
 )
+
+const localOverlayStyle = computed<CSSProperties | undefined>(() => {
+  if (!props.overlay) return { backgroundColor: 'transparent' }
+  return props.overlayStyle
+})
 
 const transitionStyle = computed<CSSProperties>(() => {
   const styleObj: { [key in PopupPosition]: CSSProperties } = {
