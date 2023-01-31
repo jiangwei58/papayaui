@@ -68,7 +68,7 @@ const createWatermark = (textList: string[]) => {
   query
     .in(internalInstance)
     .select('#watermark')
-    .fields({ node: true, size: true }, () => {})
+    .fields({ node: true, size: true } as UniApp.NodeField, () => {})
     .exec((res) => {
       const canvas = res[0].node
       const ctx = canvas.getContext('2d')
