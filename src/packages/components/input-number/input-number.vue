@@ -173,8 +173,9 @@ const onBlur = async (e: unknown) => {
     }
     // 防止处理后modelValue前后值一样视图不更新
     if (result === Number(modelValue.value) && result !== numVal) {
-      emit('update:modelValue', numVal)
+      numberVal.value = numVal
       await nextTick()
+      numberVal.value = result
     }
     event.detail.value = result
     onUpdate(result)
