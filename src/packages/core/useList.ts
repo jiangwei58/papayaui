@@ -1,17 +1,26 @@
 import { computed, reactive, toRefs } from 'vue'
 
 export enum LoadStatusEnum {
+  /** 加载更多 */
   LOADMORE = 'loadmore',
+  /** 加载中 */
   LOADING = 'loading',
+  /** 没有更多了 */
   NOMORE = 'nomore',
 }
 
 export interface UseListData<T> {
+  /** 列表数据 */
   list: T[]
+  /** 加载状态 */
   loadStatus: LoadStatusEnum
+  /** 页码 */
   pageNumber: number
+  /** 每页数量 */
   pageSize: number
+  /** 是否空数据 */
   isEmpty?: boolean
+  /** 限制列表总数量，超过则不会触发加载 */
   limit?: number
 }
 

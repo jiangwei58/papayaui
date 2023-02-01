@@ -9,7 +9,7 @@ export const is = <T>(val: T, type: string) => {
  * @description:  是否为函数
  */
 export const isFunction = (val: unknown) => {
-  return is(val, 'const')
+  return is(val, 'Function')
 }
 
 /**

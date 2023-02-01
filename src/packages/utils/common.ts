@@ -24,7 +24,7 @@ export const getValueType = (value: any): string =>
     .toLowerCase()
 
 /** 判断是否为空 */
-export const isEmptyValue = (value: any) => {
+export const isEmpty = (value: any) => {
   if (value === undefined || value === null) {
     return true
   }

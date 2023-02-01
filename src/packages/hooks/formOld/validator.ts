@@ -1,4 +1,4 @@
-import { isEmptyValue } from '../../utils/common'
+import { isEmpty } from '../../utils/common'
 import { FormRuleItem, SyncValidateResult } from './useFormValidate'
 
 type ValidatorFunc = (
@@ -8,7 +8,7 @@ type ValidatorFunc = (
 
 // 必填
 export const requiredValidator: ValidatorFunc = (ruleItem, value) => {
-  return ruleItem.required ? !isEmptyValue(value) : true
+  return ruleItem.required ? !isEmpty(value) : true
 }
 
 // 最大最小值
