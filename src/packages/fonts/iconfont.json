@@ -6,6 +6,34 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "4767051",
+      "name": "outdent",
+      "font_class": "outdent",
+      "unicode": "e7f3",
+      "unicode_decimal": 59379
+    },
+    {
+      "icon_id": "4767059",
+      "name": "menu",
+      "font_class": "menu",
+      "unicode": "e7f4",
+      "unicode_decimal": 59380
+    },
+    {
+      "icon_id": "4767060",
+      "name": "unordered list",
+      "font_class": "unordered-list",
+      "unicode": "e7f5",
+      "unicode_decimal": 59381
+    },
+    {
+      "icon_id": "4767044",
+      "name": "swap",
+      "font_class": "swap",
+      "unicode": "e7f2",
+      "unicode_decimal": 59378
+    },
+    {
       "icon_id": "18736899",
       "name": "小胖车图片",
       "font_class": "image",
