@@ -151,13 +151,27 @@ export default defineComponent({
 })
 </script>
 <script module="wxs" lang="wxs">
+var MIN_DISTANCE = 10;
+
+function getDirection(x, y) {
+  if (x > y && x > MIN_DISTANCE) {
+    return 'horizontal';
+  }
+  if (y > x && y > MIN_DISTANCE) {
+    return 'vertical';
+  }
+  return '';
+}
+
 function touchstart(event, _ownInstance) {
   var instance = event.instance
   // wxs内的局部变量快照，此快照是属于整个组件的，在touchstart和touchmove事件中都能获取到相同的结果
   var state = instance.getState()
   if (state.disabled) return
+  state.direction = ''
   var touch = event.touches[0] || event.changedTouches[0]
   state.startX = touch.pageX
+  state.startY = touch.pageY
   state.lastStartX = state.lastStartX || 0
   state.isStarted = true
 }
@@ -167,14 +181,17 @@ function touchmove(event, ownInstance) {
   var state = instance.getState()
   if (state.disabled) return
   var touch = event.touches[0] || event.changedTouches[0]
-  var pageX = touch.pageX
-  var moveX = pageX - state.startX + state.lastStartX
+  var moveX = touch.pageX - state.startX + state.lastStartX
+  var moveY = touch.pageY - state.startY
   if (moveX >= 0) {
     moveX = 0
   } else if (moveX <= -state.btnsWidth) {
     moveX = -state.btnsWidth
   }
   state.moveX = moveX
+  state.direction = state.direction || getDirection(Math.abs(moveX), Math.abs(moveY))
+  // 防止横向和纵向同时滑动
+  if (state.direction !== 'horizontal') return
   updateMoveX(state, instance, ownInstance)
   return false
 }
