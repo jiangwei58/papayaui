@@ -1,5 +1,5 @@
 <template>
-  <view :class="computedClass('swipe-cell')">
+  <view :class="computedClass('swipe-cell')" @tap="onClick">
     <view
       :class="computedClass('swipe-cell__wrapper')"
       :status="status"
@@ -74,6 +74,8 @@ export interface SwipeCellProps {
   options?: SwipeCellOption[]
 }
 
+type SwipeCellStatus = 'open' | 'close'
+
 export default defineComponent({
   components: {
     ButtonComponent,
@@ -104,7 +106,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const instance = getCurrentInstance()
 
-    const status = ref<'open' | 'close'>(props.show ? 'open' : 'close')
+    const status = ref<SwipeCellStatus>(props.show ? 'open' : 'close')
 
     const extraParams = ref({
       btnsWidth: 0,
@@ -124,6 +126,15 @@ export default defineComponent({
       })
     }
 
+    const setStatus = (newStatus: SwipeCellStatus) => {
+      status.value = newStatus
+      emit(newStatus)
+    }
+
+    const onClick = async () => {
+      status.value = 'close'
+    }
+
     const onBtnClick = (index: number) => {
       emit('click', props.name, index)
     }
@@ -135,7 +146,7 @@ export default defineComponent({
     watch(
       () => props.show,
       (newVal) => {
-        status.value = newVal ? 'open' : 'close'
+        setStatus(newVal ? 'open' : 'close')
       },
     )
 
@@ -145,6 +156,8 @@ export default defineComponent({
       extraParams,
       computedClass,
       getUnitValue,
+      setStatus,
+      onClick,
       onBtnClick,
     }
   },
@@ -181,15 +194,16 @@ function touchmove(event, ownInstance) {
   var state = instance.getState()
   if (state.disabled) return
   var touch = event.touches[0] || event.changedTouches[0]
-  var moveX = touch.pageX - state.startX + state.lastStartX
-  var moveY = touch.pageY - state.startY
+  var offsetX = touch.pageX - state.startX
+  var offsetY = touch.pageY - state.startY
+  var moveX = offsetX + state.lastStartX
   if (moveX >= 0) {
     moveX = 0
   } else if (moveX <= -state.btnsWidth) {
     moveX = -state.btnsWidth
   }
   state.moveX = moveX
-  state.direction = state.direction || getDirection(Math.abs(moveX), Math.abs(moveY))
+  state.direction = state.direction || getDirection(Math.abs(offsetX), Math.abs(offsetY))
   // 防止横向和纵向同时滑动
   if (state.direction !== 'horizontal') return
   updateMoveX(state, instance, ownInstance)
@@ -209,6 +223,7 @@ function touchend(event, ownInstance) {
   state.lastStartX = state.moveX
   state.isStarted = false
   updateMoveX(state, instance, ownInstance)
+  setStatus(state.moveX === 0 ? 'close' : 'open',instance, ownInstance)
 }
 
 function updateMoveX(state, instance, _ownInstance) {
@@ -223,20 +238,21 @@ function updateMoveX(state, instance, _ownInstance) {
 // 标记菜单的当前状态，open-已经打开，close-已经关闭
 function setStatus(status, instance, ownerInstance) {
 	var state = instance.getState()
-	state.status = status
-  // ownerInstance.callMethod('setState', status)
+  if (state.status !== status) {
+    state.status = status
+    ownerInstance.callMethod('setStatus', status)
+  }
 }
 
 function statusChange(newValue, oldValue, ownerInstance, instance) {
-  console.log(JSON.stringify(newValue))
   if (typeof newValue === 'undefined') return
   var state = instance.getState()
 	if (state.disabled) return
-  setStatus(newValue, instance, ownerInstance)
   state.moveX = newValue === 'open' ? -state.btnsWidth : 0
   state.lastStartX = state.moveX
   state.isStarted = false
   updateMoveX(state, instance, ownerInstance)
+  setStatus(newValue, instance, ownerInstance)
 }
 
 function extraChange(newValue, oldValue, ownerInstance, instance) {
