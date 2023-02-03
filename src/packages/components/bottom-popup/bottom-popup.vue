@@ -4,8 +4,11 @@
     :show="show"
     position="bottom"
     :height="height"
-    closeable
-    round
+    :z-index="zIndex"
+    :overlay="overlay"
+    :bg-color="bgColor"
+    :closeable="closeable"
+    :round="round"
     :close-on-click-overlay="maskCloseAble"
     :safe-area-inset-bottom="false"
     @update:show="emit('update:show', !!$event)"
@@ -40,7 +43,7 @@
 </template>
 
 <script lang="ts" setup>
-import { toRefs } from 'vue'
+import { CSSProperties, toRefs } from 'vue'
 import { computedClass } from '../../utils/style'
 import Popup from '../popup/popup.vue'
 
@@ -51,6 +54,16 @@ export interface BottomPopupProps {
   title?: string
   /** 弹窗高度 */
   height?: string
+  /** z-index层级 */
+  zIndex?: number
+  /** 是否显示遮罩 */
+  overlay?: boolean
+  /** 背景色 */
+  bgColor?: CSSProperties['background-color']
+  /** 是否圆角 */
+  round?: boolean | string
+  /** 是否显示关闭按钮 */
+  closeable?: boolean
   /** 是否可以点击空白处关闭 */
   maskCloseAble?: boolean
   /** 是否留出底部安全距离 */
@@ -61,6 +74,11 @@ const props = withDefaults(defineProps<BottomPopupProps>(), {
   show: false,
   title: undefined,
   height: '80vh',
+  zIndex: undefined,
+  overlay: undefined,
+  bgColor: undefined,
+  round: true,
+  closeable: true,
   maskCloseAble: true,
   safeAreaInsetBottom: true,
 })
