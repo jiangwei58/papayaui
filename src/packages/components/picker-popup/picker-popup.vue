@@ -168,7 +168,7 @@ const filterOptions = computed(() => {
 watch(show, async (newVal, oldVal) => {
   if (newVal !== oldVal && newVal) {
     if (props.initData) {
-      onReset()
+      onClean()
     }
     if (!options.value.length) {
       getData()
