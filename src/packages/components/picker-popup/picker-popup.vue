@@ -168,7 +168,7 @@ const filterOptions = computed(() => {
 watch(show, async (newVal, oldVal) => {
   if (newVal !== oldVal && newVal) {
     if (props.initData) {
-      onClean()
+      onClean(false)
     }
     if (!options.value.length) {
       getData()
@@ -236,10 +236,10 @@ const onReset = () => {
   _onClear()
 }
 
-const onClean = () => {
+const onClean = (reset = true) => {
   pageNumber.value = 0
   options.value = []
-  onReset()
+  reset && onReset()
 }
 
 defineExpose({
