@@ -45,7 +45,7 @@
           :class="{ 'height-full': !filterOptions.length }"
           @tap="onScrolltolower"
         >
-          <loadmore :status="loadStatus" :config="{ nomore: '无数据' }" />
+          <loadmore :status="loadStatus" :config="{ nomore: isEmpty ? '无数据' : '没有更多了' }" />
         </view>
         <SafeBottom v-if="safeAreaInsetBottom && !multiple" />
       </scroll-view>
@@ -63,17 +63,17 @@
 </template>
 
 <script lang="ts" setup>
-import { watch, toRefs, ref, computed } from 'vue'
-import BottomPopup from '../bottom-popup/bottom-popup.vue'
-import Icon from '../icon/icon.vue'
-import Search from '../search/search.vue'
-import { computedClass, PREFIX } from '../../utils/style'
-import SafeBottom from '../safe-bottom/safe-bottom.vue'
-import ButtonComponent from '../button/button.vue'
-import Loadmore from '../loadmore/loadmore.vue'
-import useList, { UseListData } from '../../core/useList'
+import { computed, ref, toRefs, watch } from 'vue'
+import useList, { UseListProps } from '../../core/useList'
 import useSelect from '../../core/useSelect'
 import { debounce } from '../../utils/common'
+import { computedClass, PREFIX } from '../../utils/style'
+import BottomPopup from '../bottom-popup/bottom-popup.vue'
+import ButtonComponent from '../button/button.vue'
+import Icon from '../icon/icon.vue'
+import Loadmore from '../loadmore/loadmore.vue'
+import SafeBottom from '../safe-bottom/safe-bottom.vue'
+import Search from '../search/search.vue'
 
 export type Option = any
 export type OptionValue = number | string
@@ -101,7 +101,7 @@ export interface PickerPopupProps {
   /** 是否远程搜索 */
   remote?: boolean
   /** 是否支持分页 */
-  pagination?: boolean | Partial<Pick<UseListData<Option>, 'pageNumber' | 'pageSize'>>
+  pagination?: boolean | UseListProps<Option>
   /** 是否留出底部安全距离 */
   safeAreaInsetBottom?: boolean
   /** 每次打开重新加载数据 */
@@ -135,7 +135,7 @@ const emit = defineEmits<{
   (event: 'close'): void
 }>()
 
-const { show, data, modelValue, labelKey, valueKey, multiple } = toRefs(props)
+const { show, data, modelValue, labelKey, valueKey, multiple, pagination } = toRefs(props)
 
 const searchText = ref<string>('')
 
@@ -144,6 +144,7 @@ const {
   pageNumber,
   pageSize,
   loadStatus,
+  isEmpty,
   getListData,
 } = useList<Option>(typeof props.pagination === 'object' ? props.pagination : undefined)
 
@@ -185,6 +186,13 @@ watch(
     immediate: true,
   },
 )
+
+watch(pagination, (newVal) => {
+  if (typeof newVal === 'object') {
+    pageNumber.value = newVal.pageNumber ?? pageNumber.value
+    pageSize.value = newVal.pageSize ?? pageSize.value
+  }
+})
 
 const getData = async () => {
   return getListData(async () => {
