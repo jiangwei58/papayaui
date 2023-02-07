@@ -11,7 +11,12 @@
         </view>
       </view>
     </view>
-    <scroll-view scroll-y :class="computedClass('calendar-body')" @scroll="onScroll">
+    <scroll-view
+      scroll-y
+      :scroll-top="scrollTop"
+      :class="computedClass('calendar-body')"
+      @scroll="onScroll"
+    >
       <view
         v-for="(monthItem, monthIndex) in months"
         :key="monthIndex"
@@ -51,8 +56,8 @@
 </template>
 
 <script lang="ts" setup>
-import { Dayjs } from 'dayjs'
-import { computed, getCurrentInstance, ref, toRefs } from 'vue'
+import dayjs, { Dayjs } from 'dayjs'
+import { computed, getCurrentInstance, nextTick, ref, toRefs } from 'vue'
 import useCalendar, { DayItem, FirstDayOfWeekType } from '../../core/useCalendar'
 import { useRect } from '../../hooks'
 import { EventDetail } from '../../types'
@@ -143,6 +148,7 @@ const {
 })
 const monthCurrent = ref<number>(0)
 const monthTops = ref<number[]>([])
+const scrollTop = ref<number>(0)
 
 const confirmEnabled = computed<boolean>(() => {
   if (props.type === 'range') return selectedItems.value.length >= 2
@@ -169,6 +175,22 @@ const updateMonthTop = () => {
     }, [] as number[])
     tops.unshift(0)
     monthTops.value = tops
+    scrollToMonth()
+  })
+}
+
+// 跳转到默认值的月份
+const scrollToMonth = async () => {
+  if (!defaultDate.value) return
+  if (scrollTop.value !== 0) {
+    scrollTop.value = 0
+    await nextTick()
+  }
+  const start = Array.isArray(defaultDate.value) ? defaultDate.value[0] : defaultDate.value
+  months.value.forEach((item, index) => {
+    if (item.date.diff(dayjs(start).startOf('month')) === 0) {
+      scrollTop.value = monthTops.value[index]
+    }
   })
 }
 

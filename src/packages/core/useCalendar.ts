@@ -70,8 +70,8 @@ export default (props: IncludeRefs<UseCalendarProps>) => {
 
   const months = computed<MonthItem[]>(() => {
     const startDate = dayjs(state.min).startOf('month')
-    const monthDiffLength = dayjs(state.max).endOf('month').diff(startDate, 'month')
-    return new Array(monthDiffLength < 1 ? 1 : monthDiffLength).fill(0).map((_, index) => {
+    const monthDiffLength = dayjs(state.max).endOf('month').diff(startDate, 'month') + 1
+    return new Array(monthDiffLength).fill(0).map((_, index) => {
       const date = startDate.add(index, 'month')
       return {
         date,
@@ -152,9 +152,10 @@ export default (props: IncludeRefs<UseCalendarProps>) => {
         if (selectedItems.value.length >= 2) {
           onClear()
         }
+        // 如果第二次值小于第一次值则覆盖
         value > selectedItems.value[0]
           ? selectedItems.value.push(value)
-          : selectedItems.value.unshift(value)
+          : (selectedItems.value[0] = value)
         break
     }
   }
