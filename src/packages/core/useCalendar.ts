@@ -140,6 +140,11 @@ export default (props: IncludeRefs<UseCalendarProps>) => {
         if (selectedItems.value.length === 1) {
           // 判断是否能选择同一天
           if (!state.allowSameDay && isSameDay(selectedItems.value[0], value)) return
+          // 如果第二次值小于第一次值则覆盖
+          if (value < selectedItems.value[0]) {
+            selectedItems.value[0] = value
+            return
+          }
           // 最多可选天数
           if (
             typeof state.maxRange !== 'undefined' &&
@@ -152,10 +157,7 @@ export default (props: IncludeRefs<UseCalendarProps>) => {
         if (selectedItems.value.length >= 2) {
           onClear()
         }
-        // 如果第二次值小于第一次值则覆盖
-        value > selectedItems.value[0]
-          ? selectedItems.value.push(value)
-          : (selectedItems.value[0] = value)
+        selectedItems.value.push(value)
         break
     }
   }
@@ -168,8 +170,8 @@ export default (props: IncludeRefs<UseCalendarProps>) => {
     () => state.defaultDate,
     (newVal) => {
       const timestamps = Array.isArray(newVal) ? newVal : [newVal]
+      onClear()
       timestamps.forEach((timestamp) => {
-        onClear()
         onSelect(dayjs(timestamp))
       })
     },
