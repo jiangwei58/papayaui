@@ -17,7 +17,7 @@
       class="flex flex-col"
       :class="[
         computedClass('bottom-popup__wrapper'),
-        { 'safe-buttom-padding': safeAreaInsetBottom },
+        { 'safe-bottom-padding': safeAreaInsetBottom },
       ]"
     >
       <view

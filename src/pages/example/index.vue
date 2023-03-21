@@ -12,7 +12,7 @@
       :path="item.path"
     />
   </DocDemoBlock>
-  <view class="safe-buttom-padding" />
+  <view class="safe-bottom-padding" />
 </template>
 
 <script lang="ts" setup>
