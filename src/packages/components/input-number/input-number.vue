@@ -94,6 +94,10 @@ export interface InputNumberProps {
   block?: boolean
   /** 朴素样式 */
   plain?: boolean
+  /** 是否允许空值 */
+  nullable?: boolean
+  /** 空值时返回的值 */
+  nullValue?: any
 }
 
 const props = withDefaults(defineProps<InputNumberProps>(), {
@@ -109,6 +113,7 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
   disabled: false,
   controls: true,
   inputWidth: undefined,
+  nullValue: null,
 })
 
 const emit = defineEmits<{
@@ -163,21 +168,21 @@ const onInput = (e: unknown) => {
 
 const onBlur = async (e: unknown) => {
   let event = e as EventDetail<{ value: InputNumberValue; cursor: number }>
-  if (event.detail.value) {
-    const numVal = Number(event.detail.value)
-    const result = minAndMax(numVal, min.value, max.value)
-    // 值没变不发送更新事件
-    if (result === Number(modelValue.value) && result === numVal) {
-      emit('blur', event)
-      return
-    }
-    // 防止处理后modelValue前后值一样视图不更新
-    if (result === Number(modelValue.value) && result !== numVal) {
-      numberVal.value = numVal
-      await nextTick()
-      numberVal.value = result
-    }
-    event.detail.value = result
+  const numVal = Number(event.detail.value ?? 0)
+  let result = minAndMax(numVal, min.value, max.value)
+  // 处理空值的情况
+  if (!event.detail.value && props.nullable) {
+    result = props.nullValue
+  }
+  // 防止处理后modelValue前后值一样视图不更新
+  if (result === Number(modelValue.value) && result !== numVal) {
+    numberVal.value = numVal
+    await nextTick()
+    numberVal.value = result
+  }
+  event.detail.value = result
+  // 值没变不发送更新事件
+  if (result !== Number(modelValue.value) || result !== numVal) {
     onUpdate(result)
   }
   emit('blur', event)

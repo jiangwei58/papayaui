@@ -19,15 +19,15 @@ export interface UseInputNumberProps {
 }
 
 export default (props: IncludeRefs<UseInputNumberProps>) => {
-  const _porps = props as UseInputNumberProps
+  const _props = props as UseInputNumberProps
   const state = reactive({
     ...props,
-    modelValue: _porps.modelValue ?? 0,
-    min: _porps.min ?? 1,
-    max: _porps.max ?? Number.MAX_SAFE_INTEGER,
-    step: _porps.step ?? 1,
-    intLength: _porps.intLength ?? Number.MAX_SAFE_INTEGER.toString().length,
-    decimalLength: _porps.decimalLength ?? 0,
+    modelValue: _props.modelValue ?? 0,
+    min: _props.min ?? 1,
+    max: _props.max ?? Number.MAX_SAFE_INTEGER,
+    step: _props.step ?? 1,
+    intLength: _props.intLength ?? Number.MAX_SAFE_INTEGER.toString().length,
+    decimalLength: _props.decimalLength ?? 0,
   })
 
   const numberVal = ref<number>(+state.modelValue)
@@ -35,7 +35,9 @@ export default (props: IncludeRefs<UseInputNumberProps>) => {
   watch(
     () => state.modelValue,
     (newVal) => {
-      numberVal.value = +newVal
+      if ((typeof newVal === 'string' && !!newVal.length) || typeof newVal === 'number') {
+        numberVal.value = +newVal
+      }
     },
   )
 
