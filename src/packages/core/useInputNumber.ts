@@ -1,4 +1,4 @@
-import { reactive, ref, watch } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import { IncludeRefs } from '../types'
 
 export type InputNumberValue = string | number
@@ -30,13 +30,19 @@ export default (props: IncludeRefs<UseInputNumberProps>) => {
     decimalLength: _props.decimalLength ?? 0,
   })
 
-  const numberVal = ref<number>(+state.modelValue)
+  const numberVal = ref<number | null>(+state.modelValue)
+
+  const safeNumberVal = computed<number>(() => {
+    return Number(numberVal.value ?? 0)
+  })
 
   watch(
     () => state.modelValue,
     (newVal) => {
       if ((typeof newVal === 'string' && !!newVal.length) || typeof newVal === 'number') {
         numberVal.value = +newVal
+      } else {
+        numberVal.value = null
       }
     },
   )
@@ -46,7 +52,7 @@ export default (props: IncludeRefs<UseInputNumberProps>) => {
   }
 
   const onUpdate = (type: 'add' | 'reduce', updateValue = true) => {
-    let newVal = numberVal.value
+    let newVal = safeNumberVal.value
     if (type === 'add') {
       newVal += state.step
     } else {
@@ -72,6 +78,7 @@ export default (props: IncludeRefs<UseInputNumberProps>) => {
 
   return {
     numberVal,
+    safeNumberVal,
     getFormatVal,
     onAdd,
     onReduce,

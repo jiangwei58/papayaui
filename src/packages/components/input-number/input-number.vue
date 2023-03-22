@@ -13,7 +13,7 @@
       v-if="controls"
       :class="
         computedClass('input-number-icon', 'input-number-minus', {
-          'input-number-icon--disabled': disabled || numberVal <= min,
+          'input-number-icon--disabled': disabled || safeNumberVal <= min,
         })
       "
       class="flex items-center justify-center"
@@ -43,7 +43,7 @@
       v-if="controls"
       :class="
         computedClass('input-number-icon', 'input-number-plus', {
-          'input-number-icon--disabled': disabled || numberVal >= max,
+          'input-number-icon--disabled': disabled || safeNumberVal >= max,
         })
       "
       class="flex items-center justify-center"
@@ -130,6 +130,7 @@ const step = computed<number>(() => +props.step)
 
 const {
   numberVal,
+  safeNumberVal,
   getFormatVal,
   onAdd: _onAdd,
   onReduce: _onReduce,
@@ -150,13 +151,13 @@ const onUpdate = (value: number) => {
 }
 
 const onAdd = () => {
-  if (props.disabled || numberVal.value >= max.value) return
+  if (props.disabled || safeNumberVal.value >= max.value) return
   const newVal = _onAdd(!props.asyncChange)
   onUpdate(newVal)
 }
 
 const onReduce = () => {
-  if (props.disabled || numberVal.value <= min.value) return
+  if (props.disabled || safeNumberVal.value <= min.value) return
   const newVal = _onReduce(!props.asyncChange)
   onUpdate(newVal)
 }
