@@ -97,7 +97,12 @@ export interface PickerPopupProps {
   /** 是否多选 */
   multiple?: boolean
   /** 动态获取下一级节点数据 */
-  load?: (query?: string, pageNumber?: number, pageSize?: number) => Option[] | Promise<Option[]>
+  load?: (
+    query?: string,
+    pageNumber?: number,
+    pageSize?: number,
+    extra?: Record<string, unknown>,
+  ) => Option[] | Promise<Option[]>
   /** 是否远程搜索 */
   remote?: boolean
   /** 是否支持分页 */
@@ -194,9 +199,9 @@ watch(pagination, (newVal) => {
   }
 })
 
-const getData = async () => {
+const getData = async (extra?: Record<string, unknown>) => {
   return getListData(async () => {
-    let res = props.load?.(searchText.value, pageNumber.value, pageSize.value)
+    let res = props.load?.(searchText.value, pageNumber.value, pageSize.value, extra)
     if (res instanceof Promise) {
       res = await res
     }
@@ -250,9 +255,29 @@ const onClean = (reset = true) => {
   reset && onReset()
 }
 
+/** 刷新列表数据，会重新触发load方法 */
+const onRefresh = () => {
+  getData({ refresh: true })
+}
+
+/** 获取当前内部选项数据 */
+const exposeGetOptions = () => {
+  return options.value
+}
+
+/** 更新当前内部选项数据 */
+const exposeUpdateOptions = (iterator: (item: Option) => Option) => {
+  options.value = options.value.map((option) => {
+    return iterator(option)
+  })
+}
+
 defineExpose({
   reset: onReset,
   clean: onClean,
+  refresh: onRefresh,
+  getOptions: exposeGetOptions,
+  updateOptions: exposeUpdateOptions,
 })
 </script>
 
