@@ -45,7 +45,7 @@
           :class="{ 'height-full': !filterOptions.length }"
           @tap="onScrolltolower"
         >
-          <loadmore :status="loadStatus" :config="{ nomore: isEmpty ? '无数据' : '没有更多了' }" />
+          <Loadmore :status="loadStatus" :config="{ nomore: isEmpty ? '无数据' : '没有更多了' }" />
         </view>
         <SafeBottom v-if="safeAreaInsetBottom && !multiple" />
       </scroll-view>
@@ -64,7 +64,7 @@
 
 <script lang="ts" setup>
 import { computed, ref, toRefs, watch } from 'vue'
-import useList, { UseListProps } from '../../core/useList'
+import useList, { LoadStatusEnum, UseListProps } from '../../core/useList'
 import useSelect from '../../core/useSelect'
 import { debounce } from '../../utils/common'
 import { computedClass, PREFIX } from '../../utils/style'
@@ -167,7 +167,9 @@ const {
 })
 
 const filterOptions = computed(() => {
+  // 远程情况不作处理
   if (props.remote) return options.value
+  // 本地数据情况，直接做过滤
   return options.value.filter((item) => item[labelKey.value]?.indexOf(searchText.value) !== -1)
 })
 
@@ -221,6 +223,11 @@ const onSearchChange = () => {
   if (props.remote) {
     pageNumber.value = 0
     getData()
+  } else {
+    // 本地搜索额外考虑无数据的情况
+    if (!filterOptions.value.length) {
+      loadStatus.value = LoadStatusEnum.NOMORE
+    }
   }
 }
 const debounceSearchChange = debounce(onSearchChange, 300)
@@ -261,12 +268,12 @@ const onRefresh = () => {
 }
 
 /** 获取当前内部选项数据 */
-const exposeGetOptions = () => {
+const __getOptions = () => {
   return options.value
 }
 
 /** 更新当前内部选项数据 */
-const exposeUpdateOptions = (iterator: (item: Option) => Option) => {
+const __updateOptions = (iterator: (item: Option) => Option) => {
   options.value = options.value.map((option) => {
     return iterator(option)
   })
@@ -276,8 +283,8 @@ defineExpose({
   reset: onReset,
   clean: onClean,
   refresh: onRefresh,
-  getOptions: exposeGetOptions,
-  updateOptions: exposeUpdateOptions,
+  getOptions: __getOptions,
+  updateOptions: __updateOptions,
 })
 </script>
 
