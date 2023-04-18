@@ -25,7 +25,9 @@ export default (props: IncludeRefs<UseSwitchProps>) => {
     inactiveValue: _props.inactiveValue ?? false,
   })
 
-  const checked = ref<SwitchValue>(state.modelValue)
+  const checked = ref<SwitchValue>(
+    typeof _props.modelValue !== 'undefined' ? state.modelValue : state.inactiveValue,
+  )
 
   const isChecked = computed<boolean>(() => checked.value === state.activeValue)
 

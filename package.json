@@ -32,7 +32,8 @@
     "build:quickapp-webview-huawei": "uni build -p quickapp-webview-huawei",
     "build:quickapp-webview-union": "uni build -p quickapp-webview-union",
     "build:package": "bash internal/build.sh",
-    "release": "bash internal/publish.sh"
+    "release": "bash internal/publish.sh",
+    "test": "vitest"
   },
   "dependencies": {
     "@dcloudio/uni-app": "3.0.0-alpha-3061620230109001",
@@ -73,7 +74,8 @@
     "prettier": "^2.5.1",
     "sass": "^1.49.10",
     "typescript": "^4.6.2",
-    "vite": "3.2.4"
+    "vite": "3.2.4",
+    "vitest": "^0.30.1"
   },
   "keywords": [
     "uniapp"
