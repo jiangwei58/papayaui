@@ -45,15 +45,27 @@ const props = withDefaults(defineProps<CountToProps>(), {
 
 const emit = defineEmits<{
   (event: 'click', value: Event): void
+  (event: 'change', value: number, progress: number): void
+  (event: 'finish'): void
 }>()
 
 const { startNum, endNum, duration, easeout } = toRefs(props)
+
+const onProgress = (progress: number) => {
+  emit('change', numValue.value, progress)
+}
+
+const onEnd = () => {
+  emit('finish')
+}
 
 const { numValue, start, pause, resume, restart, reset } = useCountTo({
   startNum,
   endNum,
   duration,
   easeout,
+  onProgress,
+  onEnd,
 })
 
 const displayValue = computed(() => {
