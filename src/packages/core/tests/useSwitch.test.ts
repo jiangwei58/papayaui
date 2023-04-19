@@ -3,14 +3,14 @@ import useSwitch from '../useSwitch'
 import { nextTick, ref } from 'vue'
 
 describe('useSwitch test', () => {
-  test('初始值是否正确', () => {
+  test('should initial value is false', () => {
     const { checked, isChecked } = useSwitch({})
 
     expect(checked.value).toBeTypeOf('boolean')
     expect(isChecked.value).toBe(false)
   })
 
-  test('默认值及赋值', async () => {
+  test('should switch correct', async () => {
     const customValue = ref<boolean>(true)
     const { checked, isChecked } = useSwitch({ modelValue: customValue })
 
@@ -26,7 +26,7 @@ describe('useSwitch test', () => {
     [true, false],
     [1, 0],
     ['是', '否'],
-  ])('自定义值(%s, %s)', (activeValue, inactiveValue) => {
+  ])('custom value(%s, %s)', (activeValue, inactiveValue) => {
     const { checked, isChecked, onToggle } = useSwitch({
       activeValue,
       inactiveValue,
