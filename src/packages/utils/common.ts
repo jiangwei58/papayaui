@@ -1,3 +1,5 @@
+import { Ref, isRef } from 'vue'
+
 /** 判断传入的值，是否带有单位，如果没有，就默认用rpx单位 */
 export const getUnitValue = (val: string, unit = 'rpx') => {
   if (/(%|px|rpx|auto|vw|vh|em|rem)$/.test(val)) return val
@@ -120,4 +122,11 @@ export const throttle = (
       }, wait)
     }
   }
+}
+
+/**
+ * 获取ref或普通类型的值
+ */
+export const getRefValue = <T>(prop: T | Ref<T>) => {
+  return isRef(prop) ? prop.value : prop
 }

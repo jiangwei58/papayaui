@@ -160,6 +160,13 @@
       "type": "form"
     },
     {
+      "path": "packages/components/date-picker/demo",
+      "style": {
+        "navigationBarTitleText": "DatePicker 时间选择"
+      },
+      "type": "form"
+    },
+    {
       "path": "packages/components/nav-bar/demo",
       "style": {
         "navigationBarTitleText": "NavBar 导航栏"

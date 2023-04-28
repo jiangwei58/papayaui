@@ -47,6 +47,7 @@ import Menu from './components/menu/menu.vue'
 import MenuItem from './components/menu-item/menu-item.vue'
 import Sidebar from './components/sidebar/sidebar.vue'
 import SidebarItem from './components/sidebar-item/sidebar-item.vue'
+import DatePicker from './components/date-picker/date-picker.vue'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
@@ -99,5 +100,6 @@ declare module '@vue/runtime-core' {
     'pa-menu-item': typeof MenuItem
     'pa-sidebar': typeof Sidebar
     'pa-sidebar-item': typeof SidebarItem
+    'pa-date-picker': typeof DatePicker
   }
 }

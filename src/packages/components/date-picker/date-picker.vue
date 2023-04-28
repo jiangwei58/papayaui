@@ -1,0 +1,172 @@
+<template>
+  <view class="flex flex-col" :class="computedClass('date-picker')">
+    <slot name="columns-top" />
+    <view
+      v-if="showToolbar"
+      class="flex items-center justify-between text-32 border-bottom"
+      :class="computedClass('date-picker-toolbar')"
+    >
+      <view class="btn height-full text-black px-32" hover-class="btn-hover" @click="onCancel">
+        <slot v-if="$slots.cancel" />
+        <template v-else>{{ cancelButtonText }}</template>
+      </view>
+      <slot v-if="$slots.title" name="title" />
+      <view v-else class="font-w-500 leading-42 text-black">{{ title }}</view>
+      <view class="btn height-full color-primary px-32" hover-class="btn-hover" @click="onConfirm">
+        <slot v-if="$slots.confirm" />
+        <template v-else>{{ confirmButtonText }}</template>
+      </view>
+    </view>
+    <picker-view
+      :class="computedClass('date-picker-columns')"
+      :indicator-style="`height: ${getUnitValue(optionHeight, 'px')}`"
+      :immediate-change="false"
+      :value="indexes"
+      :style="{
+        height: `calc(${getUnitValue(optionHeight, 'px')} * ${visibleOptionNum})`,
+      }"
+      @change="onChange"
+    >
+      <picker-view-column v-for="(col, colIndex) in _columnsType" :key="col">
+        <template v-for="item in columns[colIndex]" :key="item.value">
+          <slot v-if="$slots.option" :option="item" :type="col" :colIndex="colIndex" />
+          <view
+            v-else
+            class="flex items-center justify-center text-center"
+            :class="computedClass('date-picker-column')"
+          >
+            {{ item.text }}
+          </view>
+        </template>
+      </picker-view-column>
+    </picker-view>
+    <slot name="columns-bottom" />
+  </view>
+</template>
+
+<script lang="ts" setup>
+import { toRefs } from 'vue'
+import useDatePicker, {
+  DatePickerColumnType,
+  DatePickerFilter,
+  DatePickerFormatter,
+} from '../../core/useDatePicker'
+import { EventDetail } from '../../types'
+import { getUnitValue } from '../../utils/common'
+import { computedClass } from '../../utils/style'
+
+export type columnItem = string | Record<string, any>
+
+export interface PickerViewProps {
+  /** 值 */
+  modelValue?: Date
+  /**
+   * 选项类型，由选项组成数组，数据顺序代表排序顺序
+   * ```
+   * year: 年, month: 月, day: 日, hour: 小时, minute: 分钟
+   * ```
+   * @default - ['year', 'month', 'day']
+   */
+  columnsType?: DatePickerColumnType[]
+  /**
+   * 可选的最小时间，精确到分
+   * @default - 十年前
+   */
+  minDate?: Date
+  /**
+   * 可选的最大时间，精确到分
+   * @default - 十年后
+   */
+  maxDate?: Date
+  /** 顶部栏标题 */
+  title?: string
+  /** 是否显示顶部栏 */
+  showToolbar?: boolean
+  /** 确认按钮文字 */
+  confirmButtonText?: string
+  /** 取消按钮文字 */
+  cancelButtonText?: string
+  /** 选项高度 */
+  optionHeight?: number
+  /** 可见选项个数 */
+  visibleOptionNum?: number
+  /** 选项格式化函数 */
+  formatter?: DatePickerFormatter
+  /** 选项过滤函数 */
+  filter?: DatePickerFilter
+}
+
+const props = withDefaults(defineProps<PickerViewProps>(), {
+  modelValue: undefined,
+  columnsType: undefined,
+  minDate: undefined,
+  maxDate: undefined,
+  title: '',
+  showToolbar: true,
+  confirmButtonText: '确认',
+  cancelButtonText: '取消',
+  optionHeight: 44,
+  visibleOptionNum: 6,
+  formatter: undefined,
+  filter: undefined,
+})
+
+const emit = defineEmits<{
+  (event: 'update:modelValue', value: Date): void
+  (event: 'change', value: Date): void
+  (event: 'confirm', value: Date): void
+  (event: 'cancel'): void
+}>()
+
+const { modelValue, columnsType, minDate, maxDate } = toRefs(props)
+
+const {
+  columnsType: _columnsType,
+  indexes,
+  selectedDate,
+  columns,
+  onChangeColumnIndexes,
+} = useDatePicker({
+  modelValue,
+  columnsType,
+  minDate,
+  maxDate,
+  formatter: props.formatter,
+  filter: props.filter,
+})
+
+const onChange = (event: EventDetail<{ value: number[] }>) => {
+  onChangeColumnIndexes(event.detail.value)
+  emit('change', selectedDate.value)
+}
+
+const onConfirm = () => {
+  emit('update:modelValue', selectedDate.value)
+  emit('confirm', selectedDate.value)
+}
+
+const onCancel = () => {
+  emit('cancel')
+}
+</script>
+
+<style lang="scss" scoped>
+@import '../../styles/vars.scss';
+
+.#{$prefix}-date-picker {
+  &-toolbar {
+    $height: 88rpx;
+    height: $height;
+    background-color: #fff;
+
+    > .btn {
+      font-size: 28rpx;
+      line-height: $height;
+    }
+  }
+}
+
+.btn-hover {
+  opacity: 0.7;
+}
+</style>
