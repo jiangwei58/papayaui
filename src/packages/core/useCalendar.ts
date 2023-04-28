@@ -50,14 +50,14 @@ export type DayItem = {
 export const WEEKDAYS = ['日', '一', '二', '三', '四', '五', '六']
 
 export default (props: IncludeRefs<UseCalendarProps>) => {
-  const _porps = props as UseCalendarProps
+  const _props = props as UseCalendarProps
   const state = reactive({
     ...props,
-    type: _porps.type ?? 'single',
-    min: _porps.min ?? dayjs().valueOf(),
-    max: _porps.max ?? dayjs().add(6, 'month'),
-    defaultDate: _porps.defaultDate ?? dayjs().valueOf(),
-    firstDayOfWeek: _porps.firstDayOfWeek ?? 0,
+    type: _props.type ?? 'single',
+    min: _props.min ?? dayjs().valueOf(),
+    max: _props.max ?? dayjs().add(6, 'month'),
+    defaultDate: _props.defaultDate ?? dayjs().valueOf(),
+    firstDayOfWeek: _props.firstDayOfWeek ?? 0,
   })
 
   const selectedItems = ref<Dayjs[]>([])

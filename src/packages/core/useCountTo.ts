@@ -17,13 +17,13 @@ export interface UseCountToProps {
 }
 
 export default (props: IncludeRefs<UseCountToProps>) => {
-  const _porps = props as UseCountToProps
+  const _props = props as UseCountToProps
   const ownProps = reactive({
-    ..._porps,
-    startNum: _porps.startNum ?? 0,
-    endNum: _porps.endNum ?? 0,
-    duration: _porps.duration ?? 2000,
-    easeout: _porps.easeout ?? true,
+    ..._props,
+    startNum: _props.startNum ?? 0,
+    endNum: _props.endNum ?? 0,
+    duration: _props.duration ?? 2000,
+    easeout: _props.easeout ?? true,
   })
 
   const numValue = ref<number>(ownProps.endNum)
@@ -46,11 +46,11 @@ export default (props: IncludeRefs<UseCountToProps>) => {
 
   const requestAnimationFrame = (callback: (time: number) => void) => {
     const currTime = new Date().getTime()
-    // 为了使setTimteout的尽可能的接近每秒60帧的效果
+    // 为了使setTimeout的尽可能的接近每秒60帧的效果
     const timeToCall = Math.max(0, 16 - (currTime - state.lastTime))
     state.timerId = setTimeout(() => {
       callback(currTime + timeToCall)
-    }, timeToCall)
+    }, timeToCall) as unknown as number
     state.lastTime = currTime + timeToCall
   }
 
