@@ -42,6 +42,7 @@ onMounted(() => {
     feedback: { title: '反馈组件', index: 4 },
     show: { title: '展示组件', index: 5 },
     other: { title: '其他组件', index: 6 },
+    hook: { title: 'Hooks', index: 7 },
   }
   const data: NavGroupItem[] = []
   pageConfig.pages.forEach((page) => {

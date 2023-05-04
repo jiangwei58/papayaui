@@ -1,67 +1,41 @@
 <template>
-  <pa-container>
+  <pa-container ref="containerRef">
     <template #header>
-      <pa-search @confirm="onSearch" />
+      <pa-search placeholder="这是固定头部，通常放置搜索栏、下拉菜单等" />
     </template>
 
-    <view>
-      <view v-for="item in list" :key="item.id" class="px-26">
-        <view class="border-bottom" style="line-height: 88rpx">{{ item.label }}</view>
+    <view class="px-25">
+      <view
+        v-for="index in 10"
+        :key="index"
+        class="p-15 text-28 text-black-2 border mt-20"
+        style="height: 100px"
+      >
+        放置页面内容，已自动处理固定头部和底部的填充
       </view>
-      <pa-loadmore :status="loadStatus" />
     </view>
 
     <template #bottom>
-      <view class="px-26 py-12">
-        <pa-button type="primary" block>确定</pa-button>
+      <view v-if="showBottom" class="px-26 py-12">
+        <pa-button type="primary" block @click="updateHeight">
+          这是固定底部，通常放置操作按钮
+        </pa-button>
       </view>
     </template>
   </pa-container>
 </template>
 
 <script lang="ts" setup>
-import { onReachBottom } from '@dcloudio/uni-app'
-import { onMounted } from 'vue'
-import { useList } from '../../hooks'
-import { EventDetail } from '../../types'
+import { ref } from 'vue'
+import paContainer from './container.vue'
 
-interface ListItem {
-  id: number
-  label: string
-}
+const containerRef = ref<InstanceType<typeof paContainer>>()
+const showBottom = ref<boolean>(true)
 
-const { list, pageNumber, pageSize, loadStatus, getListData } = useList<ListItem>({ pageSize: 20 })
-
-const getData = (searchText?: string) => {
-  getListData(() => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          list: new Array(pageSize.value).fill(0).map<ListItem>((_item, index) => {
-            const id = pageNumber.value * pageSize.value + index
-            return {
-              id,
-              label: `${searchText || ''}列表数据${id}`,
-            }
-          }),
-        })
-      }, 300)
-    })
-  })
-}
-
-onMounted(() => {
-  getData()
-})
-
-onReachBottom(() => {
-  pageNumber.value += 1
-  getData()
-})
-
-const onSearch = (event: EventDetail<{ value: string }>) => {
-  pageNumber.value = 0
-  getData(event.detail.value)
+const updateHeight = () => {
+  showBottom.value = !showBottom.value
+  // 如果固定头部或底部有动态内容会影响高度的，可以使用updateHeight方法重新刷新高度，防止多余填充留白
+  containerRef.value?.updateHeight()
 }
 </script>
 
