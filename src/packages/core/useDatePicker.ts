@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import { computed, reactive, ref, toRefs } from 'vue'
+import { computed, reactive, ref, toRefs, watch } from 'vue'
 import { IncludeRefs } from '../types'
 import { getRefValue, padZero } from '../utils'
 
@@ -75,7 +75,7 @@ export default (props: IncludeRefs<UseDatePickerProps> = {}) => {
   const columns = computed(() => {
     let currentDate = getSelectedDate(indexes.value)
 
-    // 按从大到小维度生成数据，确保在任务顺序下低维度可以依赖高纬度的数据
+    // 按从大到小维度生成数据，确保在任何顺序下低维度可以依赖高纬度的数据
     return columnsSort.reduce<DatePickerOption[][]>((result, type) => {
       if (!state.columnsType.includes(type)) return result
       const [start, end, newDate] = getTypeRange(type, currentDate, state.minDate, state.maxDate)
@@ -169,6 +169,25 @@ export default (props: IncludeRefs<UseDatePickerProps> = {}) => {
   }
 
   const selectedDate = computed(() => getSelectedDate(indexes.value))
+
+  const updateIndexesByModelValue = () => {
+    const date = dayjs(state.modelValue)
+    indexes.value = state.columnsType.map((type, colIndex) => {
+      return columns.value[colIndex].findIndex((option) => option.value === date.get(getType(type)))
+    })
+  }
+
+  watch(
+    () => state.modelValue,
+    () => {
+      if (!state.modelValue || !columns.value.length) return
+      updateIndexesByModelValue()
+    },
+    {
+      immediate: true,
+      flush: 'post',
+    },
+  )
 
   const onChangeColumnIndexes = (indexList: number[]) => {
     const newIndexes = indexList

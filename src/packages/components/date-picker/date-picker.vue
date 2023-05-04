@@ -80,7 +80,10 @@ export interface PickerViewProps {
   maxDate?: Date
   /** 顶部栏标题 */
   title?: string
-  /** 是否显示顶部栏 */
+  /**
+   * 是否显示顶部栏
+   * @description 启用时只有confirm会触发modelValue更新，禁用时change会触发modelValue更新
+   */
   showToolbar?: boolean
   /** 确认按钮文字 */
   confirmButtonText?: string
@@ -138,6 +141,9 @@ const {
 const onChange = (event: EventDetail<{ value: number[] }>) => {
   onChangeColumnIndexes(event.detail.value)
   emit('change', selectedDate.value)
+  if (!props.showToolbar) {
+    emit('update:modelValue', selectedDate.value)
+  }
 }
 
 const onConfirm = () => {
