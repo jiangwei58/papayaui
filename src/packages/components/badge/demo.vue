@@ -1,6 +1,6 @@
 <template>
   <DocDemoBlock title="基础用法" card>
-    <view class="grid grid-cols-4">
+    <view class="demo-badge">
       <pa-badge content="5">
         <view class="demo-block"></view>
       </pa-badge>
@@ -16,7 +16,7 @@
     </view>
   </DocDemoBlock>
   <DocDemoBlock title="最大值" card>
-    <view class="grid grid-cols-4">
+    <view class="demo-badge">
       <pa-badge content="999" :max="9">
         <view class="demo-block"></view>
       </pa-badge>
@@ -29,7 +29,7 @@
     </view>
   </DocDemoBlock>
   <DocDemoBlock title="自定义颜色" card>
-    <view class="grid grid-cols-4">
+    <view class="demo-badge">
       <pa-badge content="5" color="#1989fa">
         <view class="demo-block"></view>
       </pa-badge>
@@ -45,7 +45,7 @@
     </view>
   </DocDemoBlock>
   <DocDemoBlock title="自定义内容" card>
-    <view class="grid grid-cols-4">
+    <view class="demo-badge">
       <pa-badge>
         <view class="demo-block"></view>
         <template #content>
@@ -61,7 +61,7 @@
     </view>
   </DocDemoBlock>
   <DocDemoBlock title="自定义位置" card>
-    <view class="grid grid-cols-4">
+    <view class="demo-badge">
       <pa-badge content="99" :offset="[-10, -10]">
         <view class="demo-block"></view>
       </pa-badge>
@@ -71,7 +71,7 @@
     </view>
   </DocDemoBlock>
   <DocDemoBlock title="独立展示" card>
-    <view class="grid grid-cols-4">
+    <view class="demo-badge">
       <pa-badge content="9" />
       <pa-badge content="99" />
     </view>
@@ -84,6 +84,11 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 </script>
 
 <style lang="scss" scoped>
+.demo-badge {
+  :deep(.pa-badge) {
+    margin-right: 42px;
+  }
+}
 .demo-block {
   width: 40px;
   height: 40px;

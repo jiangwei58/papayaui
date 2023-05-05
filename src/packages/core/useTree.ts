@@ -3,7 +3,7 @@ import { IncludeRefs } from '../types'
 
 export interface UseTreeProps<T> {
   /** 数据源 */
-  options: T[]
+  options?: T[]
   /** 自定义 options 结构中的字段 */
   fieldNames?: Partial<UseTreeFieldNames<T>>
   /** 是否多选 */
@@ -44,7 +44,7 @@ export default <T, V>(props: IncludeRefs<UseTreeProps<T>>) => {
       ..._fieldNames.value,
     } as UseTreeFieldNames<T>
   })
-  const options = toRef(props, 'options', []) as Ref<OwnProps['options']>
+  const options = toRef(props, 'options', []) as Ref<Required<OwnProps>['options']>
   const multiple = toRef(props, 'multiple') as Ref<OwnProps['multiple']>
 
   const treeData = ref([]) as Ref<OwnNode[]>

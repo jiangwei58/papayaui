@@ -12,6 +12,7 @@
   >
     <slot />
     <Icon
+      v-if="selected"
       :class="computedClass('cascader-list-item__icon')"
       name="success"
       :color="`var(--${PREFIX}-color-primary)`"
@@ -38,14 +39,8 @@ const emit = defineEmits<{
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
 .#{$prefix}-cascader-list-item {
-  &__icon {
-    display: none;
-  }
   &.active {
     color: _var(color-primary);
-  }
-  &.active &__icon {
-    display: block;
   }
 }
 </style>

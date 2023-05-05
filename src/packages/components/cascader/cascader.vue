@@ -29,7 +29,7 @@
           :key="`${tabActive}-${index}`"
           :selected="
             tabActive < tabList.length - 1
-              ? index === currentIndexs[tabActive]
+              ? index === currentIndexes[tabActive]
               : isSelected(item[_fieldNames.value])
           "
           @select="onSelect(item, index)"
@@ -199,7 +199,7 @@ let oldScrollTop = 0
 const scrollTop = ref<number>(0)
 
 const loading = ref<boolean>(false)
-const currentIndexs = ref<number[]>([])
+const currentIndexes = ref<number[]>([])
 
 const searchViewRef = ref<InstanceType<typeof SearchView>>()
 const searchText = ref<string>('')
@@ -215,18 +215,22 @@ const localState = computed(() => {
 
 const tabList = computed(() => {
   if (searchText.value) return []
-  if (!treeData.value.length || !currentIndexs.value.length) return [{ name: '请选择' }]
+  if (!treeData.value.length || !currentIndexes.value.length) return [{ name: '请选择' }]
   const tabList = []
   let currentData = treeData.value
-  const maxLength = Math.max(tabActive.value + 1, tabMaxLevel.value + 1, currentIndexs.value.length)
+  const maxLength = Math.max(
+    tabActive.value + 1,
+    tabMaxLevel.value + 1,
+    currentIndexes.value.length,
+  )
   for (let i = 0; i < maxLength; i++) {
     if (i !== 0) {
-      currentData = currentData[currentIndexs.value[i - 1]][_fieldNames.value.children] || []
+      currentData = currentData[currentIndexes.value[i - 1]][_fieldNames.value.children] || []
     }
-    const index: number | undefined = currentIndexs.value[i]
+    const index: number | undefined = currentIndexes.value[i]
     const name =
       typeof index !== 'undefined'
-        ? currentData[currentIndexs.value[i]][_fieldNames.value.label]
+        ? currentData[currentIndexes.value[i]][_fieldNames.value.label]
         : '请选择'
     tabList.push({ name })
   }
@@ -234,7 +238,7 @@ const tabList = computed(() => {
 })
 
 const currentData = computed(() => {
-  const path = currentIndexs.value.slice(0, tabActive.value)
+  const path = currentIndexes.value.slice(0, tabActive.value)
   return getChildren(path)
 })
 
@@ -256,7 +260,7 @@ const init = async () => {
 const getData = async (level = 0, nodeProps?: CascaderOption) => {
   try {
     loading.value = true
-    let res = props.lazyLoad({ props: nodeProps, level })
+    let res = props.lazyLoad?.({ props: nodeProps, level }) ?? []
     if (res instanceof Promise) {
       res = await res
     }
@@ -274,10 +278,10 @@ const onScroll = (e: EventDetail<{ scrollTop: number }>) => {
 
 const onSelect = async (item: TreeNode<CascaderOption>, valueIndex: number) => {
   const currentNode = currentData.value[valueIndex]
-  currentIndexs.value.splice(tabActive.value, currentIndexs.value.length, valueIndex)
+  currentIndexes.value.splice(tabActive.value, currentIndexes.value.length, valueIndex)
   emit('nodeClick', currentNode)
   // 达到设置的最大层级时直接完成
-  if (currentIndexs.value.length >= props.maxLevel) {
+  if (currentIndexes.value.length >= props.maxLevel) {
     onSelectFinish(item)
     return
   }
@@ -305,7 +309,7 @@ const onSelect = async (item: TreeNode<CascaderOption>, valueIndex: number) => {
 
 const onSelectSearch = (item: SearchNode) => {
   if (!localState.value.isLazySearch) {
-    currentIndexs.value = getNodePath(item)
+    currentIndexes.value = getNodePath(item)
   }
   onSelectFinish(item)
 }
@@ -366,7 +370,7 @@ const onClose = () => {
 /** 重置数据（清除选中数据，还原tab选中状态） */
 const onReset = () => {
   tabActive.value = 0
-  currentIndexs.value = []
+  currentIndexes.value = []
   onClearSelected()
   emit('reset')
 }

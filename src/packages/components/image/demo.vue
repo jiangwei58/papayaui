@@ -53,8 +53,7 @@
 
 <script lang="ts" setup>
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-
-const src = 'https://img01.yzcdn.cn/vant/cat.jpeg'
+import src from '../../images/demo.jpeg' // 推荐使用图片链接
 
 const modeList = [
   'scaleToFill',

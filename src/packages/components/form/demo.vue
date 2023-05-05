@@ -32,7 +32,9 @@
         </pa-form-item>
       </pa-cell-group>
 
-      <pa-button class="block px-32 pt-30" block @click="onValidate">提交</pa-button>
+      <pa-button class="block mt-30 mx-32" style="width: auto" block @click="onValidate">
+        提交
+      </pa-button>
     </pa-form>
   </DocDemoBlock>
 
@@ -67,11 +69,9 @@
         </pa-form-item>
       </pa-cell-group>
 
-      <view class="grid grid-cols-2">
-        <pa-button class="block px-32 pt-30" block @click="onValidate2">提交</pa-button>
-        <pa-button class="block px-32 pt-30" block type="default" @click="onAddItem">
-          新增
-        </pa-button>
+      <view class="grid grid-cols-2 gap-25 mt-30 mx-32">
+        <pa-button block @click="onValidate2">提交</pa-button>
+        <pa-button block type="default" @click="onAddItem">新增</pa-button>
       </view>
     </pa-form>
   </DocDemoBlock>
