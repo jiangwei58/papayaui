@@ -15,7 +15,7 @@
       scroll-y
       :scroll-top="scrollTop"
       :class="computedClass('calendar-body')"
-      @scroll="onScroll"
+      @scroll="onThrottleScroll"
     >
       <view
         v-for="(monthItem, monthIndex) in months"
@@ -25,23 +25,35 @@
         <view v-if="monthIndex !== 0" :class="computedClass('calendar__month-title')">
           {{ monthItem.date.format('YYYY年M月') }}
         </view>
-        <view :class="computedClass('calendar__days')">
-          <view v-if="showMark" :class="computedClass('calendar__month-mark')">
-            {{ monthItem.date.month() + 1 }}
-          </view>
-          <view
-            v-for="(dayItem, dayIndex) in getDays(monthItem.date)"
-            :key="dayItem.text"
-            :class="computedClass('calendar__day', `calendar__day--${dayItem.type}`)"
-            :style="{ gridColumnStart: dayIndex === 0 ? monthItem.dayOfWeekStart + 1 : 'auto' }"
-            @tap="onSelect(dayItem)"
-          >
-            <view :class="computedClass('calendar__top-info')">{{ dayItem.topInfo }}</view>
-            <view :class="computedClass('calendar__day__select')">
-              {{ dayItem.text }}
+        <view
+          :class="computedClass('calendar__days')"
+          :style="{
+            height: isVisualRange(monthIndex)
+              ? 'auto'
+              : getUnitValue(
+                  Math.ceil((monthItem.dayOfWeekStart + monthItem.dayLength) / 7) * 64,
+                  'px',
+                ),
+          }"
+        >
+          <template v-if="isVisualRange(monthIndex)">
+            <view v-if="showMark" :class="computedClass('calendar__month-mark')">
+              {{ monthItem.date.month() + 1 }}
             </view>
-            <view :class="computedClass('calendar__bottom-info')">{{ dayItem.bottomInfo }}</view>
-          </view>
+            <view
+              v-for="(dayItem, dayIndex) in getDays(monthItem.date)"
+              :key="dayItem.text"
+              :class="computedClass('calendar__day', `calendar__day--${dayItem.type}`)"
+              :style="{ gridColumnStart: dayIndex === 0 ? monthItem.dayOfWeekStart + 1 : 'auto' }"
+              @tap="onSelect(dayItem)"
+            >
+              <view :class="computedClass('calendar__top-info')">{{ dayItem.topInfo }}</view>
+              <view :class="computedClass('calendar__day__select')">
+                {{ dayItem.text }}
+              </view>
+              <view :class="computedClass('calendar__bottom-info')">{{ dayItem.bottomInfo }}</view>
+            </view>
+          </template>
         </view>
       </view>
       <SafeBottom v-if="!showConfirm && safeAreaInsetBottom" />
@@ -64,6 +76,7 @@ import { EventDetail } from '../../types'
 import { computedClass } from '../../utils/style'
 import ButtonComponent from '../button/button.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
+import { getUnitValue, throttle } from '../../utils'
 
 export interface CalendarWrapperProps {
   /** 选择类型: single表示选择单个日期，multiple表示选择多个日期，range表示选择日期区间 */
@@ -155,6 +168,14 @@ const confirmEnabled = computed<boolean>(() => {
   return selectedItems.value.length > 0
 })
 
+/**
+ * 月份是否在显示范围
+ */
+const isVisualRange = (monthIndex: number) => {
+  const diff = monthIndex - monthCurrent.value
+  return diff >= -1 && diff <= 1
+}
+
 const onScroll = (e: EventDetail<{ scrollTop: number }>) => {
   let current = 0
   const scrollTop = e.detail.scrollTop
@@ -165,6 +186,7 @@ const onScroll = (e: EventDetail<{ scrollTop: number }>) => {
   }
   monthCurrent.value = current
 }
+const onThrottleScroll = throttle(onScroll, 100, { trailing: true })
 
 const updateMonthTop = () => {
   if (!instance) return
