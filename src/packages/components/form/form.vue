@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import { computed, provide, ref, toRefs } from 'vue'
-import { FormItemExtraParams, FormRules, useFormValidate } from '../../'
+import useFormValidate, { FormItemExtraParams, FormRules } from '../../core/useForm'
 import { computedClass } from '../../utils/style'
 import { FormItemInstance } from '../form-item/form-item.vue'
 

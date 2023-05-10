@@ -87,7 +87,7 @@
 
 <script lang="ts" setup>
 import { computed, reactive, ref } from 'vue'
-import { FormRules } from '../../hooks'
+import { FormRules } from '../../core/useForm'
 import Form from './form.vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
 import { PREFIX } from '../../utils/style'

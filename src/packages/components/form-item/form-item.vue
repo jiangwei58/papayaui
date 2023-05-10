@@ -13,7 +13,7 @@
 
 <script lang="ts" setup>
 import { ComponentInternalInstance, getCurrentInstance, inject, Ref, ref } from 'vue'
-import { FormRuleItem } from '../../hooks/form/useFormValidate'
+import { FormRuleItem } from '../../core/useForm/useFormValidate'
 import Cell, { CellProps } from '../cell/cell.vue'
 
 export interface FormItemInstance extends Omit<ComponentInternalInstance, 'props'> {
@@ -43,13 +43,10 @@ const instance = getCurrentInstance()
 const errorMessage = ref<string>('')
 
 if (instance && p_children?.value) {
-  p_children.value = [
-    ...p_children.value,
-    {
-      ...instance,
-      errorMessage,
-    },
-  ]
+  p_children.value = p_children.value.concat({
+    ...instance,
+    errorMessage,
+  })
 }
 </script>
 

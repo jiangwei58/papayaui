@@ -67,3 +67,15 @@ export const isBoolean = (val: unknown) => {
 export const isArray = (val: unknown) => {
   return val && Array.isArray(val)
 }
+
+/**
+ * @description:  是否为普通对象
+ */
+export const isPlainObject = (val: unknown) => {
+  if (!is(val, 'Object')) {
+    return false
+  }
+
+  const prototype = Object.getPrototypeOf(val)
+  return prototype === null || prototype === Object.prototype
+}

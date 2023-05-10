@@ -3,7 +3,7 @@ import { ValidateOption } from 'async-validator/dist-types/interface'
 import { computed, Ref, ref, toRef } from 'vue'
 import { IncludeRefs } from '../..'
 import { replaceMessage, validateMessages } from './message'
-import { isObject, isArray } from '../../utils/lang'
+import { isObject, isArray, isUndefined } from '../../utils/lang'
 
 export type FormRules<T> = {
   [key in keyof T]?: FormRuleItem | FormRuleItem[]
@@ -98,7 +98,9 @@ export const convertSchemaRules = <T>(formData: T, rules: FormRules<T>) => {
         const key = keys[i]
         currentRule[key] = currentRule[key] ?? {}
         if (i < keys.length - 1) {
-          if (isObject(currentObj[key])) {
+          if (isUndefined(currentObj[key])) {
+            continue
+          } else if (isObject(currentObj[key])) {
             currentRule[key].type = 'object'
           } else if (isArray(currentObj[key])) {
             currentRule[key].type = 'array'

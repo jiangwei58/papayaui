@@ -1,15 +1,4 @@
-export const isPlainObject = (val: any) => {
-  if (toString.call(val) !== '[object Object]') {
-    return false
-  }
-
-  const prototype = Object.getPrototypeOf(val)
-  return prototype === null || prototype === Object.prototype
-}
-
-export const isArray = (val: any) => {
-  return Array.isArray(val)
-}
+import { isArray, isPlainObject } from '../utils'
 
 export const merge = <TObject>(...args: Partial<TObject>[]) => {
   const result: Record<string, any> = {}
