@@ -18,10 +18,10 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, getCurrentInstance, onMounted, ref } from 'vue'
+import { computed, getCurrentInstance, onMounted, provide, Ref, ref } from 'vue'
 import { useRect } from '../../hooks'
-import { computedClass } from '../../utils/style'
-import MenuItem, { MenuItemInstance } from '../menu-item/menu-item.vue'
+import { computedClass, PREFIX } from '../../utils/style'
+import { MenuItemInstance } from '../menu-item/menu-item.vue'
 import { PopupProps } from '../popup/popup.vue'
 import { TransitionProps } from '../transition/transition.vue'
 
@@ -38,15 +38,14 @@ export interface MenuProps {
   closeOnClickOverlay?: PopupProps['closeOnClickOverlay']
 }
 
-export interface MenuExposeData {
+export interface MenuProvideData {
+  props: Required<MenuProps>
   setChildren: (node: MenuItemInstance) => void
   isMenuItemShow: boolean
-  offset: { top: number; bottom: number }
+  offset: Ref<{ top: number; bottom: number }>
 }
 
-type MenuItemExpose = InstanceType<typeof MenuItem> | null
-
-withDefaults(defineProps<MenuProps>(), {
+const props = withDefaults(defineProps<MenuProps>(), {
   direction: 'down',
   zIndex: 10,
   duration: 200,
@@ -74,29 +73,36 @@ const offset = ref<{ top: number; bottom: number }>({ top: 0, bottom: 0 })
 
 onMounted(() => {
   if (!instance) return
+  // #ifndef H5
   useRect(instance, `.${computedClass('menu')}`).then((node) => {
     if (node) {
       offset.value = { top: node.top + node.height, bottom: systemInfo.windowHeight - node.top }
     }
   })
+  // #endif
+  // #ifdef H5
+  const rect = instance.proxy?.$el.getBoundingClientRect()
+  offset.value = { top: rect.top + rect.height, bottom: systemInfo.windowHeight - rect.top }
+  // #endif
 })
 
 const setChildren = (node: MenuItemInstance) => {
-  children.value.push(node)
+  children.value.push(node as any)
 }
 
 const onShowMenu = (index: number) => {
   children.value.forEach((node, nodeIndex) => {
-    const nodeExpose = node.exposeProxy as MenuItemExpose
+    const nodeExpose = node
     if (nodeIndex === index) {
       nodeExpose?.toggle()
     } else if (node.show) {
-      nodeExpose?.close()
+      nodeExpose?.toggle(false)
     }
   })
 }
 
-defineExpose({
+provide(`${PREFIX}-menu-data`, {
+  props,
   setChildren,
   isMenuItemShow,
   offset,

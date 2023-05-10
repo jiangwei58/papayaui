@@ -1,6 +1,6 @@
 <template>
   <view
-    :class="computedClass('menu-item', `menu-item--${getParentProps()?.direction}`)"
+    :class="computedClass('menu-item', `menu-item--${menuProvide.props.direction}`)"
     :style="customStyle"
   >
     <Popup
@@ -35,23 +35,28 @@ import {
   computed,
   CSSProperties,
   getCurrentInstance,
+  inject,
   onMounted,
+  Ref,
   ref,
   toRefs,
 } from 'vue'
 import useSelect from '../../core/useSelect'
-import { computedClass } from '../../utils/style'
+import { noop } from '../../utils'
+import { computedClass, PREFIX } from '../../utils/style'
 import Cell from '../cell/cell.vue'
 import IconComponent from '../icon/icon.vue'
-import { MenuExposeData, MenuProps } from '../menu/menu.vue'
+import { MenuProvideData } from '../menu/menu.vue'
 import Popup, { PopupProps } from '../popup/popup.vue'
 
 export interface MenuItemInstance extends Omit<ComponentInternalInstance, 'props'> {
   props: MenuItem
   /** 是否显示 */
-  show: boolean
+  show: Ref<boolean>
   /** 选中项的数据 */
-  activeItem: MenuItemOption
+  activeItem: Ref<MenuItemOption>
+  /** 切换打开状态 */
+  toggle: (show?: boolean) => void
 }
 
 export interface MenuItem {
@@ -92,6 +97,19 @@ const instance = getCurrentInstance()
 
 const { options, modelValue } = toRefs(props)
 
+const menuProvide = inject<MenuProvideData>(`${PREFIX}-menu-data`, {
+  props: {
+    direction: 'down',
+    zIndex: 10,
+    duration: 200,
+    overlay: true,
+    closeOnClickOverlay: true,
+  },
+  setChildren: noop,
+  isMenuItemShow: false,
+  offset: ref({ top: 0, bottom: 0 }),
+})
+
 const visible = ref<boolean>(false)
 const visibleEnded = ref<boolean>(true)
 const { isSelected, onSelect, selectedItems } = useSelect<MenuItemOption, MenuItemOptionValue>({
@@ -99,27 +117,15 @@ const { isSelected, onSelect, selectedItems } = useSelect<MenuItemOption, MenuIt
   defaultValue: modelValue,
 })
 
-const getParentProps = () => {
-  if (!instance) return
-  return instance.parent?.props as MenuProps
-}
-
-const getParentExpose = () => {
-  if (!instance) return
-  return instance.proxy?.$parent as unknown as MenuExposeData | undefined
-}
-
 const customStyle = computed(() => {
-  const parentProps = getParentProps()
-  if (!parentProps) return
+  if (!menuProvide.props) return
   const style: CSSProperties = {
-    zIndex: parentProps.zIndex ?? 10,
+    zIndex: menuProvide.props.zIndex ?? 10,
   }
-  const parentExpose = getParentExpose()
-  if (parentExpose) {
-    const direction = parentProps.direction === 'up' ? 'bottom' : 'top'
-    style[direction] = parentExpose.offset[direction] + 'px'
-  }
+
+  const direction = menuProvide.props.direction === 'up' ? 'bottom' : 'top'
+  style[direction] = menuProvide.offset.value[direction] + 'px'
+
   if (visibleEnded.value) {
     style.display = 'none'
   }
@@ -127,13 +133,12 @@ const customStyle = computed(() => {
 })
 
 const popupAttrs = computed<PopupProps>(() => {
-  const parentProps = getParentProps()
-  if (!parentProps) return {}
+  if (!menuProvide.props) return {}
   return {
-    position: parentProps.direction === 'up' ? 'bottom' : 'top',
-    duration: parentProps.duration,
-    overlay: parentProps.overlay,
-    closeOnClickOverlay: parentProps.closeOnClickOverlay,
+    position: menuProvide.props.direction === 'up' ? 'bottom' : 'top',
+    duration: menuProvide.props.duration,
+    overlay: menuProvide.props.overlay,
+    closeOnClickOverlay: menuProvide.props.closeOnClickOverlay,
   }
 })
 
@@ -143,8 +148,7 @@ const toggle = (show = !visible.value) => {
     visibleEnded.value = false
   } else {
     // 关闭弹窗的时候如果有展开的节点立即关闭，没有的话等待动画完毕再关闭
-    const parentExpose = getParentExpose()
-    if (parentExpose?.isMenuItemShow && !visible.value) {
+    if (menuProvide.isMenuItemShow && !visible.value) {
       visibleEnded.value = true
     }
   }
@@ -167,11 +171,12 @@ const onChange = (item: MenuItemOption) => {
 
 onMounted(() => {
   // 将自身组件实例添加到父组件
-  if (instance?.proxy?.$parent) {
-    ;(instance.proxy.$parent as any | undefined)?.setChildren({
+  if (instance) {
+    menuProvide.setChildren({
       ...instance,
+      toggle,
       show: visible,
-      activeItem: selectedItems,
+      activeItem: selectedItems as Ref<MenuItemOption>,
     })
   }
 })
