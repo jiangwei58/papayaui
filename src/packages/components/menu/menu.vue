@@ -73,17 +73,11 @@ const offset = ref<{ top: number; bottom: number }>({ top: 0, bottom: 0 })
 
 onMounted(() => {
   if (!instance) return
-  // #ifndef H5
   useRect(instance, `.${computedClass('menu')}`).then((node) => {
     if (node) {
       offset.value = { top: node.top + node.height, bottom: systemInfo.windowHeight - node.top }
     }
   })
-  // #endif
-  // #ifdef H5
-  const rect = instance.proxy?.$el.getBoundingClientRect()
-  offset.value = { top: rect.top + rect.height, bottom: systemInfo.windowHeight - rect.top }
-  // #endif
 })
 
 const setChildren = (node: MenuItemInstance) => {

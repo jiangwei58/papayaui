@@ -36,7 +36,7 @@
 
 <script lang="ts" setup>
 import { Dayjs } from 'dayjs'
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch, nextTick } from 'vue'
 import { DayItem } from '../../core/useCalendar'
 import { getUnitValue } from '../../utils'
 import { computedClass } from '../../utils/style'
@@ -85,7 +85,9 @@ watch(
   () => props.show,
   (newVal, oldVal) => {
     if (newVal !== oldVal && newVal && props.poppable) {
-      wrapperRef.value?.updateMonthTop()
+      nextTick(() => {
+        wrapperRef.value?.updateMonthTop()
+      })
     }
   },
 )

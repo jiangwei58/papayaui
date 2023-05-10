@@ -16,6 +16,7 @@ function useRect(
   all?: boolean,
 ): Promise<(Required<UniApp.NodeInfo> | null) | Required<UniApp.NodeInfo>[]> {
   return new Promise((resolve) => {
+    // #ifndef H5
     uni
       .createSelectorQuery()
       .in(component)
@@ -28,6 +29,22 @@ function useRect(
         }
       })
       .exec()
+    // #endif
+    // #ifdef H5
+    let el: HTMLElement = component.proxy?.$el
+    el = el.parentElement ?? el
+    if (all) {
+      resolve(
+        Array.from(el.querySelectorAll(selector)).map((item) =>
+          item.getBoundingClientRect(),
+        ) as unknown as Required<UniApp.NodeInfo>[],
+      )
+    } else {
+      resolve(
+        el.querySelector(selector)?.getBoundingClientRect() as unknown as Required<UniApp.NodeInfo>,
+      )
+    }
+    // #endif
   })
 }
 
