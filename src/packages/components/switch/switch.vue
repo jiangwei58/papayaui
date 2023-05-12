@@ -1,19 +1,11 @@
 <template>
   <view
-    :class="
-      computedClass('switch', {
-        'switch--on': isChecked,
-        'switch--disabled': disabled,
-      })
-    "
+    :class="[ns.b(), ns.is('on', isChecked), ns.is('disabled', disabled)]"
     :style="switchStyle"
     @tap="onToggle"
   >
-    <view
-      :class="computedClass('switch__bg')"
-      :style="computedStyle({ backgroundColor: inactiveColor })"
-    />
-    <view :class="computedClass('switch__node')">
+    <view :class="ns.e('bg')" :style="ns.style({ backgroundColor: inactiveColor })" />
+    <view :class="ns.e('node')">
       <LoadingIcon v-if="loading" size="100%" class="block width-full height-full" />
     </view>
   </view>
@@ -21,9 +13,9 @@
 
 <script lang="ts" setup>
 import { computed, CSSProperties, toRefs } from 'vue'
+import useNamespace from '../../core/useNamespace'
 import useSwitch, { SwitchValue as _SwitchValue } from '../../core/useSwitch'
 import { getUnitValue } from '../../utils'
-import { computedClass, computedStyle } from '../../utils/style'
 import LoadingIcon from '../loading-icon/loading-icon.vue'
 
 export type SwitchValue = _SwitchValue
@@ -46,6 +38,8 @@ export interface SwitchProps {
   /** 开关尺寸 */
   size?: string
 }
+
+const ns = useNamespace('switch')
 
 const props = withDefaults(defineProps<SwitchProps>(), {
   modelValue: false,
