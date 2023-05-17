@@ -1,8 +1,5 @@
 <template>
-  <view
-    :class="computedClass('menu-item', `menu-item--${menuProvide.props.direction}`)"
-    :style="customStyle"
-  >
+  <view :class="[ns.b(), ns.m(menuProvide.props.direction)]" :style="customStyle">
     <Popup
       :show="visible"
       :custom-style="{ position: 'absolute' }"
@@ -15,7 +12,7 @@
       <Cell
         v-for="item in options"
         :key="item.value"
-        :class="computedClass({ 'menu-item--active': isSelected(item.value) })"
+        :class="ns.is('active', isSelected(item.value))"
         :title="item.text"
         clickable
         @click="onChange(item)"
@@ -41,9 +38,9 @@ import {
   ref,
   toRefs,
 } from 'vue'
+import useNamespace, { defaultNamespace } from '../../core/useNamespace'
 import useSelect from '../../core/useSelect'
 import { noop } from '../../utils'
-import { computedClass, PREFIX } from '../../utils/style'
 import Cell from '../cell/cell.vue'
 import IconComponent from '../icon/icon.vue'
 import { MenuProvideData } from '../menu/menu.vue'
@@ -81,6 +78,8 @@ export interface MenuItemOption {
 
 export type MenuItemOptionValue = number | string
 
+const ns = useNamespace('menu-item')
+
 const props = withDefaults(defineProps<MenuItem>(), {
   title: '',
   modelValue: undefined,
@@ -97,7 +96,7 @@ const instance = getCurrentInstance()
 
 const { options, modelValue } = toRefs(props)
 
-const menuProvide = inject<MenuProvideData>(`${PREFIX}-menu-data`, {
+const menuProvide = inject<MenuProvideData>(`${defaultNamespace}-menu-data`, {
   props: {
     direction: 'down',
     zIndex: 10,

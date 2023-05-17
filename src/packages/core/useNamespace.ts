@@ -50,8 +50,8 @@ export default (block: string) => {
   const bem = (blockSuffix?: string, element?: string, modifier?: string) =>
     blockSuffix && element && modifier ? _bem(namespace, block, blockSuffix, element, modifier) : ''
 
-  const is = (name: string, ...args: boolean[]) => {
-    const state = args.length >= 1 ? args.every((arg) => arg) : true
+  const is = (name: string, ...args: Array<boolean | undefined>) => {
+    const state = args.length >= 1 ? args.every((arg) => !!arg) : true
     return name && state ? m(name) : ''
   }
 

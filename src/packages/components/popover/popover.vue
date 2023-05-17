@@ -1,17 +1,13 @@
 <template>
-  <view :class="computedClass('popover', { 'popover--show': show })">
-    <view
-      v-show="show"
-      :class="computedClass('popover-overlay')"
-      @tap="onVisibleChange(false)"
-    ></view>
+  <view :class="[ns.b(), ns.is('show', show)]">
+    <view v-show="show" :class="ns.b('overlay')" @tap="onVisibleChange(false)"></view>
     <view @tap.stop="onVisibleChange()">
       <slot></slot>
     </view>
     <view
       v-show="show"
       class="light bottom"
-      :class="computedClass('popover-wapper')"
+      :class="ns.b('wrapper')"
       :style="{
         width: getUnitValue(width),
         opacity: tooltipRect.height && tooltipContentWidth ? '1' : '0',
@@ -24,25 +20,24 @@
         {{ text }}
       </view>
       <slot name="popover-content"></slot>
-      <view
-        :class="computedClass('popover-arrow')"
-        :style="{ transform: `translateX(${arrowLeft}px)` }"
-      ></view>
+      <view :class="ns.b('arrow')" :style="{ transform: `translateX(${arrowLeft}px)` }"></view>
     </view>
   </view>
 </template>
 
 <script lang="ts" setup>
 import { getUnitValue } from '../../utils/common'
-import { computedClass } from '../../utils/style'
 import { computed, getCurrentInstance, nextTick, ref, watch } from 'vue'
 import useRect from '../../hooks/useRect'
+import useNamespace from '../../core/useNamespace'
 
 export interface PopoverProps {
   text?: string
   width?: string
   zIndex?: number
 }
+
+const ns = useNamespace('popover')
 
 withDefaults(defineProps<PopoverProps>(), {
   text: '',
@@ -79,12 +74,12 @@ const arrowLeft = computed(() => {
 watch(show, (newVal) => {
   if (instance && newVal) {
     nextTick(() => {
-      useRect(instance, `.${computedClass('popover')}`).then((res) => {
+      useRect(instance, `.${ns.b()}`).then((res) => {
         if (res) {
           tooltipRect.value = res
         }
       })
-      useRect(instance, `.${computedClass('popover-wapper')}`).then((res) => {
+      useRect(instance, `.${ns.b('wrapper')}`).then((res) => {
         if (res) {
           tooltipContentWidth.value = res.width || 0
         }
@@ -113,7 +108,7 @@ const onVisibleChange = (visible = !show.value) => {
     height: 100vh;
     background-color: transparent;
   }
-  &-wapper {
+  &-wrapper {
     position: fixed;
     left: 0;
     top: 0;
@@ -140,11 +135,11 @@ const onVisibleChange = (visible = !show.value) => {
     }
   }
 
-  &-wapper.light {
+  &-wrapper.light {
     color: $darkColor;
     background: #fff;
   }
-  &-wapper.light &-arrow {
+  &-wrapper.light &-arrow {
     &::before {
       border: 1px solid #fff;
       background: #fff;
@@ -153,7 +148,7 @@ const onVisibleChange = (visible = !show.value) => {
     }
   }
 
-  &-wapper.bottom &-arrow {
+  &-wrapper.bottom &-arrow {
     $top: calc($arrowSize / 2);
     left: 50%;
     top: -$top;

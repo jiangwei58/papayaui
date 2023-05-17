@@ -1,6 +1,6 @@
 <template>
   <Popup
-    :custom-class="computedClass('bottom-popup')"
+    :custom-class="ns.b()"
     :show="show"
     position="bottom"
     :height="height"
@@ -13,28 +13,19 @@
     :safe-area-inset-bottom="false"
     @update:show="emit('update:show', !!$event)"
   >
-    <view
-      class="flex flex-col"
-      :class="[
-        computedClass('bottom-popup__wrapper'),
-        { 'safe-bottom-padding': safeAreaInsetBottom },
-      ]"
-    >
-      <view
-        :class="computedClass('bottom-popup__header')"
-        class="width-full flex items-center justify-center flex-shrink-0"
-      >
+    <view :class="[ns.e('wrapper'), { 'safe-bottom-padding': safeAreaInsetBottom }]">
+      <view :class="ns.e('header')">
         <slot name="before-title"></slot>
-        <text class="text-32 leading-40 text-block font-w-500 mr-8">{{ title }}</text>
+        <text :class="ns.e('title')">{{ title }}</text>
         <slot name="after-title"></slot>
       </view>
 
-      <view class="flex flex-col flex-1" style="overflow: hidden">
+      <view :class="ns.e('body')">
         <view class="flex-1" style="overflow: hidden">
           <slot></slot>
         </view>
 
-        <view v-if="$slots.footer" :class="computedClass('bottom-popup__footer')">
+        <view v-if="$slots.footer" :class="ns.e('footer')">
           <slot name="footer"></slot>
         </view>
       </view>
@@ -44,7 +35,7 @@
 
 <script lang="ts" setup>
 import { CSSProperties, toRefs } from 'vue'
-import { computedClass } from '../../utils/style'
+import useNamespace from '../../core/useNamespace'
 import Popup from '../popup/popup.vue'
 
 export interface BottomPopupProps {
@@ -69,6 +60,8 @@ export interface BottomPopupProps {
   /** 是否留出底部安全距离 */
   safeAreaInsetBottom?: boolean
 }
+
+const ns = useNamespace('bottom-popup')
 
 const props = withDefaults(defineProps<BottomPopupProps>(), {
   show: false,
@@ -95,13 +88,34 @@ const emit = defineEmits<{
 .#{$prefix}-bottom-popup {
   &__wrapper {
     position: relative;
+    display: flex;
+    flex-direction: column;
     height: 100%;
     border-radius: 24rpx 24rpx 0 0;
   }
 
   &__header {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 100%;
     height: 88rpx;
+  }
+  &__title {
+    font-size: 32rpx;
+    line-height: 40rpx;
+    color: _var(color-black);
+    font-weight: 500;
+    margin-right: 8rpx;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
   }
 
   &__footer {

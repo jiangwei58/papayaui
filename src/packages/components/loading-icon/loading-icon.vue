@@ -1,21 +1,21 @@
 <template>
   <view
-    :class="computedClass('loading-icon')"
+    :class="ns.b()"
     :style="{
       width: size ? getUnitValue(size) : undefined,
       height: size ? getUnitValue(size) : undefined,
     }"
   >
-    <view :class="computedClass('loading-icon__spinner')" :style="{ borderTopColor: color }" />
-    <view :class="computedClass('loading-icon__spinner')" :style="{ borderTopColor: color }" />
-    <view :class="computedClass('loading-icon__spinner')" :style="{ borderTopColor: color }" />
+    <view :class="ns.e('spinner')" :style="{ borderTopColor: color }" />
+    <view :class="ns.e('spinner')" :style="{ borderTopColor: color }" />
+    <view :class="ns.e('spinner')" :style="{ borderTopColor: color }" />
   </view>
 </template>
 
 <script lang="ts" setup>
 import { CSSProperties } from 'vue'
+import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
-import { computedClass } from '../../utils/style'
 
 export interface LoadingIconProps {
   /** 加载图标颜色 */
@@ -23,6 +23,8 @@ export interface LoadingIconProps {
   /** 加载图标大小 */
   size?: string
 }
+
+const ns = useNamespace('loading-icon')
 
 defineProps<LoadingIconProps>()
 </script>

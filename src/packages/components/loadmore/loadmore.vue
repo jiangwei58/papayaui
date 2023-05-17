@@ -1,7 +1,7 @@
 <template>
-  <view :class="computedClass('loadmore')">
+  <view :class="ns.b()">
     <LoadingIcon v-if="status === 'loading'" :size="iconSize" :color="color" />
-    <text v-if="showText" :class="computedClass('loadmore__text')" :style="{ color: textColor }">
+    <text v-if="showText" :class="ns.e('text')" :style="{ color: textColor }">
       {{
         status === 'loadmore'
           ? localConfig.loadmore
@@ -15,7 +15,7 @@
 
 <script lang="ts" setup>
 import { computed, CSSProperties } from 'vue'
-import { computedClass, PREFIX } from '../../utils/style'
+import useNamespace, { defaultNamespace } from '../../core/useNamespace'
 import LoadingIcon from '../loading-icon/loading-icon.vue'
 
 export interface LoadStatus {
@@ -39,10 +39,12 @@ export interface LoadmoreProps {
   showText?: boolean
 }
 
+const ns = useNamespace('loadmore')
+
 const props = withDefaults(defineProps<LoadmoreProps>(), {
   config: undefined,
   status: 'loadmore',
-  color: `var(--${PREFIX}-color-primary)`,
+  color: `var(--${defaultNamespace}-color-primary)`,
   textColor: '#646566',
   iconSize: '20px',
   showText: true,

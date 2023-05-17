@@ -1,21 +1,14 @@
 <template>
-  <view :class="computedClass('steps', `steps-${direction}`)">
+  <view :class="[ns.b(), ns.b(direction)]">
     <view
       v-for="(item, index) in steps"
       :key="index"
-      :class="
-        computedClass('steps-item', {
-          [`steps-item--${getStatus(index)}`]: true,
-        })
-      "
+      :class="[ns.b('item'), ns.bm('item', getStatus(index))]"
       @tap="emit('click-step', index)"
     >
-      <view
-        :class="computedClass('steps-item-head')"
-        :style="computedStyle({ height: headHeights[index] })"
-      >
-        <view :class="[computedClass('steps-item-line'), { custom: $slots.icon }]"></view>
-        <view :class="computedClass('steps-item-wrapper')">
+      <view :class="ns.b('item-head')" :style="ns.style({ height: headHeights[index] })">
+        <view :class="[ns.b('item-line'), { custom: $slots.icon }]"></view>
+        <view :class="ns.b('item-wrapper')">
           <slot
             v-if="$slots.icon"
             name="icon"
@@ -23,14 +16,14 @@
             :index="index"
             :status="getStatus(index)"
           />
-          <view v-else :class="computedClass('steps-item-icon')">
+          <view v-else :class="ns.b('item-icon')">
             <Icon v-if="index < current" name="success" />
             <text v-else>{{ index + 1 }}</text>
           </view>
         </view>
       </view>
-      <view :class="computedClass('steps-item-content')">
-        <view :class="computedClass('steps-item-title')">
+      <view :class="ns.b('item-content')">
+        <view :class="ns.b('item-title')">
           <slot
             v-if="$slots.title"
             name="title"
@@ -40,7 +33,7 @@
           />
           <text v-else>{{ item.title }}</text>
         </view>
-        <view :class="computedClass('steps-item-desc')">
+        <view :class="ns.b('item-desc')">
           <slot
             v-if="$slots.desc"
             name="desc"
@@ -57,8 +50,8 @@
 
 <script lang="ts" setup>
 import { CSSProperties, getCurrentInstance, onMounted, ref, useSlots, watch } from 'vue'
+import useNamespace from '../../core/useNamespace'
 import { useRect } from '../../hooks'
-import { computedClass, computedStyle } from '../../utils/style'
 import Icon from '../icon/icon.vue'
 
 /** 步骤状态 */
@@ -75,6 +68,8 @@ export interface StepsProps {
   steps?: StepItem[]
   direction?: 'horizontal' | 'vertical'
 }
+
+const ns = useNamespace('steps')
 
 const instance = getCurrentInstance()
 const slots = useSlots()
@@ -99,7 +94,7 @@ const getStatus = (index: number): StepStatus => {
 
 const updateHeadHeight = async () => {
   if (!instance || props.direction !== 'vertical' || !slots.icon) return
-  const rects = await useRect(instance, `.${computedClass('steps-item')}`, true)
+  const rects = await useRect(instance, `.${ns.b('item')}`, true)
   headHeights.value = rects.map((item) => `${item.height}px` || '100%')
 }
 

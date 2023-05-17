@@ -1,9 +1,5 @@
 <template>
-  <view
-    class="flex items-center justify-center"
-    :class="[computedClass('sort-label'), sort]"
-    @tap="onChange"
-  >
+  <view :class="[ns.b(), sort]" @tap="onChange">
     <text class="text-28 leading-40" :class="[sort ? 'color-primary' : 'text-black-2']">
       {{ title }}
     </text>
@@ -16,7 +12,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { computedClass } from '../../utils/style'
+import useNamespace from '../../core/useNamespace'
 
 export type Sort = 'up' | 'down' | undefined
 
@@ -31,13 +27,15 @@ enum SortTypeEnum {
   DOWN = ':desc',
 }
 
+const ns = useNamespace('sort-label')
+
 const props = withDefaults(defineProps<SortLabelProps>(), {
   modelValue: undefined,
   title: '',
 })
 
 const emit = defineEmits<{
-  (evevt: 'update:modelValue', value?: string): void
+  (event: 'update:modelValue', value?: string): void
   (event: 'change', key: string, sort?: string): void
 }>()
 
@@ -67,7 +65,11 @@ const onChange = () => {
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
 .#{$prefix}-sort-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 24rpx 0;
+
   .sort-up,
   .sort-down {
     width: 0;

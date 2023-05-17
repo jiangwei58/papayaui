@@ -1,17 +1,11 @@
 <template>
-  <view
-    :class="
-      computedClass('textarea', {
-        'textarea--disabled': disabled,
-      })
-    "
-  >
+  <view :class="[ns.b(), ns.is('disabled', disabled)]">
     <textarea
-      :class="computedClass('textarea__textarea')"
+      :class="ns.e('textarea')"
       :style="{ height: autoHeight ? 'auto' : getUnitValue(height), textAlign: inputAlign }"
       :value="modelValue"
       :placeholder="placeholder"
-      :placeholder-class="computedClass('textarea__placeholder')"
+      :placeholder-class="ns.e('placeholder')"
       :disabled="readonly || disabled"
       :maxlength="maxlength"
       :auto-height="autoHeight"
@@ -33,16 +27,16 @@
       @linechange="emit('linechange', $event)"
       @keyboardheightchange="emit('keyboardheightchange', $event)"
     />
-    <view v-if="showCount" :class="computedClass('textarea__limit')">
+    <view v-if="showCount" :class="ns.e('limit')">
       {{ modelValue ? modelValue.length : '0' }}/{{ maxlength }}
     </view>
   </view>
 </template>
 
 <script lang="ts" setup>
+import useNamespace from '../../core/useNamespace'
 import { EventDetail } from '../../types'
 import { getUnitValue } from '../../utils'
-import { computedClass } from '../../utils/style'
 import { CellProps } from '../cell/cell.vue'
 
 export interface TextareaProps {
@@ -87,6 +81,8 @@ export interface TextareaProps {
   /** focus时，点击页面的时候不收起键盘，只微信小程序有效 */
   holdKeyboard?: boolean
 }
+
+const ns = useNamespace('textarea')
 
 withDefaults(defineProps<TextareaProps>(), {
   modelValue: undefined,

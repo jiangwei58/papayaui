@@ -1,5 +1,5 @@
 <template>
-  <view :class="computedClass('form')">
+  <view :class="ns.b()">
     <slot />
   </view>
 </template>
@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import { computed, provide, ref, toRefs } from 'vue'
 import useFormValidate, { FormItemExtraParams, FormRules } from '../../core/useForm'
-import { computedClass } from '../../utils/style'
+import useNamespace from '../../core/useNamespace'
 import { FormItemInstance } from '../form-item/form-item.vue'
 
 export interface FormProps {
@@ -16,6 +16,8 @@ export interface FormProps {
   /** 校验规则 */
   rules?: FormRules<any>
 }
+
+const ns = useNamespace('form')
 
 const props = withDefaults(defineProps<FormProps>(), {
   form: () => {},

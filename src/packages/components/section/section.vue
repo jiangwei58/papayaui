@@ -1,12 +1,12 @@
 <template>
   <view
-    :class="computedClass('section')"
+    :class="ns.b()"
     class="flex items-center"
-    :style="computedStyle({ backgroundColor: bgColor })"
+    :style="ns.style({ backgroundColor: bgColor })"
     @click="emit('click', $event)"
   >
-    <view :class="computedClass('section-line')"></view>
-    <view :class="computedClass('section-title')">
+    <view :class="ns.b('line')"></view>
+    <view :class="ns.b('title')">
       <slot v-if="$slots.title" name="title" />
       <text v-else>{{ title }}</text>
     </view>
@@ -16,12 +16,14 @@
 
 <script lang="ts" setup>
 import { CSSProperties } from 'vue'
-import { computedClass, computedStyle } from '../../utils/style'
+import useNamespace from '../../core/useNamespace'
 
 export interface SectionProps {
   title?: string
   bgColor?: CSSProperties['background-color']
 }
+
+const ns = useNamespace('section')
 
 withDefaults(defineProps<SectionProps>(), {
   title: '',

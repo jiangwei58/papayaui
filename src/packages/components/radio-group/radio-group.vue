@@ -1,13 +1,13 @@
 <template>
-  <view :class="computedClass('radio-group', { [`radio-group--${direction}`]: true })">
+  <view :class="[ns.b(), ns.m(direction)]">
     <slot />
   </view>
 </template>
 
 <script lang="ts" setup>
 import { provide, toRefs } from 'vue'
+import useNamespace from '../../core/useNamespace'
 import useSelect from '../../core/useSelect'
-import { computedClass } from '../../utils/style'
 import { RadioValue } from '../radio/radio.vue'
 
 export interface RadioGroupProps {
@@ -26,6 +26,8 @@ export interface RadioProvideData {
   onSelect: (name: RadioValue) => void
   isSelected: (name: RadioValue) => boolean
 }
+
+const ns = useNamespace('radio-group')
 
 const props = withDefaults(defineProps<RadioGroupProps>(), {
   name: '',

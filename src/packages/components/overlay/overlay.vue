@@ -1,6 +1,6 @@
 <template>
   <TransitionComponent
-    :custom-class="computedClass('overlay')"
+    :custom-class="ns.b()"
     :show="show"
     :duration="duration"
     mode="fade"
@@ -13,7 +13,7 @@
 
 <script lang="ts" setup>
 import { computed, CSSProperties } from 'vue'
-import { computedClass } from '../../utils/style'
+import useNamespace from '../../core/useNamespace'
 import TransitionComponent, { TransitionProps } from '../transition/transition.vue'
 
 export interface OverlayProps {
@@ -28,6 +28,8 @@ export interface OverlayProps {
   /** 自定义style */
   customStyle?: CSSProperties
 }
+
+const ns = useNamespace('overlay')
 
 const props = withDefaults(defineProps<OverlayProps>(), {
   zIndex: 1,

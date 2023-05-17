@@ -1,25 +1,24 @@
 <template>
   <view
     :class="[
-      computedClass('sidebar-item', {
-        'sidebar-item--active': getParentExpose()?.isSelected(value),
-        'sidebar-item--disabled': disabled,
-      }),
+      ns.b(),
+      ns.is('active', getParentExpose()?.isSelected(value)),
+      ns.is('disabled', disabled),
       customClass,
     ]"
     :style="customStyle"
     @tap="onSelect"
   >
     <Badge :show="dot || !isUndefined(badge)" :dot="dot" :content="badge">
-      <text :class="computedClass('sidebar-item__text')">{{ title }}</text>
+      <text :class="ns.e('text')">{{ title }}</text>
     </Badge>
   </view>
 </template>
 
 <script lang="ts" setup>
 import { getCurrentInstance, ref, SVGAttributes } from 'vue'
+import useNamespace from '../../core/useNamespace'
 import { isUndefined } from '../../utils'
-import { computedClass } from '../../utils/style'
 import Badge, { BadgeProps } from '../badge/badge.vue'
 import { SidebarExposeData, SidebarValue } from '../sidebar/sidebar.vue'
 
@@ -39,6 +38,8 @@ export interface SidebarItemProps {
   /** 根节点样式 */
   customStyle?: SVGAttributes['style']
 }
+
+const ns = useNamespace('sidebar-item')
 
 const props = defineProps<SidebarItemProps>()
 

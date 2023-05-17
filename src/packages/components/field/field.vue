@@ -1,13 +1,9 @@
 <template>
-  <Cell
-    :class="computedClass('field', { 'field--only-input': onlyInput })"
-    :border="false"
-    v-bind="$props"
-  >
-    <view :class="computedClass('field__body')" @tap="emit('click-input', $event)">
+  <Cell :class="[ns.b(), ns.is('only-input', onlyInput)]" :border="false" v-bind="$props">
+    <view :class="ns.e('body')" @tap="emit('click-input', $event)">
       <input
         v-if="type !== 'textarea'"
-        :class="computedClass('field__input')"
+        :class="ns.e('input')"
         :type="type"
         :value="modelValue"
         :disabled="disabled || readonly"
@@ -30,7 +26,7 @@
       />
       <textarea
         v-else
-        :class="computedClass('field__input')"
+        :class="ns.e('input')"
         :value="modelValue"
         :disabled="disabled || readonly"
         :placeholder="placeholder"
@@ -53,7 +49,7 @@
       <Icon
         v-if="!disabled && clearable && !!modelValue"
         name="close-circle-fill"
-        class="block ml-15"
+        :class="ns.e('icon')"
         size="18px"
         color="#c8c9cc"
         @tap.stop="onClear"
@@ -63,9 +59,10 @@
 </template>
 
 <script lang="ts" setup>
+import useNamespace from '../../core/useNamespace'
 import { EventDetail } from '../../types'
 import { getUnitValue } from '../../utils'
-import { computedClass, PREFIX } from '../../utils/style'
+import { PREFIX } from '../../utils/style'
 import Cell from '../cell/cell.vue'
 import { CellProps } from '../cell/cell.vue'
 import Icon from '../icon/icon.vue'
@@ -115,6 +112,8 @@ export interface FieldProps
   /** 高度（textarea生效）*/
   height?: string
 }
+
+const ns = useNamespace('field')
 
 withDefaults(defineProps<FieldProps>(), {
   modelValue: '',
@@ -183,6 +182,11 @@ const onClear = () => {
     border: 0;
     resize: none;
     font: inherit;
+  }
+
+  &__icon {
+    display: block;
+    margin-left: 15rpx;
   }
 }
 </style>

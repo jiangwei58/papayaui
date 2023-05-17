@@ -7,21 +7,15 @@
     @update:show="emit('update:show', $event as boolean)"
     @close="onClose"
   >
-    <view :class="computedClass('cascader-content')" class="flex flex-col">
-      <Search
-        v-if="showSearch"
-        v-model="searchText"
-        :class="computedClass('cascader-search')"
-        class="flex-shrink-0"
-      />
-      <view v-if="show" class="tab flex-shrink-0">
+    <view :class="ns.b('content')">
+      <Search v-if="showSearch" v-model="searchText" :class="ns.b('search')" />
+      <view v-if="show" :class="ns.b('tab')">
         <Tabs v-model="tabActive" :tabs="tabList" label-key="name" scrollable shrink />
       </view>
       <scroll-view
         scroll-y
         :scroll-top="scrollTop"
-        class="flex-1 pt-10"
-        style="overflow: hidden"
+        :class="ns.b('list-wrapper')"
         @scroll="onScroll"
       >
         <ListItem
@@ -37,15 +31,10 @@
           <slot v-if="$slots.default" :item="item" />
           <text v-else>{{ item[_fieldNames.label] }}</text>
         </ListItem>
-        <view v-if="loading" class="height-full flex flex-col items-center justify-center">
+        <view v-if="loading" :class="ns.e('loading')">
           <loadmore :status="LoadStatusEnum.LOADING" />
         </view>
-        <view
-          v-if="!currentData.length && !loading"
-          class="height-full flex flex-col items-center justify-center text-28 text-black-2"
-        >
-          无数据
-        </view>
+        <view v-if="!currentData.length && !loading" :class="ns.e('empty')">无数据</view>
         <SafeBottom v-if="safeAreaInsetBottom && !localState.hasConfirm" />
       </scroll-view>
       <SearchView
@@ -61,7 +50,7 @@
       />
     </view>
     <template v-if="localState.hasConfirm" #footer>
-      <view class="px-26 py-15 flex flex-shrink-0">
+      <view :class="ns.e('footer')">
         <ButtonComponent type="default" block style="width: 30%" @click="onReset()">
           {{ resetButtonText }}
         </ButtonComponent>
@@ -87,9 +76,9 @@
 <script lang="ts" setup>
 import { computed, nextTick, ref, toRaw, toRefs, watch } from 'vue'
 import { LoadStatusEnum } from '../../core/useList'
+import useNamespace from '../../core/useNamespace'
 import useTree, { TreeNode, UseTreeFieldNames } from '../../core/useTree'
 import { EventDetail } from '../../types'
-import { computedClass } from '../../utils/style'
 import BottomPopup from '../bottom-popup/bottom-popup.vue'
 import ButtonComponent from '../button/button.vue'
 import Loadmore from '../loadmore/loadmore.vue'
@@ -143,6 +132,8 @@ export interface CascaderProps {
   /** 是否允许空值，只在显示底部操作按钮时有效（通常使用场景是未选中值时允许确认） */
   allowEmpty?: boolean
 }
+
+const ns = useNamespace('cascader')
 
 const props = withDefaults(defineProps<CascaderProps>(), {
   modelValue: undefined,
@@ -405,11 +396,43 @@ defineExpose({
 @import '../../styles/vars.scss';
 .#{$prefix}-cascader {
   &-content {
+    display: flex;
+    flex-direction: column;
     position: relative;
     height: 100%;
   }
   &-search {
     @include _setVar(search-padding, 0 12px);
+    flex-shrink: 0;
+  }
+  &-tab {
+    flex-shrink: 0;
+  }
+  &-list-wrapper {
+    flex: 1;
+    padding-top: 10;
+    overflow: hidden;
+  }
+  &__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 28rpx;
+    color: _var(color-black-2);
+  }
+  &__footer {
+    display: flex;
+    flex-shrink: 0;
+    padding: 15rpx 26rpx;
   }
 }
 </style>

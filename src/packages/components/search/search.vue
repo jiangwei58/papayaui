@@ -1,14 +1,14 @@
 <template>
   <view
-    :class="computedClass('search', { [`search--${shape}`]: true })"
+    :class="[ns.b(), ns.m(shape)]"
     class="flex items-center"
-    :style="computedStyle({ backgroundColor: background })"
+    :style="ns.style({ backgroundColor: background })"
   >
     <slot name="before" />
     <view
-      :class="computedClass('search-input')"
+      :class="ns.b('input')"
       class="flex items-center"
-      :style="computedStyle({ backgroundColor: inputBackground })"
+      :style="ns.style({ backgroundColor: inputBackground })"
     >
       <slot name="prefix" />
       <Field
@@ -34,8 +34,8 @@
 
 <script lang="ts" setup>
 import { CSSProperties } from 'vue'
+import useNamespace from '../../core/useNamespace'
 import { EventDetail } from '../../types'
-import { computedClass, computedStyle } from '../../utils/style'
 import Field, { FieldProps } from '../field/field.vue'
 
 export interface SearchProps {
@@ -58,6 +58,8 @@ export interface SearchProps {
   /** 搜索框内部背景色 */
   inputBackground?: CSSProperties['background-color']
 }
+
+const ns = useNamespace('search')
 
 withDefaults(defineProps<SearchProps>(), {
   modelValue: undefined,

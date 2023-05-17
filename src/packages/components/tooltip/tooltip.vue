@@ -1,16 +1,12 @@
 <template>
-  <view :class="computedClass('tooltip', 'tooltip--dark', 'tooltip--bottom')">
+  <view :class="[ns.b(), ns.m('dark'), ns.m('bottom')]">
     <view @tap="onVisibleChange()">
       <slot></slot>
     </view>
+    <view v-show="show" :class="ns.b('overlay')" @click="onVisibleChange(false)"></view>
     <view
       v-show="show"
-      :class="computedClass('tooltip-overlay')"
-      @click="onVisibleChange(false)"
-    ></view>
-    <view
-      v-show="show"
-      :class="computedClass('tooltip-wapper')"
+      :class="ns.b('wrapper')"
       :style="{
         width: getUnitValue(width),
         opacity: tooltipRect.height && tooltipContentWidth ? '1' : '0',
@@ -21,10 +17,7 @@
       <view class="text-28 leading-40" style="max-width: 420rpx">
         {{ text }}
       </view>
-      <view
-        :class="computedClass('tooltip-arrow')"
-        :style="{ transform: `translateX(${arrowLeft}px)` }"
-      ></view>
+      <view :class="ns.b('arrow')" :style="{ transform: `translateX(${arrowLeft}px)` }"></view>
     </view>
   </view>
 </template>
@@ -33,7 +26,7 @@
 import { getUnitValue } from '../../utils/common'
 import { computed, getCurrentInstance, nextTick, ref, watch } from 'vue'
 import useRect from '../../hooks/useRect'
-import { computedClass } from '../../utils/style'
+import useNamespace from '../../core/useNamespace'
 
 export interface TooltipProps {
   /** 悬浮内容 */
@@ -41,6 +34,8 @@ export interface TooltipProps {
   /** 宽度 */
   width?: string
 }
+
+const ns = useNamespace('tooltip')
 
 withDefaults(defineProps<TooltipProps>(), {
   text: '',
@@ -76,12 +71,12 @@ const arrowLeft = computed(() => {
 watch(show, (newVal) => {
   if (instance && newVal) {
     nextTick(() => {
-      useRect(instance, `.${computedClass('tooltip')}`).then((res) => {
+      useRect(instance, `.${ns.b()}`).then((res) => {
         if (res) {
           tooltipRect.value = res
         }
       })
-      useRect(instance, `.${computedClass('tooltip-wapper')}`).then((res) => {
+      useRect(instance, `.${ns.b('wrapper')}`).then((res) => {
         if (res) {
           tooltipContentWidth.value = res.width || 0
         }
@@ -110,7 +105,7 @@ const onVisibleChange = (visible = !show.value) => {
     height: 100vh;
     background-color: transparent;
   }
-  &-wapper {
+  &-wrapper {
     position: fixed;
     left: 0;
     top: 0;
@@ -135,7 +130,7 @@ const onVisibleChange = (visible = !show.value) => {
       box-sizing: border-box;
     }
   }
-  &--dark &-wapper {
+  &--dark &-wrapper {
     color: #fff;
     background: $darkColor;
   }

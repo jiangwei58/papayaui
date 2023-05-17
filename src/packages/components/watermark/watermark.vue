@@ -1,8 +1,8 @@
 <template>
   <view
-    :class="computedClass('watermark')"
+    :class="ns.b()"
     :style="{
-      zIndex: zindex,
+      zIndex,
       background: `url(${src}) repeat`,
       backgroundSize: `${width}px ${height}px`,
     }"
@@ -19,7 +19,7 @@
 
 <script lang="ts" setup>
 import { ref, toRefs, onMounted, getCurrentInstance, watch } from 'vue'
-import { computedClass } from '../../utils/style'
+import useNamespace from '../../core/useNamespace'
 
 export interface WatermarkProps {
   /** 单个水印宽度 */
@@ -33,10 +33,12 @@ export interface WatermarkProps {
   /** 水印字体大小 */
   fontsize?: number
   /** 水印元素层级 */
-  zindex?: number
+  zIndex?: number
   /** 水印内容，数组的每个元素代表每一行的内容 */
   contents?: string[]
 }
+
+const ns = useNamespace('watermark')
 
 const props = withDefaults(defineProps<WatermarkProps>(), {
   width: 125,
@@ -44,7 +46,7 @@ const props = withDefaults(defineProps<WatermarkProps>(), {
   top: 50,
   opacity: 0.2,
   fontsize: 12,
-  zindex: 1000,
+  zIndex: 1000,
   contents: () => [],
 })
 

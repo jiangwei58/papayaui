@@ -1,8 +1,8 @@
 <template>
   <view
-    :class="computedClass('iconfont', `icon-${name}`)"
+    :class="[`${defaultNamespace}-iconfont`, ns.b(name)]"
     :style="
-      computedStyle({
+      ns.style({
         ...customStyle,
         display: block ? 'block' : undefined,
         fontSize: size ? getUnitValue(size) : undefined,
@@ -15,8 +15,8 @@
 
 <script lang="ts" setup>
 import { CSSProperties } from 'vue'
+import useNamespace, { defaultNamespace } from '../../core/useNamespace'
 import { getUnitValue } from '../../utils/common'
-import { computedClass, computedStyle } from '../../utils/style'
 
 export interface IconProps {
   /** 图标名称 */
@@ -30,6 +30,8 @@ export interface IconProps {
   /** 自定义样式 */
   customStyle?: CSSProperties
 }
+
+const ns = useNamespace('icon')
 
 withDefaults(defineProps<IconProps>(), {
   size: undefined,

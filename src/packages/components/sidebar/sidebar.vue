@@ -1,13 +1,13 @@
 <template>
-  <view :class="[computedClass('sidebar'), customClass]" :style="customStyle">
+  <view :class="[ns.b(), customClass]" :style="customStyle">
     <slot />
   </view>
 </template>
 
 <script lang="ts" setup>
 import { toRefs, SVGAttributes } from 'vue'
+import useNamespace from '../../core/useNamespace'
 import useSelect from '../../core/useSelect'
-import { computedClass } from '../../utils/style'
 
 export interface SidebarProps {
   /** 选择项值 */
@@ -24,6 +24,8 @@ export interface SidebarExposeData {
   onSelect: (value: SidebarValue) => void
   isSelected: (value: SidebarValue) => boolean
 }
+
+const ns = useNamespace('sidebar')
 
 const props = defineProps<SidebarProps>()
 

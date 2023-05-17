@@ -1,28 +1,27 @@
 <template>
   <view
-    :class="
-      computedClass('radio', {
-        [`radio--${shape}`]: true,
-        'radio--checked': p_data?.isSelected(name),
-        'radio--disabled': disabled || p_data?.disabled,
-      })
-    "
+    :class="[
+      ns.b(),
+      ns.m(shape),
+      ns.is('checked', p_data?.isSelected(name)),
+      ns.is('disabled', disabled || p_data?.disabled),
+    ]"
     @tap.stop="onClick"
   >
     <view
       v-if="labelPosition === 'left'"
-      :class="computedClass('radio__label')"
+      :class="ns.e('label')"
       class="mr-16"
       @tap.stop="onLabelClick"
     >
       <slot />
     </view>
-    <view :class="computedClass('radio__icon')">
+    <view :class="ns.e('icon')">
       <IconComponent name="success" size="0.8em" block />
     </view>
     <view
       v-if="labelPosition === 'right'"
-      :class="computedClass('radio__label')"
+      :class="ns.e('label')"
       class="ml-16"
       @tap.stop="onLabelClick"
     >
@@ -33,8 +32,8 @@
 
 <script lang="ts" setup>
 import { ComponentInternalInstance, CSSProperties, inject } from 'vue'
+import useNamespace from '../../core/useNamespace'
 import { noop } from '../../utils'
-import { computedClass } from '../../utils/style'
 import IconComponent from '../icon/icon.vue'
 import { RadioProvideData } from '../radio-group/radio-group.vue'
 
@@ -60,6 +59,8 @@ export interface RadioProps {
   /** 选中状态颜色 */
   checkedColor?: CSSProperties['color']
 }
+
+const ns = useNamespace('radio')
 
 const props = withDefaults(defineProps<RadioProps>(), {
   name: '',

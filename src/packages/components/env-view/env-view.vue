@@ -48,7 +48,9 @@ const { modelValue, urls } = toRefs(props)
 const value = ref<string>('')
 
 onMounted(() => {
-  value.value = modelValue.value
+  if (typeof modelValue.value !== 'undefined') {
+    value.value = modelValue.value
+  }
 })
 
 const isActive = (url: string) => url === value.value

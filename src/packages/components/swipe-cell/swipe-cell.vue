@@ -1,7 +1,7 @@
 <template>
-  <view :class="computedClass('swipe-cell')" @tap="onClick">
+  <view :class="ns.b()" @tap="onClick">
     <view
-      :class="computedClass('swipe-cell__wrapper')"
+      :class="ns.e('wrapper')"
       :status="status"
       :change:status="wxs.statusChange"
       :extra="extraParams"
@@ -10,10 +10,10 @@
       @touchmove="wxs.touchmove"
       @touchend="wxs.touchend"
     >
-      <view :class="computedClass('swipe-cell__content')">
+      <view :class="ns.e('content')">
         <slot />
       </view>
-      <view :class="computedClass('swipe-cell__right')">
+      <view :class="ns.e('right')">
         <slot v-if="$slots.right" name="right" />
         <template v-else>
           <ButtonComponent
@@ -26,10 +26,10 @@
             :custom-style="{
               backgroundColor: item.style
                 ? item.style.backgroundColor
-                : `var(--${PREFIX}-color-danger)`,
+                : `var(--${defaultNamespace}-color-danger)`,
               borderColor: item.style
                 ? item.style.backgroundColor
-                : `var(--${PREFIX}-color-danger)`,
+                : `var(--${defaultNamespace}-color-danger)`,
             }"
             @click="onBtnClick(index)"
           >
@@ -51,9 +51,9 @@ import {
   ref,
   watch,
 } from 'vue'
+import useNamespace, { defaultNamespace } from '../../core/useNamespace'
 import useRect from '../../hooks/useRect'
 import { getUnitValue } from '../../utils'
-import { computedClass, PREFIX } from '../../utils/style'
 import ButtonComponent from '../button/button.vue'
 
 export type SwipeCellOption = {
@@ -104,6 +104,8 @@ export default defineComponent({
   },
   emits: ['open', 'close', 'click'],
   setup(props, { emit }) {
+    const ns = useNamespace('swipe-cell')
+
     const instance = getCurrentInstance()
 
     const status = ref<SwipeCellStatus>(props.show ? 'open' : 'close')
@@ -116,7 +118,7 @@ export default defineComponent({
 
     const onUpdateExtraParams = () => {
       if (!instance) return
-      useRect(instance, '.' + computedClass('swipe-cell__right')).then((res) => {
+      useRect(instance, '.' + ns.e('right')).then((res) => {
         if (!res) return
         extraParams.value = {
           btnsWidth: res.width || 0,
@@ -151,10 +153,10 @@ export default defineComponent({
     )
 
     return {
-      PREFIX,
+      ns,
+      defaultNamespace,
       status,
       extraParams,
-      computedClass,
       getUnitValue,
       setStatus,
       onClick,

@@ -1,9 +1,7 @@
 <template>
   <view
-    :class="
-      computedClass('tag', { [`tag--${type}`]: true, 'tag--plain': plain, 'tag--mark': mark })
-    "
-    :style="computedStyle(customStyle)"
+    :class="[ns.b(), ns.m(type), ns.is('plain', plain), ns.is('mark', mark)]"
+    :style="ns.style(customStyle)"
   >
     <slot />
     <Icon v-if="closeable" name="close" class="ml-2" @tap="emit('close')" />
@@ -12,8 +10,8 @@
 
 <script lang="ts" setup>
 import { computed, CSSProperties } from 'vue'
+import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
-import { computedClass, computedStyle } from '../../utils/style'
 import Icon from '../icon/icon.vue'
 
 interface TagProps {
@@ -31,6 +29,8 @@ interface TagProps {
   /** 是否显示可关闭标签 */
   closeable?: boolean
 }
+
+const ns = useNamespace('tag')
 
 const props = withDefaults(defineProps<TagProps>(), {
   type: 'primary',

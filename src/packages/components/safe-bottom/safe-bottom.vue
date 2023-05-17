@@ -1,9 +1,11 @@
 <template>
-  <view :class="computedClass('safe-bottom')"></view>
+  <view :class="ns.b()"></view>
 </template>
 
 <script lang="ts" setup>
-import { computedClass } from '../../utils/style'
+import useNamespace from '../../core/useNamespace'
+
+const ns = useNamespace('safe-bottom')
 </script>
 
 <style lang="scss" scoped>

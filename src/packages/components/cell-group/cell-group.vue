@@ -1,16 +1,18 @@
 <template>
-  <view :class="computedClass('cell-group', { 'cell-group--inset': inset })">
+  <view :class="[ns.b(), ns.is('inset', inset)]">
     <slot />
   </view>
 </template>
 
 <script lang="ts" setup>
-import { computedClass } from '../../utils/style'
+import useNamespace from '../../core/useNamespace'
 
 interface OwnProps {
   /** 是否展示为圆角卡片风格 */
   inset?: boolean
 }
+
+const ns = useNamespace('cell-group')
 
 defineProps<OwnProps>()
 </script>

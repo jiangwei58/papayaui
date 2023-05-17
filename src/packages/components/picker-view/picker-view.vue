@@ -1,13 +1,6 @@
 <template>
-  <view
-    class="flex flex-col"
-    :class="computedClass('picker-view')"
-    :style="{ height: getUnitValue(height) }"
-  >
-    <view
-      class="flex items-center justify-between text-32 border-bottom"
-      :class="computedClass('picker-view-toolbar')"
-    >
+  <view class="flex flex-col" :class="ns.b()" :style="{ height: getUnitValue(height) }">
+    <view class="flex items-center justify-between text-32 border-bottom" :class="ns.b('toolbar')">
       <view class="btn height-full text-black px-32" hover-class="btn-hover" @click="onCancel"
         >取消</view
       >
@@ -38,8 +31,8 @@
 <script lang="ts" setup>
 import { EventDetail } from '../../types'
 import { getUnitValue } from '../../utils/common'
-import { computedClass } from '../../utils/style'
 import { toRefs, ref, watch } from 'vue'
+import useNamespace from '../../core/useNamespace'
 
 export type columnItem = string | Record<string, any>
 
@@ -51,6 +44,8 @@ export interface PickerViewProps {
   valueKey?: string
   defaultIndex?: number
 }
+
+const ns = useNamespace('picker-view')
 
 const props = withDefaults(defineProps<PickerViewProps>(), {
   modelValue: () => [],
@@ -105,11 +100,13 @@ const onCancel = () => {
 
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
-.#{$prefix}-picker-view-toolbar {
-  $height: 88rpx;
-  height: $height;
-  > .btn {
-    line-height: $height;
+.#{$prefix}-picker-view {
+  &-toolbar {
+    $height: 88rpx;
+    height: $height;
+    > .btn {
+      line-height: $height;
+    }
   }
 }
 .btn-hover {

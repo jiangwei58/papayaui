@@ -7,7 +7,7 @@
     <view class="flex items-center justify-center height-full">
       <pa-icon name="search" />
       <text>页面标题</text>
-      <pa-button class="m-0" height="54">按钮</pa-button>
+      <pa-button class="m-0" height="54" block>按钮</pa-button>
     </view>
   </pa-nav-bar>
 </template>

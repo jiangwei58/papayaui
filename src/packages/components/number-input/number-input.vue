@@ -1,11 +1,11 @@
 <template>
   <input
-    :class="[computedClass('number-input'), { disabled }]"
+    :class="[ns.b(), { disabled }]"
     :style="{ ...customStyle, textAlign: align }"
     :placeholder="placeholder"
     :value="modelValue"
     :type="precision ? 'digit' : 'number'"
-    :placeholder-class="computedClass('number-input-placeholder')"
+    :placeholder-class="ns.b('placeholder')"
     :disabled="disabled"
     :focus="focus"
     :auto-blur="autoBlur"
@@ -20,7 +20,7 @@
 <script lang="ts" setup>
 import { EventDetail } from '../../types'
 import { CSSProperties, nextTick } from 'vue'
-import { computedClass } from '../../utils/style'
+import useNamespace from '../../core/useNamespace'
 
 export interface NumberInputProps {
   modelValue?: string | number | undefined
@@ -47,6 +47,8 @@ export interface NumberInputProps {
   /** 定义需要用到的外部样式 */
   customStyle?: CSSProperties
 }
+
+const ns = useNamespace('number-input')
 
 const props = withDefaults(defineProps<NumberInputProps>(), {
   modelValue: '',

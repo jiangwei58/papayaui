@@ -1,28 +1,27 @@
 <template>
   <view
-    :class="
-      computedClass('checkbox', {
-        [`checkbox--${shape}`]: true,
-        'checkbox--checked': modelValue || p_data?.isSelected(name),
-        'checkbox--disabled': disabled || p_data?.disabled,
-      })
-    "
+    :class="[
+      ns.b(),
+      ns.m(shape),
+      ns.is('checked', modelValue || p_data?.isSelected(name)),
+      ns.is('disabled', disabled || p_data?.disabled),
+    ]"
     @tap.stop="onClick"
   >
     <view
       v-if="labelPosition === 'left'"
-      :class="computedClass('checkbox__label')"
+      :class="ns.e('label')"
       class="mr-16"
       @tap.stop="onLabelClick"
     >
       <slot />
     </view>
-    <view :class="computedClass('checkbox__icon')">
+    <view :class="ns.e('icon')">
       <IconComponent name="success" size="0.8em" block />
     </view>
     <view
       v-if="labelPosition === 'right'"
-      :class="computedClass('checkbox__label')"
+      :class="ns.e('label')"
       class="ml-16"
       @tap.stop="onLabelClick"
     >
@@ -33,8 +32,8 @@
 
 <script lang="ts" setup>
 import { ComponentInternalInstance, CSSProperties, inject } from 'vue'
+import useNamespace from '../../core/useNamespace'
 import { noop } from '../../utils'
-import { computedClass } from '../../utils/style'
 import { CheckboxProvideData } from '../checkbox-group/checkbox-group.vue'
 import IconComponent from '../icon/icon.vue'
 
@@ -62,6 +61,8 @@ export interface CheckboxProps {
   /** 选中状态颜色 */
   checkedColor?: CSSProperties['color']
 }
+
+const ns = useNamespace('checkbox')
 
 const props = withDefaults(defineProps<CheckboxProps>(), {
   name: '',

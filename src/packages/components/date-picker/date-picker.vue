@@ -1,24 +1,22 @@
 <template>
-  <view class="flex flex-col" :class="computedClass('date-picker')">
+  <view :class="ns.b()">
     <slot name="columns-top" />
-    <view
-      v-if="showToolbar"
-      class="flex items-center justify-between text-32 border-bottom"
-      :class="computedClass('date-picker-toolbar')"
-    >
-      <view class="btn height-full text-black px-32" hover-class="btn-hover" @click="onCancel">
+
+    <view v-if="showToolbar" :class="ns.b('toolbar')" class="border-bottom">
+      <view :class="ns.e('btn')" class="text-black" hover-class="btn-hover" @click="onCancel">
         <slot v-if="$slots.cancel" />
         <template v-else>{{ cancelButtonText }}</template>
       </view>
       <slot v-if="$slots.title" name="title" />
-      <view v-else class="font-w-500 leading-42 text-black">{{ title }}</view>
-      <view class="btn height-full color-primary px-32" hover-class="btn-hover" @click="onConfirm">
+      <view v-else :class="ns.e('title')">{{ title }}</view>
+      <view :class="ns.e('btn')" class="color-primary" hover-class="btn-hover" @click="onConfirm">
         <slot v-if="$slots.confirm" />
         <template v-else>{{ confirmButtonText }}</template>
       </view>
     </view>
+
     <picker-view
-      :class="computedClass('date-picker-columns')"
+      :class="ns.b('columns')"
       :indicator-style="`height: ${getUnitValue(optionHeight, 'px')}`"
       :immediate-change="false"
       :value="indexes"
@@ -30,16 +28,13 @@
       <picker-view-column v-for="(col, colIndex) in _columnsType" :key="col">
         <template v-for="item in columns[colIndex]" :key="item.value">
           <slot v-if="$slots.option" :option="item" :type="col" :colIndex="colIndex" />
-          <view
-            v-else
-            class="flex items-center justify-center text-center"
-            :class="computedClass('date-picker-column')"
-          >
+          <view v-else :class="ns.b('column')">
             {{ item.text }}
           </view>
         </template>
       </picker-view-column>
     </picker-view>
+
     <slot name="columns-bottom" />
   </view>
 </template>
@@ -51,9 +46,9 @@ import useDatePicker, {
   DatePickerFilter,
   DatePickerFormatter,
 } from '../../core/useDatePicker'
+import useNamespace from '../../core/useNamespace'
 import { EventDetail } from '../../types'
 import { getUnitValue } from '../../utils/common'
-import { computedClass } from '../../utils/style'
 
 export type columnItem = string | Record<string, any>
 
@@ -98,6 +93,8 @@ export interface PickerViewProps {
   /** 选项过滤函数 */
   filter?: DatePickerFilter
 }
+
+const ns = useNamespace('date-picker')
 
 const props = withDefaults(defineProps<PickerViewProps>(), {
   modelValue: undefined,
@@ -160,15 +157,38 @@ const onCancel = () => {
 @import '../../styles/vars.scss';
 
 .#{$prefix}-date-picker {
-  &-toolbar {
-    $height: 88rpx;
-    height: $height;
-    background-color: #fff;
+  $toolbarHeight: 88rpx;
 
-    > .btn {
-      font-size: 28rpx;
-      line-height: $height;
-    }
+  display: flex;
+  flex-direction: column;
+
+  &-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: $toolbarHeight;
+    font-size: 32rpx;
+    background-color: #fff;
+  }
+
+  &__title {
+    font-weight: 500;
+    line-height: 42rpx;
+    color: _var(color-black);
+  }
+
+  &__btn {
+    font-size: 28rpx;
+    line-height: $toolbarHeight;
+    height: 100%;
+    padding: 0 32rpx;
+  }
+
+  &-column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
 }
 

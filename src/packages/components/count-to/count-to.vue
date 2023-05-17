@@ -1,9 +1,5 @@
 <template>
-  <view
-    :class="[computedClass('count-to'), customClass]"
-    :style="customStyle"
-    @tap="emit('click', $event)"
-  >
+  <view :class="[ns.b(), customClass]" :style="customStyle" @tap="emit('click', $event)">
     {{ displayValue }}
   </view>
 </template>
@@ -11,7 +7,7 @@
 <script lang="ts" setup>
 import { computed, onMounted, SVGAttributes, toRefs } from 'vue'
 import useCountTo from '../../core/useCountTo'
-import { computedClass } from '../../utils/style'
+import useNamespace from '../../core/useNamespace'
 
 export interface CountToProps {
   /** 开始值 */
@@ -31,6 +27,8 @@ export interface CountToProps {
   /** 自定义style */
   customStyle?: SVGAttributes['style']
 }
+
+const ns = useNamespace('count-to')
 
 const props = withDefaults(defineProps<CountToProps>(), {
   startNum: 0,

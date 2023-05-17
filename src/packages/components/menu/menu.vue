@@ -1,16 +1,13 @@
 <template>
-  <view :class="computedClass('menu')">
-    <view
-      :class="computedClass('menu__bar')"
-      :style="{ zIndex: isMenuItemShow ? zIndex + 1 : 'auto' }"
-    >
+  <view :class="ns.b()">
+    <view :class="ns.e('bar')" :style="{ zIndex: isMenuItemShow ? zIndex + 1 : 'auto' }">
       <view
         v-for="(item, index) in menuBarList"
         :key="index"
-        :class="computedClass('menu__item', { 'menu--active': item.show })"
+        :class="[ns.e('item'), ns.is('active', item.show)]"
         @tap="onShowMenu(index)"
       >
-        <text :class="computedClass('menu__title')">{{ item.title }}</text>
+        <text :class="ns.e('title')">{{ item.title }}</text>
       </view>
     </view>
     <slot />
@@ -19,8 +16,8 @@
 
 <script lang="ts" setup>
 import { computed, getCurrentInstance, onMounted, provide, Ref, ref } from 'vue'
+import useNamespace, { defaultNamespace } from '../../core/useNamespace'
 import { useRect } from '../../hooks'
-import { computedClass, PREFIX } from '../../utils/style'
 import { MenuItemInstance } from '../menu-item/menu-item.vue'
 import { PopupProps } from '../popup/popup.vue'
 import { TransitionProps } from '../transition/transition.vue'
@@ -44,6 +41,8 @@ export interface MenuProvideData {
   isMenuItemShow: boolean
   offset: Ref<{ top: number; bottom: number }>
 }
+
+const ns = useNamespace('menu')
 
 const props = withDefaults(defineProps<MenuProps>(), {
   direction: 'down',
@@ -73,7 +72,7 @@ const offset = ref<{ top: number; bottom: number }>({ top: 0, bottom: 0 })
 
 onMounted(() => {
   if (!instance) return
-  useRect(instance, `.${computedClass('menu')}`).then((node) => {
+  useRect(instance, `.${ns.b()}`).then((node) => {
     if (node) {
       offset.value = { top: node.top + node.height, bottom: systemInfo.windowHeight - node.top }
     }
@@ -95,7 +94,7 @@ const onShowMenu = (index: number) => {
   })
 }
 
-provide(`${PREFIX}-menu-data`, {
+provide(`${defaultNamespace}-menu-data`, {
   props,
   setChildren,
   isMenuItemShow,

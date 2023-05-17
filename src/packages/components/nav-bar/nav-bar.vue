@@ -1,12 +1,9 @@
 <template>
-  <view
-    :class="computedClass('nav-bar')"
-    :style="{ backgroundColor: bgColor, paddingTop: statusBarHeight }"
-  >
-    <view :class="computedClass('nav-bar-content')" :style="{ height: contentHeight }">
+  <view :class="ns.b()" :style="{ backgroundColor: bgColor, paddingTop: statusBarHeight }">
+    <view :class="ns.b('content')" :style="{ height: contentHeight }">
       <text
         v-if="!$slots.default"
-        class="block width-full text-center"
+        :class="ns.e('title')"
         :style="{ lineHeight: contentHeight, fontSize: '16px', fontWeight: 'bold' }"
       >
         {{ title }}
@@ -18,7 +15,7 @@
 
 <script lang="ts" setup>
 import { computed, defineProps, withDefaults, CSSProperties } from 'vue'
-import { computedClass } from '../../utils/style'
+import useNamespace from '../../core/useNamespace'
 
 export interface NavBarProps {
   /** 标题 */
@@ -30,6 +27,8 @@ export interface NavBarProps {
 }
 
 const systemInfo = uni.getSystemInfoSync()
+
+const ns = useNamespace('nav-bar')
 
 const props = withDefaults(defineProps<NavBarProps>(), {
   title: '标题',
@@ -52,6 +51,12 @@ const contentHeight = computed(() => {
   position: relative;
   &-content {
     display: block;
+  }
+
+  &__title {
+    display: block;
+    width: 100%;
+    text-align: center;
   }
 }
 </style>

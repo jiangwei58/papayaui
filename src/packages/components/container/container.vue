@@ -1,13 +1,13 @@
 <template>
-  <view :class="computedClass('container')" :style="{ backgroundColor: bgColor }">
+  <view :class="ns.b()" :style="{ backgroundColor: bgColor }">
     <sticky z-index="99">
-      <view :class="computedClass('container-header')" :style="{ backgroundColor: headerBgColor }">
+      <view :class="ns.b('header')" :style="{ backgroundColor: headerBgColor }">
         <slot name="header"></slot>
       </view>
     </sticky>
 
     <view
-      class="relative"
+      :class="ns.b('body')"
       :style="{
         height: partialContent ? `calc(100vh - ${headerHeight}px - ${bottomHeight}px)` : 'auto',
       }"
@@ -26,7 +26,7 @@
 
     <view :style="{ height: bottomHeight + 'px' }"></view>
     <view
-      :class="computedClass('container-bottom-fixed')"
+      :class="ns.b('bottom-fixed')"
       :style="{ visibility: $slots.bottom && showFixedBottom ? 'visible' : 'hidden' }"
     >
       <slot name="bottom"></slot>
@@ -37,8 +37,8 @@
 
 <script lang="ts" setup>
 import { getCurrentInstance, nextTick, onMounted, ref } from 'vue'
+import useNamespace from '../../core/useNamespace'
 import useRect from '../../hooks/useRect'
-import { computedClass } from '../../utils/style'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import sticky from '../sticky/sticky.vue'
 import watermark from '../watermark/watermark.vue'
@@ -60,6 +60,8 @@ export interface ContainerProps {
   partialContent?: boolean
 }
 
+const ns = useNamespace('container')
+
 withDefaults(defineProps<ContainerProps>(), {
   safeBottom: true,
   headerBgColor: 'transparent',
@@ -77,12 +79,12 @@ const internalInstance = getCurrentInstance()
 const updateHeight = () => {
   nextTick(() => {
     if (!internalInstance) return
-    useRect(internalInstance, `.${computedClass('container-header')}`).then((res) => {
+    useRect(internalInstance, `.${ns.b('header')}`).then((res) => {
       if (res) {
         headerHeight.value = res.height || 0
       }
     })
-    useRect(internalInstance, `.${computedClass('container-bottom-fixed')}`).then((res) => {
+    useRect(internalInstance, `.${ns.b('bottom-fixed')}`).then((res) => {
       if (res) {
         bottomHeight.value = res.height || 0
       }
@@ -107,6 +109,11 @@ defineExpose({
   &-header {
     width: 100%;
   }
+
+  &-body {
+    position: relative;
+  }
+
   &-bottom-fixed {
     position: fixed;
     width: 100%;

@@ -10,15 +10,15 @@
     :show="visible"
     :duration="duration"
     :mode="animateMode"
-    :custom-class="`${computedClass('popup')} ${customClass}`"
+    :custom-class="`${ns.b()} ${customClass}`"
     :custom-style="transitionStyle"
     @click="onContentClick"
     @before-enter="onBeforeEnter"
     @after-enter="onAfterEnter"
     @after-leave="onAfterLeave"
   >
-    <view :class="computedClass('popup__content')" :style="contentStyle" @tap.stop="noop">
-      <view v-if="closeable" :class="computedClass('popup__close')" @tap.stop="onClose">
+    <view :class="ns.e('content')" :style="contentStyle" @tap.stop="noop">
+      <view v-if="closeable" :class="ns.e('close')" @tap.stop="onClose">
         <Icon name="close" size="24px" block />
       </view>
       <slot />
@@ -29,8 +29,8 @@
 
 <script lang="ts" setup>
 import { computed, CSSProperties, ref, toRefs, watch } from 'vue'
+import useNamespace from '../../core/useNamespace'
 import { getUnitValue, noop } from '../../utils'
-import { computedClass } from '../../utils/style'
 import Icon from '../icon/icon.vue'
 import Overlay from '../overlay/overlay.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
@@ -72,6 +72,8 @@ export interface PopupProps {
   /** 自定义遮罩层样式 */
   overlayStyle?: CSSProperties
 }
+
+const ns = useNamespace('popup')
 
 const props = withDefaults(defineProps<PopupProps>(), {
   show: false,

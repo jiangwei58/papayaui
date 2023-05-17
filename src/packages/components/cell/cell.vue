@@ -1,52 +1,39 @@
 <template>
   <view
     :class="[
-      computedClass('cell', {
-        'cell--clickable': clickable || isLink,
-        'cell--required': required,
-        'cell--border': border,
-      }),
+      ns.b(),
+      ns.is('clickable', clickable || isLink),
+      ns.is('required', required),
+      ns.is('border', border),
       `items-${center ? 'center' : 'start'}`,
       customClass,
     ]"
-    class="flex"
     @click="onClick"
   >
-    <Icon v-if="icon" :name="icon" block :class="computedClass('cell__icon')" class="mr-4" />
+    <Icon v-if="icon" :name="icon" block :class="ns.e('icon')" />
     <view
       v-if="!!title || $slots.title"
-      :class="[computedClass('cell__title'), titleClass]"
+      :class="[ns.e('title'), titleClass]"
       :style="{ flex: titleWidth ? `0 ${getUnitValue(titleWidth)}` : '1' }"
     >
       <slot v-if="$slots.title" name="title" />
       <text v-else>{{ title }}</text>
     </view>
-    <view :class="[computedClass('cell__value'), valueClass]">
+    <view :class="[ns.e('value'), valueClass]">
       <slot v-if="$slots.default" />
       <text v-else>{{ value }}</text>
-      <view
-        v-if="errorMessage"
-        :class="computedClass('cell__error-message')"
-        :style="{ textAlign: valueAlign }"
-      >
+      <view v-if="errorMessage" :class="ns.e('error-message')" :style="{ textAlign: valueAlign }">
         {{ errorMessage }}
       </view>
     </view>
     <slot v-if="$slots['right-icon'] && !isLink" name="right-icon" />
-    <Icon
-      v-if="isLink"
-      :class="computedClass('cell__icon-right')"
-      name="right"
-      size="18px"
-      class="ml-8"
-      block
-    />
+    <Icon v-if="isLink" :class="ns.e('icon-right')" name="right" size="18px" block />
   </view>
 </template>
 
 <script lang="ts" setup>
+import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils/common'
-import { computedClass } from '../../utils/style'
 import Icon from '../icon/icon.vue'
 
 export interface CellProps {
@@ -80,6 +67,8 @@ export interface CellProps {
   valueClass?: string
 }
 
+const ns = useNamespace('cell')
+
 const props = withDefaults(defineProps<CellProps>(), {
   title: '',
   value: '',
@@ -108,6 +97,7 @@ const onClick = (event: MouseEvent) => {
 .#{$prefix}-cell {
   $padding-x: 16px;
 
+  display: flex;
   position: relative;
   padding: _var(cell-padding-y, 10px) _var(cell-padding-x, $padding-x);
   background-color: _var(cell-bg-color, #fff);
@@ -119,10 +109,16 @@ const onClick = (event: MouseEvent) => {
   &__value {
     flex: 1;
   }
+
   &__icon,
   &__title {
     color: _var(cell-title-color, _var(color-black));
   }
+
+  &__icon {
+    margin-right: 4rpx;
+  }
+
   &__value {
     position: relative;
     overflow: hidden;
@@ -132,20 +128,26 @@ const onClick = (event: MouseEvent) => {
     @include _setVar(textarea-padding, 0);
     @include _setVar(textarea-color, _var(color-primary));
   }
+
   &__icon-right {
     font-weight: bold;
+    margin-left: 8rpx;
   }
+
   &__error-message {
     color: _var(color-error);
     font-size: 12px;
     text-align: left;
   }
+
   &--clickable:active {
     background-color: _var(color-gray);
   }
+
   &--clickable &__value {
     color: _var(cell-value-color, _var(color-primary));
   }
+
   &--required::before {
     position: absolute;
     left: 8px;
@@ -153,6 +155,7 @@ const onClick = (event: MouseEvent) => {
     font-size: 14px;
     content: '*';
   }
+
   &--border::after {
     position: absolute;
     box-sizing: border-box;

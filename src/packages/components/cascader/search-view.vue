@@ -1,5 +1,5 @@
 <template>
-  <scroll-view v-show="show" scroll-y :class="computedClass('cascader-search-view')">
+  <scroll-view v-show="show" scroll-y :class="ns.b()">
     <ListItem
       v-for="(item, index) in searchData"
       :key="`search-${index}`"
@@ -8,25 +8,20 @@
     >
       <text>{{ item.__label }}</text>
     </ListItem>
-    <view v-if="loading" class="height-full flex flex-col items-center justify-center">
+    <view v-if="loading" :class="ns.e('loading')">
       <loadmore :status="LoadStatusEnum.LOADING" />
     </view>
-    <view
-      v-if="!searchData.length && !loading"
-      class="height-full flex flex-col items-center justify-center text-28 text-black-2"
-    >
-      无数据
-    </view>
+    <view v-if="!searchData.length && !loading" :class="ns.e('empty')">无数据</view>
     <SafeBottom v-if="safeAreaInsetBottom" />
   </scroll-view>
 </template>
 
 <script lang="ts" setup>
 import { ref, toRefs, watch } from 'vue'
+import useNamespace from '../../core/useNamespace'
 import { TreeNode, UseTreeFieldNames } from '../../core/useTree'
 import { LoadStatusEnum } from '../../hooks'
 import { debounce } from '../../utils/common'
-import { computedClass } from '../../utils/style'
 import Loadmore from '../loadmore/loadmore.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import { CascaderOption, CascaderValue } from './cascader.vue'
@@ -46,6 +41,8 @@ export interface SearchNode extends TreeNode<CascaderOption> {
   __label: string
   __remoteSearch: boolean
 }
+
+const ns = useNamespace('cascader-search-view')
 
 const props = defineProps<CascaderSearchViewProps>()
 
@@ -124,5 +121,23 @@ defineExpose({
   width: 100%;
   height: calc(100% - 50px);
   background-color: #fff;
+
+  &__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 28rpx;
+    color: _var(color-black-2);
+  }
 }
 </style>

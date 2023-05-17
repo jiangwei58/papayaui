@@ -1,23 +1,23 @@
 <template>
-  <view :class="[computedClass('tabs'), { scrollable, shrink }]">
+  <view :class="[ns.b(), { scrollable, shrink }]">
     <scroll-view
       id="tabsScrollContainer"
-      :class="computedClass('tabs-scroll')"
+      :class="ns.b('scroll')"
       scroll-x
       :scroll-left="lineScrollLeft"
       scroll-with-animation
     >
-      <view :class="computedClass('tabs-wrapper')">
+      <view :class="ns.b('wrapper')">
         <view
           v-for="(item, index) in tabs"
           :key="index"
-          :class="[computedClass('tab'), { active: isActive(item, index) }]"
+          :class="[ns.e('item'), { active: isActive(item, index) }]"
           @click="onChangeTab(item, index)"
         >
           {{ item[labelKey] }}
         </view>
         <view
-          :class="computedClass('tabs__line')"
+          :class="ns.e('line')"
           :style="{
             transform: `translateX(${lineOffsetLeft}px) translateX(-50%)`,
             transitionDuration: '0.3s',
@@ -29,9 +29,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computedClass } from '../../utils/style'
 import { computed, getCurrentInstance, nextTick, ref, toRefs, watch } from 'vue'
 import { useRect } from '../../hooks'
+import useNamespace from '../../core/useNamespace'
 
 export type TabItem = any
 
@@ -50,6 +50,8 @@ export interface TabsProps {
   /** 是否开启左侧收缩布局 */
   shrink?: boolean
 }
+
+const ns = useNamespace('tabs')
 
 const props = withDefaults(defineProps<TabsProps>(), {
   modelValue: 0,
@@ -109,7 +111,7 @@ const updateTabItemWidth = async () => {
   if (!containerNode) return
   const containerWidth = containerNode.width || 0
   // 获取所有的 tab-item 的宽度
-  const nodes = await useRect(internalInstance, `.${computedClass('tab')}`, true)
+  const nodes = await useRect(internalInstance, `.${ns.e('item')}`, true)
   let lineLeft = 0
   let currentWidth = 0
   const currentTabIndex = getCurrentTabIndex()
@@ -147,11 +149,11 @@ defineExpose({
   height: _var(tabs-height, 44px);
   padding: 0 8px;
   background-color: _var(tabs-bg-color, #fff);
-  &.scrollable .#{$prefix}-tab {
+  &.scrollable &__item {
     flex: 1 0 auto;
     padding: 0 12px;
   }
-  &.shrink .#{$prefix}-tab {
+  &.shrink &__item {
     flex: none;
   }
   &-scroll {
@@ -163,7 +165,7 @@ defineExpose({
     height: 100%;
     user-select: none;
   }
-  .#{$prefix}-tab {
+  &__item {
     position: relative;
     display: flex;
     flex: 1;

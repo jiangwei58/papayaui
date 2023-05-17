@@ -1,7 +1,7 @@
 <template>
   <Popup
     v-if="poppable"
-    :custom-class="computedClass('calendar')"
+    :custom-class="ns.b()"
     :show="show"
     :height="getUnitValue(height)"
     :closeable="showTitle || showSubtitle"
@@ -20,7 +20,7 @@
   </Popup>
   <view
     v-else
-    :class="computedClass('calendar')"
+    :class="ns.b()"
     :style="{ height: getUnitValue(height), borderRadius: getUnitValue($attrs.round as string ?? '0') }"
   >
     <CalendarWrapper
@@ -38,8 +38,8 @@
 import { Dayjs } from 'dayjs'
 import { onMounted, ref, watch, nextTick } from 'vue'
 import { DayItem } from '../../core/useCalendar'
+import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
-import { computedClass } from '../../utils/style'
 import CalendarWrapper, { CalendarWrapperProps } from '../calendar/calendar-wrapper.vue'
 import Popup, { PopupProps } from '../popup/popup.vue'
 
@@ -61,6 +61,8 @@ export interface CalendarProps
   /** 是否展示日历副标题（年月） */
   showSubtitle?: boolean
 }
+
+const ns = useNamespace('calendar')
 
 const props = withDefaults(defineProps<CalendarProps>(), {
   poppable: true,

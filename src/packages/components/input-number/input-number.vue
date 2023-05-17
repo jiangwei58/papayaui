@@ -1,39 +1,26 @@
 <template>
   <view
-    :class="[
-      computedClass('input-number', {
-        'input-number-controls': controls,
-        'input-number--plain': plain,
-      }),
-      block ? 'flex' : 'inline-flex',
-    ]"
-    class="items-center"
+    :class="[ns.b(), ns.is('controls', controls), ns.is('plain', plain)]"
+    :style="{ display: block ? 'flex' : 'inline-flex' }"
   >
     <view
       v-if="controls"
-      :class="
-        computedClass('input-number-icon', 'input-number-minus', {
-          'input-number-icon--disabled': disabled || safeNumberVal <= min,
-        })
-      "
-      class="flex items-center justify-center"
+      :class="[
+        ns.b('icon'),
+        ns.b('minus'),
+        ns.is('icon-disabled', disabled || safeNumberVal <= min),
+      ]"
       @tap="onReduce()"
     >
       <Icon name="minus" block />
     </view>
     <input
-      :class="
-        computedClass('input-number-inner', {
-          'input-number-inner--disabled': disabled,
-        })
-      "
-      :style="
-        computedStyle({ width: inputWidth && getUnitValue(inputWidth), textAlign: inputAlign })
-      "
+      :class="[ns.b('inner'), ns.is('inner-disabled', disabled)]"
+      :style="ns.style({ width: inputWidth && getUnitValue(inputWidth), textAlign: inputAlign })"
       :placeholder="placeholder"
       :value="numberVal"
       :type="decimalLength ? 'digit' : 'number'"
-      :placeholder-class="computedClass('input-number-placeholder')"
+      :placeholder-class="ns.b('placeholder')"
       :disabled="readonly || disabled"
       @input="onInput"
       @blur="onBlur"
@@ -41,12 +28,11 @@
     />
     <view
       v-if="controls"
-      :class="
-        computedClass('input-number-icon', 'input-number-plus', {
-          'input-number-icon--disabled': disabled || safeNumberVal >= max,
-        })
-      "
-      class="flex items-center justify-center"
+      :class="[
+        ns.b('icon'),
+        ns.b('plus'),
+        ns.is('icon-disabled', disabled || safeNumberVal >= max),
+      ]"
       @tap="onAdd()"
     >
       <Icon name="plus" block />
@@ -58,8 +44,8 @@
 import { computed, nextTick, toRefs } from 'vue'
 import { EventDetail } from '../..'
 import useInputNumber, { InputNumberValue, minAndMax } from '../../core/useInputNumber'
+import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
-import { computedClass, computedStyle } from '../../utils/style'
 import Icon from '../icon/icon.vue'
 
 export interface InputNumberProps {
@@ -99,6 +85,8 @@ export interface InputNumberProps {
   /** 空值时返回的值 */
   nullValue?: any
 }
+
+const ns = useNamespace('input-number')
 
 const props = withDefaults(defineProps<InputNumberProps>(), {
   modelValue: undefined,
@@ -203,9 +191,13 @@ const onFocus = (e: unknown) => {
   $disabledBgColor: _var(input-number-disabled-bg-color, #f2f3f5);
   $round: _var(input-number-round, 4px);
 
+  align-items: center;
   height: $height;
   color: _var(color-black);
   &-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
     width: $height;
     height: $height;
@@ -232,16 +224,16 @@ const onFocus = (e: unknown) => {
       color: _var(input-number-placeholder-color, $disabledColor);
     }
   }
-  &-controls &-inner {
+  &--controls &-inner {
     margin: 0 2px;
     border-radius: 0;
   }
-  &-icon--disabled {
+  &--icon-disabled {
     color: $disabledColor;
     background-color: $disabledBgColor;
     cursor: not-allowed;
   }
-  &-inner--disabled {
+  &--inner-disabled {
     color: $disabledColor;
     background-color: $disabledBgColor;
   }

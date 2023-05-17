@@ -1,6 +1,6 @@
 <template>
-  <view :id="elId" :class="computedClass('sticky')" :style="style">
-    <view :class="computedClass('sticky__content')" :style="stickyContent">
+  <view :id="elId" :class="ns.b()" :style="style">
+    <view :class="ns.e('content')" :style="stickyContent">
       <slot />
     </view>
   </view>
@@ -16,7 +16,7 @@ import {
   reactive,
   toRefs,
 } from 'vue'
-import { computedClass } from '../../utils/style'
+import useNamespace from '../../core/useNamespace'
 /**
  * sticky 吸顶
  * @description 该组件与CSS中position: sticky属性实现的效果一致，当组件达到预设的到顶部距离时， 就会固定在指定位置，组件位置大于预设的顶部距离时，会重新按照正常的布局排列。
@@ -67,6 +67,8 @@ export default defineComponent({
     },
   },
   setup() {
+    const ns = useNamespace('sticky')
+
     const state: {
       cssSticky: boolean
       stickyTop: number
@@ -86,6 +88,7 @@ export default defineComponent({
     })
 
     return {
+      ns,
       ...toRefs(state),
     }
   },
@@ -230,7 +233,7 @@ export default defineComponent({
         uni
           .createSelectorQuery()
           .in(this)
-          .select(`.${computedClass('sticky')}`)
+          .select(`.${this.ns.b()}`)
           .fields({
             computedStyle: ['position'],
           })
@@ -257,7 +260,6 @@ export default defineComponent({
       return false
       // #endif
     },
-    computedClass,
   },
 })
 </script>

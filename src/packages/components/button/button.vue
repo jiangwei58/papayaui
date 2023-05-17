@@ -1,8 +1,8 @@
 <template>
   <button
-    :class="[computedClass('button'), `button--${type}`, plain ? `button--plain` : '']"
+    :class="[ns.b(), ns.m(type), ns.is('plain', plain)]"
     :style="customStyle"
-    :hover-class="computedClass('button--hover')"
+    :hover-class="ns.m('hover')"
     :disabled="disabled"
     :plain="plain"
     :open-type="openType"
@@ -15,7 +15,7 @@
     @chooseavatar="emit('chooseavatar', $event)"
     @tap="onClick"
   >
-    <view class="height-full flex items-center justify-center">
+    <view :class="ns.e('content')">
       <Loadmore
         v-if="localLoading"
         class="mr-4"
@@ -40,9 +40,9 @@
 <script lang="ts" setup>
 import { getUnitValue } from '../../utils/common'
 import { computed, CSSProperties, ref, StyleValue } from 'vue'
-import { computedClass } from '../../utils/style'
 import Icon from '../icon/icon.vue'
 import Loadmore from '../loadmore/loadmore.vue'
+import useNamespace from '../../core/useNamespace'
 
 export interface ButtonProps {
   /** 按钮类型 */
@@ -100,6 +100,8 @@ export interface ButtonProps {
   /** 是否显示会话内消息卡片，设置此参数为 true，用户进入客服会话会在右下角显示"可能要发送的小程序"提示，用户点击后可以快速发送小程序消息，open-type="contact"时有效 */
   showMessageCard?: boolean
 }
+
+const ns = useNamespace('button')
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   type: 'primary',
@@ -192,37 +194,45 @@ const onClick = async (event: MouseEvent) => {
       opacity: 0.1;
     }
   }
-  &.button--default {
+  &--default {
     color: _var(color-black);
     background-color: #fff;
     border-color: #ebedf0;
   }
-  &.button--primary {
+  &--primary {
     color: #fff;
     background-color: _var(color-primary);
     border-color: _var(color-primary);
-    &.button--plain {
-      color: _var(color-primary);
-    }
   }
-  &.button--warning {
+  &--warning {
     color: #fff;
     background-color: _var(color-warning);
     border-color: _var(color-warning);
-    &.button--plain {
-      color: _var(color-warning);
-    }
   }
-  &.button--danger {
+  &--danger {
     color: #fff;
     background-color: _var(color-danger);
     border-color: _var(color-danger);
-    &.button--plain {
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  &--plain {
+    background-color: transparent;
+    &.#{$prefix}-button--primary {
+      color: _var(color-primary);
+    }
+    &.#{$prefix}-button--warning {
+      color: _var(color-warning);
+    }
+    &.#{$prefix}-button--danger {
       color: _var(color-danger);
     }
-  }
-  &[plain] {
-    background-color: transparent;
   }
   &[disabled]:not([type]) {
     color: _var(color-black);

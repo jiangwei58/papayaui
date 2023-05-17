@@ -1,6 +1,6 @@
 <template>
   <BottomPopup
-    :class="computedClass('picker-popup')"
+    :class="ns.b()"
     :show="show"
     :title="title"
     :height="height"
@@ -9,7 +9,7 @@
     @close="onClose"
     @confirm="onOk"
   >
-    <view :class="computedClass('picker-popup-content')" class="flex flex-col">
+    <view :class="ns.b('content')" class="flex flex-col">
       <Search
         v-if="showSearch"
         v-model="searchText"
@@ -35,7 +35,7 @@
           <Icon
             v-if="isSelected(item[valueKey])"
             name="success"
-            :color="`var(--${PREFIX}-color-primary)`"
+            :color="`var(--${defaultNamespace}-color-primary)`"
             block
           />
         </view>
@@ -65,9 +65,9 @@
 <script lang="ts" setup>
 import { computed, ref, toRefs, watch } from 'vue'
 import useList, { LoadStatusEnum, UseListProps } from '../../core/useList'
+import useNamespace, { defaultNamespace } from '../../core/useNamespace'
 import useSelect from '../../core/useSelect'
 import { debounce } from '../../utils/common'
-import { computedClass, PREFIX } from '../../utils/style'
 import BottomPopup from '../bottom-popup/bottom-popup.vue'
 import ButtonComponent from '../button/button.vue'
 import Icon from '../icon/icon.vue'
@@ -116,6 +116,8 @@ export interface PickerPopupProps {
   /** 确定后是否重置数据 */
   resetAfterConfirm?: boolean
 }
+
+const ns = useNamespace('picker-popup')
 
 const props = withDefaults(defineProps<PickerPopupProps>(), {
   modelValue: undefined,

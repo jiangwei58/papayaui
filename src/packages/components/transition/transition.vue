@@ -1,7 +1,7 @@
 <template>
   <view
     v-if="state.inited"
-    :class="[computedClass('transition'), state.classes, customClass]"
+    :class="[ns.b(), state.classes, customClass]"
     :style="mergeStyle"
     @tap="clickHandler"
     @touchmove="noop"
@@ -12,8 +12,8 @@
 
 <script lang="ts" setup>
 import { computed, CSSProperties, nextTick, reactive, watch } from 'vue'
+import useNamespace, { defaultNamespace } from '../../core/useNamespace'
 import { noop } from '../../utils/common'
-import { computedClass, PREFIX } from '../../utils/style'
 
 /**
  * 动画内置的动画模式有如下：
@@ -56,6 +56,8 @@ export interface TransitionProps {
   /** 自定义样式 */
   customStyle?: CSSProperties
 }
+
+const ns = useNamespace('transition')
 
 const props = withDefaults(defineProps<TransitionProps>(), {
   mode: 'fade',
@@ -105,7 +107,7 @@ const mergeStyle = computed(() => {
 
 // 定义类名，通过给元素动态切换类名，赋予元素一定的css动画样式
 const getClassNames = (name: string) => {
-  const classPrefix = `${PREFIX}-${name}`
+  const classPrefix = `${defaultNamespace}-${name}`
   return {
     enter: `${classPrefix}-enter ${classPrefix}-enter-active`,
     'enter-to': `${classPrefix}-enter-to ${classPrefix}-enter-active`,

@@ -1,13 +1,13 @@
 <template>
-  <view :class="computedClass('checkbox-group', { [`checkbox-group--${direction}`]: true })">
+  <view :class="[ns.b(), ns.m(direction)]">
     <slot />
   </view>
 </template>
 
 <script lang="ts" setup>
 import { provide, toRefs } from 'vue'
+import useNamespace from '../../core/useNamespace'
 import useSelect from '../../core/useSelect'
-import { computedClass } from '../../utils/style'
 import { CheckboxValue } from '../checkbox/checkbox.vue'
 
 export interface CheckboxGroupProps {
@@ -32,6 +32,8 @@ export interface CheckboxProvideData {
 export type CheckboxOption = {
   name: CheckboxValue
 }
+
+const ns = useNamespace('checkbox-group')
 
 const props = withDefaults(defineProps<CheckboxGroupProps>(), {
   name: '',

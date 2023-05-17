@@ -1,8 +1,8 @@
 <template>
   <view
-    :class="computedClass('image')"
+    :class="ns.b()"
     :style="
-      computedStyle({
+      ns.style({
         width: width && getUnitValue(width.toString()),
         height: height && getUnitValue(height.toString()),
         borderRadius: round === true ? getUnitValue('999') : getUnitValue(round || '0'),
@@ -10,7 +10,7 @@
     "
   >
     <image
-      :class="computedClass('image__img')"
+      :class="ns.e('img')"
       :src="src"
       :mode="mode"
       :lazy-load="lazyLoad"
@@ -19,11 +19,11 @@
       @error="onError"
       @load="onLoad"
     />
-    <view v-if="status === 'loading'" :class="computedClass('image__loading')">
+    <view v-if="status === 'loading'" :class="ns.e('loading')">
       <slot v-if="$slots.loading" name="loading" />
       <Icon v-else name="image" size="32px" color="#dcdee0" />
     </view>
-    <view v-if="status === 'error'" :class="computedClass('image__error')">
+    <view v-if="status === 'error'" :class="ns.e('error')">
       <slot v-if="$slots.error" name="error" />
       <Icon v-else name="image-error" size="32px" color="#dcdee0" />
     </view>
@@ -32,8 +32,8 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
-import { computedClass, computedStyle } from '../../utils/style'
 import Icon from '../icon/icon.vue'
 
 interface ImageProps {
@@ -54,6 +54,8 @@ interface ImageProps {
   /** 开启长按图片显示识别小程序码菜单 */
   showMenuByLongpress?: boolean
 }
+
+const ns = useNamespace('image')
 
 withDefaults(defineProps<ImageProps>(), {
   src: '',

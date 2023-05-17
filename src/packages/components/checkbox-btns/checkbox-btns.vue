@@ -1,15 +1,14 @@
 <template>
   <view
     class="grid"
-    :class="[computedClass('checkbox-btns'), `grid-cols-${column}`]"
+    :class="[ns.b('buttons'), `grid-cols-${column}`]"
     :style="{ gap: getUnitValue(gap) }"
   >
     <view
       v-for="(item, index) in options"
       :key="index"
-      class="text-black text-center"
       :class="[
-        computedClass('checkbox-btn'),
+        ns.b('button'),
         {
           active: typeof modelValue !== 'undefined' ? isSelected(item[valueKey]) : false,
         },
@@ -29,9 +28,9 @@
 
 <script lang="ts" setup>
 import { toRefs } from 'vue'
+import useNamespace from '../../core/useNamespace'
 import useSelect from '../../core/useSelect'
 import { getUnitValue } from '../../utils/common'
-import { computedClass } from '../../utils/style'
 
 export type CheckboxItem = any
 export type CheckboxValue = any
@@ -58,6 +57,8 @@ export interface CheckboxProps {
   /** 是否支持反选 */
   inverse?: boolean
 }
+
+const ns = useNamespace('checkbox')
 
 const props = withDefaults(defineProps<CheckboxProps>(), {
   column: 3,
@@ -102,11 +103,13 @@ const onSelect = (item: CheckboxItem, index: number) => {
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
 .#{$prefix}-checkbox {
-  &-btn {
+  &-button {
     font-size: _var(checkbox-btns-font-size, 14px);
+    color: _var(checkbox-btns-color, _var(color-black));
     padding: _var(checkbox-btns-padding, 7px 4px);
     border-width: _var(checkbox-btns-border-width, 2rpx);
     border-style: solid;
+    text-align: center;
     &.active {
       color: _var(color-primary);
       background-color: rgba(0, 156, 93, 0.1) !important;

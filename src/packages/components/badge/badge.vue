@@ -1,16 +1,9 @@
 <template>
-  <view
-    :class="
-      computedClass('badge', {
-        'badge--dot': dot,
-        'badge--fixed': !!$slots.default,
-      })
-    "
-  >
+  <view :class="[ns.b(), ns.is('dot', dot), ns.is('fixed', !!$slots.default)]">
     <slot></slot>
     <view
       v-if="visible"
-      :class="computedClass('badge-content')"
+      :class="ns.e('content')"
       :style="{
         backgroundColor: color,
         top: getUnitValue(offset[1].toString()),
@@ -25,8 +18,8 @@
 
 <script lang="ts" setup>
 import { computed, CSSProperties } from 'vue'
+import useNamespace, { defaultNamespace } from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
-import { computedClass, PREFIX } from '../../utils/style'
 
 export interface BadgeProps {
   /** 徽标内容 */
@@ -45,9 +38,11 @@ export interface BadgeProps {
   show?: boolean
 }
 
+const ns = useNamespace('badge')
+
 const props = withDefaults(defineProps<BadgeProps>(), {
   content: undefined,
-  color: `var(--${PREFIX}-color-danger)`,
+  color: `var(--${defaultNamespace}-color-danger)`,
   max: undefined,
   offset: () => [0, 0],
   showZero: false,
@@ -75,7 +70,7 @@ const value = computed(() => {
 .#{$prefix}-badge {
   position: relative;
   display: inline-block;
-  &-content {
+  &__content {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -86,12 +81,12 @@ const value = computed(() => {
     padding: 2px 5px;
     border-radius: 100px;
   }
-  &--dot &-content {
+  &--dot &__content {
     padding: 0;
     width: 8px;
     height: 8px;
   }
-  &--fixed &-content {
+  &--fixed &__content {
     position: absolute;
     transform: translate(50%, -50%);
     transform-origin: 100%;

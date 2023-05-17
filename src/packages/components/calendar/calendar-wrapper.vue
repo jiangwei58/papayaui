@@ -1,32 +1,23 @@
 <template>
-  <view :class="computedClass('calendar-wrapper')">
-    <view :class="computedClass('calendar-header')">
-      <view v-if="showTitle" :class="computedClass('calendar-header__title')">{{ title }}</view>
-      <view v-if="showSubtitle" :class="computedClass('calendar-header__subtitle')">
+  <view :class="ns.b('wrapper')">
+    <view :class="ns.b('header')">
+      <view v-if="showTitle" :class="ns.be('header', 'title')">{{ title }}</view>
+      <view v-if="showSubtitle" :class="ns.be('header', 'subtitle')">
         {{ months[monthCurrent]?.date.format('YYYY年M月') || '' }}
       </view>
-      <view :class="computedClass('calendar__weekdays')">
-        <view v-for="item in weekdays" :key="item" :class="computedClass('calendar__weekday')">
+      <view :class="ns.e('weekdays')">
+        <view v-for="item in weekdays" :key="item" :class="ns.e('weekday')">
           {{ item }}
         </view>
       </view>
     </view>
-    <scroll-view
-      scroll-y
-      :scroll-top="scrollTop"
-      :class="computedClass('calendar-body')"
-      @scroll="onThrottleScroll"
-    >
-      <view
-        v-for="(monthItem, monthIndex) in months"
-        :key="monthIndex"
-        :class="computedClass('calendar__month')"
-      >
-        <view v-if="monthIndex !== 0" :class="computedClass('calendar__month-title')">
+    <scroll-view scroll-y :scroll-top="scrollTop" :class="ns.b('body')" @scroll="onThrottleScroll">
+      <view v-for="(monthItem, monthIndex) in months" :key="monthIndex" :class="ns.e('month')">
+        <view v-if="monthIndex !== 0" :class="ns.e('month-title')">
           {{ monthItem.date.format('YYYY年M月') }}
         </view>
         <view
-          :class="computedClass('calendar__days')"
+          :class="ns.e('days')"
           :style="{
             height: isVisualRange(monthIndex)
               ? 'auto'
@@ -37,28 +28,28 @@
           }"
         >
           <template v-if="isVisualRange(monthIndex)">
-            <view v-if="showMark" :class="computedClass('calendar__month-mark')">
+            <view v-if="showMark" :class="ns.e('month-mark')">
               {{ monthItem.date.month() + 1 }}
             </view>
             <view
               v-for="(dayItem, dayIndex) in getDays(monthItem.date)"
               :key="dayItem.text"
-              :class="computedClass('calendar__day', `calendar__day--${dayItem.type}`)"
+              :class="[ns.e('day'), ns.em('day', dayItem.type)]"
               :style="{ gridColumnStart: dayIndex === 0 ? monthItem.dayOfWeekStart + 1 : 'auto' }"
               @tap="onSelect(dayItem)"
             >
-              <view :class="computedClass('calendar__top-info')">{{ dayItem.topInfo }}</view>
-              <view :class="computedClass('calendar__day__select')">
+              <view :class="ns.e('top-info')">{{ dayItem.topInfo }}</view>
+              <view :class="ns.e('day__select')">
                 {{ dayItem.text }}
               </view>
-              <view :class="computedClass('calendar__bottom-info')">{{ dayItem.bottomInfo }}</view>
+              <view :class="ns.e('bottom-info')">{{ dayItem.bottomInfo }}</view>
             </view>
           </template>
         </view>
       </view>
       <SafeBottom v-if="!showConfirm && safeAreaInsetBottom" />
     </scroll-view>
-    <view v-if="showConfirm" :class="computedClass('calendar-footer')" class="px-26 py-15">
+    <view v-if="showConfirm" :class="ns.b('footer')" class="px-26 py-15">
       <ButtonComponent type="primary" block :disabled="!confirmEnabled" @click="onConfirm">
         {{ confirmEnabled ? confirmText : confirmDisabledText }}
       </ButtonComponent>
@@ -73,10 +64,10 @@ import { computed, getCurrentInstance, nextTick, ref, toRefs } from 'vue'
 import useCalendar, { DayItem, FirstDayOfWeekType } from '../../core/useCalendar'
 import { useRect } from '../../hooks'
 import { EventDetail } from '../../types'
-import { computedClass } from '../../utils/style'
 import ButtonComponent from '../button/button.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import { getUnitValue, throttle } from '../../utils'
+import useNamespace from '../../core/useNamespace'
 
 export interface CalendarWrapperProps {
   /** 选择类型: single表示选择单个日期，multiple表示选择多个日期，range表示选择日期区间 */
@@ -115,6 +106,8 @@ export interface CalendarWrapperProps {
   /** 日期区间最多可选天数，默认无限制 */
   maxRange?: number
 }
+
+const ns = useNamespace('calendar')
 
 const props = withDefaults(defineProps<CalendarWrapperProps>(), {
   type: 'single',
@@ -190,7 +183,7 @@ const onThrottleScroll = throttle(onScroll, 100, { trailing: true })
 
 const updateMonthTop = () => {
   if (!instance) return
-  useRect(instance, '.pa-calendar__month', true).then((nodes) => {
+  useRect(instance, `.${ns.e('month')}`, true).then((nodes) => {
     const tops = (nodes ?? []).reduce((result, node) => {
       result.push((result[result.length - 1] || 0) + node.height)
       return result
