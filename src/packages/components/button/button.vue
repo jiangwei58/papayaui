@@ -170,6 +170,7 @@ const onClick = async (event: MouseEvent) => {
 @import '../../styles/vars.scss';
 .#{$prefix}-button {
   padding: _var(button-padding, 12px);
+  margin: _var(button-margin, 0);
   border: 1px solid transparent;
   box-sizing: border-box;
   &::before {
