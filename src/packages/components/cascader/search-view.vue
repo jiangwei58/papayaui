@@ -3,11 +3,10 @@
     <ListItem
       v-for="(item, index) in searchData"
       :key="`search-${index}`"
+      :text="item.__label"
       :selected="isSelected(item[fieldNames.value as keyof SearchNode])"
-      @select="onSelect(item)"
-    >
-      <text>{{ item.__label }}</text>
-    </ListItem>
+      @click="onSelect(item)"
+    />
     <view v-if="loading" :class="ns.e('loading')">
       <loadmore :status="LoadStatusEnum.LOADING" />
     </view>
@@ -25,7 +24,7 @@ import { debounce } from '../../utils/common'
 import Loadmore from '../loadmore/loadmore.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import { CascaderOption, CascaderValue } from './cascader.vue'
-import ListItem from './list-item.vue'
+import ListItem from '../list-item/list-item.vue'
 
 export interface CascaderSearchViewProps {
   show?: boolean

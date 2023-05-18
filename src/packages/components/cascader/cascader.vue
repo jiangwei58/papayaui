@@ -21,15 +21,16 @@
         <ListItem
           v-for="(item, index) in currentData"
           :key="`${tabActive}-${index}`"
+          :text="item[_fieldNames.label]"
           :selected="
             tabActive < tabList.length - 1
               ? index === currentIndexes[tabActive]
               : isSelected(item[_fieldNames.value])
           "
-          @select="onSelect(item, index)"
+          :use-slot="!!$slots.default"
+          @click="onSelect(item, index)"
         >
           <slot v-if="$slots.default" :item="item" />
-          <text v-else>{{ item[_fieldNames.label] }}</text>
         </ListItem>
         <view v-if="loading" :class="ns.e('loading')">
           <loadmore :status="LoadStatusEnum.LOADING" />
@@ -85,7 +86,7 @@ import Loadmore from '../loadmore/loadmore.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import Search from '../search/search.vue'
 import Tabs from '../tabs/tabs.vue'
-import ListItem from './list-item.vue'
+import ListItem from '../list-item/list-item.vue'
 import SearchView, { SearchNode } from './search-view.vue'
 
 export interface CascaderNode<T = any> {
@@ -244,7 +245,7 @@ const init = async () => {
   if (localState.value.isLazyLoad) {
     setChildren(await getData())
   } else {
-    console.warn('data or lazyLoad is required')
+    console.warn('options or lazyLoad is required')
   }
 }
 

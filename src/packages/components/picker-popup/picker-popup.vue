@@ -9,40 +9,27 @@
     @close="onClose"
     @confirm="onOk"
   >
-    <view :class="ns.b('content')" class="flex flex-col">
+    <view :class="ns.b('content')">
       <Search
         v-if="showSearch"
         v-model="searchText"
-        class="flex-shrink-0"
+        :class="ns.e('search')"
         @change="debounceSearchChange"
       />
-      <scroll-view
-        scroll-y
-        class="flex-1"
-        style="overflow: hidden"
-        @scrolltolower="onScrolltolower"
-      >
-        <view
+      <scroll-view scroll-y :class="ns.e('list')" @scrolltolower="onScrolltolower">
+        <ListItem
           v-for="(item, index) in filterOptions"
           :key="index"
-          class="list-item flex items-center justify-between px-32 py-20 text-28 leading-40"
-          :class="{ 'color-primary': isSelected(item[valueKey]) }"
-          hover-class="bg-hover"
-          @tap="onSelect(item[valueKey])"
+          :text="item[labelKey]"
+          :selected="isSelected(item[valueKey])"
+          :use-slot="!!$slots.default"
+          @click="onSelect(item[valueKey])"
         >
           <slot v-if="$slots.default" :item="item" />
-          <text v-else>{{ item[labelKey] }}</text>
-          <Icon
-            v-if="isSelected(item[valueKey])"
-            name="success"
-            :color="`var(--${defaultNamespace}-color-primary)`"
-            block
-          />
-        </view>
+        </ListItem>
         <view
           v-if="!filterOptions.length || !!pagination"
-          class="flex flex-col justify-center"
-          :class="{ 'height-full': !filterOptions.length }"
+          :class="[ns.e('empty'), { 'height-full': !filterOptions.length }]"
           @tap="onScrolltolower"
         >
           <Loadmore :status="loadStatus" :config="{ nomore: isEmpty ? '无数据' : '没有更多了' }" />
@@ -52,7 +39,7 @@
     </view>
 
     <template v-if="safeAreaInsetBottom && multiple" #footer>
-      <view class="px-26 pt-15 flex-shrink-0">
+      <view :class="ns.e('footer')">
         <ButtonComponent type="primary" block @click="onOk()">
           {{ confirmButtonText }}
         </ButtonComponent>
@@ -65,12 +52,12 @@
 <script lang="ts" setup>
 import { computed, ref, toRefs, watch } from 'vue'
 import useList, { LoadStatusEnum, UseListProps } from '../../core/useList'
-import useNamespace, { defaultNamespace } from '../../core/useNamespace'
+import useNamespace from '../../core/useNamespace'
 import useSelect from '../../core/useSelect'
 import { debounce } from '../../utils/common'
 import BottomPopup from '../bottom-popup/bottom-popup.vue'
 import ButtonComponent from '../button/button.vue'
-import Icon from '../icon/icon.vue'
+import ListItem from '../list-item/list-item.vue'
 import Loadmore from '../loadmore/loadmore.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import Search from '../search/search.vue'
@@ -295,7 +282,29 @@ defineExpose({
 .#{$prefix}-picker-popup {
   &-content {
     position: relative;
+    display: flex;
+    flex-direction: column;
     height: 100%;
+  }
+
+  &__search {
+    flex-shrink: 0;
+  }
+
+  &__list {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__footer {
+    flex-shrink: 0;
+    padding: 8px 13px;
   }
 }
 </style>
