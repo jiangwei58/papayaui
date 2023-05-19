@@ -1,6 +1,6 @@
 <template>
   <button
-    :class="[ns.b(), ns.m(type), ns.is('plain', plain)]"
+    :class="[ns.b(), ns.m(type), ns.m(size), ns.is('block', block), ns.is('plain', plain)]"
     :style="customStyle"
     :hover-class="ns.m('hover')"
     :disabled="disabled"
@@ -51,6 +51,8 @@ export interface ButtonProps {
   width?: string
   /** 按钮高度 */
   height?: string
+  /**尺寸 */
+  size?: 'large' | 'normal' | 'small' | 'mini'
   /** 字体大小 */
   fontSize?: string
   /** 是否为块级元素 */
@@ -105,10 +107,11 @@ const ns = useNamespace('button')
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   type: 'primary',
-  width: 'auto',
-  height: '42px',
-  fontSize: '14px',
-  round: '3px',
+  width: undefined,
+  height: undefined,
+  size: 'normal',
+  fontSize: undefined,
+  round: undefined,
   icon: undefined,
   syncClick: undefined,
   customStyle: undefined,
@@ -138,16 +141,24 @@ const clickLoading = ref<boolean>()
 const localLoading = computed(() => props.loading || clickLoading.value)
 
 const customStyle = computed<StyleValue>(() => {
-  return {
+  const style: CSSProperties = {
     ...props.customStyle,
-    display: props.block ? 'block' : 'inline-block',
-    width: props.block
-      ? getUnitValue(props.width === 'auto' ? '100%' : props.width)
-      : getUnitValue(props.width),
-    height: getUnitValue(props.height),
-    fontSize: getUnitValue(props.fontSize),
-    borderRadius: props.round === true ? getUnitValue(props.height) : getUnitValue(props.round),
   }
+  if (props.width) {
+    style.width = props.block
+      ? getUnitValue(props.width === 'auto' ? '100%' : props.width)
+      : getUnitValue(props.width)
+  }
+  if (props.height) {
+    style.height = getUnitValue(props.height)
+  }
+  if (props.fontSize) {
+    style.fontSize = getUnitValue(props.fontSize)
+  }
+  if (props.round) {
+    style.borderRadius = props.round === true ? '100px' : getUnitValue(props.round)
+  }
+  return style
 })
 
 const onClick = async (event: MouseEvent) => {
@@ -169,10 +180,20 @@ const onClick = async (event: MouseEvent) => {
 <style lang="scss" scoped>
 @import '../../styles/vars.scss';
 .#{$prefix}-button {
-  padding: _var(button-padding, 12px);
+  display: inline-block;
+  height: 44px;
+  line-height: 1.2;
   margin: _var(button-margin, 0);
   border: 1px solid transparent;
   box-sizing: border-box;
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
   &::before {
     position: absolute;
     top: 50%;
@@ -190,11 +211,13 @@ const onClick = async (event: MouseEvent) => {
   &::after {
     border: none;
   }
+
   &--hover {
     &::before {
       opacity: 0.1;
     }
   }
+
   &--default {
     color: _var(color-black);
     background-color: #fff;
@@ -216,11 +239,28 @@ const onClick = async (event: MouseEvent) => {
     border-color: _var(color-danger);
   }
 
-  &__content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+  &--large {
+    width: 100%;
+    height: 50px;
+  }
+  &--normal {
+    font-size: 14px;
+    padding: _var(button-padding, 0 15px);
+  }
+  &--small {
+    height: 32px;
+    font-size: 12px;
+    padding: _var(button-padding, 0 8px);
+  }
+  &--mini {
+    height: 24px;
+    font-size: 10px;
+    padding: _var(button-padding, 0 4px);
+  }
+
+  &--block {
+    display: block;
+    width: 100%;
   }
 
   &--plain {
