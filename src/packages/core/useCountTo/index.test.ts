@@ -1,5 +1,5 @@
 import { describe, expect, test, vi } from 'vitest'
-import useCountTo from '../useCountTo'
+import useCountTo from '.'
 
 describe('useCountTo test', () => {
   const commonProps = {

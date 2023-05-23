@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import { computed, reactive, ref, toRefs, watch } from 'vue'
-import { IncludeRefs } from '../types'
-import { getRefValue, padZero } from '../utils'
+import { IncludeRefs } from '../../types'
+import { getRefValue, padZero } from '../../utils'
 
 export type DatePickerColumnType = 'year' | 'month' | 'day' | 'hour' | 'minute'
 

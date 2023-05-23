@@ -1,5 +1,5 @@
 import { computed, Ref, ref, toRef, watch } from 'vue'
-import { IncludeRefs } from '../types'
+import { IncludeRefs } from '../../types'
 
 export interface UseSelectProps<T, V> {
   /** 选项数据 */

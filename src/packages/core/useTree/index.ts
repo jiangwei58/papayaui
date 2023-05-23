@@ -1,5 +1,5 @@
 import { computed, Ref, ref, toRaw, toRef, watch } from 'vue'
-import { IncludeRefs } from '../types'
+import { IncludeRefs } from '../../types'
 
 export interface UseTreeProps<T> {
   /** 数据源 */
@@ -129,6 +129,23 @@ export default <T, V>(props: IncludeRefs<UseTreeProps<T>>) => {
     return node.__path.split('-').map((item) => +item)
   }
 
+  /**
+   * 通过值获取路径，通常用来获取modelValue的路径
+   */
+  const getPathByValues = (values: T[keyof T][]) => {
+    let currentData: OwnNode[] = treeData.value
+
+    return values.reduce((path, value, index) => {
+      if (index > 0) {
+        currentData = (currentData[index][fieldNames.value.children] as OwnNode[]) ?? []
+      }
+
+      const findIndex = currentData.findIndex((item) => item[fieldNames.value.value] === value)
+      path.push(findIndex)
+      return path
+    }, [] as number[])
+  }
+
   watch(
     options,
     (newVal) => {
@@ -152,5 +169,6 @@ export default <T, V>(props: IncludeRefs<UseTreeProps<T>>) => {
     isSelected,
     toRawNode,
     getNodePath,
+    getPathByValues,
   }
 }

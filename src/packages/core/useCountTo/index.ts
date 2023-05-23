@@ -1,5 +1,5 @@
 import { computed, reactive, ref } from 'vue'
-import { IncludeRefs } from '../types'
+import { IncludeRefs } from '../../types'
 
 export interface UseCountToProps {
   /** 开始值 */

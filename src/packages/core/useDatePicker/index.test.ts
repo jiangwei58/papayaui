@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import useDatePicker, { DatePickerFilter, DatePickerFormatter } from '../useDatePicker'
+import useDatePicker, { DatePickerFilter, DatePickerFormatter } from '.'
 import { ref } from 'vue'
 
 describe('useDatePicker test', () => {

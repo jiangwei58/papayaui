@@ -1,5 +1,5 @@
 import { computed, reactive, ref, watch } from 'vue'
-import { IncludeRefs } from '../types'
+import { IncludeRefs } from '../../types'
 
 export type SwitchValue = boolean | string | number
 
