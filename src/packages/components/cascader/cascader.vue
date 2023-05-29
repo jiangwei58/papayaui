@@ -76,17 +76,19 @@
 
 <script lang="ts" setup>
 import { computed, nextTick, ref, toRaw, toRefs, watch } from 'vue'
+import useCascader from '../../core/useCascader'
 import { LoadStatusEnum } from '../../core/useList'
 import useNamespace from '../../core/useNamespace'
-import useTree, { TreeNode, UseTreeFieldNames } from '../../core/useTree'
+import type { TreeNode, UseTreeFieldNames } from '../../core/useTree'
+import { defaultFieldNames } from '../../core/useTree'
 import { EventDetail } from '../../types'
 import BottomPopup from '../bottom-popup/bottom-popup.vue'
 import ButtonComponent from '../button/button.vue'
+import ListItem from '../list-item/list-item.vue'
 import Loadmore from '../loadmore/loadmore.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import Search from '../search/search.vue'
 import Tabs from '../tabs/tabs.vue'
-import ListItem from '../list-item/list-item.vue'
 import SearchView, { SearchNode } from './search-view.vue'
 
 export interface CascaderNode<T = any> {
@@ -141,8 +143,8 @@ const props = withDefaults(defineProps<CascaderProps>(), {
   show: false,
   height: undefined,
   title: '',
-  options: undefined,
-  fieldNames: undefined,
+  options: () => [],
+  fieldNames: () => defaultFieldNames,
   maxLevel: Number.MAX_SAFE_INTEGER,
   multiple: false,
   lazyLoad: undefined,
@@ -180,7 +182,8 @@ const {
   clearSelect,
   isSelected,
   getNodePath,
-} = useTree<CascaderOption, CascaderValue>({
+  getNodesByPath,
+} = useCascader<CascaderOption, CascaderValue>({
   options,
   fieldNames,
   multiple,
@@ -208,23 +211,17 @@ const localState = computed(() => {
 const tabList = computed(() => {
   if (searchText.value) return []
   if (!treeData.value.length || !currentIndexes.value.length) return [{ name: '请选择' }]
-  const tabList = []
-  let currentData = treeData.value
   const maxLength = Math.max(
     tabActive.value + 1,
     tabMaxLevel.value + 1,
     currentIndexes.value.length,
   )
-  for (let i = 0; i < maxLength; i++) {
-    if (i !== 0) {
-      currentData = currentData[currentIndexes.value[i - 1]][_fieldNames.value.children] || []
-    }
-    const index: number | undefined = currentIndexes.value[i]
-    const name =
-      typeof index !== 'undefined'
-        ? currentData[currentIndexes.value[i]][_fieldNames.value.label]
-        : '请选择'
-    tabList.push({ name })
+
+  const tabList = getNodesByPath(currentIndexes.value).map((node) => ({
+    name: node[_fieldNames.value.label],
+  }))
+  if (currentIndexes.value.length < maxLength) {
+    tabList.push({ name: '请选择' })
   }
   return tabList
 })
@@ -234,14 +231,17 @@ const currentData = computed(() => {
   return getChildren(path)
 })
 
-watch(show, async (newVal, oldVal) => {
+watch(show, (newVal, oldVal) => {
   if (newVal !== oldVal && newVal) {
     init()
   }
 })
 
 const init = async () => {
-  if (treeData.value.length) return
+  if (treeData.value.length) {
+    setSelectedByValues(props.modelValue)
+    return
+  }
   if (localState.value.isLazyLoad) {
     setChildren(await getData())
   } else {
@@ -268,18 +268,18 @@ const onScroll = (e: EventDetail<{ scrollTop: number }>) => {
   oldScrollTop = e.detail.scrollTop
 }
 
-const onSelect = async (item: TreeNode<CascaderOption>, valueIndex: number) => {
+const onSelect = (item: TreeNode<CascaderOption>, valueIndex: number, autoComplete = true) => {
   const currentNode = currentData.value[valueIndex]
   currentIndexes.value.splice(tabActive.value, currentIndexes.value.length, valueIndex)
   emit('nodeClick', currentNode)
   // 达到设置的最大层级时直接完成
   if (currentIndexes.value.length >= props.maxLevel) {
-    onSelectFinish(item)
+    autoComplete && onSelectFinish(item)
     return
   }
   // 根据有无子节点判断
   if (isLeafNode(currentNode)) {
-    onSelectFinish(item)
+    autoComplete && onSelectFinish(item)
     return
   }
   // 动态数据
@@ -385,11 +385,34 @@ const setCheckedNodes = (node: CascaderOption | CascaderOption[]) => {
   })
 }
 
+/**
+ * 根据值反推列表项并选中
+ */
+const setSelectedByValues = (values?: CascaderValue[]) => {
+  // 排除无值、已选中路径的情况
+  if (!values?.length || currentIndexes.value.length) return
+  // 根据值反推节点，节点值一样的情况下会有问题，无法避免
+  let currentData = treeData.value
+  const params = values.map<[TreeNode<CascaderOption>, number]>((value) => {
+    const findIndex = currentData.findIndex(
+      (item) => item[fieldNames.value.value as keyof typeof item] === value,
+    )
+    currentData = currentData[findIndex][fieldNames.value.children as keyof CascaderOption] ?? []
+    return [currentData[findIndex], findIndex]
+  })
+  // 判定是否能找到完整路径，防止数据不全半路中断
+  if (values.length !== params.length) return
+  params.forEach((param) => {
+    onSelect(...param, false)
+  })
+}
+
 defineExpose({
   clean: onClean,
   reset: onReset,
   clearSelected: onClearSelected,
   setCheckedNodes,
+  setSelectedByValues,
 })
 </script>
 
