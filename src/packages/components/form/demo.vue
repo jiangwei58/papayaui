@@ -6,7 +6,7 @@
           <input
             v-model="formData.name"
             placeholder="请输入"
-            :placeholder-style="`color:var(--${PREFIX}-number-input-placeholder-color)`"
+            :placeholder-style="`color:var(--${defaultNamespace}-number-input-placeholder-color)`"
           />
         </pa-form-item>
 
@@ -53,7 +53,7 @@
             <input
               v-model="item.name"
               placeholder="请输入"
-              :placeholder-style="`color:var(--${PREFIX}-number-input-placeholder-color)`"
+              :placeholder-style="`color:var(--${defaultNamespace}-number-input-placeholder-color)`"
             />
             <pa-button
               type="danger"
@@ -90,7 +90,7 @@ import { computed, reactive, ref } from 'vue'
 import { FormRules } from '../../core/useForm'
 import Form from './form.vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import { PREFIX } from '../../utils/style'
+import { defaultNamespace } from '../../core/useNamespace'
 
 interface FormData {
   name: string

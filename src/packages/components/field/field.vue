@@ -8,7 +8,7 @@
         :value="modelValue"
         :disabled="disabled || readonly"
         :placeholder="placeholder"
-        :placeholder-style="`color:var(--${PREFIX}-number-input-placeholder-color)`"
+        :placeholder-style="`color:var(${ns.cssVarName('number-input-placeholder-color')}`"
         :style="{ textAlign: valueAlign }"
         :maxlength="maxlength"
         :focus="focus"
@@ -30,7 +30,7 @@
         :value="modelValue"
         :disabled="disabled || readonly"
         :placeholder="placeholder"
-        :placeholder-style="`color:var(--${PREFIX}-number-input-placeholder-color)`"
+        :placeholder-style="`color:var(${ns.cssVarName('number-input-placeholder-color')})`"
         :style="{ textAlign: valueAlign, width: '100%', height: getUnitValue(height) }"
         :auto-height="autoHeight"
         :maxlength="maxlength"
@@ -62,7 +62,6 @@
 import useNamespace from '../../core/useNamespace'
 import { EventDetail } from '../../types'
 import { getUnitValue } from '../../utils'
-import { PREFIX } from '../../utils/style'
 import Cell from '../cell/cell.vue'
 import { CellProps } from '../cell/cell.vue'
 import Icon from '../icon/icon.vue'
