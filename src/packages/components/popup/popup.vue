@@ -95,7 +95,7 @@ const props = withDefaults(defineProps<PopupProps>(), {
 const emit = defineEmits<{
   (event: 'update:show', value: PopupProps['show']): void
   (event: 'open'): void
-  (event: 'opend'): void
+  (event: 'opened'): void
   (event: 'close'): void
   (event: 'closed'): void
   (event: 'clickOverlay'): void
@@ -205,7 +205,7 @@ const onBeforeEnter = () => {
 }
 
 const onAfterEnter = () => {
-  emit('opend')
+  emit('opened')
 }
 
 const onClose = () => {

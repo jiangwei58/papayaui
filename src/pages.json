@@ -286,7 +286,7 @@
       "type": "other"
     },
     {
-      "path": "packages/core/demo/useList",
+      "path": "packages/core/useList/demo",
       "style": {
         "navigationBarTitleText": "useList"
       },

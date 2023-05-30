@@ -1,4 +1,4 @@
-import { computed, ref, shallowRef } from 'vue'
+import { computed, ref } from 'vue'
 import { MaybeRef } from '../../types'
 import useTree, { TreeNode, UseTreeProps } from '../useTree'
 
@@ -15,7 +15,7 @@ export default <T extends object, V>(props: UseCascaderProps<T>) => {
 
   const multiple = ref(props.multiple)
 
-  const selectedMap = shallowRef<Map<V, OwnNode>>(new Map())
+  const selectedMap = ref<Map<V, OwnNode>>(new Map())
   const selectedValues = computed<V[]>(() => [...selectedMap.value.keys()])
 
   const setSelect = (item: OwnNode) => {
