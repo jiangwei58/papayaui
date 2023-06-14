@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import useSwitch from '../useSwitch'
+import useSwitch from '.'
 import { nextTick, ref } from 'vue'
 
 describe('useSwitch test', () => {

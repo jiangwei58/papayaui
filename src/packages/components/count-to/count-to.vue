@@ -16,6 +16,8 @@ export interface CountToProps {
   endNum?: number
   /** 滚动过程所需的时间，单位ms */
   duration?: number
+  /** 频率，默认保持每秒60帧，即16毫秒一次 */
+  frequency?: number
   /** 是否自动开始滚动 */
   autoplay?: boolean
   /** 缓动结尾效果 */
@@ -34,6 +36,7 @@ const props = withDefaults(defineProps<CountToProps>(), {
   startNum: 0,
   endNum: 0,
   duration: 2000,
+  frequency: undefined,
   autoplay: false,
   easeout: true,
   formatter: undefined,
@@ -47,7 +50,7 @@ const emit = defineEmits<{
   (event: 'finish'): void
 }>()
 
-const { startNum, endNum, duration, easeout } = toRefs(props)
+const { startNum, endNum, duration, frequency, easeout } = toRefs(props)
 
 const onProgress = (progress: number) => {
   emit('change', numValue.value, progress)
@@ -61,6 +64,7 @@ const { numValue, start, pause, resume, restart, reset } = useCountTo({
   startNum,
   endNum,
   duration,
+  frequency,
   easeout,
   onProgress,
   onEnd,

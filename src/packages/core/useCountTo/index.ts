@@ -8,6 +8,8 @@ export interface UseCountToProps {
   endNum?: number
   /** 滚动过程所需的时间，单位ms */
   duration?: number
+  /** 频率，默认保持每秒60帧，即16毫秒一次 */
+  frequency?: number
   /** 缓动结尾效果 */
   easeout?: boolean
   /** 过程触发事件 */
@@ -23,6 +25,7 @@ export default (props: IncludeRefs<UseCountToProps>) => {
     startNum: _props.startNum ?? 0,
     endNum: _props.endNum ?? 0,
     duration: _props.duration ?? 2000,
+    frequency: _props.frequency ?? 16,
     easeout: _props.easeout ?? true,
   })
 
@@ -47,7 +50,7 @@ export default (props: IncludeRefs<UseCountToProps>) => {
   const requestAnimationFrame = (callback: (time: number) => void) => {
     const currTime = new Date().getTime()
     // 为了使setTimeout的尽可能的接近每秒60帧的效果
-    const timeToCall = Math.max(0, 16 - (currTime - state.lastTime))
+    const timeToCall = Math.max(0, ownProps.frequency - (currTime - state.lastTime))
     state.timerId = setTimeout(() => {
       callback(currTime + timeToCall)
     }, timeToCall) as unknown as number
