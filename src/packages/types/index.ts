@@ -10,5 +10,5 @@ export type MaybeRef<T> = T | Ref<T>
 
 /** 属性包含ref类型 */
 export type IncludeRefs<T> = {
-  [P in keyof T]: T[P] | Ref<NonNullable<T[P]>>
+  [P in keyof T]: MaybeRef<T[P]>
 }
