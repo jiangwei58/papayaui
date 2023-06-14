@@ -49,8 +49,9 @@
       </view>
       <SafeBottom v-if="!showConfirm && safeAreaInsetBottom" />
     </scroll-view>
-    <view v-if="showConfirm" :class="ns.b('footer')" class="px-26 py-15">
-      <ButtonComponent type="primary" block :disabled="!confirmEnabled" @click="onConfirm">
+    <view v-if="showConfirm" :class="ns.b('footer')">
+      <text v-if="showResultText" :class="ns.e('result_text')">{{ resultText }}</text>
+      <ButtonComponent type="primary" block :disabled="!confirmEnabled" :sync-click="onConfirm">
         {{ confirmEnabled ? confirmText : confirmDisabledText }}
       </ButtonComponent>
       <SafeBottom v-if="safeAreaInsetBottom" />
@@ -105,6 +106,12 @@ export interface CalendarWrapperProps {
   allowSameDay?: boolean
   /** 日期区间最多可选天数，默认无限制 */
   maxRange?: number
+  /**
+   * 是否显示选择结果文字
+   * @description 底部显示当前选中的日期，多选','分隔，范围'~'分隔
+   * @default - false
+   */
+  showResultText?: boolean
 }
 
 const ns = useNamespace('calendar')
@@ -159,6 +166,11 @@ const scrollTop = ref<number>(0)
 const confirmEnabled = computed<boolean>(() => {
   if (props.type === 'range') return selectedItems.value.length >= 2
   return selectedItems.value.length > 0
+})
+
+const resultText = computed(() => {
+  const separator = type.value === 'range' ? '~' : ','
+  return selectedItems.value.map((item) => item.format('YYYY-MM-DD')).join(separator)
 })
 
 /**
@@ -370,6 +382,16 @@ defineExpose({
 
   &-footer {
     flex-shrink: 0;
+    padding: 8px 13px;
+  }
+
+  &__result_text {
+    display: block;
+    font-size: 14px;
+    text-align: center;
+    color: _var(color-primary);
+    line-height: 20px;
+    padding-bottom: 8px;
   }
 }
 </style>
