@@ -2,7 +2,7 @@
   <view :class="ns.b()">
     <slot name="columns-top" />
 
-    <view v-if="showToolbar" :class="ns.b('toolbar')" class="border-bottom">
+    <view v-if="showToolbar" :class="[ns.b('toolbar'), { 'border-bottom': !showColumnsHeader }]">
       <view :class="ns.e('btn')" class="text-black" hover-class="btn-hover" @click="onCancel">
         <slot v-if="$slots.cancel" />
         <template v-else>{{ cancelButtonText }}</template>
@@ -12,6 +12,12 @@
       <view :class="ns.e('btn')" class="color-primary" hover-class="btn-hover" @click="onConfirm">
         <slot v-if="$slots.confirm" />
         <template v-else>{{ confirmButtonText }}</template>
+      </view>
+    </view>
+
+    <view v-if="showColumnsHeader" :class="ns.b('col-header')" class="border-bottom">
+      <view v-for="colName in headers" :key="colName" :class="ns.be('col-header', 'item')">
+        {{ colName }}
       </view>
     </view>
 
@@ -40,7 +46,7 @@
 </template>
 
 <script lang="ts" setup>
-import { toRefs } from 'vue'
+import { computed, toRefs } from 'vue'
 import useDatePicker, {
   DatePickerColumnType,
   DatePickerFilter,
@@ -80,6 +86,15 @@ export interface PickerViewProps {
    * @description 启用时只有confirm会触发modelValue更新，禁用时change会触发modelValue更新
    */
   showToolbar?: boolean
+  /**
+   * 是否显示列标题栏
+   */
+  showColumnsHeader?: boolean
+  /**
+   * 列标题名称
+   * @default - 默认根据列的类型自动匹配显示，如：year -> 年
+   */
+  columnsHeader?: string[] | ((types: DatePickerColumnType[]) => string[])
   /** 确认按钮文字 */
   confirmButtonText?: string
   /** 取消按钮文字 */
@@ -103,6 +118,7 @@ const props = withDefaults(defineProps<PickerViewProps>(), {
   maxDate: undefined,
   title: '',
   showToolbar: true,
+  columnsHeader: undefined,
   confirmButtonText: '确认',
   cancelButtonText: '取消',
   optionHeight: 44,
@@ -133,6 +149,22 @@ const {
   maxDate,
   formatter: props.formatter,
   filter: props.filter,
+})
+
+const headers = computed(() => {
+  if (typeof props.columnsHeader === 'undefined') {
+    const typeNames: { [key in DatePickerColumnType]: string } = {
+      year: '年',
+      month: '月',
+      day: '日',
+      hour: '时',
+      minute: '分',
+    }
+    return _columnsType.value.map((type) => typeNames[type])
+  }
+  return typeof props.columnsHeader === 'function'
+    ? props.columnsHeader(_columnsType.value)
+    : props.columnsHeader
 })
 
 const onChange = (event: EventDetail<{ value: number[] }>) => {
@@ -182,6 +214,17 @@ const onCancel = () => {
     line-height: $toolbarHeight;
     height: 100%;
     padding: 0 32rpx;
+  }
+
+  &-col-header {
+    display: flex;
+    background-color: #fff;
+    &__item {
+      flex: 1;
+      font-size: 12px;
+      line-height: 30px;
+      text-align: center;
+    }
   }
 
   &-column {

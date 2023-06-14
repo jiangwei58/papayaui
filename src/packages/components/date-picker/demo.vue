@@ -5,7 +5,7 @@
 
   <DocDemoBlock title="配合Popup使用" card>
     <pa-cell title="选择年月日" :value="dateText" clickable @click="datePickerShow = true" />
-    <pa-popup :show="datePickerShow" position="bottom">
+    <pa-popup v-model:show="datePickerShow" position="bottom">
       <pa-date-picker title="选择年月日" @confirm="onConfirm" />
     </pa-popup>
   </DocDemoBlock>
@@ -31,6 +31,15 @@
 
   <DocDemoBlock title="选择年月日小时" card>
     <pa-date-picker title="选择年月日小时" :columns-type="['year', 'month', 'day', 'hour']" />
+  </DocDemoBlock>
+
+  <DocDemoBlock title="显示列标题" card>
+    <pa-date-picker
+      v-model="dateValue"
+      title="选择年月日"
+      show-columns-header
+      @confirm="onConfirm"
+    />
   </DocDemoBlock>
 
   <DocDemoBlock title="选项过滤器" card>
