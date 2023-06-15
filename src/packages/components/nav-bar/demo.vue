@@ -16,7 +16,7 @@
   <DocDemoBlock title="胶囊菜单" />
   <pa-nav-bar
     title="页面标题"
-    :left-menu="['left', 'search']"
+    :left-menu="['left', 'home']"
     :safe-area-inset-top="false"
     @menu-click="onMenuClick"
   />

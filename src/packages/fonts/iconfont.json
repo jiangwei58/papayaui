@@ -6,11 +6,18 @@
   "description": "",
   "glyphs": [
     {
-      "icon_id": "4766685",
+      "icon_id": "5326767",
       "name": "home",
       "font_class": "home",
-      "unicode": "e7c6",
-      "unicode_decimal": 59334
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "24883439",
+      "name": "home",
+      "font_class": "home-fill",
+      "unicode": "e601",
+      "unicode_decimal": 58881
     },
     {
       "icon_id": "4936479",

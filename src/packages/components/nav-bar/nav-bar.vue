@@ -1,6 +1,11 @@
 <template>
   <view
-    :class="[ns.b(), ns.m(theme), ns.is('single', leftMenu.length === 1)]"
+    :class="[
+      ns.b(),
+      ns.m(theme),
+      ns.is('single', leftMenu.length === 1),
+      ns.is('development', systemInfo.platform === 'devtools'),
+    ]"
     :style="{ backgroundColor: bgColor, paddingTop: getUnitValue(statusBarHeight, 'px') }"
   >
     <view v-if="leftMenu.length" :class="ns.e('capsule-menu')" :style="capsuleMenuStyle">
@@ -16,8 +21,6 @@
         :class="ns.e('title')"
         :style="{
           lineHeight: getUnitValue(contentHeight, 'px'),
-          fontSize: '16px',
-          fontWeight: 'bold',
         }"
       >
         {{ title }}
@@ -110,7 +113,6 @@ const onLeftMenuClick = (index: number) => {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    font-weight: bold;
     @include _setVar(icon-size, 22px);
 
     &-line {
@@ -127,6 +129,8 @@ const onLeftMenuClick = (index: number) => {
     display: block;
     width: 100%;
     text-align: center;
+    font-size: 16px;
+    font-weight: bold;
   }
 
   &--white &__title {
@@ -158,6 +162,11 @@ const onLeftMenuClick = (index: number) => {
     @include _setVar(icon-size, 24px);
     background-color: transparent;
     border-color: transparent;
+  }
+
+  &--development &__title {
+    font-size: 14px;
+    font-weight: normal;
   }
 }
 </style>
