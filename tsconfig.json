@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "esnext",
@@ -12,10 +11,7 @@
     "esModuleInterop": true,
     "allowJs": true,
     "lib": ["esnext", "dom"],
-    "types": ["@dcloudio/types"],
-    "paths": {
-      "@/*": ["src/*"]
-    }
+    "types": ["@dcloudio/types"]
   },
   "include": [
     "src/**/*.ts",
