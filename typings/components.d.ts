@@ -50,6 +50,8 @@ declare module 'vue' {
     PaSidebar: typeof import('../src/packages/components/sidebar/sidebar.vue')['default']
     PaSidebarItem: typeof import('../src/packages/components/sidebar-item/sidebar-item.vue')['default']
     PaDatePicker: typeof import('../src/packages/components/date-picker/date-picker.vue')['default']
+    PaCollapse: typeof import('../src/packages/components/collapse/collapse.vue')['default']
+    PaCollapseItem: typeof import('../src/packages/components/collapse-item/collapse-item.vue')['default']
   }
 }
 

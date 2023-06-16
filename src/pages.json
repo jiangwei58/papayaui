@@ -216,6 +216,13 @@
       "type": "show"
     },
     {
+      "path": "packages/components/collapse/demo",
+      "style": {
+        "navigationBarTitleText": "Collapse 折叠面板"
+      },
+      "type": "show"
+    },
+    {
       "path": "packages/components/count-to/demo",
       "style": {
         "navigationBarTitleText": "CountTo 数字滚动"

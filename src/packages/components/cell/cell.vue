@@ -132,6 +132,8 @@ const onClick = (event: MouseEvent) => {
   &__icon-right {
     font-weight: bold;
     margin-left: 8rpx;
+    transition: transform 0.3s ease-in-out;
+    transform: rotate(_var(cell-icon-right-rotate, 0));
   }
 
   &__error-message {
