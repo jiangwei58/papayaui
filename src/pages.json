@@ -251,6 +251,13 @@
       "type": "show"
     },
     {
+      "path": "packages/components/skeleton/demo",
+      "style": {
+        "navigationBarTitleText": "Skeleton 骨架屏"
+      },
+      "type": "show"
+    },
+    {
       "path": "packages/components/picker-popup/demo",
       "style": {
         "navigationBarTitleText": "PickerPopup 选择弹窗"

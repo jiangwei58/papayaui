@@ -52,6 +52,7 @@ declare module 'vue' {
     PaDatePicker: typeof import('../src/packages/components/date-picker/date-picker.vue')['default']
     PaCollapse: typeof import('../src/packages/components/collapse/collapse.vue')['default']
     PaCollapseItem: typeof import('../src/packages/components/collapse-item/collapse-item.vue')['default']
+    PaSkeleton: typeof import('../src/packages/components/skeleton/skeleton.vue')['default']
   }
 }
 
