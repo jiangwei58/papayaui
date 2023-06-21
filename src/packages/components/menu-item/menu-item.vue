@@ -44,7 +44,8 @@ import { noop } from '../../utils'
 import Cell from '../cell/cell.vue'
 import IconComponent from '../icon/icon.vue'
 import { MenuProvideData } from '../menu/menu.vue'
-import Popup, { PopupProps } from '../popup/popup.vue'
+import Popup from '../popup/popup.vue'
+import type { PopupProps } from '../popup/props'
 
 export interface MenuItemInstance extends Omit<ComponentInternalInstance, 'props'> {
   props: MenuItem
@@ -131,14 +132,14 @@ const customStyle = computed(() => {
   return style
 })
 
-const popupAttrs = computed<PopupProps>(() => {
+const popupAttrs = computed(() => {
   if (!menuProvide.props) return {}
   return {
     position: menuProvide.props.direction === 'up' ? 'bottom' : 'top',
     duration: menuProvide.props.duration,
     overlay: menuProvide.props.overlay,
     closeOnClickOverlay: menuProvide.props.closeOnClickOverlay,
-  }
+  } as Pick<PopupProps, 'position' | 'duration' | 'overlay' | 'closeOnClickOverlay'>
 })
 
 const toggle = (show = !visible.value) => {

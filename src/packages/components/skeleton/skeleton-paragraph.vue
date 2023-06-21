@@ -3,16 +3,12 @@
 </template>
 
 <script setup lang="ts">
+import { skeletonParagraphProps } from './props'
 import useNamespace from '../../core/useNamespace'
-import { skeletonProps, skeletonParagraphProps } from '../skeleton'
-import { pickProps } from '../../utils'
 
 const ns = useNamespace('skeleton-paragraph')
 
-defineProps({
-  ...skeletonParagraphProps,
-  ...pickProps(skeletonProps, ['round']),
-})
+defineProps(skeletonParagraphProps)
 </script>
 
 <style lang="scss" scoped>

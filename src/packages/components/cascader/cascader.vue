@@ -5,7 +5,10 @@
     :height="height"
     :safe-area-inset-bottom="false"
     @update:show="emit('update:show', $event as boolean)"
+    @open="emit('open')"
+    @opened="emit('opened')"
     @close="onClose"
+    @closed="emit('closed')"
   >
     <view :class="ns.b('content')">
       <Search v-if="showSearch" v-model="searchText" :class="ns.b('search')" />
@@ -79,8 +82,7 @@ import { computed, nextTick, ref, toRaw, toRefs, watch } from 'vue'
 import useCascader from '../../core/useCascader'
 import { LoadStatusEnum } from '../../core/useList'
 import useNamespace from '../../core/useNamespace'
-import type { TreeNode, UseTreeFieldNames } from '../../core/useTree'
-import { defaultFieldNames } from '../../core/useTree'
+import type { TreeNode } from '../../core/useTree'
 import { EventDetail } from '../../types'
 import BottomPopup from '../bottom-popup/bottom-popup.vue'
 import ButtonComponent from '../button/button.vue'
@@ -89,84 +91,13 @@ import Loadmore from '../loadmore/loadmore.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import Search from '../search/search.vue'
 import Tabs from '../tabs/tabs.vue'
-import SearchView, { SearchNode } from './search-view.vue'
-
-export interface CascaderNode<T = any> {
-  props: T
-  level: number
-}
-
-export type CascaderOption = any
-export type CascaderValue = any
-
-export interface CascaderProps {
-  /** 值 */
-  modelValue?: CascaderValue[]
-  /** 显示状态 */
-  show?: boolean
-  /** 高度 */
-  height?: string
-  /** 标题 */
-  title?: string
-  /** 可选项数据源 */
-  options?: CascaderOption[]
-  /** 自定义 options 结构中的字段 */
-  fieldNames?: Partial<UseTreeFieldNames<CascaderOption>>
-  /** 最大层级，把哪一层级作为叶子节点 */
-  maxLevel?: number
-  /** 是否多选 */
-  multiple?: boolean
-  /** 是否显示搜索 */
-  showSearch?: boolean
-  /** 动态获取下一级节点数据 */
-  lazyLoad?: (node: CascaderNode) => CascaderOption[] | Promise<CascaderOption[]>
-  /** 远程搜索 */
-  lazySearch?: (searchText: string) => CascaderOption[] | Promise<CascaderOption[]>
-  /** 底部安全距离 */
-  safeAreaInsetBottom?: boolean
-  /** 确定按钮文案，多选时默认数量显示的文案也要自己定义 */
-  confirmButtonText?: string
-  /** 重置按钮文案 */
-  resetButtonText?: string
-  /** 确定后是否重置数据 */
-  resetAfterConfirm?: boolean
-  /** 是否显示底部确认重置按钮，多选时强制开启 */
-  showConfirm?: boolean
-  /** 是否允许空值，只在显示底部操作按钮时有效（通常使用场景是未选中值时允许确认） */
-  allowEmpty?: boolean
-}
+import { cascaderEmits, CascaderOption, cascaderProps, CascaderValue, SearchNode } from './props'
+import SearchView from './search-view.vue'
 
 const ns = useNamespace('cascader')
 
-const props = withDefaults(defineProps<CascaderProps>(), {
-  modelValue: undefined,
-  show: false,
-  height: undefined,
-  title: '',
-  options: () => [],
-  fieldNames: () => defaultFieldNames,
-  maxLevel: Number.MAX_SAFE_INTEGER,
-  multiple: false,
-  lazyLoad: undefined,
-  lazySearch: undefined,
-  safeAreaInsetBottom: true,
-  confirmButtonText: undefined,
-  resetButtonText: '重置',
-})
-
-const emit = defineEmits<{
-  (event: 'update:show', show: boolean): void
-  (event: 'update:modelValue', value: CascaderValue[]): void
-  (
-    event: 'change',
-    value: CascaderValue[],
-    items: CascaderOption[],
-    extra: { tabIndex: number; isSearch: boolean },
-  ): void
-  (event: 'reset'): void
-  (event: 'confirm'): void
-  (event: 'nodeClick', node: TreeNode<CascaderOption>): void
-}>()
+const props = defineProps(cascaderProps)
+const emit = defineEmits(cascaderEmits)
 
 const { show, options, fieldNames, multiple } = toRefs(props)
 
@@ -357,6 +288,7 @@ const onConfirm = () => {
 const onClose = () => {
   searchText.value = ''
   emit('update:show', false)
+  emit('close')
 }
 
 /** 重置数据（清除选中数据，还原tab选中状态） */

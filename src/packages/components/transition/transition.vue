@@ -11,77 +11,15 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, CSSProperties, nextTick, reactive, watch } from 'vue'
+import { computed, nextTick, reactive, watch } from 'vue'
 import useNamespace, { defaultNamespace } from '../../core/useNamespace'
 import { noop } from '../../utils/common'
-
-/**
- * 动画内置的动画模式有如下：
- * fade：淡入
- * zoom：缩放
- * fade-zoom：缩放淡入
- * fade-up：上滑淡入
- * fade-down：下滑淡入
- * fade-left：左滑淡入
- * fade-right：右滑淡入
- * slide-up：上滑进入
- * slide-down：下滑进入
- * slide-left：左滑进入
- * slide-right：右滑进入
- */
-export type TransitionMode =
-  | 'fade'
-  | 'zoom'
-  | 'fade-zoom'
-  | 'fade-up'
-  | 'fade-down'
-  | 'fade-left'
-  | 'fade-right'
-  | 'slide-up'
-  | 'slide-down'
-  | 'slide-left'
-  | 'slide-right'
-
-export interface TransitionProps {
-  /** 是否展示组件 */
-  show?: boolean
-  /** 使用的动画模式 */
-  mode?: TransitionMode
-  /** 动画的执行时间，单位ms */
-  duration?: string | number
-  /** 使用的动画过渡函数 */
-  timingFunction?: CSSProperties['transitionTimingFunction']
-  /** 自定义class */
-  customClass?: string
-  /** 自定义样式 */
-  customStyle?: CSSProperties
-}
+import { transitionEmits, transitionProps } from './props'
 
 const ns = useNamespace('transition')
 
-const props = withDefaults(defineProps<TransitionProps>(), {
-  mode: 'fade',
-  duration: 300,
-  timingFunction: 'ease-out',
-  customClass: undefined,
-  customStyle: undefined,
-})
-
-const emit = defineEmits<{
-  (event: 'click'): void
-  /** 进入前触发 */
-  (event: 'beforeEnter'): void
-  /** 进入中触发 */
-  (event: 'enter'): void
-  /** 进入后触发 */
-  (event: 'afterEnter'): void
-  /** 离开前触发 */
-  (event: 'beforeLeave'): void
-  /** 离开中触发 */
-  (event: 'leave'): void
-  /** 离开后触发 */
-  (event: 'afterLeave'): void
-}>()
+const props = defineProps(transitionProps)
+const emit = defineEmits(transitionEmits)
 
 const state = reactive<{
   inited: boolean // 是否显示/隐藏组件

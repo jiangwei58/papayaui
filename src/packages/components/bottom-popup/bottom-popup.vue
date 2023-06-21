@@ -12,6 +12,10 @@
     :close-on-click-overlay="maskCloseAble"
     :safe-area-inset-bottom="false"
     @update:show="emit('update:show', !!$event)"
+    @open="emit('open')"
+    @opened="emit('opened')"
+    @close="emit('close')"
+    @closed="emit('closed')"
   >
     <view :class="[ns.e('wrapper'), { 'safe-bottom-padding': safeAreaInsetBottom }]">
       <view :class="ns.e('header')">
@@ -34,53 +38,17 @@
 </template>
 
 <script lang="ts" setup>
-import { CSSProperties, toRefs } from 'vue'
+import { toRefs } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import Popup from '../popup/popup.vue'
-
-export interface BottomPopupProps {
-  /** 是否显示弹窗 */
-  show: boolean
-  /** 标题 */
-  title?: string
-  /** 弹窗高度 */
-  height?: string
-  /** z-index层级 */
-  zIndex?: number
-  /** 是否显示遮罩 */
-  overlay?: boolean
-  /** 背景色 */
-  bgColor?: CSSProperties['background-color']
-  /** 是否圆角 */
-  round?: boolean | string
-  /** 是否显示关闭按钮 */
-  closeable?: boolean
-  /** 是否可以点击空白处关闭 */
-  maskCloseAble?: boolean
-  /** 是否留出底部安全距离 */
-  safeAreaInsetBottom?: boolean
-}
+import { bottomPopupEmits, bottomPopupProps } from './props'
 
 const ns = useNamespace('bottom-popup')
 
-const props = withDefaults(defineProps<BottomPopupProps>(), {
-  show: false,
-  title: undefined,
-  height: '80vh',
-  zIndex: undefined,
-  overlay: undefined,
-  bgColor: undefined,
-  round: true,
-  closeable: true,
-  maskCloseAble: true,
-  safeAreaInsetBottom: true,
-})
+const props = defineProps(bottomPopupProps)
+const emit = defineEmits(bottomPopupEmits)
 
 const { show } = toRefs(props)
-
-const emit = defineEmits<{
-  (event: 'update:show', value: BottomPopupProps['show']): void
-}>()
 </script>
 
 <style lang="scss" scoped>

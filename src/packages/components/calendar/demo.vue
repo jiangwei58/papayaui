@@ -100,7 +100,7 @@
   </DocDemoBlock>
 
   <DocDemoBlock title="平铺展示" card>
-    <pa-calendar :poppable="false" :default-date="state.defaultDate" round="8px" />
+    <pa-calendar :poppable="false" :default-date="state.defaultDate" />
   </DocDemoBlock>
 
   <pa-calendar
@@ -124,9 +124,9 @@ import dayjs from 'dayjs'
 import { ref } from 'vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
-import { CalendarProps } from './calendar.vue'
+import { CalendarProps } from './props'
 
-type StateProps = CalendarProps & { current?: number }
+type StateProps = Partial<CalendarProps> & { current?: number }
 
 const visible = ref<boolean>(false)
 const state = ref<StateProps>({

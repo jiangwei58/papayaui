@@ -18,7 +18,7 @@
 <script lang="ts" setup>
 import { nextTick, ref } from 'vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import { TransitionMode } from './transition.vue'
+import type { TransitionMode } from './props'
 
 const show = ref<boolean>(true)
 const mode = ref<TransitionMode>('fade')

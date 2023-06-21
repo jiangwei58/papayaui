@@ -18,36 +18,22 @@
 <script lang="ts" setup>
 import { ref, toRefs, watch } from 'vue'
 import useNamespace from '../../core/useNamespace'
-import { TreeNode, UseTreeFieldNames } from '../../core/useTree'
 import { LoadStatusEnum } from '../../hooks'
 import { debounce } from '../../utils/common'
+import ListItem from '../list-item/list-item.vue'
 import Loadmore from '../loadmore/loadmore.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
-import { CascaderOption, CascaderValue } from './cascader.vue'
-import ListItem from '../list-item/list-item.vue'
-
-export interface CascaderSearchViewProps {
-  show?: boolean
-  options: CascaderOption[]
-  fieldNames: UseTreeFieldNames<CascaderOption>
-  searchText: string
-  lazySearch?: (searchText: string) => CascaderOption[] | Promise<CascaderOption[]>
-  isSelected: (value: CascaderValue) => boolean
-  safeAreaInsetBottom?: boolean
-}
-
-export interface SearchNode extends TreeNode<CascaderOption> {
-  __label: string
-  __remoteSearch: boolean
-}
+import {
+  CascaderOption,
+  cascaderSearchViewEmits,
+  cascaderSearchViewProps,
+  SearchNode,
+} from './props'
 
 const ns = useNamespace('cascader-search-view')
 
-const props = defineProps<CascaderSearchViewProps>()
-
-const emit = defineEmits<{
-  (event: 'select', item: SearchNode): void
-}>()
+const props = defineProps(cascaderSearchViewProps)
+const emit = defineEmits(cascaderSearchViewEmits)
 
 const { options, fieldNames, searchText, lazySearch } = toRefs(props)
 

@@ -1,4 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue'
+import { pickProps } from '../../utils'
 
 export const skeletonProps = {
   /**
@@ -55,8 +56,13 @@ export const skeletonProps = {
   },
 }
 
+export const skeletonTitleProps = pickProps(skeletonProps, ['round', 'titleWidth'])
+
+export const skeletonAvatarProps = pickProps(skeletonProps, ['avatarSize', 'avatarShape'])
+
 export const skeletonParagraphProps = {
   rowWidth: [Number, String],
+  round: skeletonProps.round,
 }
 
 export type SkeletonProps = ExtractPropTypes<typeof skeletonProps>

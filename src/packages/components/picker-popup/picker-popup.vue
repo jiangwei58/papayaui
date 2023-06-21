@@ -6,7 +6,10 @@
     :height="height"
     :safe-area-inset-bottom="false"
     @update:show="emit('update:show', $event as boolean)"
+    @open="emit('open')"
+    @opened="emit('opened')"
     @close="onClose"
+    @closed="emit('closed')"
     @confirm="onOk"
   >
     <view :class="ns.b('content')">
@@ -51,7 +54,7 @@
 
 <script lang="ts" setup>
 import { computed, ref, toRefs, watch } from 'vue'
-import useList, { LoadStatusEnum, UseListProps } from '../../core/useList'
+import useList, { LoadStatusEnum } from '../../core/useList'
 import useNamespace from '../../core/useNamespace'
 import useSelect from '../../core/useSelect'
 import { debounce } from '../../utils/common'
@@ -61,73 +64,12 @@ import ListItem from '../list-item/list-item.vue'
 import Loadmore from '../loadmore/loadmore.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import Search from '../search/search.vue'
-
-export type Option = any
-export type OptionValue = number | string
-
-export interface PickerPopupProps {
-  modelValue?: OptionValue | OptionValue[]
-  /** 显示状态 */
-  show?: boolean
-  /** 高度 */
-  height?: string
-  /** 标题 */
-  title?: string
-  /** 选项数据 */
-  data?: Option[]
-  /** 数据标题的字段名 */
-  labelKey?: string
-  /** 数据值的字段名 */
-  valueKey?: string
-  /** 是否显示搜索 */
-  showSearch?: boolean
-  /** 是否多选 */
-  multiple?: boolean
-  /** 动态获取下一级节点数据 */
-  load?: (
-    query?: string,
-    pageNumber?: number,
-    pageSize?: number,
-    extra?: Record<string, unknown>,
-  ) => Option[] | Promise<Option[]>
-  /** 是否远程搜索 */
-  remote?: boolean
-  /** 是否支持分页 */
-  pagination?: boolean | UseListProps<Option>
-  /** 是否留出底部安全距离 */
-  safeAreaInsetBottom?: boolean
-  /** 每次打开重新加载数据 */
-  initData?: boolean
-  /** 确认按钮的文案 */
-  confirmButtonText?: string
-  /** 确定后是否重置数据 */
-  resetAfterConfirm?: boolean
-}
+import { Option, OptionValue, pickerPopupEmits, pickerPopupProps } from './props'
 
 const ns = useNamespace('picker-popup')
 
-const props = withDefaults(defineProps<PickerPopupProps>(), {
-  modelValue: undefined,
-  show: false,
-  height: undefined,
-  title: '',
-  data: () => [],
-  labelKey: 'label',
-  valueKey: 'value',
-  multiple: false,
-  load: undefined,
-  remote: false,
-  pagination: false,
-  safeAreaInsetBottom: true,
-  confirmButtonText: '确定',
-})
-
-const emit = defineEmits<{
-  (event: 'update:show', show: boolean): void
-  (event: 'update:modelValue', value: OptionValue | OptionValue[]): void
-  (event: 'change', item: Option | Option[]): void
-  (event: 'close'): void
-}>()
+const props = defineProps(pickerPopupProps)
+const emit = defineEmits(pickerPopupEmits)
 
 const { show, data, modelValue, labelKey, valueKey, multiple, pagination } = toRefs(props)
 

@@ -6,13 +6,12 @@
 </template>
 
 <script setup lang="ts">
+import { skeletonAvatarProps } from './props'
 import useNamespace from '../../core/useNamespace'
-import { pickProps } from '../../utils'
-import { skeletonProps } from '../skeleton'
 
 const ns = useNamespace('skeleton-avatar')
 
-defineProps(pickProps(skeletonProps, ['avatarSize', 'avatarShape']))
+defineProps(skeletonAvatarProps)
 </script>
 
 <style lang="scss" scoped>

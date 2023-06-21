@@ -19,8 +19,8 @@ import { computed, getCurrentInstance, onMounted, provide, Ref, ref } from 'vue'
 import useNamespace, { defaultNamespace } from '../../core/useNamespace'
 import { useRect } from '../../hooks'
 import { MenuItemInstance } from '../menu-item/menu-item.vue'
-import { PopupProps } from '../popup/popup.vue'
-import { TransitionProps } from '../transition/transition.vue'
+import type { PopupProps } from '../popup/props'
+import type { TransitionProps } from '../transition/props'
 
 export interface MenuProps {
   /** 菜单展开方向 */
