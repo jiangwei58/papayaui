@@ -81,7 +81,7 @@ const updateData = async (text: string) => {
     searchData.value = getFlattenTreeData(res, true)
     loading.value = false
   } else {
-    searchData.value = getFlattenTreeData(options.value, false, text)
+    searchData.value = getFlattenTreeData(options.value, false, text.trim())
   }
 }
 const debounceUpdateData = debounce(updateData, 300)

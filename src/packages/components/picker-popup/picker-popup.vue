@@ -101,7 +101,9 @@ const filterOptions = computed(() => {
   // 远程情况不作处理
   if (props.remote) return options.value
   // 本地数据情况，直接做过滤
-  return options.value.filter((item) => item[labelKey.value]?.indexOf(searchText.value) !== -1)
+  return options.value.filter(
+    (item) => item[labelKey.value]?.indexOf(searchText.value.trim()) !== -1,
+  )
 })
 
 watch(show, async (newVal, oldVal) => {

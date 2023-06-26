@@ -1,8 +1,7 @@
 import { ExtractPropTypes, PropType } from 'vue'
 import { UseListProps } from '../../core/useList'
-import { pickProps } from '../../utils'
+import { isBoolean, pickProps } from '../../utils'
 import { bottomPopupEmits, bottomPopupProps } from '../bottom-popup/props'
-import { isBoolean } from '../../../wxcomponents/vant/common/validator'
 
 export type Option = any
 export type OptionValue = number | string
