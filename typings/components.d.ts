@@ -53,6 +53,7 @@ declare module 'vue' {
     PaCollapse: typeof import('../src/packages/components/collapse/collapse.vue')['default']
     PaCollapseItem: typeof import('../src/packages/components/collapse-item/collapse-item.vue')['default']
     PaSkeleton: typeof import('../src/packages/components/skeleton/skeleton.vue')['default']
+    PaUploader: typeof import('../src/packages/components/uploader/uploader.vue')['default']
   }
 }
 

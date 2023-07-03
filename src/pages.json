@@ -167,6 +167,13 @@
       "type": "form"
     },
     {
+      "path": "packages/components/uploader/demo",
+      "style": {
+        "navigationBarTitleText": "Uploader 文件上传"
+      },
+      "type": "form"
+    },
+    {
       "path": "packages/components/nav-bar/demo",
       "style": {
         "navigationBarTitleText": "NavBar 导航栏"

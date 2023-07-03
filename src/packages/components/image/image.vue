@@ -8,6 +8,7 @@
         borderRadius: round === true ? getUnitValue('999') : getUnitValue(round || '0'),
       })
     "
+    @tap="emit('click')"
   >
     <image
       :class="ns.e('img')"
@@ -64,6 +65,10 @@ withDefaults(defineProps<ImageProps>(), {
   height: undefined,
   round: undefined,
 })
+
+const emit = defineEmits<{
+  (event: 'click'): void
+}>()
 
 const status = ref<'success' | 'loading' | 'error'>('loading')
 

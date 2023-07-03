@@ -28,7 +28,7 @@ defineProps<OwnProps>()
     line-height: 16px;
   }
   .doc-demo-block__card {
-    margin: 12px 12px 0;
+    margin: 0 12px 0;
   }
 }
 </style>

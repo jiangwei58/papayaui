@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "399099",
+      "name": "camera",
+      "font_class": "camera-fill",
+      "unicode": "e705",
+      "unicode_decimal": 59141
+    },
+    {
+      "icon_id": "4868894",
+      "name": "camera",
+      "font_class": "camera",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
       "icon_id": "5326767",
       "name": "home",
       "font_class": "home",
