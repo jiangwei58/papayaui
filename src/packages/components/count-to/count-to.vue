@@ -36,7 +36,7 @@ const props = withDefaults(defineProps<CountToProps>(), {
   startNum: 0,
   endNum: 0,
   duration: 2000,
-  frequency: undefined,
+  frequency: 16,
   autoplay: false,
   easeout: true,
   formatter: undefined,
