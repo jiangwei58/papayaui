@@ -1,12 +1,14 @@
 <template>
-  <pa-watermark :contents="['papayaui-watermark', '2022-10-29 23:59']" />
+  <pa-watermark :contents="contents" />
 
   <view class="p-30" style="height: 100vh">{{ text }}</view>
 </template>
 
 <script lang="ts" setup>
+import dayjs from 'dayjs'
 import { onMounted, ref } from 'vue'
 
+const contents = ['papayaui-watermark', dayjs().format('YYYY-MM-DD HH:mm')]
 const text = ref<string>('')
 
 onMounted(() => {
