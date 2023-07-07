@@ -47,15 +47,5 @@ const onOk = () => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.active {
-  background-color: _var(color-primary);
-  color: #fff;
-}
-.btn {
-  line-height: 100rpx;
-  background-color: _var(color-primary);
-  color: #fff;
-  text-align: center;
-}
+@import './env-view.scss';
 </style>

@@ -110,56 +110,5 @@ const onCancel = () => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-
-.#{$prefix}-date-picker {
-  $toolbarHeight: 88rpx;
-
-  display: flex;
-  flex-direction: column;
-
-  &-toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: $toolbarHeight;
-    font-size: 32rpx;
-    background-color: #fff;
-  }
-
-  &__title {
-    font-weight: 500;
-    line-height: 42rpx;
-    color: _var(color-black);
-  }
-
-  &__btn {
-    font-size: 28rpx;
-    line-height: $toolbarHeight;
-    height: 100%;
-    padding: 0 32rpx;
-  }
-
-  &-col-header {
-    display: flex;
-    background-color: #fff;
-    &__item {
-      flex: 1;
-      font-size: 12px;
-      line-height: 30px;
-      text-align: center;
-    }
-  }
-
-  &-column {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-}
-
-.btn-hover {
-  opacity: 0.7;
-}
+@import './date-picker.scss';
 </style>

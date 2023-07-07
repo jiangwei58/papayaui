@@ -120,15 +120,5 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-sticky {
-  position: sticky;
-
-  &--fixed &__content {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-  }
-}
+@import './sticky.scss';
 </style>

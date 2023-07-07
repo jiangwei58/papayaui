@@ -1,0 +1,44 @@
+@import '../../styles/vars.scss';
+.#{$prefix}-collapse-item {
+  position: relative;
+
+  &__title {
+    @include _setVar(cell-icon-right-rotate, 90deg);
+  }
+
+  &__wrapper {
+    overflow: hidden;
+    height: 0;
+    transition: height _var(collapse-item-duration, 0.3s) ease-in-out;
+    will-change: height;
+  }
+
+  &__content {
+    padding: _var(collapse-item-content-padding, 12px 16px);
+    color: _var(collapse-item-content-color, _var(color-black-3));
+    font-size: _var(collapse-item-content-font-size, 14px);
+    line-height: _var(collapse-item-content-line-height, 1.5);
+    background-color: _var(collapse-item-content-background, #fff);
+  }
+
+  &--border::after {
+    position: absolute;
+    box-sizing: border-box;
+    content: ' ';
+    pointer-events: none;
+    top: -1px;
+    right: 16px;
+    left: 16px;
+    border-top: 1px solid #ebedf0;
+    transform: scaleY(0.5);
+  }
+
+  &--expanded &__title {
+    @include _setVar(cell-icon-right-rotate, -90deg);
+  }
+
+  &--disabled {
+    @include _setVar(cell-color, _var(color-disabled));
+    @include _setVar(cell-title-color, _var(color-disabled));
+  }
+}

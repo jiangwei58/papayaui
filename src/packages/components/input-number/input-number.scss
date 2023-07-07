@@ -1,0 +1,59 @@
+@import '../../styles/vars.scss';
+.#{$prefix}-input-number {
+  $height: _var(input-number-height, 28px);
+  $bgColor: _var(input-number-bg-color, #f2f3f5);
+  $disabledColor: _var(input-number-disabled-color, #c8c9cc);
+  $disabledBgColor: _var(input-number-disabled-bg-color, #f2f3f5);
+  $round: _var(input-number-round, 4px);
+
+  align-items: center;
+  height: $height;
+  color: _var(color-black);
+  &-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: $height;
+    height: $height;
+    background-color: $bgColor;
+    &:active:not(.#{$prefix}-input-number-icon--disabled) {
+      background-color: #e8e8e8;
+    }
+  }
+  &-minus {
+    border-radius: $round 0 0 $round;
+  }
+  &-plus {
+    border-radius: 0 $round $round 0;
+  }
+  &-inner {
+    flex: 1;
+    width: _var(input-number-width, 32px);
+    height: $height;
+    font-size: _var(input-number-font-size, 14px);
+    color: _var(input-number-color, _var(color-black));
+    background-color: $bgColor;
+    border-radius: $round;
+    :deep(.#{$prefix}-input-number-placeholder) {
+      color: _var(input-number-placeholder-color, $disabledColor);
+    }
+  }
+  &--controls &-inner {
+    margin: 0 2px;
+    border-radius: 0;
+  }
+  &--icon-disabled {
+    color: $disabledColor;
+    background-color: $disabledBgColor;
+    cursor: not-allowed;
+  }
+  &--inner-disabled {
+    color: $disabledColor;
+    background-color: $disabledBgColor;
+  }
+  &--plain &-inner {
+    color: _var(input-number-color, _var(color-primary));
+    background-color: transparent;
+  }
+}

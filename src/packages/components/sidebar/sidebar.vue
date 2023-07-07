@@ -39,10 +39,5 @@ defineExpose<SidebarExposeData>({
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-
-.#{$prefix}-sidebar {
-  width: _var(sidebar-width, 80px);
-  overflow-y: auto;
-}
+@import './sidebar.scss';
 </style>

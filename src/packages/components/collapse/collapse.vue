@@ -76,20 +76,5 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-collapse {
-  &--border::after {
-    position: absolute;
-    box-sizing: border-box;
-    content: ' ';
-    pointer-events: none;
-    top: -50%;
-    right: -50%;
-    bottom: -50%;
-    left: -50%;
-    border: 0 solid #ebedf0;
-    transform: scale(0.5);
-    border-width: 1px 0;
-  }
-}
+@import './collapse.scss';
 </style>

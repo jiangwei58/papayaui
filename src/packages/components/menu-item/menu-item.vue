@@ -159,24 +159,5 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-
-.#{$prefix}-menu-item {
-  position: fixed;
-  right: 0;
-  left: 0;
-  overflow: hidden;
-
-  &--down {
-    bottom: 0;
-  }
-  &--up {
-    top: 0;
-  }
-
-  &--active {
-    @include _setVar(cell-color, _var(menu-active-color, _var(color-primary)));
-    @include _setVar(cell-title-color, _var(menu-active-color, _var(color-primary)));
-  }
-}
+@import './menu-item.scss';
 </style>

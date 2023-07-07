@@ -72,25 +72,5 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-container {
-  width: 100%;
-  min-height: 100vh;
-  &-header {
-    width: 100%;
-  }
-
-  &-body {
-    position: relative;
-  }
-
-  &-bottom-fixed {
-    position: fixed;
-    width: 100%;
-    left: 0;
-    bottom: 0;
-    z-index: 98;
-    background-color: #fff;
-  }
-}
+@import './container.scss';
 </style>

@@ -48,39 +48,5 @@ const onSelect = () => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-
-.#{$prefix}-sidebar-item {
-  position: relative;
-  display: block;
-  box-sizing: border-box;
-  padding: _var(sidebar-padding, 20px 12px);
-  overflow: hidden;
-  color: _var(color-black);
-  font-size: _var(sidebar-font-size, 14px);
-  line-height: _var(sidebar-line-height, 20px);
-  background-color: _var(sidebar-bg-color, #f7f8fa);
-  cursor: pointer;
-  user-select: none;
-
-  &--active {
-    background-color: #fff;
-    &::before {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      width: 4px;
-      height: 16px;
-      background-color: _var(sidebar-active-color, _var(color-primary));
-      -webkit-transform: translateY(-50%);
-      transform: translateY(-50%);
-      content: '';
-    }
-  }
-
-  &--disabled {
-    color: _var(sidebar-disabled-color, #c8c9cc);
-    cursor: not-allowed;
-  }
-}
+@import './sidebar-item.scss';
 </style>

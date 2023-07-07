@@ -55,28 +55,5 @@ const onLoad = () => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-
-.#{$prefix}-image {
-  position: relative;
-  display: inline-block;
-  &__img {
-    width: inherit;
-    height: inherit;
-    border-radius: inherit;
-  }
-  &__loading,
-  &__error {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    background-color: #f7f8fa;
-    border-radius: inherit;
-  }
-}
+@import './image.scss';
 </style>

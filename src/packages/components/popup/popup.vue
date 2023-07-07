@@ -162,20 +162,5 @@ const onAfterLeave = () => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-popup {
-  &__content {
-    position: relative;
-    background-color: #fff;
-  }
-
-  &__close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 1;
-    padding: 10px;
-    color: #c8c9cc;
-  }
-}
+@import './popup.scss';
 </style>

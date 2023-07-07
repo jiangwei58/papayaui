@@ -37,5 +37,5 @@ const overlayStyle = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
+@import './overlay.scss';
 </style>

@@ -43,30 +43,5 @@ const value = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-badge {
-  position: relative;
-  display: inline-block;
-  &__content {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    line-height: 11px;
-    text-align: center;
-    font-size: 11px;
-    color: #fff;
-    padding: 2px 5px;
-    border-radius: 100px;
-  }
-  &--dot &__content {
-    padding: 0;
-    width: 8px;
-    height: 8px;
-  }
-  &--fixed &__content {
-    position: absolute;
-    transform: translate(50%, -50%);
-    transform-origin: 100%;
-  }
-}
+@import './badge.scss';
 </style>

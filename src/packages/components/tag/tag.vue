@@ -36,32 +36,5 @@ const customStyle = computed<CSSProperties>(() => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-tag {
-  display: inline-flex;
-  align-items: center;
-  font-size: _var(tag-font-size, 12px);
-  line-height: _var(tag-line-height, 16px);
-  border-radius: 4px;
-  height: _var(tag-height, auto);
-  padding: _var(tag-padding, 0 4px);
-  border: 1px solid transparent;
-
-  @each $type in primary, success, warning, danger {
-    &--#{$type} {
-      color: #fff;
-      background-color: _var(color-#{$type});
-      &.#{$prefix}-tag--plain {
-        color: _var(color-#{$type});
-      }
-    }
-  }
-  &--plain {
-    background-color: #fff;
-    border-color: currentColor;
-  }
-  &--mark {
-    border-radius: 0 100px 100px 0;
-  }
-}
+@import './tag.scss';
 </style>

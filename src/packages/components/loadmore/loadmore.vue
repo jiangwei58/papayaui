@@ -34,16 +34,5 @@ const localConfig = computed<LoadStatus>(() => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-loadmore {
-  display: flex;
-  flex-direction: row;
-  height: 40px;
-  align-items: center;
-  justify-content: center;
-  &__text {
-    font-size: 14px;
-    margin-left: 8px;
-  }
-}
+@import './loadmore.scss';
 </style>

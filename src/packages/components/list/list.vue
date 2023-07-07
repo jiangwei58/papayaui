@@ -24,8 +24,5 @@ withDefaults(defineProps<ListProps>(), {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-list-wrapper {
-  width: 100%;
-}
+@import './list.scss';
 </style>

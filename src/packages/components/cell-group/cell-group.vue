@@ -14,13 +14,5 @@ defineProps(cellGroupProps)
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-cell-group {
-  background-color: _var(cell-group-bg-color, 8px);
-  &--inset {
-    margin: 0 _var(cell-group-margin-x, 16px);
-    overflow: hidden;
-    border-radius: _var(cell-group-rounded, 8px);
-  }
-}
+@import './cell-group.scss';
 </style>

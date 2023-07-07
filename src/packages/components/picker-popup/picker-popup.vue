@@ -222,33 +222,5 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-picker-popup {
-  &-content {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  &__search {
-    flex-shrink: 0;
-  }
-
-  &__list {
-    flex: 1;
-    overflow: hidden;
-  }
-
-  &__empty {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  &__footer {
-    flex-shrink: 0;
-    padding: 8px 13px;
-  }
-}
+@import './picker-popup.scss';
 </style>

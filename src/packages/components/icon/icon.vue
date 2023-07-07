@@ -25,14 +25,5 @@ const emit = defineEmits(iconEmits)
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-iconfont {
-  position: relative;
-  display: inline-block;
-  font-size: _var(icon-size, 16px);
-  color: inherit;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  vertical-align: middle;
-}
+@import './icon.scss';
 </style>

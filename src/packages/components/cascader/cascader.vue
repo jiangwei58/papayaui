@@ -349,46 +349,5 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-cascader {
-  &-content {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    height: 100%;
-  }
-  &-search {
-    @include _setVar(search-padding, 0 12px);
-    flex-shrink: 0;
-  }
-  &-tab {
-    flex-shrink: 0;
-  }
-  &-list-wrapper {
-    flex: 1;
-    padding-top: 10;
-    overflow: hidden;
-  }
-  &__loading {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-  }
-  &__empty {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    font-size: 28rpx;
-    color: _var(color-black-2);
-  }
-  &__footer {
-    display: flex;
-    flex-shrink: 0;
-    padding: 15rpx 26rpx;
-  }
-}
+@import './cascader.scss';
 </style>

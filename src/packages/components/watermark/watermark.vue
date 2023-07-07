@@ -86,14 +86,5 @@ const createWatermark = (text: string | string[]) => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-watermark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
-  pointer-events: none;
-}
+@import './watermark.scss';
 </style>

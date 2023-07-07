@@ -25,21 +25,5 @@ const emit = defineEmits(sectionEmits)
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-section {
-  font-weight: 400;
-  padding: _var(section-padding, 12px 10px);
-  background-color: _var(section-bg-color, transparent);
-  &-line {
-    width: 4px;
-    height: 12px;
-    border-radius: 10px;
-    margin-right: 6px;
-    background-color: _var(section-line-color, _var(color-primary));
-  }
-  &-title {
-    font-size: _var(section-font-size, 14px);
-    color: _var(section-color, _var(color-black));
-  }
-}
+@import './section.scss';
 </style>

@@ -116,54 +116,5 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-tabs {
-  $tabs-line-width: 40px;
-  height: _var(tabs-height, 44px);
-  padding: 0 8px;
-  background-color: _var(tabs-bg-color, #fff);
-  &.scrollable &__item {
-    flex: 1 0 auto;
-    padding: 0 12px;
-  }
-  &.shrink &__item {
-    flex: none;
-  }
-  &-scroll {
-    height: 100%;
-  }
-  &-wrapper {
-    position: relative;
-    display: flex;
-    height: 100%;
-    user-select: none;
-  }
-  &__item {
-    position: relative;
-    display: flex;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    padding: 0 4px;
-    color: _var(tabs-color, _var(color-black-2));
-    font-size: _var(tabs-font-size, 14px);
-    line-height: _var(tabs-line-height, 20px);
-    min-width: _var(tabs-line-width, $tabs-line-width);
-    &.active {
-      color: _var(tabs-color-active, _var(color-black));
-      font-weight: 500;
-    }
-  }
-  &__line {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    width: _var(tabs-line-width, $tabs-line-width);
-    height: _var(tabs-line-height, 3px);
-    background-color: _var(color-primary);
-    border-radius: 3rpx;
-  }
-}
+@import './tabs.scss';
 </style>

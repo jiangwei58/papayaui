@@ -81,8 +81,5 @@ const onConfirm = (selectedItems: Dayjs[]) => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-calendar {
-  background-color: #fff;
-}
+@import './calendar.scss';
 </style>

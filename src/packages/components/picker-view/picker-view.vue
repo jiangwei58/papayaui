@@ -75,17 +75,5 @@ const onCancel = () => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-picker-view {
-  &-toolbar {
-    $height: 88rpx;
-    height: $height;
-    > .btn {
-      line-height: $height;
-    }
-  }
-}
-.btn-hover {
-  opacity: 0.7;
-}
+@import './picker-view.scss';
 </style>

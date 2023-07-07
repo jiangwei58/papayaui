@@ -40,15 +40,5 @@ provide<RadioProvideData>('radioData', {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-
-.#{$prefix}-radio-group {
-  &--horizontal {
-    @include _setVar(radio-display, inline-flex);
-    @include _setVar(radio-margin, 0 16px 0 0);
-  }
-  &--vertical {
-    @include _setVar(radio-margin, 0 0 8px);
-  }
-}
+@import './radio-group.scss';
 </style>

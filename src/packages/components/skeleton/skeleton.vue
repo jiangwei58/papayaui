@@ -47,24 +47,5 @@ const rowList = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-
-@keyframes skeleton-animate {
-  50% {
-    opacity: 0.6;
-  }
-}
-
-.#{$prefix}-skeleton {
-  display: flex;
-  padding: _var(skeleton-padding, 0 16px);
-
-  &__content {
-    width: 100%;
-  }
-
-  &--animate {
-    animation: skeleton-animate 1.8s ease infinite;
-  }
-}
+@import './skeleton.scss';
 </style>

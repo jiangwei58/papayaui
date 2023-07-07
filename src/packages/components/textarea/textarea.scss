@@ -1,0 +1,31 @@
+@import '../../styles/vars.scss';
+
+.#{$prefix}-textarea {
+  position: relative;
+  display: flex;
+  width: 100%;
+  background-color: #fff;
+  padding: _var(textarea-padding, 10px 25px);
+  font-size: _var(textarea-font-size, 14px);
+  color: _var(textarea-color, _var(color-black));
+  line-height: _var(textarea-line-height, 24px);
+  &__textarea {
+    width: inherit;
+    font: inherit;
+    color: inherit;
+    line-height: inherit;
+  }
+  &__limit {
+    position: absolute;
+    right: 15px;
+    bottom: 12px;
+    font-size: _var(textarea-font-size, 14px);
+    color: gray;
+  }
+  :deep(.#{$prefix}-textarea__placeholder) {
+    color: _var(textarea-placeholder-color, #c8c9cc);
+  }
+  &--disabled {
+    color: _var(textarea-disabled-color, #c8c9cc);
+  }
+}

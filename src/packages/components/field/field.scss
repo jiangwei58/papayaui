@@ -1,0 +1,38 @@
+@import '../../styles/vars.scss';
+.#{$prefix}-field {
+  &__body {
+    display: flex;
+    align-items: center;
+    > input,
+    > textarea {
+      flex: 1;
+    }
+  }
+  &__input {
+    color: _var(field-input-color, _var(color-primary));
+  }
+  &--only-input {
+    @include _setVar(cell-padding-y, 0);
+    @include _setVar(cell-padding-x, 0);
+  }
+  &__textarea {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    color: #323233;
+    line-height: inherit;
+    text-align: left;
+    background-color: transparent;
+    border: 0;
+    resize: none;
+    font: inherit;
+  }
+
+  &__icon {
+    display: block;
+    margin-left: 15rpx;
+  }
+}

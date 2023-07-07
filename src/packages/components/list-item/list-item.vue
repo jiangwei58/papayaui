@@ -28,21 +28,5 @@ const emit = defineEmits(listItemEmits)
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-list-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 16px;
-  font-size: 14px;
-  line-height: 24px;
-
-  &--selected {
-    color: _var(color-primary);
-  }
-
-  &--hover {
-    background-color: _var(color-active) !important;
-  }
-}
+@import './list-item.scss';
 </style>

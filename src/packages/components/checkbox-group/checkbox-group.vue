@@ -48,15 +48,5 @@ provide<CheckboxProvideData>('checkboxData', {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-
-.#{$prefix}-checkbox-group {
-  &--horizontal {
-    @include _setVar(checkbox-display, inline-flex);
-    @include _setVar(checkbox-margin, 0 16px 0 0);
-  }
-  &--vertical {
-    @include _setVar(checkbox-margin, 0 0 8px);
-  }
-}
+@import './checkbox-group.scss';
 </style>
