@@ -16,36 +16,17 @@
 </template>
 
 <script lang="ts" setup>
-import { getCurrentInstance, ref, SVGAttributes } from 'vue'
+import { getCurrentInstance, ref } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { isUndefined } from '../../utils'
-import Badge, { BadgeProps } from '../badge/badge.vue'
+import Badge from '../badge/badge.vue'
 import { SidebarExposeData, SidebarValue } from '../sidebar/sidebar.vue'
-
-export interface SidebarItemProps {
-  /** 标题 */
-  title?: string
-  /** 当前项标识值 */
-  name?: SidebarValue
-  /** 是否禁用该项 */
-  disabled?: boolean
-  /** 是否显示右上角小红点 */
-  dot?: BadgeProps['dot']
-  /** 图标右上角徽标的内容 */
-  badge?: BadgeProps['content']
-  /** 根节点样式类 */
-  customClass?: string
-  /** 根节点样式 */
-  customStyle?: SVGAttributes['style']
-}
+import { sidebarItemEmits, sidebarItemProps } from './props'
 
 const ns = useNamespace('sidebar-item')
 
-const props = defineProps<SidebarItemProps>()
-
-const emit = defineEmits<{
-  (event: 'click', value: SidebarValue): void
-}>()
+const props = defineProps(sidebarItemProps)
+const emit = defineEmits(sidebarItemEmits)
 
 const instance = getCurrentInstance()
 

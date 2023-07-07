@@ -42,67 +42,19 @@
 </template>
 
 <script lang="ts">
-import {
-  CSSProperties,
-  defineComponent,
-  getCurrentInstance,
-  onMounted,
-  PropType,
-  ref,
-  watch,
-} from 'vue'
+import { defineComponent, getCurrentInstance, onMounted, ref, watch } from 'vue'
 import useNamespace, { defaultNamespace } from '../../core/useNamespace'
 import useRect from '../../hooks/useRect'
 import { getUnitValue } from '../../utils'
 import ButtonComponent from '../button/button.vue'
-
-export type SwipeCellOption = {
-  text: string
-  style?: Partial<{ width: string; backgroundColor: CSSProperties['background-color'] }>
-}
-
-export interface SwipeCellProps {
-  /** 标识名 */
-  name?: string
-  /** 控制打开或者关闭 */
-  show?: boolean
-  /** 是否禁用 */
-  disabled?: boolean
-  /** 滑动距离阈值，只有大于此值，才被认为是要打开菜单 */
-  threshold?: number
-  /** 右侧按钮内容 */
-  options?: SwipeCellOption[]
-}
-
-type SwipeCellStatus = 'open' | 'close'
+import { swipeCellEmits, swipeCellProps, SwipeCellStatus } from './props'
 
 export default defineComponent({
   components: {
     ButtonComponent,
   },
-  props: {
-    name: {
-      type: String as PropType<SwipeCellProps['name']>,
-      default: '',
-    },
-    show: {
-      type: Boolean as PropType<SwipeCellProps['show']>,
-      default: false,
-    },
-    disabled: {
-      type: Boolean as PropType<SwipeCellProps['disabled']>,
-      default: false,
-    },
-    threshold: {
-      type: Number as PropType<SwipeCellProps['threshold']>,
-      default: 20,
-    },
-    options: {
-      type: Array as PropType<SwipeCellProps['options']>,
-      default: () => [],
-    },
-  },
-  emits: ['open', 'close', 'click'],
+  props: swipeCellProps,
+  emits: swipeCellEmits,
   setup(props, { emit }) {
     const ns = useNamespace('swipe-cell')
 

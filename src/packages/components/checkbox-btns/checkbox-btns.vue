@@ -16,7 +16,7 @@
       :style="{
         backgroundColor: bgColor,
         borderColor: bgColor,
-        borderRadius: round === true ? getUnitValue('100') : getUnitValue(round),
+        borderRadius: getUnitValue(typeof round === 'boolean' ? (round ? '100' : '0') : round),
       }"
       @tap="onSelect(item, index)"
     >
@@ -31,52 +31,13 @@ import { toRefs } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import useSelect from '../../core/useSelect'
 import { getUnitValue } from '../../utils/common'
-
-export type CheckboxItem = any
-export type CheckboxValue = any
-
-export interface CheckboxProps {
-  /** 列数 */
-  column?: number
-  /** 间隔 */
-  gap?: string
-  /** 选中值 */
-  modelValue?: CheckboxValue
-  /** 选项列表 */
-  options?: CheckboxItem[]
-  /** 标题对应字段名 */
-  labelKey?: string
-  /** 内容对应字段名 */
-  valueKey?: string
-  /** 是否多选 */
-  multiple?: boolean
-  /** 背景色 */
-  bgColor?: string
-  /** 圆角大小, 值为true时半圆角 */
-  round?: true | string
-  /** 是否支持反选 */
-  inverse?: boolean
-}
+import type { CheckboxItem, CheckboxValue } from './props'
+import { checkboxButtonsEmits, checkboxButtonsProps } from './props'
 
 const ns = useNamespace('checkbox')
 
-const props = withDefaults(defineProps<CheckboxProps>(), {
-  column: 3,
-  gap: '20',
-  modelValue: undefined,
-  options: () => [],
-  labelKey: 'label',
-  valueKey: 'value',
-  multiple: false,
-  bgColor: '#F2F3F5',
-  round: '4rpx',
-  inverse: true,
-})
-
-const emit = defineEmits<{
-  (event: 'update:modelValue', value: CheckboxProps['modelValue']): void
-  (event: 'change', item: CheckboxItem, index: number): void
-}>()
+const props = defineProps(checkboxButtonsProps)
+const emit = defineEmits(checkboxButtonsEmits)
 
 const { options, valueKey, modelValue, multiple, inverse } = toRefs(props)
 

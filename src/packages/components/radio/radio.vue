@@ -31,48 +31,21 @@
 </template>
 
 <script lang="ts" setup>
-import { ComponentInternalInstance, CSSProperties, inject } from 'vue'
+import { ComponentInternalInstance, inject } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { noop } from '../../utils'
 import IconComponent from '../icon/icon.vue'
 import { RadioProvideData } from '../radio-group/radio-group.vue'
+import { radioEmits, RadioProps, radioProps } from './props'
 
 export interface RadioInstance extends Omit<ComponentInternalInstance, 'props'> {
   props: RadioProps
 }
 
-export type RadioValue = string | number
-
-export interface RadioProps {
-  /** 标识符 */
-  name?: RadioValue
-  /** 形状 */
-  shape?: 'square' | 'round'
-  /** 是否为禁用状态 */
-  disabled?: boolean
-  /** 是否禁用文本内容点击 */
-  labelDisabled?: boolean
-  /** 文本位置 */
-  labelPosition?: 'left' | 'right'
-  /** 图标大小 */
-  iconSize?: string | number
-  /** 选中状态颜色 */
-  checkedColor?: CSSProperties['color']
-}
-
 const ns = useNamespace('radio')
 
-const props = withDefaults(defineProps<RadioProps>(), {
-  name: '',
-  shape: 'round',
-  labelPosition: 'right',
-  iconSize: '20px',
-  checkedColor: undefined,
-})
-
-const emit = defineEmits<{
-  (event: 'change', value: RadioValue): void
-}>()
+const props = defineProps(radioProps)
+const emit = defineEmits(radioEmits)
 
 const p_data = inject<RadioProvideData>('radioData', { onSelect: noop, isSelected: noop })
 

@@ -13,28 +13,16 @@
 
 <script lang="ts" setup>
 import { ComponentInternalInstance, getCurrentInstance, inject, Ref, ref } from 'vue'
-import { FormRuleItem } from '../../core/useForm/useFormValidate'
-import Cell, { CellProps } from '../cell/cell.vue'
+import Cell from '../cell/cell.vue'
+import { formItemEmits, FormItemProps, formItemProps } from './props'
 
 export interface FormItemInstance extends Omit<ComponentInternalInstance, 'props'> {
   errorMessage: Ref<string>
   props: FormItemProps
 }
 
-export interface FormItemProps extends CellProps {
-  /** 校验对应的字段名 */
-  prop?: string
-  /** 标签名 */
-  label?: string
-  /** 校验规则 */
-  rules?: FormRuleItem | FormRuleItem[]
-}
-
-defineProps<FormItemProps>()
-
-const emit = defineEmits<{
-  (event: 'click'): void
-}>()
+defineProps(formItemProps)
+const emit = defineEmits(formItemEmits)
 
 const p_children = inject<Ref<FormItemInstance[]>>('children')
 

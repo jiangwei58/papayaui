@@ -19,35 +19,12 @@
 <script lang="ts" setup>
 import useNamespace, { defaultNamespace } from '../../core/useNamespace'
 import Icon from '../icon/icon.vue'
-
-export interface ListItemProps {
-  /**
-   * 内容
-   */
-  text?: string
-  /**
-   * 是否选中
-   */
-  selected?: boolean
-  /**
-   * 是否使用slot
-   * @description 主动判定，为了防止slot上v-if为false场景下识别为slot存在的问题
-   * ```tsx
-   * <ListItem>
-   *   <slot v-if="false" /> // 这时$slots.default为true
-   * </ListItem>
-   * ```
-   */
-  useSlot?: boolean
-}
+import { listItemEmits, listItemProps } from './props'
 
 const ns = useNamespace('list-item')
 
-defineProps<ListItemProps>()
-
-const emit = defineEmits<{
-  (event: 'click'): void
-}>()
+defineProps(listItemProps)
+const emit = defineEmits(listItemEmits)
 </script>
 
 <style lang="scss" scoped>

@@ -42,11 +42,12 @@ import { useRect } from '../../hooks'
 import { noop } from '../../utils'
 import Cell from '../cell/cell.vue'
 import { CollapseProvideData } from '../collapse/collapse.vue'
+import { CollapseItemProps, collapseItemProps } from './props'
 
 export interface CollapseItemInstance {
   index: Ref<number>
   /** 唯一标识符 */
-  name: Ref<CollapseItemProps['name']>
+  name?: Ref<CollapseItemProps['name']>
   /** 打开状态 */
   expanded: Ref<boolean>
   /** 禁用状态 */
@@ -55,55 +56,11 @@ export interface CollapseItemInstance {
   toggle: typeof toggle
 }
 
-export type CollapseItemValue = string | number
-
-export interface CollapseItemProps {
-  /**
-   * 唯一标识符，默认为索引值
-   */
-  name?: CollapseItemValue
-  /**
-   * 标题栏左侧内容
-   */
-  title?: string
-  /**
-   * 标题栏左侧图标名称或图片链接，可选值见 Icon 组件
-   */
-  icon?: string
-  /**
-   * 标题栏右侧内容
-   */
-  value?: string
-  /**
-   * 是否显示内边框
-   */
-  border?: boolean
-  /**
-   * 是否展示标题栏右侧箭头并开启点击反馈
-   */
-  isLink?: boolean
-  /**
-   * 是否禁用面板
-   */
-  disabled?: boolean
-  /**
-   * 是否为只读状态，只读状态下无法操作面板
-   */
-  readonly?: boolean
-}
-
 const ns = useNamespace('collapse-item')
 
 const instance = getCurrentInstance()
 
-const props = withDefaults(defineProps<CollapseItemProps>(), {
-  name: undefined,
-  title: '',
-  icon: 'right-icon',
-  value: undefined,
-  border: true,
-  isLink: true,
-})
+const props = defineProps(collapseItemProps)
 
 const { name, disabled } = toRefs(props)
 const _index = ref<number>(0)

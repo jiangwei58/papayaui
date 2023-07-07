@@ -31,51 +31,21 @@
 </template>
 
 <script lang="ts" setup>
-import { ComponentInternalInstance, CSSProperties, inject } from 'vue'
+import { ComponentInternalInstance, inject } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { noop } from '../../utils'
 import { CheckboxProvideData } from '../checkbox-group/checkbox-group.vue'
 import IconComponent from '../icon/icon.vue'
+import { checkboxEmits, CheckboxProps, checkboxProps } from './props'
 
 export interface CheckboxInstance extends Omit<ComponentInternalInstance, 'props'> {
   props: CheckboxProps
 }
 
-export type CheckboxValue = string | number | boolean
-
-export interface CheckboxProps {
-  /** 是否选中 */
-  modelValue?: boolean
-  /** 标识符 */
-  name?: CheckboxValue
-  /** 形状 */
-  shape?: 'square' | 'round'
-  /** 是否为禁用状态 */
-  disabled?: boolean
-  /** 是否禁用文本内容点击 */
-  labelDisabled?: boolean
-  /** 文本位置 */
-  labelPosition?: 'left' | 'right'
-  /** 图标大小 */
-  iconSize?: string | number
-  /** 选中状态颜色 */
-  checkedColor?: CSSProperties['color']
-}
-
 const ns = useNamespace('checkbox')
 
-const props = withDefaults(defineProps<CheckboxProps>(), {
-  name: '',
-  shape: 'round',
-  labelPosition: 'right',
-  iconSize: '20px',
-  checkedColor: undefined,
-})
-
-const emit = defineEmits<{
-  (event: 'update:modelValue', value: boolean): void
-  (event: 'change', value: boolean, name: CheckboxValue): void
-}>()
+const props = defineProps(checkboxProps)
+const emit = defineEmits(checkboxEmits)
 
 const p_data = inject<CheckboxProvideData>('checkboxData', { onSelect: noop, isSelected: noop })
 

@@ -1,6 +1,6 @@
 import { ExtractPropTypes, PropType } from 'vue'
 import { UseListProps } from '../../core/useList'
-import { isBoolean, pickProps } from '../../utils'
+import { isArray, isNumber, isObject, isString, pickProps } from '../../utils'
 import { bottomPopupEmits, bottomPopupProps } from '../bottom-popup/props'
 
 export type Option = any
@@ -17,9 +17,7 @@ export const pickerPopupProps = {
    */
   data: {
     type: Array as PropType<Option[]>,
-    default() {
-      return []
-    },
+    default: () => [],
   },
   /**
    * 数据标题的字段名
@@ -90,8 +88,9 @@ export const pickerPopupProps = {
 
 export const pickerPopupEmits = {
   ...bottomPopupEmits,
-  'update:modelValue': (value: OptionValue | OptionValue[]) => isBoolean(value),
-  change: (item: Option | Option[]) => isBoolean(item),
+  'update:modelValue': (value: OptionValue | OptionValue[]) =>
+    isString(value) || isNumber(value) || isArray(value),
+  change: (item: Option | Option[]) => isObject(item) || isArray(item),
 }
 
 export type PickerPopupProps = ExtractPropTypes<typeof pickerPopupProps>

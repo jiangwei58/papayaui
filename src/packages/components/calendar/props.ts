@@ -1,8 +1,8 @@
+import { Dayjs } from 'dayjs'
 import type { ExtractPropTypes, PropType } from 'vue'
 import { DayItem, FirstDayOfWeekType } from '../../core/useCalendar'
-import { isBoolean, pickProps } from '../../utils'
+import { isArray, isDate, isObject, pickProps } from '../../utils'
 import { popupEmits, popupProps } from '../popup/props'
-import { Dayjs } from 'dayjs'
 
 export type CalendarValue = Date | Date[]
 
@@ -157,14 +157,14 @@ export const calendarProps = {
 }
 
 export const calendarWrapperEmits = {
-  confirm: (value: Dayjs[]) => isBoolean(value),
-  select: (value: DayItem) => isBoolean(value),
+  confirm: (value: Dayjs[]) => isArray(value),
+  select: (value: DayItem) => isObject(value),
 }
 
 export const calendarEmits = {
   ...popupEmits,
-  confirm: (value: CalendarValue) => isBoolean(value),
-  select: (value: CalendarValue) => isBoolean(value),
+  confirm: (value: CalendarValue) => isDate(value) || isArray(value),
+  select: (value: CalendarValue) => isDate(value) || isArray(value),
 }
 
 export type CalendarProps = ExtractPropTypes<typeof calendarProps>

@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import { TreeNode, UseTreeFieldNames, defaultFieldNames } from '../../core/useTree'
-import { isBoolean, pickProps } from '../../utils'
+import { isArray, isObject, pickProps } from '../../utils'
 import { bottomPopupEmits, bottomPopupProps } from '../bottom-popup/props'
 
 export interface CascaderNode<T = any> {
@@ -22,18 +22,14 @@ export const cascaderProps = {
    */
   options: {
     type: Array as PropType<CascaderOption[]>,
-    default() {
-      return []
-    },
+    default: () => [],
   },
   /**
    * 自定义 options 结构中的字段
    */
   fieldNames: {
     type: Object as PropType<Partial<UseTreeFieldNames<CascaderOption>>>,
-    default() {
-      return defaultFieldNames
-    },
+    default: () => defaultFieldNames,
   },
   /**
    * 最大层级，把哪一层级作为叶子节点
@@ -92,15 +88,15 @@ export const cascaderProps = {
 
 export const cascaderEmits = {
   ...bottomPopupEmits,
-  'update:modelValue': (value: CascaderValue[]) => isBoolean(value),
+  'update:modelValue': (value: CascaderValue[]) => isArray(value),
   change: (
     value: CascaderValue[],
     _items: CascaderOption[],
     _extra: { tabIndex: number; isSearch: boolean },
-  ) => isBoolean(value),
+  ) => isArray(value),
   reset: () => true,
   confirm: () => true,
-  nodeClick: (node: TreeNode<CascaderOption>) => isBoolean(node),
+  nodeClick: (node: TreeNode<CascaderOption>) => isObject(node),
 }
 
 export const cascaderSearchViewProps = {
@@ -133,7 +129,7 @@ export interface SearchNode extends TreeNode<CascaderOption> {
 }
 
 export const cascaderSearchViewEmits = {
-  select: (item: SearchNode) => isBoolean(item),
+  select: (item: SearchNode) => isObject(item),
 }
 
 export type CascaderProps = ExtractPropTypes<typeof cascaderProps>

@@ -7,22 +7,8 @@
 <script setup lang="ts">
 import { provide, ref } from 'vue'
 import useNamespace, { defaultNamespace } from '../../core/useNamespace'
-import { CollapseItemInstance, CollapseItemValue } from '../collapse-item/collapse-item.vue'
-
-export interface CollapseProps {
-  /**
-   * 当前展开面板的 name
-   */
-  modelValue?: CollapseItemValue | CollapseItemValue[]
-  /**
-   * 是否开启手风琴模式
-   */
-  accordion?: boolean
-  /**
-   * 是否显示外边框
-   */
-  border?: boolean
-}
+import { CollapseItemInstance } from '../collapse-item/collapse-item.vue'
+import { collapseEmits, collapseProps } from './props'
 
 export interface CollapseProvideData {
   setChildren: typeof setChildren
@@ -31,17 +17,8 @@ export interface CollapseProvideData {
 
 const ns = useNamespace('collapse')
 
-const props = withDefaults(defineProps<CollapseProps>(), {
-  modelValue: undefined,
-  border: true,
-})
-
-const emit = defineEmits<{
-  (event: 'update:modelValue', value: NonNullable<CollapseProps['modelValue']>): void
-  (event: 'change', value: NonNullable<CollapseProps['modelValue']>): void
-  (event: 'open', name: CollapseItemValue): void
-  (event: 'close', name: CollapseItemValue): void
-}>()
+const props = defineProps(collapseProps)
+const emit = defineEmits(collapseEmits)
 
 const children = ref<CollapseItemInstance[]>([])
 

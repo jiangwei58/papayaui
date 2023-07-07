@@ -35,56 +35,12 @@
 import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils/common'
 import Icon from '../icon/icon.vue'
-
-export interface CellProps {
-  /** 标题 */
-  title?: string
-  /** 内容 */
-  value?: string | number | boolean
-  /** 标题宽度 */
-  titleWidth?: string
-  /** 是否开启点击反馈 */
-  clickable?: boolean
-  /** 是否显示箭头，为true同时有点击反馈 */
-  isLink?: boolean
-  /** 是否显示必填标识 */
-  required?: boolean
-  /** 内容居中 */
-  center?: boolean
-  /** 前面的图标 */
-  icon?: string
-  /** 内容对齐方式 */
-  valueAlign?: 'left' | 'center' | 'right'
-  /** 错误信息 */
-  errorMessage?: string
-  /** 是否显示下边框 */
-  border?: boolean
-  /** 根节点样式类 */
-  customClass?: string
-  /** 标题样式类 */
-  titleClass?: string
-  /** 右侧内容样式类 */
-  valueClass?: string
-}
+import { cellEmits, cellProps } from './props'
 
 const ns = useNamespace('cell')
 
-const props = withDefaults(defineProps<CellProps>(), {
-  title: '',
-  value: '',
-  titleWidth: undefined,
-  icon: '',
-  valueAlign: 'right',
-  errorMessage: '',
-  border: true,
-  customClass: '',
-  titleClass: '',
-  valueClass: '',
-})
-
-const emit = defineEmits<{
-  (event: 'click', value: MouseEvent): void
-}>()
+const props = defineProps(cellProps)
+const emit = defineEmits(cellEmits)
 
 const onClick = (event: MouseEvent) => {
   if (!props.clickable && !props.isLink) return

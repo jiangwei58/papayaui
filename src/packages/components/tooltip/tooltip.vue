@@ -27,20 +27,11 @@ import { getUnitValue } from '../../utils/common'
 import { computed, getCurrentInstance, nextTick, ref, watch } from 'vue'
 import useRect from '../../hooks/useRect'
 import useNamespace from '../../core/useNamespace'
-
-export interface TooltipProps {
-  /** 悬浮内容 */
-  text?: string
-  /** 宽度 */
-  width?: string
-}
+import { tooltipProps } from './props'
 
 const ns = useNamespace('tooltip')
 
-withDefaults(defineProps<TooltipProps>(), {
-  text: '',
-  width: '300',
-})
+defineProps(tooltipProps)
 
 const show = ref<boolean>(false)
 

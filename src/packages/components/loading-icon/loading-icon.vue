@@ -13,20 +13,13 @@
 </template>
 
 <script lang="ts" setup>
-import { CSSProperties } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
-
-export interface LoadingIconProps {
-  /** 加载图标颜色 */
-  color?: CSSProperties['color']
-  /** 加载图标大小 */
-  size?: string
-}
+import { loadingIconProps } from './props'
 
 const ns = useNamespace('loading-icon')
 
-defineProps<LoadingIconProps>()
+defineProps(loadingIconProps)
 </script>
 
 <style lang="scss" scoped>

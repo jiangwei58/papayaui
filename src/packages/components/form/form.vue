@@ -9,24 +9,12 @@ import { computed, provide, ref, toRefs } from 'vue'
 import useFormValidate, { FormItemExtraParams, FormRules } from '../../core/useForm'
 import useNamespace from '../../core/useNamespace'
 import { FormItemInstance } from '../form-item/form-item.vue'
-
-export interface FormProps {
-  /** 表单数据 */
-  form?: any
-  /** 校验规则 */
-  rules?: FormRules<any>
-}
+import { formEmits, formProps } from './props'
 
 const ns = useNamespace('form')
 
-const props = withDefaults(defineProps<FormProps>(), {
-  form: () => {},
-  rules: () => ({} as FormRules<any>),
-})
-
-const emit = defineEmits<{
-  (event: 'reset'): void
-}>()
+const props = defineProps(formProps)
+const emit = defineEmits(formEmits)
 
 const { form, rules } = toRefs(props)
 

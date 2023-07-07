@@ -17,37 +17,14 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, CSSProperties } from 'vue'
-import useNamespace, { defaultNamespace } from '../../core/useNamespace'
+import { computed } from 'vue'
+import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
-
-export interface BadgeProps {
-  /** 徽标内容 */
-  content?: number | string
-  /** 徽标背景颜色 */
-  color?: CSSProperties['color']
-  /** 是否展示为小点 */
-  dot?: boolean
-  /** max	最大值，超过最大值会显示 {max}+，仅当 content 为数字时有效 */
-  max?: number
-  /** 设置徽标的偏移量，数组的两项分别对应水平和垂直方向的偏移量，默认单位为rpx */
-  offset?: Array<number | string>
-  /** 当 content 为数字 0 或字符串 '0' 时，是否展示徽标 */
-  showZero?: boolean
-  /** 是否显示 */
-  show?: boolean
-}
+import { badgeProps } from './props'
 
 const ns = useNamespace('badge')
 
-const props = withDefaults(defineProps<BadgeProps>(), {
-  content: undefined,
-  color: `var(--${defaultNamespace}-color-danger)`,
-  max: undefined,
-  offset: () => [0, 0],
-  showZero: false,
-  show: true,
-})
+const props = defineProps(badgeProps)
 
 const visible = computed<boolean>(() => {
   if (!props.showZero && Number(props.content) === 0) return false

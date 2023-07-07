@@ -6,15 +6,11 @@
 
 <script lang="ts" setup>
 import useNamespace from '../../core/useNamespace'
-
-interface OwnProps {
-  /** 是否展示为圆角卡片风格 */
-  inset?: boolean
-}
+import { cellGroupProps } from './props'
 
 const ns = useNamespace('cell-group')
 
-defineProps<OwnProps>()
+defineProps(cellGroupProps)
 </script>
 
 <style lang="scss" scoped>

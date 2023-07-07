@@ -32,39 +32,12 @@
 import { computed, getCurrentInstance, nextTick, ref, toRefs, watch } from 'vue'
 import { useRect } from '../../hooks'
 import useNamespace from '../../core/useNamespace'
-
-export type TabItem = any
-
-export type TabItemValue = number | string
-
-export interface TabsProps {
-  modelValue?: TabItemValue
-  /** 标签页列表数据 */
-  tabs: TabItem[]
-  /** 标题对应字段名 */
-  labelKey?: string
-  /** 值对应字段名 */
-  valueKey?: string
-  /** 是否滚动 */
-  scrollable?: boolean
-  /** 是否开启左侧收缩布局 */
-  shrink?: boolean
-}
+import { TabItem, tabsEmits, tabsProps } from './props'
 
 const ns = useNamespace('tabs')
 
-const props = withDefaults(defineProps<TabsProps>(), {
-  modelValue: 0,
-  tabs: () => [],
-  labelKey: 'label',
-  valueKey: undefined,
-  scrollable: false,
-})
-
-const emit = defineEmits<{
-  (event: 'update:modelValue', current: TabItemValue): void
-  (event: 'change', item: TabItem): void
-}>()
+const props = defineProps(tabsProps)
+const emit = defineEmits(tabsEmits)
 
 const { tabs, modelValue } = toRefs(props)
 

@@ -36,39 +36,12 @@ import { ref } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
 import Icon from '../icon/icon.vue'
-
-interface ImageProps {
-  /** 图片资源地址 */
-  src?: string
-  /** 图片裁剪、缩放的模式[详细地址](https://uniapp.dcloud.net.cn/component/image.html) */
-  mode?: string
-  /** 宽度 */
-  width?: string | number
-  /** 高度 */
-  height?: string | number
-  /** 圆角 */
-  round?: boolean | string
-  /** 图片懒加载 */
-  lazyLoad?: boolean
-  /** 在系统不支持webp的情况下是否单独启用webp。默认false，只支持网络资源。 */
-  webp?: boolean
-  /** 开启长按图片显示识别小程序码菜单 */
-  showMenuByLongpress?: boolean
-}
+import { imageEmits, imageProps } from './props'
 
 const ns = useNamespace('image')
 
-withDefaults(defineProps<ImageProps>(), {
-  src: '',
-  mode: 'scaleToFill',
-  width: undefined,
-  height: undefined,
-  round: undefined,
-})
-
-const emit = defineEmits<{
-  (event: 'click'): void
-}>()
+defineProps(imageProps)
+const emit = defineEmits(imageEmits)
 
 const status = ref<'success' | 'loading' | 'error'>('loading')
 

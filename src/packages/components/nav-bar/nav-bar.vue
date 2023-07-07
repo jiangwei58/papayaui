@@ -31,46 +31,19 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, CSSProperties, defineProps, withDefaults } from 'vue'
+import { computed, CSSProperties, defineProps } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
 import Icon from '../icon/icon.vue'
-
-export interface NavBarProps {
-  /** 标题 */
-  title?: string
-  /** 背景色 */
-  bgColor?: string
-  /**
-   * 主题样式
-   * @description 会同时影响胶囊菜单和标题的样式
-   */
-  theme?: 'black' | 'white'
-  /**
-   * 左侧返回按钮或胶囊菜单
-   * @description 只有一个的情况下直接显示图标，没有胶囊样式
-   */
-  leftMenu?: string | [string, string]
-  /** 是否开启顶部安全区适配 */
-  safeAreaInsetTop: boolean
-}
+import { navBarEmits, navBarProps } from './props'
 
 const systemInfo = uni.getSystemInfoSync()
 const menuButtonInfo = uni.getMenuButtonBoundingClientRect()
 
 const ns = useNamespace('nav-bar')
 
-const props = withDefaults(defineProps<NavBarProps>(), {
-  title: '标题',
-  bgColor: '#fff',
-  theme: 'black',
-  leftMenu: undefined,
-  safeAreaInsetTop: true,
-})
-
-const emit = defineEmits<{
-  (event: 'menuClick', index: number): void
-}>()
+const props = defineProps(navBarProps)
+const emit = defineEmits(navBarEmits)
 
 const statusBarHeight = computed(() => {
   return props.safeAreaInsetTop ? (systemInfo.statusBarHeight as number) : 0

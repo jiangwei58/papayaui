@@ -13,35 +13,12 @@ import { computed, CSSProperties } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
 import Icon from '../icon/icon.vue'
-
-interface TagProps {
-  type?: 'primary' | 'success' | 'warning' | 'danger'
-  /** 标签颜色 */
-  color?: CSSProperties['background-color']
-  /** 是否为空心样式 */
-  plain?: boolean
-  /** 圆角大小, 值为true时半圆角 */
-  round?: true | string
-  /** 是否为标记样式 */
-  mark?: boolean
-  /** 文字颜色 */
-  textColor?: CSSProperties['color']
-  /** 是否显示可关闭标签 */
-  closeable?: boolean
-}
+import { tagEmits, tagProps } from './props'
 
 const ns = useNamespace('tag')
 
-const props = withDefaults(defineProps<TagProps>(), {
-  type: 'primary',
-  color: undefined,
-  textColor: undefined,
-  round: undefined,
-})
-
-const emit = defineEmits<{
-  (event: 'close'): void
-}>()
+const props = defineProps(tagProps)
+const emit = defineEmits(tagEmits)
 
 const customStyle = computed<CSSProperties>(() => {
   const style: CSSProperties = {}

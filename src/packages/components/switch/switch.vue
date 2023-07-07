@@ -14,46 +14,15 @@
 <script lang="ts" setup>
 import { computed, CSSProperties, toRefs } from 'vue'
 import useNamespace from '../../core/useNamespace'
-import useSwitch, { SwitchValue as _SwitchValue } from '../../core/useSwitch'
+import useSwitch from '../../core/useSwitch'
 import { getUnitValue } from '../../utils'
 import LoadingIcon from '../loading-icon/loading-icon.vue'
-
-export type SwitchValue = _SwitchValue
-
-export interface SwitchProps {
-  /** 开关状态 */
-  modelValue?: SwitchValue
-  /** 打开时组件的值 */
-  activeValue?: SwitchValue
-  /** 关闭组件的值 */
-  inactiveValue?: SwitchValue
-  /** 打开时的背景颜色 */
-  activeColor?: CSSProperties['background-color']
-  /** 关闭时的背景颜色 */
-  inactiveColor?: CSSProperties['background-color']
-  /** 禁用状态 */
-  loading?: boolean
-  /** 加载状态 */
-  disabled?: boolean
-  /** 开关尺寸 */
-  size?: string
-}
+import { switchEmits, switchProps } from './props'
 
 const ns = useNamespace('switch')
 
-const props = withDefaults(defineProps<SwitchProps>(), {
-  modelValue: false,
-  activeValue: true,
-  inactiveValue: false,
-  activeColor: undefined,
-  inactiveColor: undefined,
-  size: undefined,
-})
-
-const emit = defineEmits<{
-  (event: 'update:modelValue', value: SwitchValue): void
-  (event: 'change', value: SwitchValue): void
-}>()
+const props = defineProps(switchProps)
+const emit = defineEmits(switchEmits)
 
 const { modelValue, activeValue, inactiveValue, loading, disabled } = toRefs(props)
 

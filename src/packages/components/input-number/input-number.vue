@@ -47,69 +47,12 @@ import useInputNumber, { InputNumberValue, minAndMax } from '../../core/useInput
 import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
 import Icon from '../icon/icon.vue'
-
-export interface InputNumberProps {
-  modelValue?: InputNumberValue
-  /** 标识符 */
-  name?: string
-  /** 输入提示 */
-  placeholder?: string
-  /** 内容对齐方式 */
-  inputAlign?: 'left' | 'center' | 'right'
-  /** 输入框宽度 */
-  inputWidth?: string
-  /** 最小值 */
-  min?: InputNumberValue
-  /** 最大值 */
-  max?: InputNumberValue
-  /** 步长 */
-  step?: InputNumberValue
-  /** 整数位长度 */
-  intLength?: number
-  /** 小数位长度 */
-  decimalLength?: number
-  /** 只读状态禁用输入框操作行为 */
-  readonly?: boolean
-  /** 禁用所有功能 */
-  disabled?: boolean
-  /** 是否显示控制按钮 */
-  controls?: boolean
-  /** 是否开启异步变更，开启后需要手动控制输入值 */
-  asyncChange?: boolean
-  /** 是否为块级元素 */
-  block?: boolean
-  /** 朴素样式 */
-  plain?: boolean
-  /** 是否允许空值 */
-  nullable?: boolean
-  /** 空值时返回的值 */
-  nullValue?: any
-}
+import { inputNumberEmits, inputNumberProps } from './props'
 
 const ns = useNamespace('input-number')
 
-const props = withDefaults(defineProps<InputNumberProps>(), {
-  modelValue: undefined,
-  name: '',
-  placeholder: '',
-  inputAlign: 'center',
-  min: 1,
-  max: 9999,
-  step: 1,
-  intLength: Number.MAX_SAFE_INTEGER.toString().length,
-  decimalLength: 0,
-  disabled: false,
-  controls: true,
-  inputWidth: undefined,
-  nullValue: null,
-})
-
-const emit = defineEmits<{
-  (event: 'update:modelValue', value: number, name?: string): void
-  (event: 'change', value: number, name?: string): void
-  (event: 'focus', value: EventDetail<{ value: InputNumberValue; height: number }>): void
-  (event: 'blur', value: EventDetail<{ value: InputNumberValue; cursor: number }>): void
-}>()
+const props = defineProps(inputNumberProps)
+const emit = defineEmits(inputNumberEmits)
 
 const { modelValue, intLength, decimalLength } = toRefs(props)
 const min = computed<number>(() => +props.min)
@@ -164,14 +107,14 @@ const onBlur = async (e: unknown) => {
     result = props.nullValue
   }
   // 防止处理后modelValue前后值一样视图不更新
-  if (result === Number(modelValue.value) && result !== numVal) {
+  if (result === Number(props.modelValue) && result !== numVal) {
     numberVal.value = numVal
     await nextTick()
     numberVal.value = result
   }
   event.detail.value = result
   // 值没变不发送更新事件
-  if (result !== Number(modelValue.value) || result !== numVal) {
+  if (result !== Number(props.modelValue) || result !== numVal) {
     onUpdate(result)
   }
   emit('blur', event)

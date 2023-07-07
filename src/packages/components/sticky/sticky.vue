@@ -10,46 +10,13 @@
 import { computed, CSSProperties, getCurrentInstance, nextTick, onMounted, ref } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { useRect } from '../../hooks'
-
-export interface StickyProps {
-  /**
-   * 吸顶容器到顶部某个距离的时候，进行吸顶，在H5平台，NavigationBar为44px
-   */
-  offsetTop?: string | number
-  /**
-   * 自定义导航栏的高度
-   */
-  customNavHeight?: string | number
-  /**
-   * 是否开启吸顶功能
-   */
-  disabled?: boolean
-  /**
-   * z-index值
-   */
-  zIndex?: string | number
-  /**
-   * 列表中的索引值
-   */
-  index?: string | number
-  /**
-   * 是否使用css模式，同position: sticky属性实现效果一致
-   */
-  cssSticky?: boolean
-}
+import { StickyProps } from './props'
 
 const instance = getCurrentInstance()
 
 const ns = useNamespace('sticky')
 
-const props = withDefaults(defineProps<StickyProps>(), {
-  offsetTop: 0,
-  customNavHeight: 0,
-  disabled: false,
-  zIndex: undefined,
-  index: undefined,
-  cssSticky: true,
-})
+const props = defineProps(StickyProps)
 
 const elId = 'stickyId' + new Date().getTime().toString()
 let _contentObserver: UniApp.IntersectionObserver | undefined = void 0

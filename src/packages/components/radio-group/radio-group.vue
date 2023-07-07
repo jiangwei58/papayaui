@@ -8,18 +8,8 @@
 import { provide, toRefs } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import useSelect from '../../core/useSelect'
-import { RadioValue } from '../radio/radio.vue'
-
-export interface RadioGroupProps {
-  /** 标识符 */
-  name?: string
-  /** 值 */
-  modelValue?: RadioValue
-  /** 方向 */
-  direction?: 'horizontal' | 'vertical'
-  /** 是否全部禁用 */
-  disabled?: boolean
-}
+import { RadioValue } from '../radio/props'
+import { radioGroupEmits, radioGroupProps } from './props'
 
 export interface RadioProvideData {
   disabled?: boolean
@@ -29,17 +19,8 @@ export interface RadioProvideData {
 
 const ns = useNamespace('radio-group')
 
-const props = withDefaults(defineProps<RadioGroupProps>(), {
-  name: '',
-  modelValue: undefined,
-  direction: 'vertical',
-  disabled: false,
-})
-
-const emit = defineEmits<{
-  (event: 'update:modelValue', value: RadioValue): void
-  (event: 'change', value: RadioValue, name: string): void
-}>()
+const props = defineProps(radioGroupProps)
+const emit = defineEmits(radioGroupEmits)
 
 const { modelValue } = toRefs(props)
 

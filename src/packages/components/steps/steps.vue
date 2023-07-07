@@ -53,36 +53,15 @@ import { CSSProperties, getCurrentInstance, onMounted, ref, useSlots, watch } fr
 import useNamespace from '../../core/useNamespace'
 import { useRect } from '../../hooks'
 import Icon from '../icon/icon.vue'
-
-/** 步骤状态 */
-export type StepStatus = 'default' | 'process' | 'finish'
-
-export type StepItem = {
-  title: string
-  desc: string
-  [key: string]: any
-}
-
-export interface StepsProps {
-  current?: number
-  steps?: StepItem[]
-  direction?: 'horizontal' | 'vertical'
-}
+import { stepsEmits, stepsProps, StepStatus } from './props'
 
 const ns = useNamespace('steps')
 
 const instance = getCurrentInstance()
 const slots = useSlots()
 
-const props = withDefaults(defineProps<StepsProps>(), {
-  current: 0,
-  steps: () => [],
-  direction: 'horizontal',
-})
-
-const emit = defineEmits<{
-  (event: 'click-step', index: number): void
-}>()
+const props = defineProps(stepsProps)
+const emit = defineEmits(stepsEmits)
 
 const headHeights = ref<CSSProperties['height'][]>([])
 

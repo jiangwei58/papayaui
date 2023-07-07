@@ -1,13 +1,14 @@
 <template>
   <view :class="ns.b()">
     <slot></slot>
-    <Loadmore v-if="status" :status="status" :config="loadStatusConfig" />
+    <LoadMore v-if="status" :status="status" :config="loadStatusConfig" />
   </view>
 </template>
 
 <script lang="ts" setup>
 import useNamespace from '../../core/useNamespace'
-import Loadmore, { LoadStatus } from '../loadmore/loadmore.vue'
+import LoadMore from '../loadmore/loadmore.vue'
+import { LoadStatus } from '../loadmore/props'
 
 export interface ListProps {
   status?: keyof LoadStatus

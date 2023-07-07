@@ -13,31 +13,12 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import useNamespace from '../../core/useNamespace'
-
-export type Sort = 'up' | 'down' | undefined
-
-export interface SortLabelProps {
-  modelValue?: string
-  title?: string
-  datakey: string
-}
-
-enum SortTypeEnum {
-  UP = ':asc',
-  DOWN = ':desc',
-}
+import { Sort, sortLabelEmits, sortLabelProps, SortTypeEnum } from './props'
 
 const ns = useNamespace('sort-label')
 
-const props = withDefaults(defineProps<SortLabelProps>(), {
-  modelValue: undefined,
-  title: '',
-})
-
-const emit = defineEmits<{
-  (event: 'update:modelValue', value?: string): void
-  (event: 'change', key: string, sort?: string): void
-}>()
+const props = defineProps(sortLabelProps)
+const emit = defineEmits(sortLabelEmits)
 
 const sort = computed<Sort>(() => {
   const value = props.modelValue || ''

@@ -38,6 +38,8 @@
       center
     />
   </DocDemoBlock>
+
+  <pa-safe-bottom />
 </template>
 
 <script lang="ts" setup>

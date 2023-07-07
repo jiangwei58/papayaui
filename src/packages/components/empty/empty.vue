@@ -30,20 +30,11 @@
 
 <script lang="ts" setup>
 import useNamespace from '../../core/useNamespace'
-
-export interface EmptyProps {
-  /** 图片类型, 支持图片url */
-  image?: 'default' | 'error' | 'search' | string
-  /** 图片下方的描述文字 */
-  description?: string
-}
+import { emptyProps } from './props'
 
 const ns = useNamespace('empty')
 
-withDefaults(defineProps<EmptyProps>(), {
-  image: 'default',
-  description: '',
-})
+defineProps(emptyProps)
 </script>
 
 <style lang="scss" scoped>

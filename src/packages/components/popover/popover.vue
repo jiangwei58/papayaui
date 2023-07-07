@@ -30,20 +30,11 @@ import { getUnitValue } from '../../utils/common'
 import { computed, getCurrentInstance, nextTick, ref, watch } from 'vue'
 import useRect from '../../hooks/useRect'
 import useNamespace from '../../core/useNamespace'
-
-export interface PopoverProps {
-  text?: string
-  width?: string
-  zIndex?: number
-}
+import { popoverProps } from './props'
 
 const ns = useNamespace('popover')
 
-withDefaults(defineProps<PopoverProps>(), {
-  text: '',
-  width: '300',
-  zIndex: 9,
-})
+defineProps(popoverProps)
 
 const show = ref<boolean>(false)
 

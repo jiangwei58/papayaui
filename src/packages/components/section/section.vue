@@ -15,24 +15,13 @@
 </template>
 
 <script lang="ts" setup>
-import { CSSProperties } from 'vue'
 import useNamespace from '../../core/useNamespace'
-
-export interface SectionProps {
-  title?: string
-  bgColor?: CSSProperties['background-color']
-}
+import { sectionEmits, sectionProps } from './props'
 
 const ns = useNamespace('section')
 
-withDefaults(defineProps<SectionProps>(), {
-  title: '',
-  bgColor: undefined,
-})
-
-const emit = defineEmits<{
-  (event: 'click', value: Event): void
-}>()
+defineProps(sectionProps)
+const emit = defineEmits(sectionEmits)
 </script>
 
 <style lang="scss" scoped>
