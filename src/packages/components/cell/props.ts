@@ -8,7 +8,10 @@ export const cellProps = {
   /**
    * 内容
    */
-  value: [String, Number, Boolean],
+  value: {
+    type: [String, Number, Boolean],
+    default: '',
+  },
   /**
    * 标题宽度
    */
