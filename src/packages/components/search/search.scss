@@ -9,7 +9,7 @@
   background-color: _var(search-bg-color, #fff);
   &-input {
     flex: 1;
-    background-color: _var(search-input-bg-color, var(--color-page-bg-gray));
+    background-color: _var(search-input-bg-color, _var(color-gray));
     border-radius: 3px;
   }
   &--round &-input {

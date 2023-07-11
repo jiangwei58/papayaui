@@ -134,6 +134,6 @@ const onLoad2 = (query?: string, pageNumber?: number, pageSize?: number) => {
 
 <style lang="scss">
 page {
-  background-color: var(--color-page-bg-gray);
+  background-color: var(--pa-color-gray);
 }
 </style>

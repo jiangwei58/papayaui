@@ -74,3 +74,19 @@ pnpm install sass -D
   }
 }
 ```
+
+### 修改主题色
+
+> 所有颜色都基于 css 变量定义，覆盖 css 变量即可
+
+```css
+/* 小程序 */
+page {
+  --pa-color-primary: #409eff;
+}
+
+/* H5 */
+:root {
+  --pa-color-primary: #409eff;
+}
+```
