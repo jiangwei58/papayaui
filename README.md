@@ -70,8 +70,10 @@ pnpm install sass -D
 {
   "compilerOptions": {
     // ...
-    "types": ["papayaui/components"]
-  }
+    "types": ["papayaui/global"]
+  },
+  // 防止组件props类型识别错误
+  "include": ["node_modules/papayaui"]
 }
 ```
 
