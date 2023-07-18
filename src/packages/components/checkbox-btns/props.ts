@@ -2,7 +2,7 @@ import type { ExtractPropTypes, PropType } from 'vue'
 import { isObject, isUndefined, isNumber } from '../../utils'
 
 export type CheckboxItem = any
-export type CheckboxValue = any
+export type CheckboxButtonValue = any
 
 export const checkboxButtonsProps = {
   /**
@@ -22,7 +22,7 @@ export const checkboxButtonsProps = {
   /**
    * 选中值
    */
-  modelValue: [String, Number, Boolean] as PropType<CheckboxValue>,
+  modelValue: [String, Number, Boolean] as PropType<CheckboxButtonValue>,
   /**
    * 选项列表
    */
@@ -76,7 +76,7 @@ export const checkboxButtonsProps = {
 }
 
 export const checkboxButtonsEmits = {
-  'update:modelValue': (value: CheckboxValue) => !isUndefined(value),
+  'update:modelValue': (value: CheckboxButtonValue) => !isUndefined(value),
   change: (item: CheckboxItem, index: number) => isObject(item) && isNumber(index),
 }
 

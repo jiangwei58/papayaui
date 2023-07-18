@@ -26,7 +26,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import type { SwitchValue } from './props'
+import type { SwitchValue } from '../../core'
 
 const checked = ref<boolean>(true)
 const loading = ref<boolean>(false)

@@ -90,7 +90,7 @@ import { computed, reactive, ref } from 'vue'
 import type { FormRules } from '../../core/useForm'
 import { defaultNamespace } from '../../core/useNamespace'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import type Form from './form.vue'
+import type { FormInstance } from '.'
 
 interface FormData {
   name: string
@@ -101,7 +101,7 @@ interface FormData {
   object: { text: string }
 }
 
-const formRef = ref<InstanceType<typeof Form>>()
+const formRef = ref<FormInstance>()
 
 const genderOptions = [
   { label: '男', value: 1 },
@@ -150,7 +150,7 @@ const onValueChange = () => {
   formRef.value?.validateField('gender')
 }
 
-const formRef2 = ref<InstanceType<typeof Form>>()
+const formRef2 = ref<FormInstance>()
 
 const formData2 = ref<{
   list: { name: string }[]

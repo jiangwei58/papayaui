@@ -33,7 +33,7 @@ import { ref, toRefs, watch } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import type { EventDetail } from '../../types'
 import { getUnitValue } from '../../utils/common'
-import type { ColumnItem } from './props'
+import type { PickerViewColumnItem } from './props'
 import { pickerViewEmits, pickerViewProps } from './props'
 
 const ns = useNamespace('picker-view')
@@ -55,7 +55,7 @@ watch(
   },
 )
 
-const optionText = (item: ColumnItem) => {
+const optionText = (item: PickerViewColumnItem) => {
   return typeof item === 'object' ? item[props.valueKey] : item
 }
 

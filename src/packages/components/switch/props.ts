@@ -1,5 +1,5 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
-import type { SwitchValue as _SwitchValue } from '../../core/useSwitch'
+import type { SwitchValue } from '../../core/useSwitch'
 
 export const switchProps = {
   /**
@@ -49,8 +49,6 @@ export const switchEmits = {
   'update:modelValue': (_value: SwitchValue) => true,
   change: (_value: SwitchValue) => true,
 }
-
-export type SwitchValue = _SwitchValue
 
 export type SwitchProps = ExtractPropTypes<typeof switchProps>
 export type SwitchEmits = typeof switchEmits

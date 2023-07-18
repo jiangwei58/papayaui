@@ -13,7 +13,7 @@ export const pickerViewProps = {
    * 多列的选项列表
    */
   columns: {
-    type: Array as PropType<ColumnItem[]>,
+    type: Array as PropType<PickerViewColumnItem[]>,
     default: () => [],
   },
   /**
@@ -60,7 +60,7 @@ export const pickerViewEmits = {
   cancel: () => true,
 }
 
-export type ColumnItem = string | Record<string, any>
+export type PickerViewColumnItem = string | Record<string, any>
 
 export type PickerViewProps = ExtractPropTypes<typeof pickerViewProps>
 export type PickerViewEmits = typeof pickerViewEmits
