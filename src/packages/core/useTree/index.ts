@@ -59,6 +59,7 @@ export function useTree<T extends object>(props: UseTreeProps<T> = {}) {
   })
 
   const treeData = shallowRef<OwnNode[]>([])
+  const options = isRef(props.options) ? props.options : shallowRef(props.options ?? [])
 
   const convertTreeNodes = (data: T[] = [], parentNode?: OwnNode) => {
     data.forEach((item, index) => {
@@ -135,10 +136,10 @@ export function useTree<T extends object>(props: UseTreeProps<T> = {}) {
   }
 
   watch(
-    () => props.options,
+    options,
     (newVal) => {
       if (newVal) {
-        setChildren(isRef(newVal) ? newVal.value : newVal)
+        setChildren(newVal)
       }
     },
     {
