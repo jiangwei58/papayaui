@@ -73,7 +73,7 @@ pnpm install sass -D
     "types": ["papayaui/global"]
   },
   // 防止组件props类型识别错误
-  "include": ["node_modules/papayaui"]
+  "include": ["node_modules/papayaui/components/*/*.vue"]
 }
 ```
 

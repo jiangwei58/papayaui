@@ -1,6 +1,6 @@
 cd ./src/packages
 set -e
 npm publish --access=public --registry=https://registry.npmjs.org
-rm ./components.d.ts
+rm ./global.d.ts
 rm ./package.json
 rm ./README.md
