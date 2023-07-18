@@ -49,11 +49,13 @@
 </template>
 
 <script lang="ts" setup>
-import { CSSProperties, getCurrentInstance, onMounted, ref, useSlots, watch } from 'vue'
+import type { CSSProperties } from 'vue'
+import { getCurrentInstance, onMounted, ref, useSlots, watch } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { useRect } from '../../hooks'
 import Icon from '../icon/icon.vue'
-import { stepsEmits, stepsProps, StepStatus } from './props'
+import type { StepStatus } from './props'
+import { stepsEmits, stepsProps } from './props'
 
 const ns = useNamespace('steps')
 

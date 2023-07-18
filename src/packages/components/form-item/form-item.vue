@@ -12,9 +12,11 @@
 </template>
 
 <script lang="ts" setup>
-import { ComponentInternalInstance, getCurrentInstance, inject, Ref, ref } from 'vue'
+import type { ComponentInternalInstance, Ref } from 'vue'
+import { getCurrentInstance, inject, ref } from 'vue'
 import Cell from '../cell/cell.vue'
-import { formItemEmits, FormItemProps, formItemProps } from './props'
+import type { FormItemProps } from './props'
+import { formItemEmits, formItemProps } from './props'
 
 export interface FormItemInstance extends Omit<ComponentInternalInstance, 'props'> {
   errorMessage: Ref<string>

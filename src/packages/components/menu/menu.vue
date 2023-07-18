@@ -15,11 +15,13 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, getCurrentInstance, onMounted, provide, Ref, ref } from 'vue'
+import type { Ref } from 'vue'
+import { computed, getCurrentInstance, onMounted, provide, ref } from 'vue'
 import useNamespace, { defaultNamespace } from '../../core/useNamespace'
 import { useRect } from '../../hooks'
-import { MenuItemInstance } from '../menu-item/menu-item.vue'
-import { MenuProps, menuProps } from './props'
+import type { MenuItemInstance } from '../menu-item/menu-item.vue'
+import type { MenuProps } from './props'
+import { menuProps } from './props'
 
 export interface MenuProvideData {
   props: Required<MenuProps>

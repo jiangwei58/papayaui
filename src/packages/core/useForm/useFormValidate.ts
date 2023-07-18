@@ -1,9 +1,11 @@
-import Schema, { RuleItem, Rules, Rule, Values } from 'async-validator'
-import { ValidateOption } from 'async-validator/dist-types/interface'
-import { computed, Ref, ref, toRef } from 'vue'
-import { IncludeRefs } from '../..'
+import type { Rule, RuleItem, Rules, Values } from 'async-validator'
+import Schema from 'async-validator'
+import type { ValidateOption } from 'async-validator/dist-types/interface'
+import type { Ref } from 'vue'
+import { computed, ref, toRef } from 'vue'
+import type { IncludeRefs } from '../..'
+import { isArray, isObject, isUndefined } from '../../utils/lang'
 import { replaceMessage, validateMessages } from './message'
-import { isObject, isArray, isUndefined } from '../../utils/lang'
 
 export type FormRules<T> = {
   [key in keyof T]?: FormRuleItem | FormRuleItem[]
@@ -25,7 +27,7 @@ export interface UseFormValidateProps<T> {
  * 表单校验hooks
  * @description 表单校验，统一规则的表单名称、输入提示、错误提示等。
  */
-export default <T = Values>(props: IncludeRefs<UseFormValidateProps<T>>) => {
+export function useFormValidate<T = Values>(props: IncludeRefs<UseFormValidateProps<T>>) {
   type OwnProps = UseFormValidateProps<T>
   const formData = toRef(props, 'formData') as Ref<OwnProps['formData']>
   const rules = toRef(props, 'rules') as Ref<OwnProps['rules']>

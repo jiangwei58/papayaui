@@ -1,5 +1,5 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
-import { EventDetail } from '../../types'
+import type { EventDetail } from '../../types'
 import { isObject, isString } from '../../utils'
 
 export const numberInputProps = {

@@ -1,4 +1,4 @@
-import { Ref } from 'vue'
+import type { Ref } from 'vue'
 
 /** 事件返回类型 */
 export interface EventDetail<T> {

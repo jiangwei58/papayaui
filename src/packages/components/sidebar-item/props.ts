@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType, SVGAttributes } from 'vue'
 import { isNumber, isString, pickProps } from '../../utils'
-import { SidebarValue } from '../sidebar/props'
 import { badgeProps } from '../badge/props'
+import type { SidebarValue } from '../sidebar/props'
 
 export const sidebarItemProps = {
   ...pickProps(badgeProps, ['dot']),

@@ -31,12 +31,14 @@
 </template>
 
 <script lang="ts" setup>
-import { ComponentInternalInstance, inject } from 'vue'
+import type { ComponentInternalInstance } from 'vue'
+import { inject } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { noop } from '../../utils'
-import { CheckboxProvideData } from '../checkbox-group/checkbox-group.vue'
+import type { CheckboxProvideData } from '../checkbox-group/checkbox-group.vue'
 import IconComponent from '../icon/icon.vue'
-import { checkboxEmits, CheckboxProps, checkboxProps } from './props'
+import type { CheckboxProps } from './props'
+import { checkboxEmits, checkboxProps } from './props'
 
 export interface CheckboxInstance extends Omit<ComponentInternalInstance, 'props'> {
   props: CheckboxProps

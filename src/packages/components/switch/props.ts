@@ -1,5 +1,5 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
-import { SwitchValue as _SwitchValue } from '../../core/useSwitch'
+import type { SwitchValue as _SwitchValue } from '../../core/useSwitch'
 
 export const switchProps = {
   /**

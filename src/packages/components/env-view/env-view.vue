@@ -21,7 +21,8 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
-import { EnvListItem, envViewEmits, envViewProps } from './props'
+import type { EnvListItem } from './props'
+import { envViewEmits, envViewProps } from './props'
 
 const props = defineProps(envViewProps)
 const emit = defineEmits(envViewEmits)

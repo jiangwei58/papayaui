@@ -30,9 +30,10 @@
 
 <script lang="ts" setup>
 import { computed, getCurrentInstance, nextTick, ref, toRefs, watch } from 'vue'
-import { useRect } from '../../hooks'
 import useNamespace from '../../core/useNamespace'
-import { TabItem, tabsEmits, tabsProps } from './props'
+import { useRect } from '../../hooks'
+import type { TabItem } from './props'
+import { tabsEmits, tabsProps } from './props'
 
 const ns = useNamespace('tabs')
 

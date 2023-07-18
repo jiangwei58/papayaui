@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { provide, ref } from 'vue'
 import useNamespace, { defaultNamespace } from '../../core/useNamespace'
-import { CollapseItemInstance } from '../collapse-item/collapse-item.vue'
+import type { CollapseItemInstance } from '../collapse-item/collapse-item.vue'
 import { collapseEmits, collapseProps } from './props'
 
 export interface CollapseProvideData {

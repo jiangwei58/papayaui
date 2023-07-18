@@ -47,9 +47,10 @@
 
 <script lang="ts" setup>
 import { computed, toRefs } from 'vue'
-import useDatePicker, { DatePickerColumnType } from '../../core/useDatePicker'
+import type { DatePickerColumnType } from '../../core/useDatePicker'
+import { useDatePicker } from '../../core/useDatePicker'
 import useNamespace from '../../core/useNamespace'
-import { EventDetail } from '../../types'
+import type { EventDetail } from '../../types'
 import { getUnitValue } from '../../utils/common'
 import { datePickerEmits, datePickerProps } from './props'
 

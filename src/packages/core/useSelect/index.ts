@@ -1,5 +1,6 @@
-import { computed, Ref, ref, toRef, watch } from 'vue'
-import { IncludeRefs } from '../../types'
+import type { Ref } from 'vue'
+import { computed, ref, toRef, watch } from 'vue'
+import type { IncludeRefs } from '../../types'
 
 export interface UseSelectProps<T, V> {
   /** 选项数据 */
@@ -16,7 +17,7 @@ export interface UseSelectProps<T, V> {
   max?: number
 }
 
-export default <T, V = T>(props: IncludeRefs<UseSelectProps<T, V>>) => {
+export function useSelect<T, V = T>(props: IncludeRefs<UseSelectProps<T, V>>) {
   type OwnProps = UseSelectProps<T, V>
 
   const options = toRef(props, 'options', []) as Ref<Required<OwnProps>['options']>

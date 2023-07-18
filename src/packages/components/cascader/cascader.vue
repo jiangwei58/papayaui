@@ -79,11 +79,11 @@
 
 <script lang="ts" setup>
 import { computed, nextTick, ref, toRaw, toRefs, watch } from 'vue'
-import useCascader from '../../core/useCascader'
+import { useCascader } from '../../core/useCascader'
 import { LoadStatusEnum } from '../../core/useList'
 import useNamespace from '../../core/useNamespace'
 import type { TreeNode } from '../../core/useTree'
-import { EventDetail } from '../../types'
+import type { EventDetail } from '../../types'
 import BottomPopup from '../bottom-popup/bottom-popup.vue'
 import ButtonComponent from '../button/button.vue'
 import ListItem from '../list-item/list-item.vue'
@@ -91,7 +91,8 @@ import Loadmore from '../loadmore/loadmore.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import Search from '../search/search.vue'
 import Tabs from '../tabs/tabs.vue'
-import { cascaderEmits, CascaderOption, cascaderProps, CascaderValue, SearchNode } from './props'
+import type { CascaderOption, CascaderValue, SearchNode } from './props'
+import { cascaderEmits, cascaderProps } from './props'
 import SearchView from './search-view.vue'
 
 const ns = useNamespace('cascader')

@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest'
-import useDatePicker, { DatePickerFilter, DatePickerFormatter } from '.'
 import { ref } from 'vue'
+import type { DatePickerFilter, DatePickerFormatter } from '.'
+import { useDatePicker } from '.'
 
 describe('useDatePicker test', () => {
   test('should initial values is true', () => {

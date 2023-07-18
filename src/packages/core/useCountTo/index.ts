@@ -1,5 +1,5 @@
 import { computed, reactive, ref } from 'vue'
-import { IncludeRefs } from '../../types'
+import type { IncludeRefs } from '../../types'
 
 export interface UseCountToProps {
   /** 开始值 */
@@ -18,7 +18,7 @@ export interface UseCountToProps {
   onEnd?: () => void
 }
 
-export default (props: IncludeRefs<UseCountToProps>) => {
+export function useCountTo(props: IncludeRefs<UseCountToProps>) {
   const _props = props as UseCountToProps
   const ownProps = reactive({
     ..._props,

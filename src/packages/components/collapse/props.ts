@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import { isUndefined } from '../../utils'
-import { CollapseItemValue } from '../collapse-item/props'
+import type { CollapseItemValue } from '../collapse-item/props'
 
 export const collapseProps = {
   /**

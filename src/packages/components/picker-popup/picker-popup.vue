@@ -54,9 +54,9 @@
 
 <script lang="ts" setup>
 import { computed, ref, toRefs, watch } from 'vue'
-import useList, { LoadStatusEnum } from '../../core/useList'
+import { useList, LoadStatusEnum } from '../../core/useList'
 import useNamespace from '../../core/useNamespace'
-import useSelect from '../../core/useSelect'
+import { useSelect } from '../../core/useSelect'
 import { debounce } from '../../utils/common'
 import BottomPopup from '../bottom-popup/bottom-popup.vue'
 import ButtonComponent from '../button/button.vue'
@@ -64,7 +64,8 @@ import ListItem from '../list-item/list-item.vue'
 import Loadmore from '../loadmore/loadmore.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import Search from '../search/search.vue'
-import { Option, OptionValue, pickerPopupEmits, pickerPopupProps } from './props'
+import type { Option, OptionValue } from './props'
+import { pickerPopupEmits, pickerPopupProps } from './props'
 
 const ns = useNamespace('picker-popup')
 

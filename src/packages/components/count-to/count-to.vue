@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, toRefs } from 'vue'
-import useCountTo from '../../core/useCountTo'
+import { useCountTo } from '../../core/useCountTo'
 import useNamespace from '../../core/useNamespace'
 import { countToEmits, countToProps } from './props'
 

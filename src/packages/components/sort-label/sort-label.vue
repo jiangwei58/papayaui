@@ -13,7 +13,8 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import useNamespace from '../../core/useNamespace'
-import { Sort, sortLabelEmits, sortLabelProps, SortTypeEnum } from './props'
+import type { Sort } from './props'
+import { sortLabelEmits, sortLabelProps, SortTypeEnum } from './props'
 
 const ns = useNamespace('sort-label')
 

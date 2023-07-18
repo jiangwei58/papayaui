@@ -1,6 +1,7 @@
-import dayjs, { ConfigType, Dayjs } from 'dayjs'
+import type { ConfigType } from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
 import { computed, reactive, ref, watch } from 'vue'
-import { IncludeRefs } from '../../types'
+import type { IncludeRefs } from '../../types'
 
 export type FirstDayOfWeekType = 0 | 1 | 2 | 3 | 4 | 5 | 6
 
@@ -49,7 +50,7 @@ export type DayItem = {
 
 export const WEEKDAYS = ['日', '一', '二', '三', '四', '五', '六']
 
-export default (props: IncludeRefs<UseCalendarProps>) => {
+export function useCalendar(props: IncludeRefs<UseCalendarProps>) {
   const _props = props as UseCalendarProps
   const state = reactive({
     ...props,

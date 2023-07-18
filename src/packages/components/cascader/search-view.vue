@@ -17,18 +17,14 @@
 
 <script lang="ts" setup>
 import { ref, toRefs, watch } from 'vue'
+import { LoadStatusEnum } from '../../core/useList'
 import useNamespace from '../../core/useNamespace'
-import { LoadStatusEnum } from '../../hooks'
 import { debounce } from '../../utils/common'
 import ListItem from '../list-item/list-item.vue'
 import Loadmore from '../loadmore/loadmore.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
-import {
-  CascaderOption,
-  cascaderSearchViewEmits,
-  cascaderSearchViewProps,
-  SearchNode,
-} from './props'
+import type { CascaderOption, SearchNode } from './props'
+import { cascaderSearchViewEmits, cascaderSearchViewProps } from './props'
 
 const ns = useNamespace('cascader-search-view')
 

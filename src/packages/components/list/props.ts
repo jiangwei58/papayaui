@@ -1,5 +1,5 @@
-import { ExtractPropTypes, PropType } from 'vue'
-import { LoadStatus } from '../loadmore/props'
+import type { ExtractPropTypes, PropType } from 'vue'
+import type { LoadStatus } from '../loadmore/props'
 
 export const listProps = {
   /**

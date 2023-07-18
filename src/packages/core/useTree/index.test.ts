@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'vitest'
-import useTree, { UseTreeFieldNames } from '.'
+import type { UseTreeFieldNames } from '.'
+import { useTree } from '.'
 
 describe('useTree test', () => {
   test('should set and get children normally', () => {

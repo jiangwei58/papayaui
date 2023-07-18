@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import { InputNumberValue } from '../../core/useInputNumber'
+import type { InputNumberValue } from '../../core/useInputNumber'
+import type { EventDetail } from '../../types'
 import { isNumber, isObject } from '../../utils'
-import { EventDetail } from '../../types'
 
 export const inputNumberProps = {
   /**

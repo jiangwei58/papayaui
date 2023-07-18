@@ -7,8 +7,8 @@
 <script lang="ts" setup>
 import { provide, toRefs } from 'vue'
 import useNamespace from '../../core/useNamespace'
-import useSelect from '../../core/useSelect'
-import { RadioValue } from '../radio/props'
+import { useSelect } from '../../core/useSelect'
+import type { RadioValue } from '../radio/props'
 import { radioGroupEmits, radioGroupProps } from './props'
 
 export interface RadioProvideData {

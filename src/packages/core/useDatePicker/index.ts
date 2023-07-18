@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 import { computed, reactive, ref, toRefs, watch } from 'vue'
-import { IncludeRefs } from '../../types'
+import type { IncludeRefs } from '../../types'
 import { getRefValue, padZero } from '../../utils'
 
 export type DatePickerColumnType = 'year' | 'month' | 'day' | 'hour' | 'minute'
@@ -57,7 +57,7 @@ export interface DatePickerOption {
   text: string
 }
 
-export default (props: IncludeRefs<UseDatePickerProps> = {}) => {
+export function useDatePicker(props: IncludeRefs<UseDatePickerProps> = {}) {
   const _props = props as UseDatePickerProps
 
   const currentYear = new Date().getFullYear()

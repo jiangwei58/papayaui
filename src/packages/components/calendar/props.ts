@@ -1,6 +1,6 @@
-import { Dayjs } from 'dayjs'
+import type { Dayjs } from 'dayjs'
 import type { ExtractPropTypes, PropType } from 'vue'
-import { DayItem, FirstDayOfWeekType } from '../../core/useCalendar'
+import type { DayItem, FirstDayOfWeekType } from '../../core/useCalendar'
 import { isArray, isDate, isObject, pickProps } from '../../utils'
 import { popupEmits, popupProps } from '../popup/props'
 

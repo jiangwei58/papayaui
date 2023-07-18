@@ -48,7 +48,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import { CollapseItemValue } from '../collapse-item/collapse-item.vue'
+import type { CollapseItemValue } from '../collapse-item/props'
 
 const collapseValue = ref<number[]>([])
 

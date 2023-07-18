@@ -1,13 +1,14 @@
 import { computed, ref } from 'vue'
-import { MaybeRef } from '../../types'
-import useTree, { TreeNode, UseTreeProps } from '../useTree'
+import type { MaybeRef } from '../../types'
+import type { TreeNode, UseTreeProps } from '../useTree'
+import { useTree } from '../useTree'
 
 export interface UseCascaderProps<T extends object> extends UseTreeProps<T> {
   /** 是否多选 */
   multiple?: MaybeRef<boolean>
 }
 
-export default <T extends object, V>(props: UseCascaderProps<T>) => {
+export function useCascader<T extends object, V>(props: UseCascaderProps<T>) {
   type OwnNode = TreeNode<T>
 
   const useTreeState = useTree<T>(props)

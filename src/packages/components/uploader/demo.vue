@@ -35,7 +35,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import { FileItem } from './props'
+import type { FileItem } from './props'
 // 仅做本地示例，使用时请用网络图片
 import img1 from '../../images/demo2.jpeg'
 import img2 from '../../images/demo3.jpg'

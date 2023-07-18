@@ -60,7 +60,7 @@
 
 <script lang="ts" setup>
 import useNamespace from '../../core/useNamespace'
-import { EventDetail } from '../../types'
+import type { EventDetail } from '../../types'
 import { getUnitValue } from '../../utils'
 import Cell from '../cell/cell.vue'
 import Icon from '../icon/icon.vue'

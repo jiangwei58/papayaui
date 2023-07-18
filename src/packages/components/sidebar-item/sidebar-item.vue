@@ -20,7 +20,7 @@ import { getCurrentInstance, ref } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { isUndefined } from '../../utils'
 import Badge from '../badge/badge.vue'
-import { SidebarExposeData, SidebarValue } from '../sidebar/sidebar.vue'
+import type { SidebarExposeData, SidebarValue } from '../sidebar/sidebar.vue'
 import { sidebarItemEmits, sidebarItemProps } from './props'
 
 const ns = useNamespace('sidebar-item')

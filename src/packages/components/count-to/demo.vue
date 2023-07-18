@@ -62,7 +62,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import CountTo from '../count-to/count-to.vue'
+import type CountTo from '../count-to/count-to.vue'
 
 const countToRef = ref<InstanceType<typeof CountTo>>()
 const countToRef2 = ref<InstanceType<typeof CountTo>>()

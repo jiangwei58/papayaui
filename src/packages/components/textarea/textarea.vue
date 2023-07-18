@@ -35,7 +35,7 @@
 
 <script lang="ts" setup>
 import useNamespace from '../../core/useNamespace'
-import { EventDetail } from '../../types'
+import type { EventDetail } from '../../types'
 import { getUnitValue } from '../../utils'
 import { textareaEmits, textareaProps } from './props'
 

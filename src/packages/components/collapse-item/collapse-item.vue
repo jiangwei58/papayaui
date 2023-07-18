@@ -36,13 +36,15 @@
 </template>
 
 <script setup lang="ts">
-import { CSSProperties, getCurrentInstance, inject, onMounted, Ref, ref, toRefs } from 'vue'
+import type { CSSProperties, Ref } from 'vue'
+import { getCurrentInstance, inject, onMounted, ref, toRefs } from 'vue'
 import useNamespace, { defaultNamespace } from '../../core/useNamespace'
 import { useRect } from '../../hooks'
 import { noop } from '../../utils'
 import Cell from '../cell/cell.vue'
-import { CollapseProvideData } from '../collapse/collapse.vue'
-import { CollapseItemProps, collapseItemProps } from './props'
+import type { CollapseProvideData } from '../collapse/collapse.vue'
+import type { CollapseItemProps } from './props'
+import { collapseItemProps } from './props'
 
 export interface CollapseItemInstance {
   index: Ref<number>

@@ -6,9 +6,10 @@
 
 <script lang="ts" setup>
 import { computed, provide, ref, toRefs } from 'vue'
-import useFormValidate, { FormItemExtraParams, FormRules } from '../../core/useForm'
+import type { FormItemExtraParams, FormRules } from '../../core/useForm'
+import { useFormValidate } from '../../core/useForm'
 import useNamespace from '../../core/useNamespace'
-import { FormItemInstance } from '../form-item/form-item.vue'
+import type { FormItemInstance } from '../form-item/form-item.vue'
 import { formEmits, formProps } from './props'
 
 const ns = useNamespace('form')

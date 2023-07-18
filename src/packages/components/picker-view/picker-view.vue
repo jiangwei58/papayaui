@@ -29,11 +29,12 @@
 </template>
 
 <script lang="ts" setup>
-import { EventDetail } from '../../types'
-import { getUnitValue } from '../../utils/common'
-import { toRefs, ref, watch } from 'vue'
+import { ref, toRefs, watch } from 'vue'
 import useNamespace from '../../core/useNamespace'
-import { columnItem, pickerViewEmits, pickerViewProps } from './props'
+import type { EventDetail } from '../../types'
+import { getUnitValue } from '../../utils/common'
+import type { ColumnItem } from './props'
+import { pickerViewEmits, pickerViewProps } from './props'
 
 const ns = useNamespace('picker-view')
 
@@ -54,7 +55,7 @@ watch(
   },
 )
 
-const optionText = (item: columnItem) => {
+const optionText = (item: ColumnItem) => {
   return typeof item === 'object' ? item[props.valueKey] : item
 }
 

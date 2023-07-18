@@ -22,7 +22,7 @@ const _bem = (
   return cls
 }
 
-export default (block: string) => {
+export function useNamespace(block: string) {
   const namespace = defaultNamespace
 
   // pa-xxx-xxx
@@ -104,3 +104,5 @@ export default (block: string) => {
     cssVarBlock,
   }
 }
+
+export default useNamespace

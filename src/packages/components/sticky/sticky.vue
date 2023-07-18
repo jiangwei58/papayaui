@@ -7,7 +7,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, CSSProperties, getCurrentInstance, nextTick, onMounted, ref } from 'vue'
+import type { CSSProperties } from 'vue'
+import { computed, getCurrentInstance, nextTick, onMounted, ref } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { useRect } from '../../hooks'
 import { StickyProps } from './props'

@@ -1,4 +1,4 @@
-import { ValidateMessages } from 'async-validator'
+import type { ValidateMessages } from 'async-validator'
 
 export const MESSAGES_TEMPLATE = {
   required: '{{label}}是必填的',

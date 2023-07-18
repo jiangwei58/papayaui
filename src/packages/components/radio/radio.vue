@@ -31,12 +31,14 @@
 </template>
 
 <script lang="ts" setup>
-import { ComponentInternalInstance, inject } from 'vue'
+import type { ComponentInternalInstance } from 'vue'
+import { inject } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { noop } from '../../utils'
 import IconComponent from '../icon/icon.vue'
-import { RadioProvideData } from '../radio-group/radio-group.vue'
-import { radioEmits, RadioProps, radioProps } from './props'
+import type { RadioProvideData } from '../radio-group/radio-group.vue'
+import type { RadioProps } from './props'
+import { radioEmits, radioProps } from './props'
 
 export interface RadioInstance extends Omit<ComponentInternalInstance, 'props'> {
   props: RadioProps

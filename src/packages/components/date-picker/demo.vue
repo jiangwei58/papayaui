@@ -60,7 +60,7 @@
 <script lang="ts" setup>
 import dayjs from 'dayjs'
 import { ref } from 'vue'
-import { DatePickerColumnType, DatePickerOption } from '../../core/useDatePicker'
+import type { DatePickerColumnType, DatePickerOption } from '../../core/useDatePicker'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 const dateValue = ref<Date>(new Date())

@@ -124,7 +124,7 @@ import dayjs from 'dayjs'
 import { ref } from 'vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
-import { CalendarProps } from './props'
+import type { CalendarProps } from './props'
 
 type StateProps = Partial<CalendarProps> & { current?: number }
 

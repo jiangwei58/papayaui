@@ -8,7 +8,7 @@
 <script lang="ts" setup>
 import useNamespace from '../../core/useNamespace'
 import LoadMore from '../loadmore/loadmore.vue'
-import { LoadStatus } from '../loadmore/props'
+import type { LoadStatus } from '../loadmore/props'
 
 export interface ListProps {
   status?: keyof LoadStatus

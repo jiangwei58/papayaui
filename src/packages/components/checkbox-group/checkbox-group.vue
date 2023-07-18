@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import { provide, toRefs } from 'vue'
 import useNamespace from '../../core/useNamespace'
-import useSelect from '../../core/useSelect'
+import { useSelect } from '../../core/useSelect'
 import type { CheckboxValue } from '../checkbox/props'
 import { checkboxGroupEmits, checkboxGroupProps } from './props'
 

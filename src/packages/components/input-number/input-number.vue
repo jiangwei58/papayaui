@@ -42,8 +42,9 @@
 
 <script lang="ts" setup>
 import { computed, nextTick, toRefs } from 'vue'
-import { EventDetail } from '../..'
-import useInputNumber, { InputNumberValue, minAndMax } from '../../core/useInputNumber'
+import type { EventDetail } from '../..'
+import type { InputNumberValue } from '../../core/useInputNumber'
+import { useInputNumber, minAndMax } from '../../core/useInputNumber'
 import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
 import Icon from '../icon/icon.vue'

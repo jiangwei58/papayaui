@@ -28,7 +28,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, CSSProperties, ref, toRefs, watch } from 'vue'
+import type { CSSProperties } from 'vue'
+import { computed, ref, toRefs, watch } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { getUnitValue, noop } from '../../utils'
 import Icon from '../icon/icon.vue'
@@ -36,7 +37,8 @@ import Overlay from '../overlay/overlay.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import type { TransitionMode } from '../transition/props'
 import TransitionComponent from '../transition/transition.vue'
-import { popupEmits, PopupPosition, popupProps } from './props'
+import type { PopupPosition } from './props'
+import { popupEmits, popupProps } from './props'
 
 const ns = useNamespace('popup')
 

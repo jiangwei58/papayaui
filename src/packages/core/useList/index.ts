@@ -29,7 +29,7 @@ export type UseListResult<T> = Pick<UseListData<T>, 'list'> &
 
 export type UseListProps<T> = Partial<Pick<UseListData<T>, 'pageNumber' | 'pageSize' | 'limit'>>
 
-export default <T = any>(props: UseListProps<T> = {}) => {
+export function useList<T = any>(props: UseListProps<T> = {}) {
   const state: UseListData<T> = reactive({
     list: [],
     loadStatus: LoadStatusEnum.LOADMORE,

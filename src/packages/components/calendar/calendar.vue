@@ -36,9 +36,9 @@
 </template>
 
 <script lang="ts" setup>
-import { Dayjs } from 'dayjs'
+import type { Dayjs } from 'dayjs'
 import { nextTick, onMounted, ref, watch } from 'vue'
-import { DayItem } from '../../core/useCalendar'
+import type { DayItem } from '../../core/useCalendar'
 import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
 import CalendarWrapper from '../calendar/calendar-wrapper.vue'

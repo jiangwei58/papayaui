@@ -17,9 +17,9 @@
 <script lang="ts" setup>
 import { onReachBottom } from '@dcloudio/uni-app'
 import { onMounted } from 'vue'
-import { EventDetail } from '../..'
+import type { EventDetail } from '../..'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import useList from '../useList'
+import { useList } from '../useList'
 
 interface ListItem {
   id: number

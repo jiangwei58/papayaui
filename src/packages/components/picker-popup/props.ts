@@ -1,5 +1,5 @@
-import { ExtractPropTypes, PropType } from 'vue'
-import { UseListProps } from '../../core/useList'
+import type { ExtractPropTypes, PropType } from 'vue'
+import type { UseListProps } from '../../core/useList'
 import { isArray, isNumber, isObject, isString, pickProps } from '../../utils'
 import { bottomPopupEmits, bottomPopupProps } from '../bottom-popup/props'
 

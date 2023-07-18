@@ -1,4 +1,5 @@
-import { Ref, isRef } from 'vue'
+import type { Ref } from 'vue'
+import { isRef } from 'vue'
 
 /** 判断传入的值，是否带有单位，如果没有，就默认用rpx单位 */
 export const getUnitValue = (val: number | string, unit = 'rpx'): string => {
@@ -83,7 +84,7 @@ export const debounce = (fn: (...args: any[]) => any, wait = 0) => {
     }
     t = setTimeout(() => {
       fn(...innerArgs)
-    }, wait)
+    }, wait) as unknown as number | null
   }
 }
 
@@ -119,7 +120,7 @@ export const throttle = (
     if (trailing) {
       t = setTimeout(() => {
         fn(...innerArgs)
-      }, wait)
+      }, wait) as unknown as number | null
     }
   }
 }

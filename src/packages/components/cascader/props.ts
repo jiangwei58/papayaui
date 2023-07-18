@@ -1,5 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import { TreeNode, UseTreeFieldNames, defaultFieldNames } from '../../core/useTree'
+import type { TreeNode, UseTreeFieldNames } from '../../core/useTree'
+import { defaultFieldNames } from '../../core/useTree'
 import { isArray, isObject, pickProps } from '../../utils'
 import { bottomPopupEmits, bottomPopupProps } from '../bottom-popup/props'
 

@@ -1,5 +1,5 @@
 import { computed, reactive, ref, watch } from 'vue'
-import { IncludeRefs } from '../../types'
+import type { IncludeRefs } from '../../types'
 
 export type InputNumberValue = string | number
 
@@ -18,7 +18,7 @@ export interface UseInputNumberProps {
   decimalLength?: number
 }
 
-export default (props: IncludeRefs<UseInputNumberProps>) => {
+export function useInputNumber(props: IncludeRefs<UseInputNumberProps>) {
   const _props = props as UseInputNumberProps
   const state = reactive({
     ...props,

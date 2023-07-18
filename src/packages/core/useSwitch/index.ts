@@ -1,5 +1,5 @@
 import { computed, reactive, ref, watch } from 'vue'
-import { IncludeRefs } from '../../types'
+import type { IncludeRefs } from '../../types'
 
 export type SwitchValue = boolean | string | number
 
@@ -16,7 +16,7 @@ export interface UseSwitchProps {
   disabled?: boolean
 }
 
-export default (props: IncludeRefs<UseSwitchProps>) => {
+export function useSwitch(props: IncludeRefs<UseSwitchProps>) {
   const _props = props as UseSwitchProps
   const state = reactive({
     ..._props,

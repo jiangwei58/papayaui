@@ -105,7 +105,7 @@ class Request {
       this._loadingTimer = setTimeout(() => {
         this.showLoading(newConfig)
         this._loadingTimer = null
-      }, newConfig.loadingTime)
+      }, newConfig.loadingTime) as unknown as number | null
     }
 
     return new Promise((resolve, reject) => {

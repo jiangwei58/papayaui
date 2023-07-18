@@ -9,7 +9,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, CSSProperties } from 'vue'
+import type { CSSProperties } from 'vue'
+import { computed } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
 import Icon from '../icon/icon.vue'

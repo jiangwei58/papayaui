@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import { FormRules } from '../../core/useForm'
+import type { FormRules } from '../../core/useForm'
 
 export const formProps = {
   /**

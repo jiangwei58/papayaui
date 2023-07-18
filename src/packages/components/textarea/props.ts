@@ -1,6 +1,6 @@
-import { ExtractPropTypes } from 'vue'
-import { cellProps } from '../cell/props'
+import type { ExtractPropTypes } from 'vue'
 import { isString } from '../../utils'
+import { cellProps } from '../cell/props'
 
 export const textareaProps = {
   /** 值 */

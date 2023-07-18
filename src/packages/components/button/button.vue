@@ -38,11 +38,12 @@
 </template>
 
 <script lang="ts" setup>
+import type { CSSProperties, StyleValue } from 'vue'
+import { computed, ref } from 'vue'
+import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils/common'
-import { computed, CSSProperties, ref, StyleValue } from 'vue'
 import Icon from '../icon/icon.vue'
 import Loadmore from '../loadmore/loadmore.vue'
-import useNamespace from '../../core/useNamespace'
 import { buttonEmits, buttonProps } from './props'
 
 const ns = useNamespace('button')

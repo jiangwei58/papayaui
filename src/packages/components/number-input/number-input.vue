@@ -20,8 +20,9 @@
 <script lang="ts" setup>
 import { nextTick } from 'vue'
 import useNamespace from '../../core/useNamespace'
-import { EventDetail } from '../../types'
-import { NumberInputEmits, numberInputEmits, numberInputProps } from './props'
+import type { EventDetail } from '../../types'
+import type { NumberInputEmits } from './props'
+import { numberInputEmits, numberInputProps } from './props'
 
 const ns = useNamespace('number-input')
 

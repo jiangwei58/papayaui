@@ -62,10 +62,11 @@
 <script lang="ts" setup>
 import dayjs from 'dayjs'
 import { computed, getCurrentInstance, nextTick, ref, toRefs } from 'vue'
-import useCalendar, { DayItem } from '../../core/useCalendar'
+import type { DayItem } from '../../core/useCalendar'
+import { useCalendar } from '../../core/useCalendar'
 import useNamespace from '../../core/useNamespace'
 import { useRect } from '../../hooks'
-import { EventDetail } from '../../types'
+import type { EventDetail } from '../../types'
 import { getUnitValue, throttle } from '../../utils'
 import ButtonComponent from '../button/button.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'

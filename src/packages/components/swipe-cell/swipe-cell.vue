@@ -47,7 +47,8 @@ import useNamespace, { defaultNamespace } from '../../core/useNamespace'
 import useRect from '../../hooks/useRect'
 import { getUnitValue } from '../../utils'
 import ButtonComponent from '../button/button.vue'
-import { swipeCellEmits, swipeCellProps, SwipeCellStatus } from './props'
+import type { SwipeCellStatus } from './props'
+import { swipeCellEmits, swipeCellProps } from './props'
 
 export default defineComponent({
   components: {

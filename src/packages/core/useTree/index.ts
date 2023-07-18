@@ -1,5 +1,5 @@
 import { computed, isRef, shallowRef, toRaw, triggerRef, watch } from 'vue'
-import { MaybeRef } from '../../types'
+import type { MaybeRef } from '../../types'
 
 export interface UseTreeProps<T extends object> {
   /**
@@ -48,7 +48,7 @@ export const defaultFieldNames: Partial<UseTreeFieldNames> = {
   disabled: 'disabled',
 }
 
-export default <T extends object>(props: UseTreeProps<T> = {}) => {
+export function useTree<T extends object>(props: UseTreeProps<T> = {}) {
   type OwnNode = TreeNode<T>
 
   const fieldNames = computed(() => {

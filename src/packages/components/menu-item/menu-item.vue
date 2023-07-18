@@ -27,25 +27,18 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  computed,
-  CSSProperties,
-  getCurrentInstance,
-  inject,
-  onMounted,
-  Ref,
-  ref,
-  toRefs,
-} from 'vue'
+import type { CSSProperties, Ref } from 'vue'
+import { computed, getCurrentInstance, inject, onMounted, ref, toRefs } from 'vue'
 import useNamespace, { defaultNamespace } from '../../core/useNamespace'
-import useSelect from '../../core/useSelect'
+import { useSelect } from '../../core/useSelect'
 import { noop } from '../../utils'
 import Cell from '../cell/cell.vue'
 import IconComponent from '../icon/icon.vue'
-import { MenuProvideData } from '../menu/menu.vue'
+import type { MenuProvideData } from '../menu/menu.vue'
 import Popup from '../popup/popup.vue'
 import type { PopupProps } from '../popup/props'
-import { menuItemEmits, MenuItemOption, MenuItemOptionValue, menuItemProps } from './props'
+import type { MenuItemOption, MenuItemOptionValue } from './props'
+import { menuItemEmits, menuItemProps } from './props'
 
 export interface MenuItemInstance {
   /** 标题 */

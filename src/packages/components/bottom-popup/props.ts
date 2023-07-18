@@ -1,4 +1,4 @@
-import { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes } from 'vue'
 import { pickProps } from '../../utils'
 import { popupEmits, popupProps } from '../popup/props'
 

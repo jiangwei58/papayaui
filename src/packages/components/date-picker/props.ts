@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import {
+import type {
   DatePickerColumnType,
   DatePickerFilter,
   DatePickerFormatter,
@@ -100,7 +100,7 @@ export const datePickerEmits = {
   cancel: () => true,
 }
 
-export type columnItem = string | Record<string, any>
+export type ColumnItem = string | Record<string, any>
 
 export type DatePickerProps = ExtractPropTypes<typeof datePickerProps>
 export type datePickerEmits = typeof datePickerEmits

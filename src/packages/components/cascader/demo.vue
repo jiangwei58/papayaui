@@ -63,7 +63,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import { CascaderNode } from './props'
+import type { CascaderNode } from './props'
 
 type NodeItem = { label: string; value: string; leaf?: boolean; children?: NodeItem[] }
 

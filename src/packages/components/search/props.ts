@@ -1,7 +1,7 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
-import { fieldProps } from '../field/props'
+import type { EventDetail } from '../../types'
 import { isObject, isString, pickProps } from '../../utils'
-import { EventDetail } from '../../types'
+import { fieldProps } from '../field/props'
 
 export const searchProps = {
   ...pickProps(fieldProps, ['disabled', 'readonly']),

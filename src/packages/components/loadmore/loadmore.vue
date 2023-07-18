@@ -17,7 +17,8 @@
 import { computed } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import LoadingIcon from '../loading-icon/loading-icon.vue'
-import { loadMoreProps, LoadStatus } from './props'
+import type { LoadStatus } from './props'
+import { loadMoreProps } from './props'
 
 const ns = useNamespace('loadmore')
 
