@@ -1,6 +1,9 @@
-# papayaui
+# papayaui &middot; [![npm](https://img.shields.io/npm/v/papayaui.svg)](https://www.npmjs.com/package/papayaui)
 
 适用于 uniapp 的 ui 框架
+
+- 💪 Vue 3 Composition API
+- 🔥 Written in TypeScript
 
 ## 准备工作
 
@@ -24,6 +27,14 @@ npm i sass -D
 
 # 通过 pnpm 安装
 pnpm install sass -D
+```
+
+### 附加依赖（仅使用 pnpm 时注意）
+
+因 uniapp easycom 组件模式的限制，如果您使用 pnpm 作为包管理器，您需要手动安装以下依赖
+
+```bash
+pnpm install async-validator dayjs
 ```
 
 ## 配置步骤
