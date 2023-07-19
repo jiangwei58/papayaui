@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'vitest'
+import { nextTick, ref } from 'vue'
 import type { UseTreeFieldNames } from '.'
 import { useTree } from '.'
 
@@ -35,5 +36,16 @@ describe('useTree test', () => {
     })
 
     expect(fieldNames.value).toMatchObject(customFieldNames)
+  })
+
+  test('should watch options change correctly', async () => {
+    const options = ref([{ label: '1', value: '1' }])
+    const { treeData } = useTree({ options })
+
+    expect(treeData.value).toEqual(options.value)
+
+    options.value = [{ label: '2', value: '2' }]
+    await nextTick()
+    expect(treeData.value).toEqual(options.value)
   })
 })
