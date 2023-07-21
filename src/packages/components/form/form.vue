@@ -48,7 +48,7 @@ const formValidate = useFormValidate({
 })
 
 const baseValidate = (keys?: string[]) => {
-  return formValidate.validate({ keys }).then(({ isValid, errorMap }) => {
+  return formValidate.validate(keys).then(({ isValid, errorMap }) => {
     children.value.forEach((child) => {
       const error = errorMap[child.props.prop as string]
       child.errorMessage = error || ''

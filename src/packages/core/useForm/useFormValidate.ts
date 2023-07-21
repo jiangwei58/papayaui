@@ -1,10 +1,9 @@
 import type { Rule, RuleItem, Rules, Values } from 'async-validator'
 import Schema from 'async-validator'
-import type { ValidateOption } from 'async-validator/dist-types/interface'
 import type { Ref } from 'vue'
-import { computed, ref, toRef } from 'vue'
+import { ref, toRef } from 'vue'
 import type { IncludeRefs } from '../..'
-import { isArray, isObject, isUndefined } from '../../utils/lang'
+import { isArray, isObject, isUndefined, pick } from '../../utils'
 import { replaceMessage, validateMessages } from './message'
 
 export type FormRules<T> = {
@@ -35,13 +34,6 @@ export function useFormValidate<T = Values>(props: IncludeRefs<UseFormValidatePr
 
   const errorMap = ref<ErrorMap<T>>({})
 
-  const validator = computed(() => {
-    const newRules = convertSchemaRules(formData.value, rules.value)
-    const _validator = new Schema(newRules)
-    _validator.messages(validateMessages)
-    return _validator
-  })
-
   const clearValidate = (key?: keyof T | Array<keyof T>) => {
     const keys = Array.isArray(key) ? key : [key]
     if (keys.length) {
@@ -53,28 +45,37 @@ export function useFormValidate<T = Values>(props: IncludeRefs<UseFormValidatePr
     }
   }
 
-  const validate = (option?: ValidateOption) => {
-    clearValidate((option?.keys || []) as Array<keyof T>)
+  const validate = async (keys: Array<keyof T> = []) => {
+    const filterRules = keys.length ? pick(rules.value, keys) : rules.value
+    const validatorRules = convertSchemaRules(formData.value, filterRules)
+
+    const validator = new Schema(validatorRules)
+    validator.messages(validateMessages)
+
     return new Promise<{ isValid: boolean; errorMap: ErrorMap<T> }>((resolve) => {
-      validator.value.validate(formData.value as Values, option, (errors, _data) => {
-        let isValid = true
-        if (errors?.length) {
-          errorMap.value = errors.reduce((result, error) => {
-            result[error.field as keyof T] = replaceMessage(
-              error.message || '',
-              extraParams.value[error.field as keyof T],
+      validator.validate(formData.value as Values, (errors, fields) => {
+        Object.keys(filterRules).forEach((key) => {
+          if (fields[key]) {
+            errorMap.value[key] = replaceMessage(
+              fields[key][0].message || '',
+              extraParams.value[key as keyof T],
             )
-            return result
-          }, {} as ErrorMap<T>)
-          isValid = false
-        }
-        resolve({ isValid, errorMap: errorMap.value })
+          } else {
+            delete errorMap.value[key]
+          }
+        })
+        resolve({ isValid: !errors?.length, errorMap: errorMap.value })
       })
     })
   }
 
+  const validateField = (key: keyof T) => {
+    return validate([key])
+  }
+
   return {
     validate,
+    validateField,
     clearValidate,
     errorMap,
   }
