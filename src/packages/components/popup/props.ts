@@ -1,11 +1,11 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
-import { isBoolean, pickProps } from '../../utils'
+import { isBoolean, pick } from '../../utils'
 import { transitionProps } from '../transition/props'
 
 export type PopupPosition = 'top' | 'bottom' | 'left' | 'right' | 'center'
 
 export const popupProps = {
-  ...pickProps(transitionProps, ['duration']),
+  ...pick(transitionProps, ['duration']),
   /**
    * 是否显示
    */

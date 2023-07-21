@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts" setup>
-import { getUnitValue } from '../../utils/common'
+import { getUnitValue } from '../../utils'
 import { computed, getCurrentInstance, nextTick, ref, watch } from 'vue'
 import useRect from '../../hooks/useRect'
 import useNamespace from '../../core/useNamespace'

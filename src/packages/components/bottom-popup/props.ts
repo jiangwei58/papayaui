@@ -1,9 +1,9 @@
 import type { ExtractPropTypes } from 'vue'
-import { pickProps } from '../../utils'
+import { pick } from '../../utils'
 import { popupEmits, popupProps } from '../popup/props'
 
 export const bottomPopupProps = {
-  ...pickProps(popupProps, ['show', 'zIndex', 'overlay', 'bgColor', 'safeAreaInsetBottom']),
+  ...pick(popupProps, ['show', 'zIndex', 'overlay', 'bgColor', 'safeAreaInsetBottom']),
   /**
    * 标题
    */

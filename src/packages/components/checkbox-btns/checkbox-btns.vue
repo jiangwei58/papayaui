@@ -30,7 +30,7 @@
 import { toRefs } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { useSelect } from '../../core/useSelect'
-import { getUnitValue } from '../../utils/common'
+import { getUnitValue } from '../../utils'
 import type { CheckboxItem, CheckboxButtonValue } from './props'
 import { checkboxButtonsEmits, checkboxButtonsProps } from './props'
 

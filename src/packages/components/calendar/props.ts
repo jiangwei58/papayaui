@@ -1,7 +1,7 @@
 import type { Dayjs } from 'dayjs'
 import type { ExtractPropTypes, PropType } from 'vue'
 import type { DayItem, FirstDayOfWeekType } from '../../core/useCalendar'
-import { isArray, isDate, isObject, pickProps } from '../../utils'
+import { isArray, isDate, isObject, pick } from '../../utils'
 import { popupEmits, popupProps } from '../popup/props'
 
 export type CalendarValue = Date | Date[]
@@ -151,7 +151,7 @@ export const calendarProps = {
   /**
    * 当 poppable 为 true 时支持
    */
-  ...pickProps(popupProps, ['show', 'closeOnClickOverlay']),
+  ...pick(popupProps, ['show', 'closeOnClickOverlay']),
 
   ...calendarWrapperProps,
 }

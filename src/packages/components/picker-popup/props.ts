@@ -1,13 +1,13 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import type { UseListProps } from '../../core/useList'
-import { isArray, isNumber, isObject, isString, pickProps } from '../../utils'
+import { isArray, isNumber, isObject, isString, pick } from '../../utils'
 import { bottomPopupEmits, bottomPopupProps } from '../bottom-popup/props'
 
 export type Option = any
 export type OptionValue = number | string
 
 export const pickerPopupProps = {
-  ...pickProps(bottomPopupProps, ['show', 'height', 'title', 'safeAreaInsetBottom']),
+  ...pick(bottomPopupProps, ['show', 'height', 'title', 'safeAreaInsetBottom']),
   /**
    * 选择的值
    */

@@ -13,7 +13,7 @@
 <script lang="ts" setup>
 import { computed, nextTick, reactive, watch } from 'vue'
 import useNamespace, { defaultNamespace } from '../../core/useNamespace'
-import { noop } from '../../utils/common'
+import { noop } from '../../utils'
 import { transitionEmits, transitionProps } from './props'
 
 const ns = useNamespace('transition')

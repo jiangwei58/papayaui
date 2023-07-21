@@ -1,10 +1,10 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import type { EventDetail } from '../../types'
-import { isObject, isString, pickProps } from '../../utils'
+import { isObject, isString, pick } from '../../utils'
 import { cellProps } from '../cell/props'
 
 export const fieldProps = {
-  ...pickProps(cellProps, [
+  ...pick(cellProps, [
     'title',
     'titleWidth',
     'valueAlign',

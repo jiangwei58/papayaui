@@ -33,7 +33,7 @@
 
 <script lang="ts" setup>
 import useNamespace from '../../core/useNamespace'
-import { getUnitValue } from '../../utils/common'
+import { getUnitValue } from '../../utils'
 import Icon from '../icon/icon.vue'
 import { cellEmits, cellProps } from './props'
 

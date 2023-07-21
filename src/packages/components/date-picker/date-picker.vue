@@ -51,7 +51,7 @@ import type { DatePickerColumnType } from '../../core/useDatePicker'
 import { useDatePicker } from '../../core/useDatePicker'
 import useNamespace from '../../core/useNamespace'
 import type { EventDetail } from '../../types'
-import { getUnitValue } from '../../utils/common'
+import { getUnitValue } from '../../utils'
 import { datePickerEmits, datePickerProps } from './props'
 
 const ns = useNamespace('date-picker')

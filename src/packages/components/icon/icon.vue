@@ -15,7 +15,7 @@
 
 <script lang="ts" setup>
 import useNamespace, { defaultNamespace } from '../../core/useNamespace'
-import { getUnitValue } from '../../utils/common'
+import { getUnitValue } from '../../utils'
 import { iconEmits, iconProps } from './props'
 
 const ns = useNamespace('icon')
