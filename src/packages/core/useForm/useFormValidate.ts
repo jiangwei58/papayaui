@@ -82,7 +82,7 @@ export function useFormValidate<T = Values>(props: IncludeRefs<UseFormValidatePr
 }
 
 export const stringSplitToArray = (key: string): string[] => {
-  return key.replace(/\[|(\]\.)/g, '.').split('.')
+  return key.replace(/\[(\w+)\]/g, '.$1').split('.')
 }
 
 export const convertSchemaRules = <T>(formData: T, rules: FormRules<T>) => {
