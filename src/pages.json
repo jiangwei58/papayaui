@@ -195,6 +195,13 @@
       "type": "nav"
     },
     {
+      "path": "packages/components/index-bar/demo",
+      "style": {
+        "navigationBarTitleText": "IndexBar 索引栏"
+      },
+      "type": "nav"
+    },
+    {
       "path": "packages/components/overlay/demo",
       "style": {
         "navigationBarTitleText": "Overlay 遮罩层"

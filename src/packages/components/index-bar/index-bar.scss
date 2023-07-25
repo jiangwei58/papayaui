@@ -1,0 +1,30 @@
+@import '../../styles/vars.scss';
+
+.#{$prefix}-index-bar {
+  height: 100vh;
+  overflow: hidden;
+
+  &__sidebar {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    z-index: _var(index-bar-sidebar-z-index, 2);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  &__index {
+    padding: _var(index-bar-index-padding, 0 8px 0 16px);
+    font-weight: _var(index-bar-index-font-weight, 500);
+    font-size: _var(index-bar-index-font-size, 10px);
+    line-height: _var(index-bar-index-line-height, 16px);
+  }
+
+  &--index-active {
+    color: _var(color-primary);
+  }
+}
