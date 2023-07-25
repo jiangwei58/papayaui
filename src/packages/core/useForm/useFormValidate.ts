@@ -55,7 +55,7 @@ export function useFormValidate<T = Values>(props: IncludeRefs<UseFormValidatePr
     return new Promise<{ isValid: boolean; errorMap: ErrorMap<T> }>((resolve) => {
       validator.validate(formData.value as Values, (errors, fields) => {
         Object.keys(filterRules).forEach((key) => {
-          if (fields[key]) {
+          if (errors?.length && fields[key]) {
             errorMap.value[key] = replaceMessage(
               fields[key][0].message || '',
               extraParams.value[key as keyof T],
