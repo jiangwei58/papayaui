@@ -150,6 +150,45 @@ export interface GetObjectUrlResult {
   Url: string
 }
 
+/**
+ * 针对腾讯云COS的封装工具类
+ *
+ * 示例
+ * ```ts
+ * // 初始化
+ * const paCOS = new PaCOS({
+ *   getConfig: () => {
+ *     // 调用接口获取相关配置信息
+ *     return Promise.resolve({
+ *       region: 'ap-guangzhou',
+ *       bucket: 'instance-xxxx',
+ *       prefix: 'a1',
+ *     });
+ *   },
+ *   getAuthorization: () => {
+ *     // 调用接口获取 token 相关鉴权信息
+ *     return Promise.resolve({
+ *       startTime: 1633764822, // 该参数会影响，getObjectUrl Ex
+ *       expiredTime: 1633766622,
+ *       credentials: {
+ *         tmpSecretId: 'xxxxx',
+ *         tmpSecretKey: 'xxxxx',
+ *         sessionToken: 'xxxx',
+ *         ScopeLimit: true,
+ *       },
+ *     });
+ *   },
+ * })
+ *
+ * // 上传文件，filePath 在小程序上是选择完的tempFilePath
+ * const res = await paCOS.uploadFile(filePath)
+ *
+ * // 获取对象访问 URL
+ * paCOS.getObjectUrl({
+ *   Key: res.Key
+ * })
+ * ```
+ */
 export class PaCOS {
   private config: PaCOSConfig
 
