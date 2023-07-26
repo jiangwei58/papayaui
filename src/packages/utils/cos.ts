@@ -228,7 +228,7 @@ export class PaCOS {
   }
 
   async getAuthorization(options: any) {
-    if (this.cosAuthorization && this.cosAuthorization.expiredTime > Date.now() / 1000) {
+    if (this.cosAuthorization && this.cosAuthorization.expiredTime < Date.now() / 1000) {
       return this.cosAuthorization
     }
     const authorization = await this.config.getAuthorization(options)
