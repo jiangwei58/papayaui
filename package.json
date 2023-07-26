@@ -52,6 +52,7 @@
     "@dcloudio/uni-mp-xhs": "3.0.0-alpha-3081020230714001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-alpha-3081020230714001",
     "async-validator": "^4.2.5",
+    "cos-wx-sdk-v5": "^1.4.10",
     "dayjs": "^1.11.1",
     "sa-sdk-miniprogram": "^1.17.9",
     "vite-plugin-eslint": "^1.3.0",
