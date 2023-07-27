@@ -21,6 +21,10 @@ export const cellProps = {
    */
   clickable: Boolean,
   /**
+   * 内容是否可选中
+   */
+  selectable: Boolean,
+  /**
    * 是否显示箭头，为true同时有点击反馈
    */
   isLink: Boolean,

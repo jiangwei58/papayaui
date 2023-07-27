@@ -21,7 +21,7 @@
     </view>
     <view :class="[ns.e('value'), valueClass]">
       <slot v-if="$slots.default" />
-      <text v-else>{{ value }}</text>
+      <text v-else :selectable="selectable" :user-select="selectable">{{ value }}</text>
       <view v-if="errorMessage" :class="ns.e('error-message')" :style="{ textAlign: valueAlign }">
         {{ errorMessage }}
       </view>
