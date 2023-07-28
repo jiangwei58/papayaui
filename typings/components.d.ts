@@ -54,8 +54,8 @@ declare module 'vue' {
     PaCollapseItem: typeof import('../src/packages/components/collapse-item/collapse-item.vue')['default']
     PaSkeleton: typeof import('../src/packages/components/skeleton/skeleton.vue')['default']
     PaUploader: typeof import('../src/packages/components/uploader/uploader.vue')['default']
-    PaIndexBar: typeof import('../src/packages/components/index-bar')['default']
-    PaIndexAnchor: typeof import('../src/packages/components/index-anchor')['default']
+    PaIndexBar: typeof import('../src/packages/components/index-bar/index-bar.vue')['default']
+    PaIndexAnchor: typeof import('../src/packages/components/index-anchor/index-anchor.vue')['default']
   }
 }
 
