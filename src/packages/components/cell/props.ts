@@ -1,4 +1,4 @@
-import { getGlobalOptions } from '@/packages/utils/config'
+import { getGlobalOptions } from '../../utils/config'
 import type { ExtractPropTypes, PropType } from 'vue'
 import { getCurrentInstance } from 'vue'
 

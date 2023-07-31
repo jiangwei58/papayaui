@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { noop } from '@/packages/utils'
+import { noop } from '../../utils'
 import { getCurrentInstance, inject, onMounted } from 'vue'
 import { useNamespace } from '../../core'
 import { useRect } from '../../hooks'
