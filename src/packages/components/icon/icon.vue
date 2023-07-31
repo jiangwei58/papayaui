@@ -1,6 +1,6 @@
 <template>
   <view
-    :class="[`${defaultNamespace}-iconfont`, ns.b(name)]"
+    :class="[`${defaultNamespace}-iconfont`, ns.b(name), customClass]"
     :style="
       ns.style({
         ...customStyle,

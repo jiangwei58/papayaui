@@ -19,6 +19,10 @@ export const iconProps = {
    */
   block: Boolean,
   /**
+   * 自定义类名
+   */
+  customClass: String,
+  /**
    * 自定义样式
    */
   customStyle: Object as PropType<CSSProperties>,
