@@ -1,4 +1,6 @@
+import { getGlobalOptions } from '@/packages/utils/config'
 import type { ExtractPropTypes, PropType } from 'vue'
+import { getCurrentInstance } from 'vue'
 
 export const cellProps = {
   /**
@@ -23,7 +25,13 @@ export const cellProps = {
   /**
    * 内容是否可选中
    */
-  selectable: Boolean,
+  selectable: {
+    type: Boolean,
+    default: () => {
+      const instance = getCurrentInstance()
+      return getGlobalOptions(instance)?.cell?.selectable ?? false
+    },
+  },
   /**
    * 是否显示箭头，为true同时有点击反馈
    */
