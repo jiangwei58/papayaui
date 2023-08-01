@@ -106,6 +106,7 @@ export default defineComponent({
     )
 
     return {
+      wxs: {} as any, // 防止类型报错
       ns,
       defaultNamespace,
       status,

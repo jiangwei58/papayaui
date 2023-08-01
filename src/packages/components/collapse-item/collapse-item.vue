@@ -55,7 +55,7 @@ export interface CollapseItemInstance {
   /** 禁用状态 */
   disabled: Ref<boolean>
   /** 切换打开状态 */
-  toggle: typeof toggle
+  toggle: (show?: boolean) => void
 }
 
 const ns = useNamespace('collapse-item')

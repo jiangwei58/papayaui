@@ -11,8 +11,8 @@ import type { CollapseItemInstance } from '../collapse-item/collapse-item.vue'
 import { collapseEmits, collapseProps } from './props'
 
 export interface CollapseProvideData {
-  setChildren: typeof setChildren
-  onChildExpand: typeof onChildExpand
+  setChildren: (node: CollapseItemInstance) => void
+  onChildExpand: (index: number, expanded: boolean) => void
 }
 
 const ns = useNamespace('collapse')

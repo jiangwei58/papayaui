@@ -14,7 +14,12 @@
     @close="emit('close')"
     @closed="emit('closed')"
   >
-    <CalendarWrapper ref="wrapperRef" v-bind="$props" @select="onSelect" @confirm="onConfirm" />
+    <CalendarWrapper
+      ref="wrapperRef"
+      v-bind="($props as CalendarWrapperProps)"
+      @select="onSelect"
+      @confirm="onConfirm"
+    />
   </Popup>
   <view
     v-else
@@ -26,7 +31,7 @@
   >
     <CalendarWrapper
       ref="wrapperRef"
-      v-bind="$props"
+      v-bind="($props as CalendarWrapperProps)"
       :show-confirm="false"
       :safe-area-inset-bottom="false"
       @select="onSelect"
@@ -43,7 +48,7 @@ import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
 import CalendarWrapper from '../calendar/calendar-wrapper.vue'
 import Popup from '../popup/popup.vue'
-import { calendarEmits, calendarProps } from './props'
+import { calendarEmits, calendarProps, type CalendarWrapperProps } from './props'
 
 const ns = useNamespace('calendar')
 
