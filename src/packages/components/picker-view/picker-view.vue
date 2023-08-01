@@ -13,7 +13,7 @@
       class="base-picker-view flex-1"
       indicator-style="height: 44px"
       :immediate-change="true"
-      :value="pickerIndexs"
+      :value="pickerIndexes"
       @change="onChange"
     >
       <picker-view-column>
@@ -29,68 +29,45 @@
 </template>
 
 <script lang="ts" setup>
-import { EventDetail } from '../../types'
-import { getUnitValue } from '../../utils/common'
-import { toRefs, ref, watch } from 'vue'
+import { ref, toRefs, watch } from 'vue'
 import useNamespace from '../../core/useNamespace'
-
-export type columnItem = string | Record<string, any>
-
-export interface PickerViewProps {
-  columns?: columnItem[]
-  showToolbar?: boolean
-  title?: string
-  height?: string
-  valueKey?: string
-  defaultIndex?: number
-}
+import type { EventDetail } from '../../types'
+import { getUnitValue } from '../../utils'
+import type { PickerViewColumnItem } from './props'
+import { pickerViewEmits, pickerViewProps } from './props'
 
 const ns = useNamespace('picker-view')
 
-const props = withDefaults(defineProps<PickerViewProps>(), {
-  modelValue: () => [],
-  columns: () => [],
-  showToolbar: true,
-  title: '',
-  height: '50vh',
-  valueKey: 'text',
-  defaultIndex: 0,
-})
-
-const emit = defineEmits<{
-  (event: 'update:modelValue', value: number[]): void
-  (event: 'change', value: number[]): void
-  (event: 'confirm', value: number[]): void
-  (event: 'cancel'): void
-}>()
+const props = defineProps(pickerViewProps)
+const emit = defineEmits(pickerViewEmits)
 
 const { defaultIndex } = toRefs(props)
 
-const pickerIndexs = ref<number[]>([0])
+const pickerIndexes = ref<number[]>([0])
 
 watch(
   defaultIndex,
   (newVal: number) => {
-    pickerIndexs.value = [newVal]
+    pickerIndexes.value = [newVal]
   },
   {
     immediate: true,
   },
 )
 
-const optionText = (item: columnItem) => {
+const optionText = (item: PickerViewColumnItem) => {
   return typeof item === 'object' ? item[props.valueKey] : item
 }
 
 const onChange = (event: EventDetail<{ value: number[] }>) => {
-  const indexs = event.detail.value
-  pickerIndexs.value = indexs
-  emit('update:modelValue', indexs)
-  emit('change', indexs)
+  const indexes = event.detail.value
+  pickerIndexes.value = indexes
+  emit('update:modelValue', indexes)
+  emit('change', indexes)
 }
 
 const onConfirm = () => {
-  emit('confirm', pickerIndexs.value)
+  emit('confirm', pickerIndexes.value)
 }
 
 const onCancel = () => {
@@ -99,17 +76,5 @@ const onCancel = () => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-picker-view {
-  &-toolbar {
-    $height: 88rpx;
-    height: $height;
-    > .btn {
-      line-height: $height;
-    }
-  }
-}
-.btn-hover {
-  opacity: 0.7;
-}
+@import './picker-view.scss';
 </style>

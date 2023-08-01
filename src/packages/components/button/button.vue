@@ -1,6 +1,6 @@
 <template>
   <button
-    :class="[ns.b(), ns.m(type), ns.is('plain', plain)]"
+    :class="[ns.b(), ns.m(type), ns.m(size), ns.is('block', block), ns.is('plain', plain)]"
     :style="customStyle"
     :hover-class="ns.m('hover')"
     :disabled="disabled"
@@ -38,116 +38,41 @@
 </template>
 
 <script lang="ts" setup>
-import { getUnitValue } from '../../utils/common'
-import { computed, CSSProperties, ref, StyleValue } from 'vue'
+import type { CSSProperties, StyleValue } from 'vue'
+import { computed, ref } from 'vue'
+import useNamespace from '../../core/useNamespace'
+import { getUnitValue } from '../../utils'
 import Icon from '../icon/icon.vue'
 import Loadmore from '../loadmore/loadmore.vue'
-import useNamespace from '../../core/useNamespace'
-
-export interface ButtonProps {
-  /** 按钮类型 */
-  type?: 'primary' | 'warning' | 'danger' | 'default'
-  /** 按钮宽度 */
-  width?: string
-  /** 按钮高度 */
-  height?: string
-  /** 字体大小 */
-  fontSize?: string
-  /** 是否为块级元素 */
-  block?: boolean
-  /** 是否显示为加载状态 */
-  loading?: boolean
-  /** 是否禁用 */
-  disabled?: boolean
-  /** 圆角大小, 值为true时半圆角 */
-  round?: true | string
-  /** 是否镂空样式 */
-  plain?: boolean
-  /** 图标 */
-  icon?: string
-  /** 同步点击（主要用于防止异步事件多次触发） */
-  syncClick?: (...args: any[]) => any | Promise<any>
-  /** 自定义样式 */
-  customStyle?: CSSProperties
-  /** 微信开放能力[文档](https://developers.weixin.qq.com/miniprogram/dev/component/button.html) */
-  openType?:
-    | 'contact'
-    | 'share'
-    | 'getPhoneNumber'
-    | 'getUserInfo'
-    | 'launchApp'
-    | 'openSetting'
-    | 'feedback'
-    | 'chooseAvatar'
-  /** 按住后多久出现点击态，单位毫秒 */
-  hoverStartTime?: number
-  /** 手指松开后点击态保留时间，单位毫秒 */
-  hoverStayTime?: number
-  /** 打开 APP 时，向 APP 传递的参数，open-type=launchApp时有效 */
-  appParameter?: string
-  /** 指定是否阻止本节点的祖先节点出现点击态 */
-  hoverStopPropagation?: boolean
-  /** 指定返回用户信息的语言，zh_CN 简体中文，zh_TW 繁体中文，en 英文。 */
-  lang?: 'zh_CN' | 'zh_TW' | 'en'
-  /** 会话来源，open-type="contact"时有效 */
-  sessionFrom?: string
-  /** 会话内消息卡片标题，open-type="contact"时有效 */
-  sendMessageTitle?: string
-  /** 会话内消息卡片点击跳转小程序路径，open-type="contact"时有效 */
-  sendMessagePath?: string
-  /** 会话内消息卡片图片，open-type="contact"时有效 */
-  sendMessageImg?: string
-  /** 是否显示会话内消息卡片，设置此参数为 true，用户进入客服会话会在右下角显示"可能要发送的小程序"提示，用户点击后可以快速发送小程序消息，open-type="contact"时有效 */
-  showMessageCard?: boolean
-}
+import { buttonEmits, buttonProps } from './props'
 
 const ns = useNamespace('button')
 
-const props = withDefaults(defineProps<ButtonProps>(), {
-  type: 'primary',
-  width: 'auto',
-  height: '42px',
-  fontSize: '14px',
-  round: '3px',
-  icon: undefined,
-  syncClick: undefined,
-  customStyle: undefined,
-  openType: undefined,
-  hoverStartTime: undefined,
-  hoverStayTime: undefined,
-  appParameter: undefined,
-  lang: undefined,
-  sessionFrom: undefined,
-  sendMessageTitle: undefined,
-  sendMessagePath: undefined,
-  sendMessageImg: undefined,
-})
-
-const emit = defineEmits<{
-  (event: 'click', value: Event): void
-  (event: 'getphonenumber', res: any): void
-  (event: 'getuserinfo', res: any): void
-  (event: 'error', res: any): void
-  (event: 'opensetting', res: any): void
-  (event: 'launchapp', res: any): void
-  (event: 'contact', res: any): void
-  (event: 'chooseavatar', res: any): void
-}>()
+const props = defineProps(buttonProps)
+const emit = defineEmits(buttonEmits)
 
 const clickLoading = ref<boolean>()
 const localLoading = computed(() => props.loading || clickLoading.value)
 
 const customStyle = computed<StyleValue>(() => {
-  return {
+  const style: CSSProperties = {
     ...props.customStyle,
-    display: props.block ? 'block' : 'inline-block',
-    width: props.block
-      ? getUnitValue(props.width === 'auto' ? '100%' : props.width)
-      : getUnitValue(props.width),
-    height: getUnitValue(props.height),
-    fontSize: getUnitValue(props.fontSize),
-    borderRadius: props.round === true ? getUnitValue(props.height) : getUnitValue(props.round),
   }
+  if (props.width) {
+    style.width = props.block
+      ? getUnitValue(props.width === 'auto' ? '100%' : props.width)
+      : getUnitValue(props.width)
+  }
+  if (props.height) {
+    style.height = getUnitValue(props.height)
+  }
+  if (props.fontSize) {
+    style.fontSize = getUnitValue(props.fontSize)
+  }
+  if (props.round) {
+    style.borderRadius = props.round === true ? '100px' : getUnitValue(props.round)
+  }
+  return style
 })
 
 const onClick = async (event: MouseEvent) => {
@@ -167,77 +92,5 @@ const onClick = async (event: MouseEvent) => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-button {
-  padding: _var(button-padding, 12px);
-  border: 1px solid transparent;
-  box-sizing: border-box;
-  &::before {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    background-color: #000;
-    border: inherit;
-    border-color: #000;
-    border-radius: inherit;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    content: ' ';
-  }
-  &::after {
-    border: none;
-  }
-  &--hover {
-    &::before {
-      opacity: 0.1;
-    }
-  }
-  &--default {
-    color: _var(color-black);
-    background-color: #fff;
-    border-color: #ebedf0;
-  }
-  &--primary {
-    color: #fff;
-    background-color: _var(color-primary);
-    border-color: _var(color-primary);
-  }
-  &--warning {
-    color: #fff;
-    background-color: _var(color-warning);
-    border-color: _var(color-warning);
-  }
-  &--danger {
-    color: #fff;
-    background-color: _var(color-danger);
-    border-color: _var(color-danger);
-  }
-
-  &__content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-  }
-
-  &--plain {
-    background-color: transparent;
-    &.#{$prefix}-button--primary {
-      color: _var(color-primary);
-    }
-    &.#{$prefix}-button--warning {
-      color: _var(color-warning);
-    }
-    &.#{$prefix}-button--danger {
-      color: _var(color-danger);
-    }
-  }
-  &[disabled]:not([type]) {
-    color: _var(color-black);
-    background-color: #c8c9cc;
-    border-color: #c8c9cc;
-  }
-}
+@import './button.scss';
 </style>

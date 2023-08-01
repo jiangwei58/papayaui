@@ -30,45 +30,13 @@
 
 <script lang="ts" setup>
 import useNamespace from '../../core/useNamespace'
-
-export interface EmptyProps {
-  /** 图片类型, 支持图片url */
-  image?: 'default' | 'error' | 'search' | string
-  /** 图片下方的描述文字 */
-  description?: string
-}
+import { emptyProps } from './props'
 
 const ns = useNamespace('empty')
 
-withDefaults(defineProps<EmptyProps>(), {
-  image: 'default',
-  description: '',
-})
+defineProps(emptyProps)
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-
-.#{$prefix}-empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  padding: _var(empty-padding, 32px 0);
-
-  &-image {
-    $imageSize: _var(empty-image-size, 160px);
-    width: $imageSize;
-    height: $imageSize;
-  }
-
-  &-description {
-    margin-top: 16px;
-    padding: 0 60px;
-    color: #969799;
-    font-size: 14px;
-    line-height: 20px;
-  }
-}
+@import './empty.scss';
 </style>

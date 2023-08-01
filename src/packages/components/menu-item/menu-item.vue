@@ -27,27 +27,22 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  ComponentInternalInstance,
-  computed,
-  CSSProperties,
-  getCurrentInstance,
-  inject,
-  onMounted,
-  Ref,
-  ref,
-  toRefs,
-} from 'vue'
+import type { CSSProperties, Ref } from 'vue'
+import { computed, getCurrentInstance, inject, onMounted, ref, toRefs } from 'vue'
 import useNamespace, { defaultNamespace } from '../../core/useNamespace'
-import useSelect from '../../core/useSelect'
+import { useSelect } from '../../core/useSelect'
 import { noop } from '../../utils'
 import Cell from '../cell/cell.vue'
 import IconComponent from '../icon/icon.vue'
-import { MenuProvideData } from '../menu/menu.vue'
-import Popup, { PopupProps } from '../popup/popup.vue'
+import type { MenuProvideData } from '../menu/menu.vue'
+import Popup from '../popup/popup.vue'
+import type { PopupProps } from '../popup/props'
+import type { MenuItemOption, MenuItemOptionValue } from './props'
+import { menuItemEmits, menuItemProps } from './props'
 
-export interface MenuItemInstance extends Omit<ComponentInternalInstance, 'props'> {
-  props: MenuItem
+export interface MenuItemInstance {
+  /** 标题 */
+  title: Ref<string>
   /** 是否显示 */
   show: Ref<boolean>
   /** 选中项的数据 */
@@ -56,45 +51,14 @@ export interface MenuItemInstance extends Omit<ComponentInternalInstance, 'props
   toggle: (show?: boolean) => void
 }
 
-export interface MenuItem {
-  /** 菜单项标题 */
-  title?: string
-  /** 当前选中项对应的 value */
-  modelValue?: MenuItemOptionValue
-  /** 选项数组 */
-  options?: MenuItemOption[]
-  /** 是否禁用菜单 */
-  disabled?: boolean
-  /** 标题额外类名 */
-  titleClass?: string
-}
-
-export interface MenuItemOption {
-  /** 文字 */
-  text: string
-  /** 标识符 */
-  value: MenuItemOptionValue
-}
-
-export type MenuItemOptionValue = number | string
-
 const ns = useNamespace('menu-item')
 
-const props = withDefaults(defineProps<MenuItem>(), {
-  title: '',
-  modelValue: undefined,
-  options: () => [],
-  titleClass: '',
-})
-
-const emit = defineEmits<{
-  (event: 'update:modelValue', value: MenuItemOptionValue): void
-  (event: 'change', value: MenuItemOptionValue): void
-}>()
+const props = defineProps(menuItemProps)
+const emit = defineEmits(menuItemEmits)
 
 const instance = getCurrentInstance()
 
-const { options, modelValue } = toRefs(props)
+const { title, options, modelValue } = toRefs(props)
 
 const menuProvide = inject<MenuProvideData>(`${defaultNamespace}-menu-data`, {
   props: {
@@ -131,14 +95,14 @@ const customStyle = computed(() => {
   return style
 })
 
-const popupAttrs = computed<PopupProps>(() => {
+const popupAttrs = computed(() => {
   if (!menuProvide.props) return {}
   return {
     position: menuProvide.props.direction === 'up' ? 'bottom' : 'top',
     duration: menuProvide.props.duration,
     overlay: menuProvide.props.overlay,
     closeOnClickOverlay: menuProvide.props.closeOnClickOverlay,
-  }
+  } as Pick<PopupProps, 'position' | 'duration' | 'overlay' | 'closeOnClickOverlay'>
 })
 
 const toggle = (show = !visible.value) => {
@@ -172,7 +136,7 @@ onMounted(() => {
   // 将自身组件实例添加到父组件
   if (instance) {
     menuProvide.setChildren({
-      ...instance,
+      title,
       toggle,
       show: visible,
       activeItem: selectedItems as Ref<MenuItemOption>,
@@ -188,24 +152,5 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-
-.#{$prefix}-menu-item {
-  position: fixed;
-  right: 0;
-  left: 0;
-  overflow: hidden;
-
-  &--down {
-    bottom: 0;
-  }
-  &--up {
-    top: 0;
-  }
-
-  &--active {
-    @include _setVar(cell-color, _var(menu-active-color, _var(color-primary)));
-    @include _setVar(cell-title-color, _var(menu-active-color, _var(color-primary)));
-  }
-}
+@import './menu-item.scss';
 </style>

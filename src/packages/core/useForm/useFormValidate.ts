@@ -1,9 +1,10 @@
-import Schema, { RuleItem, Rules, Rule, Values } from 'async-validator'
-import { ValidateOption } from 'async-validator/dist-types/interface'
-import { computed, Ref, ref, toRef } from 'vue'
-import { IncludeRefs } from '../..'
+import type { Rule, RuleItem, Rules, Values } from 'async-validator'
+import Schema from 'async-validator'
+import type { Ref } from 'vue'
+import { ref, toRef } from 'vue'
+import type { IncludeRefs } from '../..'
+import { isArray, isObject, isUndefined, pick } from '../../utils'
 import { replaceMessage, validateMessages } from './message'
-import { isObject, isArray, isUndefined } from '../../utils/lang'
 
 export type FormRules<T> = {
   [key in keyof T]?: FormRuleItem | FormRuleItem[]
@@ -25,20 +26,13 @@ export interface UseFormValidateProps<T> {
  * 表单校验hooks
  * @description 表单校验，统一规则的表单名称、输入提示、错误提示等。
  */
-export default <T = Values>(props: IncludeRefs<UseFormValidateProps<T>>) => {
+export function useFormValidate<T = Values>(props: IncludeRefs<UseFormValidateProps<T>>) {
   type OwnProps = UseFormValidateProps<T>
   const formData = toRef(props, 'formData') as Ref<OwnProps['formData']>
   const rules = toRef(props, 'rules') as Ref<OwnProps['rules']>
   const extraParams = toRef(props, 'extraParams', {}) as Ref<NonNullable<OwnProps['extraParams']>>
 
   const errorMap = ref<ErrorMap<T>>({})
-
-  const validator = computed(() => {
-    const newRules = convertSchemaRules(formData.value, rules.value)
-    const _validator = new Schema(newRules)
-    _validator.messages(validateMessages)
-    return _validator
-  })
 
   const clearValidate = (key?: keyof T | Array<keyof T>) => {
     const keys = Array.isArray(key) ? key : [key]
@@ -51,35 +45,44 @@ export default <T = Values>(props: IncludeRefs<UseFormValidateProps<T>>) => {
     }
   }
 
-  const validate = (option?: ValidateOption) => {
-    clearValidate((option?.keys || []) as Array<keyof T>)
+  const validate = async (keys: Array<keyof T> = []) => {
+    const filterRules = keys.length ? pick(rules.value, keys) : rules.value
+    const validatorRules = convertSchemaRules(formData.value, filterRules)
+
+    const validator = new Schema(validatorRules)
+    validator.messages(validateMessages)
+
     return new Promise<{ isValid: boolean; errorMap: ErrorMap<T> }>((resolve) => {
-      validator.value.validate(formData.value as Values, option, (errors, _data) => {
-        let isValid = true
-        if (errors?.length) {
-          errorMap.value = errors.reduce((result, error) => {
-            result[error.field as keyof T] = replaceMessage(
-              error.message || '',
-              extraParams.value[error.field as keyof T],
+      validator.validate(formData.value as Values, (errors, fields) => {
+        Object.keys(filterRules).forEach((key) => {
+          if (errors?.length && fields[key]) {
+            errorMap.value[key] = replaceMessage(
+              fields[key][0].message || '',
+              extraParams.value[key as keyof T],
             )
-            return result
-          }, {} as ErrorMap<T>)
-          isValid = false
-        }
-        resolve({ isValid, errorMap: errorMap.value })
+          } else {
+            delete errorMap.value[key]
+          }
+        })
+        resolve({ isValid: !errors?.length, errorMap: errorMap.value })
       })
     })
   }
 
+  const validateField = (key: keyof T) => {
+    return validate([key])
+  }
+
   return {
     validate,
+    validateField,
     clearValidate,
     errorMap,
   }
 }
 
 export const stringSplitToArray = (key: string): string[] => {
-  return key.replace(/\[|(\]\.)/g, '.').split('.')
+  return key.replace(/\[(\w+)\]/g, '.$1').split('.')
 }
 
 export const convertSchemaRules = <T>(formData: T, rules: FormRules<T>) => {

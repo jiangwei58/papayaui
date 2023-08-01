@@ -6,27 +6,16 @@
 
 <script lang="ts" setup>
 import { computed, provide, ref, toRefs } from 'vue'
-import useFormValidate, { FormItemExtraParams, FormRules } from '../../core/useForm'
+import type { FormItemExtraParams, FormRules } from '../../core/useForm'
+import { useFormValidate } from '../../core/useForm'
 import useNamespace from '../../core/useNamespace'
-import { FormItemInstance } from '../form-item/form-item.vue'
-
-export interface FormProps {
-  /** 表单数据 */
-  form?: any
-  /** 校验规则 */
-  rules?: FormRules<any>
-}
+import type { FormItemInstance } from '../form-item/form-item.vue'
+import { formEmits, formProps } from './props'
 
 const ns = useNamespace('form')
 
-const props = withDefaults(defineProps<FormProps>(), {
-  form: () => {},
-  rules: () => ({} as FormRules<any>),
-})
-
-const emit = defineEmits<{
-  (event: 'reset'): void
-}>()
+const props = defineProps(formProps)
+const emit = defineEmits(formEmits)
 
 const { form, rules } = toRefs(props)
 
@@ -59,7 +48,7 @@ const formValidate = useFormValidate({
 })
 
 const baseValidate = (keys?: string[]) => {
-  return formValidate.validate({ keys }).then(({ isValid, errorMap }) => {
+  return formValidate.validate(keys).then(({ isValid, errorMap }) => {
     children.value.forEach((child) => {
       const error = errorMap[child.props.prop as string]
       child.errorMessage = error || ''

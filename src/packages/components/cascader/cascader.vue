@@ -5,7 +5,10 @@
     :height="height"
     :safe-area-inset-bottom="false"
     @update:show="emit('update:show', $event as boolean)"
+    @open="emit('open')"
+    @opened="emit('opened')"
     @close="onClose"
+    @closed="emit('closed')"
   >
     <view :class="ns.b('content')">
       <Search v-if="showSearch" v-model="searchText" :class="ns.b('search')" />
@@ -21,15 +24,16 @@
         <ListItem
           v-for="(item, index) in currentData"
           :key="`${tabActive}-${index}`"
+          :text="item[_fieldNames.label]"
           :selected="
             tabActive < tabList.length - 1
               ? index === currentIndexes[tabActive]
               : isSelected(item[_fieldNames.value])
           "
-          @select="onSelect(item, index)"
+          :use-slot="!!$slots.default"
+          @click="onSelect(item, index)"
         >
           <slot v-if="$slots.default" :item="item" />
-          <text v-else>{{ item[_fieldNames.label] }}</text>
         </ListItem>
         <view v-if="loading" :class="ns.e('loading')">
           <loadmore :status="LoadStatusEnum.LOADING" />
@@ -75,95 +79,26 @@
 
 <script lang="ts" setup>
 import { computed, nextTick, ref, toRaw, toRefs, watch } from 'vue'
+import { useCascader } from '../../core/useCascader'
 import { LoadStatusEnum } from '../../core/useList'
 import useNamespace from '../../core/useNamespace'
-import useTree, { TreeNode, UseTreeFieldNames } from '../../core/useTree'
-import { EventDetail } from '../../types'
+import type { TreeNode } from '../../core/useTree'
+import type { EventDetail } from '../../types'
 import BottomPopup from '../bottom-popup/bottom-popup.vue'
 import ButtonComponent from '../button/button.vue'
+import ListItem from '../list-item/list-item.vue'
 import Loadmore from '../loadmore/loadmore.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import Search from '../search/search.vue'
 import Tabs from '../tabs/tabs.vue'
-import ListItem from './list-item.vue'
-import SearchView, { SearchNode } from './search-view.vue'
-
-export interface CascaderNode<T = any> {
-  props: T
-  level: number
-}
-
-export type CascaderOption = any
-export type CascaderValue = any
-
-export interface CascaderProps {
-  /** 值 */
-  modelValue?: CascaderValue[]
-  /** 显示状态 */
-  show?: boolean
-  /** 高度 */
-  height?: string
-  /** 标题 */
-  title?: string
-  /** 可选项数据源 */
-  options?: CascaderOption[]
-  /** 自定义 options 结构中的字段 */
-  fieldNames?: Partial<UseTreeFieldNames<CascaderOption>>
-  /** 最大层级，把哪一层级作为叶子节点 */
-  maxLevel?: number
-  /** 是否多选 */
-  multiple?: boolean
-  /** 是否显示搜索 */
-  showSearch?: boolean
-  /** 动态获取下一级节点数据 */
-  lazyLoad?: (node: CascaderNode) => CascaderOption[] | Promise<CascaderOption[]>
-  /** 远程搜索 */
-  lazySearch?: (searchText: string) => CascaderOption[] | Promise<CascaderOption[]>
-  /** 底部安全距离 */
-  safeAreaInsetBottom?: boolean
-  /** 确定按钮文案，多选时默认数量显示的文案也要自己定义 */
-  confirmButtonText?: string
-  /** 重置按钮文案 */
-  resetButtonText?: string
-  /** 确定后是否重置数据 */
-  resetAfterConfirm?: boolean
-  /** 是否显示底部确认重置按钮，多选时强制开启 */
-  showConfirm?: boolean
-  /** 是否允许空值，只在显示底部操作按钮时有效（通常使用场景是未选中值时允许确认） */
-  allowEmpty?: boolean
-}
+import type { CascaderOption, CascaderValue, SearchNode } from './props'
+import { cascaderEmits, cascaderProps } from './props'
+import SearchView from './search-view.vue'
 
 const ns = useNamespace('cascader')
 
-const props = withDefaults(defineProps<CascaderProps>(), {
-  modelValue: undefined,
-  show: false,
-  height: undefined,
-  title: '',
-  options: undefined,
-  fieldNames: undefined,
-  maxLevel: Number.MAX_SAFE_INTEGER,
-  multiple: false,
-  lazyLoad: undefined,
-  lazySearch: undefined,
-  safeAreaInsetBottom: true,
-  confirmButtonText: undefined,
-  resetButtonText: '重置',
-})
-
-const emit = defineEmits<{
-  (event: 'update:show', show: boolean): void
-  (event: 'update:modelValue', value: CascaderValue[]): void
-  (
-    event: 'change',
-    value: CascaderValue[],
-    items: CascaderOption[],
-    extra: { tabIndex: number; isSearch: boolean },
-  ): void
-  (event: 'reset'): void
-  (event: 'confirm'): void
-  (event: 'nodeClick', node: TreeNode<CascaderOption>): void
-}>()
+const props = defineProps(cascaderProps)
+const emit = defineEmits(cascaderEmits)
 
 const { show, options, fieldNames, multiple } = toRefs(props)
 
@@ -179,7 +114,8 @@ const {
   clearSelect,
   isSelected,
   getNodePath,
-} = useTree<CascaderOption, CascaderValue>({
+  getNodesByPath,
+} = useCascader<CascaderOption, CascaderValue>({
   options,
   fieldNames,
   multiple,
@@ -207,23 +143,17 @@ const localState = computed(() => {
 const tabList = computed(() => {
   if (searchText.value) return []
   if (!treeData.value.length || !currentIndexes.value.length) return [{ name: '请选择' }]
-  const tabList = []
-  let currentData = treeData.value
   const maxLength = Math.max(
     tabActive.value + 1,
     tabMaxLevel.value + 1,
     currentIndexes.value.length,
   )
-  for (let i = 0; i < maxLength; i++) {
-    if (i !== 0) {
-      currentData = currentData[currentIndexes.value[i - 1]][_fieldNames.value.children] || []
-    }
-    const index: number | undefined = currentIndexes.value[i]
-    const name =
-      typeof index !== 'undefined'
-        ? currentData[currentIndexes.value[i]][_fieldNames.value.label]
-        : '请选择'
-    tabList.push({ name })
+
+  const tabList = getNodesByPath(currentIndexes.value).map((node) => ({
+    name: node[_fieldNames.value.label],
+  }))
+  if (currentIndexes.value.length < maxLength) {
+    tabList.push({ name: '请选择' })
   }
   return tabList
 })
@@ -233,18 +163,21 @@ const currentData = computed(() => {
   return getChildren(path)
 })
 
-watch(show, async (newVal, oldVal) => {
+watch(show, (newVal, oldVal) => {
   if (newVal !== oldVal && newVal) {
     init()
   }
 })
 
 const init = async () => {
-  if (treeData.value.length) return
+  if (treeData.value.length) {
+    setSelectedByValues(props.modelValue)
+    return
+  }
   if (localState.value.isLazyLoad) {
     setChildren(await getData())
   } else {
-    console.warn('data or lazyLoad is required')
+    console.warn('options or lazyLoad is required')
   }
 }
 
@@ -267,18 +200,18 @@ const onScroll = (e: EventDetail<{ scrollTop: number }>) => {
   oldScrollTop = e.detail.scrollTop
 }
 
-const onSelect = async (item: TreeNode<CascaderOption>, valueIndex: number) => {
+const onSelect = (item: TreeNode<CascaderOption>, valueIndex: number, autoComplete = true) => {
   const currentNode = currentData.value[valueIndex]
   currentIndexes.value.splice(tabActive.value, currentIndexes.value.length, valueIndex)
   emit('nodeClick', currentNode)
   // 达到设置的最大层级时直接完成
   if (currentIndexes.value.length >= props.maxLevel) {
-    onSelectFinish(item)
+    autoComplete && onSelectFinish(item)
     return
   }
   // 根据有无子节点判断
   if (isLeafNode(currentNode)) {
-    onSelectFinish(item)
+    autoComplete && onSelectFinish(item)
     return
   }
   // 动态数据
@@ -356,6 +289,7 @@ const onConfirm = () => {
 const onClose = () => {
   searchText.value = ''
   emit('update:show', false)
+  emit('close')
 }
 
 /** 重置数据（清除选中数据，还原tab选中状态） */
@@ -384,55 +318,37 @@ const setCheckedNodes = (node: CascaderOption | CascaderOption[]) => {
   })
 }
 
+/**
+ * 根据值反推列表项并选中
+ */
+const setSelectedByValues = (values?: CascaderValue[]) => {
+  // 排除无值、已选中路径的情况
+  if (!values?.length || currentIndexes.value.length) return
+  // 根据值反推节点，节点值一样的情况下会有问题，无法避免
+  let currentData = treeData.value
+  const params = values.map<[TreeNode<CascaderOption>, number]>((value) => {
+    const findIndex = currentData.findIndex(
+      (item) => item[fieldNames.value.value as keyof typeof item] === value,
+    )
+    currentData = currentData[findIndex][fieldNames.value.children as keyof CascaderOption] ?? []
+    return [currentData[findIndex], findIndex]
+  })
+  // 判定是否能找到完整路径，防止数据不全半路中断
+  if (values.length !== params.length) return
+  params.forEach((param) => {
+    onSelect(...param, false)
+  })
+}
+
 defineExpose({
   clean: onClean,
   reset: onReset,
   clearSelected: onClearSelected,
   setCheckedNodes,
+  setSelectedByValues,
 })
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-cascader {
-  &-content {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    height: 100%;
-  }
-  &-search {
-    @include _setVar(search-padding, 0 12px);
-    flex-shrink: 0;
-  }
-  &-tab {
-    flex-shrink: 0;
-  }
-  &-list-wrapper {
-    flex: 1;
-    padding-top: 10;
-    overflow: hidden;
-  }
-  &__loading {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-  }
-  &__empty {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    font-size: 28rpx;
-    color: _var(color-black-2);
-  }
-  &__footer {
-    display: flex;
-    flex-shrink: 0;
-    padding: 15rpx 26rpx;
-  }
-}
+@import './cascader.scss';
 </style>

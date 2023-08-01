@@ -37,6 +37,6 @@ const text = computed(() => {
 
 <style lang="scss">
 page {
-  background-color: var(--color-page-bg-gray);
+  background-color: var(--pa-color-gray);
 }
 </style>

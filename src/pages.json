@@ -167,6 +167,13 @@
       "type": "form"
     },
     {
+      "path": "packages/components/uploader/demo",
+      "style": {
+        "navigationBarTitleText": "Uploader 文件上传"
+      },
+      "type": "form"
+    },
+    {
       "path": "packages/components/nav-bar/demo",
       "style": {
         "navigationBarTitleText": "NavBar 导航栏"
@@ -184,6 +191,13 @@
       "path": "packages/components/tabs/demo",
       "style": {
         "navigationBarTitleText": "Tabs 标签页"
+      },
+      "type": "nav"
+    },
+    {
+      "path": "packages/components/index-bar/demo",
+      "style": {
+        "navigationBarTitleText": "IndexBar 索引栏"
       },
       "type": "nav"
     },
@@ -216,6 +230,13 @@
       "type": "show"
     },
     {
+      "path": "packages/components/collapse/demo",
+      "style": {
+        "navigationBarTitleText": "Collapse 折叠面板"
+      },
+      "type": "show"
+    },
+    {
       "path": "packages/components/count-to/demo",
       "style": {
         "navigationBarTitleText": "CountTo 数字滚动"
@@ -240,6 +261,13 @@
       "path": "packages/components/tag/demo",
       "style": {
         "navigationBarTitleText": "Tag 标签"
+      },
+      "type": "show"
+    },
+    {
+      "path": "packages/components/skeleton/demo",
+      "style": {
+        "navigationBarTitleText": "Skeleton 骨架屏"
       },
       "type": "show"
     },
@@ -286,9 +314,16 @@
       "type": "other"
     },
     {
-      "path": "packages/core/demo/useList",
+      "path": "packages/core/useList/demo",
       "style": {
         "navigationBarTitleText": "useList"
+      },
+      "type": "hook"
+    },
+    {
+      "path": "packages/core/useVirtualList/demo",
+      "style": {
+        "navigationBarTitleText": "useVirtualList"
       },
       "type": "hook"
     }

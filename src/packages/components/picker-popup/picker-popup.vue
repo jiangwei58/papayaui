@@ -6,43 +6,33 @@
     :height="height"
     :safe-area-inset-bottom="false"
     @update:show="emit('update:show', $event as boolean)"
+    @open="emit('open')"
+    @opened="emit('opened')"
     @close="onClose"
+    @closed="emit('closed')"
     @confirm="onOk"
   >
-    <view :class="ns.b('content')" class="flex flex-col">
+    <view :class="ns.b('content')">
       <Search
         v-if="showSearch"
         v-model="searchText"
-        class="flex-shrink-0"
+        :class="ns.e('search')"
         @change="debounceSearchChange"
       />
-      <scroll-view
-        scroll-y
-        class="flex-1"
-        style="overflow: hidden"
-        @scrolltolower="onScrolltolower"
-      >
-        <view
+      <scroll-view scroll-y :class="ns.e('list')" @scrolltolower="onScrolltolower">
+        <ListItem
           v-for="(item, index) in filterOptions"
           :key="index"
-          class="list-item flex items-center justify-between px-32 py-20 text-28 leading-40"
-          :class="{ 'color-primary': isSelected(item[valueKey]) }"
-          hover-class="bg-hover"
-          @tap="onSelect(item[valueKey])"
+          :text="item[labelKey]"
+          :selected="isSelected(item[valueKey])"
+          :use-slot="!!$slots.default"
+          @click="onSelect(item[valueKey])"
         >
           <slot v-if="$slots.default" :item="item" />
-          <text v-else>{{ item[labelKey] }}</text>
-          <Icon
-            v-if="isSelected(item[valueKey])"
-            name="success"
-            :color="`var(--${defaultNamespace}-color-primary)`"
-            block
-          />
-        </view>
+        </ListItem>
         <view
           v-if="!filterOptions.length || !!pagination"
-          class="flex flex-col justify-center"
-          :class="{ 'height-full': !filterOptions.length }"
+          :class="[ns.e('empty'), { 'height-full': !filterOptions.length }]"
           @tap="onScrolltolower"
         >
           <Loadmore :status="loadStatus" :config="{ nomore: isEmpty ? '无数据' : '没有更多了' }" />
@@ -52,7 +42,7 @@
     </view>
 
     <template v-if="safeAreaInsetBottom && multiple" #footer>
-      <view class="px-26 pt-15 flex-shrink-0">
+      <view :class="ns.e('footer')">
         <ButtonComponent type="primary" block @click="onOk()">
           {{ confirmButtonText }}
         </ButtonComponent>
@@ -64,83 +54,23 @@
 
 <script lang="ts" setup>
 import { computed, ref, toRefs, watch } from 'vue'
-import useList, { LoadStatusEnum, UseListProps } from '../../core/useList'
-import useNamespace, { defaultNamespace } from '../../core/useNamespace'
-import useSelect from '../../core/useSelect'
-import { debounce } from '../../utils/common'
+import { useList, LoadStatusEnum } from '../../core/useList'
+import useNamespace from '../../core/useNamespace'
+import { useSelect } from '../../core/useSelect'
+import { debounce } from '../../utils'
 import BottomPopup from '../bottom-popup/bottom-popup.vue'
 import ButtonComponent from '../button/button.vue'
-import Icon from '../icon/icon.vue'
+import ListItem from '../list-item/list-item.vue'
 import Loadmore from '../loadmore/loadmore.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import Search from '../search/search.vue'
-
-export type Option = any
-export type OptionValue = number | string
-
-export interface PickerPopupProps {
-  modelValue?: OptionValue | OptionValue[]
-  /** 显示状态 */
-  show?: boolean
-  /** 高度 */
-  height?: string
-  /** 标题 */
-  title?: string
-  /** 选项数据 */
-  data?: Option[]
-  /** 数据标题的字段名 */
-  labelKey?: string
-  /** 数据值的字段名 */
-  valueKey?: string
-  /** 是否显示搜索 */
-  showSearch?: boolean
-  /** 是否多选 */
-  multiple?: boolean
-  /** 动态获取下一级节点数据 */
-  load?: (
-    query?: string,
-    pageNumber?: number,
-    pageSize?: number,
-    extra?: Record<string, unknown>,
-  ) => Option[] | Promise<Option[]>
-  /** 是否远程搜索 */
-  remote?: boolean
-  /** 是否支持分页 */
-  pagination?: boolean | UseListProps<Option>
-  /** 是否留出底部安全距离 */
-  safeAreaInsetBottom?: boolean
-  /** 每次打开重新加载数据 */
-  initData?: boolean
-  /** 确认按钮的文案 */
-  confirmButtonText?: string
-  /** 确定后是否重置数据 */
-  resetAfterConfirm?: boolean
-}
+import type { Option, OptionValue } from './props'
+import { pickerPopupEmits, pickerPopupProps } from './props'
 
 const ns = useNamespace('picker-popup')
 
-const props = withDefaults(defineProps<PickerPopupProps>(), {
-  modelValue: undefined,
-  show: false,
-  height: undefined,
-  title: '',
-  data: () => [],
-  labelKey: 'label',
-  valueKey: 'value',
-  multiple: false,
-  load: undefined,
-  remote: false,
-  pagination: false,
-  safeAreaInsetBottom: true,
-  confirmButtonText: '确定',
-})
-
-const emit = defineEmits<{
-  (event: 'update:show', show: boolean): void
-  (event: 'update:modelValue', value: OptionValue | OptionValue[]): void
-  (event: 'change', item: Option | Option[]): void
-  (event: 'close'): void
-}>()
+const props = defineProps(pickerPopupProps)
+const emit = defineEmits(pickerPopupEmits)
 
 const { show, data, modelValue, labelKey, valueKey, multiple, pagination } = toRefs(props)
 
@@ -172,7 +102,9 @@ const filterOptions = computed(() => {
   // 远程情况不作处理
   if (props.remote) return options.value
   // 本地数据情况，直接做过滤
-  return options.value.filter((item) => item[labelKey.value]?.indexOf(searchText.value) !== -1)
+  return options.value.filter(
+    (item) => item[labelKey.value]?.indexOf(searchText.value.trim()) !== -1,
+  )
 })
 
 watch(show, async (newVal, oldVal) => {
@@ -291,11 +223,5 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-picker-popup {
-  &-content {
-    position: relative;
-    height: 100%;
-  }
-}
+@import './picker-popup.scss';
 </style>

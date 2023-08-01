@@ -13,31 +13,13 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import useNamespace from '../../core/useNamespace'
-
-export type Sort = 'up' | 'down' | undefined
-
-export interface SortLabelProps {
-  modelValue?: string
-  title?: string
-  datakey: string
-}
-
-enum SortTypeEnum {
-  UP = ':asc',
-  DOWN = ':desc',
-}
+import type { Sort } from './props'
+import { sortLabelEmits, sortLabelProps, SortTypeEnum } from './props'
 
 const ns = useNamespace('sort-label')
 
-const props = withDefaults(defineProps<SortLabelProps>(), {
-  modelValue: undefined,
-  title: '',
-})
-
-const emit = defineEmits<{
-  (event: 'update:modelValue', value?: string): void
-  (event: 'change', key: string, sort?: string): void
-}>()
+const props = defineProps(sortLabelProps)
+const emit = defineEmits(sortLabelEmits)
 
 const sort = computed<Sort>(() => {
   const value = props.modelValue || ''
@@ -63,32 +45,5 @@ const onChange = () => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-sort-label {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24rpx 0;
-
-  .sort-up,
-  .sort-down {
-    width: 0;
-    height: 0;
-    border: 8rpx solid transparent;
-  }
-  .sort-up {
-    border-bottom: 8rpx solid #969799;
-  }
-  .sort-down {
-    margin-top: 4rpx;
-    border-top: 8rpx solid #969799;
-  }
-
-  &.up .sort-up {
-    border-bottom-color: _var(color-primary);
-  }
-  &.down .sort-down {
-    border-top-color: _var(color-primary);
-  }
-}
+@import './sort-label.scss';
 </style>

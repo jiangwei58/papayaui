@@ -28,78 +28,22 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, CSSProperties, ref, toRefs, watch } from 'vue'
+import type { CSSProperties } from 'vue'
+import { computed, ref, toRefs, watch } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { getUnitValue, noop } from '../../utils'
 import Icon from '../icon/icon.vue'
 import Overlay from '../overlay/overlay.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
-import TransitionComponent, { TransitionMode, TransitionProps } from '../transition/transition.vue'
-
-export type PopupPosition = 'top' | 'bottom' | 'left' | 'right' | 'center'
-
-export interface PopupProps {
-  /** 是否显示 */
-  show?: boolean
-  /** z-index层级 */
-  zIndex?: number
-  /** 弹出方式 */
-  position?: PopupPosition
-  /** 遮罩打开或收起的动画过渡时间，单位ms */
-  duration?: TransitionProps['duration']
-  /** 是否显示遮罩 */
-  overlay?: boolean
-  /** 点击遮罩是否关闭弹窗 */
-  closeOnClickOverlay?: boolean
-  /** 弹出宽度 */
-  width?: string
-  /** 弹窗高度 */
-  height?: string
-  /** 背景色 */
-  bgColor?: CSSProperties['background-color']
-  /** 是否圆角 */
-  round?: boolean | string
-  /** 是否显示关闭按钮 */
-  closeable?: boolean
-  /** 是否适配底部安全区 */
-  safeAreaInsetBottom?: boolean
-  /** 是否留出顶部安全距离（状态栏高度） */
-  safeAreaInsetTop?: boolean
-  /** 自定义样式类 */
-  customClass?: string
-  /** 自定义弹出层样式 */
-  customStyle?: CSSProperties
-  /** 自定义遮罩层样式 */
-  overlayStyle?: CSSProperties
-}
+import type { TransitionMode } from '../transition/props'
+import TransitionComponent from '../transition/transition.vue'
+import type { PopupPosition } from './props'
+import { popupEmits, popupProps } from './props'
 
 const ns = useNamespace('popup')
 
-const props = withDefaults(defineProps<PopupProps>(), {
-  show: false,
-  zIndex: 999,
-  position: 'bottom',
-  duration: 300,
-  overlay: true,
-  round: undefined,
-  width: undefined,
-  height: undefined,
-  bgColor: undefined,
-  closeOnClickOverlay: true,
-  safeAreaInsetBottom: true,
-  customClass: '',
-  customStyle: undefined,
-  overlayStyle: undefined,
-})
-
-const emit = defineEmits<{
-  (event: 'update:show', value: PopupProps['show']): void
-  (event: 'open'): void
-  (event: 'opend'): void
-  (event: 'close'): void
-  (event: 'closed'): void
-  (event: 'clickOverlay'): void
-}>()
+const props = defineProps(popupProps)
+const emit = defineEmits(popupEmits)
 
 const { show } = toRefs(props)
 
@@ -205,7 +149,7 @@ const onBeforeEnter = () => {
 }
 
 const onAfterEnter = () => {
-  emit('opend')
+  emit('opened')
 }
 
 const onClose = () => {
@@ -220,20 +164,5 @@ const onAfterLeave = () => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-popup {
-  &__content {
-    position: relative;
-    background-color: #fff;
-  }
-
-  &__close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 1;
-    padding: 10px;
-    color: #c8c9cc;
-  }
-}
+@import './popup.scss';
 </style>

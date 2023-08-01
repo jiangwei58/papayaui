@@ -1,4 +1,4 @@
-import { ComponentInternalInstance } from 'vue'
+import type { ComponentInternalInstance } from 'vue'
 
 function useRect(
   component: ComponentInternalInstance,

@@ -20,36 +20,18 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref, toRefs } from 'vue'
+import { onMounted, ref } from 'vue'
+import type { EnvListItem } from './props'
+import { envViewEmits, envViewProps } from './props'
 
-export interface EnvListItem {
-  label: string
-  key: string
-  url: string
-}
-
-interface OwnProps {
-  modelValue?: string
-  urls: EnvListItem[]
-}
-
-const props = withDefaults(defineProps<OwnProps>(), {
-  modelValue: undefined,
-  urls: () => [],
-})
-
-const emit = defineEmits<{
-  (event: 'update:modelValue', url: string): void
-  (event: 'confirm', url: string): void
-}>()
-
-const { modelValue, urls } = toRefs(props)
+const props = defineProps(envViewProps)
+const emit = defineEmits(envViewEmits)
 
 const value = ref<string>('')
 
 onMounted(() => {
-  if (typeof modelValue.value !== 'undefined') {
-    value.value = modelValue.value
+  if (typeof props.modelValue !== 'undefined') {
+    value.value = props.modelValue
   }
 })
 
@@ -66,15 +48,5 @@ const onOk = () => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.active {
-  background-color: _var(color-primary);
-  color: #fff;
-}
-.btn {
-  line-height: 100rpx;
-  background-color: _var(color-primary);
-  color: #fff;
-  text-align: center;
-}
+@import './env-view.scss';
 </style>

@@ -49,40 +49,21 @@
 </template>
 
 <script lang="ts" setup>
-import { CSSProperties, getCurrentInstance, onMounted, ref, useSlots, watch } from 'vue'
+import type { CSSProperties } from 'vue'
+import { getCurrentInstance, onMounted, ref, useSlots, watch } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { useRect } from '../../hooks'
 import Icon from '../icon/icon.vue'
-
-/** 步骤状态 */
-export type StepStatus = 'default' | 'process' | 'finish'
-
-export type StepItem = {
-  title: string
-  desc: string
-  [key: string]: any
-}
-
-export interface StepsProps {
-  current?: number
-  steps?: StepItem[]
-  direction?: 'horizontal' | 'vertical'
-}
+import type { StepStatus } from './props'
+import { stepsEmits, stepsProps } from './props'
 
 const ns = useNamespace('steps')
 
 const instance = getCurrentInstance()
 const slots = useSlots()
 
-const props = withDefaults(defineProps<StepsProps>(), {
-  current: 0,
-  steps: () => [],
-  direction: 'horizontal',
-})
-
-const emit = defineEmits<{
-  (event: 'click-step', index: number): void
-}>()
+const props = defineProps(stepsProps)
+const emit = defineEmits(stepsEmits)
 
 const headHeights = ref<CSSProperties['height'][]>([])
 
@@ -111,131 +92,5 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-steps {
-  $gap: 8px;
-  $iconSize: 20px;
-  display: flex;
-  &-item {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    &-head {
-      position: relative;
-      display: flex;
-      justify-content: center;
-    }
-    &-content {
-      width: 100%;
-    }
-    &-line {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      right: -50%;
-      display: inline-block;
-      background-color: #909ca4;
-    }
-    &-wrapper {
-      position: relative;
-      background-color: #fff;
-    }
-    &-icon {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: $iconSize;
-      height: $iconSize;
-      font-size: 12px;
-      color: _var(color-black-3);
-      border: 1px solid _var(color-black-3);
-      border-radius: 50%;
-      background-color: #fff;
-    }
-    &-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    &-title {
-      font-size: 13px;
-    }
-    &-desc {
-      font-size: 12px;
-      color: #909193;
-      margin-top: 4px;
-    }
-    &:last-child &-line {
-      display: none;
-    }
-
-    &--process &-icon,
-    &--finish &-icon {
-      border-color: _var(color-primary);
-    }
-    &--process &-icon {
-      background-color: _var(color-primary);
-      color: #fff;
-    }
-    &--finish &-icon {
-      color: _var(color-primary);
-    }
-    &--finish &-line {
-      background-color: _var(color-primary);
-    }
-  }
-
-  &-horizontal &-item {
-    &-head {
-      width: 100%;
-    }
-    &-line {
-      height: 1px;
-    }
-    &-wrapper {
-      padding: 0 $gap;
-    }
-    &-content {
-      margin-top: 6px;
-    }
-  }
-
-  &-vertical {
-    height: 100%;
-    flex-direction: column;
-  }
-  &-vertical &-item {
-    flex-direction: row;
-    align-items: flex-start;
-    &-head {
-      height: 100%;
-    }
-    &-wrapper {
-      height: 20px + $gap;
-      padding-bottom: $gap;
-    }
-    &-content {
-      align-items: flex-start;
-      margin-left: 15px;
-    }
-    &-title,
-    &-desc {
-      width: 100%;
-    }
-    &-line {
-      width: 1px;
-      height: calc(100% - $gap - $iconSize);
-      top: auto;
-      bottom: $gap;
-    }
-  }
-
-  &-item {
-    &-line.custom {
-      bottom: 0;
-    }
-  }
-}
+@import './steps.scss';
 </style>

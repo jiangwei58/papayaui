@@ -1,0 +1,14 @@
+@import '../../styles/vars.scss';
+
+.#{$prefix}-index-anchor {
+  position: sticky;
+  top: 0;
+  z-index: _var(index-anchor-z-index, 1);
+  box-sizing: border-box;
+  padding: _var(index-anchor-padding, 0 16px);
+  color: _var(index-anchor-color, _var(color-text-black));
+  font-weight: _var(index-anchor-font-weight, 500);
+  font-size: _var(index-anchor-font-size, 14px);
+  line-height: _var(index-anchor-line-height, 32px);
+  background-color: _var(index-anchor-background, #f7f8fa);
+}

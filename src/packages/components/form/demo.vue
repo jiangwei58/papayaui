@@ -6,7 +6,7 @@
           <input
             v-model="formData.name"
             placeholder="请输入"
-            :placeholder-style="`color:var(--${PREFIX}-number-input-placeholder-color)`"
+            :placeholder-style="`color:var(--${defaultNamespace}-number-input-placeholder-color)`"
           />
         </pa-form-item>
 
@@ -53,7 +53,7 @@
             <input
               v-model="item.name"
               placeholder="请输入"
-              :placeholder-style="`color:var(--${PREFIX}-number-input-placeholder-color)`"
+              :placeholder-style="`color:var(--${defaultNamespace}-number-input-placeholder-color)`"
             />
             <pa-button
               type="danger"
@@ -87,10 +87,10 @@
 
 <script lang="ts" setup>
 import { computed, reactive, ref } from 'vue'
-import { FormRules } from '../../core/useForm'
-import Form from './form.vue'
+import type { FormRules } from '../../core/useForm'
+import { defaultNamespace } from '../../core/useNamespace'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import { PREFIX } from '../../utils/style'
+import type { FormInstance } from '.'
 
 interface FormData {
   name: string
@@ -101,7 +101,7 @@ interface FormData {
   object: { text: string }
 }
 
-const formRef = ref<InstanceType<typeof Form>>()
+const formRef = ref<FormInstance>()
 
 const genderOptions = [
   { label: '男', value: 1 },
@@ -150,7 +150,7 @@ const onValueChange = () => {
   formRef.value?.validateField('gender')
 }
 
-const formRef2 = ref<InstanceType<typeof Form>>()
+const formRef2 = ref<FormInstance>()
 
 const formData2 = ref<{
   list: { name: string }[]
@@ -178,6 +178,6 @@ const onDeleteItem = (index: number) => {
 <style lang="scss" scoped></style>
 <style lang="scss">
 page {
-  background-color: var(--color-page-bg-gray);
+  background-color: var(--pa-color-gray);
 }
 </style>

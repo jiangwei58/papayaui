@@ -30,41 +30,15 @@
 
 <script lang="ts" setup>
 import { computed, getCurrentInstance, nextTick, ref, toRefs, watch } from 'vue'
-import { useRect } from '../../hooks'
 import useNamespace from '../../core/useNamespace'
-
-export type TabItem = any
-
-export type TabItemValue = number | string
-
-export interface TabsProps {
-  modelValue?: TabItemValue
-  /** 标签页列表数据 */
-  tabs: TabItem[]
-  /** 标题对应字段名 */
-  labelKey?: string
-  /** 值对应字段名 */
-  valueKey?: string
-  /** 是否滚动 */
-  scrollable?: boolean
-  /** 是否开启左侧收缩布局 */
-  shrink?: boolean
-}
+import { useRect } from '../../hooks'
+import type { TabItem } from './props'
+import { tabsEmits, tabsProps } from './props'
 
 const ns = useNamespace('tabs')
 
-const props = withDefaults(defineProps<TabsProps>(), {
-  modelValue: 0,
-  tabs: () => [],
-  labelKey: 'label',
-  valueKey: undefined,
-  scrollable: false,
-})
-
-const emit = defineEmits<{
-  (event: 'update:modelValue', current: TabItemValue): void
-  (event: 'change', item: TabItem): void
-}>()
+const props = defineProps(tabsProps)
+const emit = defineEmits(tabsEmits)
 
 const { tabs, modelValue } = toRefs(props)
 
@@ -143,54 +117,5 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-tabs {
-  $tabs-line-width: 40px;
-  height: _var(tabs-height, 44px);
-  padding: 0 8px;
-  background-color: _var(tabs-bg-color, #fff);
-  &.scrollable &__item {
-    flex: 1 0 auto;
-    padding: 0 12px;
-  }
-  &.shrink &__item {
-    flex: none;
-  }
-  &-scroll {
-    height: 100%;
-  }
-  &-wrapper {
-    position: relative;
-    display: flex;
-    height: 100%;
-    user-select: none;
-  }
-  &__item {
-    position: relative;
-    display: flex;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    padding: 0 4px;
-    color: _var(tabs-color, _var(color-black-2));
-    font-size: _var(tabs-font-size, 14px);
-    line-height: _var(tabs-line-height, 20px);
-    min-width: _var(tabs-line-width, $tabs-line-width);
-    &.active {
-      color: _var(tabs-color-active, _var(color-black));
-      font-weight: 500;
-    }
-  }
-  &__line {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    width: _var(tabs-line-width, $tabs-line-width);
-    height: _var(tabs-line-height, 3px);
-    background-color: _var(color-primary);
-    border-radius: 3rpx;
-  }
-}
+@import './tabs.scss';
 </style>

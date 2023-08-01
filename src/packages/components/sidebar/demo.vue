@@ -37,7 +37,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import { SidebarValue } from './sidebar.vue'
+import type { SidebarValue } from './sidebar.vue'
 
 const activeVal = ref(0)
 const activeVal2 = ref(0)

@@ -29,7 +29,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import { PopupPosition } from './popup.vue'
+import type { PopupPosition } from './props'
 
 const visible = ref<boolean>(false)
 const position = ref<PopupPosition>('bottom')
@@ -47,6 +47,6 @@ const onOpen = (_position: PopupPosition, _closeable = false, _round = false) =>
 <style lang="scss" scoped></style>
 <style lang="scss">
 page {
-  background-color: var(--color-page-bg-gray);
+  background-color: var(--pa-color-gray);
 }
 </style>

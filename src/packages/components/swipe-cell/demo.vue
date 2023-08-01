@@ -52,7 +52,7 @@
 
 <script lang="ts" setup>
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import { SwipeCellOption } from './swipe-cell.vue'
+import type { SwipeCellOption } from './props'
 
 const options: SwipeCellOption[] = [{ text: '删除' }]
 

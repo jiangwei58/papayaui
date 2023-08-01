@@ -18,63 +18,16 @@
 </template>
 
 <script lang="ts" setup>
-import { EventDetail } from '../../types'
-import { CSSProperties, nextTick } from 'vue'
+import { nextTick } from 'vue'
 import useNamespace from '../../core/useNamespace'
-
-export interface NumberInputProps {
-  modelValue?: string | number | undefined
-  /** 是否禁用 */
-  disabled?: boolean
-  /** 输入提示 */
-  placeholder?: string
-  /** 内容对齐方式 */
-  align?: 'left' | 'center' | 'right'
-  /** 最小值 */
-  min?: number
-  /** 最大值 */
-  max?: number
-  /** 整数位长度 */
-  intLength?: number
-  /** 小数位长度 */
-  precision?: number
-  /** 获取焦点 */
-  focus?: boolean
-  /** 键盘收起时，是否自动失去焦点 */
-  autoBlur?: boolean
-  /** 键盘弹起时，是否自动上推页面 */
-  adjustPosition?: boolean
-  /** 定义需要用到的外部样式 */
-  customStyle?: CSSProperties
-}
+import type { EventDetail } from '../../types'
+import type { NumberInputEmits } from './props'
+import { numberInputEmits, numberInputProps } from './props'
 
 const ns = useNamespace('number-input')
 
-const props = withDefaults(defineProps<NumberInputProps>(), {
-  modelValue: '',
-  disabled: false,
-  placeholder: '请输入',
-  align: 'right',
-  min: undefined,
-  max: undefined,
-  precision: 0,
-  intLength: Number.MAX_SAFE_INTEGER.toString().length,
-  customStyle: undefined,
-  adjustPosition: true,
-})
-
-const emit = defineEmits<{
-  (event: 'update:modelValue', value: string): void
-  (
-    event: 'focus',
-    value: EventDetail<{ value: NumberInputProps['modelValue']; height: number }>,
-  ): void
-  (
-    event: 'blur',
-    value: EventDetail<{ value: NumberInputProps['modelValue']; cursor: number }>,
-  ): void
-  (event: 'confirm', value: EventDetail<{ value: NumberInputProps['modelValue'] }>): void
-}>()
+const props = defineProps(numberInputProps)
+const emit = defineEmits(numberInputEmits)
 
 const minAndMax = (val: number) => {
   if (typeof props.min !== 'undefined') {
@@ -118,10 +71,7 @@ const onBlur = async (e: any) => {
 }
 
 const onFocus = (e: FocusEvent) => {
-  emit(
-    'focus',
-    e as unknown as EventDetail<{ value: NumberInputProps['modelValue']; height: number }>,
-  )
+  emit('focus', e as unknown as Parameters<NumberInputEmits['focus']>[0])
 }
 
 const onConfirm = (e: any) => {
@@ -130,26 +80,5 @@ const onConfirm = (e: any) => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-number-input {
-  $input-height: 24px;
-  background-color: initial;
-  border: 0;
-  box-sizing: border-box;
-  color: _var(number-input-text-color, _var(color-primary));
-  height: _var(number-input-height, $input-height);
-  line-height: inherit;
-  margin: 0;
-  min-height: _var(number-input-height, $input-height);
-  padding: 0;
-  position: relative;
-  resize: none;
-  width: 100%;
-  &.disabled {
-    @include _setVar(number-input-text-color, _var(number-input-disabled-color, #323233));
-  }
-  :deep(.#{$prefix}-number-input-placeholder) {
-    color: _var(number-input-placeholder-color, #c8c9cc);
-  }
-}
+@import './number-input.scss';
 </style>

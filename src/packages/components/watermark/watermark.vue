@@ -20,35 +20,11 @@
 <script lang="ts" setup>
 import { ref, toRefs, onMounted, getCurrentInstance, watch } from 'vue'
 import useNamespace from '../../core/useNamespace'
-
-export interface WatermarkProps {
-  /** 单个水印宽度 */
-  width?: number
-  /** 单个水印高度 */
-  height?: number
-  /** 水印内容距离画布顶部的距离 */
-  top?: number
-  /** 水印透明度 */
-  opacity?: number
-  /** 水印字体大小 */
-  fontsize?: number
-  /** 水印元素层级 */
-  zIndex?: number
-  /** 水印内容，数组的每个元素代表每一行的内容 */
-  contents?: string[]
-}
+import { watermarkProps } from './props'
 
 const ns = useNamespace('watermark')
 
-const props = withDefaults(defineProps<WatermarkProps>(), {
-  width: 125,
-  height: 125,
-  top: 50,
-  opacity: 0.2,
-  fontsize: 12,
-  zIndex: 1000,
-  contents: () => [],
-})
+const props = defineProps(watermarkProps)
 
 const { contents } = toRefs(props)
 
@@ -64,28 +40,44 @@ watch(contents, (newVal) => {
   createWatermark(newVal)
 })
 
-const createWatermark = (textList: string[]) => {
+const createWatermark = (text: string | string[]) => {
+  const textList = Array.isArray(text) ? text : [text]
   if (!textList.length) return
+
   const query = uni.createSelectorQuery()
   query
     .in(internalInstance)
     .select('#watermark')
     .fields({ node: true, size: true } as UniApp.NodeField, () => {})
     .exec((res) => {
-      const canvas = res[0].node
+      let canvas = null
+      // #ifdef MP
+      canvas = res[0].node as HTMLCanvasElement
+      // #endif
+      // #ifdef H5
+      canvas = document.querySelector('#watermark canvas') as HTMLCanvasElement
+      // #endif
+
       const ctx = canvas.getContext('2d')
+      if (!ctx) return
 
+      // #ifdef MP
       const dpr = uni.getSystemInfoSync().pixelRatio
-      canvas.width = res[0].width * dpr
-      canvas.height = res[0].height * dpr
+      canvas.width = props.width * dpr
+      canvas.height = props.height * dpr
       ctx.scale(dpr, dpr)
+      // #endif
 
-      ctx.rotate((-20 * Math.PI) / 180)
-      ctx.fillStyle = `rgba(0,0,0,${props.opacity})`
-      ctx.font = `${props.fontsize}px`
       ctx.textAlign = 'center'
+      ctx.textBaseline = 'middle'
+
+      ctx.translate(res[0].width / 2, res[0].height / 2 - textList.length * (props.fontSize / 2))
+      ctx.rotate((Math.PI / 180) * Number(props.rotate))
+
+      ctx.font = `${props.fontSize}px ${props.fontFamily}`
+      ctx.fillStyle = props.fontColor
       textList.forEach((text, index) => {
-        ctx.fillText(text, res[0].width / 2 - 20, props.top + index * 16)
+        ctx.fillText(text, 0, index * (props.fontSize + 5))
       })
 
       src.value = canvas.toDataURL()
@@ -94,14 +86,5 @@ const createWatermark = (textList: string[]) => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-watermark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
-  pointer-events: none;
-}
+@import './watermark.scss';
 </style>

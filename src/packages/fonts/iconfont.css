@@ -1,8 +1,8 @@
 @font-face {
   font-family: "pa-iconfont"; /* Project id 3668565 */
-  src: url('iconfont.woff2?t=1675327578393') format('woff2'),
-       url('iconfont.woff?t=1675327578393') format('woff'),
-       url('iconfont.ttf?t=1675327578393') format('truetype');
+  src: url('iconfont.woff2?t=1688368150563') format('woff2'),
+       url('iconfont.woff?t=1688368150563') format('woff'),
+       url('iconfont.ttf?t=1688368150563') format('truetype');
 }
 
 .pa-iconfont {
@@ -11,6 +11,38 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.pa-icon-camera-fill:before {
+  content: "\e705";
+}
+
+.pa-icon-camera:before {
+  content: "\e606";
+}
+
+.pa-icon-home:before {
+  content: "\e60e";
+}
+
+.pa-icon-home-fill:before {
+  content: "\e601";
+}
+
+.pa-icon-left-circle-fill:before {
+  content: "\e846";
+}
+
+.pa-icon-down-circle-fill:before {
+  content: "\e847";
+}
+
+.pa-icon-up-circle-fill:before {
+  content: "\e848";
+}
+
+.pa-icon-right-circle-fill:before {
+  content: "\e849";
 }
 
 .pa-icon-outdent:before {

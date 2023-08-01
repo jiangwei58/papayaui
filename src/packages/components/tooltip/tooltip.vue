@@ -23,24 +23,15 @@
 </template>
 
 <script lang="ts" setup>
-import { getUnitValue } from '../../utils/common'
+import { getUnitValue } from '../../utils'
 import { computed, getCurrentInstance, nextTick, ref, watch } from 'vue'
 import useRect from '../../hooks/useRect'
 import useNamespace from '../../core/useNamespace'
-
-export interface TooltipProps {
-  /** 悬浮内容 */
-  text?: string
-  /** 宽度 */
-  width?: string
-}
+import { tooltipProps } from './props'
 
 const ns = useNamespace('tooltip')
 
-withDefaults(defineProps<TooltipProps>(), {
-  text: '',
-  width: '300',
-})
+defineProps(tooltipProps)
 
 const show = ref<boolean>(false)
 
@@ -91,63 +82,5 @@ const onVisibleChange = (visible = !show.value) => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-tooltip {
-  $arrowSize: 20rpx;
-  $darkColor: #323233;
-  position: relative;
-  &-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 8;
-    width: 100vw;
-    height: 100vh;
-    background-color: transparent;
-  }
-  &-wrapper {
-    position: fixed;
-    left: 0;
-    top: 0;
-    margin: 0;
-    z-index: 9;
-    padding: 22rpx 24rpx;
-    border-radius: 8rpx;
-    opacity: 0.9;
-  }
-  &-arrow {
-    position: absolute;
-    width: $arrowSize;
-    height: $arrowSize;
-    z-index: -1;
-    &::before {
-      position: absolute;
-      width: $arrowSize;
-      height: $arrowSize;
-      z-index: -1;
-      content: ' ';
-      transform: rotate(45deg);
-      box-sizing: border-box;
-    }
-  }
-  &--dark &-wrapper {
-    color: #fff;
-    background: $darkColor;
-  }
-  &--dark &-arrow {
-    &::before {
-      border: 1px solid $darkColor;
-      background: $darkColor;
-      border-bottom-color: transparent !important;
-      border-right-color: transparent !important;
-    }
-  }
-  &--bottom &-arrow {
-    $top: calc($arrowSize / 2);
-    left: 50%;
-    top: -$top;
-    margin-left: -$top;
-    border-top-left-radius: 2px;
-  }
-}
+@import './tooltip.scss';
 </style>

@@ -1,0 +1,70 @@
+@import '../../styles/vars.scss';
+.#{$prefix}-uploader {
+  $size: 100px;
+  $gap: 10px;
+
+  position: relative;
+  display: inline-block;
+
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__preview {
+    position: relative;
+    margin: _var(uploader-preview-margin, 0 $gap $gap 0);
+    cursor: pointer;
+
+    &-image {
+      display: block;
+      width: _var(uploader-size, $size);
+      height: _var(uploader-size, $size);
+      border-radius: _var(uploader-preview-radius, 4px);
+      overflow: hidden;
+    }
+
+    &-delete {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: _var(uploader-delete-width, 15%);
+      height: _var(uploader-delete-height, 15%);
+      background-color: _var(uploader-delete-bg, rgba(0, 0, 0, 0.7));
+      border-radius: 0 _var(uploader-preview-radius, 4px) 0 12px;
+      @include _setVar(icon-size, _var(uploader-delete-icon-size, 12px));
+
+      &-icon {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: #fff;
+      }
+    }
+  }
+
+  &__upload {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: _var(uploader-size, $size);
+    height: _var(uploader-size, $size);
+    margin: _var(uploader-preview-margin, 0 $gap $gap 0);
+    background-color: #f7f8fa;
+    border-radius: _var(uploader-preview-radius, 4px);
+
+    &:active {
+      background-color: _var(color-gray);
+    }
+
+    &-icon {
+      color: #dcdee0;
+    }
+  }
+
+  &--disabled {
+    opacity: 0.5;
+  }
+}

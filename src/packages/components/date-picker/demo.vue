@@ -5,7 +5,7 @@
 
   <DocDemoBlock title="配合Popup使用" card>
     <pa-cell title="选择年月日" :value="dateText" clickable @click="datePickerShow = true" />
-    <pa-popup :show="datePickerShow" position="bottom">
+    <pa-popup v-model:show="datePickerShow" position="bottom">
       <pa-date-picker title="选择年月日" @confirm="onConfirm" />
     </pa-popup>
   </DocDemoBlock>
@@ -33,6 +33,15 @@
     <pa-date-picker title="选择年月日小时" :columns-type="['year', 'month', 'day', 'hour']" />
   </DocDemoBlock>
 
+  <DocDemoBlock title="显示列标题" card>
+    <pa-date-picker
+      v-model="dateValue"
+      title="选择年月日"
+      show-columns-header
+      @confirm="onConfirm"
+    />
+  </DocDemoBlock>
+
   <DocDemoBlock title="选项过滤器" card>
     <pa-date-picker title="选项过滤器" :columns-type="['hour', 'minute']" :filter="filter" />
   </DocDemoBlock>
@@ -51,7 +60,7 @@
 <script lang="ts" setup>
 import dayjs from 'dayjs'
 import { ref } from 'vue'
-import { DatePickerColumnType, DatePickerOption } from '../../core/useDatePicker'
+import type { DatePickerColumnType, DatePickerOption } from '../../core/useDatePicker'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 const dateValue = ref<Date>(new Date())
@@ -90,6 +99,6 @@ const onConfirm = (date: Date) => {
 <style lang="scss" scoped></style>
 <style lang="scss">
 page {
-  background-color: var(--color-page-bg-gray);
+  background-color: var(--pa-color-gray);
 }
 </style>

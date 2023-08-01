@@ -14,14 +14,7 @@
     >
       <slot></slot>
 
-      <watermark
-        v-if="showWatermark"
-        :width="160"
-        :height="220"
-        :opacity="0.1"
-        :contents="watermarkContents"
-        :zindex="96"
-      />
+      <watermark v-if="showWatermark" :contents="watermarkContents" />
     </view>
 
     <view :style="{ height: bottomHeight + 'px' }"></view>
@@ -42,34 +35,11 @@ import useRect from '../../hooks/useRect'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import sticky from '../sticky/sticky.vue'
 import watermark from '../watermark/watermark.vue'
-
-export interface ContainerProps {
-  /** 是否填充底部安全区 */
-  safeBottom?: boolean
-  /** 头部背景色 */
-  headerBgColor?: string
-  /** 背景色 */
-  bgColor?: string
-  /** 是否显示固定底部 */
-  showFixedBottom?: boolean
-  /** 是否显示水印 */
-  showWatermark?: boolean
-  /** 水印内容 */
-  watermarkContents?: string[]
-  /** 是否局部内容布局，默认内容在页面，使用页面滚动；如需内容区只占中间部分设为true */
-  partialContent?: boolean
-}
+import { containerProps } from './props'
 
 const ns = useNamespace('container')
 
-withDefaults(defineProps<ContainerProps>(), {
-  safeBottom: true,
-  headerBgColor: 'transparent',
-  bgColor: 'transparent',
-  showFixedBottom: true,
-  showWatermark: false,
-  watermarkContents: () => [],
-})
+defineProps(containerProps)
 
 const headerHeight = ref<number>(0)
 const bottomHeight = ref<number>(34)
@@ -102,25 +72,5 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-container {
-  width: 100%;
-  min-height: 100vh;
-  &-header {
-    width: 100%;
-  }
-
-  &-body {
-    position: relative;
-  }
-
-  &-bottom-fixed {
-    position: fixed;
-    width: 100%;
-    left: 0;
-    bottom: 0;
-    z-index: 98;
-    background-color: #fff;
-  }
-}
+@import './container.scss';
 </style>

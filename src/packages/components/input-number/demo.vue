@@ -40,7 +40,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import { sleep } from '../../utils/common'
+import { sleep } from '../../utils'
 
 const input1 = ref<number>(1)
 const input2 = ref<number>(1)
@@ -67,6 +67,6 @@ const onChange = async (value: number) => {
 <style lang="scss" scoped></style>
 <style lang="scss">
 page {
-  background-color: var(--color-page-bg-gray);
+  background-color: var(--pa-color-gray);
 }
 </style>

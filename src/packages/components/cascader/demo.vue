@@ -63,7 +63,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import { CascaderNode } from './cascader.vue'
+import type { CascaderNode } from './props'
 
 type NodeItem = { label: string; value: string; leaf?: boolean; children?: NodeItem[] }
 
@@ -135,6 +135,6 @@ const onMultipleChangeVisible = () => {
 <style lang="scss" scoped></style>
 <style lang="scss">
 page {
-  background-color: var(--color-page-bg-gray);
+  background-color: var(--pa-color-gray);
 }
 </style>

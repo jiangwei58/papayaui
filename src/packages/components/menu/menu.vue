@@ -15,25 +15,13 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, getCurrentInstance, onMounted, provide, Ref, ref } from 'vue'
+import type { Ref } from 'vue'
+import { computed, getCurrentInstance, onMounted, provide, ref } from 'vue'
 import useNamespace, { defaultNamespace } from '../../core/useNamespace'
 import { useRect } from '../../hooks'
-import { MenuItemInstance } from '../menu-item/menu-item.vue'
-import { PopupProps } from '../popup/popup.vue'
-import { TransitionProps } from '../transition/transition.vue'
-
-export interface MenuProps {
-  /** 菜单展开方向 */
-  direction?: 'up' | 'down'
-  /** 菜单栏 z-index 层级 */
-  zIndex?: number
-  /** 动画时长，单位ms */
-  duration?: TransitionProps['duration']
-  /** 是否显示遮罩层 */
-  overlay?: PopupProps['overlay']
-  /** 是否在点击遮罩层后关闭菜单 */
-  closeOnClickOverlay?: PopupProps['closeOnClickOverlay']
-}
+import type { MenuItemInstance } from '../menu-item/menu-item.vue'
+import type { MenuProps } from './props'
+import { menuProps } from './props'
 
 export interface MenuProvideData {
   props: Required<MenuProps>
@@ -44,13 +32,7 @@ export interface MenuProvideData {
 
 const ns = useNamespace('menu')
 
-const props = withDefaults(defineProps<MenuProps>(), {
-  direction: 'down',
-  zIndex: 10,
-  duration: 200,
-  overlay: true,
-  closeOnClickOverlay: true,
-})
+const props = defineProps(menuProps)
 
 const systemInfo = uni.getSystemInfoSync()
 const instance = getCurrentInstance()
@@ -59,7 +41,7 @@ const children = ref<MenuItemInstance[]>([])
 const menuBarList = computed(() => {
   return children.value.map((child) => {
     return {
-      title: child.props.title || child.activeItem.text,
+      title: child.title || child.activeItem.text,
       show: child.show,
     }
   })

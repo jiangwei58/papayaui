@@ -60,10 +60,8 @@ const onClick = () => {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .demo-button {
-  button {
-    margin: 0 16px 16px 0;
-  }
+  --pa-button-margin: 0 16px 16px 0;
 }
 </style>

@@ -5,49 +5,17 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, SVGAttributes, toRefs } from 'vue'
-import useCountTo from '../../core/useCountTo'
+import { computed, onMounted, toRefs } from 'vue'
+import { useCountTo } from '../../core/useCountTo'
 import useNamespace from '../../core/useNamespace'
-
-export interface CountToProps {
-  /** 开始值 */
-  startNum?: number
-  /** 结束值 */
-  endNum?: number
-  /** 滚动过程所需的时间，单位ms */
-  duration?: number
-  /** 是否自动开始滚动 */
-  autoplay?: boolean
-  /** 缓动结尾效果 */
-  easeout?: boolean
-  /** 格式化值 */
-  formatter?: (value: number) => string | number
-  /** 自定义class */
-  customClass?: string
-  /** 自定义style */
-  customStyle?: SVGAttributes['style']
-}
+import { countToEmits, countToProps } from './props'
 
 const ns = useNamespace('count-to')
 
-const props = withDefaults(defineProps<CountToProps>(), {
-  startNum: 0,
-  endNum: 0,
-  duration: 2000,
-  autoplay: false,
-  easeout: true,
-  formatter: undefined,
-  customClass: undefined,
-  customStyle: undefined,
-})
+const props = defineProps(countToProps)
+const emit = defineEmits(countToEmits)
 
-const emit = defineEmits<{
-  (event: 'click', value: Event): void
-  (event: 'change', value: number, progress: number): void
-  (event: 'finish'): void
-}>()
-
-const { startNum, endNum, duration, easeout } = toRefs(props)
+const { startNum, endNum, duration, frequency, easeout } = toRefs(props)
 
 const onProgress = (progress: number) => {
   emit('change', numValue.value, progress)
@@ -61,6 +29,7 @@ const { numValue, start, pause, resume, restart, reset } = useCountTo({
   startNum,
   endNum,
   duration,
+  frequency,
   easeout,
   onProgress,
   onEnd,

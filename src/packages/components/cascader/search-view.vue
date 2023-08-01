@@ -3,11 +3,10 @@
     <ListItem
       v-for="(item, index) in searchData"
       :key="`search-${index}`"
+      :text="item.__label"
       :selected="isSelected(item[fieldNames.value as keyof SearchNode])"
-      @select="onSelect(item)"
-    >
-      <text>{{ item.__label }}</text>
-    </ListItem>
+      @click="onSelect(item)"
+    />
     <view v-if="loading" :class="ns.e('loading')">
       <loadmore :status="LoadStatusEnum.LOADING" />
     </view>
@@ -18,37 +17,19 @@
 
 <script lang="ts" setup>
 import { ref, toRefs, watch } from 'vue'
+import { LoadStatusEnum } from '../../core/useList'
 import useNamespace from '../../core/useNamespace'
-import { TreeNode, UseTreeFieldNames } from '../../core/useTree'
-import { LoadStatusEnum } from '../../hooks'
-import { debounce } from '../../utils/common'
+import { debounce } from '../../utils'
+import ListItem from '../list-item/list-item.vue'
 import Loadmore from '../loadmore/loadmore.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
-import { CascaderOption, CascaderValue } from './cascader.vue'
-import ListItem from './list-item.vue'
-
-export interface CascaderSearchViewProps {
-  show?: boolean
-  options: CascaderOption[]
-  fieldNames: UseTreeFieldNames<CascaderOption>
-  searchText: string
-  lazySearch?: (searchText: string) => CascaderOption[] | Promise<CascaderOption[]>
-  isSelected: (value: CascaderValue) => boolean
-  safeAreaInsetBottom?: boolean
-}
-
-export interface SearchNode extends TreeNode<CascaderOption> {
-  __label: string
-  __remoteSearch: boolean
-}
+import type { CascaderOption, SearchNode } from './props'
+import { cascaderSearchViewEmits, cascaderSearchViewProps } from './props'
 
 const ns = useNamespace('cascader-search-view')
 
-const props = defineProps<CascaderSearchViewProps>()
-
-const emit = defineEmits<{
-  (event: 'select', item: SearchNode): void
-}>()
+const props = defineProps(cascaderSearchViewProps)
+const emit = defineEmits(cascaderSearchViewEmits)
 
 const { options, fieldNames, searchText, lazySearch } = toRefs(props)
 
@@ -96,7 +77,7 @@ const updateData = async (text: string) => {
     searchData.value = getFlattenTreeData(res, true)
     loading.value = false
   } else {
-    searchData.value = getFlattenTreeData(options.value, false, text)
+    searchData.value = getFlattenTreeData(options.value, false, text.trim())
   }
 }
 const debounceUpdateData = debounce(updateData, 300)

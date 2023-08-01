@@ -1,6 +1,9 @@
-# papayaui
+# papayaui &middot; [![npm](https://img.shields.io/npm/v/papayaui.svg)](https://www.npmjs.com/package/papayaui)
 
 适用于 uniapp 的 ui 框架
+
+- 💪 Vue 3 Composition API
+- 🔥 Written in TypeScript
 
 ## 准备工作
 
@@ -10,8 +13,8 @@
 # 通过 npm 安装
 npm i papayaui
 
-# 通过 yarn 安装
-yarn add papayaui
+# 通过 pnpm 安装
+pnpm install papayaui
 ```
 
 ### SASS
@@ -22,13 +25,21 @@ yarn add papayaui
 # 通过 npm 安装
 npm i sass -D
 
-# 通过 yarn 安装
-yarn add sass -D
+# 通过 pnpm 安装
+pnpm install sass -D
+```
+
+### 附加依赖（仅使用 pnpm 时注意）
+
+因 uniapp easycom 组件模式的限制，如果您使用 pnpm 作为包管理器，您需要手动安装以下依赖
+
+```bash
+pnpm install async-validator dayjs
 ```
 
 ## 配置步骤
 
-1. 在引入全局 SCSS 文件
+### 引入全局 SCSS 文件
 
 > 注意
 > 在`App.vue`中首行的位置引入，注意给 style 标签加入 lang="scss"属性
@@ -41,7 +52,7 @@ yarn add sass -D
 </style>
 ```
 
-2. 配置 easycom 组件模式
+### 配置 easycom 组件模式（推荐）
 
 此配置需要在项目 src 目录的 pages.json 中进行。
 
@@ -61,10 +72,34 @@ yarn add sass -D
 }
 ```
 
-3. 引入 ts 组件声明文件
+### Volar 支持
 
-> 在`env.d.ts`中上方引入，可以得到代码提示
+> 如果您使用 Volar，请在 tsconfig.json 中通过 compilerOptions.type 指定全局组件类型。
 
 ```typescript
-/// <reference types="papayaui/components" />
+// tsconfig.json
+{
+  "compilerOptions": {
+    // ...
+    "types": ["papayaui/global"]
+  },
+  // 防止组件props类型识别错误
+  "include": ["node_modules/papayaui/components/*/*.vue"]
+}
+```
+
+### 修改主题色
+
+> 所有颜色都基于 css 变量定义，覆盖 css 变量即可
+
+```css
+/* 小程序 */
+page {
+  --pa-color-primary: #409eff;
+}
+
+/* H5 */
+:root {
+  --pa-color-primary: #409eff;
+}
 ```

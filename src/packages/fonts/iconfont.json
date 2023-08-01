@@ -6,6 +6,62 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "399099",
+      "name": "camera",
+      "font_class": "camera-fill",
+      "unicode": "e705",
+      "unicode_decimal": 59141
+    },
+    {
+      "icon_id": "4868894",
+      "name": "camera",
+      "font_class": "camera",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "5326767",
+      "name": "home",
+      "font_class": "home",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "24883439",
+      "name": "home",
+      "font_class": "home-fill",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "4936479",
+      "name": "left-circle-fill",
+      "font_class": "left-circle-fill",
+      "unicode": "e846",
+      "unicode_decimal": 59462
+    },
+    {
+      "icon_id": "4936480",
+      "name": "down-circle-fill",
+      "font_class": "down-circle-fill",
+      "unicode": "e847",
+      "unicode_decimal": 59463
+    },
+    {
+      "icon_id": "4936484",
+      "name": "up-circle-fill",
+      "font_class": "up-circle-fill",
+      "unicode": "e848",
+      "unicode_decimal": 59464
+    },
+    {
+      "icon_id": "4936485",
+      "name": "right-circle-fill",
+      "font_class": "right-circle-fill",
+      "unicode": "e849",
+      "unicode_decimal": 59465
+    },
+    {
       "icon_id": "4767051",
       "name": "outdent",
       "font_class": "outdent",

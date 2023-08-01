@@ -7,21 +7,9 @@
 <script lang="ts" setup>
 import { provide, toRefs } from 'vue'
 import useNamespace from '../../core/useNamespace'
-import useSelect from '../../core/useSelect'
-import { CheckboxValue } from '../checkbox/checkbox.vue'
-
-export interface CheckboxGroupProps {
-  /** 标识符 */
-  name?: string
-  /** 值 */
-  modelValue?: CheckboxValue[]
-  /** 方向 */
-  direction?: 'horizontal' | 'vertical'
-  /** 是否全部禁用 */
-  disabled?: boolean
-  /** 限制选择的数量 */
-  max?: number
-}
+import { useSelect } from '../../core/useSelect'
+import type { CheckboxValue } from '../checkbox/props'
+import { checkboxGroupEmits, checkboxGroupProps } from './props'
 
 export interface CheckboxProvideData {
   disabled?: boolean
@@ -35,18 +23,8 @@ export type CheckboxOption = {
 
 const ns = useNamespace('checkbox-group')
 
-const props = withDefaults(defineProps<CheckboxGroupProps>(), {
-  name: '',
-  modelValue: undefined,
-  direction: 'vertical',
-  disabled: false,
-  max: undefined,
-})
-
-const emit = defineEmits<{
-  (event: 'update:modelValue', value: CheckboxValue[]): void
-  (event: 'change', value: CheckboxValue[], name: string): void
-}>()
+const props = defineProps(checkboxGroupProps)
+const emit = defineEmits(checkboxGroupEmits)
 
 const { modelValue, max } = toRefs(props)
 
@@ -70,15 +48,5 @@ provide<CheckboxProvideData>('checkboxData', {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-
-.#{$prefix}-checkbox-group {
-  &--horizontal {
-    @include _setVar(checkbox-display, inline-flex);
-    @include _setVar(checkbox-margin, 0 16px 0 0);
-  }
-  &--vertical {
-    @include _setVar(checkbox-margin, 0 0 8px);
-  }
-}
+@import './checkbox-group.scss';
 </style>

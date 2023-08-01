@@ -9,11 +9,5 @@ const ns = useNamespace('safe-bottom')
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-safe-bottom {
-  display: block;
-  width: 100%;
-  height: 0;
-  @include safeBottomPadding();
-}
+@import './safe-bottom.scss';
 </style>

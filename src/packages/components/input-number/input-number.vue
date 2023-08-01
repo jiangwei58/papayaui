@@ -42,74 +42,18 @@
 
 <script lang="ts" setup>
 import { computed, nextTick, toRefs } from 'vue'
-import { EventDetail } from '../..'
-import useInputNumber, { InputNumberValue, minAndMax } from '../../core/useInputNumber'
+import type { EventDetail } from '../..'
+import type { InputNumberValue } from '../../core/useInputNumber'
+import { useInputNumber, minAndMax } from '../../core/useInputNumber'
 import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
 import Icon from '../icon/icon.vue'
-
-export interface InputNumberProps {
-  modelValue?: InputNumberValue
-  /** 标识符 */
-  name?: string
-  /** 输入提示 */
-  placeholder?: string
-  /** 内容对齐方式 */
-  inputAlign?: 'left' | 'center' | 'right'
-  /** 输入框宽度 */
-  inputWidth?: string
-  /** 最小值 */
-  min?: InputNumberValue
-  /** 最大值 */
-  max?: InputNumberValue
-  /** 步长 */
-  step?: InputNumberValue
-  /** 整数位长度 */
-  intLength?: number
-  /** 小数位长度 */
-  decimalLength?: number
-  /** 只读状态禁用输入框操作行为 */
-  readonly?: boolean
-  /** 禁用所有功能 */
-  disabled?: boolean
-  /** 是否显示控制按钮 */
-  controls?: boolean
-  /** 是否开启异步变更，开启后需要手动控制输入值 */
-  asyncChange?: boolean
-  /** 是否为块级元素 */
-  block?: boolean
-  /** 朴素样式 */
-  plain?: boolean
-  /** 是否允许空值 */
-  nullable?: boolean
-  /** 空值时返回的值 */
-  nullValue?: any
-}
+import { inputNumberEmits, inputNumberProps } from './props'
 
 const ns = useNamespace('input-number')
 
-const props = withDefaults(defineProps<InputNumberProps>(), {
-  modelValue: undefined,
-  name: '',
-  placeholder: '',
-  inputAlign: 'center',
-  min: 1,
-  max: 9999,
-  step: 1,
-  intLength: Number.MAX_SAFE_INTEGER.toString().length,
-  decimalLength: 0,
-  disabled: false,
-  controls: true,
-  inputWidth: undefined,
-  nullValue: null,
-})
-
-const emit = defineEmits<{
-  (event: 'update:modelValue', value: number, name?: string): void
-  (event: 'change', value: number, name?: string): void
-  (event: 'focus', value: EventDetail<{ value: InputNumberValue; height: number }>): void
-  (event: 'blur', value: EventDetail<{ value: InputNumberValue; cursor: number }>): void
-}>()
+const props = defineProps(inputNumberProps)
+const emit = defineEmits(inputNumberEmits)
 
 const { modelValue, intLength, decimalLength } = toRefs(props)
 const min = computed<number>(() => +props.min)
@@ -164,14 +108,14 @@ const onBlur = async (e: unknown) => {
     result = props.nullValue
   }
   // 防止处理后modelValue前后值一样视图不更新
-  if (result === Number(modelValue.value) && result !== numVal) {
+  if (result === Number(props.modelValue) && result !== numVal) {
     numberVal.value = numVal
     await nextTick()
     numberVal.value = result
   }
   event.detail.value = result
   // 值没变不发送更新事件
-  if (result !== Number(modelValue.value) || result !== numVal) {
+  if (result !== Number(props.modelValue) || result !== numVal) {
     onUpdate(result)
   }
   emit('blur', event)
@@ -183,63 +127,5 @@ const onFocus = (e: unknown) => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/vars.scss';
-.#{$prefix}-input-number {
-  $height: _var(input-number-height, 28px);
-  $bgColor: _var(input-number-bg-color, #f2f3f5);
-  $disabledColor: _var(input-number-disabled-color, #c8c9cc);
-  $disabledBgColor: _var(input-number-disabled-bg-color, #f2f3f5);
-  $round: _var(input-number-round, 4px);
-
-  align-items: center;
-  height: $height;
-  color: _var(color-black);
-  &-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: $height;
-    height: $height;
-    background-color: $bgColor;
-    &:active:not(.#{$prefix}-input-number-icon--disabled) {
-      background-color: #e8e8e8;
-    }
-  }
-  &-minus {
-    border-radius: $round 0 0 $round;
-  }
-  &-plus {
-    border-radius: 0 $round $round 0;
-  }
-  &-inner {
-    flex: 1;
-    width: _var(input-number-width, 32px);
-    height: $height;
-    font-size: _var(input-number-font-size, 14px);
-    color: _var(input-number-color, _var(color-black));
-    background-color: $bgColor;
-    border-radius: $round;
-    :deep(.#{$prefix}-input-number-placeholder) {
-      color: _var(input-number-placeholder-color, $disabledColor);
-    }
-  }
-  &--controls &-inner {
-    margin: 0 2px;
-    border-radius: 0;
-  }
-  &--icon-disabled {
-    color: $disabledColor;
-    background-color: $disabledBgColor;
-    cursor: not-allowed;
-  }
-  &--inner-disabled {
-    color: $disabledColor;
-    background-color: $disabledBgColor;
-  }
-  &--plain &-inner {
-    color: _var(input-number-color, _var(color-primary));
-    background-color: transparent;
-  }
-}
+@import './input-number.scss';
 </style>

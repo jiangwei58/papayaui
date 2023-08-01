@@ -6,14 +6,15 @@ const getPackageJson = () => {
   const filePath = path.resolve(url.fileURLToPath(import.meta.url), '../../package.json')
   const dataStr = fs.readFileSync(filePath).toString()
   const json = JSON.parse(dataStr)
+  json.main = 'index.ts'
   for (const key in json.dependencies) {
-    if (!['async-validator', 'dayjs'].includes(key)) {
+    if (!['async-validator', 'dayjs', 'cos-wx-sdk-v5'].includes(key)) {
       delete json.dependencies[key]
     }
   }
   delete json.scripts
   delete json.devDependencies
-  json['files'] = ['*']
+  json.files = ['*']
   return json
 }
 

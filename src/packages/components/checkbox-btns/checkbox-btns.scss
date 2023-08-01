@@ -1,0 +1,16 @@
+@import '../../styles/vars.scss';
+.#{$prefix}-checkbox {
+  &-button {
+    font-size: _var(checkbox-btns-font-size, 14px);
+    color: _var(checkbox-btns-color, _var(color-black));
+    padding: _var(checkbox-btns-padding, 7px 4px);
+    border-width: _var(checkbox-btns-border-width, 2rpx);
+    border-style: solid;
+    text-align: center;
+    &.active {
+      color: _var(color-primary);
+      background-color: rgba(0, 156, 93, 0.1) !important;
+      border-color: _var(color-primary) !important;
+    }
+  }
+}
