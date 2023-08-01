@@ -319,6 +319,13 @@
         "navigationBarTitleText": "useList"
       },
       "type": "hook"
+    },
+    {
+      "path": "packages/core/useVirtualList/demo",
+      "style": {
+        "navigationBarTitleText": "useVirtualList"
+      },
+      "type": "hook"
     }
   ],
   "globalStyle": {
