@@ -76,7 +76,7 @@ import { ref } from 'vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 const checkValue = ref<boolean>(true)
-const checkValue2 = ref<boolean>(true)
+const checkValue2 = ref<boolean>(false)
 const checkValue3 = ref<number[]>([0])
 const checkValue4 = ref<number[]>([0])
 const checkValue5 = ref<number[]>([0])

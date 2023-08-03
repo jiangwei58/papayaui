@@ -3,7 +3,7 @@
     :class="[
       ns.b(),
       ns.m(shape),
-      ns.is('checked', modelValue || p_data?.isSelected(name)),
+      ns.is('checked', modelValue || indeterminate || p_data?.isSelected(name)),
       ns.is('disabled', disabled || p_data?.disabled),
     ]"
     @tap.stop="onClick"
