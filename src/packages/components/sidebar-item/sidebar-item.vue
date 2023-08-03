@@ -2,7 +2,7 @@
   <view
     :class="[
       ns.b(),
-      ns.is('active', getParentExpose()?.isSelected(value)),
+      ns.is('active', sidebarProvide.isSelected(value)),
       ns.is('disabled', disabled),
       customClass,
     ]"
@@ -16,35 +16,42 @@
 </template>
 
 <script lang="ts" setup>
-import { getCurrentInstance, ref } from 'vue'
-import useNamespace from '../../core/useNamespace'
-import { isUndefined } from '../../utils'
+import { computed, inject, onMounted, ref, type Ref } from 'vue'
+import { defaultNamespace, useNamespace } from '../../core'
+import { isUndefined, noop } from '../../utils'
 import Badge from '../badge/badge.vue'
-import type { SidebarExposeData, SidebarValue } from '../sidebar/sidebar.vue'
+import type { SidebarProvideData, SidebarValue } from '../sidebar/sidebar.vue'
 import { sidebarItemEmits, sidebarItemProps } from './props'
+
+export interface SidebarItemInstance {
+  index: Ref<number>
+}
 
 const ns = useNamespace('sidebar-item')
 
 const props = defineProps(sidebarItemProps)
 const emit = defineEmits(sidebarItemEmits)
 
-const instance = getCurrentInstance()
+const sidebarProvide = inject<SidebarProvideData>(`${defaultNamespace}-sidebar-provide`, {
+  setChildren: noop,
+  onSelect: noop,
+  isSelected: noop,
+})
 
-const index = (instance?.parent?.proxy as any).$children.length as number // 默认以当前节点在父节点的添加顺序当初始值
-const value = ref<SidebarValue>(props.name ?? index)
-
-const getParentExpose = () => {
-  if (!instance) return
-  return instance.proxy?.$parent as unknown as SidebarExposeData | undefined
-}
+const index = ref<number>(0)
+const value = computed<SidebarValue>(() => props.name ?? index.value)
 
 const onSelect = () => {
   if (props.disabled) return
-  const parentExpose = getParentExpose()
-  if (!parentExpose) return
-  parentExpose.onSelect(value.value)
+  sidebarProvide.onSelect(value.value)
   emit('click', value.value)
 }
+
+onMounted(() => {
+  sidebarProvide.setChildren({
+    index,
+  })
+})
 </script>
 
 <style lang="scss" scoped>

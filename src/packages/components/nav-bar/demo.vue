@@ -6,7 +6,7 @@
   <pa-nav-bar :safe-area-inset-top="false">
     <view class="flex items-center justify-center height-full">
       <text>页面标题</text>
-      <pa-button class="m-0" height="54" block>按钮</pa-button>
+      <pa-button class="m-0" width="120" height="54" block>按钮</pa-button>
     </view>
   </pa-nav-bar>
 

@@ -1,6 +1,6 @@
 {
   "name": "papayaui",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "适用于uniapp的ui扩展库",
   "scripts": {
     "dev:app": "uni -p app",

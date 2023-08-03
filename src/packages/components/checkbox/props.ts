@@ -46,6 +46,10 @@ export const checkboxProps = {
    * 选中状态颜色
    */
   checkedColor: [String, Number] as PropType<CSSProperties['color']>,
+  /**
+   * 当前是否支持半选状态，一般用在全选操作中
+   */
+  indeterminate: Boolean,
 }
 
 export const checkboxEmits = {
