@@ -22,10 +22,14 @@
     <view :class="[ns.e('value'), valueClass]">
       <slot v-if="$slots.default" />
       <text v-else :selectable="selectable" :user-select="selectable">{{ value }}</text>
+
       <view v-if="errorMessage" :class="ns.e('error-message')" :style="{ textAlign: valueAlign }">
         {{ errorMessage }}
       </view>
     </view>
+
+    <text v-if="suffix" :class="ns.e('suffix')">{{ suffix }}</text>
+
     <slot v-if="$slots['right-icon'] && !isLink" name="right-icon" />
     <Icon v-if="isLink" :class="ns.e('icon-right')" name="right" size="18px" block />
   </view>

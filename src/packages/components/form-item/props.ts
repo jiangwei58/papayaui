@@ -1,7 +1,10 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import type { FormRuleItem } from '../../core/useForm'
+import { pick } from '../../utils'
+import { cellProps } from '../cell'
 
 export const formItemProps = {
+  ...pick(cellProps, ['suffix']),
   /**
    * 校验对应的字段名
    */

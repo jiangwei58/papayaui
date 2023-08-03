@@ -67,6 +67,10 @@ export const cellProps = {
     default: true,
   },
   /**
+   * 后缀内容
+   */
+  suffix: String,
+  /**
    * 根节点样式类
    */
   customClass: String,

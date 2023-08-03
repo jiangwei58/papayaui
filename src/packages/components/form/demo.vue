@@ -21,7 +21,7 @@
           is-link
           @click="onChangeGenderVisible"
         />
-        <pa-form-item prop="age" label="年龄" required>
+        <pa-form-item prop="age" label="年龄" suffix="岁" required>
           <pa-number-input v-model.number="formData.age" />
         </pa-form-item>
         <pa-form-item prop="object.text" label="对象值(如obj.text)">

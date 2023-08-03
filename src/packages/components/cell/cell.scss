@@ -34,9 +34,14 @@
     @include _setVar(textarea-color, _var(color-primary));
   }
 
+  &__suffix {
+    margin-left: _var(cell-suffix-margin-left, 5rpx);
+    color: _var(cell-suffix-color, inherit);
+  }
+
   &__icon-right {
     font-weight: bold;
-    margin-left: 8rpx;
+    margin-left: _var(cell-icon-right-margin-left, 8rpx);
     transition: transform 0.3s ease-in-out;
     transform: rotate(_var(cell-icon-right-rotate, 0));
   }

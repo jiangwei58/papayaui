@@ -14,6 +14,10 @@
     <pa-cell title="单元格" value="内容" is-link />
   </DocDemoBlock>
 
+  <DocDemoBlock title="后缀">
+    <pa-cell title="单元格" value="内容" suffix="%" />
+  </DocDemoBlock>
+
   <DocDemoBlock title="图标">
     <pa-cell title="单元格" value="内容" icon="search" />
   </DocDemoBlock>

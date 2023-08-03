@@ -3,6 +3,7 @@
   &__body {
     display: flex;
     align-items: center;
+    min-height: _var(cell-line-height, 24px);
     > input,
     > textarea {
       flex: 1;
