@@ -39,7 +39,17 @@ import Icon from '../icon/icon.vue'
 import { navBarEmits, navBarProps } from './props'
 
 const systemInfo = uni.getSystemInfoSync()
-const menuButtonInfo = uni.getMenuButtonBoundingClientRect()
+let menuButtonInfo: UniApp.GetMenuButtonBoundingClientRectRes = {
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  width: 87,
+  height: 32,
+}
+// #ifdef MP
+menuButtonInfo = uni.getMenuButtonBoundingClientRect()
+// #endif
 
 const ns = useNamespace('nav-bar')
 

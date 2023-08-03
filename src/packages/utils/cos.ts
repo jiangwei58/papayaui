@@ -1,6 +1,8 @@
+// #ifndef H5
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import WeChatCOS from 'cos-wx-sdk-v5'
+// #endif
 
 export interface PaCOSConfig {
   /**

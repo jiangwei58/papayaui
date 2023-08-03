@@ -5,14 +5,16 @@
 </template>
 
 <script lang="ts" setup>
-import { toRefs } from 'vue'
-import useNamespace from '../../core/useNamespace'
+import { provide, ref, toRefs } from 'vue'
+import { useNamespace } from '../../core'
 import { useSelect } from '../../core/useSelect'
+import type { SidebarItemInstance } from '../sidebar-item/sidebar-item.vue'
 import { sidebarEmits, sidebarProps } from './props'
 
 export type SidebarValue = string | number
 
-export interface SidebarExposeData {
+export interface SidebarProvideData {
+  setChildren: (node: SidebarItemInstance) => void
   onSelect: (value: SidebarValue) => void
   isSelected: (value: SidebarValue) => boolean
 }
@@ -23,8 +25,14 @@ const props = defineProps(sidebarProps)
 const emit = defineEmits(sidebarEmits)
 
 const { modelValue } = toRefs(props)
+const children = ref<SidebarItemInstance[]>([])
 
 const { onSelect, isSelected } = useSelect({ defaultValue: modelValue })
+
+const setChildren = (node: SidebarItemInstance) => {
+  node.index.value = children.value.length
+  children.value.push(node as any)
+}
 
 const onChildSelect = (value: SidebarValue) => {
   onSelect(value)
@@ -32,7 +40,8 @@ const onChildSelect = (value: SidebarValue) => {
   emit('change', value)
 }
 
-defineExpose<SidebarExposeData>({
+provide<SidebarProvideData>(`${ns.b()}-provide`, {
+  setChildren,
   onSelect: onChildSelect,
   isSelected,
 })
