@@ -1,5 +1,4 @@
 import { defineConfig } from 'vite'
-import MarkdownTransform from './plugins/markdown-transform'
 
 export default defineConfig({
   server: {
@@ -8,5 +7,4 @@ export default defineConfig({
       allow: ['..'],
     },
   },
-  plugins: [MarkdownTransform()],
 })

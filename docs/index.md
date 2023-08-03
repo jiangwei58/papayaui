@@ -3,15 +3,15 @@
 layout: home
 
 hero:
-  name: 'Papaya'
-  text: '基于 Vue 3 开发'
-  tagline: 适用于uniapp的ui框架
+  name: 'Papayaui'
+  text: 'Document Site'
+  tagline: My great project tagline
   actions:
     - theme: brand
-      text: 指南
+      text: Markdown Examples
       link: /markdown-examples
     - theme: alt
-      text: 组件
+      text: API Examples
       link: /api-examples
 
 features:
