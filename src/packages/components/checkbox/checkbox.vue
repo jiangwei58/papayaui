@@ -17,7 +17,7 @@
       <slot />
     </view>
     <view :class="ns.e('icon')">
-      <IconComponent name="success" size="0.8em" block />
+      <IconComponent :name="indeterminate ? 'half-check' : 'success'" size="0.8em" block />
     </view>
     <view
       v-if="labelPosition === 'right'"

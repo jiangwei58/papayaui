@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "8227940",
+      "name": "半选",
+      "font_class": "half-check",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    },
+    {
       "icon_id": "399099",
       "name": "camera",
       "font_class": "camera-fill",
