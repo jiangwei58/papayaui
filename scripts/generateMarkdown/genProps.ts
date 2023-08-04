@@ -147,7 +147,7 @@ export async function main({ sourceDirPath, targetDirPath }: PluginOptions) {
         `$1\n\n${propsText}\n\n$2`,
       )
       writeFileSync(`${targetDirPath}/${componentName}.md`, newMdContent, { encoding: 'utf-8' })
-      console.log(`写入 ${componentName} props 完成`)
+      console.log(`===写入 ${componentName} props 完成===`)
     } catch (e) {
       console.error(componentName, 'gen props error', e)
     }

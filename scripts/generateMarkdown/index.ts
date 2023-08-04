@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url'
 import { main as genPropsMain } from './genProps'
 import { main as initMain } from './init'
 import { main as genEventMain } from './genEvent'
+import { main as genSlotMain } from './genSlot'
 
 export interface PluginOptions {
   sourceDirPath: string
@@ -39,6 +40,8 @@ async function main() {
   await genPropsMain(params)
 
   await genEventMain(params)
+
+  await genSlotMain(params)
 
   console.log('generate completed')
 }

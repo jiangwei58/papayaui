@@ -19,9 +19,14 @@ function initTsProject() {
 function getEvent(sourceFile: SourceFile, componentDirName: string) {
   const eventList: EventItem[] = []
   const componentName = getCamelCaseName(componentDirName, true)
-  sourceFile
-    .getTypeAlias(`${componentName}Emit`)
-    ?.getType()
+  const typeAliasDeclaration = sourceFile.getTypeAlias(`${componentName}Emits`)
+  if (!typeAliasDeclaration) {
+    console.warn(`${componentName}Emits 不存在`)
+    return eventList
+  }
+
+  typeAliasDeclaration
+    .getType()
     .getProperties()
     .forEach((property) => {
       eventList.push({
@@ -75,7 +80,7 @@ export async function main({ sourceDirPath, targetDirPath }: PluginOptions) {
         `$1\n\n${propsText}\n\n$2`,
       )
       writeFileSync(`${targetDirPath}/${componentDirName}.md`, newMdContent, { encoding: 'utf-8' })
-      console.log(`写入 ${componentDirName} event 完成`)
+      console.log(`===写入 ${componentDirName} event 完成===`)
     }
   } catch (e) {
     console.error('gen event error', e)
