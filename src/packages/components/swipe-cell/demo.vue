@@ -20,7 +20,7 @@
     </pa-swipe-cell>
   </DocDemoBlock>
   <DocDemoBlock title="多个按钮">
-    <pa-swipe-cell :options="options2">
+    <pa-swipe-cell :options="options2" @click="onClick">
       <pa-cell title="单元格" value="内容" />
     </pa-swipe-cell>
   </DocDemoBlock>
@@ -63,6 +63,14 @@ const options2: SwipeCellOption[] = [
 
 const onOpen = () => {
   console.log('open')
+}
+
+const onClick = (name: string, index: number, item: SwipeCellOption) => {
+  uni.showToast({
+    title: `点击了 ${item.text}`,
+    icon: 'none',
+  })
+  console.log(name, index, item)
 }
 </script>
 

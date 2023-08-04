@@ -43,6 +43,7 @@ export const swipeCellEmits = ['open', 'close', 'click']
 export type SwipeCellOption = {
   text: string
   style?: Partial<{ width: string; backgroundColor: CSSProperties['background-color'] }>
+  [key: string]: any
 }
 
 export type SwipeCellStatus = 'open' | 'close'

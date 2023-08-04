@@ -91,7 +91,7 @@ export default defineComponent({
     }
 
     const onBtnClick = (index: number) => {
-      emit('click', props.name, index)
+      emit('click', props.name, index, props.options[index])
     }
 
     onMounted(() => {
