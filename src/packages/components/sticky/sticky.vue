@@ -11,13 +11,13 @@ import type { CSSProperties } from 'vue'
 import { computed, getCurrentInstance, nextTick, onMounted, ref } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { useRect } from '../../hooks'
-import { StickyProps } from './props'
+import { stickyProps } from './props'
 
 const instance = getCurrentInstance()
 
 const ns = useNamespace('sticky')
 
-const props = defineProps(StickyProps)
+const props = defineProps(stickyProps)
 
 const elId = 'stickyId' + new Date().getTime().toString()
 let _contentObserver: UniApp.IntersectionObserver | undefined = void 0

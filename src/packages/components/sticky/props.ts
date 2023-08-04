@@ -1,6 +1,6 @@
 import type { ExtractPropTypes } from 'vue'
 
-export const StickyProps = {
+export const stickyProps = {
   /**
    * 吸顶容器到顶部某个距离的时候，进行吸顶，在H5平台，NavigationBar为44px
    */
@@ -36,4 +36,4 @@ export const StickyProps = {
   },
 }
 
-export type StickyProps = ExtractPropTypes<typeof StickyProps>
+export type StickyProps = ExtractPropTypes<typeof stickyProps>

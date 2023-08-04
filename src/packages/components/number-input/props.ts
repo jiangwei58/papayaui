@@ -3,6 +3,9 @@ import type { EventDetail } from '../../types'
 import { isObject, isString } from '../../utils'
 
 export const numberInputProps = {
+  /**
+   * 输入框值
+   */
   modelValue: {
     type: [String, Number],
     default: '',

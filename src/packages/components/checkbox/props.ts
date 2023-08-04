@@ -60,4 +60,4 @@ export const checkboxEmits = {
 export type CheckboxValue = string | number | boolean
 
 export type CheckboxProps = ExtractPropTypes<typeof checkboxProps>
-export type CheckboxEmit = typeof checkboxEmits
+export type CheckboxEmits = typeof checkboxEmits

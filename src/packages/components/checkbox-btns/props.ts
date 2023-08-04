@@ -81,4 +81,4 @@ export const checkboxButtonsEmits = {
 }
 
 export type CheckboxButtonsProps = ExtractPropTypes<typeof checkboxButtonsProps>
-export type CheckboxButtonsEmit = typeof checkboxButtonsEmits
+export type CheckboxButtonsEmits = typeof checkboxButtonsEmits

@@ -126,4 +126,4 @@ export const buttonEmits = {
 }
 
 export type ButtonProps = ExtractPropTypes<typeof buttonProps>
-export type ButtonEmit = typeof buttonEmits
+export type ButtonEmits = typeof buttonEmits

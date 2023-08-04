@@ -13,9 +13,7 @@ export const datePickerProps = {
   modelValue: Date,
   /**
    * 选项类型，由选项组成数组，数据顺序代表排序顺序
-   * ```
-   * year: 年, month: 月, day: 日, hour: 小时, minute: 分钟
-   * ```
+   * @argument year: 年, month: 月, day: 日, hour: 小时, minute: 分钟
    * @default - ['year', 'month', 'day']
    */
   columnsType: Array as PropType<DatePickerColumnType[]>,
@@ -103,4 +101,4 @@ export const datePickerEmits = {
 export type ColumnItem = string | Record<string, any>
 
 export type DatePickerProps = ExtractPropTypes<typeof datePickerProps>
-export type datePickerEmits = typeof datePickerEmits
+export type DatePickerEmits = typeof datePickerEmits
