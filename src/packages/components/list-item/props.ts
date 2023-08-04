@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, CSSProperties, PropType } from 'vue'
 
 export const listItemProps = {
   /**
@@ -19,6 +19,14 @@ export const listItemProps = {
    * ```
    */
   useSlot: Boolean,
+  /**
+   *  自定义样式类
+   */
+  customClass: String,
+  /**
+   *  自定义样式
+   */
+  customStyle: [String, Object] as PropType<string | CSSProperties>,
 }
 
 export const listItemEmits = {

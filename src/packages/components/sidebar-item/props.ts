@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType, SVGAttributes } from 'vue'
+import type { ExtractPropTypes, PropType, CSSProperties } from 'vue'
 import { isNumber, isString, pick } from '../../utils'
 import { badgeProps } from '../badge/props'
 import type { SidebarValue } from '../sidebar/props'
@@ -28,7 +28,7 @@ export const sidebarItemProps = {
   /**
    * 根节点样式
    */
-  customStyle: [String, Object] as PropType<SVGAttributes['style']>,
+  customStyle: [String, Object] as PropType<string | CSSProperties>,
 }
 
 export const sidebarItemEmits = {

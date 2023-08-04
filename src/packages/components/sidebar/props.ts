@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType, SVGAttributes } from 'vue'
+import type { ExtractPropTypes, PropType, CSSProperties } from 'vue'
 import { isNumber, isString } from '../../utils'
 
 export const sidebarProps = {
@@ -13,7 +13,7 @@ export const sidebarProps = {
   /**
    * 根节点样式
    */
-  customStyle: [String, Object] as PropType<SVGAttributes['style']>,
+  customStyle: [String, Object] as PropType<string | CSSProperties>,
 }
 
 export const sidebarEmits = {

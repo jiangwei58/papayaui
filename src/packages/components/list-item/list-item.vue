@@ -1,6 +1,7 @@
 <template>
   <view
-    :class="[ns.b(), ns.is('selected', selected)]"
+    :class="[ns.b(), ns.is('selected', selected), customClass]"
+    :style="customStyle"
     :hover-class="ns.m('hover')"
     @tap="emit('click')"
   >

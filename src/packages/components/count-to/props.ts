@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType, SVGAttributes } from 'vue'
+import type { ExtractPropTypes, PropType, CSSProperties } from 'vue'
 import { isNumber, isObject } from '../../utils'
 
 export const countToProps = {
@@ -52,7 +52,7 @@ export const countToProps = {
   /**
    *  自定义style
    */
-  customStyle: [String, Object] as PropType<SVGAttributes['style']>,
+  customStyle: [String, Object] as PropType<string | CSSProperties>,
 }
 
 export const countToEmits = {

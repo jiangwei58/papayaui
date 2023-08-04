@@ -31,6 +31,8 @@
               : isSelected(item[_fieldNames.value])
           "
           :use-slot="!!$slots.default"
+          :custom-class="itemClass"
+          :custom-style="itemStyle"
           @click="onSelect(item, index)"
         >
           <slot v-if="$slots.default" :item="item" />

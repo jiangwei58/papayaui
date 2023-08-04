@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, CSSProperties, PropType } from 'vue'
 import type { UseListProps } from '../../core/useList'
 import { isArray, isNumber, isObject, isString, pick } from '../../utils'
 import { bottomPopupEmits, bottomPopupProps } from '../bottom-popup/props'
@@ -84,6 +84,14 @@ export const pickerPopupProps = {
    * 确定后是否重置数据
    */
   resetAfterConfirm: Boolean,
+  /**
+   * 列表项的样式类
+   */
+  itemClass: String,
+  /**
+   * 列表项的样式
+   */
+  itemStyle: [String, Object] as PropType<string | CSSProperties>,
 }
 
 export const pickerPopupEmits = {

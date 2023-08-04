@@ -26,6 +26,8 @@
           :text="item[labelKey]"
           :selected="isSelected(item[valueKey])"
           :use-slot="!!$slots.default"
+          :custom-class="itemClass"
+          :custom-style="itemStyle"
           @click="onSelect(item[valueKey])"
         >
           <slot v-if="$slots.default" :item="item" />

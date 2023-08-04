@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, CSSProperties, PropType } from 'vue'
 import type { TreeNode, UseTreeFieldNames } from '../../core/useTree'
 import { defaultFieldNames } from '../../core/useTree'
 import { isArray, isObject, pick } from '../../utils'
@@ -85,6 +85,14 @@ export const cascaderProps = {
    * 是否允许空值，只在显示底部操作按钮时有效（通常使用场景是未选中值时允许确认）
    */
   allowEmpty: Boolean,
+  /**
+   * 列表项的样式类
+   */
+  itemClass: String,
+  /**
+   * 列表项的样式
+   */
+  itemStyle: [String, Object] as PropType<string | CSSProperties>,
 }
 
 export const cascaderEmits = {
