@@ -4,6 +4,10 @@ unpackage/
 dist/
 wxcomponents/
 
+docs/.vitepress/cache/
+docs/node_modules/
+docs/public/
+
 # local env files
 .env.local
 .env.*.local

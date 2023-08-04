@@ -1,0 +1,18 @@
+{
+  "name": "doc",
+  "version": "1.0.0",
+  "description": "文档网站",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^4.2.1",
+    "vitepress": "^1.0.0-alpha.65"
+  }
+}
