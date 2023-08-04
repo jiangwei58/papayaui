@@ -39,8 +39,8 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: '首页', link: '/' },
-      { text: '组件', link: '/README.md' },
+      { text: '首页', link: '/README.md' },
+      { text: '组件', link: getComponents()[0].items?.[0].link ?? '' },
     ],
 
     sidebar: [
@@ -49,13 +49,6 @@ export default defineConfig({
         items: [{ text: '安装', link: '/README.md' }],
       },
       ...getComponents(),
-      {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' },
-        ],
-      },
     ],
 
     socialLinks: [{ icon: 'github', link: 'https://github.com/vuejs/vitepress' }],

@@ -9,7 +9,7 @@
   flex: 1;
   width: 360px;
   max-height: 640px;
-  border: none;
+  border: 1px solid var(--vp-c-divider);
   border-radius: 20px;
 }
 </style>
