@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { readFile, readdir } from 'node:fs/promises'
+import { resolve } from 'node:path'
 import { PluginOptions } from '.'
 
 interface CodeItem {
@@ -48,7 +49,7 @@ export async function main({ sourceDirPath, targetDirPath }: PluginOptions) {
     for (const componentDirName of files) {
       if (componentDirName === 'index.ts') continue
 
-      const filePath = `${sourceDirPath}/${componentDirName}/demo.vue`
+      const filePath = resolve(sourceDirPath, `./${componentDirName}/demo.vue`)
       const fileCode = await readFile(filePath, { encoding: 'utf-8' }).catch(() => null)
       if (!fileCode) continue
 

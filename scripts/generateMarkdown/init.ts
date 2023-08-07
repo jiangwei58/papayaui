@@ -1,4 +1,5 @@
 import { access, readdir, writeFile } from 'fs/promises'
+import { resolve } from 'path'
 import { PluginOptions, getCamelCaseName } from '.'
 
 export const getTag = (tagName: string, start = true) => {
@@ -10,7 +11,7 @@ export async function main({ sourceDirPath, targetDirPath }: PluginOptions) {
     const files = await readdir(sourceDirPath)
     for (const componentName of files) {
       if (componentName === 'index.ts') continue
-      const path = `${targetDirPath}/${componentName}.md`
+      const path = resolve(targetDirPath, `./${componentName}.md`)
       await access(path).catch(() => {
         const markdownText =
           `# ${getCamelCaseName(componentName, true)}\n\n` +

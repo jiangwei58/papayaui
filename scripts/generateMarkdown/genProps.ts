@@ -1,6 +1,7 @@
 import assert from 'node:assert'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { readFile, readdir } from 'node:fs/promises'
+import { resolve } from 'node:path'
 import { Node, Project, PropertyAssignment, SourceFile } from 'ts-morph'
 import ts from 'typescript'
 import { PluginOptions, getCamelCaseName } from '.'
@@ -129,7 +130,7 @@ export async function main({ sourceDirPath, targetDirPath }: PluginOptions) {
     // if (componentName !== 'number-input') continue
 
     try {
-      const filePath = `${sourceDirPath}/${componentName}/props.ts`
+      const filePath = resolve(sourceDirPath, `./${componentName}/props.ts`)
       const fileCode = await readFile(filePath, { encoding: 'utf-8' }).catch(() => null)
       if (!fileCode) continue
 
