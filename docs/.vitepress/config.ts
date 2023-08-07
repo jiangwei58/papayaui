@@ -1,5 +1,6 @@
 import { DefaultTheme, defineConfig } from 'vitepress'
 import pageConfig from '../../src/pages.json'
+import packageJSON from '../../package.json'
 
 const getComponents = () => {
   const group: Record<string, { title: string; index: number }> = {
@@ -39,18 +40,18 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: '首页', link: '/README.md' },
+      { text: '首页', link: '/' },
       { text: '组件', link: getComponents()[0].items?.[0].link ?? '' },
     ],
 
     sidebar: [
       {
         text: '开发指南',
-        items: [{ text: '安装', link: '/README.md' }],
+        items: [{ text: '安装', link: '/guide/install.md' }],
       },
       ...getComponents(),
     ],
 
-    socialLinks: [{ icon: 'github', link: 'https://github.com/vuejs/vitepress' }],
+    socialLinks: [{ icon: 'github', link: packageJSON.repository.url }],
   },
 })

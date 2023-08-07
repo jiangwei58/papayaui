@@ -5,7 +5,7 @@ import path from 'path'
 const getPackageJson = () => {
   const filePath = path.resolve(url.fileURLToPath(import.meta.url), '../../package.json')
   const dataStr = fs.readFileSync(filePath).toString()
-  const json = JSON.parse(dataStr)
+  const json: Record<string, any> = JSON.parse(dataStr)
   json.main = 'index.ts'
   for (const key in json.dependencies) {
     if (!['async-validator', 'dayjs', 'cos-wx-sdk-v5'].includes(key)) {
@@ -18,7 +18,7 @@ const getPackageJson = () => {
   return json
 }
 
-const writePackage = (packageJSON) => {
+const writePackage = (packageJSON: Record<string, any>) => {
   const writeFilePath = path.resolve(
     url.fileURLToPath(import.meta.url),
     '../../src/packages/package.json',

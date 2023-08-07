@@ -1,9 +1,10 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { main as genPropsMain } from './genProps'
-import { main as initMain } from './init'
+import { main as genCodesMain } from './genCodes'
 import { main as genEventMain } from './genEvent'
+import { main as genPropsMain } from './genProps'
 import { main as genSlotMain } from './genSlot'
+import { main as initMain } from './init'
 
 export interface PluginOptions {
   sourceDirPath: string
@@ -36,6 +37,8 @@ async function main() {
   }
 
   await initMain(params)
+
+  await genCodesMain(params)
 
   await genPropsMain(params)
 

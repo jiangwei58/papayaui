@@ -8,7 +8,7 @@ const main = () => {
 
   dataStr = dataStr
     .replace(`module 'vue'`, `module '@vue/runtime-core'`)
-    .replaceAll('../src/packages', 'papayaui')
+    .replace(/\.\.\/src\/packages/g, 'papayaui')
 
   const writeFilePath = path.resolve(
     url.fileURLToPath(import.meta.url),

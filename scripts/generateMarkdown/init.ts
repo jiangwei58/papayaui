@@ -1,5 +1,5 @@
 import { access, readdir, writeFile } from 'fs/promises'
-import { PluginOptions } from '.'
+import { PluginOptions, getCamelCaseName } from '.'
 
 export const getTag = (tagName: string, start = true) => {
   return `<!--${tagName} ${start ? 'start' : 'end'}-->`
@@ -13,7 +13,8 @@ export async function main({ sourceDirPath, targetDirPath }: PluginOptions) {
       const path = `${targetDirPath}/${componentName}.md`
       await access(path).catch(() => {
         const markdownText =
-          `# ${componentName}\n\n` +
+          `# ${getCamelCaseName(componentName, true)}\n\n` +
+          `## 示例\n\n${getTag('codes')}\n${getTag('codes', false)}\n\n` +
           `## Props\n\n${getTag('props')}\n${getTag('props', false)}\n\n` +
           `## Event\n\n${getTag('event')}\n${getTag('event', false)}\n\n` +
           `## Slot\n\n${getTag('slot')}\n${getTag('slot', false)}\n\n`

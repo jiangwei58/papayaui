@@ -42,7 +42,6 @@ export async function main({ sourceDirPath, targetDirPath }: PluginOptions) {
     const files = await readdir(sourceDirPath)
     for (const componentDirName of files) {
       if (componentDirName === 'index.ts') continue
-      // if (componentDirName !== 'popup') continue
 
       const filePath = `${sourceDirPath}/${componentDirName}/${componentDirName}.vue`
       const fileCode = await readFile(filePath, { encoding: 'utf-8' }).catch(() => null)
