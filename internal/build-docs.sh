@@ -10,4 +10,6 @@ mv ./dist/build/h5/* ./docs/public/
 
 cd ./docs
 
+pnpm install
+
 npm run docs:build
