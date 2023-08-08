@@ -1,6 +1,6 @@
 set -e
 
-npm run build:h5
+npm run build:h5-simulator
 
 mkdir -p ./docs/public
 
