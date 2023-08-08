@@ -35,7 +35,8 @@ const getComponents = () => {
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: 'Papayaui',
+  base: `/${packageJSON.name}/`,
+  title: packageJSON.name[0].toUpperCase() + packageJSON.name.slice(1),
   description: 'Document Site',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
