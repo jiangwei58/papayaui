@@ -35,7 +35,7 @@ export default {
           if (findPage) {
             const simulatorEl = document.querySelector('.doc-simulator') as HTMLIFrameElement
             simulatorEl.src = simulatorEl.src.replace(
-              /^(.*\/index\.html)(#\/)?.*$/,
+              /^(.*\/[a-z]*\.html)(#\/)?.*$/,
               `$1#/${findPage.path}`,
             )
           }

@@ -9,7 +9,7 @@ import { onMounted, ref } from 'vue'
 const simulatorRef = ref<HTMLIFrameElement>()
 
 const { site } = useData()
-const src = `${site.value.base}index.html`
+const src = `${site.value.base}mobile.html`
 
 const hideScroller = (el: HTMLIFrameElement) => {
   el.onload = () => {
