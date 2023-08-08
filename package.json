@@ -33,6 +33,7 @@
     "build:quickapp-webview-union": "uni build -p quickapp-webview-union",
     "gen:docs": "tsx scripts/generateMarkdown/index.ts",
     "build:package": "bash internal/build.sh",
+    "build:docs": "bash internal/build-docs.sh",
     "release": "bash internal/publish.sh",
     "test": "vitest",
     "type-check": "vue-tsc --noEmit"
