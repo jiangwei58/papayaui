@@ -2,6 +2,7 @@
   "name": "papayaui",
   "version": "0.1.17",
   "description": "适用于uniapp的ui扩展库",
+  "packageManager": "pnpm@8.6.0",
   "scripts": {
     "dev:app": "uni -p app",
     "dev:custom": "uni -p",
