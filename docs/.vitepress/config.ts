@@ -48,7 +48,23 @@ export default defineConfig({
     sidebar: [
       {
         text: '开发指南',
-        items: [{ text: '安装', link: '/guide/install.md' }],
+        items: [
+          { text: '安装', link: '/guide/install.md' },
+          { text: '定制主题', link: '/guide/theme.md' },
+        ],
+      },
+      {
+        text: '内置样式',
+        items: [
+          { text: '介绍', link: '/inbuiltStyle/introduction.md' },
+          { text: 'Flex布局', link: '/inbuiltStyle/flex.md' },
+          { text: 'Grid布局', link: '/inbuiltStyle/grid.md' },
+          { text: 'Margin和Padding', link: '/inbuiltStyle/margin.md' },
+          { text: 'Font 字体', link: '/inbuiltStyle/font.md' },
+          { text: 'TextAlign 文本对齐', link: '/inbuiltStyle/textAlign.md' },
+          { text: '文本行数限制', link: '/inbuiltStyle/ellipsis.md' },
+          { text: 'Border 边框', link: '/inbuiltStyle/border.md' },
+        ],
       },
       ...getComponents(),
     ],
