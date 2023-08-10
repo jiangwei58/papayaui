@@ -9,8 +9,13 @@ page {
   }
 }
 
-.color-primary {
-  color: _var(color-primary);
+@each $name in primary, success, warning, danger, error {
+  .color-#{$name} {
+    color: _var(color-#{$name});
+  }
+  .bg-#{$name} {
+    background-color: _var(color-#{$name});
+  }
 }
 
 @each $name in white, gray {
@@ -23,8 +28,4 @@ page {
   .text-#{'' + $name} {
     color: _var(color-#{$name});
   }
-}
-
-.text-red {
-  color: _var(color-danger);
 }
