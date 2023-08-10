@@ -5,6 +5,7 @@ import { h, onMounted } from 'vue'
 import Simulator from './Simulator.vue'
 import pageConfig from '../../../src/pages.json'
 import './style.css'
+import '../../../src/packages/styles/index.scss'
 
 export default {
   extends: Theme,
