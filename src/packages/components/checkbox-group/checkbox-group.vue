@@ -40,7 +40,7 @@ const onChildSelect = (value: CheckboxValue) => {
   emit('change', selectedValues.value as CheckboxValue[], props.name)
 }
 
-provide<CheckboxProvideData>('checkboxData', {
+provide<CheckboxProvideData>(`${ns.b()}-provide`, {
   disabled: props.disabled,
   onSelect: onChildSelect,
   isSelected,

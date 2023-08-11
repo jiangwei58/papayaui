@@ -33,7 +33,7 @@
 <script lang="ts" setup>
 import type { ComponentInternalInstance } from 'vue'
 import { inject } from 'vue'
-import useNamespace from '../../core/useNamespace'
+import useNamespace, { defaultNamespace } from '../../core/useNamespace'
 import { noop } from '../../utils'
 import type { CheckboxProvideData } from '../checkbox-group/checkbox-group.vue'
 import IconComponent from '../icon/icon.vue'
@@ -49,7 +49,10 @@ const ns = useNamespace('checkbox')
 const props = defineProps(checkboxProps)
 const emit = defineEmits(checkboxEmits)
 
-const p_data = inject<CheckboxProvideData>('checkboxData', { onSelect: noop, isSelected: noop })
+const p_data = inject<CheckboxProvideData>(`${defaultNamespace}-checkbox-group-provide`, {
+  onSelect: noop,
+  isSelected: noop,
+})
 
 const onClick = () => {
   if (props.disabled || p_data.disabled) return

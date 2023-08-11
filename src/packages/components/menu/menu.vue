@@ -17,7 +17,7 @@
 <script lang="ts" setup>
 import type { Ref } from 'vue'
 import { computed, getCurrentInstance, onMounted, provide, ref } from 'vue'
-import useNamespace, { defaultNamespace } from '../../core/useNamespace'
+import useNamespace from '../../core/useNamespace'
 import { useRect } from '../../hooks'
 import type { MenuItemInstance } from '../menu-item/menu-item.vue'
 import type { MenuProps } from './props'
@@ -76,7 +76,7 @@ const onShowMenu = (index: number) => {
   })
 }
 
-provide(`${defaultNamespace}-menu-data`, {
+provide(`${ns.b()}-provide`, {
   props,
   setChildren,
   isMenuItemShow,

@@ -31,7 +31,7 @@ import { toRefs } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { useSelect } from '../../core/useSelect'
 import { getUnitValue } from '../../utils'
-import type { CheckboxItem, CheckboxButtonValue } from './props'
+import type { CheckboxButtonValue, CheckboxItem } from './props'
 import { checkboxButtonsEmits, checkboxButtonsProps } from './props'
 
 const ns = useNamespace('checkbox')

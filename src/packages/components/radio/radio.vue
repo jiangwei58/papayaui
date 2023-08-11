@@ -33,7 +33,7 @@
 <script lang="ts" setup>
 import type { ComponentInternalInstance } from 'vue'
 import { inject } from 'vue'
-import useNamespace from '../../core/useNamespace'
+import useNamespace, { defaultNamespace } from '../../core/useNamespace'
 import { noop } from '../../utils'
 import IconComponent from '../icon/icon.vue'
 import type { RadioProvideData } from '../radio-group/radio-group.vue'
@@ -49,7 +49,10 @@ const ns = useNamespace('radio')
 const props = defineProps(radioProps)
 const emit = defineEmits(radioEmits)
 
-const p_data = inject<RadioProvideData>('radioData', { onSelect: noop, isSelected: noop })
+const p_data = inject<RadioProvideData>(`${defaultNamespace}-radio-group-provide`, {
+  onSelect: noop,
+  isSelected: noop,
+})
 
 const onClick = () => {
   if (props.disabled || p_data.disabled) return

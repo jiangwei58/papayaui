@@ -32,7 +32,7 @@ const onChildSelect = (value: RadioValue) => {
   emit('change', value, props.name)
 }
 
-provide<RadioProvideData>('radioData', {
+provide<RadioProvideData>(`${ns.b()}-provide`, {
   disabled: props.disabled,
   onSelect: onChildSelect,
   isSelected,

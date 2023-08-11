@@ -1,5 +1,5 @@
-import type { ConfigType } from 'dayjs'
-import dayjs, { Dayjs } from 'dayjs'
+import type { ConfigType, Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 import { computed, reactive, ref, watch } from 'vue'
 import type { IncludeRefs } from '../../types'
 

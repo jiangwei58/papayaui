@@ -60,7 +60,7 @@ const instance = getCurrentInstance()
 
 const { title, options, modelValue } = toRefs(props)
 
-const menuProvide = inject<MenuProvideData>(`${defaultNamespace}-menu-data`, {
+const menuProvide = inject<MenuProvideData>(`${defaultNamespace}-menu-provide`, {
   props: {
     direction: 'down',
     zIndex: 10,
