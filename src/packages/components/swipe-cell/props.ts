@@ -1,11 +1,12 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { ButtonProps } from '../button'
 
 export const swipeCellProps = {
   /**
    * 标识名
    */
   name: {
-    type: String,
+    type: [String, Number],
     default: '',
   },
   /**
@@ -42,7 +43,12 @@ export const swipeCellEmits = ['open', 'close', 'click']
 
 export type SwipeCellOption = {
   text: string
-  style?: Partial<{ width: string; backgroundColor: CSSProperties['background-color'] }>
+  style?: Partial<{
+    width: string
+    backgroundColor: CSSProperties['background-color']
+    borderRadius: ButtonProps['round']
+  }>
+  click?: (name: SwipeCellProps['name']) => void
   [key: string]: any
 }
 

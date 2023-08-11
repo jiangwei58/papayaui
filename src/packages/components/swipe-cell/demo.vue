@@ -20,7 +20,7 @@
     </pa-swipe-cell>
   </DocDemoBlock>
   <DocDemoBlock title="多个按钮">
-    <pa-swipe-cell :options="options2" @click="onClick">
+    <pa-swipe-cell name="name" :options="options2" @click="onClick">
       <pa-cell title="单元格" value="内容" />
     </pa-swipe-cell>
   </DocDemoBlock>
@@ -52,12 +52,18 @@
 
 <script lang="ts" setup>
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import type { SwipeCellOption } from './props'
+import type { SwipeCellOption, SwipeCellProps } from './props'
 
 const options: SwipeCellOption[] = [{ text: '删除' }]
 
 const options2: SwipeCellOption[] = [
-  { text: '收藏', style: { backgroundColor: 'var(--pa-color-primary)' } },
+  {
+    text: '收藏',
+    style: { backgroundColor: 'var(--pa-color-primary)' },
+    click: (name: SwipeCellProps['name']) => {
+      console.log('当前点击的name:', name)
+    },
+  },
   { text: '删除' },
 ]
 

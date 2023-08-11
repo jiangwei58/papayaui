@@ -22,7 +22,7 @@
             type="danger"
             :width="item.style && item.style.width ? getUnitValue(item.style.width) : '60px'"
             height="100%"
-            round="0"
+            :round="item.style?.borderRadius"
             :custom-style="{
               backgroundColor: item.style
                 ? item.style.backgroundColor
@@ -91,7 +91,11 @@ export default defineComponent({
     }
 
     const onBtnClick = (index: number) => {
-      emit('click', props.name, index, props.options[index])
+      const currentOption = props.options[index]
+      if (typeof currentOption.click === 'function') {
+        currentOption.click(props.name)
+      }
+      emit('click', props.name, index, currentOption)
     }
 
     onMounted(() => {
