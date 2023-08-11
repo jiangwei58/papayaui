@@ -22,7 +22,7 @@
             type="danger"
             :width="item.style && item.style.width ? getUnitValue(item.style.width) : '60px'"
             height="100%"
-            :round="item.style?.borderRadius"
+            :round="item.style?.borderRadius ?? '0'"
             :custom-style="{
               backgroundColor: item.style
                 ? item.style.backgroundColor
