@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import type { CSSProperties, Ref } from 'vue'
+import { computed, watch, type CSSProperties, type Ref } from 'vue'
 import { getCurrentInstance, inject, onMounted, ref, toRefs } from 'vue'
 import useNamespace, { defaultNamespace } from '../../core/useNamespace'
 import { useRect } from '../../hooks'
@@ -68,11 +68,13 @@ const { name, disabled } = toRefs(props)
 const _index = ref<number>(0)
 
 const collapseProvide = inject<CollapseProvideData>(`${defaultNamespace}-collapse-provide`, {
+  modelValue: ref([]),
   setChildren: noop,
   onChildExpand: noop,
 })
 
-const expanded = ref(false)
+const itemId = computed(() => name?.value ?? _index.value)
+const expanded = computed(() => collapseProvide.modelValue.value.includes(itemId.value))
 const wrapperAnimation = ref<CSSProperties>()
 
 const getRect = () => {
@@ -81,12 +83,9 @@ const getRect = () => {
 }
 
 const toggle = async (show = !expanded.value) => {
-  collapseProvide.onChildExpand(_index.value, show)
-  expanded.value = show
-
   const rect = await getRect()
   if (!rect) return
-  const height = expanded.value ? rect.height : 0
+  const height = show ? rect.height : 0
 
   const animation = uni.createAnimation({
     timingFunction: 'ease-in-out',
@@ -99,6 +98,7 @@ const toggle = async (show = !expanded.value) => {
 
 const onClick = () => {
   if (props.disabled || props.readonly) return
+  collapseProvide.onChildExpand(itemId.value, !expanded.value)
   toggle()
 }
 
@@ -112,6 +112,13 @@ onMounted(() => {
       disabled,
       toggle,
     })
+    toggle(expanded.value)
+  }
+})
+
+watch(expanded, (newVal, oldVal) => {
+  if (newVal !== oldVal) {
+    toggle(newVal)
   }
 })
 

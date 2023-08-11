@@ -6,7 +6,7 @@ export const collapseProps = {
   /**
    * 当前展开面板的 name
    */
-  modelValue: [String, Number] as PropType<CollapseItemValue | CollapseItemValue[]>,
+  modelValue: [String, Number, Array] as PropType<CollapseItemValue | CollapseItemValue[]>,
   /**
    * 是否开启手风琴模式
    */

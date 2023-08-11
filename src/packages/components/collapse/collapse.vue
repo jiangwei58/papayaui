@@ -5,14 +5,16 @@
 </template>
 
 <script setup lang="ts">
-import { provide, ref } from 'vue'
-import useNamespace, { defaultNamespace } from '../../core/useNamespace'
+import { provide, ref, watch, type Ref } from 'vue'
+import useNamespace from '../../core/useNamespace'
 import type { CollapseItemInstance } from '../collapse-item/collapse-item.vue'
+import type { CollapseItemValue } from '../collapse-item/props'
 import { collapseEmits, collapseProps } from './props'
 
 export interface CollapseProvideData {
+  modelValue: Ref<CollapseItemValue[]>
   setChildren: (node: CollapseItemInstance) => void
-  onChildExpand: (index: number, expanded: boolean) => void
+  onChildExpand: (name: CollapseItemValue, expanded: boolean) => void
 }
 
 const ns = useNamespace('collapse')
@@ -21,32 +23,30 @@ const props = defineProps(collapseProps)
 const emit = defineEmits(collapseEmits)
 
 const children = ref<CollapseItemInstance[]>([])
+const expandedValues = ref<CollapseItemValue[]>([])
 
 const setChildren = (node: CollapseItemInstance) => {
   node.index.value = children.value.length
   children.value.push(node as any)
 }
 
-const onChildExpand = (index: number, expanded: boolean) => {
-  if (props.accordion && expanded) {
-    children.value.forEach((node, nodeIndex) => {
-      if (nodeIndex !== index && node.expanded) {
-        node?.toggle(false)
-      }
-    })
-  }
-
-  const values = children.value.flatMap((node) => {
-    const nodeExpanded = node.index === index ? expanded : node.expanded
-    return nodeExpanded ? node.name ?? node.index : []
-  })
-  emit('update:modelValue', props.accordion ? values[0] : values)
-  emit('change', props.accordion ? values[0] : values)
+const onChildExpand = (name: CollapseItemValue, expanded: boolean) => {
+  const values = props.accordion
+    ? name
+    : children.value.flatMap((node) => {
+        const nodeId = node.name ?? node.index
+        const nodeExpanded = nodeId === name ? expanded : node.expanded
+        return nodeExpanded ? nodeId : []
+      })
+  const newModelValue = values
+  expandedValues.value = Array.isArray(newModelValue) ? newModelValue : [newModelValue]
+  emit('update:modelValue', newModelValue)
+  emit('change', newModelValue)
 
   if (expanded) {
-    emit('open', children.value[index].name ?? index)
+    emit('open', name)
   } else {
-    emit('close', children.value[index].name ?? index)
+    emit('close', name)
   }
 }
 
@@ -65,7 +65,18 @@ const toggleAll = (options: boolean | { expanded: boolean; skipDisabled: boolean
   })
 }
 
-provide<CollapseProvideData>(`${defaultNamespace}-collapse-provide`, {
+watch(
+  () => props.modelValue,
+  (value) => {
+    expandedValues.value = Array.isArray(value) ? value : value ? [value] : []
+  },
+  {
+    immediate: true,
+  },
+)
+
+provide<CollapseProvideData>(`${ns.b()}-provide`, {
+  modelValue: expandedValues,
   setChildren,
   onChildExpand,
 })
