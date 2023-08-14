@@ -1,6 +1,6 @@
 <template>
   <view
-    :class="[`${defaultNamespace}-iconfont`, ns.b(name), customClass]"
+    :class="[...iconClassList, customClass]"
     :style="
       ns.style({
         ...customStyle,
@@ -14,14 +14,21 @@
 </template>
 
 <script lang="ts" setup>
-import useNamespace, { defaultNamespace } from '../../core/useNamespace'
+import { computed } from 'vue'
+import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
 import { iconEmits, iconProps } from './props'
 
 const ns = useNamespace('icon')
 
-defineProps(iconProps)
+const props = defineProps(iconProps)
 const emit = defineEmits(iconEmits)
+
+const iconClassList = computed(() => {
+  return props.classPrefix
+    ? [props.classPrefix, `${props.classPrefix}-${props.name}`]
+    : [ns.b(), ns.b(props.name)]
+})
 </script>
 
 <style lang="scss" scoped>
