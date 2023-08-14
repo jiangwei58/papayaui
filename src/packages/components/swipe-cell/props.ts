@@ -39,7 +39,11 @@ export const swipeCellProps = {
   },
 }
 
-export const swipeCellEmits = ['open', 'close', 'click']
+export const swipeCellEmits = {
+  open: () => true,
+  close: () => true,
+  click: (_name: SwipeCellProps['name'], _index: number, _option: SwipeCellOption) => true,
+}
 
 export type SwipeCellOption = {
   text: string

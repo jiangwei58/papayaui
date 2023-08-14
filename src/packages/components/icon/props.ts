@@ -26,6 +26,10 @@ export const iconProps = {
    * 自定义样式
    */
   customStyle: Object as PropType<CSSProperties>,
+  /**
+   * 类名前缀
+   */
+  classPrefix: String,
 }
 
 export const iconEmits = {

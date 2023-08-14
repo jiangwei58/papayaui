@@ -3,8 +3,8 @@
     :class="[
       ns.b(),
       ns.m(shape),
-      ns.is('checked', modelValue || indeterminate || p_data?.isSelected(name)),
-      ns.is('disabled', disabled || p_data?.disabled),
+      ns.is('checked', modelValue || indeterminate || checkboxGroupProvide.isSelected(name)),
+      ns.is('disabled', isDisabled),
     ]"
     @tap.stop="onClick"
   >
@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { ComponentInternalInstance } from 'vue'
+import { computed, type ComponentInternalInstance } from 'vue'
 import { inject } from 'vue'
 import useNamespace, { defaultNamespace } from '../../core/useNamespace'
 import { noop } from '../../utils'
@@ -49,14 +49,21 @@ const ns = useNamespace('checkbox')
 const props = defineProps(checkboxProps)
 const emit = defineEmits(checkboxEmits)
 
-const p_data = inject<CheckboxProvideData>(`${defaultNamespace}-checkbox-group-provide`, {
-  onSelect: noop,
-  isSelected: noop,
+const checkboxGroupProvide = inject<CheckboxProvideData>(
+  `${defaultNamespace}-checkbox-group-provide`,
+  {
+    onSelect: noop,
+    isSelected: noop,
+  },
+)
+
+const isDisabled = computed(() => {
+  return props.disabled || !!checkboxGroupProvide?.disabled?.value
 })
 
 const onClick = () => {
-  if (props.disabled || p_data.disabled) return
-  p_data?.onSelect(props.name)
+  if (isDisabled.value) return
+  checkboxGroupProvide.onSelect(props.name)
   emit('update:modelValue', !props.modelValue)
   emit('change', !props.modelValue, props.name)
 }

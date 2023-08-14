@@ -5,6 +5,7 @@
   line-height: 1.2;
   margin: _var(button-margin, 0);
   border: 1px solid transparent;
+  border-radius: _var(button-border-radius, 5px);
   box-sizing: border-box;
 
   &__content {

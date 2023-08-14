@@ -5,14 +5,14 @@
 </template>
 
 <script lang="ts" setup>
-import { provide, toRefs } from 'vue'
+import { provide, toRefs, type Ref } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { useSelect } from '../../core/useSelect'
 import type { CheckboxValue } from '../checkbox/props'
 import { checkboxGroupEmits, checkboxGroupProps } from './props'
 
 export interface CheckboxProvideData {
-  disabled?: boolean
+  disabled?: Ref<boolean>
   onSelect: (name: CheckboxValue) => void
   isSelected: (name: CheckboxValue) => boolean
 }
@@ -26,7 +26,7 @@ const ns = useNamespace('checkbox-group')
 const props = defineProps(checkboxGroupProps)
 const emit = defineEmits(checkboxGroupEmits)
 
-const { modelValue, max } = toRefs(props)
+const { modelValue, max, disabled } = toRefs(props)
 
 const { selectedValues, onSelect, isSelected } = useSelect<CheckboxOption, CheckboxValue>({
   defaultValue: modelValue,
@@ -41,7 +41,7 @@ const onChildSelect = (value: CheckboxValue) => {
 }
 
 provide<CheckboxProvideData>(`${ns.b()}-provide`, {
-  disabled: props.disabled,
+  disabled,
   onSelect: onChildSelect,
   isSelected,
 })

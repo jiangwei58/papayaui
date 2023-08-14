@@ -3,8 +3,8 @@
     :class="[
       ns.b(),
       ns.m(shape),
-      ns.is('checked', p_data?.isSelected(name)),
-      ns.is('disabled', disabled || p_data?.disabled),
+      ns.is('checked', radioGroupProvide.isSelected(name)),
+      ns.is('disabled', isDisabled),
     ]"
     @tap.stop="onClick"
   >
@@ -31,8 +31,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { ComponentInternalInstance } from 'vue'
-import { inject } from 'vue'
+import { computed, inject, type ComponentInternalInstance } from 'vue'
 import useNamespace, { defaultNamespace } from '../../core/useNamespace'
 import { noop } from '../../utils'
 import IconComponent from '../icon/icon.vue'
@@ -49,14 +48,18 @@ const ns = useNamespace('radio')
 const props = defineProps(radioProps)
 const emit = defineEmits(radioEmits)
 
-const p_data = inject<RadioProvideData>(`${defaultNamespace}-radio-group-provide`, {
+const radioGroupProvide = inject<RadioProvideData>(`${defaultNamespace}-radio-group-provide`, {
   onSelect: noop,
   isSelected: noop,
 })
 
+const isDisabled = computed<boolean>(() => {
+  return props.disabled || !!radioGroupProvide?.disabled?.value
+})
+
 const onClick = () => {
-  if (props.disabled || p_data.disabled) return
-  p_data?.onSelect(props.name)
+  if (isDisabled.value) return
+  radioGroupProvide.onSelect(props.name)
   emit('change', props.name)
 }
 
