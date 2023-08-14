@@ -69,7 +69,7 @@ const menuProvide = inject<MenuProvideData>(`${defaultNamespace}-menu-provide`, 
     closeOnClickOverlay: true,
   },
   setChildren: noop,
-  isMenuItemShow: false,
+  isMenuItemShow: ref(false),
   offset: ref({ top: 0, bottom: 0 }),
 })
 

@@ -37,7 +37,8 @@ function getEvent(sourceFile: SourceFile, componentDirName: string) {
             .getValueDeclaration()
             ?.getChildAtIndex(2)
             .getText()
-            .replace(/=>\s.+/, '') ?? '',
+            .replace(/=>\s.+/, '')
+            .replace(/_([A-Za-z]+:)/g, '$1') ?? '',
       })
     })
   return eventList

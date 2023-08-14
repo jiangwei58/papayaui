@@ -14,6 +14,7 @@
 <script lang="ts" setup>
 import type { ComponentInternalInstance, Ref } from 'vue'
 import { getCurrentInstance, inject, ref } from 'vue'
+import { defaultNamespace } from '../../core'
 import Cell from '../cell/cell.vue'
 import type { FormItemProps } from './props'
 import { formItemEmits, formItemProps } from './props'
@@ -26,7 +27,7 @@ export interface FormItemInstance extends Omit<ComponentInternalInstance, 'props
 defineProps(formItemProps)
 const emit = defineEmits(formItemEmits)
 
-const p_children = inject<Ref<FormItemInstance[]>>('children')
+const p_children = inject<Ref<FormItemInstance[]>>(`${defaultNamespace}-form-children`)
 
 const instance = getCurrentInstance()
 

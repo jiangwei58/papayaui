@@ -20,7 +20,7 @@ const emit = defineEmits(formEmits)
 const { form, rules } = toRefs(props)
 
 const children = ref<FormItemInstance[]>([])
-provide('children', children)
+provide(`${ns.b()}-children`, children)
 
 const formRules = computed(() => {
   const extraRules = children.value.reduce((result, child) => {

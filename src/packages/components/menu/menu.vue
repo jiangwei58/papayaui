@@ -26,7 +26,7 @@ import { menuProps } from './props'
 export interface MenuProvideData {
   props: Required<MenuProps>
   setChildren: (node: MenuItemInstance) => void
-  isMenuItemShow: boolean
+  isMenuItemShow: Ref<boolean>
   offset: Ref<{ top: number; bottom: number }>
 }
 
@@ -76,7 +76,7 @@ const onShowMenu = (index: number) => {
   })
 }
 
-provide(`${ns.b()}-provide`, {
+provide<MenuProvideData>(`${ns.b()}-provide`, {
   props,
   setChildren,
   isMenuItemShow,
