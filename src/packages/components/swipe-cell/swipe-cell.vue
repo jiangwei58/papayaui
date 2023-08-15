@@ -83,7 +83,7 @@ export default defineComponent({
 
     const setStatus = (newStatus: SwipeCellStatus) => {
       status.value = newStatus
-      emit(newStatus)
+      emit(newStatus as 'open')
     }
 
     const onClick = async () => {
@@ -108,6 +108,10 @@ export default defineComponent({
         setStatus(newVal ? 'open' : 'close')
       },
     )
+
+    watch([() => props.threshold, () => props.options], () => {
+      onUpdateExtraParams()
+    })
 
     return {
       wxs: {} as any, // 防止类型报错
