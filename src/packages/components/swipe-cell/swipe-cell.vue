@@ -193,7 +193,7 @@ function touchend(event, ownInstance) {
 function updateMoveX(state, instance, _ownInstance) {
   instance.requestAnimationFrame(function () {
     instance.setStyle({
-      transition: 'transform ' + (state.isStarted ? '0s' : '0.6s'),
+      transition: 'transform ' + (state.isStarted ? '0s' : '0.6s') + ' cubic-bezier(0.18, 0.89, 0.32, 1)',
       transform: 'translate3d(' + state.moveX + 'px, 0px, 0px)',
     })
   })
