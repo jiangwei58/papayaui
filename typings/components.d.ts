@@ -56,6 +56,8 @@ declare module 'vue' {
     PaUploader: typeof import('../src/packages/components/uploader/uploader.vue')['default']
     PaIndexBar: typeof import('../src/packages/components/index-bar/index-bar.vue')['default']
     PaIndexAnchor: typeof import('../src/packages/components/index-anchor/index-anchor.vue')['default']
+    PaTabbar: typeof import('../src/packages/components/tabbar/tabbar.vue')['default']
+    PaTabbarItem: typeof import('../src/packages/components/tabbar-item/tabbar-item.vue')['default']
   }
 }
 

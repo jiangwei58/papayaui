@@ -1,0 +1,40 @@
+@import '../../styles/vars.scss';
+
+.#{$prefix}-tabbar {
+  &__content {
+    display: flex;
+    height: _var(tabbar-height, 48px);
+    background-color: _var(tabbar-background-color, #fff);
+    box-sizing: content-box;
+    z-index: 1;
+  }
+
+  &--border {
+    position: relative;
+    &::after {
+      position: absolute;
+      box-sizing: border-box;
+      content: ' ';
+      pointer-events: none;
+      top: -50%;
+      right: -50%;
+      bottom: -50%;
+      left: -50%;
+      border: 0 solid #ebedf0;
+      border-top-width: 1px;
+      transform: scale(0.5);
+    }
+  }
+
+  &--fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  &--safe-bottom {
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
