@@ -88,7 +88,7 @@ export async function main({
           relevanceName,
         )
         if (relevanceText) {
-          propsText += `\n\n## ${getCamelCaseName(relevanceName, true)}Event\n\n${relevanceText}`
+          propsText += `\n\n## ${getCamelCaseName(relevanceName, true)} Event\n\n${relevanceText}`
         }
       }
 

@@ -59,7 +59,7 @@ export async function main({
       for (const relevanceName of relevanceMap[componentDirName] ?? []) {
         const relevanceText = await getMarkdownTextByFileCode(sourceDirPath, relevanceName)
         if (relevanceText) {
-          propsText += `\n\n## ${getCamelCaseName(relevanceName, true)}Slot\n\n${relevanceText}`
+          propsText += `\n\n## ${getCamelCaseName(relevanceName, true)} Slot\n\n${relevanceText}`
         }
       }
 

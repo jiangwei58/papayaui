@@ -154,7 +154,7 @@ export async function main({
           relevanceName,
         )
         if (relevanceText) {
-          propsText += `\n\n## ${getCamelCaseName(relevanceName, true)}Props\n\n${relevanceText}`
+          propsText += `\n\n## ${getCamelCaseName(relevanceName, true)} Props\n\n${relevanceText}`
         }
       }
 
