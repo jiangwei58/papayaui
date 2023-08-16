@@ -1,3 +1,4 @@
+import { readdir } from 'fs/promises'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { main as genCodesMain } from './genCodes'
@@ -9,6 +10,8 @@ import { main as initMain } from './init'
 export interface PluginOptions {
   sourceDirPath: string
   targetDirPath: string
+  componentDirNames: string[]
+  relevanceMap: Record<string, string[]>
 }
 
 export function getCamelCaseName(name: string, firstUpperCase = false) {
@@ -31,9 +34,30 @@ async function main() {
   const directoryPath = path.resolve(__filename, '../../../src/packages/components')
   const docDirectoryPath = path.resolve(__filename, '../../../docs/components')
 
+  const files = await readdir(directoryPath)
+  const relevanceMap = {
+    cell: ['cell-group'],
+    form: ['form-item'],
+    radio: ['radio-group'],
+    checkbox: ['checkbox-group'],
+    collapse: ['collapse-item'],
+    'index-bar': ['index-anchor'],
+    menu: ['menu-item'],
+    sidebar: ['sidebar-item'],
+    tabbar: ['tabbar-item'],
+  }
+  const componentDirNames = files.filter(
+    (name) =>
+      !['index.ts', 'env-view', ...Object.values(relevanceMap).flatMap((names) => names)].includes(
+        name,
+      ),
+  )
+
   const params = {
     sourceDirPath: directoryPath,
     targetDirPath: docDirectoryPath,
+    componentDirNames,
+    relevanceMap,
   }
 
   await initMain(params)

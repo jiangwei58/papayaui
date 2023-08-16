@@ -1,9 +1,8 @@
 import assert from 'node:assert'
 import { readFileSync, writeFileSync } from 'node:fs'
-import { readFile, readdir } from 'node:fs/promises'
+import { open } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { Node, Project, PropertyAssignment, SourceFile } from 'ts-morph'
-import ts from 'typescript'
 import { PluginOptions, getCamelCaseName } from '.'
 
 interface PropItem {
@@ -14,10 +13,9 @@ interface PropItem {
 }
 
 function initTsProject() {
-  const tsProject = new Project({
+  return new Project({
     tsConfigFilePath: './tsconfig.json',
   })
-  return tsProject
 }
 
 function getPropType(property: PropertyAssignment) {
@@ -121,24 +119,44 @@ function props2MarkdownTable(props: PropItem[]) {
   return tableText
 }
 
-export async function main({ sourceDirPath, targetDirPath }: PluginOptions) {
+async function getMarkdownTextByFileCode(
+  tsProject: Project,
+  sourceDirPath: string,
+  componentName: string,
+) {
+  const filePath = resolve(sourceDirPath, `./${componentName}/props.ts`)
+  return open(filePath)
+    .then(() => {
+      const sourceFile = tsProject.addSourceFileAtPath(filePath)
+      const text = props2MarkdownTable(getProps(sourceFile, componentName))
+      sourceFile.delete()
+      return text
+    })
+    .catch(() => null)
+}
+
+export async function main({
+  sourceDirPath,
+  targetDirPath,
+  componentDirNames,
+  relevanceMap,
+}: PluginOptions) {
   const tsProject = initTsProject()
 
-  const files = await readdir(sourceDirPath)
-  for (const componentName of files) {
-    if (componentName === 'index.ts') continue
-    // if (componentName !== 'number-input') continue
-
+  for (const componentName of componentDirNames) {
     try {
-      const filePath = resolve(sourceDirPath, `./${componentName}/props.ts`)
-      const fileCode = await readFile(filePath, { encoding: 'utf-8' }).catch(() => null)
-      if (!fileCode) continue
+      let propsText = await getMarkdownTextByFileCode(tsProject, sourceDirPath, componentName)
 
-      const sourceFile = tsProject.createSourceFile(componentName + '.ts', fileCode, {
-        scriptKind: ts.ScriptKind.TS,
-      })
-
-      const propsText = props2MarkdownTable(getProps(sourceFile, componentName))
+      for (const relevanceName of relevanceMap[componentName] ?? []) {
+        const relevanceText = await getMarkdownTextByFileCode(
+          tsProject,
+          sourceDirPath,
+          relevanceName,
+        )
+        if (relevanceText) {
+          propsText += `\n\n## ${getCamelCaseName(relevanceName, true)}Props\n\n${relevanceText}`
+        }
+      }
 
       const mdContent = readFileSync(`${targetDirPath}/${componentName}.md`, {
         encoding: 'utf-8',
@@ -148,7 +166,7 @@ export async function main({ sourceDirPath, targetDirPath }: PluginOptions) {
         `$1\n\n${propsText}\n\n$2`,
       )
       writeFileSync(`${targetDirPath}/${componentName}.md`, newMdContent, { encoding: 'utf-8' })
-      console.log(`===写入 ${componentName} props 完成===`)
+      console.log(`===write ${componentName} props complete===`)
     } catch (e) {
       console.error(componentName, 'gen props error', e)
     }

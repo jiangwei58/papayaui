@@ -1,8 +1,7 @@
 import { readFileSync, writeFileSync } from 'node:fs'
-import { readFile, readdir } from 'node:fs/promises'
+import { open } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { Project, SourceFile } from 'ts-morph'
-import ts from 'typescript'
 import { PluginOptions, getCamelCaseName } from '.'
 
 interface EventItem {
@@ -56,35 +55,54 @@ function event2MarkdownTable(props: EventItem[]) {
   return tableText
 }
 
-export async function main({ sourceDirPath, targetDirPath }: PluginOptions) {
+async function getMarkdownTextByFileCode(
+  tsProject: Project,
+  sourceDirPath: string,
+  componentName: string,
+) {
+  const filePath = resolve(sourceDirPath, `./${componentName}/props.ts`)
+  return open(filePath)
+    .then(() => {
+      const sourceFile = tsProject.addSourceFileAtPath(filePath)
+      return event2MarkdownTable(getEvent(sourceFile, componentName))
+    })
+    .catch(() => null)
+}
+
+export async function main({
+  sourceDirPath,
+  targetDirPath,
+  componentDirNames,
+  relevanceMap,
+}: PluginOptions) {
   const tsProject = initTsProject()
 
-  try {
-    const files = await readdir(sourceDirPath)
-    for (const componentDirName of files) {
-      if (componentDirName === 'index.ts') continue
+  for (const componentName of componentDirNames) {
+    try {
+      let propsText = await getMarkdownTextByFileCode(tsProject, sourceDirPath, componentName)
 
-      const filePath = resolve(sourceDirPath, `./${componentDirName}/props.ts`)
-      const fileCode = await readFile(filePath, { encoding: 'utf-8' }).catch(() => null)
-      if (!fileCode) continue
+      for (const relevanceName of relevanceMap[componentName] ?? []) {
+        const relevanceText = await getMarkdownTextByFileCode(
+          tsProject,
+          sourceDirPath,
+          relevanceName,
+        )
+        if (relevanceText) {
+          propsText += `\n\n## ${getCamelCaseName(relevanceName, true)}Event\n\n${relevanceText}`
+        }
+      }
 
-      const sourceFile = tsProject.createSourceFile(componentDirName + '.ts', fileCode, {
-        scriptKind: ts.ScriptKind.TS,
-      })
-
-      const propsText = event2MarkdownTable(getEvent(sourceFile, componentDirName))
-
-      const mdContent = readFileSync(`${targetDirPath}/${componentDirName}.md`, {
+      const mdContent = readFileSync(`${targetDirPath}/${componentName}.md`, {
         encoding: 'utf-8',
       })
       const newMdContent = mdContent.replace(
         /(<!--event start-->).+(<!--event end-->)/s,
         `$1\n\n${propsText}\n\n$2`,
       )
-      writeFileSync(`${targetDirPath}/${componentDirName}.md`, newMdContent, { encoding: 'utf-8' })
-      console.log(`===写入 ${componentDirName} event 完成===`)
+      writeFileSync(`${targetDirPath}/${componentName}.md`, newMdContent, { encoding: 'utf-8' })
+      console.log(`===write ${componentName} event complete===`)
+    } catch (e) {
+      console.error('gen event error', e)
     }
-  } catch (e) {
-    console.error('gen event error', e)
   }
 }
