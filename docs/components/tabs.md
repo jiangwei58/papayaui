@@ -49,7 +49,7 @@ const tabActive3 = ref<number>(0)
 
 <!--codes end-->
 
-## Props
+## Tabs Props
 
 <!--props start-->
 
@@ -64,7 +64,7 @@ const tabActive3 = ref<number>(0)
 
 <!--props end-->
 
-## Event
+## Tabs Event
 
 <!--event start-->
 
@@ -75,7 +75,7 @@ const tabActive3 = ref<number>(0)
 
 <!--event end-->
 
-## Slot
+## Tabs Slot
 
 <!--slot start-->
 

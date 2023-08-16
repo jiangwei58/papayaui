@@ -48,7 +48,7 @@ const text = computed(() => {
 
 <!--codes end-->
 
-## Props
+## BottomPopup Props
 
 <!--props start-->
 
@@ -62,17 +62,22 @@ const text = computed(() => {
 
 <!--props end-->
 
-## Event
+## BottomPopup Event
 
 <!--event start-->
 
 | 事件名 | 参数 |
 | --- | --- |
-
+| update:show | (value: PopupProps['show'])  |
+| open | ()  |
+| opened | ()  |
+| close | ()  |
+| closed | ()  |
+| clickOverlay | ()  |
 
 <!--event end-->
 
-## Slot
+## BottomPopup Slot
 
 <!--slot start-->
 

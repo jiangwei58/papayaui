@@ -63,7 +63,7 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 <!--codes end-->
 
-## Props
+## Cell Props
 
 <!--props start-->
 
@@ -86,19 +86,31 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 | titleClass | 标题样式类 | string | - |
 | valueClass | 右侧内容样式类 | string | - |
 
+## CellGroup Props
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | ----- | --- | --- |
+| inset | 是否展示为圆角卡片风格 | boolean | - |
+
 <!--props end-->
 
-## Event
+## Cell Event
 
 <!--event start-->
 
 | 事件名 | 参数 |
 | --- | --- |
-| click | (_value: MouseEvent)  |
+| click | (value: MouseEvent)  |
+
+## CellGroup Event
+
+| 事件名 | 参数 |
+| --- | --- |
+
 
 <!--event end-->
 
-## Slot
+## Cell Slot
 
 <!--slot start-->
 
@@ -107,6 +119,12 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 | title | - |
 | default | - |
 | right-icon | - |
+
+## CellGroup Slot
+
+| 名称 | 说明 |
+| --- | --- |
+| default | - |
 
 <!--slot end-->
 

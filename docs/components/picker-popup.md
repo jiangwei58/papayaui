@@ -145,7 +145,7 @@ const onLoad2 = (query?: string, pageNumber?: number, pageSize?: number) => {
 
 <!--codes end-->
 
-## Props
+## PickerPopup Props
 
 <!--props start-->
 
@@ -168,17 +168,24 @@ const onLoad2 = (query?: string, pageNumber?: number, pageSize?: number) => {
 
 <!--props end-->
 
-## Event
+## PickerPopup Event
 
 <!--event start-->
 
 | 事件名 | 参数 |
 | --- | --- |
-
+| update:modelValue | (value: OptionValue \| OptionValue[])  |
+| change | (item: Option \| Option[])  |
+| update:show | (value: PopupProps['show'])  |
+| open | ()  |
+| opened | ()  |
+| close | ()  |
+| closed | ()  |
+| clickOverlay | ()  |
 
 <!--event end-->
 
-## Slot
+## PickerPopup Slot
 
 <!--slot start-->
 

@@ -55,7 +55,7 @@ const customChecked = ref<string>('开')
 
 <!--codes end-->
 
-## Props
+## Switch Props
 
 <!--props start-->
 
@@ -72,18 +72,18 @@ const customChecked = ref<string>('开')
 
 <!--props end-->
 
-## Event
+## Switch Event
 
 <!--event start-->
 
 | 事件名 | 参数 |
 | --- | --- |
-| update:modelValue | (_value: SwitchValue)  |
-| change | (_value: SwitchValue)  |
+| update:modelValue | (value: SwitchValue)  |
+| change | (value: SwitchValue)  |
 
 <!--event end-->
 
-## Slot
+## Switch Slot
 
 <!--slot start-->
 

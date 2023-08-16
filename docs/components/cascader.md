@@ -145,7 +145,7 @@ const onMultipleChangeVisible = () => {
 
 <!--codes end-->
 
-## Props
+## Cascader Props
 
 <!--props start-->
 
@@ -169,17 +169,31 @@ const onMultipleChangeVisible = () => {
 
 <!--props end-->
 
-## Event
+## Cascader Event
 
 <!--event start-->
 
 | 事件名 | 参数 |
 | --- | --- |
-
+| update:modelValue | (value: CascaderValue[])  |
+| change | (
+    value: CascaderValue[],
+    items: CascaderOption[],
+    extra: { tabIndex: number; isSearch: boolean },
+  )  |
+| reset | ()  |
+| confirm | ()  |
+| nodeClick | (node: TreeNode\<CascaderOption\>)  |
+| update:show | (value: PopupProps['show'])  |
+| open | ()  |
+| opened | ()  |
+| close | ()  |
+| closed | ()  |
+| clickOverlay | ()  |
 
 <!--event end-->
 
-## Slot
+## Cascader Slot
 
 <!--slot start-->
 

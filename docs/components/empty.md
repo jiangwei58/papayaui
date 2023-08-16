@@ -31,7 +31,7 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 <!--codes end-->
 
-## Props
+## Empty Props
 
 <!--props start-->
 
@@ -42,7 +42,7 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 <!--props end-->
 
-## Event
+## Empty Event
 
 <!--event start-->
 
@@ -52,7 +52,7 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 <!--event end-->
 
-## Slot
+## Empty Slot
 
 <!--slot start-->
 

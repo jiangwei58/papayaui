@@ -5,7 +5,7 @@
 <!--codes start-->
 <!--codes end-->
 
-## Props
+## LoadingIcon Props
 
 <!--props start-->
 
@@ -16,7 +16,7 @@
 
 <!--props end-->
 
-## Event
+## LoadingIcon Event
 
 <!--event start-->
 
@@ -26,7 +26,7 @@
 
 <!--event end-->
 
-## Slot
+## LoadingIcon Slot
 
 <!--slot start-->
 

@@ -54,7 +54,7 @@ const onCopy = (name: string) => {
 
 <!--codes end-->
 
-## Props
+## Icon Props
 
 <!--props start-->
 
@@ -66,10 +66,11 @@ const onCopy = (name: string) => {
 | block | 是否块级元素 | boolean | - |
 | customClass | 自定义类名 | string | - |
 | customStyle | 自定义样式 | CSSProperties | - |
+| classPrefix | 类名前缀 | string | - |
 
 <!--props end-->
 
-## Event
+## Icon Event
 
 <!--event start-->
 
@@ -79,7 +80,7 @@ const onCopy = (name: string) => {
 
 <!--event end-->
 
-## Slot
+## Icon Slot
 
 <!--slot start-->
 

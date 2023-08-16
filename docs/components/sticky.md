@@ -31,7 +31,7 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 <!--codes end-->
 
-## Props
+## Sticky Props
 
 <!--props start-->
 
@@ -46,7 +46,7 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 <!--props end-->
 
-## Event
+## Sticky Event
 
 <!--event start-->
 
@@ -56,7 +56,7 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 <!--event end-->
 
-## Slot
+## Sticky Slot
 
 <!--slot start-->
 

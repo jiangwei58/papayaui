@@ -163,7 +163,7 @@ const onConfirm = (value: Date | Date[]) => {
 
 <!--codes end-->
 
-## Props
+## Calendar Props
 
 <!--props start-->
 
@@ -174,17 +174,24 @@ const onConfirm = (value: Date | Date[]) => {
 
 <!--props end-->
 
-## Event
+## Calendar Event
 
 <!--event start-->
 
 | 事件名 | 参数 |
 | --- | --- |
-
+| confirm | (value: CalendarValue)  |
+| select | (value: CalendarValue)  |
+| update:show | (value: PopupProps['show'])  |
+| open | ()  |
+| opened | ()  |
+| close | ()  |
+| closed | ()  |
+| clickOverlay | ()  |
 
 <!--event end-->
 
-## Slot
+## Calendar Slot
 
 <!--slot start-->
 

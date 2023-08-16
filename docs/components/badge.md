@@ -96,7 +96,7 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 <!--codes end-->
 
-## Props
+## Badge Props
 
 <!--props start-->
 
@@ -112,7 +112,7 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 <!--props end-->
 
-## Event
+## Badge Event
 
 <!--event start-->
 
@@ -122,7 +122,7 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 <!--event end-->
 
-## Slot
+## Badge Slot
 
 <!--slot start-->
 

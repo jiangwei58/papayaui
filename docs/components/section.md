@@ -35,7 +35,7 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 <!--codes end-->
 
-## Props
+## Section Props
 
 <!--props start-->
 
@@ -46,7 +46,7 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 <!--props end-->
 
-## Event
+## Section Event
 
 <!--event start-->
 
@@ -56,7 +56,7 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 <!--event end-->
 
-## Slot
+## Section Slot
 
 <!--slot start-->
 

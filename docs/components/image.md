@@ -79,7 +79,7 @@ const modeList = [
 
 <!--codes end-->
 
-## Props
+## Image Props
 
 <!--props start-->
 
@@ -96,7 +96,7 @@ const modeList = [
 
 <!--props end-->
 
-## Event
+## Image Event
 
 <!--event start-->
 
@@ -106,7 +106,7 @@ const modeList = [
 
 <!--event end-->
 
-## Slot
+## Image Slot
 
 <!--slot start-->
 

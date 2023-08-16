@@ -37,7 +37,7 @@ const customConfig = { loadmore: '给我上划', loading: '努力加载...', nom
 
 <!--codes end-->
 
-## Props
+## Loadmore Props
 
 <!--props start-->
 
@@ -47,7 +47,7 @@ const customConfig = { loadmore: '给我上划', loading: '努力加载...', nom
 
 <!--props end-->
 
-## Event
+## Loadmore Event
 
 <!--event start-->
 
@@ -57,7 +57,7 @@ const customConfig = { loadmore: '给我上划', loading: '努力加载...', nom
 
 <!--event end-->
 
-## Slot
+## Loadmore Slot
 
 <!--slot start-->
 

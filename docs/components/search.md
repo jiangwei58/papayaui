@@ -67,7 +67,7 @@ const onClick = () => {
 
 <!--codes end-->
 
-## Props
+## Search Props
 
 <!--props start-->
 
@@ -83,7 +83,7 @@ const onClick = () => {
 
 <!--props end-->
 
-## Event
+## Search Event
 
 <!--event start-->
 
@@ -97,7 +97,7 @@ const onClick = () => {
 
 <!--event end-->
 
-## Slot
+## Search Slot
 
 <!--slot start-->
 

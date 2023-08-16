@@ -94,7 +94,7 @@ const onNext = () => {
 
 <!--codes end-->
 
-## Props
+## Steps Props
 
 <!--props start-->
 
@@ -106,7 +106,7 @@ const onNext = () => {
 
 <!--props end-->
 
-## Event
+## Steps Event
 
 <!--event start-->
 
@@ -116,7 +116,7 @@ const onNext = () => {
 
 <!--event end-->
 
-## Slot
+## Steps Slot
 
 <!--slot start-->
 

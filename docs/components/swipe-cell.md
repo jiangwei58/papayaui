@@ -29,7 +29,7 @@
     </pa-swipe-cell>
   </DocDemoBlock>
   <DocDemoBlock title="多个按钮">
-    <pa-swipe-cell :options="options2" @click="onClick">
+    <pa-swipe-cell name="name" :options="options2" @click="onClick">
       <pa-cell title="单元格" value="内容" />
     </pa-swipe-cell>
   </DocDemoBlock>
@@ -62,12 +62,18 @@
 ```ts [script]
 <script lang="ts" setup>
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import type { SwipeCellOption } from './props'
+import type { SwipeCellOption, SwipeCellProps } from './props'
 
 const options: SwipeCellOption[] = [{ text: '删除' }]
 
 const options2: SwipeCellOption[] = [
-  { text: '收藏', style: { backgroundColor: 'var(--pa-color-primary)' } },
+  {
+    text: '收藏',
+    style: { backgroundColor: 'var(--pa-color-primary)' },
+    click: (name: SwipeCellProps['name']) => {
+      console.log('当前点击的name:', name)
+    },
+  },
   { text: '删除' },
 ]
 
@@ -87,13 +93,13 @@ const onClick = (name: string, index: number, item: SwipeCellOption) => {
 
 <!--codes end-->
 
-## Props
+## SwipeCell Props
 
 <!--props start-->
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | ----- | --- | --- |
-| name | 标识名 | string |  '' |
+| name | 标识名 | string \| number |  '' |
 | show | 控制打开或者关闭 | boolean |  false |
 | disabled | 是否禁用 | boolean |  false |
 | threshold | 滑动距离阈值，只有大于此值，才被认为是要打开菜单 | number |  20 |
@@ -101,53 +107,19 @@ const onClick = (name: string, index: number, item: SwipeCellOption) => {
 
 <!--props end-->
 
-## Event
+## SwipeCell Event
 
 <!--event start-->
 
 | 事件名 | 参数 |
 | --- | --- |
-| length | number |
-| toString |  |
-| toLocaleString |  |
-| pop |  |
-| push | ...items:T[] |
-| concat | ...items:ConcatArray\<T\>[] |
-| join | separator?:string |
-| reverse |  |
-| shift |  |
-| slice | start?:number,end?:number |
-| sort | compareFn?:(a:T,b:T)=\>number |
-| splice | start:number,deleteCount?:number |
-| unshift | ...items:T[] |
-| indexOf | searchElement:T,fromIndex?:number |
-| lastIndexOf | searchElement:T,fromIndex?:number |
-| every | S extends T |
-| some | predicate:(value:T,index:number,array:T[])=\>unknown,thisArg?:any |
-| forEach | callbackfn:(value:T,index:number,array:T[])=\>void,thisArg?:any |
-| map | U |
-| filter | S extends T |
-| reduce | callbackfn:(previousValue:T,currentValue:T,currentIndex:number,array:T[])=\>T |
-| reduceRight | callbackfn:(previousValue:T,currentValue:T,currentIndex:number,array:T[])=\>T |
-| find | S extends T |
-| findIndex | predicate:(value:T,index:number,obj:T[])=\>unknown,thisArg?:any |
-| fill | value:T,start?:number,end?:number |
-| copyWithin | target:number,start?:number,end?:number |
-| entries |  |
-| keys |  |
-| values |  |
-| includes | searchElement:T,fromIndex?:number |
-| flatMap | U,This=undefined |
-| flat | A,D extends number=1 |
-| at | index:number |
-| findLast | S extends T |
-| findLastIndex | predicate:(value:T,index:number,array:T[])=\>unknown,thisArg?:any |
-| __@iterator@150 |  |
-| __@unscopables@152 | : |
+| open | ()  |
+| close | ()  |
+| click | (name: SwipeCellProps['name'], index: number, option: SwipeCellOption)  |
 
 <!--event end-->
 
-## Slot
+## SwipeCell Slot
 
 <!--slot start-->
 

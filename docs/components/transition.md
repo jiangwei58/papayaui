@@ -63,7 +63,7 @@ const onShow = async (newMode: TransitionMode) => {
 
 <!--codes end-->
 
-## Props
+## Transition Props
 
 <!--props start-->
 
@@ -78,7 +78,7 @@ const onShow = async (newMode: TransitionMode) => {
 
 <!--props end-->
 
-## Event
+## Transition Event
 
 <!--event start-->
 
@@ -94,7 +94,7 @@ const onShow = async (newMode: TransitionMode) => {
 
 <!--event end-->
 
-## Slot
+## Transition Slot
 
 <!--slot start-->
 

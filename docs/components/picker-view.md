@@ -5,7 +5,7 @@
 <!--codes start-->
 <!--codes end-->
 
-## Props
+## PickerView Props
 
 <!--props start-->
 
@@ -21,7 +21,7 @@
 
 <!--props end-->
 
-## Event
+## PickerView Event
 
 <!--event start-->
 
@@ -34,7 +34,7 @@
 
 <!--event end-->
 
-## Slot
+## PickerView Slot
 
 <!--slot start-->
 

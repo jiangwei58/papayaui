@@ -60,7 +60,7 @@ const onMenuClick = (index: number) => {
 
 <!--codes end-->
 
-## Props
+## NavBar Props
 
 <!--props start-->
 
@@ -74,7 +74,7 @@ const onMenuClick = (index: number) => {
 
 <!--props end-->
 
-## Event
+## NavBar Event
 
 <!--event start-->
 
@@ -84,7 +84,7 @@ const onMenuClick = (index: number) => {
 
 <!--event end-->
 
-## Slot
+## NavBar Slot
 
 <!--slot start-->
 

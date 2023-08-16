@@ -52,7 +52,7 @@ const updateHeight = () => {
 
 <!--codes end-->
 
-## Props
+## Container Props
 
 <!--props start-->
 
@@ -68,7 +68,7 @@ const updateHeight = () => {
 
 <!--props end-->
 
-## Event
+## Container Event
 
 <!--event start-->
 
@@ -78,7 +78,7 @@ const updateHeight = () => {
 
 <!--event end-->
 
-## Slot
+## Container Slot
 
 <!--slot start-->
 
