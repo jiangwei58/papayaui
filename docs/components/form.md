@@ -188,7 +188,7 @@ const onDeleteItem = (index: number) => {
 
 <!--codes end-->
 
-## Props
+## Form Props
 
 <!--props start-->
 
@@ -197,9 +197,17 @@ const onDeleteItem = (index: number) => {
 | form | 表单数据 | any |  () => ({}) |
 | rules | 校验规则 | FormRules\<any\> |  () => ({}) |
 
+## FormItem Props
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | ----- | --- | --- |
+| prop | 校验对应的字段名 | string | - |
+| label | 标签名 | string | - |
+| rules | 校验规则 | FormRuleItem\|FormRuleItem[] | - |
+
 <!--props end-->
 
-## Event
+## Form Event
 
 <!--event start-->
 
@@ -207,11 +215,23 @@ const onDeleteItem = (index: number) => {
 | --- | --- |
 | reset | ()  |
 
+## FormItem Event
+
+| 事件名 | 参数 |
+| --- | --- |
+| click | ()  |
+
 <!--event end-->
 
-## Slot
+## Form Slot
 
 <!--slot start-->
+
+| 名称 | 说明 |
+| --- | --- |
+| default | - |
+
+## FormItem Slot
 
 | 名称 | 说明 |
 | --- | --- |

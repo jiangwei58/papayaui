@@ -37,7 +37,7 @@ const onShow = (index: number, show = true) => {
 
 <!--codes end-->
 
-## Props
+## Overlay Props
 
 <!--props start-->
 
@@ -51,7 +51,7 @@ const onShow = (index: number, show = true) => {
 
 <!--props end-->
 
-## Event
+## Overlay Event
 
 <!--event start-->
 
@@ -61,7 +61,7 @@ const onShow = (index: number, show = true) => {
 
 <!--event end-->
 
-## Slot
+## Overlay Slot
 
 <!--slot start-->
 

@@ -47,7 +47,7 @@ const loaded = ref(false)
 
 <!--codes end-->
 
-## Props
+## Skeleton Props
 
 <!--props start-->
 
@@ -66,7 +66,7 @@ const loaded = ref(false)
 
 <!--props end-->
 
-## Event
+## Skeleton Event
 
 <!--event start-->
 
@@ -76,7 +76,7 @@ const loaded = ref(false)
 
 <!--event end-->
 
-## Slot
+## Skeleton Slot
 
 <!--slot start-->
 

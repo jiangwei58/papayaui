@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from 'node:fs'
-import { readFile, readdir } from 'node:fs/promises'
+import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
-import { PluginOptions } from '.'
+import { PluginOptions, getCamelCaseName } from '.'
 
 interface SlotItem {
   name: string
@@ -27,7 +27,7 @@ function getEvent(fileContent: string, _componentDirName: string) {
   return slotList
 }
 
-function event2MarkdownTable(props: SlotItem[]) {
+function slot2MarkdownTable(props: SlotItem[]) {
   let tableText = '| 名称 | 说明 |\n| --- | --- |\n'
   tableText += props
     .map((prop) => {
@@ -38,17 +38,30 @@ function event2MarkdownTable(props: SlotItem[]) {
   return tableText
 }
 
-export async function main({ sourceDirPath, targetDirPath }: PluginOptions) {
-  try {
-    const files = await readdir(sourceDirPath)
-    for (const componentDirName of files) {
-      if (componentDirName === 'index.ts') continue
+async function getMarkdownTextByFileCode(sourceDirPath: string, componentName: string) {
+  const filePath = resolve(sourceDirPath, `./${componentName}/${componentName}.vue`)
+  const fileCode = await readFile(filePath, { encoding: 'utf-8' }).catch(() => null)
+  if (!fileCode) return null
 
-      const filePath = resolve(sourceDirPath, `./${componentDirName}/${componentDirName}.vue`)
-      const fileCode = await readFile(filePath, { encoding: 'utf-8' }).catch(() => null)
-      if (!fileCode) continue
+  return slot2MarkdownTable(getEvent(fileCode, componentName))
+}
 
-      const propsText = event2MarkdownTable(getEvent(fileCode, componentDirName))
+export async function main({
+  sourceDirPath,
+  targetDirPath,
+  componentDirNames,
+  relevanceMap,
+}: PluginOptions) {
+  for (const componentDirName of componentDirNames) {
+    try {
+      let propsText = await getMarkdownTextByFileCode(sourceDirPath, componentDirName)
+
+      for (const relevanceName of relevanceMap[componentDirName] ?? []) {
+        const relevanceText = await getMarkdownTextByFileCode(sourceDirPath, relevanceName)
+        if (relevanceText) {
+          propsText += `\n\n## ${getCamelCaseName(relevanceName, true)} Slot\n\n${relevanceText}`
+        }
+      }
 
       const mdContent = readFileSync(`${targetDirPath}/${componentDirName}.md`, {
         encoding: 'utf-8',
@@ -58,9 +71,9 @@ export async function main({ sourceDirPath, targetDirPath }: PluginOptions) {
         `$1\n\n${propsText}\n\n$2`,
       )
       writeFileSync(`${targetDirPath}/${componentDirName}.md`, newMdContent, { encoding: 'utf-8' })
-      console.log(`===写入 ${componentDirName} slot 完成===`)
+      console.log(`===write ${componentDirName} slot complete===`)
+    } catch (e) {
+      console.error('gen slot error', e)
     }
-  } catch (e) {
-    console.error('gen slot error', e)
   }
 }

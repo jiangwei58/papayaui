@@ -38,7 +38,7 @@ const text2 = ref<string>('')
 
 <!--codes end-->
 
-## Props
+## Textarea Props
 
 <!--props start-->
 
@@ -67,23 +67,23 @@ const text2 = ref<string>('')
 
 <!--props end-->
 
-## Event
+## Textarea Event
 
 <!--event start-->
 
 | 事件名 | 参数 |
 | --- | --- |
 | update:modelValue | (value: string)  |
-| input | (_value: Event)  |
-| focus | (_value: Event)  |
-| blur | (_value: Event)  |
-| confirm | (_value: Event)  |
-| linechange | (_value: Event)  |
-| keyboardheightchange | (_value: Event)  |
+| input | (value: Event)  |
+| focus | (value: Event)  |
+| blur | (value: Event)  |
+| confirm | (value: Event)  |
+| linechange | (value: Event)  |
+| keyboardheightchange | (value: Event)  |
 
 <!--event end-->
 
-## Slot
+## Textarea Slot
 
 <!--slot start-->
 

@@ -5,7 +5,7 @@
 <!--codes start-->
 <!--codes end-->
 
-## Props
+## ListItem Props
 
 <!--props start-->
 
@@ -19,7 +19,7 @@
 
 <!--props end-->
 
-## Event
+## ListItem Event
 
 <!--event start-->
 
@@ -29,7 +29,7 @@
 
 <!--event end-->
 
-## Slot
+## ListItem Slot
 
 <!--slot start-->
 

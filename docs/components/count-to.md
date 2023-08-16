@@ -84,7 +84,7 @@ const countToRef5 = ref<InstanceType<typeof CountTo>>()
 
 <!--codes end-->
 
-## Props
+## CountTo Props
 
 <!--props start-->
 
@@ -102,7 +102,7 @@ const countToRef5 = ref<InstanceType<typeof CountTo>>()
 
 <!--props end-->
 
-## Event
+## CountTo Event
 
 <!--event start-->
 
@@ -114,7 +114,7 @@ const countToRef5 = ref<InstanceType<typeof CountTo>>()
 
 <!--event end-->
 
-## Slot
+## CountTo Slot
 
 <!--slot start-->
 

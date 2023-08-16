@@ -57,7 +57,7 @@ const onOpen = (_position: PopupPosition, _closeable = false, _round = false) =>
 
 <!--codes end-->
 
-## Props
+## Popup Props
 
 <!--props start-->
 
@@ -81,7 +81,7 @@ const onOpen = (_position: PopupPosition, _closeable = false, _round = false) =>
 
 <!--props end-->
 
-## Event
+## Popup Event
 
 <!--event start-->
 
@@ -96,7 +96,7 @@ const onOpen = (_position: PopupPosition, _closeable = false, _round = false) =>
 
 <!--event end-->
 
-## Slot
+## Popup Slot
 
 <!--slot start-->
 

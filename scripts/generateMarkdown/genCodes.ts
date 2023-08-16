@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from 'node:fs'
-import { readFile, readdir } from 'node:fs/promises'
+import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { PluginOptions } from '.'
 
@@ -43,12 +43,9 @@ function code2Markdown(codes: CodeItem[]) {
   return text
 }
 
-export async function main({ sourceDirPath, targetDirPath }: PluginOptions) {
+export async function main({ sourceDirPath, targetDirPath, componentDirNames }: PluginOptions) {
   try {
-    const files = await readdir(sourceDirPath)
-    for (const componentDirName of files) {
-      if (componentDirName === 'index.ts') continue
-
+    for (const componentDirName of componentDirNames) {
       const filePath = resolve(sourceDirPath, `./${componentDirName}/demo.vue`)
       const fileCode = await readFile(filePath, { encoding: 'utf-8' }).catch(() => null)
       if (!fileCode) continue
@@ -63,7 +60,7 @@ export async function main({ sourceDirPath, targetDirPath }: PluginOptions) {
         `$1\n\n${propsText}\n\n$2`,
       )
       writeFileSync(`${targetDirPath}/${componentDirName}.md`, newMdContent, { encoding: 'utf-8' })
-      console.log(`===写入 ${componentDirName} codes 完成===`)
+      console.log(`===write ${componentDirName} codes complete===`)
     }
   } catch (e) {
     console.error('gen codes error', e)

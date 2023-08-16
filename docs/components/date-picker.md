@@ -109,7 +109,7 @@ const onConfirm = (date: Date) => {
 
 <!--codes end-->
 
-## Props
+## DatePicker Props
 
 <!--props start-->
 
@@ -132,7 +132,7 @@ const onConfirm = (date: Date) => {
 
 <!--props end-->
 
-## Event
+## DatePicker Event
 
 <!--event start-->
 
@@ -145,7 +145,7 @@ const onConfirm = (date: Date) => {
 
 <!--event end-->
 
-## Slot
+## DatePicker Slot
 
 <!--slot start-->
 

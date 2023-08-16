@@ -75,7 +75,7 @@ const options = new Array(3).fill(0).map((_item, index) => ({
 
 <!--codes end-->
 
-## Props
+## Radio Props
 
 <!--props start-->
 
@@ -89,9 +89,18 @@ const options = new Array(3).fill(0).map((_item, index) => ({
 | iconSize | 图标大小 | string \| number |  '20px' |
 | checkedColor | 选中状态颜色 | CSSProperties['color'] | - |
 
+## RadioGroup Props
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | ----- | --- | --- |
+| name | 标识符 | string |  '' |
+| modelValue | 值 | RadioValue | - |
+| direction | 方向 | 'horizontal'\|'vertical' |  'vertical' |
+| disabled | 是否全部禁用 | boolean | - |
+
 <!--props end-->
 
-## Event
+## Radio Event
 
 <!--event start-->
 
@@ -99,15 +108,28 @@ const options = new Array(3).fill(0).map((_item, index) => ({
 | --- | --- |
 | change | (value: RadioValue)  |
 
+## RadioGroup Event
+
+| 事件名 | 参数 |
+| --- | --- |
+| update:modelValue | (value: RadioValue)  |
+| change | (value: RadioValue, name: string)  |
+
 <!--event end-->
 
-## Slot
+## Radio Slot
 
 <!--slot start-->
 
 | 名称 | 说明 |
 | --- | --- |
 | default | - |
+| default | - |
+
+## RadioGroup Slot
+
+| 名称 | 说明 |
+| --- | --- |
 | default | - |
 
 <!--slot end-->

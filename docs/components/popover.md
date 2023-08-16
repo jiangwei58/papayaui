@@ -29,7 +29,7 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 <!--codes end-->
 
-## Props
+## Popover Props
 
 <!--props start-->
 
@@ -41,7 +41,7 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 <!--props end-->
 
-## Event
+## Popover Event
 
 <!--event start-->
 
@@ -51,7 +51,7 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 <!--event end-->
 
-## Slot
+## Popover Slot
 
 <!--slot start-->
 

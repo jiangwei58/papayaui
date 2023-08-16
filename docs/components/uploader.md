@@ -111,7 +111,7 @@ const onAfterRead = (files: FileItem | FileItem[]) => {
 
 <!--codes end-->
 
-## Props
+## Uploader Props
 
 <!--props start-->
 
@@ -139,7 +139,7 @@ const onAfterRead = (files: FileItem | FileItem[]) => {
 
 <!--props end-->
 
-## Event
+## Uploader Event
 
 <!--event start-->
 
@@ -153,7 +153,7 @@ const onAfterRead = (files: FileItem | FileItem[]) => {
 
 <!--event end-->
 
-## Slot
+## Uploader Slot
 
 <!--slot start-->
 

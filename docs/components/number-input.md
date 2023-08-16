@@ -52,7 +52,7 @@ const input3 = ref<string>()
 
 <!--codes end-->
 
-## Props
+## NumberInput Props
 
 <!--props start-->
 
@@ -73,7 +73,7 @@ const input3 = ref<string>()
 
 <!--props end-->
 
-## Event
+## NumberInput Event
 
 <!--event start-->
 
@@ -86,7 +86,7 @@ const input3 = ref<string>()
 
 <!--event end-->
 
-## Slot
+## NumberInput Slot
 
 <!--slot start-->
 

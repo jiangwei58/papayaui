@@ -32,7 +32,7 @@ onMounted(() => {
 
 <!--codes end-->
 
-## Props
+## Watermark Props
 
 <!--props start-->
 
@@ -49,7 +49,7 @@ onMounted(() => {
 
 <!--props end-->
 
-## Event
+## Watermark Event
 
 <!--event start-->
 
@@ -59,7 +59,7 @@ onMounted(() => {
 
 <!--event end-->
 
-## Slot
+## Watermark Slot
 
 <!--slot start-->
 

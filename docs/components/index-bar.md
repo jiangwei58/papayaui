@@ -24,7 +24,7 @@ const indexes = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 
 <!--codes end-->
 
-## Props
+## IndexBar Props
 
 <!--props start-->
 
@@ -35,9 +35,15 @@ const indexes = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 | sticky | 是否开启锚点自动吸顶 | boolean |  true |
 | stickyOffsetTop | 锚点自动吸顶时与顶部的距离 | number |  0 |
 
+## IndexAnchor Props
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | ----- | --- | --- |
+| index | 索引字符 | string \| number |  '' |
+
 <!--props end-->
 
-## Event
+## IndexBar Event
 
 <!--event start-->
 
@@ -45,15 +51,27 @@ const indexes = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 | --- | --- |
 
 
+## IndexAnchor Event
+
+| 事件名 | 参数 |
+| --- | --- |
+
+
 <!--event end-->
 
-## Slot
+## IndexBar Slot
 
 <!--slot start-->
 
 | 名称 | 说明 |
 | --- | --- |
 | default | - |
+
+## IndexAnchor Slot
+
+| 名称 | 说明 |
+| --- | --- |
+
 
 <!--slot end-->
 

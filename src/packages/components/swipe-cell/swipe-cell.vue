@@ -83,7 +83,7 @@ export default defineComponent({
 
     const setStatus = (newStatus: SwipeCellStatus) => {
       status.value = newStatus
-      emit(newStatus)
+      emit(newStatus as 'open')
     }
 
     const onClick = async () => {
@@ -108,6 +108,10 @@ export default defineComponent({
         setStatus(newVal ? 'open' : 'close')
       },
     )
+
+    watch([() => props.threshold, () => props.options], () => {
+      onUpdateExtraParams()
+    })
 
     return {
       wxs: {} as any, // 防止类型报错
@@ -189,7 +193,7 @@ function touchend(event, ownInstance) {
 function updateMoveX(state, instance, _ownInstance) {
   instance.requestAnimationFrame(function () {
     instance.setStyle({
-      transition: 'transform ' + (state.isStarted ? '0s' : '0.6s'),
+      transition: 'transform ' + (state.isStarted ? '0s' : '0.6s') + ' cubic-bezier(0.18, 0.89, 0.32, 1)',
       transform: 'translate3d(' + state.moveX + 'px, 0px, 0px)',
     })
   })

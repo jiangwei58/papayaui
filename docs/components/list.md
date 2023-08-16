@@ -5,7 +5,7 @@
 <!--codes start-->
 <!--codes end-->
 
-## Props
+## List Props
 
 <!--props start-->
 
@@ -16,7 +16,7 @@
 
 <!--props end-->
 
-## Event
+## List Event
 
 <!--event start-->
 
@@ -26,7 +26,7 @@
 
 <!--event end-->
 
-## Slot
+## List Slot
 
 <!--slot start-->
 

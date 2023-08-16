@@ -5,7 +5,7 @@
 <!--codes start-->
 <!--codes end-->
 
-## Props
+## SortLabel Props
 
 <!--props start-->
 
@@ -17,7 +17,7 @@
 
 <!--props end-->
 
-## Event
+## SortLabel Event
 
 <!--event start-->
 
@@ -28,7 +28,7 @@
 
 <!--event end-->
 
-## Slot
+## SortLabel Slot
 
 <!--slot start-->
 

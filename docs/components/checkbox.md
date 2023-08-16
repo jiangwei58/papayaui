@@ -102,7 +102,7 @@ const options = new Array(3).fill(0).map((_item, index) => ({
 
 <!--codes end-->
 
-## Props
+## Checkbox Props
 
 <!--props start-->
 
@@ -118,9 +118,19 @@ const options = new Array(3).fill(0).map((_item, index) => ({
 | checkedColor | 选中状态颜色 | CSSProperties['color'] | - |
 | indeterminate | 当前是否支持半选状态，一般用在全选操作中 | boolean | - |
 
+## CheckboxGroup Props
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | ----- | --- | --- |
+| name | 标识符 | string |  '' |
+| modelValue | 值 | CheckboxValue[] | - |
+| direction | 方向 | 'horizontal'\|'vertical' |  'vertical' |
+| disabled | 是否全部禁用 | boolean | - |
+| max | 限制选择的数量 | number | - |
+
 <!--props end-->
 
-## Event
+## Checkbox Event
 
 <!--event start-->
 
@@ -129,15 +139,28 @@ const options = new Array(3).fill(0).map((_item, index) => ({
 | update:modelValue | (value: boolean)  |
 | change | (value: boolean, name: CheckboxValue)  |
 
+## CheckboxGroup Event
+
+| 事件名 | 参数 |
+| --- | --- |
+| update:modelValue | (value: CheckboxValue[])  |
+| change | (value: CheckboxValue[], name: string)  |
+
 <!--event end-->
 
-## Slot
+## Checkbox Slot
 
 <!--slot start-->
 
 | 名称 | 说明 |
 | --- | --- |
 | default | - |
+| default | - |
+
+## CheckboxGroup Slot
+
+| 名称 | 说明 |
+| --- | --- |
 | default | - |
 
 <!--slot end-->

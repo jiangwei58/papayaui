@@ -25,7 +25,7 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 <!--codes end-->
 
-## Props
+## Tooltip Props
 
 <!--props start-->
 
@@ -36,7 +36,7 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 <!--props end-->
 
-## Event
+## Tooltip Event
 
 <!--event start-->
 
@@ -46,7 +46,7 @@ import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 <!--event end-->
 
-## Slot
+## Tooltip Slot
 
 <!--slot start-->
 

@@ -202,6 +202,13 @@
       "type": "nav"
     },
     {
+      "path": "packages/components/tabbar/demo",
+      "style": {
+        "navigationBarTitleText": "Tabbar 标签栏"
+      },
+      "type": "nav"
+    },
+    {
       "path": "packages/components/overlay/demo",
       "style": {
         "navigationBarTitleText": "Overlay 遮罩层"

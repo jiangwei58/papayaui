@@ -77,7 +77,7 @@ const onChange = async (value: number) => {
 
 <!--codes end-->
 
-## Props
+## InputNumber Props
 
 <!--props start-->
 
@@ -104,7 +104,7 @@ const onChange = async (value: number) => {
 
 <!--props end-->
 
-## Event
+## InputNumber Event
 
 <!--event start-->
 
@@ -117,7 +117,7 @@ const onChange = async (value: number) => {
 
 <!--event end-->
 
-## Slot
+## InputNumber Slot
 
 <!--slot start-->
 

@@ -70,7 +70,7 @@ const onClose = () => {
 
 <!--codes end-->
 
-## Props
+## Tag Props
 
 <!--props start-->
 
@@ -86,7 +86,7 @@ const onClose = () => {
 
 <!--props end-->
 
-## Event
+## Tag Event
 
 <!--event start-->
 
@@ -96,7 +96,7 @@ const onClose = () => {
 
 <!--event end-->
 
-## Slot
+## Tag Slot
 
 <!--slot start-->
 

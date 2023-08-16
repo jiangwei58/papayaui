@@ -73,7 +73,7 @@ const onClick = () => {
 
 <!--codes end-->
 
-## Props
+## Button Props
 
 <!--props start-->
 
@@ -106,24 +106,24 @@ const onClick = () => {
 
 <!--props end-->
 
-## Event
+## Button Event
 
 <!--event start-->
 
 | 事件名 | 参数 |
 | --- | --- |
-| click | (_value: Event)  |
-| getphonenumber | (_res: any)  |
-| getuserinfo | (_res: any)  |
-| error | (_res: any)  |
-| opensetting | (_res: any)  |
-| launchapp | (_res: any)  |
-| contact | (_res: any)  |
-| chooseavatar | (_res: any)  |
+| click | (value: Event)  |
+| getphonenumber | (res: any)  |
+| getuserinfo | (res: any)  |
+| error | (res: any)  |
+| opensetting | (res: any)  |
+| launchapp | (res: any)  |
+| contact | (res: any)  |
+| chooseavatar | (res: any)  |
 
 <!--event end-->
 
-## Slot
+## Button Slot
 
 <!--slot start-->
 

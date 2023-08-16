@@ -58,7 +58,7 @@ const getData = (count: number) => {
 
 <!--codes end-->
 
-## Props
+## CheckboxButtons Props
 
 <!--props start-->
 
@@ -66,7 +66,7 @@ const getData = (count: number) => {
 | --- | ----- | --- | --- |
 | column | 列数 | number |  3 |
 | gap | 间隔 | string \| number |  20 |
-| modelValue | 选中值 | CheckboxButtonValue | - |
+| modelValue | 选中值 | CheckboxButtonValue\|CheckboxButtonValue[] | - |
 | options | 选项列表 | CheckboxItem[] |  () => [] |
 | labelKey | 标题对应字段名 | string |  'label' |
 | valueKey | 内容对应字段名 | string |  'value' |
@@ -77,18 +77,18 @@ const getData = (count: number) => {
 
 <!--props end-->
 
-## Event
+## CheckboxButtons Event
 
 <!--event start-->
 
 | 事件名 | 参数 |
 | --- | --- |
-| update:modelValue | (value: CheckboxButtonValue)  |
-| change | (item: CheckboxItem, index: number)  |
+| update:modelValue | (value: CheckboxButtonValue \| CheckboxButtonValue[])  |
+| change | (item: CheckboxItem \| CheckboxItem[], index: number)  |
 
 <!--event end-->
 
-## Slot
+## CheckboxButtons Slot
 
 <!--slot start-->
 
