@@ -1,6 +1,8 @@
 @import '../../styles/vars.scss';
 
 .#{$prefix}-tabbar-item {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,11 +10,12 @@
   flex: 1;
   text-align: center;
   height: 100%;
-  color: #7d7e80;
+  color: _var(tabbar-item-color, #7d7e80);
+  line-height: 1;
   cursor: pointer;
 
   &__icon {
-    margin-bottom: 4px;
+    margin-bottom: _var(tabbar-item-icon-margin-bottom, 4px);
     font-size: 0;
   }
 

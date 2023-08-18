@@ -1,6 +1,6 @@
 <template>
   <view :class="[ns.b(), ns.is('active', isActive)]" :style="customStyle" @tap="onClick">
-    <Badge :show="dot || !isUndefined(info)" :dot="dot" :content="info" :offset="[0, '5px']">
+    <Badge :show="dot || !isUndefined(info)" :dot="dot" :content="info">
       <view :class="ns.e('icon')">
         <slot v-if="$slots.icon" name="icon" :active="isActive" />
         <Icon v-else :name="icon" :class-prefix="iconPrefix" size="22px" block />
