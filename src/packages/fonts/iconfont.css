@@ -1,9 +1,8 @@
 @font-face {
-  font-family: "pa-icon";
-    /* Project id 3668565 */
-  src: url('iconfont.woff2?t=1691046035083') format('woff2'),
-       url('iconfont.woff?t=1691046035083') format('woff'),
-       url('iconfont.ttf?t=1691046035083') format('truetype');
+  font-family: "pa-icon"; /* Project id 3668565 */
+  src: url('iconfont.woff2?t=1692346569539') format('woff2'),
+       url('iconfont.woff?t=1692346569539') format('woff'),
+       url('iconfont.ttf?t=1692346569539') format('truetype');
 }
 
 .pa-icon {
@@ -12,6 +11,30 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.pa-icon-notice:before {
+  content: "\e626";
+}
+
+.pa-icon-info-circle:before {
+  content: "\e77e";
+}
+
+.pa-icon-appstore:before {
+  content: "\e795";
+}
+
+.pa-icon-user:before {
+  content: "\e7ae";
+}
+
+.pa-icon-bell:before {
+  content: "\e7c5";
+}
+
+.pa-icon-sound:before {
+  content: "\e7da";
 }
 
 .pa-icon-half-check:before {
