@@ -300,6 +300,13 @@
       "type": "show"
     },
     {
+      "path": "packages/components/notice-bar/demo",
+      "style": {
+        "navigationBarTitleText": "NoticeBar 通知栏"
+      },
+      "type": "show"
+    },
+    {
       "path": "packages/components/loadmore/demo",
       "style": {
         "navigationBarTitleText": "Loadmore 加载更多"

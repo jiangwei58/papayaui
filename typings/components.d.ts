@@ -58,6 +58,7 @@ declare module 'vue' {
     PaIndexAnchor: typeof import('../src/packages/components/index-anchor/index-anchor.vue')['default']
     PaTabbar: typeof import('../src/packages/components/tabbar/tabbar.vue')['default']
     PaTabbarItem: typeof import('../src/packages/components/tabbar-item/tabbar-item.vue')['default']
+    PaNoticeBar: typeof import('../src/packages/components/notice-bar/notice-bar.vue')['default']
   }
 }
 

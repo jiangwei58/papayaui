@@ -1,0 +1,57 @@
+@import '../../styles/vars.scss';
+
+.#{$prefix}-notice-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: _var(notice-bar-height, 40px);
+  padding: _var(notice-bar-padding, 0 16px);
+  color: _var(notice-bar-color, #ed6a0c);
+  font-size: _var(notice-bar-font-size, 14px);
+  line-height: _var(notice-bar-line-height, 24px);
+  background-color: _var(notice-bar-background, #fffbe8);
+
+  @keyframes loop-animation {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  &__left-icon {
+    margin-right: 8px;
+  }
+
+  &__wrap {
+    position: relative;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  &__content {
+    white-space: nowrap;
+  }
+
+  &__right-icon {
+    font-size: 0;
+    font-weight: bold;
+  }
+
+  &--wrapable {
+    height: auto;
+    padding: _var(notice-bar-wrapable-padding, 8px 16px);
+  }
+  &--wrapable &__content {
+    white-space: normal;
+  }
+
+  &--scrollable &__content {
+    padding-left: 100%;
+    animation: loop-animation 10s linear infinite both;
+  }
+}
