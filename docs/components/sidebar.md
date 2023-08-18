@@ -81,7 +81,7 @@ const onChange = (value: SidebarValue) => {
 | --- | ----- | --- | --- |
 | title | 标题 | string | - |
 | name | 当前项标识值 | SidebarValue | - |
-| badge | 图标右上角徽标的内容 |  | - |
+| badge | 图标右上角徽标的内容 | string | - |
 | disabled | 是否禁用该项 | boolean | - |
 | customClass | 根节点样式类 | string | - |
 | customStyle | 根节点样式 | string\|CSSProperties | - |

@@ -75,8 +75,8 @@ const onClick = () => {
 | --- | ----- | --- | --- |
 | modelValue | 值 | string | - |
 | shape | 搜索框形状 | 'square'\|'round' |  'square' |
-| placeholder | 输入提示 |  |  '请输入搜索关键词' |
-| clearable | 是否显示清除控件 |  |  true |
+| placeholder | 输入提示 | string |  '请输入搜索关键词' |
+| clearable | 是否显示清除控件 | boolean |  true |
 | inputAlign | 输入内容对齐方式 | 'left'\|'center'\|'right' |  'left' |
 | background | 搜索框背景色 | CSSProperties['background-color'] | - |
 | inputBackground | 搜索框内部背景色 | CSSProperties['background-color'] | - |

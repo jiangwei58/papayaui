@@ -47,7 +47,7 @@ const text2 = ref<string>('')
 | modelValue | 值 | string | - |
 | placeholder | 设置占位提示文字 | string |  '请输入' |
 | height | 输入框高度 | string |  '70px' |
-| inputAlign | 值对齐方式 |  |  'left' |
+| inputAlign | 值对齐方式 | 'left'\|'center'\|'right' |  'left' |
 | readonly | 是否只读 | boolean | - |
 | disabled | 是否禁用 | boolean | - |
 | maxlength | 最大输入长度，设置为 -1 的时候不限制最大长度 | number |  140 |

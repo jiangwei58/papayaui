@@ -170,7 +170,7 @@ const onConfirm = (value: Date | Date[]) => {
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | ----- | --- | --- |
 | poppable | 是否以弹层的形式展示日历 | boolean |  true |
-| height | 高度 |  |  '80vh' |
+| height | 高度 | string |  '80vh' |
 
 <!--props end-->
 

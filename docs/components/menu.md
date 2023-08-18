@@ -73,7 +73,7 @@ const state = reactive({
 | --- | ----- | --- | --- |
 | direction | 菜单展开方向 | 'up'\|'down' |  'down' |
 | zIndex | 菜单栏 z-index 层级 | number |  10 |
-| duration | 动画时长，单位ms |  |  200 |
+| duration | 动画时长，单位ms | (string \| number)[] |  200 |
 
 ## MenuItem Props
 

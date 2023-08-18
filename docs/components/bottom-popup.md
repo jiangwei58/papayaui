@@ -55,10 +55,10 @@ const text = computed(() => {
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | ----- | --- | --- |
 | title | 标题 | string | - |
-| height | 弹窗高度 |  |  '80vh' |
-| round | 是否圆角 |  |  true |
-| closeable | 是否显示关闭按钮 |  |  true |
-| maskCloseAble | 是否可以点击空白处关闭 |  | - |
+| height | 弹窗高度 | string |  '80vh' |
+| round | 是否圆角 | (boolean \| string)[] |  true |
+| closeable | 是否显示关闭按钮 | boolean |  true |
+| maskCloseAble | 是否可以点击空白处关闭 | boolean | - |
 
 <!--props end-->
 
