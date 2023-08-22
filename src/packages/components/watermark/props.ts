@@ -23,6 +23,20 @@ export const watermarkProps = {
     default: -20,
   },
   /**
+   * 水印之间的水平间距
+   */
+  gapX: {
+    type: Number,
+    default: 0,
+  },
+  /**
+   * 水印之间的垂直间距
+   */
+  gapY: {
+    type: Number,
+    default: 0,
+  },
+  /**
    * 水印字体大小
    */
   fontColor: {
@@ -56,6 +70,13 @@ export const watermarkProps = {
   contents: {
     type: [String, Array] as PropType<string | string[]>,
     default: '',
+  },
+  /**
+   * 是否覆盖整个页面
+   */
+  fullPage: {
+    type: Boolean,
+    default: true,
   },
 }
 

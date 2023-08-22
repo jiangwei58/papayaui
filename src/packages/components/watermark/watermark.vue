@@ -1,24 +1,17 @@
 <template>
   <view
-    :class="ns.b()"
+    :class="[ns.b(), ns.is('full-page', fullPage)]"
     :style="{
       zIndex,
-      background: `url(${src}) repeat`,
       backgroundSize: `${width}px ${height}px`,
+      backgroundImage: `url(${imageUrl})`,
     }"
   >
-    <canvas
-      v-if="!src"
-      id="watermark"
-      canvas-id="watermark"
-      type="2d"
-      :style="{ width: width + 'px', height: height + 'px' }"
-    ></canvas>
   </view>
 </template>
 
 <script lang="ts" setup>
-import { ref, toRefs, onMounted, getCurrentInstance, watch } from 'vue'
+import { onMounted, ref, toRefs, watch } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { watermarkProps } from './props'
 
@@ -28,15 +21,14 @@ const props = defineProps(watermarkProps)
 
 const { contents } = toRefs(props)
 
-const internalInstance = getCurrentInstance()
-const src = ref<string>('')
+const imageUrl = ref<string>('')
 
 onMounted(() => {
   createWatermark(contents.value)
 })
 
 watch(contents, (newVal) => {
-  src.value = ''
+  imageUrl.value = ''
   createWatermark(newVal)
 })
 
@@ -44,44 +36,74 @@ const createWatermark = (text: string | string[]) => {
   const textList = Array.isArray(text) ? text : [text]
   if (!textList.length) return
 
-  const query = uni.createSelectorQuery()
-  query
-    .in(internalInstance)
-    .select('#watermark')
-    .fields({ node: true, size: true } as UniApp.NodeField, () => {})
-    .exec((res) => {
-      let canvas = null
-      // #ifdef MP
-      canvas = res[0].node as HTMLCanvasElement
-      // #endif
-      // #ifdef H5
-      canvas = document.querySelector('#watermark canvas') as HTMLCanvasElement
-      // #endif
+  // #ifdef H5
+  initH5(textList)
+  // #endif
+  // #ifndef H5
+  initMP(textList)
+  // #endif
+}
 
-      const ctx = canvas.getContext('2d')
-      if (!ctx) return
+const initMP = (textList: string[]) => {
+  const ratio = uni.getSystemInfoSync().pixelRatio
+  const canvasWidth = `${(props.gapX + props.width) * ratio}`
+  const canvasHeight = `${(props.gapY + props.height) * ratio}`
+  const markWidth = props.width * ratio
+  const markHeight = props.height * ratio
+  const canvas: any = uni.createOffscreenCanvas({
+    type: '2d',
+    width: Number(canvasWidth),
+    height: Number(canvasHeight),
+  })
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return
 
-      // #ifdef MP
-      const dpr = uni.getSystemInfoSync().pixelRatio
-      canvas.width = props.width * dpr
-      canvas.height = props.height * dpr
-      ctx.scale(dpr, dpr)
-      // #endif
+  drawText({ ctx, canvas, markWidth, markHeight, ratio, textList })
+}
 
-      ctx.textAlign = 'center'
-      ctx.textBaseline = 'middle'
+const initH5 = (textList: string[]) => {
+  const canvas = document.createElement('canvas')
+  const ratio = window.devicePixelRatio
+  const ctx = canvas.getContext('2d')
+  const canvasWidth = `${(props.gapX + props.width) * ratio}px`
+  const canvasHeight = `${(props.gapY + props.height) * ratio}px`
+  const markWidth = props.width * ratio
+  const markHeight = props.height * ratio
+  canvas.setAttribute('width', canvasWidth)
+  canvas.setAttribute('height', canvasHeight)
+  if (!ctx) return
 
-      ctx.translate(res[0].width / 2, res[0].height / 2 - textList.length * (props.fontSize / 2))
-      ctx.rotate((Math.PI / 180) * Number(props.rotate))
+  drawText({ ctx, canvas, markWidth, markHeight, ratio, textList })
+}
 
-      ctx.font = `${props.fontSize}px ${props.fontFamily}`
-      ctx.fillStyle = props.fontColor
-      textList.forEach((text, index) => {
-        ctx.fillText(text, 0, index * (props.fontSize + 5))
-      })
-
-      src.value = canvas.toDataURL()
-    })
+const drawText = ({
+  ctx,
+  canvas,
+  markWidth,
+  markHeight,
+  ratio,
+  textList,
+}: {
+  ctx: any
+  canvas: HTMLCanvasElement
+  markWidth: number
+  markHeight: number
+  ratio: number
+  textList: string[]
+}) => {
+  ctx.textBaseline = 'middle'
+  ctx.textAlign = 'center'
+  // 文字绕中间旋转
+  ctx.translate(markWidth / 2, markHeight / 2)
+  ctx.rotate((Math.PI / 180) * Number(props.rotate))
+  const markSize = Number(props.fontSize) * ratio
+  ctx.font = `normal normal normal ${markSize}px/${markHeight}px ${props.fontFamily}`
+  ctx.fillStyle = props.fontColor
+  textList.forEach((text, index) => {
+    ctx.fillText(text, 0, index * (props.fontSize * ratio + 5))
+  })
+  ctx.restore()
+  imageUrl.value = canvas.toDataURL()
 }
 </script>
 
