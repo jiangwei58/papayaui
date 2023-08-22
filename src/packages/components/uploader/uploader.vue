@@ -127,10 +127,18 @@ const afterRead = (fileList: FileItem[]) => {
 
 const onPreview = (file: FileItem, index: number) => {
   if (!props.previewFullImage) return
+  // #ifdef MP
   uni.previewMedia({
     sources: props.fileList,
     current: index,
   })
+  // #endif
+  // #ifndef MP
+  uni.previewImage({
+    urls: props.fileList.map((file) => file.url),
+    current: index,
+  })
+  // #endif
   emit('click-preview', file, index)
 }
 
