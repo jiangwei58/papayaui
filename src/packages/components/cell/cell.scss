@@ -21,7 +21,7 @@
   }
 
   &__icon {
-    margin-right: 4rpx;
+    margin-right: _var(cell-icon-left-margin-left, 4px);
   }
 
   &__value {
@@ -40,10 +40,13 @@
   }
 
   &__icon-right {
-    font-weight: bold;
-    margin-left: _var(cell-icon-right-margin-left, 8rpx);
+    margin-left: _var(cell-icon-right-margin-left, 4px);
     transition: transform 0.3s ease-in-out;
     transform: rotate(_var(cell-icon-right-rotate, 0));
+  }
+
+  &__icon, &__icon-right {
+    font-size: _var(cell-icon-size, 16px);
   }
 
   &__error-message {

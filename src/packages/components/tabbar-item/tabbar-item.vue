@@ -3,7 +3,7 @@
     <Badge :show="dot || !isUndefined(info)" :dot="dot" :content="info">
       <view :class="ns.e('icon')">
         <slot v-if="$slots.icon" name="icon" :active="isActive" />
-        <Icon v-else :name="icon" :class-prefix="iconPrefix" size="22px" block />
+        <IconComponent v-else :name="icon" :class-prefix="iconPrefix" />
       </view>
     </Badge>
     <view :class="ns.e('text')">{{ text }}</view>
@@ -16,7 +16,7 @@ import { useNamespace } from '../../core'
 import { isUndefined } from '../../utils'
 import { getParentInstance } from '../../utils/component'
 import Badge from '../badge/badge.vue'
-import Icon from '../icon/icon.vue'
+import IconComponent from '../icon/icon.vue'
 import type { TabbarExpose, TabbarProps } from '../tabbar/props'
 import { tabbarItemProps } from './props'
 

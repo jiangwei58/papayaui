@@ -10,19 +10,17 @@
   >
     <view
       v-if="labelPosition === 'left'"
-      :class="ns.e('label')"
-      class="mr-16"
+      :class="[ns.e('label'), ns.e('label-left')]"
       @tap.stop="onLabelClick"
     >
       <slot />
     </view>
-    <view :class="ns.e('icon')">
-      <IconComponent :name="indeterminate ? 'half-check' : 'success'" size="0.8em" block />
+    <view :class="ns.e('icon')" :style="{ lineHeight: getUnitValue(iconSize) }">
+      <IconComponent :name="indeterminate ? 'half-check' : 'success'" />
     </view>
     <view
       v-if="labelPosition === 'right'"
-      :class="ns.e('label')"
-      class="ml-16"
+      :class="[ns.e('label'), ns.e('label-right')]"
       @tap.stop="onLabelClick"
     >
       <slot />
@@ -34,7 +32,7 @@
 import { computed, type ComponentInternalInstance } from 'vue'
 import { inject } from 'vue'
 import useNamespace, { defaultNamespace } from '../../core/useNamespace'
-import { noop } from '../../utils'
+import { getUnitValue, noop } from '../../utils'
 import type { CheckboxProvideData } from '../checkbox-group/checkbox-group.vue'
 import IconComponent from '../icon/icon.vue'
 import type { CheckboxProps } from './props'

@@ -12,7 +12,7 @@
       ]"
       @tap="onReduce()"
     >
-      <Icon name="minus" block />
+      <IconComponent name="move" />
     </view>
     <input
       :class="[ns.b('inner'), ns.is('inner-disabled', disabled)]"
@@ -35,7 +35,7 @@
       ]"
       @tap="onAdd()"
     >
-      <Icon name="plus" block />
+      <IconComponent name="add" />
     </view>
   </view>
 </template>
@@ -47,7 +47,7 @@ import type { InputNumberValue } from '../../core/useInputNumber'
 import { useInputNumber, minAndMax } from '../../core/useInputNumber'
 import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
-import Icon from '../icon/icon.vue'
+import IconComponent from '../icon/icon.vue'
 import { inputNumberEmits, inputNumberProps } from './props'
 
 const ns = useNamespace('input-number')

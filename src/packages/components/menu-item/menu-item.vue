@@ -18,7 +18,7 @@
         @click="onChange(item)"
       >
         <template #right-icon>
-          <IconComponent v-if="isSelected(item.value)" name="success" block />
+          <IconComponent v-if="isSelected(item.value)" name="success" />
         </template>
       </Cell>
       <slot v-if="$slots.default" />

@@ -5,7 +5,7 @@
     :style="ns.style({ color, backgroundColor: background })"
     @click="emit('click', $event)"
   >
-    <Icon v-if="leftIcon" :class="ns.e('left-icon')" :name="leftIcon" style="font-size: 0" />
+    <IconComponent v-if="leftIcon" :class="ns.e('left-icon')" :name="leftIcon" />
     <slot name="left-icon" :class="ns.e('left-icon')" />
     <view :class="ns.e('wrap')">
       <view :class="ns.e('content')" :style="contentStyle">
@@ -13,7 +13,12 @@
         <slot v-if="!text" />
       </view>
     </view>
-    <Icon v-if="mode" :class="ns.e('right-icon')" :name="rightIconName" @click.stop="onClose" />
+    <IconComponent
+      v-if="mode"
+      :class="ns.e('right-icon')"
+      :name="rightIconName"
+      @click.stop="onClose"
+    />
     <slot name="right-icon" />
   </view>
 </template>
@@ -22,7 +27,7 @@
 import { computed, getCurrentInstance, ref, watch } from 'vue'
 import { useNamespace } from '../../core'
 import { useRect } from '../../hooks'
-import Icon from '../icon/icon.vue'
+import IconComponent from '../icon/icon.vue'
 import { noticeBarProps, noticeBarEmits } from './props'
 
 const ns = useNamespace('notice-bar')

@@ -16,23 +16,11 @@
     @tap="onClick"
   >
     <view :class="ns.e('content')">
-      <Loadmore
-        v-if="localLoading"
-        class="mr-4"
-        status="loading"
-        color="inherit"
-        icon-size="1.2em"
-        :show-text="false"
-      />
-      <Icon
-        v-if="icon && !localLoading"
-        :class="{ 'mr-4': $slots.default }"
-        :name="icon"
-        size="1.2em"
-        color="inherit"
-        style="font-size: inherit"
-      />
-      <slot />
+      <LoadingIcon v-if="localLoading" :class="ns.e('loading-icon')" color="inherit" size="1.2em" />
+      <IconComponent v-if="icon && !localLoading" :class="[ns.e('icon')]" :name="icon" />
+      <text v-if="$slots.default" :class="ns.e('text')">
+        <slot />
+      </text>
     </view>
   </button>
 </template>
@@ -42,8 +30,8 @@ import type { CSSProperties, StyleValue } from 'vue'
 import { computed, ref } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
-import Icon from '../icon/icon.vue'
-import Loadmore from '../loadmore/loadmore.vue'
+import IconComponent from '../icon/icon.vue'
+import LoadingIcon from '../loading-icon/loading-icon.vue'
 import { buttonEmits, buttonProps } from './props'
 
 const ns = useNamespace('button')

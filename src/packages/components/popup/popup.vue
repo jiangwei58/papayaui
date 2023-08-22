@@ -19,7 +19,7 @@
   >
     <view :class="ns.e('content')" :style="contentStyle" @tap.stop="noop">
       <view v-if="closeable" :class="ns.e('close')" @tap.stop="onClose">
-        <Icon name="close" size="24px" block />
+        <IconComponent name="close" />
       </view>
       <slot />
       <SafeBottom v-if="safeAreaInsetBottom && ['left', 'right', 'bottom'].includes(position)" />
@@ -32,7 +32,7 @@ import type { CSSProperties } from 'vue'
 import { computed, ref, toRefs, watch } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { getUnitValue, noop } from '../../utils'
-import Icon from '../icon/icon.vue'
+import IconComponent from '../icon/icon.vue'
 import Overlay from '../overlay/overlay.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import type { TransitionMode } from '../transition/props'

@@ -5,12 +5,12 @@
     @click="toPage"
   >
     {{ title }}
-    <Icon name="right" block />
+    <IconComponent name="right" class="doc-nav-block-item__icon" />
   </view>
 </template>
 
 <script lang="ts" setup>
-import Icon from '../components/icon/icon.vue'
+import IconComponent from '../components/icon/icon.vue'
 
 interface OwnProps {
   title?: string
@@ -42,6 +42,11 @@ const toPage = () => {
   background: #f7f8fa;
   border-radius: 99px;
   transition: background 0.3s;
+
+  &__icon {
+    font-size: 16px;
+    font-weight: normal;
+  }
 }
 .doc-nav-block-item-hover {
   background: #eef0f4;

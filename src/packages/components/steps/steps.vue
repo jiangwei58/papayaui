@@ -17,7 +17,7 @@
             :status="getStatus(index)"
           />
           <view v-else :class="ns.b('item-icon')">
-            <Icon v-if="index < current" name="success" />
+            <IconComponent v-if="index < current" name="success" />
             <text v-else>{{ index + 1 }}</text>
           </view>
         </view>
@@ -53,7 +53,7 @@ import type { CSSProperties } from 'vue'
 import { getCurrentInstance, onMounted, ref, useSlots, watch } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { useRect } from '../../hooks'
-import Icon from '../icon/icon.vue'
+import IconComponent from '../icon/icon.vue'
 import type { StepStatus } from './props'
 import { stepsEmits, stepsProps } from './props'
 

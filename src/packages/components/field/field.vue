@@ -46,12 +46,10 @@
         @blur="emit('blur', $event)"
         @confirm="emit('confirm', $event)"
       />
-      <Icon
+      <IconComponent
         v-if="!disabled && clearable && !!modelValue"
-        name="close-circle-fill"
+        name="round-close-fill"
         :class="ns.e('icon')"
-        size="18px"
-        color="#c8c9cc"
         @tap.stop="onClear"
       />
     </view>
@@ -63,7 +61,7 @@ import useNamespace from '../../core/useNamespace'
 import type { EventDetail } from '../../types'
 import { getUnitValue } from '../../utils'
 import Cell from '../cell/cell.vue'
-import Icon from '../icon/icon.vue'
+import IconComponent from '../icon/icon.vue'
 import { fieldEmits, fieldProps } from './props'
 
 const ns = useNamespace('field')

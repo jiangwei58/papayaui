@@ -18,7 +18,7 @@
             :class="ns.e('preview-delete')"
             @tap="onDelete(file, index)"
           >
-            <Icon name="close" :class="ns.e('preview-delete-icon')" />
+            <IconComponent name="close" :class="ns.e('preview-delete-icon')" />
           </view>
         </view>
 
@@ -28,7 +28,7 @@
           :style="sizeStyle"
           @tap="onChooseFile"
         >
-          <Icon name="camera" :class="ns.e('upload-icon')" size="24px" block />
+          <IconComponent name="camera" :class="ns.e('upload-icon')" />
         </view>
       </template>
     </view>
@@ -39,7 +39,7 @@
 import { computed } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
-import Icon from '../icon/icon.vue'
+import IconComponent from '../icon/icon.vue'
 import ImageComponent from '../image/image.vue'
 import type { FileItem } from './props'
 import { uploaderProps, uploaderEmits } from './props'

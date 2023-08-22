@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    @include _setVar(icon-size, 22px);
+    font-size: 20px;
 
     &-line {
       width: 1rpx;
@@ -53,7 +53,7 @@
   &--single &__capsule-menu {
     justify-content: flex-start;
     padding-left: 6px;
-    @include _setVar(icon-size, 24px);
+    font-size: 22px;
     background-color: transparent;
     border-color: transparent;
   }

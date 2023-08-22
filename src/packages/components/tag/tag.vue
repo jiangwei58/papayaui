@@ -4,7 +4,7 @@
     :style="ns.style(customStyle)"
   >
     <slot />
-    <Icon v-if="closeable" name="close" class="ml-2" @tap="emit('close')" />
+    <IconComponent v-if="closeable" :class="ns.e('close')" name="clear" @tap="emit('close')" />
   </view>
 </template>
 
@@ -13,7 +13,7 @@ import type { CSSProperties } from 'vue'
 import { computed } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
-import Icon from '../icon/icon.vue'
+import IconComponent from '../icon/icon.vue'
 import { tagEmits, tagProps } from './props'
 
 const ns = useNamespace('tag')

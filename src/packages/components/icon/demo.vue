@@ -1,5 +1,5 @@
 <template>
-  <DocDemoBlock title="基础用法" card>
+  <DocDemoBlock title="基础用法">
     <view class="grid grid-cols-4">
       <view
         v-for="(name, index) in icons"
@@ -17,6 +17,8 @@
   <DocDemoBlock title="颜色大小" card>
     <pa-icon name="success" size="100" />
     <pa-icon name="success" size="50" color="green" />
+    <!-- 样式形式，方便继承父级样式 -->
+    <pa-icon name="success" style="font-size: 50px; color: red" />
   </DocDemoBlock>
   <pa-safe-bottom />
 </template>

@@ -2,7 +2,7 @@
 .#{$prefix}-icon {
   position: relative;
   display: inline-block;
-  font-size: _var(icon-size, 16px);
+  font-size: _var(icon-size, inherit);
   color: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;

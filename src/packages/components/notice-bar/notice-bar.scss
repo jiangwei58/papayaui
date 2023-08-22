@@ -37,9 +37,8 @@
     white-space: nowrap;
   }
 
-  &__right-icon {
-    font-size: 0;
-    font-weight: bold;
+  &__left-icon, &__right-icon {
+    font-size: _var(notice-bar-icon-size, 16px);
   }
 
   &--wrapable {

@@ -1,6 +1,6 @@
 <template>
   <DocDemoBlock title="基础用法">
-    <pa-notice-bar left-icon="notice" text="落霞与孤鹜齐飞，秋水共长天一色" />
+    <pa-notice-bar left-icon="notification" text="落霞与孤鹜齐飞，秋水共长天一色" />
   </DocDemoBlock>
 
   <DocDemoBlock title="滚动播放">

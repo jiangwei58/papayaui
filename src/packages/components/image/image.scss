@@ -21,4 +21,10 @@
     background-color: #f7f8fa;
     border-radius: inherit;
   }
+
+  &__loading-icon,
+  &__error-icon {
+    font-size: 32px;
+    color: #dcdee0;
+  }
 }

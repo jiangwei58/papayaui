@@ -1,7 +1,7 @@
 @import '../../styles/vars.scss';
 .#{$prefix}-steps {
   $gap: 8px;
-  $iconSize: 20px;
+  $iconSize: _var(steps-icon-size, 20px);
   display: flex;
   &-item {
     flex: 1;
@@ -35,7 +35,8 @@
       justify-content: center;
       width: $iconSize;
       height: $iconSize;
-      font-size: 12px;
+      font-size: calc($iconSize - 4px);
+      line-height: $iconSize;
       color: _var(color-black-3);
       border: 1px solid _var(color-black-3);
       border-radius: 50%;

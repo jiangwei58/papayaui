@@ -1,7 +1,7 @@
 @import '../../styles/vars.scss';
 
 .#{$prefix}-checkbox {
-  $size: 20px;
+  $size: _var(checkbox-size, 20px);;
   $gray: #c8c9cc;
 
   display: _var(checkbox-display, flex);
@@ -16,7 +16,7 @@
     justify-content: center;
     width: $size;
     height: $size;
-    font-size: $size;
+    font-size: calc($size * 0.8);
     color: transparent;
     border: 1px solid $gray;
     transition-property: color, border-color, background-color;
@@ -26,6 +26,12 @@
     font-size: _var(checkbox-font-size, 16px);
     line-height: $size;
     color: _var(checkbox-label-color, _var(color-black));
+  }
+  &__label-left {
+    margin-right: 8px;
+  }
+  &__label-right {
+    margin-left: 8px;
   }
 
   &--square &__icon {

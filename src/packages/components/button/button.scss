@@ -15,6 +15,14 @@
     height: 100%;
   }
 
+  &__loading-icon + &__text, &__icon + &__text {
+    margin-left: 4px;
+  }
+
+  &__icon {
+    font-size: 1.2em;
+  }
+
   &::before {
     position: absolute;
     top: 50%;

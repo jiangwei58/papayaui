@@ -16,6 +16,7 @@
     flex-shrink: 0;
     width: $height;
     height: $height;
+    font-size: 16px;
     background-color: $bgColor;
     &:active:not(.#{$prefix}-input-number-icon--disabled) {
       background-color: #e8e8e8;

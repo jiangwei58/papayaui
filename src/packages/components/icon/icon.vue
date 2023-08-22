@@ -34,3 +34,12 @@ const iconClassList = computed(() => {
 <style lang="scss" scoped>
 @import './icon.scss';
 </style>
+<style lang="scss">
+/* #ifdef MP */
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+/* #endif */
+</style>

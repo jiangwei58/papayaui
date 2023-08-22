@@ -16,11 +16,11 @@
 
   &__icon {
     margin-bottom: _var(tabbar-item-icon-margin-bottom, 4px);
-    font-size: 0;
+    font-size: _var(tabbar-item-icon-size, 22px);
   }
 
   &__text {
-    font-size: 10px;
+    font-size: _var(tabbar-item-font-size, 10px);
   }
 
   &--active {

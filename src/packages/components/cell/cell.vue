@@ -10,7 +10,7 @@
     ]"
     @click="onClick"
   >
-    <Icon v-if="icon" :name="icon" block :class="ns.e('icon')" />
+    <IconComponent v-if="icon" :class="ns.e('icon')" :name="icon" />
     <view
       v-if="!!title || $slots.title"
       :class="[ns.e('title'), titleClass]"
@@ -31,14 +31,14 @@
     <text v-if="suffix" :class="ns.e('suffix')">{{ suffix }}</text>
 
     <slot v-if="$slots['right-icon'] && !isLink" name="right-icon" />
-    <Icon v-if="isLink" :class="ns.e('icon-right')" name="right" size="18px" block />
+    <IconComponent v-if="isLink" :class="ns.e('icon-right')" name="right" />
   </view>
 </template>
 
 <script lang="ts" setup>
 import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
-import Icon from '../icon/icon.vue'
+import IconComponent from '../icon/icon.vue'
 import { cellEmits, cellProps } from './props'
 
 const ns = useNamespace('cell')

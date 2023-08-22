@@ -9,10 +9,10 @@
     :style="{ backgroundColor: bgColor, paddingTop: getUnitValue(statusBarHeight, 'px') }"
   >
     <view v-if="leftMenu.length" :class="ns.e('capsule-menu')" :style="capsuleMenuStyle">
-      <Icon :name="leftMenu[0]" @click="onLeftMenuClick(0)" />
+      <IconComponent :name="leftMenu[0]" @click="onLeftMenuClick(0)" />
       <template v-if="leftMenu.length > 1">
         <view :class="ns.e('capsule-menu-line')"></view>
-        <Icon :name="leftMenu[1]" @click="onLeftMenuClick(1)" />
+        <IconComponent :name="leftMenu[1]" @click="onLeftMenuClick(1)" />
       </template>
     </view>
     <view :class="ns.b('content')" :style="{ height: getUnitValue(contentHeight, 'px') }">
@@ -35,7 +35,7 @@ import type { CSSProperties } from 'vue'
 import { computed, defineProps } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
-import Icon from '../icon/icon.vue'
+import IconComponent from '../icon/icon.vue'
 import { navBarEmits, navBarProps } from './props'
 
 const systemInfo = uni.getSystemInfoSync()

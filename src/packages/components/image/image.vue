@@ -22,11 +22,11 @@
     />
     <view v-if="status === 'loading'" :class="ns.e('loading')">
       <slot v-if="$slots.loading" name="loading" />
-      <Icon v-else name="image" size="32px" color="#dcdee0" />
+      <IconComponent v-else name="image" :class="ns.e('loading-icon')" />
     </view>
     <view v-if="status === 'error'" :class="ns.e('error')">
       <slot v-if="$slots.error" name="error" />
-      <Icon v-else name="image-error" size="32px" color="#dcdee0" />
+      <IconComponent v-else name="image-error" :class="ns.e('error-icon')" />
     </view>
   </view>
 </template>
@@ -35,7 +35,7 @@
 import { ref } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
-import Icon from '../icon/icon.vue'
+import IconComponent from '../icon/icon.vue'
 import { imageEmits, imageProps } from './props'
 
 const ns = useNamespace('image')

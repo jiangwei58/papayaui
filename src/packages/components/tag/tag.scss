@@ -9,6 +9,10 @@
   padding: _var(tag-padding, 0 4px);
   border: 1px solid transparent;
 
+  &__close {
+    margin-left: 2px;
+  }
+
   @each $type in primary, success, warning, danger {
     &--#{$type} {
       color: #fff;
