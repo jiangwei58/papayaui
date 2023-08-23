@@ -18,7 +18,7 @@
     <view :class="ns.e('content')">
       <LoadingIcon v-if="localLoading" :class="ns.e('loading-icon')" color="inherit" size="1.2em" />
       <IconComponent v-if="icon && !localLoading" :class="[ns.e('icon')]" :name="icon" />
-      <view :class="ns.e('text')">
+      <view v-if="$slots.default" :class="ns.e('text')">
         <slot />
       </view>
     </view>
