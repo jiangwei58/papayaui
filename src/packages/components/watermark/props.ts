@@ -6,35 +6,35 @@ export const watermarkProps = {
    */
   width: {
     type: Number,
-    default: 150,
+    default: 125,
   },
   /**
    * 单个水印高度
    */
   height: {
     type: Number,
-    default: 150,
+    default: 100,
   },
   /**
    * 水印绘制时，旋转的角度
    */
   rotate: {
     type: Number,
-    default: -20,
+    default: -22,
   },
   /**
    * 水印之间的水平间距
    */
   gapX: {
     type: Number,
-    default: 0,
+    default: 25,
   },
   /**
    * 水印之间的垂直间距
    */
   gapY: {
     type: Number,
-    default: 0,
+    default: 50,
   },
   /**
    * 水印字体大小

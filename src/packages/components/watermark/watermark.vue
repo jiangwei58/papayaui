@@ -3,7 +3,7 @@
     :class="[ns.b(), ns.is('full-page', fullPage)]"
     :style="{
       zIndex,
-      backgroundSize: `${width}px ${height}px`,
+      backgroundSize: `${gapX + width}px`,
       backgroundImage: `url(${imageUrl})`,
     }"
   >
@@ -62,13 +62,13 @@ const initMP = (textList: string[]) => {
 }
 
 const initH5 = (textList: string[]) => {
-  const canvas = document.createElement('canvas')
   const ratio = window.devicePixelRatio
-  const ctx = canvas.getContext('2d')
   const canvasWidth = `${(props.gapX + props.width) * ratio}px`
   const canvasHeight = `${(props.gapY + props.height) * ratio}px`
   const markWidth = props.width * ratio
   const markHeight = props.height * ratio
+  const canvas = document.createElement('canvas')
+  const ctx = canvas.getContext('2d')
   canvas.setAttribute('width', canvasWidth)
   canvas.setAttribute('height', canvasHeight)
   if (!ctx) return
