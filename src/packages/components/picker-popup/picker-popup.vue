@@ -188,8 +188,15 @@ const onClose = () => {
   emit('close')
 }
 
+/** 清除搜索框 */
+const onClearSearch = () => {
+  searchText.value = ''
+  onSearchChange()
+}
+
 const onReset = () => {
   _onClear()
+  onClearSearch()
 }
 
 const onClean = (reset = true) => {
@@ -219,6 +226,7 @@ defineExpose({
   reset: onReset,
   clean: onClean,
   refresh: onRefresh,
+  clearSearch: onClearSearch,
   getOptions: __getOptions,
   updateOptions: __updateOptions,
 })
