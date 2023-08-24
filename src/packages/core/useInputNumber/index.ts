@@ -30,7 +30,11 @@ export function useInputNumber(props: IncludeRefs<UseInputNumberProps>) {
     decimalLength: _props.decimalLength ?? 0,
   })
 
-  const numberVal = ref<number | null>(+state.modelValue)
+  const numberVal = ref<number | null>(
+    typeof state.modelValue === 'number' || typeof state.modelValue === 'string'
+      ? +state.modelValue
+      : null,
+  )
 
   const safeNumberVal = computed<number>(() => {
     return Number(numberVal.value ?? 0)
