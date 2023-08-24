@@ -39,8 +39,12 @@ export function useList<T = any>(props: UseListProps<T> = {}) {
     ...props,
   })
 
-  const loading = computed<boolean>(() => {
+  const loading = computed(() => {
     return state.loadStatus === LoadStatusEnum.LOADING
+  })
+
+  const onlyOnePage = computed(() => {
+    return state.pageNumber === 0 && state.list.length > 0 && state.list.length < state.pageSize
   })
 
   const getListData = async (fun: () => Promise<UseListResult<T>>) => {
@@ -83,6 +87,7 @@ export function useList<T = any>(props: UseListProps<T> = {}) {
   return {
     ...toRefs(state),
     loading,
+    onlyOnePage,
     getListData,
     reset,
   }

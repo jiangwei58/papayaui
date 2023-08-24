@@ -16,12 +16,6 @@
     overflow: hidden;
   }
 
-  &__empty {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
   &__footer {
     flex-shrink: 0;
     padding: 8px 13px;

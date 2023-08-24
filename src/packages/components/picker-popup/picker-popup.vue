@@ -19,7 +19,7 @@
         :class="ns.e('search')"
         @change="debounceSearchChange"
       />
-      <scroll-view scroll-y :class="ns.e('list')" @scrolltolower="onScrolltolower">
+      <scroll-view scroll-y :class="ns.e('list')" @scrolltolower="onScrollNext">
         <ListItem
           v-for="(item, index) in filterOptions"
           :key="index"
@@ -32,13 +32,14 @@
         >
           <slot v-if="$slots.default" :item="item" />
         </ListItem>
-        <view
+        <LoadMore
           v-if="!filterOptions.length || !!pagination"
-          :class="[ns.e('empty'), { 'height-full': !filterOptions.length }]"
-          @tap="onScrolltolower"
-        >
-          <Loadmore :status="loadStatus" :config="{ nomore: isEmpty ? '无数据' : '没有更多了' }" />
-        </view>
+          :status="loadStatus"
+          :config="{ nomore: isEmpty ? '无数据' : '没有更多了' }"
+          :full-page="isEmpty"
+          :show-text="!onlyOnePage"
+          @next="onScrollNext"
+        />
         <SafeBottom v-if="safeAreaInsetBottom && !multiple" />
       </scroll-view>
     </view>
@@ -63,7 +64,7 @@ import { debounce } from '../../utils'
 import BottomPopup from '../bottom-popup/bottom-popup.vue'
 import ButtonComponent from '../button/button.vue'
 import ListItem from '../list-item/list-item.vue'
-import Loadmore from '../loadmore/loadmore.vue'
+import LoadMore from '../loadmore/loadmore.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import Search from '../search/search.vue'
 import type { Option, OptionValue } from './props'
@@ -84,6 +85,7 @@ const {
   pageSize,
   loadStatus,
   isEmpty,
+  onlyOnePage,
   getListData,
 } = useList<Option>(typeof props.pagination === 'object' ? props.pagination : undefined)
 
@@ -149,7 +151,7 @@ const getData = async (extra?: Record<string, unknown>) => {
   })
 }
 
-const onScrolltolower = () => {
+const onScrollNext = () => {
   if (!props.pagination) return
   pageNumber.value += 1
   getData()
