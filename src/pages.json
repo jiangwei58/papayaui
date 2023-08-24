@@ -106,7 +106,7 @@
     {
       "path": "packages/components/number-input/demo",
       "style": {
-        "navigationBarTitleText": "NumberInput 数值输入框"
+        "navigationBarTitleText": "NumberInput 数值输入框（废弃）"
       },
       "type": "form"
     },

@@ -16,8 +16,14 @@
     </view>
 
     <view
-      v-if="selectAllOnFocus && !inputSelection.focus"
-      :class="[ns.e('inner'), ns.e('inner-mask'), ns.is('inner-disabled', disabled)]"
+      v-if="
+        selectAllOnFocus &&
+        !inputSelection.focus &&
+        !disabled &&
+        !readonly &&
+        typeof numberVal === 'number'
+      "
+      :class="[ns.e('inner'), ns.e('inner-mask')]"
       :style="ns.style({ width: inputWidth && getUnitValue(inputWidth), textAlign: inputAlign })"
       @click="onFocusInput"
     >
@@ -111,7 +117,6 @@ const onReduce = () => {
 }
 
 const onFocusInput = () => {
-  if (props.disabled || props.readonly) return
   if (props.selectAllOnFocus && typeof numberVal.value === 'number') {
     inputSelection.value = { focus: true, start: 0, end: numberVal.value }
   }

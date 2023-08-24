@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import type { InputNumberValue } from '../../core/useInputNumber'
 import type { EventDetail } from '../../types'
-import { isNumber, isObject } from '../../utils'
+import { isObject } from '../../utils'
 
 export const inputNumberProps = {
   /**
@@ -113,8 +113,8 @@ export const inputNumberProps = {
 }
 
 export const inputNumberEmits = {
-  'update:modelValue': (value: number, _name?: string) => isNumber(value),
-  change: (value: number, _name?: string) => isNumber(value),
+  'update:modelValue': (_value: number, _name?: string) => true,
+  change: (_value: number, _name?: string) => true,
   focus: (value: EventDetail<{ value: InputNumberValue; height: number }>) => isObject(value),
   blur: (value: EventDetail<{ value: InputNumberValue; cursor: number }>) => isObject(value),
 }
