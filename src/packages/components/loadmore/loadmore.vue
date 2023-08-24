@@ -1,5 +1,5 @@
 <template>
-  <view :class="ns.b()">
+  <view :class="[ns.b(), ns.is('full-page', fullPage)]" @tap="onClick">
     <LoadingIcon v-if="status === 'loading'" :size="iconSize" :color="color" />
     <text v-if="showText" :class="ns.e('text')" :style="{ color: textColor }">
       {{
@@ -15,14 +15,16 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
+import { LoadStatusEnum } from '../../core'
 import useNamespace from '../../core/useNamespace'
 import LoadingIcon from '../loading-icon/loading-icon.vue'
-import type { LoadStatus } from './props'
+import { loadMoreEmits, type LoadStatus } from './props'
 import { loadMoreProps } from './props'
 
 const ns = useNamespace('loadmore')
 
 const props = defineProps(loadMoreProps)
+const emit = defineEmits(loadMoreEmits)
 
 const localConfig = computed<LoadStatus>(() => {
   return {
@@ -32,6 +34,12 @@ const localConfig = computed<LoadStatus>(() => {
     ...props.config,
   }
 })
+
+const onClick = () => {
+  if (props.status === LoadStatusEnum.LOADMORE) {
+    emit('next')
+  }
+}
 </script>
 
 <style lang="scss" scoped>

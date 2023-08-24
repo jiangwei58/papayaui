@@ -1,4 +1,5 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { LoadStatusEnum } from '../../core'
 import { defaultNamespace } from '../../core/useNamespace'
 
 export const loadMoreProps = {
@@ -41,15 +42,17 @@ export const loadMoreProps = {
     type: Boolean,
     default: true,
   },
+  /**
+   * 是否覆盖整个页面
+   */
+  fullPage: Boolean,
 }
 
-export const loadMoreEmits = {}
-
-export interface LoadStatus {
-  loadmore: string
-  loading: string
-  nomore: string
+export const loadMoreEmits = {
+  next: () => true,
 }
+
+export type LoadStatus = Record<LoadStatusEnum, string>
 
 export type LoadMoreProps = ExtractPropTypes<typeof loadMoreProps>
 export type LoadMoreEmits = typeof loadMoreEmits
