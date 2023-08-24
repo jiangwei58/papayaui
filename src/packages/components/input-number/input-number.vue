@@ -14,18 +14,32 @@
     >
       <IconComponent name="move" />
     </view>
+
+    <view
+      v-if="selectAllOnFocus && !inputSelection.focus"
+      :class="[ns.e('inner'), ns.e('inner-mask'), ns.is('inner-disabled', disabled)]"
+      :style="ns.style({ width: inputWidth && getUnitValue(inputWidth), textAlign: inputAlign })"
+      @click="onFocusInput"
+    >
+      {{ numberVal }}
+    </view>
     <input
-      :class="[ns.b('inner'), ns.is('inner-disabled', disabled)]"
+      v-else
+      :class="[ns.e('inner'), ns.is('inner-disabled', disabled)]"
       :style="ns.style({ width: inputWidth && getUnitValue(inputWidth), textAlign: inputAlign })"
       :placeholder="placeholder"
       :value="numberVal"
       :type="decimalLength ? 'digit' : 'number'"
       :placeholder-class="ns.b('placeholder')"
       :disabled="readonly || disabled"
+      :focus="inputSelection.focus"
+      :selection-start="inputSelection.start"
+      :selection-end="inputSelection.end"
       @input="onInput"
       @blur="onBlur"
       @focus="onFocus"
     />
+
     <view
       v-if="controls"
       :class="[
@@ -41,7 +55,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, toRefs } from 'vue'
+import { computed, nextTick, ref, toRefs } from 'vue'
 import type { EventDetail } from '../..'
 import type { InputNumberValue } from '../../core/useInputNumber'
 import { useInputNumber, minAndMax } from '../../core/useInputNumber'
@@ -59,6 +73,8 @@ const { modelValue, intLength, decimalLength } = toRefs(props)
 const min = computed<number>(() => +props.min)
 const max = computed<number>(() => +props.max)
 const step = computed<number>(() => +props.step)
+
+const inputSelection = ref({ focus: false, start: -1, end: -1 })
 
 const {
   numberVal,
@@ -94,6 +110,13 @@ const onReduce = () => {
   onUpdate(newVal)
 }
 
+const onFocusInput = () => {
+  if (props.disabled || props.readonly) return
+  if (props.selectAllOnFocus && typeof numberVal.value === 'number') {
+    inputSelection.value = { focus: true, start: 0, end: numberVal.value }
+  }
+}
+
 const onInput = (e: unknown) => {
   const detail = (e as EventDetail<{ cursor: number; keyCode: number; value: string }>).detail
   return getFormatVal(detail.value)
@@ -117,6 +140,9 @@ const onBlur = async (e: unknown) => {
   // 值没变不发送更新事件
   if (result !== Number(props.modelValue) || result !== numVal) {
     onUpdate(result)
+  }
+  if (props.selectAllOnFocus) {
+    inputSelection.value = { focus: false, start: -1, end: -1 }
   }
   emit('blur', event)
 }

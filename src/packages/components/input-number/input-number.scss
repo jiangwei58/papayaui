@@ -9,6 +9,7 @@
   align-items: center;
   height: $height;
   color: _var(color-black);
+
   &-icon {
     display: flex;
     align-items: center;
@@ -22,13 +23,16 @@
       background-color: #e8e8e8;
     }
   }
+
   &-minus {
     border-radius: $round 0 0 $round;
   }
+
   &-plus {
     border-radius: 0 $round $round 0;
   }
-  &-inner {
+
+  &__inner {
     flex: 1;
     width: _var(input-number-width, 32px);
     height: $height;
@@ -40,20 +44,28 @@
       color: _var(input-number-placeholder-color, $disabledColor);
     }
   }
-  &--controls &-inner {
+
+  &__inner-mask {
+    line-height: $height;
+  }
+
+  &--controls &__inner {
     margin: 0 2px;
     border-radius: 0;
   }
+
   &--icon-disabled {
     color: $disabledColor;
     background-color: $disabledBgColor;
     cursor: not-allowed;
   }
+
   &--inner-disabled {
     color: $disabledColor;
     background-color: $disabledBgColor;
   }
-  &--plain &-inner {
+
+  &--plain &__inner {
     color: _var(input-number-color, _var(color-primary));
     background-color: transparent;
   }

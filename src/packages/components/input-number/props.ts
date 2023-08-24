@@ -106,6 +106,10 @@ export const inputNumberProps = {
     type: Object as PropType<any>,
     default: null,
   },
+  /**
+   * 聚焦时是否全选内容
+   */
+  selectAllOnFocus: Boolean,
 }
 
 export const inputNumberEmits = {
