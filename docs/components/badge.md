@@ -64,7 +64,7 @@
       <pa-badge>
         <view class="demo-block"></view>
         <template #content>
-          <pa-icon name="star" color="#fff" />
+          <pa-icon name="favor" color="#fff" />
         </template>
       </pa-badge>
     </view>

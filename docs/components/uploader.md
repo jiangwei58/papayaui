@@ -50,9 +50,17 @@ import type { FileItem } from './props'
 import img1 from '../../images/demo2.jpeg'
 import img2 from '../../images/demo3.jpg'
 
+let src1 = ''
+let src2 = ''
+// #ifdef MP
 const fileManager = uni.getFileSystemManager()
-const src1 = 'data:image/jpeg;base64,' + fileManager.readFileSync(img1, 'base64')
-const src2 = 'data:image/jpeg;base64,' + fileManager.readFileSync(img2, 'base64')
+src1 = 'data:image/jpeg;base64,' + fileManager.readFileSync(img1, 'base64')
+src2 = 'data:image/jpeg;base64,' + fileManager.readFileSync(img2, 'base64')
+// #endif
+// #ifdef H5
+src1 = img1
+src2 = img2
+// #endif
 
 const fileList = ref<FileItem[]>([])
 const fileList2 = ref([

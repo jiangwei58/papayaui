@@ -41,9 +41,9 @@
     </DocDemoBlock>
 
     <DocDemoBlock title="图标" card>
-      <pa-button type="primary" icon="edit">图标按钮</pa-button>
-      <pa-button type="primary" icon="edit"></pa-button>
-      <pa-button type="primary" icon="edit" width="42px" height="42px" round></pa-button>
+      <pa-button type="primary" icon="write">图标按钮</pa-button>
+      <pa-button type="primary" icon="write"></pa-button>
+      <pa-button type="primary" icon="write" width="42px" height="42px" round></pa-button>
     </DocDemoBlock>
 
     <DocDemoBlock title="块级元素" card>
