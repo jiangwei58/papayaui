@@ -1,0 +1,7 @@
+@import '../../styles/vars.scss';
+
+.#{$prefix}-tab__pane {
+  width: 100%;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}

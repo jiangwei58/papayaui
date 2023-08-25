@@ -23,6 +23,7 @@ declare module 'vue' {
     PaSortLabel: typeof import('../src/packages/components/sort-label/sort-label.vue')['default']
     PaSticky: typeof import('../src/packages/components/sticky/sticky.vue')['default']
     PaTabs: typeof import('../src/packages/components/tabs/tabs.vue')['default']
+    PaTabPane: typeof import('../src/packages/components/tab-pane/tab-pane.vue')['default']
     PaTooltip: typeof import('../src/packages/components/tooltip/tooltip.vue')['default']
     PaWatermark: typeof import('../src/packages/components/watermark/watermark.vue')['default']
     PaPopup: typeof import('../src/packages/components/popup/popup.vue')['default']

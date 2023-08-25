@@ -1,25 +1,22 @@
 @import '../../styles/vars.scss';
 .#{$prefix}-tabs {
   $tabs-line-width: 40px;
-  height: _var(tabs-height, 44px);
-  padding: 0 8px;
-  background-color: _var(tabs-bg-color, #fff);
-  &.scrollable &__item {
-    flex: 1 0 auto;
-    padding: 0 12px;
+  position: relative;
+  overflow: hidden;
+
+  &__wrapper {
+    height: _var(tabs-height, 44px);
+    background-color: _var(tabs-bg-color, #fff);
   }
-  &.shrink &__item {
-    flex: none;
-  }
-  &-scroll {
-    height: 100%;
-  }
-  &-wrapper {
+
+  &__list {
     position: relative;
     display: flex;
-    height: 100%;
     user-select: none;
+    box-sizing: content-box;
+    height: 100%;
   }
+
   &__item {
     position: relative;
     display: flex;
@@ -32,11 +29,8 @@
     font-size: _var(tabs-font-size, 14px);
     line-height: _var(tabs-line-height, 20px);
     min-width: _var(tabs-line-width, $tabs-line-width);
-    &.active {
-      color: _var(tabs-color-active, _var(color-black));
-      font-weight: 500;
-    }
   }
+
   &__line {
     position: absolute;
     bottom: 0;
@@ -46,5 +40,35 @@
     height: _var(tabs-line-height, 3px);
     background-color: _var(color-primary);
     border-radius: 3rpx;
+  }
+
+  &__content {
+    display: block;
+  }
+
+  &--item-active {
+    color: _var(tabs-color-active, _var(color-black));
+    font-weight: 500;
+  }
+
+  &--item-disabled {
+    color: #c8c9cc;
+    cursor: not-allowed;
+  }
+
+  &--scrollable {
+    white-space: nowrap;
+  }
+  &--scrollable &__item {
+    flex: 1 0 auto;
+    padding: 0 12px;
+  }
+
+  &--animated &__content {
+    display: flex;
+  }
+
+  &--shrink &__item {
+    flex: none;
   }
 }
