@@ -85,6 +85,14 @@ export const pickerPopupProps = {
    */
   resetAfterConfirm: Boolean,
   /**
+   * 是否允许用户创建新条目，需配合 showSearch 使用
+   */
+  allowCreate: Boolean,
+  /**
+   * 创建前处理
+   */
+  beforeCreate: Function as PropType<(text: string) => Option | Promise<Option>>,
+  /**
    * 列表项的样式类
    */
   itemClass: String,
@@ -99,6 +107,10 @@ export const pickerPopupEmits = {
   'update:modelValue': (value: OptionValue | OptionValue[]) =>
     isString(value) || isNumber(value) || isArray(value),
   change: (item: Option | Option[]) => isObject(item) || isArray(item),
+  /**
+   * 新增选项
+   */
+  create: (text: string) => isString(text),
 }
 
 export type PickerPopupProps = ExtractPropTypes<typeof pickerPopupProps>

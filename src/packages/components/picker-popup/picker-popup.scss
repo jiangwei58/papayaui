@@ -1,6 +1,8 @@
 @import '../../styles/vars.scss';
 .#{$prefix}-picker-popup {
-  &-content {
+  $footer-padding-x: 13px;
+
+  &__content {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -16,8 +18,21 @@
     overflow: hidden;
   }
 
+  &__create-button, &__confirm-button {
+    width: calc(100vw - $footer-padding-x * 2);
+  }
+
   &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     flex-shrink: 0;
-    padding: 8px 13px;
+    padding: 8px $footer-padding-x;
+  }
+
+  &--is-two-buttons & {
+    &__create-button, &__confirm-button {
+      width: calc(50vw - $footer-padding-x - 6px);
+    }
   }
 }

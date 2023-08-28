@@ -12,7 +12,7 @@
     @closed="emit('closed')"
     @confirm="onOk"
   >
-    <view :class="ns.b('content')">
+    <view :class="ns.e('content')">
       <Search
         v-if="showSearch"
         v-model="searchText"
@@ -30,7 +30,7 @@
           :custom-style="itemStyle"
           @click="onSelect(item[valueKey])"
         >
-          <slot v-if="$slots.default" :item="item" />
+          <slot v-if="$slots.default" :item="item" :isCreate="!!item.__isCreate" />
         </ListItem>
         <LoadMore
           v-if="!filterOptions.length || !!pagination"
@@ -40,17 +40,33 @@
           :show-text="!onlyOnePage"
           @next="onScrollNext"
         />
-        <SafeBottom v-if="safeAreaInsetBottom && !multiple" />
+        <SafeBottom v-if="safeAreaInsetBottom && !showView.footer" />
       </scroll-view>
     </view>
 
-    <template v-if="safeAreaInsetBottom && multiple" #footer>
-      <view :class="ns.e('footer')">
-        <ButtonComponent type="primary" block @click="onOk()">
+    <template v-if="showView.footer" #footer>
+      <view :class="[ns.e('footer'), ns.is('is-two-buttons', showView.create, showView.confirm)]">
+        <ButtonComponent
+          v-if="showView.create"
+          :class="ns.e('create-button')"
+          :type="props.multiple ? 'default' : 'primary'"
+          ellipsis
+          block
+          @click="onCreate"
+        >
+          创建 “{{ searchText }}”
+        </ButtonComponent>
+        <ButtonComponent
+          v-if="showView.confirm"
+          :class="ns.e('confirm-button')"
+          type="primary"
+          block
+          @click="onOk()"
+        >
           {{ confirmButtonText }}
         </ButtonComponent>
       </view>
-      <SafeBottom />
+      <SafeBottom v-if="safeAreaInsetBottom" />
     </template>
   </BottomPopup>
 </template>
@@ -78,6 +94,7 @@ const emit = defineEmits(pickerPopupEmits)
 const { show, data, modelValue, labelKey, valueKey, multiple, pagination } = toRefs(props)
 
 const searchText = ref<string>('')
+const createOptions = ref<Option[]>([])
 
 const {
   list: options,
@@ -103,12 +120,23 @@ const {
 })
 
 const filterOptions = computed(() => {
+  const fullOptions = createOptions.value.concat(options.value)
+  const text = searchText.value.trim()
   // 远程情况不作处理
-  if (props.remote) return options.value
+  if (props.remote) return text ? options.value : fullOptions
   // 本地数据情况，直接做过滤
-  return options.value.filter(
-    (item) => item[labelKey.value]?.indexOf(searchText.value.trim()) !== -1,
-  )
+  if (!text) return fullOptions
+  return fullOptions.filter((item) => item[labelKey.value]?.indexOf(text) !== -1)
+})
+
+const showView = computed(() => {
+  const create = props.allowCreate && !!searchText.value
+  const confirm = props.multiple
+  return {
+    footer: create || confirm,
+    create,
+    confirm,
+  }
 })
 
 watch(show, async (newVal, oldVal) => {
@@ -169,6 +197,25 @@ const onSearchChange = () => {
   }
 }
 const debounceSearchChange = debounce(onSearchChange, 300)
+
+const onCreate = async () => {
+  let newOption: {
+    [key: string]: unknown
+    __isCreate?: boolean
+  } = {
+    [labelKey.value]: searchText.value,
+    [valueKey.value]: searchText.value,
+  }
+  // 自定义创建时的数据，通常用于定义唯一标识
+  if (typeof props.beforeCreate === 'function') {
+    newOption = await props.beforeCreate(searchText.value)
+  }
+  newOption.__isCreate = true
+  createOptions.value.unshift(newOption)
+  onSelect(searchText.value)
+  emit('create', searchText.value)
+  onClearSearch()
+}
 
 const onSelect = async (value: OptionValue) => {
   if (_onSelect(value) && !multiple.value) {
