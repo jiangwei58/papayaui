@@ -52,6 +52,10 @@ export const buttonProps = {
    */
   icon: String,
   /**
+   * 文本省略
+   */
+  ellipsis: Boolean,
+  /**
    * 同步点击（主要用于防止异步事件多次触发）
    */
   syncClick: Function as PropType<(...args: any[]) => any | Promise<any>>,

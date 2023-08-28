@@ -1,8 +1,8 @@
 @import '../../styles/vars.scss';
 .#{$prefix}-button {
   display: inline-block;
-  height: 44px;
-  line-height: 1.2;
+  height: _var(button-height, 44px);
+  line-height: _var(button-line-height, 1.2);
   margin: _var(button-margin, 0);
   border: 1px solid transparent;
   border-radius: _var(button-border-radius, 5px);
@@ -15,7 +15,8 @@
     height: 100%;
   }
 
-  &__loading-icon + &__text, &__icon + &__text {
+  &__loading-icon + &__text,
+  &__icon + &__text {
     margin-left: 4px;
   }
 
@@ -108,5 +109,11 @@
     color: _var(color-black);
     background-color: #c8c9cc;
     border-color: #c8c9cc;
+  }
+
+  &--ellipsis &__text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }

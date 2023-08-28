@@ -1,6 +1,13 @@
 <template>
   <button
-    :class="[ns.b(), ns.m(type), ns.m(size), ns.is('block', block), ns.is('plain', plain)]"
+    :class="[
+      ns.b(),
+      ns.m(type),
+      ns.m(size),
+      ns.is('block', block),
+      ns.is('plain', plain),
+      ns.is('ellipsis', ellipsis),
+    ]"
     :style="customStyle"
     :hover-class="ns.m('hover')"
     :disabled="disabled"
