@@ -20,6 +20,8 @@
     @launchapp="emit('launchapp', $event)"
     @contact="emit('contact', $event)"
     @chooseavatar="emit('chooseavatar', $event)"
+    @getrealtimephonenumber="emit('getrealtimephonenumber', $event)"
+    @agreeprivacyauthorization="emit('agreeprivacyauthorization', $event)"
     @tap="onClick"
   >
     <view :class="ns.e('content')">

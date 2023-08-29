@@ -75,6 +75,8 @@ export const buttonProps = {
     | 'openSetting'
     | 'feedback'
     | 'chooseAvatar'
+    | 'getRealtimePhoneNumber'
+    | 'agreePrivacyAuthorization'
   >,
   /**
    * 按住后多久出现点击态，单位毫秒
@@ -127,6 +129,8 @@ export const buttonEmits = {
   launchapp: (_res: any) => true,
   contact: (_res: any) => true,
   chooseavatar: (_res: any) => true,
+  getrealtimephonenumber: (_res: any) => true,
+  agreeprivacyauthorization: (_res: any) => true,
 }
 
 export type ButtonProps = ExtractPropTypes<typeof buttonProps>
