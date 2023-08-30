@@ -81,6 +81,17 @@ pnpm install async-validator dayjs
 }
 ```
 
+> 注意，如果使用 pnpm，全局组件类型无法识别，请尝试按照以下方式配置（二选一）
+>
+> - 安装 `@vue/runtime-core`
+> ```bash
+> pnpm install @vue/runtime-core -D
+> ```
+> - 创建 .npmrc, 添加以下内容
+> ```
+> shamefully-hoist=true
+> ```
+
 ### 修改主题色
 
 > 所有颜色都基于 css 变量定义，覆盖 css 变量即可
