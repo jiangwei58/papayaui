@@ -7,7 +7,10 @@ export interface UseSelectProps<T, V> {
   options?: T[]
   /** 默认数据 */
   defaultValue?: V | V[]
-  /** 数据值的字段名 */
+  /**
+   * 数据值的字段名
+   * @default value
+   */
   valueKey?: keyof T
   /** 是否多选 */
   multiple?: boolean
