@@ -1,0 +1,94 @@
+@import '../../styles/vars.scss';
+
+.#{$prefix}-dialog {
+
+  $radius: _var(dialog-radius, 16px);
+
+  &__header {
+    padding-top: _var(dialog-header-padding-top, 26px);
+    color: _var(color-black);
+    font-size: _var(dialog-font-size, 16px);
+    font-weight: _var(dialog-header-font-weight, 500);
+    line-height: _var(dialog-header-line-height, 24px);
+    text-align: center;
+  }
+
+  &__message {
+    flex: 1;
+    max-height: _var(dialog-message-max-height, 60vh);
+    padding: _var(dialog-message-padding, 26px 24px);
+    overflow-y: auto;
+    color: _var(color-black);
+    font-size: _var(dialog-message-font-size, 14px);
+    line-height: _var(dialog-message-line-height, 20px);
+    white-space: pre-wrap;
+    text-align: center;
+    word-wrap: break-word;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  &__footer {
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+  }
+
+  &__confirm,
+  &__cancel {
+    flex: 1;
+    @include _setVar(button-height, _var(dialog-button-height, 48px));
+    @include _setVar(button-font-size, 16px);
+    @include _setVar(button-border-width, 0);
+  }
+
+  &__confirm {
+    @include _setVar(button-border-radius, 0 0 $radius 0);
+  }
+
+  &__cancel {
+    @include _setVar(button-border-radius, 0 0 0 $radius);
+  }
+
+  &--line-top {
+    position: relative;
+    &::after {
+      position: absolute;
+      box-sizing: border-box;
+      content: ' ';
+      pointer-events: none;
+      top: -50%;
+      right: -50%;
+      bottom: -50%;
+      left: -50%;
+      border: 0 solid #ebedf0;
+      border-top-width: 1px;
+      transform: scale(0.5);
+    }
+  }
+
+  &--isolated {
+    display: flex;
+    align-items: center;
+    min-height: 104px;
+  }
+
+  &--has-title &__message {
+    padding-top: 8px;
+    color: _var(color-black-2);
+  }
+
+  &--round-button {
+    height: auto;
+    padding: 8px 24px 16px;
+  }
+  &--round-button &__confirm,
+  &--round-button &__cancel {
+    @include _setVar(button-height, _var(dialog-round-button-height, 36px));
+    @include _setVar(button-font-size, 14px);
+    @include _setVar(button-border-width, 1px);
+    @include _setVar(button-border-radius, $radius);
+  }
+  &--round-button &__cancel {
+    margin-right: 16px;
+  }
+}

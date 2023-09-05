@@ -60,6 +60,7 @@ declare module 'vue' {
     PaTabbar: typeof import('../src/packages/components/tabbar/tabbar.vue')['default']
     PaTabbarItem: typeof import('../src/packages/components/tabbar-item/tabbar-item.vue')['default']
     PaNoticeBar: typeof import('../src/packages/components/notice-bar/notice-bar.vue')['default']
+    PaDialog: typeof import('../src/packages/components/dialog/dialog.vue')['default']
   }
 }
 
