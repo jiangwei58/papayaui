@@ -7,8 +7,21 @@
       <pa-button type="default">默认按钮</pa-button>
     </DocDemoBlock>
 
+    <DocDemoBlock title="镂空按钮" card>
+      <pa-button type="primary" plain>镂空按钮</pa-button>
+      <pa-button type="warning" plain>镂空按钮</pa-button>
+      <pa-button type="danger" plain>镂空按钮</pa-button>
+    </DocDemoBlock>
+
     <DocDemoBlock title="禁用状态" card>
       <pa-button type="primary" disabled>禁用状态</pa-button>
+    </DocDemoBlock>
+
+    <DocDemoBlock title="尺寸" card>
+      <pa-button type="primary" size="large">大号按钮</pa-button>
+      <pa-button type="primary" size="normal">普通按钮</pa-button>
+      <pa-button type="primary" size="small">小型按钮</pa-button>
+      <pa-button type="primary" size="mini">迷你按钮</pa-button>
     </DocDemoBlock>
 
     <DocDemoBlock title="自定义大小" card>
@@ -19,12 +32,6 @@
     <DocDemoBlock title="圆角" card>
       <pa-button type="primary" round>圆角按钮</pa-button>
       <pa-button type="primary" round="20">圆角按钮</pa-button>
-    </DocDemoBlock>
-
-    <DocDemoBlock title="镂空按钮" card>
-      <pa-button type="primary" plain>镂空按钮</pa-button>
-      <pa-button type="warning" plain>镂空按钮</pa-button>
-      <pa-button type="danger" plain>镂空按钮</pa-button>
     </DocDemoBlock>
 
     <DocDemoBlock title="加载状态" card>

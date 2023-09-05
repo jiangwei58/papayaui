@@ -4,7 +4,9 @@
   height: _var(button-height, 44px);
   line-height: _var(button-line-height, 1.2);
   margin: _var(button-margin, 0);
-  border: 1px solid transparent;
+  border-width: _var(button-border-width, 1px);
+  border-style: solid;
+  border-color: _var(button-border-color, transparent);
   border-radius: _var(button-border-radius, 5px);
   box-sizing: border-box;
 
@@ -49,42 +51,43 @@
   }
 
   &--default {
-    color: _var(color-black);
-    background-color: #fff;
-    border-color: #ebedf0;
+    color: _var(button-color, _var(color-black));
+    background-color: _var(button-background, #fff);
+    border-color: _var(button-border-color, #ebedf0);
   }
   &--primary {
-    color: #fff;
-    background-color: _var(color-primary);
-    border-color: _var(color-primary);
+    color: _var(button-primary-color, #fff);
+    background-color: _var(button-primary-background, _var(color-primary));
+    border-color: _var(button-primary-border-color, _var(color-primary));
   }
   &--warning {
-    color: #fff;
-    background-color: _var(color-warning);
-    border-color: _var(color-warning);
+    color: _var(button-warning-color, #fff);
+    background-color: _var(button-warning-background, _var(color-warning));
+    border-color: _var(button-warning-border-color, _var(color-warning));
   }
   &--danger {
-    color: #fff;
-    background-color: _var(color-danger);
-    border-color: _var(color-danger);
+    color: _var(button-danger-color, #fff);
+    background-color: _var(button-danger-background, _var(color-danger));
+    border-color: _var(button-danger-border-color, _var(color-danger));
   }
 
   &--large {
     width: 100%;
-    height: 50px;
+    height: _var(button-large-height, 50px);
+    font-size: _var(button-large-font-size, 16px);
   }
   &--normal {
-    font-size: 14px;
+    font-size: _var(button-font-size, 14px);
     padding: _var(button-padding, 0 15px);
   }
   &--small {
-    height: 32px;
-    font-size: 12px;
+    height: _var(button-small-height, 32px);
+    font-size: _var(button-small-font-size, 12px);
     padding: _var(button-padding, 0 8px);
   }
   &--mini {
-    height: 24px;
-    font-size: 10px;
+    height: _var(button-mini-height, 24px);
+    font-size: _var(button-mini-font-size, 10px);
     padding: _var(button-padding, 0 4px);
   }
 
@@ -107,8 +110,8 @@
   }
   &[disabled]:not([type]) {
     color: _var(color-black);
-    background-color: #c8c9cc;
-    border-color: #c8c9cc;
+    background-color: _var(button-disabled-background, #c8c9cc);
+    border-color: _var(button-disabled-border-color, #c8c9cc);
   }
 
   &--ellipsis &__text {

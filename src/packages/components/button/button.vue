@@ -1,5 +1,6 @@
 <template>
   <button
+    :id="buttonId"
     :class="[
       ns.b(),
       ns.m(type),
@@ -28,7 +29,8 @@
       <LoadingIcon v-if="localLoading" :class="ns.e('loading-icon')" color="inherit" size="1.2em" />
       <IconComponent v-if="icon && !localLoading" :class="[ns.e('icon')]" :name="icon" />
       <view v-if="$slots.default" :class="ns.e('text')">
-        <slot />
+        <template v-if="localLoading && !isUndefined(loadingText)">{{ loadingText }}</template>
+        <slot v-else />
       </view>
     </view>
   </button>
@@ -38,7 +40,7 @@
 import type { CSSProperties, StyleValue } from 'vue'
 import { computed, ref } from 'vue'
 import useNamespace from '../../core/useNamespace'
-import { getUnitValue } from '../../utils'
+import { getUnitValue, isUndefined } from '../../utils'
 import IconComponent from '../icon/icon.vue'
 import LoadingIcon from '../loading-icon/loading-icon.vue'
 import { buttonEmits, buttonProps } from './props'

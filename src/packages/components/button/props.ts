@@ -2,6 +2,10 @@ import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
 
 export const buttonProps = {
   /**
+   * 标识符，作为原生button组件的id值
+   */
+  buttonId: String,
+  /**
    * 按钮类型
    */
   type: {
@@ -35,6 +39,10 @@ export const buttonProps = {
    * 是否显示为加载状态
    */
   loading: Boolean,
+  /**
+   * 加载状态提示文字
+   */
+  loadingText: String,
   /**
    * 是否禁用
    */
