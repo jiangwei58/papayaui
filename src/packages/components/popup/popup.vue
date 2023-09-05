@@ -17,7 +17,7 @@
     @after-enter="onAfterEnter"
     @after-leave="onAfterLeave"
   >
-    <view :class="ns.e('content')" :style="contentStyle" @tap.stop="noop">
+    <view :class="[ns.e('content'), contentClass]" :style="contentStyle" @tap.stop="noop">
       <view v-if="closeable" :class="ns.e('close')" @tap.stop="onClose">
         <IconComponent name="close" />
       </view>
@@ -106,7 +106,7 @@ const contentStyle = computed<CSSProperties>(() => {
     style.flex = 1
   }
   if (props.width && ['left', 'right', 'center'].includes(props.position)) {
-    style.height = getUnitValue(props.width)
+    style.width = getUnitValue(props.width)
   }
   if (props.height && ['top', 'bottom', 'center'].includes(props.position)) {
     style.height = getUnitValue(props.height)

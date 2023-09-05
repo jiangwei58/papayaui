@@ -81,6 +81,10 @@ export const popupProps = {
    */
   customStyle: Object as PropType<CSSProperties>,
   /**
+   * 内容自定义样式类
+   */
+  contentClass: String,
+  /**
    * 自定义遮罩层样式
    */
   overlayStyle: Object as PropType<CSSProperties>,

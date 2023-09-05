@@ -3,6 +3,7 @@
   &__content {
     position: relative;
     background-color: #fff;
+    border-radius: _var(popup-radius, 0);
   }
 
   &__close {
