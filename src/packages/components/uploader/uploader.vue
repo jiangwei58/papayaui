@@ -67,9 +67,11 @@ const onChooseFile = () => {
     sizeType: props.sizeType,
     maxDuration: props.maxDuration,
     camera: props.camera,
-    success: async (res) => {
-      console.log('res:', res)
+    success: (res) => {
       beforeRead(res.tempFiles)
+    },
+    fail: (e) => {
+      emit('error', e)
     },
   })
 }

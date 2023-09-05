@@ -130,6 +130,7 @@ export const uploaderEmits = {
   'click-preview': (file: FileItem, index: number) => isObject(file) && isNumber(index),
   oversize: () => true,
   delete: (file: FileItem, index: number) => isObject(file) && isNumber(index),
+  error: (_e: UniApp.GeneralCallbackResult) => true,
 }
 
 export type UploaderProps = ExtractPropTypes<typeof uploaderProps>
