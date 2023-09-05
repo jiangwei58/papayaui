@@ -116,6 +116,23 @@ const contentStyle = computed(() => {
   }
 })
 
+// 初始化容器宽度
+const initContainerWidth = () => {
+  if (instance) {
+    // 获取导航容器的宽度
+    useRect(instance, '#tabsScrollContainer').then((node) => {
+      if (node) {
+        navWrapperWidth.value = node.width
+      }
+    })
+    // 获取每个tab标题区域的宽度
+    useRect(instance, `.${ns.e('item')}`, true).then((nodes) => {
+      childrenWidths.value = nodes.map((node) => node.width)
+      updateTabLineLeft()
+    })
+  }
+}
+
 // 更新底部条左侧偏移位置
 const updateTabLineLeft = () => {
   const prevLeftTotal = childrenWidths.value
@@ -140,25 +157,20 @@ const onChangeTab = (item: TabItem, _index: number) => {
 }
 
 onMounted(() => {
-  if (instance) {
-    // 获取导航容器的宽度
-    useRect(instance, '#tabsScrollContainer').then((node) => {
-      if (node) {
-        navWrapperWidth.value = node.width
-      }
-    })
-    // 获取每个tab标题区域的宽度
-    useRect(instance, `.${ns.e('item')}`, true).then((nodes) => {
-      childrenWidths.value = nodes.map((node) => node.width)
-      updateTabLineLeft()
-    })
-  }
+  initContainerWidth()
 })
 
 watch(modelValue, async () => {
   await nextTick()
   updateTabLineLeft()
 })
+
+watch(
+  () => props.tabs,
+  () => {
+    initContainerWidth()
+  },
+)
 
 defineExpose({
   children,
