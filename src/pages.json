@@ -209,6 +209,13 @@
       "type": "nav"
     },
     {
+      "path": "packages/components/dialog/demo",
+      "style": {
+        "navigationBarTitleText": "Dialog 弹出框"
+      },
+      "type": "feedback"
+    },
+    {
       "path": "packages/components/overlay/demo",
       "style": {
         "navigationBarTitleText": "Overlay 遮罩层"
