@@ -158,6 +158,7 @@ const onAfterRead = (files: FileItem | FileItem[]) => {
 | click-preview | (file: FileItem, index: number)  |
 | oversize | ()  |
 | delete | (file: FileItem, index: number)  |
+| error | (e: UniApp.GeneralCallbackResult)  |
 
 <!--event end-->
 

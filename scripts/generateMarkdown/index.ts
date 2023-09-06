@@ -45,6 +45,7 @@ async function main() {
     menu: ['menu-item'],
     sidebar: ['sidebar-item'],
     tabbar: ['tabbar-item'],
+    tabs: ['tab-pane'],
   }
   const componentDirNames = files.filter(
     (name) =>

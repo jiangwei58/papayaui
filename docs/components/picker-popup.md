@@ -163,6 +163,8 @@ const onLoad2 = (query?: string, pageNumber?: number, pageSize?: number) => {
 | initData | 每次打开重新加载数据 | boolean | - |
 | confirmButtonText | 确认按钮的文案 | string |  '确定' |
 | resetAfterConfirm | 确定后是否重置数据 | boolean | - |
+| allowCreate | 是否允许用户创建新条目，需配合 showSearch 使用 | boolean | - |
+| beforeCreate | 创建前处理 | (text:string)=\>Option\|Promise\<Option\> | - |
 | itemClass | 列表项的样式类 | string | - |
 | itemStyle | 列表项的样式 | string\|CSSProperties | - |
 

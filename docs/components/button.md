@@ -16,8 +16,21 @@
       <pa-button type="default">默认按钮</pa-button>
     </DocDemoBlock>
 
+    <DocDemoBlock title="镂空按钮" card>
+      <pa-button type="primary" plain>镂空按钮</pa-button>
+      <pa-button type="warning" plain>镂空按钮</pa-button>
+      <pa-button type="danger" plain>镂空按钮</pa-button>
+    </DocDemoBlock>
+
     <DocDemoBlock title="禁用状态" card>
       <pa-button type="primary" disabled>禁用状态</pa-button>
+    </DocDemoBlock>
+
+    <DocDemoBlock title="尺寸" card>
+      <pa-button type="primary" size="large">大号按钮</pa-button>
+      <pa-button type="primary" size="normal">普通按钮</pa-button>
+      <pa-button type="primary" size="small">小型按钮</pa-button>
+      <pa-button type="primary" size="mini">迷你按钮</pa-button>
     </DocDemoBlock>
 
     <DocDemoBlock title="自定义大小" card>
@@ -28,12 +41,6 @@
     <DocDemoBlock title="圆角" card>
       <pa-button type="primary" round>圆角按钮</pa-button>
       <pa-button type="primary" round="20">圆角按钮</pa-button>
-    </DocDemoBlock>
-
-    <DocDemoBlock title="镂空按钮" card>
-      <pa-button type="primary" plain>镂空按钮</pa-button>
-      <pa-button type="warning" plain>镂空按钮</pa-button>
-      <pa-button type="danger" plain>镂空按钮</pa-button>
     </DocDemoBlock>
 
     <DocDemoBlock title="加载状态" card>
@@ -79,6 +86,7 @@ const onClick = () => {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | ----- | --- | --- |
+| buttonId | 标识符，作为原生button组件的id值 | string | - |
 | type | 按钮类型 | 'primary'\|'warning'\|'danger'\|'default' |  'primary' |
 | width | 按钮宽度 | string | - |
 | height | 按钮高度 | string | - |
@@ -86,13 +94,15 @@ const onClick = () => {
 | fontSize | 字体大小 | string | - |
 | block | 是否为块级元素 | boolean | - |
 | loading | 是否显示为加载状态 | boolean | - |
+| loadingText | 加载状态提示文字 | string | - |
 | disabled | 是否禁用 | boolean | - |
 | round | 圆角大小, 值为true时半圆角 | boolean \| string | - |
 | plain | 是否镂空样式 | boolean | - |
 | icon | 图标 | string | - |
+| ellipsis | 文本省略 | boolean | - |
 | syncClick | 同步点击（主要用于防止异步事件多次触发） | (...args:any[])=\>any\|Promise\<any\> | - |
 | customStyle | 自定义样式 | CSSProperties | - |
-| openType | 微信开放能力[文档](https://developers.weixin.qq.com/miniprogram/dev/component/button.html) | \|'contact'\|'share'\|'getPhoneNumber'\|'getUserInfo'\|'launchApp'\|'openSetting'\|'feedback'\|'chooseAvatar' | - |
+| openType | 微信开放能力[文档](https://developers.weixin.qq.com/miniprogram/dev/component/button.html) | \|'contact'\|'share'\|'getPhoneNumber'\|'getUserInfo'\|'launchApp'\|'openSetting'\|'feedback'\|'chooseAvatar'\|'getRealtimePhoneNumber'\|'agreePrivacyAuthorization' | - |
 | hoverStartTime | 按住后多久出现点击态，单位毫秒 | number | - |
 | hoverStayTime | 手指松开后点击态保留时间，单位毫秒 | number | - |
 | appParameter | 打开 APP 时，向 APP 传递的参数，open-type=launchApp时有效 | string | - |
@@ -120,6 +130,8 @@ const onClick = () => {
 | launchapp | (res: any)  |
 | contact | (res: any)  |
 | chooseavatar | (res: any)  |
+| getrealtimephonenumber | (res: any)  |
+| agreeprivacyauthorization | (res: any)  |
 
 <!--event end-->
 

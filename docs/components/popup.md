@@ -77,6 +77,7 @@ const onOpen = (_position: PopupPosition, _closeable = false, _round = false) =>
 | safeAreaInsetTop | 是否留出顶部安全距离（状态栏高度） | boolean | - |
 | customClass | 自定义样式类 | string | - |
 | customStyle | 自定义弹出层样式 | CSSProperties | - |
+| contentClass | 内容自定义样式类 | string | - |
 | overlayStyle | 自定义遮罩层样式 | CSSProperties | - |
 
 <!--props end-->

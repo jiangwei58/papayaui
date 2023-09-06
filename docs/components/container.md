@@ -8,7 +8,7 @@
 
 ```html [template]
 <template>
-  <pa-container ref="containerRef">
+  <pa-container ref="containerRef" :use-footer-slot="showBottom">
     <template #header>
       <pa-search placeholder="这是固定头部，通常放置搜索栏、下拉菜单等" />
     </template>
@@ -25,7 +25,7 @@
     </view>
 
     <template #bottom>
-      <view v-if="showBottom" class="px-26 py-12">
+      <view class="px-26 py-12">
         <pa-button type="primary" block @click="updateHeight">
           这是固定底部，通常放置操作按钮
         </pa-button>
@@ -45,7 +45,7 @@ const showBottom = ref<boolean>(true)
 const updateHeight = () => {
   showBottom.value = !showBottom.value
   // 如果固定头部或底部有动态内容会影响高度的，可以使用updateHeight方法重新刷新高度，防止多余填充留白
-  containerRef.value?.updateHeight()
+  // containerRef.value?.updateHeight()
 }
 </script>
 ```
@@ -61,10 +61,12 @@ const updateHeight = () => {
 | safeBottom | 是否填充底部安全区 | boolean |  true |
 | headerBgColor | 头部背景色 | string |  'transparent' |
 | bgColor | 背景色 | string |  'transparent' |
-| showFixedBottom | 是否显示固定底部 | boolean |  true |
+| zIndex | z-index 层级 | number | - |
 | showWatermark | 是否显示水印 | boolean | - |
 | watermarkContents | 水印内容 |  | - |
 | partialContent | 是否局部内容布局，默认内容在页面，使用页面滚动；如需内容区只占中间部分设为true | boolean | - |
+| useHeaderSlot | 是否使用自定义头部的插槽 | boolean |  true |
+| useFooterSlot | 是否使用自定义底部的插槽 | boolean |  true |
 
 <!--props end-->
 
