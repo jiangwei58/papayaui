@@ -18,4 +18,8 @@
     z-index: 98;
     background-color: #fff;
   }
+
+  &--safe-bottom {
+    @include safeBottomPadding();
+  }
 }

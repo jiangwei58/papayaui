@@ -1,5 +1,5 @@
 <template>
-  <pa-container ref="containerRef">
+  <pa-container ref="containerRef" :use-footer-slot="showBottom">
     <template #header>
       <pa-search placeholder="这是固定头部，通常放置搜索栏、下拉菜单等" />
     </template>
@@ -16,7 +16,7 @@
     </view>
 
     <template #bottom>
-      <view v-if="showBottom" class="px-26 py-12">
+      <view class="px-26 py-12">
         <pa-button type="primary" block @click="updateHeight">
           这是固定底部，通常放置操作按钮
         </pa-button>
@@ -35,7 +35,7 @@ const showBottom = ref<boolean>(true)
 const updateHeight = () => {
   showBottom.value = !showBottom.value
   // 如果固定头部或底部有动态内容会影响高度的，可以使用updateHeight方法重新刷新高度，防止多余填充留白
-  containerRef.value?.updateHeight()
+  // containerRef.value?.updateHeight()
 }
 </script>
 
