@@ -3,13 +3,17 @@
 </template>
 
 <script setup lang="ts">
-import { useData } from 'vitepress'
-import { onMounted, ref } from 'vue'
+import { useData, useRoute } from 'vitepress'
+import { onMounted, ref, watch } from 'vue'
+import pageConfig from '../../../src/pages.json'
 
 const simulatorRef = ref<HTMLIFrameElement>()
 
 const { site } = useData()
-const src = `${site.value.base}mobile.html`
+const route = useRoute()
+
+const baseUrl = `${site.value.base}mobile.html`
+const src = ref(baseUrl)
 
 const hideScroller = (el: HTMLIFrameElement) => {
   el.onload = () => {
@@ -21,10 +25,23 @@ const hideScroller = (el: HTMLIFrameElement) => {
   }
 }
 
+const updatePath = () => {
+  const name = route.data.relativePath.replace('.md', '')
+  const demoPath = pageConfig.pages.find((page) => page.path.includes(name))
+  if (demoPath) {
+    src.value = `${baseUrl}#/${demoPath.path}`
+  }
+}
+
 onMounted(() => {
   if (simulatorRef.value) {
     hideScroller(simulatorRef.value)
+    updatePath()
   }
+})
+
+watch(route, () => {
+  updatePath()
 })
 </script>
 

@@ -14,36 +14,36 @@
 
 ```html
 <view class="grid grid-cols-6 gap-20">
-  <view>1</view>
-  <view>2</view>
-  <view>3</view>
-  <view>4</view>
-  <view>5</view>
-  <view>6</view>
+  <view></view>
+  <view></view>
+  <view></view>
+  <view></view>
+  <view></view>
+  <view></view>
 </view>
 
 <view class="grid grid-cols-3 gap-20">
-  <view class="col-span-2">1</view>
-  <view class="col-start-4">2</view>
-  <view>3</view>
+  <view class="col-span-2"></view>
+  <view class="col-start-4"></view>
+  <view></view>
 </view>
 ```
 
 <div class="wrapper grid grid-cols-6" style="gap:20px">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-  <div>4</div>
-  <div>5</div>
-  <div>6</div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
 </div>
 
 <br />
 
 <div class="wrapper grid grid-cols-6" style="gap:20px">
-  <div class="col-span-2">1</div>
-  <div class="col-start-4">2</div>
-  <div>3</div>
+  <div class="col-span-2"></div>
+  <div class="col-start-4"></div>
+  <div></div>
 </div>
 :::
 
