@@ -186,6 +186,9 @@ const onConfirm = (value: Date | Date[]) => {
 | confirmText | 确认按钮的文字 | string |  '确定' |
 | confirmDisabledText | 确认按钮处于禁用状态时的文字 | string |  '确定' |
 | firstDayOfWeek | 设置周起始日, 0代表周日开始 | FirstDayOfWeekType |  0 |
+| allowSameDay | 是否允许日期范围的起止时间为同一天 | boolean | - |
+| maxRange | 日期区间最多可选天数，默认无限制 | number | 无限制 |
+| showResultText | 是否显示选择结果文字<br />底部显示当前选中的日期，多选','分隔，范围'~'分隔 | boolean | - |
 | readonly | 是否为只读状态，只读状态下不能选择日期 | boolean | - |
 | round | 是否圆角 | string \| number |  true |
 | safeAreaInsetBottom | 是否适配底部安全区 | boolean | - |

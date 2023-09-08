@@ -4,8 +4,6 @@
 
 <!--codes start-->
 
-::: code-group
-
 ```html [template]
 <template>
   <pa-cell-group inset>
@@ -48,11 +46,7 @@ const onOpen = (props: Partial<DialogProps>) => {
 }
 ```
 
-:::
-
 ## 圆角按钮样式
-
-::: code-group
 
 ```html [template]
 <template>
@@ -96,11 +90,7 @@ const onOpen = (props: Partial<DialogProps>) => {
 }
 ```
 
-:::
-
 ## 异步关闭
-
-::: code-group
 
 ```html [template]
 <template>
@@ -141,11 +131,7 @@ const onBeforeClose = (action: ActionType) => {
 }
 ```
 
-:::
-
 ## 自定义内容
-
-::: code-group
 
 ```html [template]
 <template>
@@ -211,8 +197,6 @@ const onChooseAvatar = (e: EventDetail<{ avatarUrl: string }>) => {
   }
 }
 ```
-
-:::
 
 <!--codes end-->
 
