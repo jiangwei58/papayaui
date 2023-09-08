@@ -170,7 +170,25 @@ const onConfirm = (value: Date | Date[]) => {
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | ----- | --- | --- |
 | poppable | 是否以弹层的形式展示日历 | boolean |  true |
-| height | 高度 | string |  '80vh' |
+| height | 高度 | string \| number |  '80vh' |
+| show | 是否显示弹层 | boolean |  false |
+| closeOnClickOverlay | 点击遮罩是否关闭弹窗 | boolean |  true |
+| type | 选择类型 | 'single'\|'multiple'\|'range' |  'single' |
+| title | 标题 | string |  '日期选择' |
+| minDate | 可选择的最小日期 | number |  Date.now() |
+| maxDate | 可选择的最大日期 | number |  Date.now() + 1000 * 60 * 60 * 24 * 180 |
+| defaultDate | 默认选中的日期，type 为 multiple 或 range 时为数组 | number\|number[] |  Date.now() |
+| formatter | 日期格式化函数 | (day:DayItem)=\>DayItem | - |
+| showMark | 是否显示月份背景水印 | boolean |  true |
+| showTitle | 是否展示日历标题 | boolean |  true |
+| showSubtitle | 是否展示日历副标题（年月） | boolean |  true |
+| showConfirm | 是否展示确认按钮 | boolean |  true |
+| confirmText | 确认按钮的文字 | string |  '确定' |
+| confirmDisabledText | 确认按钮处于禁用状态时的文字 | string |  '确定' |
+| firstDayOfWeek | 设置周起始日, 0代表周日开始 | FirstDayOfWeekType |  0 |
+| readonly | 是否为只读状态，只读状态下不能选择日期 | boolean | - |
+| round | 是否圆角 | string \| number |  true |
+| safeAreaInsetBottom | 是否适配底部安全区 | boolean | - |
 
 <!--props end-->
 

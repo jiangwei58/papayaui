@@ -151,13 +151,17 @@ const onLoad2 = (query?: string, pageNumber?: number, pageSize?: number) => {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | ----- | --- | --- |
+| show | 是否显示 | boolean |  false |
+| safeAreaInsetBottom | 是否适配底部安全区 | boolean |  true |
+| title | 标题 | string | - |
+| height | 弹窗高度 | string |  '80vh' |
 | modelValue | 选择的值 | OptionValue\|OptionValue[] | - |
 | data | 选项数据 | Option[] |  () => [] |
 | labelKey | 数据标题的字段名 | string |  'label' |
 | valueKey | 数据值的字段名 | string |  'value' |
 | showSearch | 是否显示搜索 | boolean | - |
 | multiple | 是否多选 | boolean |  false |
-| load | 动态获取下一级节点数据 | (query?:string,pageNumber?:number,pageSize?:number,extra?:Record\<string,unknown\>,)=\>Option[]\|Promise\<Option[]\> | - |
+| load | 动态获取下一级节点数据 | (query?:string,pageNumber?:number,pageSize?:number,extra?:Record\<string,unknown\>)<br />=\>Option[]\|Promise\<Option[]\> | - |
 | remote | 是否远程搜索 | boolean |  false |
 | pagination | 是否支持分页 | boolean\|UseListProps\<Option\> |  false |
 | initData | 每次打开重新加载数据 | boolean | - |

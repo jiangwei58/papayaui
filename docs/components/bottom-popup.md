@@ -54,6 +54,11 @@ const text = computed(() => {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | ----- | --- | --- |
+| show | 是否显示 | boolean |  false |
+| zIndex | z-index层级 | number |  999 |
+| overlay | 是否显示遮罩 | boolean |  true |
+| bgColor | 背景色 | CSSProperties['background-color'] | - |
+| safeAreaInsetBottom | 是否适配底部安全区 | boolean |  true |
 | title | 标题 | string | - |
 | height | 弹窗高度 | string |  '80vh' |
 | round | 是否圆角 | (boolean \| string)[] |  true |

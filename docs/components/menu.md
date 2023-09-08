@@ -74,6 +74,8 @@ const state = reactive({
 | direction | 菜单展开方向 | 'up'\|'down' |  'down' |
 | zIndex | 菜单栏 z-index 层级 | number |  10 |
 | duration | 动画时长，单位ms | (string \| number)[] |  200 |
+| overlay | 是否显示遮罩 | boolean |  true |
+| closeOnClickOverlay | 点击遮罩是否关闭弹窗 | boolean |  true |
 
 ## MenuItem Props
 

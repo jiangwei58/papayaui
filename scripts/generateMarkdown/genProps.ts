@@ -4,6 +4,7 @@ import { open } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { Node, Project, PropertyAssignment, SourceFile } from 'ts-morph'
 import { PluginOptions, getCamelCaseName } from '.'
+import { SpreadAssignment } from 'ts-morph'
 
 interface PropItem {
   name: string
@@ -80,6 +81,9 @@ function getProps(sourceFile: SourceFile, componentName: string) {
   // 获取组件参数字段
   const propList: PropItem[] = []
   objectLiteralExpression.getProperties().forEach((property) => {
+    if (Node.isSpreadAssignment(property)) {
+      propList.push(...getSpreadProps(sourceFile, property))
+    }
     if (!Node.isPropertyAssignment(property)) {
       console.warn(componentName, 'property不是属性')
       return
@@ -105,6 +109,13 @@ function getProps(sourceFile: SourceFile, componentName: string) {
     })
   })
   return propList
+}
+
+function getSpreadProps(sourceFile: SourceFile, node: SpreadAssignment): PropItem[] {
+  if (Node.isIdentifier(node.getExpression())) {
+    return getProps(sourceFile, node.getExpression().getText().replace('Props', ''))
+  }
+  return []
 }
 
 function props2MarkdownTable(props: PropItem[]) {

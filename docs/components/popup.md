@@ -64,6 +64,7 @@ const onOpen = (_position: PopupPosition, _closeable = false, _round = false) =>
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | ----- | --- | --- |
 | show | 是否显示 | boolean |  false |
+| duration | 动画的执行时间，单位ms | string \| number |  300 |
 | zIndex | z-index层级 | number |  999 |
 | position | 弹出方式 | PopupPosition |  'bottom' |
 | overlay | 是否显示遮罩 | boolean |  true |

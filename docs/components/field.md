@@ -53,6 +53,13 @@ const value = ref<string>()
 | alwaysEmbed | 强制 input 处于同层状态，默认 focus 时 input 会切到非同层状态 (仅在 iOS 下生效) | boolean | - |
 | holdKeyboard | focus时，点击页面的时候不收起键盘 | boolean | - |
 | height | 高度（textarea生效） | string |  '75px' |
+| title | 标题 | string | - |
+| titleWidth | 标题宽度 | string | - |
+| required | 是否显示必填标识 | boolean | - |
+| center | 内容居中 | boolean | - |
+| icon | 前面的图标 | string | - |
+| valueAlign | 内容对齐方式 | 'left'\|'center'\|'right' |  'right' |
+| errorMessage | 错误信息 | string | - |
 
 <!--props end-->
 

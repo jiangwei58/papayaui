@@ -223,6 +223,11 @@ const onChooseAvatar = (e: EventDetail<{ avatarUrl: string }>) => {
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | ----- | --- | --- |
 | show | 是否显示弹窗 | boolean | - |
+| zIndex | z-index层级 | number |  999 |
+| duration | 动画的执行时间，单位ms | string \| number |  300 |
+| overlay | 是否显示遮罩 | boolean |  true |
+| closeOnClickOverlay | 点击遮罩是否关闭弹窗 | boolean |  true |
+| overlayStyle | 自定义遮罩层样式 | CSSProperties | - |
 | title | 标题 | string | - |
 | width | 弹窗宽度，默认单位为px | string \| number |  320 |
 | message | 文本内容，支持通过\n换行 | string | - |

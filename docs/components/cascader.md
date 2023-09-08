@@ -151,6 +151,10 @@ const onMultipleChangeVisible = () => {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | ----- | --- | --- |
+| show | 是否显示 | boolean |  false |
+| title | 标题 | string | - |
+| height | 弹窗高度 | string |  '80vh' |
+| safeAreaInsetBottom | 是否适配底部安全区 | boolean |  true |
 | modelValue | 值 | CascaderValue[] | - |
 | options | 可选项数据源 | CascaderOption[] |  () => [] |
 | fieldNames | 自定义 options 结构中的字段 | Partial\<UseTreeFieldNames\<CascaderOption\>\> |  () => defaultFieldNames |
@@ -176,11 +180,7 @@ const onMultipleChangeVisible = () => {
 | 事件名 | 参数 |
 | --- | --- |
 | update:modelValue | (value: CascaderValue[])  |
-| change | (
-    value: CascaderValue[],
-    items: CascaderOption[],
-    extra: { tabIndex: number; isSearch: boolean },
-  )  |
+| change | (value: CascaderValue[],items: CascaderOption[],extra: { tabIndex: number; isSearch: boolean })  |
 | reset | ()  |
 | confirm | ()  |
 | nodeClick | (node: TreeNode\<CascaderOption\>)  |

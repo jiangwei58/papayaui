@@ -80,6 +80,8 @@ const onClick = () => {
 | inputAlign | 输入内容对齐方式 | 'left'\|'center'\|'right' |  'left' |
 | background | 搜索框背景色 | CSSProperties['background-color'] | - |
 | inputBackground | 搜索框内部背景色 | CSSProperties['background-color'] | - |
+| disabled | 是否禁用 | boolean | - |
+| readonly | 是否只读 | boolean | - |
 
 <!--props end-->
 

@@ -102,7 +102,7 @@ const onClick = () => {
 | ellipsis | 文本省略 | boolean | - |
 | syncClick | 同步点击（主要用于防止异步事件多次触发） | (...args:any[])=\>any\|Promise\<any\> | - |
 | customStyle | 自定义样式 | CSSProperties | - |
-| openType | 微信开放能力[文档](https://developers.weixin.qq.com/miniprogram/dev/component/button.html) | \|'contact'\|'share'\|'getPhoneNumber'\|'getUserInfo'\|'launchApp'\|'openSetting'\|'feedback'\|'chooseAvatar'\|'getRealtimePhoneNumber'\|'agreePrivacyAuthorization' | - |
+| openType | 微信开放能力[文档](https://developers.weixin.qq.com/miniprogram/dev/component/button.html) | 'contact'\|'share'\|'getPhoneNumber'\|'getUserInfo'<br/>\|'launchApp'\|'openSetting'\|'feedback'\|'chooseAvatar'<br/>\|'getRealtimePhoneNumber'\|'agreePrivacyAuthorization' | - |
 | hoverStartTime | 按住后多久出现点击态，单位毫秒 | number | - |
 | hoverStayTime | 手指松开后点击态保留时间，单位毫秒 | number | - |
 | appParameter | 打开 APP 时，向 APP 传递的参数，open-type=launchApp时有效 | string | - |
