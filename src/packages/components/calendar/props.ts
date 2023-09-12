@@ -5,6 +5,7 @@ import { isArray, isDate, isObject, pick } from '../../utils'
 import { popupEmits, popupProps } from '../popup/props'
 
 export type CalendarValue = Date | Date[]
+export type CalendarType = 'single' | 'multiple' | 'range'
 
 /**
  * 当 type 为 range 时支持
@@ -31,7 +32,7 @@ export const calendarWrapperProps = {
    * @description single表示选择单个日期，multiple表示选择多个日期，range表示选择日期区间
    */
   type: {
-    type: String as PropType<'single' | 'multiple' | 'range'>,
+    type: String as PropType<CalendarType>,
     default: 'single',
   },
   /**
