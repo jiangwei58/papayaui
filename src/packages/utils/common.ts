@@ -1,5 +1,5 @@
-import type { Ref } from 'vue'
 import { isRef } from 'vue'
+import type { MaybeRef } from '../types'
 
 /** 判断传入的值，是否带有单位，如果没有，就默认用rpx单位 */
 export const getUnitValue = (val: number | string, unit = 'rpx'): string => {
@@ -74,6 +74,12 @@ export const sleep = (timeout: number) => {
 /**
  * 获取ref或普通类型的值
  */
-export const getRefValue = <T>(prop: T | Ref<T>) => {
-  return isRef(prop) ? prop.value : prop
+export function getRefValue<T>(prop: MaybeRef<T>): T | undefined
+export function getRefValue<T>(prop: MaybeRef<T>, defaultValue: T): NonNullable<T>
+export function getRefValue<T>(
+  prop: MaybeRef<T>,
+  defaultValue?: T,
+): T | undefined | NonNullable<T> {
+  const value = isRef(prop) ? prop.value : prop
+  return value ?? defaultValue
 }

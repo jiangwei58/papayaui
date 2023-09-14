@@ -63,9 +63,9 @@ export function useDatePicker(props: IncludeRefs<UseDatePickerProps> = {}) {
   const currentYear = new Date().getFullYear()
   const state = reactive({
     modelValue: _props.modelValue,
-    columnsType: getRefValue(_props.columnsType) ?? ['year', 'month', 'day'],
-    minDate: getRefValue(_props.minDate) ?? new Date(currentYear - 10, 0, 1),
-    maxDate: getRefValue(_props.maxDate) ?? new Date(currentYear + 10, 11, 31),
+    columnsType: getRefValue(_props.columnsType, ['year', 'month', 'day']),
+    minDate: getRefValue(_props.minDate, new Date(currentYear - 10, 0, 1)),
+    maxDate: getRefValue(_props.maxDate, new Date(currentYear + 10, 11, 31)),
   })
 
   const indexes = ref<number[]>(new Array(state.columnsType.length).fill(0))
