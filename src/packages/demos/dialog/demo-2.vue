@@ -1,40 +1,15 @@
 <template>
-  <pa-cell-group inset>
-    <pa-cell
-      title="提示弹窗"
-      is-link
-      @click="onOpen({ title: '提示', message: '落霞与孤鹜齐飞，秋水共长天一色' })"
-    />
-    <pa-cell
-      title="提示弹窗（无标题）"
-      is-link
-      @click="onOpen({ message: '落霞与孤鹜齐飞，秋水共长天一色' })"
-    />
-    <pa-cell
-      title="确认弹窗"
-      is-link
-      @click="
-        onOpen({
-          title: '标题',
-          message: '落霞与孤鹜齐飞，秋水共长天一色',
-          showCancelButton: true,
-        })
-      "
-    />
-  </pa-cell-group>
+  <pa-cell title="提示弹窗（无标题）" is-link @click="onOpen()" />
 
-  <pa-dialog v-model:show="visible" theme="round-button" v-bind="dialogProps"></pa-dialog>
+  <pa-dialog v-model:show="visible" message="落霞与孤鹜齐飞，秋水共长天一色"></pa-dialog>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { DialogProps } from '../../components/dialog/props'
 
 const visible = ref(false)
-const dialogProps = ref<Partial<DialogProps>>({})
 
-const onOpen = (props: Partial<DialogProps>) => {
-  dialogProps.value = props
+const onOpen = () => {
   visible.value = true
 }
 </script>
