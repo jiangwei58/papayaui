@@ -1,93 +1,81 @@
 # PickerPopup
 
-## 示例
-
 <!--codes start-->
 
-::: code-group
+## 基础用法
 
 ```html [template]
-<template>
-  <DocDemoBlock title="基础用法">
-    <pa-cell-group inset>
-      <pa-cell title="单选" :value="singleValue" is-link @click="singleVisible = true" />
-      <pa-cell
-        title="多选"
-        :value="multipleValue.toString()"
-        is-link
-        @click="multipleVisible = true"
-      />
-    </pa-cell-group>
 
-    <pa-picker-popup
-      v-model:show="singleVisible"
-      v-model="singleValue"
-      :data="syncOptions"
-      show-search
-    />
-    <pa-picker-popup
-      v-model:show="multipleVisible"
-      v-model="multipleValue"
-      :data="syncOptions"
-      multiple
-      show-search
-    />
-  </DocDemoBlock>
+<pa-cell-group inset>
+  <pa-cell title="单选" :value="value" is-link @click="visible = true" />
+  <pa-cell title="多选" :value="value2.toString()" is-link @click="visible2 = true" />
+</pa-cell-group>
 
-  <DocDemoBlock title="远程数据">
-    <pa-cell-group inset>
-      <pa-cell
-        title="远程数据"
-        :value="singleValue"
-        is-link
-        @click="
-          () => {
-            remoteVisible = true
-            remote = false
-          }
-        "
-      />
-      <pa-cell
-        title="远程搜索"
-        :value="singleValue"
-        is-link
-        @click="
-          () => {
-            remoteVisible = true
-            remote = true
-          }
-        "
-      />
-    </pa-cell-group>
+<pa-picker-popup v-model:show="visible" v-model="value" :data="syncOptions" show-search />
+<pa-picker-popup
+  v-model:show="visible2"
+  v-model="value2"
+  :data="syncOptions"
+  multiple
+  show-search
+/>
 
-    <pa-picker-popup
-      v-model:show="remoteVisible"
-      v-model="singleValue"
-      :load="onLoad"
-      show-search
-      :remote="remote"
-    />
-  </DocDemoBlock>
-
-  <DocDemoBlock title="远程分页数据">
-    <pa-cell-group inset>
-      <pa-cell title="分页数据" :value="singleValue2" is-link @click="remoteVisible2 = true" />
-    </pa-cell-group>
-
-    <pa-picker-popup
-      v-model:show="remoteVisible2"
-      v-model="singleValue2"
-      :load="onLoad2"
-      show-search
-      remote
-      pagination
-    />
-  </DocDemoBlock>
-</template>
 ```
 ```ts [script]
-<script lang="ts" setup>
-import DocDemoBlock from '../../doc/doc-demo-block.vue'
+
+import { ref } from 'vue'
+
+const value = ref<string>()
+const visible = ref(false)
+
+const value2 = ref<string[]>([])
+const visible2 = ref(false)
+
+const syncOptions = new Array(20)
+  .fill(0)
+  .map((_item, index) => ({ label: index.toString(), value: index.toString() }))
+
+```
+## 远程数据
+
+```html [template]
+
+<pa-cell-group inset>
+  <pa-cell
+    title="远程数据"
+    :value="value"
+    is-link
+    @click="
+      () => {
+        visible = true
+        remote = false
+      }
+    "
+  />
+  <pa-cell
+    title="远程搜索"
+    :value="value"
+    is-link
+    @click="
+      () => {
+        visible = true
+        remote = true
+      }
+    "
+  />
+</pa-cell-group>
+
+<pa-picker-popup
+  v-model:show="visible"
+  v-model="value"
+  :load="onLoad"
+  show-search
+  :remote="remote"
+/>
+
+```
+```ts [script]
+
 import { ref } from 'vue'
 
 interface OptionItem {
@@ -95,17 +83,8 @@ interface OptionItem {
   value: string
 }
 
-const singleVisible = ref<boolean>(false)
-const singleValue = ref<string>()
-
-const multipleVisible = ref<boolean>(false)
-const multipleValue = ref<string[]>([])
-
-const syncOptions = new Array(20)
-  .fill(0)
-  .map((_item, index) => ({ label: index.toString(), value: index.toString() }))
-
-const remoteVisible = ref<boolean>(false)
+const value = ref<string>()
+const visible = ref<boolean>(false)
 const remote = ref<boolean>(false)
 
 const onLoad = (query?: string) => {
@@ -121,6 +100,34 @@ const onLoad = (query?: string) => {
       )
     }, 600)
   })
+}
+
+```
+## 远程分页数据
+
+```html [template]
+
+<pa-cell-group inset>
+  <pa-cell title="分页数据" :value="singleValue2" is-link @click="remoteVisible2 = true" />
+</pa-cell-group>
+
+<pa-picker-popup
+  v-model:show="remoteVisible2"
+  v-model="singleValue2"
+  :load="onLoad2"
+  show-search
+  remote
+  pagination
+/>
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+interface OptionItem {
+  label: string
+  value: string
 }
 
 const remoteVisible2 = ref<boolean>(false)
@@ -140,7 +147,71 @@ const onLoad2 = (query?: string, pageNumber?: number, pageSize?: number) => {
     }, 600)
   })
 }
-</script>
+
+```
+## 创建条目
+
+```html [template]
+
+<pa-cell-group inset>
+  <pa-cell title="单选" :value="value" is-link @click="visible = true" />
+  <pa-cell title="多选" :value="value2.toString()" is-link @click="visible2 = true" />
+</pa-cell-group>
+
+<pa-picker-popup
+  v-model:show="visible"
+  v-model="value"
+  :load="onLoad"
+  show-search
+  remote
+  pagination
+  allow-create
+/>
+
+<pa-picker-popup
+  v-model:show="visible2"
+  v-model="value2"
+  :load="onLoad"
+  show-search
+  remote
+  pagination
+  allow-create
+  multiple
+/>
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+interface OptionItem {
+  label: string
+  value: string
+}
+
+const value = ref<string>()
+const visible = ref(false)
+
+const value2 = ref<string[]>([])
+const visible2 = ref(false)
+
+const onLoad = (query?: string, pageNumber?: number, pageSize?: number) => {
+  if (query) return []
+  return new Promise<OptionItem[]>((resolve) => {
+    setTimeout(() => {
+      resolve(
+        new Array(pageSize).fill(0).map((_item, index) => {
+          const num = index + (pageNumber ?? 0) * (pageSize ?? 10)
+          return {
+            label: `${query ? `${query}搜索结果` : '选项'}: ${num}`,
+            value: num.toString(),
+          }
+        }),
+      )
+    }, 600)
+  })
+}
+
 ```
 
 <!--codes end-->

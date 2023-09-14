@@ -1,97 +1,107 @@
 # Badge
 
-## 示例
-
 <!--codes start-->
 
-::: code-group
+## 基础用法
 
 ```html [template]
-<template>
-  <DocDemoBlock title="基础用法" card>
-    <view class="demo-badge">
-      <pa-badge content="5">
-        <view class="demo-block"></view>
-      </pa-badge>
-      <pa-badge content="10">
-        <view class="demo-block"></view>
-      </pa-badge>
-      <pa-badge content="new">
-        <view class="demo-block"></view>
-      </pa-badge>
-      <pa-badge dot>
-        <view class="demo-block"></view>
-      </pa-badge>
-    </view>
-  </DocDemoBlock>
-  <DocDemoBlock title="最大值" card>
-    <view class="demo-badge">
-      <pa-badge content="999" :max="9">
-        <view class="demo-block"></view>
-      </pa-badge>
-      <pa-badge content="999" :max="20">
-        <view class="demo-block"></view>
-      </pa-badge>
-      <pa-badge content="999" :max="99">
-        <view class="demo-block"></view>
-      </pa-badge>
-    </view>
-  </DocDemoBlock>
-  <DocDemoBlock title="自定义颜色" card>
-    <view class="demo-badge">
-      <pa-badge content="5" color="#1989fa">
-        <view class="demo-block"></view>
-      </pa-badge>
-      <pa-badge content="10" color="#1989fa">
-        <view class="demo-block"></view>
-      </pa-badge>
-      <pa-badge content="new" color="#1989fa">
-        <view class="demo-block"></view>
-      </pa-badge>
-      <pa-badge content="new" color="#1989fa" dot>
-        <view class="demo-block"></view>
-      </pa-badge>
-    </view>
-  </DocDemoBlock>
-  <DocDemoBlock title="自定义内容" card>
-    <view class="demo-badge">
-      <pa-badge>
-        <view class="demo-block"></view>
-        <template #content>
-          <pa-icon name="success" color="#fff" />
-        </template>
-      </pa-badge>
-      <pa-badge>
-        <view class="demo-block"></view>
-        <template #content>
-          <pa-icon name="favor" color="#fff" />
-        </template>
-      </pa-badge>
-    </view>
-  </DocDemoBlock>
-  <DocDemoBlock title="自定义位置" card>
-    <view class="demo-badge">
-      <pa-badge content="99" :offset="[-10, -10]">
-        <view class="demo-block"></view>
-      </pa-badge>
-      <pa-badge content="99" :offset="[80, 0]">
-        <view class="demo-block"></view>
-      </pa-badge>
-    </view>
-  </DocDemoBlock>
-  <DocDemoBlock title="独立展示" card>
-    <view class="demo-badge">
-      <pa-badge content="9" />
-      <pa-badge content="99" />
-    </view>
-  </DocDemoBlock>
-  <pa-safe-bottom />
-</template>
+
+<view class="demo-badge">
+  <pa-badge content="5">
+    <view class="demo-badge-block"></view>
+  </pa-badge>
+  <pa-badge content="10">
+    <view class="demo-badge-block"></view>
+  </pa-badge>
+  <pa-badge content="new">
+    <view class="demo-badge-block"></view>
+  </pa-badge>
+  <pa-badge dot>
+    <view class="demo-badge-block"></view>
+  </pa-badge>
+</view>
+
 ```
-```ts [script]
-<script lang="ts" setup>
-import DocDemoBlock from '../../doc/doc-demo-block.vue'
-</script>
+## 最大值
+
+```html [template]
+
+<view class="demo-badge">
+  <pa-badge content="999" :max="9">
+    <view class="demo-badge-block"></view>
+  </pa-badge>
+  <pa-badge content="999" :max="20">
+    <view class="demo-badge-block"></view>
+  </pa-badge>
+  <pa-badge content="999" :max="99">
+    <view class="demo-badge-block"></view>
+  </pa-badge>
+</view>
+
+```
+## 自定义颜色
+
+```html [template]
+
+<view class="demo-badge">
+  <pa-badge content="5" color="#1989fa">
+    <view class="demo-badge-block"></view>
+  </pa-badge>
+  <pa-badge content="10" color="#1989fa">
+    <view class="demo-badge-block"></view>
+  </pa-badge>
+  <pa-badge content="new" color="#1989fa">
+    <view class="demo-badge-block"></view>
+  </pa-badge>
+  <pa-badge content="new" color="#1989fa" dot>
+    <view class="demo-badge-block"></view>
+  </pa-badge>
+</view>
+
+```
+## 自定义内容
+
+```html [template]
+
+<view class="demo-badge">
+  <pa-badge>
+    <view class="demo-badge-block"></view>
+    <template #content>
+      <pa-icon name="success" color="#fff" />
+    </template>
+  </pa-badge>
+  <pa-badge>
+    <view class="demo-badge-block"></view>
+    <template #content>
+      <pa-icon name="favor" color="#fff" />
+    </template>
+  </pa-badge>
+</view>
+
+```
+## 自定义位置
+
+```html [template]
+
+<view class="demo-badge">
+  <pa-badge content="99" :offset="[-10, -10]">
+    <view class="demo-badge-block"></view>
+  </pa-badge>
+  <pa-badge content="99" :offset="[80, 0]">
+    <view class="demo-badge-block"></view>
+  </pa-badge>
+</view>
+
+```
+## 独立展示
+
+```html [template]
+
+<view class="demo-badge">
+  <pa-badge content="9" />
+  <pa-badge content="99" />
+</view>
+
 ```
 
 <!--codes end-->

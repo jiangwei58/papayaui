@@ -1,151 +1,48 @@
 # Form
 
-## 示例
-
 <!--codes start-->
 
-::: code-group
+## 基础用法
 
 ```html [template]
-<template>
-  <DocDemoBlock title="基础用法">
-    <pa-form ref="formRef" :form="formData" :rules="rules">
-      <pa-cell-group inset>
-        <pa-form-item prop="name" label="名称" required>
-          <input
-            v-model="formData.name"
-            placeholder="请输入"
-            :placeholder-style="`color:var(--${defaultNamespace}-number-input-placeholder-color)`"
-          />
-        </pa-form-item>
 
-        <pa-form-item prop="desc" label="描述">
-          <pa-field v-model="formData.desc" placeholder="请输入" only-input />
-        </pa-form-item>
-        <pa-form-item
-          prop="gender"
-          label="性别"
-          :value="genderText"
-          required
-          is-link
-          @click="onChangeGenderVisible"
-        />
-        <pa-form-item prop="age" label="年龄" suffix="岁" required>
-          <pa-number-input v-model.number="formData.age" />
-        </pa-form-item>
-        <pa-form-item prop="object.text" label="对象值(如obj.text)">
-          <pa-field v-model="formData.object.text" placeholder="请输入" only-input />
-        </pa-form-item>
-        <pa-form-item prop="comment" label="评论">
-          <pa-field v-model="formData.comment" type="textarea" placeholder="请输入" only-input />
-        </pa-form-item>
-      </pa-cell-group>
+<pa-form ref="formRef" :form="formData" :rules="rules">
+  <pa-cell-group inset>
+    <pa-form-item prop="name" label="名称" required>
+      <pa-field v-model="formData.name" placeholder="请输入" only-input />
+    </pa-form-item>
 
-      <pa-button class="block mt-30 mx-32" style="width: auto" block @click="onValidate">
-        提交
-      </pa-button>
-    </pa-form>
-  </DocDemoBlock>
+    <pa-form-item prop="desc" label="描述">
+      <pa-field v-model="formData.desc" placeholder="请输入" only-input />
+    </pa-form-item>
+  </pa-cell-group>
 
-  <DocDemoBlock title="动态表单">
-    <pa-form ref="formRef2" :form="formData2">
-      <pa-cell-group inset>
-        <pa-form-item
-          v-for="(item, index) in formData2.list"
-          :key="index"
-          :prop="`list.${index}.name`"
-          :label="`名称${index}`"
-          required
-          :rules="[{ required: true }]"
-        >
-          <view class="flex">
-            <input
-              v-model="item.name"
-              placeholder="请输入"
-              :placeholder-style="`color:var(--${defaultNamespace}-number-input-placeholder-color)`"
-            />
-            <pa-button
-              type="danger"
-              width="100"
-              height="50"
-              block
-              :custom-style="{ padding: 0, marginLeft: '10px' }"
-              @click="onDeleteItem(index)"
-            >
-              删除
-            </pa-button>
-          </view>
-        </pa-form-item>
-      </pa-cell-group>
+  <pa-button class="block mt-30 mx-32" style="width: auto" block @click="onValidate">
+    提交
+  </pa-button>
+</pa-form>
 
-      <view class="grid grid-cols-2 gap-25 mt-30 mx-32">
-        <pa-button block @click="onValidate2">提交</pa-button>
-        <pa-button block type="default" @click="onAddItem">新增</pa-button>
-      </view>
-    </pa-form>
-  </DocDemoBlock>
-  <pa-safe-bottom />
-
-  <pa-picker-popup
-    v-model="formData.gender"
-    v-model:show="genderVisible"
-    :data="genderOptions"
-    @change="onValueChange"
-  />
-</template>
 ```
 ```ts [script]
-<script lang="ts" setup>
-import { computed, reactive, ref } from 'vue'
-import type { FormRules } from '../../core/useForm'
-import { defaultNamespace } from '../../core/useNamespace'
-import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import type { FormInstance } from '.'
+
+import { reactive, ref } from 'vue'
+import type { FormInstance, FormRules } from '../..'
 
 interface FormData {
   name: string
   desc: string
-  gender?: 1 | 0
-  age?: number
-  comment: string
-  object: { text: string }
 }
 
 const formRef = ref<FormInstance>()
 
-const genderOptions = [
-  { label: '男', value: 1 },
-  { label: '女', value: 0 },
-]
-const genderText = computed(() => {
-  const findItem = genderOptions.find((item) => item.value === formData.gender)
-  return findItem ? findItem.label : ''
-})
-const genderVisible = ref<boolean>(false)
-
 const formData = reactive<FormData>({
   name: '',
   desc: '',
-  comment: '',
-  object: { text: '' },
 })
 
 const rules: FormRules<FormData & { 'object.text': string }> = {
-  name: [{ required: true }, { max: 10 }],
-  desc: {
-    validator: (_rules, value: string) => {
-      return value.indexOf('1') === 0
-    },
-    message: '{{label}}开头必须是"1"',
-  },
-  gender: { required: true, message: '请选择{{label}}' },
-  age: { required: true, type: 'number', max: 99 },
-  comment: { max: 10 },
-  'object.text': { required: true }, // object: { type: 'object', fields: { text: { required: true } } },
-}
-
-const onChangeGenderVisible = () => {
-  genderVisible.value = true
+  name: [{ required: true }],
+  desc: [{ required: true, message: '请输入描述内容' }],
 }
 
 const onValidate = async () => {
@@ -156,20 +53,253 @@ const onValidate = async () => {
   })
 }
 
-const onValueChange = () => {
-  formRef.value?.validateField('gender')
+```
+## 校验规则
+
+```html [template]
+
+<pa-form ref="formRef" :form="formData" :rules="rules">
+  <pa-cell-group inset>
+    <pa-form-item prop="name" label="名称" required>
+      <pa-field v-model="formData.name" placeholder="请输入" only-input />
+    </pa-form-item>
+
+    <pa-form-item prop="age" label="年龄" suffix="岁" required>
+      <pa-input-number
+        v-model.number="formData.age"
+        :controls="false"
+        plain
+        block
+        input-align="right"
+        style="--pa-input-number-height: 24px"
+      />
+    </pa-form-item>
+
+    <pa-form-item prop="desc" label="描述">
+      <pa-textarea v-model="formData.desc" placeholder="请输入" input-align="right" />
+    </pa-form-item>
+  </pa-cell-group>
+
+  <pa-button class="block mt-30 mx-32" style="width: auto" block @click="onValidate">
+    提交
+  </pa-button>
+</pa-form>
+
+```
+```ts [script]
+
+import { reactive, ref } from 'vue'
+import type { FormInstance, FormRules } from '../..'
+
+interface FormData {
+  name: string
+  age?: number
+  desc?: string
 }
 
-const formRef2 = ref<FormInstance>()
+const formRef = ref<FormInstance>()
 
-const formData2 = ref<{
+const formData = reactive<FormData>({
+  name: '',
+})
+
+const rules: FormRules<FormData> = {
+  name: [{ required: true }, { min: 2 }, { max: 4 }],
+  age: [{ required: true }, { type: 'number', max: 999 }],
+  desc: {
+    validator: (_rules, value: string) => {
+      return value.indexOf('1') === 0
+    },
+    message: '{{label}}开头必须是"1"',
+  },
+}
+
+const onValidate = async () => {
+  formRef.value?.validate().then(({ isValid }) => {
+    if (isValid) {
+      uni.showToast({ title: '校验通过', icon: 'none' })
+    }
+  })
+}
+
+```
+## 单个校验触发
+
+```html [template]
+
+<pa-form ref="formRef" :form="formData" :rules="rules">
+  <pa-cell-group inset>
+    <pa-form-item prop="name" label="名称" required>
+      <pa-field v-model="formData.name" placeholder="请输入" only-input @blur="onNameValidate" />
+    </pa-form-item>
+  </pa-cell-group>
+
+  <pa-button class="block mt-30 mx-32" style="width: auto" block @click="onValidate">
+    提交
+  </pa-button>
+</pa-form>
+
+```
+```ts [script]
+
+/**
+ * @description 可以用 validateField 方法来校验单个字段，参数为 prop 值，通常在需要及时反馈校验状态的情况使用
+ */
+import { reactive, ref } from 'vue'
+import type { FormInstance, FormRules } from '../..'
+
+interface FormData {
+  name: string
+}
+
+const formRef = ref<FormInstance>()
+
+const formData = reactive<FormData>({
+  name: '',
+})
+
+const rules: FormRules<FormData> = {
+  name: [{ required: true }, { min: 2 }, { max: 4 }],
+}
+
+const onNameValidate = () => {
+  formRef.value?.validateField('name')
+}
+
+const onValidate = async () => {
+  formRef.value?.validate().then(({ isValid }) => {
+    if (isValid) {
+      uni.showToast({ title: '校验通过', icon: 'none' })
+    }
+  })
+}
+
+```
+## 复杂类型
+
+```html [template]
+
+<pa-form ref="formRef" :form="formData" :rules="rules">
+  <pa-cell-group inset>
+    <pa-form-item prop="object.text" label="对象" required>
+      <pa-field
+        v-model="formData.object.text"
+        placeholder="请输入"
+        only-input
+        @blur="onNameValidate"
+      />
+    </pa-form-item>
+
+    <pa-form-item prop="array.0" label="数组" required>
+      <pa-field
+        v-model="formData.array[0]"
+        placeholder="请输入"
+        only-input
+        @blur="onNameValidate"
+      />
+    </pa-form-item>
+  </pa-cell-group>
+
+  <pa-button class="block mt-30 mx-32" style="width: auto" block @click="onValidate">
+    提交
+  </pa-button>
+</pa-form>
+
+```
+```ts [script]
+
+/**
+ * @description 可以用 validateField 方法来校验单个字段，参数为 prop 值，通常在需要及时反馈校验状态的情况使用
+ */
+import { reactive, ref } from 'vue'
+import type { FormInstance, FormRules } from '../..'
+
+interface FormData {
+  object: {
+    text: string
+  }
+  array: string[]
+}
+
+const formRef = ref<FormInstance>()
+
+const formData = reactive<FormData>({
+  object: {
+    text: '',
+  },
+  array: [],
+})
+
+const rules: FormRules<FormData & { 'object.text': string; 'array.0': string }> = {
+  'object.text': [{ required: true }, { max: 5 }],
+  'array.0': [{ required: true, message: '数组第一个是必填的' }],
+}
+
+const onNameValidate = () => {
+  formRef.value?.validateField('name')
+}
+
+const onValidate = async () => {
+  formRef.value?.validate().then(({ isValid }) => {
+    if (isValid) {
+      uni.showToast({ title: '校验通过', icon: 'none' })
+    }
+  })
+}
+
+```
+## 动态表单
+
+```html [template]
+
+<pa-form ref="formRef" :form="formData">
+  <pa-cell-group inset>
+    <pa-form-item
+      v-for="(item, index) in formData.list"
+      :key="index"
+      :prop="`list.${index}.name`"
+      :label="`名称${index}`"
+      required
+      :rules="[{ required: true }]"
+    >
+      <view class="flex">
+        <pa-field v-model="item.name" placeholder="请输入" only-input />
+        <pa-button
+          type="danger"
+          width="100"
+          height="50"
+          block
+          :custom-style="{ padding: 0, marginLeft: '10px' }"
+          @click="onDeleteItem(index)"
+        >
+          删除
+        </pa-button>
+      </view>
+    </pa-form-item>
+  </pa-cell-group>
+
+  <view class="grid grid-cols-2 gap-25 mt-30 mx-32">
+    <pa-button block @click="onValidate">提交</pa-button>
+    <pa-button block type="default" @click="onAddItem">新增</pa-button>
+  </view>
+</pa-form>
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+import type { FormInstance } from '../..'
+
+const formRef = ref<FormInstance>()
+
+const formData = ref<{
   list: { name: string }[]
 }>({
   list: [{ name: '' }, { name: '' }, { name: '' }],
 })
 
-const onValidate2 = async () => {
-  formRef2.value?.validate().then(({ isValid }) => {
+const onValidate = async () => {
+  formRef.value?.validate().then(({ isValid }) => {
     if (isValid) {
       uni.showToast({ title: '校验通过', icon: 'none' })
     }
@@ -177,13 +307,13 @@ const onValidate2 = async () => {
 }
 
 const onAddItem = () => {
-  formData2.value.list.push({ name: '' })
+  formData.value.list.push({ name: '' })
 }
 
 const onDeleteItem = (index: number) => {
-  formData2.value.list.splice(index, 1)
+  formData.value.list.splice(index, 1)
 }
-</script>
+
 ```
 
 <!--codes end-->

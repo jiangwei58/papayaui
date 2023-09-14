@@ -1,114 +1,137 @@
 # Dialog
 
-## 提示弹窗
-
 <!--codes start-->
 
-```html [template]
-<template>
-  <pa-cell-group inset>
-    <pa-cell
-      title="提示弹窗"
-      is-link
-      @click="onOpen({ title: '提示', message: '落霞与孤鹜齐飞，秋水共长天一色' })"
-    />
-    <pa-cell
-      title="提示弹窗（无标题）"
-      is-link
-      @click="onOpen({ message: '落霞与孤鹜齐飞，秋水共长天一色' })"
-    />
-    <pa-cell
-      title="确认弹窗"
-      is-link
-      @click="
-        onOpen({
-          title: '标题',
-          message: '落霞与孤鹜齐飞，秋水共长天一色',
-          showCancelButton: true,
-        })
-      "
-    />
-  </pa-cell-group>
+## 提示弹窗
 
-  <pa-dialog v-model:show="visible" v-bind="dialogProps"></pa-dialog>
-</template>
+```html [template]
+
+<pa-cell title="提示弹窗" is-link @click="onOpen()" />
+
+<pa-dialog
+  v-model:show="visible"
+  title="提示"
+  message="落霞与孤鹜齐飞，秋水共长天一色"
+></pa-dialog>
+
 ```
 ```ts [script]
+
 import { ref } from 'vue'
-import type { DialogProps } from '../../components/dialog/props'
 
 const visible = ref(false)
-const dialogProps = ref<Partial<DialogProps>>({})
 
-const onOpen = (props: Partial<DialogProps>) => {
-  dialogProps.value = props
+const onOpen = () => {
   visible.value = true
 }
-```
 
+```
+## 提示弹窗（无标题）
+
+```html [template]
+
+<pa-cell title="提示弹窗（无标题）" is-link @click="onOpen()" />
+
+<pa-dialog v-model:show="visible" message="落霞与孤鹜齐飞，秋水共长天一色"></pa-dialog>
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const visible = ref(false)
+
+const onOpen = () => {
+  visible.value = true
+}
+
+```
+## 确认弹窗
+
+```html [template]
+
+<pa-cell title="确认弹窗" is-link @click="onOpen()" />
+
+<pa-dialog
+  v-model:show="visible"
+  title="提示"
+  message="落霞与孤鹜齐飞，秋水共长天一色"
+  show-cancel-button
+></pa-dialog>
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const visible = ref(false)
+
+const onOpen = () => {
+  visible.value = true
+}
+
+```
 ## 圆角按钮样式
 
 ```html [template]
-<template>
-  <pa-cell-group inset>
-    <pa-cell
-      title="提示弹窗"
-      is-link
-      @click="onOpen({ title: '提示', message: '落霞与孤鹜齐飞，秋水共长天一色' })"
-    />
-    <pa-cell
-      title="提示弹窗（无标题）"
-      is-link
-      @click="onOpen({ message: '落霞与孤鹜齐飞，秋水共长天一色' })"
-    />
-    <pa-cell
-      title="确认弹窗"
-      is-link
-      @click="
-        onOpen({
-          title: '标题',
-          message: '落霞与孤鹜齐飞，秋水共长天一色',
-          showCancelButton: true,
-        })
-      "
-    />
-  </pa-cell-group>
 
-  <pa-dialog v-model:show="visible" theme="round-button" v-bind="dialogProps"></pa-dialog>
-</template>
+<pa-cell-group inset>
+  <pa-cell title="提示弹窗" is-link @click="onOpen({ title: '提示' })" />
+  <pa-cell title="提示弹窗（无标题）" is-link @click="onOpen()" />
+  <pa-cell
+    title="确认弹窗"
+    is-link
+    @click="
+      onOpen({
+        title: '标题',
+        showCancelButton: true,
+      })
+    "
+  />
+</pa-cell-group>
+
+<pa-dialog
+  v-model:show="visible"
+  theme="round-button"
+  message="落霞与孤鹜齐飞，秋水共长天一色"
+  v-bind="dialogProps"
+></pa-dialog>
+
 ```
 ```ts [script]
+
 import { ref } from 'vue'
 import type { DialogProps } from '../../components/dialog/props'
 
 const visible = ref(false)
 const dialogProps = ref<Partial<DialogProps>>({})
 
-const onOpen = (props: Partial<DialogProps>) => {
+const onOpen = (props: Partial<DialogProps> = {}) => {
   dialogProps.value = props
   visible.value = true
 }
-```
 
+```
 ## 异步关闭
 
 ```html [template]
-<template>
-  <pa-cell-group inset>
-    <pa-cell title="异步关闭" is-link @click="onOpen()" />
-  </pa-cell-group>
 
-  <pa-dialog
-    v-model:show="visible"
-    title="提示"
-    message="落霞与孤鹜齐飞，秋水共长天一色"
-    show-cancel-button
-    :close-on-click-overlay="false"
-    :before-close="onBeforeClose"
-  />
-</template>
+<pa-cell-group inset>
+  <pa-cell title="异步关闭" is-link @click="onOpen()" />
+</pa-cell-group>
+
+<pa-dialog
+  v-model:show="visible"
+  title="提示"
+  message="落霞与孤鹜齐飞，秋水共长天一色"
+  show-cancel-button
+  :close-on-click-overlay="false"
+  :before-close="onBeforeClose"
+/>
+
 ```
 ```ts [script]
+
 import { ref } from 'vue'
 import type { ActionType } from '../../components/dialog/props'
 
@@ -129,66 +152,76 @@ const onBeforeClose = (action: ActionType) => {
     return true
   }
 }
-```
 
+```
 ## 自定义内容
 
 ```html [template]
-<template>
-  <pa-cell-group inset>
-    <pa-cell title="自定义内容" is-link @click="onOpen()" />
-    <pa-cell title="自定义底部" is-link @click="onOpen2()" />
-  </pa-cell-group>
 
-  <pa-dialog v-model:show="visible" title="标题">
-    <view class="flex flex-col items-center justify-center pt-20 pb-50">
-      <view class="text-28 color-black-2">这是自定义内容</view>
-      <image src="../../images/demo.jpeg" style="width: 80px; height: 80px" />
-    </view>
-  </pa-dialog>
+<pa-cell title="自定义内容" is-link @click="onOpen()" />
 
-  <pa-dialog
-    v-model:show="visible2"
-    title="标题"
-    message="可以自定义底部，比如自定按钮，方便利用微信开放能力"
-  >
-    <view class="flex flex-col items-center justify-center pt-20 pb-50 px-48">
-      <view class="text-28 color-black-2">可以自定义底部，比如自定按钮，方便利用微信开放能力</view>
-      <image v-if="avatarUrl" :src="avatarUrl" style="width: 80px; height: 80px" />
-    </view>
-    <template #footer>
-      <view class="flex items-center justify-between pt-16 px-48 pb-32">
-        <pa-button class="width-full block mr-32" type="default" block @click="visible2 = false">
-          取消
-        </pa-button>
-        <pa-button
-          class="width-full block"
-          block
-          open-type="chooseAvatar"
-          @chooseavatar="onChooseAvatar"
-        >
-          获取头像
-        </pa-button>
-      </view>
-    </template>
-  </pa-dialog>
-</template>
+<pa-dialog v-model:show="visible" title="标题">
+  <view class="flex flex-col items-center justify-center pt-20 pb-50">
+    <view class="text-28 color-black-2">这是自定义内容</view>
+    <image src="../../images/demo.jpeg" style="width: 80px; height: 80px" />
+  </view>
+</pa-dialog>
+
 ```
 ```ts [script]
+
 import { ref } from 'vue'
-import type { EventDetail } from '../../types'
 
 const visible = ref(false)
-const visible2 = ref(false)
-
-const avatarUrl = ref<string>()
 
 const onOpen = () => {
   visible.value = true
 }
 
-const onOpen2 = () => {
-  visible2.value = true
+```
+## 自定义底部
+
+```html [template]
+
+<pa-cell title="自定义底部" is-link @click="onOpen()" />
+
+<pa-dialog
+  v-model:show="visible"
+  title="标题"
+  message="可以自定义底部，比如自定按钮，方便利用微信开放能力"
+>
+  <view class="flex flex-col items-center justify-center pt-20 pb-50 px-48">
+    <view class="text-28 color-black-2">可以自定义底部，比如自定按钮，方便利用微信开放能力</view>
+    <image v-if="avatarUrl" :src="avatarUrl" style="width: 80px; height: 80px" />
+  </view>
+  <template #footer>
+    <view class="flex items-center justify-between pt-16 px-48 pb-32">
+      <pa-button class="width-full block mr-32" type="default" block @click="onOpen(false)">
+        取消
+      </pa-button>
+      <pa-button
+        class="width-full block"
+        block
+        open-type="chooseAvatar"
+        @chooseavatar="onChooseAvatar"
+      >
+        获取头像
+      </pa-button>
+    </view>
+  </template>
+</pa-dialog>
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+import type { EventDetail } from '../../types'
+
+const visible = ref(false)
+const avatarUrl = ref<string>()
+
+const onOpen = (show = true) => {
+  visible.value = show
 }
 
 const onChooseAvatar = (e: EventDetail<{ avatarUrl: string }>) => {
@@ -196,6 +229,7 @@ const onChooseAvatar = (e: EventDetail<{ avatarUrl: string }>) => {
     avatarUrl.value = e.detail.avatarUrl
   }
 }
+
 ```
 
 <!--codes end-->

@@ -1,164 +1,323 @@
 # Calendar
 
-## 示例
-
 <!--codes start-->
 
-::: code-group
+## 单个日期
 
 ```html [template]
-<template>
-  <DocDemoBlock title="基础用法">
-    <pa-cell-group inset>
-      <pa-cell
-        title="单个日期"
-        :value="values[0]?.toString()"
-        is-link
-        @click="onShow({ type: 'single', current: 0 })"
-      />
-      <pa-cell
-        title="多个日期"
-        :value="values[1]?.toString()"
-        is-link
-        @click="onShow({ type: 'multiple', current: 1 })"
-      />
-      <pa-cell
-        title="日期区间"
-        :value="values[2]?.toString()"
-        is-link
-        @click="onShow({ type: 'range', current: 2 })"
-      />
-    </pa-cell-group>
-  </DocDemoBlock>
 
-  <DocDemoBlock title="快捷选择">
-    <pa-cell-group inset>
-      <pa-cell
-        title="单个日期"
-        :value="values[3]?.toString()"
-        is-link
-        @click="onShow({ type: 'single', current: 3, showConfirm: false })"
-      />
-      <pa-cell
-        title="日期区间"
-        :value="values[4]?.toString()"
-        is-link
-        @click="onShow({ type: 'range', current: 4, showConfirm: false })"
-      />
-    </pa-cell-group>
-  </DocDemoBlock>
+<pa-cell title="单个日期" :value="dateStr" is-link @click="onShow()" />
 
-  <DocDemoBlock title="自定义日历">
-    <pa-cell-group inset>
-      <pa-cell
-        title="自定义日期范围"
-        :value="values[5]?.toString()"
-        is-link
-        @click="
-          onShow({
-            type: 'single',
-            current: 5,
-            minDate: dayjs().startOf('month').valueOf(),
-            maxDate: dayjs().endOf('month').valueOf(),
-          })
-        "
-      />
-      <pa-cell
-        title="自定义按钮文字"
-        :value="values[6]?.toString()"
-        is-link
-        @click="
-          onShow({
-            type: 'range',
-            current: 6,
-            confirmText: '完成',
-            confirmDisabledText: '请选择结束时间',
-          })
-        "
-      />
-      <pa-cell
-        title="自定义日期文案"
-        :value="values[7]?.toString()"
-        is-link
-        @click="
-          onShow({
-            type: 'single',
-            current: 7,
-            minDate: dayjs().month(9).startOf('month').valueOf(),
-            maxDate: dayjs().month(9).endOf('month').valueOf(),
-            formatter: (day) => {
-              if (day.date.month() === 9) {
-                if (day.date.date() === 1) {
-                  day.topInfo = '国庆节'
-                } else if (day.date.date() <= 7) {
-                  day.topInfo = '休'
-                }
-              }
-              return day
-            },
-          })
-        "
-      />
-      <pa-cell
-        title="日期区间最大范围"
-        :value="values[8]?.toString()"
-        is-link
-        @click="onShow({ type: 'range', current: 8, maxRange: 3 })"
-      />
-    </pa-cell-group>
-  </DocDemoBlock>
+<pa-calendar v-model:show="visible" type="single" @confirm="onConfirm" />
 
-  <DocDemoBlock title="平铺展示" card>
-    <pa-calendar :poppable="false" :default-date="state.defaultDate" />
-  </DocDemoBlock>
-
-  <pa-calendar
-    v-model:show="visible"
-    :type="state.type"
-    :default-date="state.defaultDate"
-    :min-date="state.minDate"
-    :max-date="state.maxDate"
-    :formatter="state.formatter"
-    :show-confirm="state.showConfirm"
-    :confirm-text="state.confirmText"
-    :confirm-disabled-text="state.confirmDisabledText"
-    :max-range="state.maxRange"
-    @confirm="onConfirm"
-  />
-  <SafeBottom />
-</template>
 ```
 ```ts [script]
-<script lang="ts" setup>
+
 import dayjs from 'dayjs'
 import { ref } from 'vue'
-import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import SafeBottom from '../safe-bottom/safe-bottom.vue'
-import type { CalendarProps } from './props'
-
-type StateProps = Partial<CalendarProps> & { current?: number }
 
 const visible = ref<boolean>(false)
-const state = ref<StateProps>({
-  type: 'single',
-  defaultDate: Date.now(),
-})
-const values = ref<Array<string | string[]>>([])
+const dateStr = ref('')
 
-const onShow = (data: StateProps = {}) => {
-  state.value = {}
-  for (const key in data) {
-    state.value[key as keyof CalendarProps] = data[key as keyof CalendarProps] as any
-  }
+const onShow = () => {
   visible.value = true
 }
 
 const onConfirm = (value: Date | Date[]) => {
-  values.value[state.value.current ?? 0] = Array.isArray(value)
-    ? value.map((item) => dayjs(item).format('YYYY-MM-DD'))
+  dateStr.value = dayjs(value as Date).format('YYYY-MM-DD')
+}
+
+```
+## 多个日期
+
+```html [template]
+
+<pa-cell title="多个日期" :value="dateStr" is-link @click="onShow()" />
+
+<pa-calendar v-model:show="visible" type="multiple" @confirm="onConfirm" />
+
+```
+```ts [script]
+
+/**
+ * @description 设置type为multiple后可以选择多个日期，此时confirm事件返回的 date 为数组结构，数组包含若干个选中的日期。
+ */
+import dayjs from 'dayjs'
+import { ref } from 'vue'
+
+const visible = ref<boolean>(false)
+const dateStr = ref('')
+
+const onShow = () => {
+  visible.value = true
+}
+
+const onConfirm = (value: Date | Date[]) => {
+  dateStr.value = (value as Date[]).map((date) => dayjs(date).format('YYYY-MM-DD')).toString()
+}
+
+```
+## 日期区间
+
+```html [template]
+
+<pa-cell title="日期区间" :value="dateStr" is-link @click="onShow()" />
+
+<pa-calendar v-model:show="visible" type="range" @confirm="onConfirm" />
+
+```
+```ts [script]
+
+/**
+ * @description 设置type为range后可以选择日期区间，此时confirm事件返回的 date 为数组结构，数组第一项为开始时间，第二项为结束时间。
+ * @tips 默认情况下，日期区间的起止时间不能为同一天，可以通过设置 allow-same-day 属性来允许选择同一天。
+ */
+import dayjs from 'dayjs'
+import { ref } from 'vue'
+
+const visible = ref<boolean>(false)
+const dateStr = ref('')
+
+const onShow = () => {
+  visible.value = true
+}
+
+const onConfirm = (value: Date | Date[]) => {
+  dateStr.value = (value as Date[]).map((date) => dayjs(date).format('YYYY-MM-DD')).join('~')
+}
+
+```
+## 快捷选择
+
+```html [template]
+
+<pa-cell-group inset>
+  <pa-cell title="单个日期" :value="dateString(0)" is-link @click="onShow('single', 0)" />
+  <pa-cell title="日期区间" :value="dateString(1)" is-link @click="onShow('range', 1)" />
+</pa-cell-group>
+
+<pa-calendar
+  v-model:show="visible"
+  :type="type"
+  :default-date="values[current]"
+  :show-confirm="false"
+  @confirm="onConfirm"
+/>
+
+```
+```ts [script]
+
+/**
+ * @description 将show-confirm设置为false可以隐藏确认按钮，这种情况下选择完成后会立即触发confirm事件。
+ */
+import dayjs from 'dayjs'
+import { ref } from 'vue'
+import type { CalendarType } from '../../components/calendar'
+
+const visible = ref<boolean>(false)
+const type = ref<CalendarType>('single')
+
+const current = ref(0)
+const values = ref<Array<number | number[]>>([])
+
+const dateString = (index: number) => {
+  const value = values.value[index]
+  if (!value) return ''
+  return Array.isArray(value)
+    ? value.map((item) => dayjs(item).format('YYYY-MM-DD')).toString()
     : dayjs(value).format('YYYY-MM-DD')
 }
-</script>
+
+const onShow = (newType: CalendarType, index: number) => {
+  type.value = newType
+  current.value = index
+  visible.value = true
+}
+
+const onConfirm = (value: Date | Date[]) => {
+  values.value[current.value] = Array.isArray(value)
+    ? value.map((item) => item.getTime())
+    : value.getTime()
+}
+
+```
+## 自定义日期范围
+
+```html [template]
+
+<pa-cell title="自定义日期范围" :value="dateStr" is-link @click="onShow()" />
+
+<pa-calendar
+  v-model:show="visible"
+  :min-date="minDate"
+  :max-date="maxDate"
+  @confirm="onConfirm"
+/>
+
+```
+```ts [script]
+
+/**
+ * @description 通过 min-date 和 max-date 定义日历的范围
+ */
+import dayjs from 'dayjs'
+import { ref } from 'vue'
+
+const visible = ref<boolean>(false)
+const minDate = dayjs().startOf('month').valueOf()
+const maxDate = dayjs().endOf('month').valueOf()
+const dateStr = ref('')
+
+const onShow = () => {
+  visible.value = true
+}
+
+const onConfirm = (value: Date | Date[]) => {
+  dateStr.value = dayjs(value as Date).format('YYYY-MM-DD')
+}
+
+```
+## 自定义按钮文字
+
+```html [template]
+
+<pa-cell title="自定义按钮文字" :value="dateStr" is-link @click="onShow()" />
+
+<pa-calendar
+  v-model:show="visible"
+  type="range"
+  confirm-text="完成"
+  confirm-disabled-text="请选择结束时间"
+  @confirm="onConfirm"
+/>
+
+```
+```ts [script]
+
+/**
+ * @description 通过confirm-text设置按钮文字，通过confirm-disabled-text设置按钮禁用时的文字。
+ */
+import dayjs from 'dayjs'
+import { ref } from 'vue'
+
+const visible = ref<boolean>(false)
+const dateStr = ref('')
+
+const onShow = () => {
+  visible.value = true
+}
+
+const onConfirm = (value: Date | Date[]) => {
+  dateStr.value = (value as Date[]).map((item) => dayjs(item).format('YYYY-MM-DD')).join('~')
+}
+
+```
+## 自定义日期文案
+
+```html [template]
+
+<pa-cell title="自定义日期文案" :value="dateStr" is-link @click="onShow()" />
+
+<pa-calendar
+  v-model:show="visible"
+  type="range"
+  :min-date="minDate"
+  :max-date="maxDate"
+  :formatter="formatter"
+  @confirm="onConfirm"
+/>
+
+```
+```ts [script]
+
+/**
+ * @description 通过传入formatter函数来对日历上每一格的内容进行格式化
+ */
+import dayjs from 'dayjs'
+import { ref } from 'vue'
+import type { DayItem } from '../../core'
+
+const visible = ref<boolean>(false)
+const minDate = dayjs('2023-6-1').valueOf()
+const maxDate = dayjs('2023-6-30').valueOf()
+const dateStr = ref('')
+
+const onShow = () => {
+  visible.value = true
+}
+
+const formatter = (dayItem: DayItem) => {
+  const month = dayItem.date.month() + 1
+  const date = dayItem.date.date()
+
+  if (month === 6) {
+    if (date === 6) {
+      dayItem.text = '今天'
+    } else if (date === 22) {
+      dayItem.topInfo = '端午节'
+    } else if (date > 22 && date < 25) {
+      dayItem.topInfo = '休'
+    } else if (date === 25) {
+      dayItem.topInfo = '补班'
+    }
+  }
+
+  if (dayItem.type === 'start') {
+    dayItem.bottomInfo = '入住'
+  } else if (dayItem.type === 'end') {
+    dayItem.bottomInfo = '离店'
+  }
+
+  return dayItem
+}
+
+const onConfirm = (value: Date | Date[]) => {
+  dateStr.value = (value as Date[]).map((item) => dayjs(item).format('YYYY-MM-DD')).join('~')
+}
+
+```
+## 日期区间最大范围
+
+```html [template]
+
+<pa-cell title="日期区间最大范围" :value="dateStr" is-link @click="onShow()" />
+
+<pa-calendar v-model:show="visible" type="range" :max-range="3" @confirm="onConfirm" />
+
+```
+```ts [script]
+
+/**
+ * @description 选择日期区间时，可以通过max-range属性来指定最多可选天数
+ */
+import dayjs from 'dayjs'
+import { ref } from 'vue'
+
+const visible = ref<boolean>(false)
+const dateStr = ref('')
+
+const onShow = () => {
+  visible.value = true
+}
+
+const onConfirm = (value: Date | Date[]) => {
+  dateStr.value = (value as Date[]).map((item) => dayjs(item).format('YYYY-MM-DD')).join('~')
+}
+
+```
+## 平铺展示
+
+```html [template]
+
+<pa-calendar :poppable="false" />
+
+```
+```ts [script]
+
+/**
+ * @description 将poppable设置为false，日历会直接展示在页面内，而不是以弹层的形式出现
+ */
+
 ```
 
 <!--codes end-->

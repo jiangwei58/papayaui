@@ -1,72 +1,90 @@
 # Button
 
-## 示例
-
 <!--codes start-->
 
-::: code-group
+## 基础用法
 
 ```html [template]
-<template>
-  <view class="demo-button">
-    <DocDemoBlock title="基础用法" card>
-      <pa-button type="primary">主要按钮</pa-button>
-      <pa-button type="warning">警告按钮</pa-button>
-      <pa-button type="danger">危险按钮</pa-button>
-      <pa-button type="default">默认按钮</pa-button>
-    </DocDemoBlock>
 
-    <DocDemoBlock title="镂空按钮" card>
-      <pa-button type="primary" plain>镂空按钮</pa-button>
-      <pa-button type="warning" plain>镂空按钮</pa-button>
-      <pa-button type="danger" plain>镂空按钮</pa-button>
-    </DocDemoBlock>
+<pa-button type="primary">主要按钮</pa-button>
+<pa-button type="warning">警告按钮</pa-button>
+<pa-button type="danger">危险按钮</pa-button>
+<pa-button type="default">默认按钮</pa-button>
 
-    <DocDemoBlock title="禁用状态" card>
-      <pa-button type="primary" disabled>禁用状态</pa-button>
-    </DocDemoBlock>
+```
+## 镂空按钮
 
-    <DocDemoBlock title="尺寸" card>
-      <pa-button type="primary" size="large">大号按钮</pa-button>
-      <pa-button type="primary" size="normal">普通按钮</pa-button>
-      <pa-button type="primary" size="small">小型按钮</pa-button>
-      <pa-button type="primary" size="mini">迷你按钮</pa-button>
-    </DocDemoBlock>
+```html [template]
 
-    <DocDemoBlock title="自定义大小" card>
-      <pa-button type="primary" width="300" height="80">按钮</pa-button>
-      <pa-button type="primary" width="200" height="60">按钮</pa-button>
-    </DocDemoBlock>
+<pa-button type="primary" plain>镂空按钮</pa-button>
+<pa-button type="warning" plain>镂空按钮</pa-button>
+<pa-button type="danger" plain>镂空按钮</pa-button>
 
-    <DocDemoBlock title="圆角" card>
-      <pa-button type="primary" round>圆角按钮</pa-button>
-      <pa-button type="primary" round="20">圆角按钮</pa-button>
-    </DocDemoBlock>
+```
+## 禁用状态
 
-    <DocDemoBlock title="加载状态" card>
-      <pa-button type="primary" loading>加载状态</pa-button>
-    </DocDemoBlock>
+```html [template]
 
-    <DocDemoBlock title="图标" card>
-      <pa-button type="primary" icon="write">图标按钮</pa-button>
-      <pa-button type="primary" icon="write"></pa-button>
-      <pa-button type="primary" icon="write" width="42px" height="42px" round></pa-button>
-    </DocDemoBlock>
+<pa-button type="primary" disabled>禁用状态</pa-button>
 
-    <DocDemoBlock title="块级元素" card>
-      <pa-button type="primary" block>块级元素</pa-button>
-    </DocDemoBlock>
+```
+## 尺寸
 
-    <DocDemoBlock title="点击加载（等待promise）" card>
-      <pa-button type="primary" :sync-click="onClick">点击加载</pa-button>
-    </DocDemoBlock>
-  </view>
-  <pa-safe-bottom />
-</template>
+```html [template]
+
+<pa-button type="primary" size="large">大号按钮</pa-button>
+<pa-button type="primary" size="normal">普通按钮</pa-button>
+<pa-button type="primary" size="small">小型按钮</pa-button>
+<pa-button type="primary" size="mini">迷你按钮</pa-button>
+
+```
+## 自定义大小
+
+```html [template]
+
+<pa-button type="primary" width="300" height="80">按钮</pa-button>
+<pa-button type="primary" width="200" height="60">按钮</pa-button>
+
+```
+## 圆角
+
+```html [template]
+
+<pa-button type="primary" round>圆角按钮</pa-button>
+<pa-button type="primary" round="20">圆角按钮</pa-button>
+
+```
+## 加载状态
+
+```html [template]
+
+<pa-button type="primary" loading>加载状态</pa-button>
+
+```
+## 图标
+
+```html [template]
+
+<pa-button type="primary" icon="write">图标按钮</pa-button>
+<pa-button type="primary" icon="write"></pa-button>
+<pa-button type="primary" icon="write" width="42px" height="42px" round></pa-button>
+
+```
+## 块级元素
+
+```html [template]
+
+<pa-button type="primary" block>块级元素</pa-button>
+
+```
+## 点击加载（等待promise）
+
+```html [template]
+
+<pa-button type="primary" :sync-click="onClick">点击加载</pa-button>
+
 ```
 ```ts [script]
-<script lang="ts" setup>
-import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 const onClick = () => {
   return new Promise<void>((resolve) => {
@@ -75,7 +93,7 @@ const onClick = () => {
     }, 2000)
   })
 }
-</script>
+
 ```
 
 <!--codes end-->
