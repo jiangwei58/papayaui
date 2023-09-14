@@ -10,6 +10,7 @@ import { main as initMain } from './init'
 export interface PluginOptions {
   sourceDirPath: string
   targetDirPath: string
+  demoDirPath: string
   componentDirNames: string[]
   relevanceMap: Record<string, string[]>
 }
@@ -33,6 +34,7 @@ async function main() {
   const __filename = fileURLToPath(import.meta.url)
   const directoryPath = path.resolve(__filename, '../../../src/packages/components')
   const docDirectoryPath = path.resolve(__filename, '../../../docs/components')
+  const demoDirectoryPath = path.resolve(__filename, '../../../src/packages/demos')
 
   const files = await readdir(directoryPath)
   const relevanceMap = {
@@ -57,6 +59,7 @@ async function main() {
   const params = {
     sourceDirPath: directoryPath,
     targetDirPath: docDirectoryPath,
+    demoDirPath: demoDirectoryPath,
     componentDirNames,
     relevanceMap,
   }
