@@ -1,64 +1,71 @@
 # Cell
 
-## 示例
-
 <!--codes start-->
 
-::: code-group
+## 基础用法
 
 ```html [template]
-<template>
-  <DocDemoBlock title="基础用法">
-    <pa-cell title="单元格" value="内容" />
-  </DocDemoBlock>
 
-  <DocDemoBlock title="卡片风格">
-    <pa-cell-group inset>
-      <pa-cell title="单元格" value="内容" />
-      <pa-cell title="单元格" value="内容" />
-    </pa-cell-group>
-  </DocDemoBlock>
+<pa-cell title="单元格" value="内容" />
 
-  <DocDemoBlock title="展示箭头">
-    <pa-cell title="单元格" value="内容" is-link />
-  </DocDemoBlock>
-
-  <DocDemoBlock title="后缀">
-    <pa-cell title="单元格" value="内容" suffix="%" />
-  </DocDemoBlock>
-
-  <DocDemoBlock title="图标">
-    <pa-cell title="单元格" value="内容" icon="search" />
-  </DocDemoBlock>
-
-  <DocDemoBlock title="插槽">
-    <pa-cell value="内容">
-      <template #title>
-        <text>标题</text>
-        <text style="color: red">插槽</text>
-      </template>
-    </pa-cell>
-    <pa-cell title="单元格">
-      <text>内容</text>
-      <text style="color: red">插槽</text>
-    </pa-cell>
-  </DocDemoBlock>
-
-  <DocDemoBlock title="居中">
-    <pa-cell
-      title="单元格"
-      value="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
-      center
-    />
-  </DocDemoBlock>
-
-  <pa-safe-bottom />
-</template>
 ```
-```ts [script]
-<script lang="ts" setup>
-import DocDemoBlock from '../../doc/doc-demo-block.vue'
-</script>
+## 卡片风格
+
+```html [template]
+
+<pa-cell-group inset>
+  <pa-cell title="单元格" value="内容" />
+  <pa-cell title="单元格" value="内容" />
+</pa-cell-group>
+
+```
+## 展示箭头
+
+```html [template]
+
+<pa-cell title="单元格" value="内容" is-link />
+
+```
+## 后缀
+
+```html [template]
+
+<pa-cell title="单元格" value="内容" suffix="%" />
+
+```
+## 图标
+
+```html [template]
+
+<pa-cell title="单元格" value="内容" icon="search" />
+
+```
+## 插槽
+
+```html [template]
+
+<pa-cell value="内容">
+  <template #title>
+    <text>标题</text>
+    <text style="color: red">插槽</text>
+  </template>
+</pa-cell>
+<pa-cell title="单元格">
+  <text>内容</text>
+  <text style="color: red">插槽</text>
+</pa-cell>
+
+```
+## 居中
+
+```html [template]
+
+<pa-cell
+  title="单元格"
+  value="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
+  center
+/>
+
 ```
 
 <!--codes end-->

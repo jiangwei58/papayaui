@@ -1,49 +1,19 @@
 # CheckboxButtons
 
-## 示例
-
 <!--codes start-->
 
-::: code-group
+## 基础用法
 
 ```html [template]
-<template>
-  <DocDemoBlock title="基础用法" card>
-    <pa-checkbox-btns v-model="selectedValue1" :options="getData(6)" />
-  </DocDemoBlock>
 
-  <DocDemoBlock title="多选" card>
-    <pa-checkbox-btns v-model="selectedValue2" :options="getData(6)" multiple />
-  </DocDemoBlock>
+<pa-checkbox-btns v-model="selectedValue" :options="getData(6)" />
 
-  <DocDemoBlock title="自定义布局" card>
-    <pa-checkbox-btns v-model="selectedValue3" :options="getData(8)" :column="4" gap="10" round />
-  </DocDemoBlock>
-
-  <DocDemoBlock title="自定义内容" card>
-    <pa-checkbox-btns v-model="selectedValue4" :options="getData(8)">
-      <template #default="{ item, index }">
-        <pa-icon :name="index % 2 === 0 ? 'success' : 'close'" />
-        <text>{{ item.label }}</text>
-      </template>
-    </pa-checkbox-btns>
-  </DocDemoBlock>
-</template>
 ```
 ```ts [script]
-<script lang="ts" setup>
+
 import { ref } from 'vue'
-import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
-interface Option {
-  label: string
-  value: number
-}
-
-const selectedValue1 = ref<Option['value']>()
-const selectedValue2 = ref<Option['value'][]>([])
-const selectedValue3 = ref<Option['value']>()
-const selectedValue4 = ref<Option['value']>()
+const selectedValue = ref<number>(0)
 
 const getData = (count: number) => {
   return new Array(count).fill(0).map((_item, index) => {
@@ -53,7 +23,81 @@ const getData = (count: number) => {
     }
   })
 }
-</script>
+
+```
+## 多选
+
+```html [template]
+
+<pa-checkbox-btns v-model="selectedValue" :options="getData(6)" multiple />
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const selectedValue = ref<number>([0, 1])
+
+const getData = (count: number) => {
+  return new Array(count).fill(0).map((_item, index) => {
+    return {
+      label: `选项${index}`,
+      value: index,
+    }
+  })
+}
+
+```
+## 自定义布局
+
+```html [template]
+
+<pa-checkbox-btns v-model="selectedValue" :options="getData(8)" :column="4" gap="10" round />
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const selectedValue = ref<number>()
+
+const getData = (count: number) => {
+  return new Array(count).fill(0).map((_item, index) => {
+    return {
+      label: `选项${index}`,
+      value: index,
+    }
+  })
+}
+
+```
+## 自定义内容
+
+```html [template]
+
+<pa-checkbox-btns v-model="selectedValue" :options="getData(8)">
+  <template #default="{ item, index }">
+    <pa-icon :name="index % 2 === 0 ? 'success' : 'close'" />
+    <text>{{ item.label }}</text>
+  </template>
+</pa-checkbox-btns>
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const selectedValue = ref<number>()
+
+const getData = (count: number) => {
+  return new Array(count).fill(0).map((_item, index) => {
+    return {
+      label: `选项${index}`,
+      value: index,
+    }
+  })
+}
+
 ```
 
 <!--codes end-->

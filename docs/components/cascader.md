@@ -1,108 +1,128 @@
 # Cascader
 
-## 示例
-
 <!--codes start-->
 
-::: code-group
+## 单选
 
 ```html [template]
-<template>
-  <DocDemoBlock title="基础用法">
-    <pa-cell-group inset>
-      <pa-cell title="静态数据" :value="value.toString()" is-link @click="onChangeVisible" />
-      <pa-cell
-        title="动态数据"
-        :value="asyncValue.toString()"
-        is-link
-        @click="onAsyncChangeVisible"
-      />
-    </pa-cell-group>
 
-    <pa-cascader v-model:show="visible" v-model="value" :options="syncTreeData" show-search />
-    <pa-cascader v-model:show="asyncVisible" v-model="asyncValue" :lazy-load="onLoad" />
-  </DocDemoBlock>
+<pa-cell title="单选" :value="value.toString()" is-link @click="onChangeVisible" />
 
-  <DocDemoBlock title="搜索">
-    <pa-cell-group inset>
-      <pa-cell
-        title="本地搜索"
-        :value="searchValue.toString()"
-        is-link
-        @click="onSearchChangeVisible()"
-      />
-      <pa-cell
-        title="远程搜索"
-        :value="searchValue.toString()"
-        is-link
-        @click="onSearchChangeVisible(true)"
-      />
-    </pa-cell-group>
+<pa-cascader v-model:show="visible" v-model="value" :options="treeData" />
 
-    <pa-cascader
-      v-model:show="searchVisible"
-      v-model="searchValue"
-      show-search
-      :lazy-load="onLoad"
-      :lazy-search="searchRemote ? onLoadSearch : undefined"
-    />
-  </DocDemoBlock>
-
-  <DocDemoBlock title="多选">
-    <pa-cell-group inset>
-      <pa-cell
-        title="多选"
-        :value="multipleValue.join('/')"
-        is-link
-        @click="onMultipleChangeVisible()"
-      />
-    </pa-cell-group>
-
-    <pa-cascader
-      v-model:show="multipleVisible"
-      v-model="multipleValue"
-      :lazy-load="onLoad"
-      multiple
-      show-search
-      :lazy-search="onLoadSearch"
-    />
-  </DocDemoBlock>
-</template>
 ```
 ```ts [script]
-<script lang="ts" setup>
+
 import { ref } from 'vue'
-import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import type { CascaderNode } from './props'
 
-type NodeItem = { label: string; value: string; leaf?: boolean; children?: NodeItem[] }
-
-const visible = ref<boolean>(false)
+const visible = ref(false)
 const value = ref<string[]>([])
 
-const nodeCount = 20
-const syncTreeData = new Array(nodeCount).fill(0).map((_item, index) => {
-  const key: string = index.toString()
-  const children =
-    index !== nodeCount - 1
-      ? new Array(nodeCount).fill(0).map((_child, childIndex) => {
-          const childKey = `${key}-${childIndex}`
-          return { label: childKey, value: childKey }
-        })
-      : []
-  return { label: key, value: key, children }
-})
+const treeData = [
+  {
+    label: '广东省',
+    value: 'gds',
+    children: [
+      {
+        label: '深圳市',
+        value: 'szs',
+      },
+      {
+        label: '广州市',
+        value: 'gzs',
+      },
+    ],
+  },
+  {
+    label: '浙江省',
+    value: 'zjs',
+    children: [
+      {
+        label: '杭州市',
+        value: 'hzs',
+      },
+    ],
+  },
+]
 
 const onChangeVisible = () => {
-  visible.value = !visible.value
+  visible.value = true
 }
 
-const asyncVisible = ref<boolean>(false)
-const asyncValue = ref<string[]>([])
+```
+## 多选
 
-const onAsyncChangeVisible = () => {
-  asyncVisible.value = !asyncVisible.value
+```html [template]
+
+<pa-cell title="多选" :value="value.join('、')" is-link @click="onChangeVisible" />
+
+<pa-cascader v-model:show="visible" v-model="value" :options="treeData" multiple />
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const visible = ref(false)
+const value = ref<string[]>([])
+
+const treeData = [
+  {
+    label: '广东省',
+    value: 'gds',
+    children: [
+      {
+        label: '深圳市',
+        value: 'szs',
+      },
+      {
+        label: '广州市',
+        value: 'gzs',
+      },
+    ],
+  },
+  {
+    label: '浙江省',
+    value: 'zjs',
+    children: [
+      {
+        label: '杭州市',
+        value: 'hzs',
+      },
+    ],
+  },
+]
+
+const onChangeVisible = () => {
+  visible.value = true
 }
+
+```
+## 异步加载选项
+
+```html [template]
+
+<pa-cell-group inset>
+  <pa-cell title="动态数据" :value="value.toString()" is-link @click="onChangeVisible" />
+</pa-cell-group>
+
+<pa-cascader v-model:show="visible" v-model="value" :lazy-load="onLoad" />
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+import type { CascaderNode } from '../..'
+
+interface NodeItem {
+  label: string
+  value: string
+  leaf?: boolean
+  children?: NodeItem[]
+}
+
+const visible = ref(false)
+const value = ref<string[]>([])
 
 const onLoad = (node: CascaderNode<NodeItem>) => {
   return new Promise<NodeItem[]>((resolve) => {
@@ -117,30 +137,162 @@ const onLoad = (node: CascaderNode<NodeItem>) => {
   })
 }
 
-const searchVisible = ref<boolean>(false)
-const searchValue = ref<string[]>([])
-const searchRemote = ref<boolean>(false)
-
-const onSearchChangeVisible = (remote = false) => {
-  searchRemote.value = remote
-  searchVisible.value = !searchVisible.value
+const onChangeVisible = () => {
+  visible.value = true
 }
 
-const onLoadSearch = (searchText: string) => {
+```
+## 自定义字段名
+
+```html [template]
+
+<pa-cell-group inset>
+  <pa-cell title="选项" :value="value.toString()" is-link @click="onChangeVisible" />
+</pa-cell-group>
+
+<pa-cascader
+  v-model:show="visible"
+  v-model="value"
+  :field-names="fieldNames"
+  :lazy-load="onLoad"
+/>
+
+```
+```ts [script]
+
+/**
+ * @description 通过 `fieldNames` 属性可以自定义字段名
+ */
+import { ref } from 'vue'
+import type { CascaderNode } from '../..'
+
+interface NodeItem {
+  name: string
+  code: string
+  leaf?: boolean
+  childList?: NodeItem[]
+}
+
+const visible = ref(false)
+const fieldNames = { label: 'name', value: 'code', children: 'childList' }
+const value = ref<string[]>([])
+
+const onLoad = (node: CascaderNode<NodeItem>) => {
   return new Promise<NodeItem[]>((resolve) => {
     setTimeout(() => {
-      resolve([{ label: `搜索结果${searchText}`, value: '000000' }])
+      resolve(
+        new Array(20).fill(0).map((_item, index) => {
+          const path = node.props ? `${node.props.code}-${index}` : index.toString()
+          return { name: `节点${path}`, code: path, leaf: node.level === 2 } as NodeItem
+        }),
+      )
+    }, 300)
+  })
+}
+
+const onChangeVisible = () => {
+  visible.value = true
+}
+
+```
+## 本地搜索
+
+```html [template]
+
+<pa-cell title="本地搜索" :value="value.toString()" is-link @click="onChangeVisible" />
+
+<pa-cascader v-model:show="visible" v-model="value" :options="treeData" show-search />
+
+```
+```ts [script]
+
+/**
+ * @description 设置 show-search 为 true 显示搜索栏，默认是本地搜索
+ */
+import { ref } from 'vue'
+
+const visible = ref(false)
+const value = ref<string[]>([])
+
+const nodeCount = 20
+const treeData = new Array(nodeCount).fill(0).map((_item, index) => {
+  const key: string = index.toString()
+  const children =
+    index !== nodeCount - 1
+      ? new Array(nodeCount).fill(0).map((_child, childIndex) => {
+          const childKey = `${key}-${childIndex}`
+          return { label: childKey, value: childKey }
+        })
+      : []
+  return { label: key, value: key, children }
+})
+
+const onChangeVisible = () => {
+  visible.value = true
+}
+
+```
+## 远程搜索
+
+```html [template]
+
+<pa-cell title="远程搜索" :value="value.toString()" is-link @click="onChangeVisible" />
+
+<pa-cascader
+  v-model:show="visible"
+  v-model="value"
+  show-search
+  :lazy-load="onLoad"
+  :lazy-search="onLoadSearch"
+/>
+
+```
+```ts [script]
+
+/**
+ * @description 通过 lazy-search 属性指定远程搜索方法，返回的数据格式为 field-names 数组数据
+ */
+import { ref } from 'vue'
+import type { CascaderNode } from '../..'
+
+interface NodeItem {
+  label: string
+  value: string
+  leaf?: boolean
+  children?: NodeItem[]
+}
+
+const visible = ref(false)
+const value = ref<string[]>([])
+
+const onLoad = (node: CascaderNode<NodeItem>) => {
+  return new Promise<NodeItem[]>((resolve) => {
+    setTimeout(() => {
+      resolve(
+        new Array(20).fill(0).map((_item, index) => {
+          const path = node.props ? `${node.props.value}-${index}` : index.toString()
+          return { label: `节点${path}`, value: path, leaf: node.level === 2 } as NodeItem
+        }),
+      )
+    }, 300)
+  })
+}
+
+const onLoadSearch = (query: string) => {
+  /**
+   * 搜索结果可以是选项里存在的数据，也可以是不存在的数据
+   */
+  return new Promise<NodeItem[]>((resolve) => {
+    setTimeout(() => {
+      resolve([{ label: `搜索结果${query}`, value: '0000' }])
     }, 1000)
   })
 }
 
-const multipleVisible = ref<boolean>(false)
-const multipleValue = ref<string[]>([])
-
-const onMultipleChangeVisible = () => {
-  multipleVisible.value = !multipleVisible.value
+const onChangeVisible = () => {
+  visible.value = true
 }
-</script>
+
 ```
 
 <!--codes end-->

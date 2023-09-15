@@ -1,85 +1,160 @@
 # CountTo
 
-## 示例
-
 <!--codes start-->
 
-::: code-group
+## 基础用法
 
 ```html [template]
-<template>
-  <DocDemoBlock title="基础用法" card>
-    <pa-count-to
-      ref="countToRef"
-      :start-num="0"
-      :end-num="999"
-      custom-class="text-60 text-black"
-      @click="countToRef?.restart()"
-    />
-  </DocDemoBlock>
-  <DocDemoBlock title="倒计时" card>
-    <pa-count-to
-      ref="countToRef2"
-      :start-num="999"
-      :end-num="0"
-      custom-class="text-60 text-black"
-      @click="countToRef2?.restart()"
-    />
-  </DocDemoBlock>
-  <DocDemoBlock title="显示小数" card>
-    <pa-count-to
-      ref="countToRef3"
-      :start-num="0"
-      :end-num="999.99"
-      custom-class="text-60 text-black"
-      @click="countToRef3?.restart()"
-    />
-  </DocDemoBlock>
-  <DocDemoBlock title="自定义格式化值" card>
-    <pa-count-to
-      ref="countToRef4"
-      :start-num="0"
-      :end-num="9999"
-      :formatter="
-        (num) =>
-          num.toString().replace(/\d+/, (s) => {
-            return s.replace(/(\d)(?=(\d{3})+$)/g, '<!--codes start-->,')
-          })
-      "
-      custom-class="text-60 text-black"
-      @click="countToRef4?.restart()"
-    />
-  </DocDemoBlock>
-  <DocDemoBlock title="自定义控制" card>
-    <pa-count-to
-      ref="countToRef5"
-      :start-num="0"
-      :end-num="999"
-      custom-class="text-60 text-black"
-    />
-    <view class="grid grid-cols-3 gap-20 mt-30">
-      <pa-button block @click="countToRef5?.start">开始</pa-button>
-      <pa-button block @click="countToRef5?.pause">暂停</pa-button>
-      <pa-button block @click="countToRef5?.resume">继续</pa-button>
-      <pa-button block @click="countToRef5?.reset">重置</pa-button>
-      <pa-button block @click="countToRef5?.restart">重新开始</pa-button>
-    </view>
-  </DocDemoBlock>
-  <pa-safe-bottom />
-</template>
+
+<pa-count-to
+  ref="countToRef"
+  :start-num="0"
+  :end-num="999"
+  custom-class="text-60 text-black"
+  @click="countToRef?.restart()"
+/>
+
 ```
 ```ts [script]
-<script lang="ts" setup>
-import { ref } from 'vue'
-import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import type CountTo from '../count-to/count-to.vue'
 
-const countToRef = ref<InstanceType<typeof CountTo>>()
-const countToRef2 = ref<InstanceType<typeof CountTo>>()
-const countToRef3 = ref<InstanceType<typeof CountTo>>()
-const countToRef4 = ref<InstanceType<typeof CountTo>>()
-const countToRef5 = ref<InstanceType<typeof CountTo>>()
-</script>
+import { ref } from 'vue'
+import type { CountToInstance } from '../..'
+
+const countToRef = ref<CountToInstance>()
+
+```
+## 倒计时
+
+```html [template]
+
+<pa-count-to
+  ref="countToRef"
+  :start-num="999"
+  :end-num="0"
+  custom-class="text-60 text-black"
+  @click="countToRef?.restart()"
+/>
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+import type { CountToInstance } from '../..'
+
+const countToRef = ref<CountToInstance>()
+
+```
+## 显示小数
+
+```html [template]
+
+<pa-count-to
+  ref="countToRef"
+  :start-num="0"
+  :end-num="999.99"
+  custom-class="text-60 text-black"
+  @click="countToRef?.restart()"
+/>
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+import type { CountToInstance } from '../..'
+
+const countToRef = ref<CountToInstance>()
+
+```
+## 自定义格式化值
+
+```html [template]
+
+<pa-count-to
+  ref="countToRef"
+  :start-num="0"
+  :end-num="9999"
+  :formatter="formatter"
+  custom-class="text-60 text-black"
+  @click="countToRef?.restart()"
+/>
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+import type { CountToInstance } from '../..'
+
+const countToRef = ref<CountToInstance>()
+
+const formatter = (num: number) => {
+  return num.toString().replace(/\d+/, (s) => {
+    return s.replace(/(\d)(?=(\d{3})+$)/g, '<!--codes start-->,')
+  })
+}
+
+```
+## 日期倒计时
+
+```html [template]
+
+<pa-count-to
+  ref="countToRef"
+  :start-num="endTime - startTime"
+  :end-num="0"
+  :duration="endTime - startTime"
+  :frequency="1000"
+  :easeout="false"
+  :formatter="formatter"
+  autoplay
+  custom-class="text-60 text-black"
+  @click="countToRef?.restart()"
+/>
+
+```
+```ts [script]
+
+/**
+ * @description 设置 duration 为日期差值，即需要的倒计时总时间，设置 frequency 为 1000，即每秒更新一次，设置 easeout 为 false，即不需要缓动效果
+ */
+import dayjs from 'dayjs'
+import duration from 'dayjs/plugin/duration'
+import { ref } from 'vue'
+import type { CountToInstance } from '../..'
+
+dayjs.extend(duration)
+
+const countToRef = ref<CountToInstance>()
+
+const startTime = dayjs().valueOf()
+const endTime = dayjs(startTime).add(1, 'hour').valueOf()
+
+const formatter = (num: number) => {
+  // 格式化成想要的日期格式
+  return dayjs.duration(num).format('HH:mm:ss')
+}
+
+```
+## 自定义控制
+
+```html [template]
+
+<pa-count-to ref="countToRef" :start-num="0" :end-num="999" custom-class="text-60 text-black" />
+<view class="grid grid-cols-3 gap-20 mt-30">
+  <pa-button block @click="countToRef?.start">开始</pa-button>
+  <pa-button block @click="countToRef?.pause">暂停</pa-button>
+  <pa-button block @click="countToRef?.resume">继续</pa-button>
+  <pa-button block @click="countToRef?.reset">重置</pa-button>
+  <pa-button block @click="countToRef?.restart">重新开始</pa-button>
+</view>
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+import type { CountToInstance } from '../..'
+
+const countToRef = ref<CountToInstance>()
+
 ```
 
 <!--codes end-->
