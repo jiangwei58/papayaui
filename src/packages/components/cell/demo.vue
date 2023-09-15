@@ -1,46 +1,30 @@
 <template>
   <DocDemoBlock title="基础用法">
-    <pa-cell title="单元格" value="内容" />
+    <Demo1 />
   </DocDemoBlock>
 
   <DocDemoBlock title="卡片风格">
-    <pa-cell-group inset>
-      <pa-cell title="单元格" value="内容" />
-      <pa-cell title="单元格" value="内容" />
-    </pa-cell-group>
+    <Demo2 />
   </DocDemoBlock>
 
   <DocDemoBlock title="展示箭头">
-    <pa-cell title="单元格" value="内容" is-link />
+    <Demo3 />
   </DocDemoBlock>
 
   <DocDemoBlock title="后缀">
-    <pa-cell title="单元格" value="内容" suffix="%" />
+    <Demo4 />
   </DocDemoBlock>
 
   <DocDemoBlock title="图标">
-    <pa-cell title="单元格" value="内容" icon="search" />
+    <Demo5 />
   </DocDemoBlock>
 
   <DocDemoBlock title="插槽">
-    <pa-cell value="内容">
-      <template #title>
-        <text>标题</text>
-        <text style="color: red">插槽</text>
-      </template>
-    </pa-cell>
-    <pa-cell title="单元格">
-      <text>内容</text>
-      <text style="color: red">插槽</text>
-    </pa-cell>
+    <Demo6 />
   </DocDemoBlock>
 
   <DocDemoBlock title="居中">
-    <pa-cell
-      title="单元格"
-      value="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
-      center
-    />
+    <Demo7 />
   </DocDemoBlock>
 
   <pa-safe-bottom />
@@ -48,6 +32,13 @@
 
 <script lang="ts" setup>
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
+import Demo1 from '../../demos/cell/demo-1.vue'
+import Demo2 from '../../demos/cell/demo-2.vue'
+import Demo3 from '../../demos/cell/demo-3.vue'
+import Demo4 from '../../demos/cell/demo-4.vue'
+import Demo5 from '../../demos/cell/demo-5.vue'
+import Demo6 from '../../demos/cell/demo-6.vue'
+import Demo7 from '../../demos/cell/demo-7.vue'
 </script>
 
 <style lang="scss" scoped></style>

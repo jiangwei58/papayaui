@@ -1,99 +1,58 @@
 <template>
   <DocDemoBlock title="选择年月日" card>
-    <pa-date-picker v-model="dateValue" title="选择年月日" @confirm="onConfirm" />
+    <Demo1 />
   </DocDemoBlock>
 
   <DocDemoBlock title="配合Popup使用" card>
-    <pa-cell title="选择年月日" :value="dateText" clickable @click="datePickerShow = true" />
-    <pa-popup v-model:show="datePickerShow" position="bottom">
-      <pa-date-picker title="选择年月日" @confirm="onConfirm" />
-    </pa-popup>
+    <Demo2 />
   </DocDemoBlock>
 
   <DocDemoBlock title="选择年月" card>
-    <pa-date-picker title="选择年月" :columns-type="['year', 'month']" :formatter="formatter" />
+    <Demo3 />
   </DocDemoBlock>
 
   <DocDemoBlock title="选择月日" card>
-    <pa-date-picker title="选择月日" :columns-type="['month', 'day']" :formatter="formatter" />
+    <Demo4 />
   </DocDemoBlock>
 
   <DocDemoBlock title="选择时间" card>
-    <pa-date-picker title="选择时间" :columns-type="['hour', 'minute']" />
+    <Demo5 />
   </DocDemoBlock>
 
   <DocDemoBlock title="选择完整时间" card>
-    <pa-date-picker
-      title="选择完整时间"
-      :columns-type="['year', 'month', 'day', 'hour', 'minute']"
-    />
+    <Demo6 />
   </DocDemoBlock>
 
   <DocDemoBlock title="选择年月日小时" card>
-    <pa-date-picker title="选择年月日小时" :columns-type="['year', 'month', 'day', 'hour']" />
+    <Demo7 />
   </DocDemoBlock>
 
   <DocDemoBlock title="显示列标题" card>
-    <pa-date-picker
-      v-model="dateValue"
-      title="选择年月日"
-      show-columns-header
-      @confirm="onConfirm"
-    />
+    <Demo8 />
   </DocDemoBlock>
 
   <DocDemoBlock title="选项过滤器" card>
-    <pa-date-picker title="选项过滤器" :columns-type="['hour', 'minute']" :filter="filter" />
+    <Demo9 />
   </DocDemoBlock>
 
   <DocDemoBlock title="选择顺序控制" card>
-    <pa-date-picker
-      title="选择顺序控制"
-      :columns-type="['day', 'month', 'year']"
-      :min-date="dayjs().subtract(10, 'year').toDate()"
-      :max-date="dayjs().add(10, 'year').toDate()"
-    />
+    <Demo10 />
   </DocDemoBlock>
   <pa-safe-bottom />
 </template>
 
 <script lang="ts" setup>
-import dayjs from 'dayjs'
-import { ref } from 'vue'
-import type { DatePickerColumnType, DatePickerOption } from '../../core/useDatePicker'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-
-const dateValue = ref<Date>(new Date())
-const datePickerShow = ref<boolean>(false)
-const dateText = ref<string>('')
-
-const formatter = (type: DatePickerColumnType, value: string) => {
-  if (type === 'year') {
-    return `${value}年`
-  } else if (type === 'month') {
-    return `${value}月`
-  } else if (type === 'day') {
-    return `${value}日`
-  }
-  return value
-}
-
-const filter = (type: DatePickerColumnType, options: DatePickerOption[]) => {
-  if (type === 'minute') {
-    return options.filter((option) => option.value % 5 === 0)
-  }
-  return options
-}
-
-const onConfirm = (date: Date) => {
-  const newVal = dayjs(date)
-  dateText.value = newVal.format('YYYY-MM-DD')
-  datePickerShow.value = false
-  uni.showToast({
-    icon: 'none',
-    title: `当前选中的值是：${newVal.format('YYYY-MM-DD HH:mm:ss')}`,
-  })
-}
+import Demo1 from '../../demos/date-picker/demo-1.vue'
+import Demo2 from '../../demos/date-picker/demo-2.vue'
+import Demo3 from '../../demos/date-picker/demo-3.vue'
+import Demo4 from '../../demos/date-picker/demo-4.vue'
+import Demo5 from '../../demos/date-picker/demo-5.vue'
+import Demo6 from '../../demos/date-picker/demo-6.vue'
+import Demo7 from '../../demos/date-picker/demo-7.vue'
+import Demo8 from '../../demos/date-picker/demo-8.vue'
+import Demo9 from '../../demos/date-picker/demo-9.vue'
+import Demo10 from '../../demos/date-picker/demo-10.vue'
 </script>
 
 <style lang="scss" scoped></style>
