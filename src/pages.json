@@ -111,13 +111,6 @@
       "type": "form"
     },
     {
-      "path": "packages/components/number-input/demo",
-      "style": {
-        "navigationBarTitleText": "NumberInput 数值输入框（废弃）"
-      },
-      "type": "form"
-    },
-    {
       "path": "packages/components/search/demo",
       "style": {
         "navigationBarTitleText": "Search 搜索框"

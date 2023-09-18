@@ -14,7 +14,6 @@ declare module 'vue' {
     PaList: typeof import('../src/packages/components/list/list.vue')['default']
     PaLoadmore: typeof import('../src/packages/components/loadmore/loadmore.vue')['default']
     PaNavBar: typeof import('../src/packages/components/nav-bar/nav-bar.vue')['default']
-    PaNumberInput: typeof import('../src/packages/components/number-input/number-input.vue')['default']
     PaPickerPopup: typeof import('../src/packages/components/picker-popup/picker-popup.vue')['default']
     PaPickerView: typeof import('../src/packages/components/picker-view/picker-view.vue')['default']
     PaPopover: typeof import('../src/packages/components/popover/popover.vue')['default']
