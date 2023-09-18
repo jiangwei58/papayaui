@@ -97,6 +97,13 @@
       "type": "form"
     },
     {
+      "path": "packages/components/input/demo",
+      "style": {
+        "navigationBarTitleText": "Input 输入框"
+      },
+      "type": "form"
+    },
+    {
       "path": "packages/components/textarea/demo",
       "style": {
         "navigationBarTitleText": "Textarea 文本域"
