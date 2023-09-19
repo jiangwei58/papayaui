@@ -18,6 +18,7 @@
       v-else
       :value="inputValue"
       :class="[ns.e('input')]"
+      :type="props.type === 'number' ? (decimalLength ? 'digit' : 'number') : 'text'"
       :disabled="readonly || disabled"
       :placeholder="placeholder"
       :placeholder-class="ns.e('placeholder')"
