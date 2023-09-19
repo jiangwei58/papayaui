@@ -9,13 +9,20 @@
       flex: 1;
     }
   }
+
   &__input {
     color: _var(field-input-color, _var(color-primary));
   }
+
+  &__placeholder {
+    color: _var(field-input-placeholder-color, _var(color-disabled));
+  }
+
   &--only-input {
     @include _setVar(cell-padding-y, 0);
     @include _setVar(cell-padding-x, 0);
   }
+
   &__textarea {
     display: block;
     box-sizing: border-box;

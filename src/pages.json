@@ -92,7 +92,14 @@
     {
       "path": "packages/components/field/demo",
       "style": {
-        "navigationBarTitleText": "Field 输入框"
+        "navigationBarTitleText": "Field 输入框（不推荐）"
+      },
+      "type": "form"
+    },
+    {
+      "path": "packages/components/input/demo",
+      "style": {
+        "navigationBarTitleText": "Input 输入框"
       },
       "type": "form"
     },
@@ -100,13 +107,6 @@
       "path": "packages/components/textarea/demo",
       "style": {
         "navigationBarTitleText": "Textarea 文本域"
-      },
-      "type": "form"
-    },
-    {
-      "path": "packages/components/number-input/demo",
-      "style": {
-        "navigationBarTitleText": "NumberInput 数值输入框（废弃）"
       },
       "type": "form"
     },

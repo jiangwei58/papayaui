@@ -1,0 +1,32 @@
+@import '../../styles/vars.scss';
+
+.#{$prefix}-input {
+  $height: _var(input-height, 24px);
+
+  display: flex;
+  align-items: center;
+
+  &__input, &__mask {
+    flex: 1;
+    font-size: _var(input-font-size, 14px);
+    color: _var(input-color, _var(color-black));
+    height: $height;
+    line-height: $height;
+  }
+
+  &__placeholder {
+    color: _var(input-placeholder-color, _var(color-disabled));
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    font-size: 16px;
+    color: _var(color-disabled);
+    line-height: inherit;
+    padding-left: 8px;
+  }
+
+  &--disabled &__input {
+    color: _var(input-disabled-color, _var(color-disabled));
+  }
+}

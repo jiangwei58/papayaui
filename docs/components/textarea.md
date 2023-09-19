@@ -4,36 +4,75 @@
 
 <!--codes start-->
 
-::: code-group
+## 基础用法
 
 ```html [template]
-<template>
-  <DocDemoBlock title="基础用法">
-    <pa-textarea v-model="text" />
-  </DocDemoBlock>
-  <DocDemoBlock title="显示字数统计">
-    <pa-textarea v-model="text2" show-count />
-  </DocDemoBlock>
-  <DocDemoBlock title="自动增高">
-    <pa-textarea auto-height />
-  </DocDemoBlock>
-  <DocDemoBlock title="只读">
-    <pa-textarea model-value="textarea只读状态" readonly />
-  </DocDemoBlock>
-  <DocDemoBlock title="禁用">
-    <pa-textarea model-value="textarea禁用状态" disabled />
-  </DocDemoBlock>
-  <pa-safe-bottom />
-</template>
+
+<pa-textarea v-model="text" />
+
 ```
 ```ts [script]
-<script lang="ts" setup>
-import { ref } from 'vue'
-import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
-const text = ref<string>('')
-const text2 = ref<string>('')
-</script>
+import { ref } from 'vue'
+
+const text = ref('')
+
+```
+## 显示字数统计
+
+```html [template]
+
+<pa-textarea v-model="text" show-count />
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const text = ref('')
+
+```
+## 自动增高
+
+```html [template]
+
+<pa-textarea v-model="text" auto-height />
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const text = ref('')
+
+```
+## 禁用和只读
+
+```html [template]
+
+<pa-textarea model-value="textarea只读状态" readonly />
+<pa-textarea model-value="textarea禁用状态" disabled />
+
+```
+## 配合表单使用
+
+```html [template]
+
+<pa-form>
+  <pa-form-item label="文本" prop="text">
+    <pa-textarea v-model="formData.text" input-align="right" />
+  </pa-form-item>
+</pa-form>
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const formData = ref({
+  text: '',
+})
+
 ```
 
 <!--codes end-->

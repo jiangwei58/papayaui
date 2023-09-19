@@ -118,7 +118,7 @@ const onReduce = () => {
 
 const onFocusInput = () => {
   if (props.selectAllOnFocus && typeof numberVal.value === 'number') {
-    inputSelection.value = { focus: true, start: 0, end: numberVal.value }
+    inputSelection.value = { focus: true, start: 0, end: numberVal.value.toString().length }
   }
 }
 

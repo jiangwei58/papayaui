@@ -52,7 +52,7 @@ export function useInputNumber(props: IncludeRefs<UseInputNumberProps>) {
   )
 
   const getFormatVal = (text: InputNumberValue) => {
-    return formatToString(text, state.intLength, state.decimalLength)
+    return formatNumericTypeString(text, state.intLength, state.decimalLength)
   }
 
   const onUpdate = (type: 'add' | 'reduce', updateValue = true) => {
@@ -89,7 +89,10 @@ export function useInputNumber(props: IncludeRefs<UseInputNumberProps>) {
   }
 }
 
-export const formatToString = (
+/**
+ * 格式化为数字类型的字符串
+ */
+export const formatNumericTypeString = (
   value: InputNumberValue,
   intLength = Number.MAX_SAFE_INTEGER.toString().length,
   decimalLength = 0,
