@@ -1,5 +1,9 @@
 # Field
 
+::: warning
+此组件停止维护, 推荐使用 `Input` 和 `Textarea` 组件代替
+:::
+
 ## 示例
 
 <!--codes start-->
