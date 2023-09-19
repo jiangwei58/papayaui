@@ -1,8 +1,8 @@
 <template>
-  <view :class="[ns.b(), ns.is('disabled', disabled)]">
+  <view :class="[ns.b(), ns.is('auto-height', autoHeight), ns.is('disabled', disabled)]">
     <textarea
       :class="ns.e('textarea')"
-      :style="{ height: autoHeight ? 'auto' : getUnitValue(height), textAlign: inputAlign }"
+      :style="customStyle"
       :value="modelValue"
       :placeholder="placeholder"
       :placeholder-class="ns.e('placeholder')"
@@ -34,6 +34,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, type CSSProperties } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import type { EventDetail } from '../../types'
 import { getUnitValue } from '../../utils'
@@ -41,8 +42,17 @@ import { textareaEmits, textareaProps } from './props'
 
 const ns = useNamespace('textarea')
 
-defineProps(textareaProps)
+const props = defineProps(textareaProps)
 const emit = defineEmits(textareaEmits)
+
+const customStyle = computed(() => {
+  const style: CSSProperties = {}
+  if (props.height && !props.autoHeight) {
+    style.height = getUnitValue(props.height)
+  }
+  style.textAlign = props.inputAlign
+  return style
+})
 
 const onInput = (e: Event) => {
   const value = (e as unknown as EventDetail<{ value: string }>).detail.value
@@ -51,6 +61,6 @@ const onInput = (e: Event) => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './textarea.scss';
 </style>

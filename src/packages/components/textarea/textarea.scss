@@ -1,6 +1,8 @@
 @import '../../styles/vars.scss';
 
 .#{$prefix}-textarea {
+  $line-height: 24px;
+
   position: relative;
   display: flex;
   width: 100%;
@@ -8,13 +10,20 @@
   padding: _var(textarea-padding, 10px 25px);
   font-size: _var(textarea-font-size, 14px);
   color: _var(textarea-color, _var(color-black));
-  line-height: _var(textarea-line-height, 24px);
+  line-height: _var(textarea-line-height, $line-height);
+
   &__textarea {
     width: inherit;
     font: inherit;
     color: inherit;
     line-height: inherit;
+    height: _var(textarea-height, $line-height * 3);
   }
+
+  &__placeholder {
+    color: _var(textarea-placeholder-color, _var(color-disabled));
+  }
+
   &__limit {
     position: absolute;
     right: 15px;
@@ -22,9 +31,11 @@
     font-size: _var(textarea-font-size, 14px);
     color: gray;
   }
-  :deep(.#{$prefix}-textarea__placeholder) {
-    color: _var(textarea-placeholder-color, #c8c9cc);
+
+  &--auto-height {
+    line-height: _var(textarea-line-height, _var(textarea-font-size));
   }
+
   &--disabled {
     color: _var(textarea-disabled-color, #c8c9cc);
   }
