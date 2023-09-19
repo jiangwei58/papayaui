@@ -1,4 +1,7 @@
 <template>
+  <view class="text-28 text-black px-32 pt-16">
+    (此组件停止维护,推荐使用Input和Textarea组件代替)
+  </view>
   <DocDemoBlock title="基础用法">
     <pa-field v-model="value" title="输入框" clearable />
     <pa-field title="文本域" type="textarea" />

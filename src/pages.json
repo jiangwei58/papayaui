@@ -92,7 +92,7 @@
     {
       "path": "packages/components/field/demo",
       "style": {
-        "navigationBarTitleText": "Field 输入框"
+        "navigationBarTitleText": "Field 输入框（不推荐）"
       },
       "type": "form"
     },

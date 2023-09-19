@@ -8,7 +8,7 @@
         :value="modelValue"
         :disabled="disabled || readonly"
         :placeholder="placeholder"
-        :placeholder-style="`color:var(${ns.cssVarName('number-input-placeholder-color')}`"
+        :placeholder-class="ns.e('placeholder')"
         :style="{ textAlign: valueAlign }"
         :maxlength="maxlength"
         :focus="focus"
@@ -30,7 +30,7 @@
         :value="modelValue"
         :disabled="disabled || readonly"
         :placeholder="placeholder"
-        :placeholder-style="`color:var(${ns.cssVarName('number-input-placeholder-color')})`"
+        :placeholder-class="ns.e('placeholder')"
         :style="{ textAlign: valueAlign, width: '100%', height: getUnitValue(height) }"
         :auto-height="autoHeight"
         :maxlength="maxlength"
@@ -81,6 +81,6 @@ const onClear = () => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './field.scss';
 </style>
