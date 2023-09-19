@@ -1,38 +1,49 @@
 # Loadmore
 
-## 示例
-
 <!--codes start-->
 
-::: code-group
+## 基础用法
 
 ```html [template]
-<template>
-  <DocDemoBlock title="基础用法">
-    <pa-loadmore :status="LoadStatusEnum.LOADMORE" />
-    <pa-loadmore :status="LoadStatusEnum.LOADING" />
-    <pa-loadmore :status="LoadStatusEnum.NOMORE" />
-  </DocDemoBlock>
 
-  <DocDemoBlock title="自定义文案">
-    <pa-loadmore :config="customConfig" :status="LoadStatusEnum.LOADMORE" />
-    <pa-loadmore :config="customConfig" :status="LoadStatusEnum.LOADING" />
-    <pa-loadmore :config="customConfig" :status="LoadStatusEnum.NOMORE" />
-  </DocDemoBlock>
+<pa-loadmore :status="LoadStatusEnum.LOADMORE" />
+<pa-loadmore :status="LoadStatusEnum.LOADING" />
+<pa-loadmore :status="LoadStatusEnum.NOMORE" />
 
-  <DocDemoBlock title="颜色">
-    <pa-loadmore :status="LoadStatusEnum.LOADING" color="red" />
-    <pa-loadmore :status="LoadStatusEnum.LOADING" text-color="red" />
-  </DocDemoBlock>
-</template>
 ```
 ```ts [script]
-<script lang="ts" setup>
-import DocDemoBlock from '../../doc/doc-demo-block.vue'
+
+import { LoadStatusEnum } from '../../core/useList'
+
+```
+## 自定义文案
+
+```html [template]
+
+<pa-loadmore :config="customConfig" :status="LoadStatusEnum.LOADMORE" />
+<pa-loadmore :config="customConfig" :status="LoadStatusEnum.LOADING" />
+<pa-loadmore :config="customConfig" :status="LoadStatusEnum.NOMORE" />
+
+```
+```ts [script]
+
 import { LoadStatusEnum } from '../../core/useList'
 
 const customConfig = { loadmore: '给我上划', loading: '努力加载...', nomore: '真的没有了' }
-</script>
+
+```
+## 颜色
+
+```html [template]
+
+<pa-loadmore :status="LoadStatusEnum.LOADING" color="red" />
+<pa-loadmore :status="LoadStatusEnum.LOADING" text-color="red" />
+
+```
+```ts [script]
+
+import { LoadStatusEnum } from '../../core/useList'
+
 ```
 
 <!--codes end-->
