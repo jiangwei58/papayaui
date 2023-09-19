@@ -1,6 +1,8 @@
 @import '../../styles/vars.scss';
 .#{$prefix}-button {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   height: _var(button-height, 44px);
   line-height: _var(button-line-height, 1.2);
   margin: _var(button-margin, 0);
@@ -9,6 +11,10 @@
   border-color: _var(button-border-color, transparent);
   border-radius: _var(button-border-radius, 5px);
   box-sizing: border-box;
+  position: relative;
+  vertical-align: middle;
+  text-size-adjust: 100%;
+  appearance: none;
 
   &__content {
     display: flex;
