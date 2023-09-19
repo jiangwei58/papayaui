@@ -2,6 +2,7 @@
 .#{$prefix}-popup {
   &__content {
     position: relative;
+    max-width: _var(popup-max-width, 100%);
     background-color: #fff;
     border-radius: _var(popup-radius, 0);
   }
