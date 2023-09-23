@@ -1,58 +1,103 @@
 # Search
 
-## 示例
-
 <!--codes start-->
 
-::: code-group
+## 基础用法
 
 ```html [template]
-<template>
-  <DocDemoBlock title="基础用法">
-    <pa-search v-model="text" />
-  </DocDemoBlock>
-  <DocDemoBlock title="圆角">
-    <pa-search v-model="text" shape="round" />
-  </DocDemoBlock>
-  <DocDemoBlock title="前后插槽">
-    <pa-search v-model="text">
-      <template #before>
-        <text class="pr-12">前部</text>
-      </template>
-      <template #after>
-        <text class="pl-12">搜索</text>
-      </template>
-    </pa-search>
-  </DocDemoBlock>
-  <DocDemoBlock title="前后缀插槽">
-    <pa-search v-model="text">
-      <template #prefix>
-        <text class="p-12">地址</text>
-      </template>
-      <template #suffix>
-        <text class="p-12">后缀</text>
-      </template>
-    </pa-search>
-  </DocDemoBlock>
-  <DocDemoBlock title="搜索框内容对齐">
-    <pa-search v-model="text" input-align="center" />
-  </DocDemoBlock>
-  <DocDemoBlock title="只读搜索框">
-    <pa-search v-model="text" readonly @click-input="onClick" />
-  </DocDemoBlock>
-  <DocDemoBlock title="禁用搜索框">
-    <pa-search v-model="text" disabled @click-input="onClick" />
-  </DocDemoBlock>
-  <DocDemoBlock title="背景色">
-    <pa-search v-model="text" background="var(--pa-color-primary)" input-background="#fff" />
-  </DocDemoBlock>
-  <pa-safe-bottom />
-</template>
+
+<pa-search v-model="text" />
+
 ```
 ```ts [script]
-<script lang="ts" setup>
+
 import { ref } from 'vue'
-import DocDemoBlock from '../../doc/doc-demo-block.vue'
+
+const text = ref<string>('')
+
+```
+## 圆角
+
+```html [template]
+
+<pa-search v-model="text" shape="round" />
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const text = ref<string>('')
+
+```
+## 前后插槽
+
+```html [template]
+
+<pa-search v-model="text">
+  <template #before>
+    <text class="pr-12">前部</text>
+  </template>
+  <template #after>
+    <text class="pl-12">搜索</text>
+  </template>
+</pa-search>
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const text = ref<string>('')
+
+```
+## 前后缀插槽
+
+```html [template]
+
+<pa-search v-model="text">
+  <template #prefix>
+    <text class="p-12">地址</text>
+  </template>
+  <template #suffix>
+    <text class="p-12">后缀</text>
+  </template>
+</pa-search>
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const text = ref<string>('')
+
+```
+## 搜索框内容对齐
+
+```html [template]
+
+<pa-search v-model="text" input-align="center" />
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const text = ref<string>('')
+
+```
+## 禁用和只读搜索框
+
+```html [template]
+
+<pa-search v-model="text" readonly @click-input="onClick" />
+
+<pa-search v-model="text" disabled @click-input="onClick" />
+
+```
+```ts [script]
+
+import { ref } from 'vue'
 
 const text = ref<string>('')
 
@@ -62,7 +107,24 @@ const onClick = () => {
     title: '点击输入框',
   })
 }
-</script>
+
+```
+## 背景色
+
+```html [template]
+
+<pa-search v-model="text" background="var(--pa-color-primary)" input-background="#fff" />
+
+```
+```ts [script]
+
+/**
+ * @tips 更推荐使用 CSS 变量的方式来修改样式
+ */
+import { ref } from 'vue'
+
+const text = ref<string>('')
+
 ```
 
 <!--codes end-->

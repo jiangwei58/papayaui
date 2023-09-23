@@ -2,7 +2,7 @@
 
 <!--codes start-->
 
-## 
+## 基础用法
 
 ```html [template]
 
@@ -16,7 +16,7 @@ import { ref } from 'vue'
 const value = ref(1)
 
 ```
-## 
+## 步长设置
 
 ```html [template]
 
@@ -30,7 +30,7 @@ import { ref } from 'vue'
 const value = ref(1)
 
 ```
-## 
+## 限制输入范围
 
 ```html [template]
 
@@ -44,7 +44,7 @@ import { ref } from 'vue'
 const value = ref(1)
 
 ```
-## 
+## 输入小数
 
 ```html [template]
 
@@ -58,21 +58,21 @@ import { ref } from 'vue'
 const value = ref(1)
 
 ```
-## 
+## 禁用状态
 
 ```html [template]
 
 <pa-input-number :model-value="1" disabled />
 
 ```
-## 
+## 禁用输入框
 
 ```html [template]
 
 <pa-input-number :model-value="1" readonly />
 
 ```
-## 
+## 异步
 
 ```html [template]
 
@@ -98,7 +98,7 @@ const onChange = async (value: number) => {
 }
 
 ```
-## 
+## 只显示输入框
 
 ```html [template]
 
@@ -112,7 +112,7 @@ import { ref } from 'vue'
 const value = ref(1)
 
 ```
-## 
+## 聚焦选中全部内容
 
 ```html [template]
 

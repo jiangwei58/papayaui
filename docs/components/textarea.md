@@ -1,7 +1,5 @@
 # Textarea
 
-## 示例
-
 <!--codes start-->
 
 ## 基础用法

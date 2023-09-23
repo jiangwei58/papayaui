@@ -1,42 +1,74 @@
 # Switch
 
-## 示例
-
 <!--codes start-->
 
-::: code-group
+## 基础用法
 
 ```html [template]
-<template>
-  <DocDemoBlock title="基础用法" card>
-    <pa-switch v-model="checked" />
-  </DocDemoBlock>
-  <DocDemoBlock title="禁用状态" card>
-    <pa-switch v-model="checked" disabled />
-  </DocDemoBlock>
-  <DocDemoBlock title="加载状态" card>
-    <pa-switch v-model="checked" loading />
-  </DocDemoBlock>
-  <DocDemoBlock title="自定义大小" card>
-    <pa-switch v-model="checked" size="18px" />
-  </DocDemoBlock>
-  <DocDemoBlock title="异步控制" card>
-    <pa-switch :model-value="checked" :loading="loading" @change="onChange" />
-  </DocDemoBlock>
-  <DocDemoBlock title="自定义颜色" card>
-    <pa-switch v-model="checked" active-color="#ee0a24" inactive-color="#aaa" />
-  </DocDemoBlock>
-  <DocDemoBlock title="自定义值" card>
-    <pa-switch v-model="customChecked" active-value="开" inactive-value="关" />
-    <text class="ml-40">{{ customChecked }}</text>
-  </DocDemoBlock>
-</template>
+
+<pa-switch v-model="checked" />
+
 ```
 ```ts [script]
-<script lang="ts" setup>
+
 import { ref } from 'vue'
-import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import type { SwitchValue } from '../../core'
+
+const checked = ref<boolean>(true)
+
+```
+## 禁用状态
+
+```html [template]
+
+<pa-switch v-model="checked" disabled />
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const checked = ref<boolean>(true)
+
+```
+## 加载状态
+
+```html [template]
+
+<pa-switch v-model="checked" loading />
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const checked = ref<boolean>(true)
+
+```
+## 自定义大小
+
+```html [template]
+
+<pa-switch v-model="checked" size="18px" />
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const checked = ref<boolean>(true)
+
+```
+## 异步控制
+
+```html [template]
+
+<pa-switch :model-value="checked" :loading="loading" @change="onChange" />
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+import { SwitchValue } from '../..'
 
 const checked = ref<boolean>(true)
 const loading = ref<boolean>(false)
@@ -49,8 +81,35 @@ const onChange = (value: SwitchValue) => {
   }, 2000)
 }
 
-const customChecked = ref<string>('开')
-</script>
+```
+## 自定义颜色
+
+```html [template]
+
+<pa-switch v-model="checked" active-color="#ee0a24" inactive-color="#aaa" />
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const checked = ref<boolean>(true)
+
+```
+## 自定义值
+
+```html [template]
+
+<pa-switch v-model="checked" active-value="开" inactive-value="关" />
+<text class="ml-40">{{ checked }}</text>
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const checked = ref<string>('开')
+
 ```
 
 <!--codes end-->

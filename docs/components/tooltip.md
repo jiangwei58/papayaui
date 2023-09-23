@@ -1,26 +1,17 @@
 # Tooltip
 
-## 示例
-
 <!--codes start-->
 
-::: code-group
+## 基础用法
 
 ```html [template]
-<template>
-  <DocDemoBlock title="基础用法">
-    <pa-tooltip text="悬浮内容悬浮内容悬浮内容" style="width: 100px">
-      <view>
-        内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-      </view>
-    </pa-tooltip>
-  </DocDemoBlock>
-</template>
-```
-```ts [script]
-<script lang="ts" setup>
-import DocDemoBlock from '../../doc/doc-demo-block.vue'
-</script>
+
+<pa-tooltip text="悬浮内容悬浮内容悬浮内容" style="width: 100px">
+  <view>
+    内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+  </view>
+</pa-tooltip>
+
 ```
 
 <!--codes end-->
