@@ -1,24 +1,21 @@
 <template>
   <DocDemoBlock title="基础用法">
-    <pa-section title="标题栏" />
+    <Demo1 />
   </DocDemoBlock>
 
   <DocDemoBlock title="自定义右侧">
-    <pa-section title="标题栏">
-      <text style="color: red">右侧内容</text>
-    </pa-section>
+    <Demo2 />
   </DocDemoBlock>
 
   <DocDemoBlock title="自定义标题">
-    <pa-section title="标题栏">
-      <template #title>
-        <text style="color: red">自定义标题</text>
-      </template>
-    </pa-section>
+    <Demo3 />
   </DocDemoBlock>
 </template>
 
 <script lang="ts" setup>
+import Demo1 from '../../demos/section/demo-1.vue'
+import Demo2 from '../../demos/section/demo-2.vue'
+import Demo3 from '../../demos/section/demo-3.vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
 </script>
 
