@@ -1,109 +1,44 @@
 <template>
   <DocDemoBlock title="基础用法" card>
-    <pa-uploader v-model:file-list="fileList" :after-read="onAfterRead" />
+    <Demo1 />
   </DocDemoBlock>
 
   <DocDemoBlock title="文件预览" card>
-    <pa-uploader v-model:file-list="fileList2" />
+    <Demo2 />
   </DocDemoBlock>
 
   <DocDemoBlock title="限制上传数量" card>
-    <pa-uploader v-model:file-list="fileList3" :max-count="3" />
+    <Demo3 />
   </DocDemoBlock>
 
   <DocDemoBlock title="限制上传大小" card>
-    <pa-uploader v-model:file-list="fileList4" :max-size="1024 * 20" @oversize="onOversize" />
+    <Demo4 />
   </DocDemoBlock>
 
   <DocDemoBlock title="自定义上传样式" card>
-    <pa-uploader v-model:file-list="fileList5">
-      <pa-button type="primary" icon="plus">上传文件</pa-button>
-    </pa-uploader>
+    <Demo5 />
   </DocDemoBlock>
 
   <DocDemoBlock title="禁用文件上传" card>
-    <pa-uploader disabled />
+    <Demo6 />
   </DocDemoBlock>
 
   <DocDemoBlock title="独立控制删除" card>
-    <pa-uploader v-model:file-list="fileList6" />
+    <Demo7 />
   </DocDemoBlock>
 
   <pa-safe-bottom />
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import Demo1 from '../../demos/uploader/demo-1.vue'
+import Demo2 from '../../demos/uploader/demo-2.vue'
+import Demo3 from '../../demos/uploader/demo-3.vue'
+import Demo4 from '../../demos/uploader/demo-4.vue'
+import Demo5 from '../../demos/uploader/demo-5.vue'
+import Demo6 from '../../demos/uploader/demo-6.vue'
+import Demo7 from '../../demos/uploader/demo-7.vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import type { FileItem } from './props'
-// 仅做本地示例，使用时请用网络图片
-import img1 from '../../images/demo2.jpeg'
-import img2 from '../../images/demo3.jpg'
-
-let src1 = ''
-let src2 = ''
-// #ifdef MP
-const fileManager = uni.getFileSystemManager()
-src1 = 'data:image/jpeg;base64,' + fileManager.readFileSync(img1, 'base64')
-src2 = 'data:image/jpeg;base64,' + fileManager.readFileSync(img2, 'base64')
-// #endif
-// #ifdef H5
-src1 = img1
-src2 = img2
-// #endif
-
-const fileList = ref<FileItem[]>([])
-const fileList2 = ref([
-  {
-    url: src1,
-  },
-  {
-    url: src2,
-  },
-])
-const fileList3 = ref([
-  {
-    url: src1,
-  },
-])
-const fileList4 = ref([
-  {
-    url: src1,
-  },
-])
-const fileList5 = ref([])
-
-const fileList6 = ref([
-  {
-    url: src1,
-    deletable: false,
-  },
-  {
-    url: src2,
-  },
-])
-
-const onOversize = () => {
-  uni.showToast({
-    title: '文件大小超过限制(20KB)',
-    icon: 'none',
-  })
-}
-
-const onAfterRead = (files: FileItem | FileItem[]) => {
-  const file = files as FileItem
-  // 当设置 multiple 为 true 时, file 为数组格式，否则为对象格式
-  uni.uploadFile({
-    url: 'https://example.xxx.com/upload', // 仅为示例，非真实的接口地址
-    filePath: file.url,
-    name: 'file',
-    formData: { user: 'test' },
-    success(res) {
-      // 上传完成需要更新 fileList
-      fileList.value.push({ url: res.data })
-    },
-  })
-}
 </script>
 
 <style lang="scss" scoped></style>

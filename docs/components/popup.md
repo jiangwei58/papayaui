@@ -1,58 +1,85 @@
 # Popup
 
-## 示例
-
 <!--codes start-->
 
-::: code-group
+## 基础用法
 
 ```html [template]
-<template>
-  <DocDemoBlock title="基础用法">
-    <pa-cell-group inset>
-      <pa-cell title="顶部弹出" is-link @click="onOpen('top')" />
-      <pa-cell title="底部弹出" is-link @click="onOpen('bottom')" />
-      <pa-cell title="左侧弹出" is-link @click="onOpen('left')" />
-      <pa-cell title="右侧弹出" is-link @click="onOpen('right')" />
-      <pa-cell title="中间弹出" is-link @click="onOpen('center')" />
-    </pa-cell-group>
-  </DocDemoBlock>
 
-  <DocDemoBlock title="关闭按钮">
-    <pa-cell-group inset>
-      <pa-cell title="关闭按钮" is-link @click="onOpen('bottom', true)" />
-    </pa-cell-group>
-  </DocDemoBlock>
+<pa-cell-group inset>
+  <pa-cell title="顶部弹出" is-link @click="onOpen('top')" />
+  <pa-cell title="底部弹出" is-link @click="onOpen('bottom')" />
+  <pa-cell title="左侧弹出" is-link @click="onOpen('left')" />
+  <pa-cell title="右侧弹出" is-link @click="onOpen('right')" />
+  <pa-cell title="中间弹出" is-link @click="onOpen('center')" />
+</pa-cell-group>
 
-  <DocDemoBlock title="圆角弹窗">
-    <pa-cell-group inset>
-      <pa-cell title="圆角弹窗" is-link @click="onOpen('bottom', true, true)" />
-    </pa-cell-group>
-  </DocDemoBlock>
+<pa-popup v-model:show="visible" :position="position">
+  <view style="width: 200px; height: 200px"></view>
+</pa-popup>
 
-  <pa-popup v-model:show="visible" :position="position" :closeable="closeable" :round="round">
-    <view style="width: 200px; height: 200px"></view>
-  </pa-popup>
-</template>
 ```
 ```ts [script]
-<script lang="ts" setup>
+
 import { ref } from 'vue'
-import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import type { PopupPosition } from './props'
+import type { PopupPosition } from '../..'
 
 const visible = ref<boolean>(false)
 const position = ref<PopupPosition>('bottom')
-const closeable = ref<boolean>(false)
-const round = ref<boolean>(false)
 
-const onOpen = (_position: PopupPosition, _closeable = false, _round = false) => {
+const onOpen = (_position: PopupPosition) => {
   position.value = _position
-  closeable.value = _closeable
-  round.value = _round
   visible.value = true
 }
-</script>
+
+```
+## 关闭按钮
+
+```html [template]
+
+<pa-cell-group inset>
+  <pa-cell title="关闭按钮" is-link @click="onOpen()" />
+</pa-cell-group>
+
+<pa-popup v-model:show="visible" closeable>
+  <view style="width: 200px; height: 200px"></view>
+</pa-popup>
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const visible = ref<boolean>(false)
+
+const onOpen = () => {
+  visible.value = true
+}
+
+```
+## 圆角弹窗
+
+```html [template]
+
+<pa-cell-group inset>
+  <pa-cell title="圆角弹窗" is-link @click="onOpen()" />
+</pa-cell-group>
+
+<pa-popup v-model:show="visible" round>
+  <view style="width: 200px; height: 200px"></view>
+</pa-popup>
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const visible = ref<boolean>(false)
+
+const onOpen = () => {
+  visible.value = true
+}
+
 ```
 
 <!--codes end-->

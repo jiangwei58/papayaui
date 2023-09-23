@@ -1,30 +1,21 @@
 # Popover
 
-## 示例
-
 <!--codes start-->
 
-::: code-group
+## 基础用法
 
 ```html [template]
-<template>
-  <DocDemoBlock title="基础用法" card>
-    <pa-popover class="inline-flex">
-      <pa-button>基础用法</pa-button>
-      <template #popover-content>
-        <view class="p-20">
-          <text class="text-32">标题</text>
-          <text class="text-28 block">这是一段内容,这是一段内容,这是一段内容,这是一段内容。</text>
-        </view>
-      </template>
-    </pa-popover>
-  </DocDemoBlock>
-</template>
-```
-```ts [script]
-<script lang="ts" setup>
-import DocDemoBlock from '../../doc/doc-demo-block.vue'
-</script>
+
+<pa-popover class="inline-flex">
+  <pa-button>基础用法</pa-button>
+  <template #popover-content>
+    <view class="p-20">
+      <text class="text-32">标题</text>
+      <text class="text-28 block">这是一段内容,这是一段内容,这是一段内容,这是一段内容。</text>
+    </view>
+  </template>
+</pa-popover>
+
 ```
 
 <!--codes end-->

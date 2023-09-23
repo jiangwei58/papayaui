@@ -26,7 +26,7 @@ const onLoad = (node: CascaderNode<NodeItem>) => {
       resolve(
         new Array(20).fill(0).map((_item, index) => {
           const path = node.props ? `${node.props.value}-${index}` : index.toString()
-          return { label: `节点${path}`, value: path, leaf: node.level === 2 } as NodeItem
+          return { label: `节点${path}`, value: path, leaf: node.level === 9 } as NodeItem
         }),
       )
     }, 300)

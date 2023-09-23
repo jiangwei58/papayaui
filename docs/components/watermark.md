@@ -1,20 +1,16 @@
 # Watermark
 
-## 示例
 
 <!--codes start-->
 
-::: code-group
+## 基础用法
 
 ```html [template]
-<template>
-  <pa-watermark :contents="contents" />
+<pa-watermark :contents="contents" />
 
-  <view class="p-30" style="height: 100vh">{{ text }}</view>
-</template>
+<view class="p-30" style="height: 100vh">{{ text }}</view>
 ```
 ```ts [script]
-<script lang="ts" setup>
 import dayjs from 'dayjs'
 import { onMounted, ref } from 'vue'
 
@@ -27,7 +23,6 @@ onMounted(() => {
     .map(() => '页面内容')
     .join('')
 })
-</script>
 ```
 
 <!--codes end-->

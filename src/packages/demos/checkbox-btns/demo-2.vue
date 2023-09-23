@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-const selectedValue = ref<number>([0, 1])
+const selectedValue = ref<number[]>([0, 1])
 
 const getData = (count: number) => {
   return new Array(count).fill(0).map((_item, index) => {

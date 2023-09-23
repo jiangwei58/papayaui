@@ -1,32 +1,25 @@
 # Sticky
 
-## 示例
-
 <!--codes start-->
 
-::: code-group
+## 基础用法
 
 ```html [template]
-<template>
-  <DocDemoBlock title="基础用法" />
-  <pa-sticky>
-    <view class="flex justify-start ml-26">
-      <pa-button width="200">基础用法</pa-button>
-    </view>
-  </pa-sticky>
-  <DocDemoBlock title="吸顶距离" />
-  <pa-sticky offset-top="30">
-    <view class="flex justify-center">
-      <pa-button width="200">吸顶距离</pa-button>
-    </view>
-  </pa-sticky>
-  <view style="height: 200vh"></view>
-</template>
+<pa-sticky>
+  <view class="flex justify-start ml-26">
+    <pa-button width="200">基础用法</pa-button>
+  </view>
+</pa-sticky>
 ```
-```ts [script]
-<script lang="ts" setup>
-import DocDemoBlock from '../../doc/doc-demo-block.vue'
-</script>
+
+## 吸顶距离
+  
+```html [template]
+<pa-sticky offset-top="30">
+  <view class="flex justify-center">
+    <pa-button width="200">吸顶距离</pa-button>
+  </view>
+</pa-sticky>
 ```
 
 <!--codes end-->

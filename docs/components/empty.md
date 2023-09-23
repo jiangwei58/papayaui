@@ -1,32 +1,30 @@
 # Empty
 
-## 示例
-
 <!--codes start-->
 
-::: code-group
+## 基础用法
 
 ```html [template]
-<template>
-  <DocDemoBlock title="基础用法">
-    <pa-empty description="描述文字" />
-  </DocDemoBlock>
-  <DocDemoBlock title="图片类型">
-    <pa-empty image="error" description="描述文字" />
-    <pa-empty image="search" description="描述文字" />
-  </DocDemoBlock>
-  <DocDemoBlock title="底部内容">
-    <pa-empty description="描述文字">
-      <pa-button class="mt-40" width="160px" round>按钮</pa-button>
-    </pa-empty>
-  </DocDemoBlock>
-  <pa-safe-bottom />
-</template>
+
+<pa-empty description="描述文字" />
+
 ```
-```ts [script]
-<script lang="ts" setup>
-import DocDemoBlock from '../../doc/doc-demo-block.vue'
-</script>
+## 图片类型
+
+```html [template]
+
+<pa-empty image="error" description="描述文字" />
+<pa-empty image="search" description="描述文字" />
+
+```
+## 底部内容
+
+```html [template]
+
+<pa-empty description="描述文字">
+  <pa-button class="mt-40" width="160px" round>按钮</pa-button>
+</pa-empty>
+
 ```
 
 <!--codes end-->

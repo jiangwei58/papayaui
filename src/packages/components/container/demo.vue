@@ -27,9 +27,9 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import paContainer from './container.vue'
+import type { ContainerInstance } from '.'
 
-const containerRef = ref<InstanceType<typeof paContainer>>()
+const containerRef = ref<ContainerInstance>()
 const showBottom = ref<boolean>(true)
 
 const updateHeight = () => {

@@ -1,53 +1,54 @@
 # NavBar
 
-## 示例
-
 <!--codes start-->
 
-::: code-group
+## 基础用法
 
 ```html [template]
-<template>
-  <DocDemoBlock title="基础用法" />
-  <pa-nav-bar title="页面标题" :safe-area-inset-top="false" />
 
-  <DocDemoBlock title="自定义" />
-  <pa-nav-bar :safe-area-inset-top="false">
-    <view class="flex items-center justify-center height-full">
-      <text>页面标题</text>
-      <pa-button class="m-0" width="120" height="54" block>按钮</pa-button>
-    </view>
-  </pa-nav-bar>
+<!-- 默认开启刘海处的填充，此为示例，为了美观，设置为关闭，实际开发通常无需设置 -->
+<pa-nav-bar title="页面标题" :safe-area-inset-top="false" />
 
-  <DocDemoBlock title="左侧图标" />
-  <pa-nav-bar title="页面标题" left-menu="left" :safe-area-inset-top="false" @menu-click="onBack" />
+```
+## 自定义
 
-  <DocDemoBlock title="胶囊菜单" />
-  <pa-nav-bar
-    title="页面标题"
-    :left-menu="['left', 'home']"
-    :safe-area-inset-top="false"
-    @menu-click="onMenuClick"
-  />
+```html [template]
 
-  <DocDemoBlock title="黑色主题" />
-  <pa-nav-bar
-    title="页面标题"
-    bg-color="#000"
-    theme="white"
-    :left-menu="['left', 'search']"
-    :safe-area-inset-top="false"
-    @menu-click="onMenuClick"
-  />
-</template>
+<pa-nav-bar :safe-area-inset-top="false">
+  <view class="flex items-center justify-center height-full">
+    <text>页面标题</text>
+    <pa-button class="ml-15" size="small">按钮</pa-button>
+  </view>
+</pa-nav-bar>
+
+```
+## 左侧图标
+
+```html [template]
+
+<pa-nav-bar title="页面标题" left-menu="left" :safe-area-inset-top="false" @menu-click="onBack" />
+
 ```
 ```ts [script]
-<script lang="ts" setup>
-import DocDemoBlock from '../../doc/doc-demo-block.vue'
 
 const onBack = () => {
   uni.navigateBack()
 }
+
+```
+## 胶囊菜单
+
+```html [template]
+
+<pa-nav-bar
+  title="页面标题"
+  :left-menu="['left', 'home']"
+  :safe-area-inset-top="false"
+  @menu-click="onMenuClick"
+/>
+
+```
+```ts [script]
 
 const onMenuClick = (index: number) => {
   uni.showToast({
@@ -55,7 +56,31 @@ const onMenuClick = (index: number) => {
     title: `点击第${index}个`,
   })
 }
-</script>
+
+```
+## 黑色主题
+
+```html [template]
+
+<pa-nav-bar
+  title="页面标题"
+  bg-color="#000"
+  theme="white"
+  :left-menu="['left', 'search']"
+  :safe-area-inset-top="false"
+  @menu-click="onMenuClick"
+/>
+
+```
+```ts [script]
+
+const onMenuClick = (index: number) => {
+  uni.showToast({
+    icon: 'none',
+    title: `点击第${index}个`,
+  })
+}
+
 ```
 
 <!--codes end-->

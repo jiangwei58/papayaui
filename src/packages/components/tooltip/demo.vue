@@ -1,15 +1,12 @@
 <template>
   <DocDemoBlock title="基础用法">
-    <pa-tooltip text="悬浮内容悬浮内容悬浮内容" style="width: 100px">
-      <view>
-        内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-      </view>
-    </pa-tooltip>
+    <Demo1 />
   </DocDemoBlock>
 </template>
 
 <script lang="ts" setup>
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
+import Demo1 from '../../demos/tooltip/demo-1.vue'
 </script>
 
 <style lang="scss" scoped></style>

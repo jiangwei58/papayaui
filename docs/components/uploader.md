@@ -1,51 +1,47 @@
 # Uploader
 
-## 示例
-
 <!--codes start-->
 
-::: code-group
+## 基础用法
 
 ```html [template]
-<template>
-  <DocDemoBlock title="基础用法" card>
-    <pa-uploader v-model:file-list="fileList" :after-read="onAfterRead" />
-  </DocDemoBlock>
 
-  <DocDemoBlock title="文件预览" card>
-    <pa-uploader v-model:file-list="fileList2" />
-  </DocDemoBlock>
+<pa-uploader v-model:file-list="fileList" :after-read="onAfterRead" />
 
-  <DocDemoBlock title="限制上传数量" card>
-    <pa-uploader v-model:file-list="fileList3" :max-count="3" />
-  </DocDemoBlock>
-
-  <DocDemoBlock title="限制上传大小" card>
-    <pa-uploader v-model:file-list="fileList4" :max-size="1024 * 20" @oversize="onOversize" />
-  </DocDemoBlock>
-
-  <DocDemoBlock title="自定义上传样式" card>
-    <pa-uploader v-model:file-list="fileList5">
-      <pa-button type="primary" icon="plus">上传文件</pa-button>
-    </pa-uploader>
-  </DocDemoBlock>
-
-  <DocDemoBlock title="禁用文件上传" card>
-    <pa-uploader disabled />
-  </DocDemoBlock>
-
-  <DocDemoBlock title="独立控制删除" card>
-    <pa-uploader v-model:file-list="fileList6" />
-  </DocDemoBlock>
-
-  <pa-safe-bottom />
-</template>
 ```
 ```ts [script]
-<script setup lang="ts">
+
 import { ref } from 'vue'
-import DocDemoBlock from '../../doc/doc-demo-block.vue'
-import type { FileItem } from './props'
+import type { FileItem } from '../..'
+
+const fileList = ref<FileItem[]>([])
+
+const onAfterRead = (files: FileItem | FileItem[]) => {
+  const file = files as FileItem
+  // 当设置 multiple 为 true 时, file 为数组格式，否则为对象格式
+  uni.uploadFile({
+    url: 'https://example.xxx.com/upload', // 仅为示例，非真实的接口地址
+    filePath: file.url,
+    name: 'file',
+    formData: { user: 'test' },
+    success(res) {
+      // 上传完成需要更新 fileList
+      fileList.value.push({ url: res.data })
+    },
+  })
+}
+
+```
+## 文件预览
+
+```html [template]
+
+<pa-uploader v-model:file-list="fileList" />
+
+```
+```ts [script]
+
+import { ref } from 'vue'
 // 仅做本地示例，使用时请用网络图片
 import img1 from '../../images/demo2.jpeg'
 import img2 from '../../images/demo3.jpg'
@@ -62,8 +58,7 @@ src1 = img1
 src2 = img2
 // #endif
 
-const fileList = ref<FileItem[]>([])
-const fileList2 = ref([
+const fileList = ref([
   {
     url: src1,
   },
@@ -71,25 +66,62 @@ const fileList2 = ref([
     url: src2,
   },
 ])
-const fileList3 = ref([
-  {
-    url: src1,
-  },
-])
-const fileList4 = ref([
-  {
-    url: src1,
-  },
-])
-const fileList5 = ref([])
 
-const fileList6 = ref([
+```
+## 限制上传数量
+
+```html [template]
+
+<pa-uploader v-model:file-list="fileList" :max-count="3" />
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+// 仅做本地示例，使用时请用网络图片
+import img1 from '../../images/demo2.jpeg'
+
+let src1 = ''
+// #ifdef MP
+const fileManager = uni.getFileSystemManager()
+src1 = 'data:image/jpeg;base64,' + fileManager.readFileSync(img1, 'base64')
+// #endif
+// #ifdef H5
+src1 = img1
+// #endif
+
+const fileList = ref([
   {
     url: src1,
-    deletable: false,
   },
+])
+
+```
+## 限制上传大小
+
+```html [template]
+
+<pa-uploader v-model:file-list="fileList" :max-size="1024 * 20" @oversize="onOversize" />
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+// 仅做本地示例，使用时请用网络图片
+import img1 from '../../images/demo2.jpeg'
+
+let src1 = ''
+// #ifdef MP
+const fileManager = uni.getFileSystemManager()
+src1 = 'data:image/jpeg;base64,' + fileManager.readFileSync(img1, 'base64')
+// #endif
+// #ifdef H5
+src1 = img1
+// #endif
+
+const fileList = ref([
   {
-    url: src2,
+    url: src1,
   },
 ])
 
@@ -100,21 +132,67 @@ const onOversize = () => {
   })
 }
 
-const onAfterRead = (files: FileItem | FileItem[]) => {
-  const file = files as FileItem
-  // 当设置 multiple 为 true 时, file 为数组格式，否则为对象格式
-  uni.uploadFile({
-    url: 'https://example.xxx.com/upload', // 仅为示例，非真实的接口地址
-    filePath: file.url,
-    name: 'file',
-    formData: { user: 'test' },
-    success(res) {
-      // 上传完成需要更新 fileList
-      fileList.value.push({ url: res.data })
-    },
-  })
-}
-</script>
+```
+## 自定义上传样式
+
+```html [template]
+
+<pa-uploader v-model:file-list="fileList">
+  <pa-button type="primary" icon="plus">上传文件</pa-button>
+</pa-uploader>
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+import type { FileItem } from '../..'
+
+const fileList = ref<FileItem[]>([])
+
+```
+## 禁用文件上传
+
+```html [template]
+
+<pa-uploader disabled />
+
+```
+## 独立控制删除
+
+```html [template]
+
+<pa-uploader v-model:file-list="fileList" />
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+// 仅做本地示例，使用时请用网络图片
+import img1 from '../../images/demo2.jpeg'
+import img2 from '../../images/demo3.jpg'
+
+let src1 = ''
+let src2 = ''
+// #ifdef MP
+const fileManager = uni.getFileSystemManager()
+src1 = 'data:image/jpeg;base64,' + fileManager.readFileSync(img1, 'base64')
+src2 = 'data:image/jpeg;base64,' + fileManager.readFileSync(img2, 'base64')
+// #endif
+// #ifdef H5
+src1 = img1
+src2 = img2
+// #endif
+
+const fileList = ref([
+  {
+    url: src1,
+    deletable: false,
+  },
+  {
+    url: src2,
+  },
+])
+
 ```
 
 <!--codes end-->
