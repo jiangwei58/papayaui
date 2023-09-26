@@ -87,6 +87,6 @@ const onLeftMenuClick = (index: number) => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './nav-bar.scss';
 </style>

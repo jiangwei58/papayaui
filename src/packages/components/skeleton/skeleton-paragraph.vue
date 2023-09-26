@@ -11,7 +11,7 @@ const ns = useNamespace('skeleton-paragraph')
 defineProps(skeletonParagraphProps)
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../../styles/vars.scss';
 
 .#{$prefix}-skeleton-paragraph {

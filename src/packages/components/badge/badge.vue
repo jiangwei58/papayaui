@@ -42,6 +42,6 @@ const value = computed(() => {
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './badge.scss';
 </style>

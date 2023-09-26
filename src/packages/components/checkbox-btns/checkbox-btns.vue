@@ -61,6 +61,6 @@ const onSelect = (item: CheckboxItem, index: number) => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './checkbox-btns.scss';
 </style>

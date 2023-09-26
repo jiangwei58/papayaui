@@ -156,6 +156,6 @@ const onDelete = async (file: FileItem, index: number) => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './uploader.scss';
 </style>

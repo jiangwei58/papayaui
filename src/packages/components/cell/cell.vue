@@ -52,6 +52,6 @@ const onClick = (event: MouseEvent) => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './cell.scss';
 </style>

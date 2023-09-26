@@ -90,6 +90,6 @@ const onClick = async (event: MouseEvent) => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './button.scss';
 </style>

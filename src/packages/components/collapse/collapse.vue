@@ -86,6 +86,6 @@ defineExpose({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './collapse.scss';
 </style>

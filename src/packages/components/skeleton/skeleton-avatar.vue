@@ -14,7 +14,7 @@ const ns = useNamespace('skeleton-avatar')
 defineProps(skeletonAvatarProps)
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../../styles/vars.scss';
 
 .#{$prefix}-skeleton-avatar {

@@ -31,10 +31,8 @@ const iconClassList = computed(() => {
 })
 </script>
 
-<style lang="scss" scoped>
-@import './icon.scss';
-</style>
 <style lang="scss">
+@import './icon.scss';
 /* #ifdef MP */
 :host {
   display: inline-flex;

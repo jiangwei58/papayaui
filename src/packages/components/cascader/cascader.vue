@@ -351,6 +351,6 @@ defineExpose({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './cascader.scss';
 </style>

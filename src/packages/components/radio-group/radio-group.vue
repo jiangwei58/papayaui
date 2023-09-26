@@ -39,6 +39,6 @@ provide<RadioProvideData>(`${ns.b()}-provide`, {
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './radio-group.scss';
 </style>

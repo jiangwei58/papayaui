@@ -127,6 +127,6 @@ defineExpose({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './collapse-item.scss';
 </style>

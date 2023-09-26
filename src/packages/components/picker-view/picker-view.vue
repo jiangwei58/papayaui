@@ -75,6 +75,6 @@ const onCancel = () => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './picker-view.scss';
 </style>

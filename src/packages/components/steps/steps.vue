@@ -91,6 +91,6 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './steps.scss';
 </style>

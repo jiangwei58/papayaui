@@ -120,6 +120,6 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './sticky.scss';
 </style>

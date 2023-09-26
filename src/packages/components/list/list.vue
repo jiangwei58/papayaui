@@ -23,6 +23,6 @@ withDefaults(defineProps<ListProps>(), {
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './list.scss';
 </style>

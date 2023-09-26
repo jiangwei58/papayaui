@@ -68,6 +68,6 @@ defineExpose<TabbarExpose>({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './tabbar.scss';
 </style>

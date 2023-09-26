@@ -72,6 +72,6 @@ const onLabelClick = () => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './checkbox.scss';
 </style>

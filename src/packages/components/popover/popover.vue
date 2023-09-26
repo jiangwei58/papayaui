@@ -84,6 +84,6 @@ const onVisibleChange = (visible = !show.value) => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './popover.scss';
 </style>

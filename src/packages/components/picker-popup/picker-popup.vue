@@ -281,6 +281,6 @@ defineExpose({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './picker-popup.scss';
 </style>

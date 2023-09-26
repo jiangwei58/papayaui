@@ -42,6 +42,6 @@ const onClick = () => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './loadmore.scss';
 </style>

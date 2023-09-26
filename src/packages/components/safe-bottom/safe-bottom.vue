@@ -8,6 +8,6 @@ import useNamespace from '../../core/useNamespace'
 const ns = useNamespace('safe-bottom')
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './safe-bottom.scss';
 </style>

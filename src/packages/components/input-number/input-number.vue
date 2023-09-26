@@ -157,6 +157,6 @@ const onFocus = (e: unknown) => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './input-number.scss';
 </style>

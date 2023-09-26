@@ -131,6 +131,6 @@ const clickHandler = () => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './animate.scss';
 </style>
