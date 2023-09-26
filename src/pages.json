@@ -258,6 +258,13 @@
       "type": "show"
     },
     {
+      "path": "packages/components/count-down/demo",
+      "style": {
+        "navigationBarTitleText": "CountDown 倒计时"
+      },
+      "type": "show"
+    },
+    {
       "path": "packages/components/empty/demo",
       "style": {
         "navigationBarTitleText": "Empty 空状态"

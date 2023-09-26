@@ -4,7 +4,7 @@ import { isString } from '../../utils'
 export type InputType = 'text' | 'number'
 export type InputValue = string | number
 
-export const inputNumberProps = {
+const inputNumberProps = {
   /**
    * 最小值
    */
