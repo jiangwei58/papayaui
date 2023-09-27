@@ -67,6 +67,6 @@ const onLabelClick = () => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './radio.scss';
 </style>

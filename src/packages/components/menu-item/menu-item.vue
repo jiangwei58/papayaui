@@ -151,6 +151,6 @@ defineExpose({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './menu-item.scss';
 </style>

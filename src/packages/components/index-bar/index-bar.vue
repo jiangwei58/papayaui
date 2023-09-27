@@ -96,6 +96,6 @@ provide<IndexBarProvideData>(`${ns.b()}-provide`, {
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './index-bar.scss';
 </style>

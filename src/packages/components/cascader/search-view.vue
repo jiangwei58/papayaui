@@ -92,7 +92,7 @@ defineExpose({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../../styles/vars.scss';
 .#{$prefix}-cascader-search-view {
   position: absolute;

@@ -24,6 +24,6 @@ defineProps(sectionProps)
 const emit = defineEmits(sectionEmits)
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './section.scss';
 </style>

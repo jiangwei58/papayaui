@@ -51,6 +51,6 @@ const emit = defineEmits(bottomPopupEmits)
 const { show } = toRefs(props)
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './bottom-popup.scss';
 </style>

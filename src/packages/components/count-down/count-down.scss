@@ -1,0 +1,7 @@
+@import '../../styles/vars.scss';
+
+.#{$prefix}-count-down {
+  color: _var(count-down-color, _var(color-black));
+  font-size: _var(count-down-font-size, 14px);
+  line-height: _var(count-down-line-height, 20px);
+}

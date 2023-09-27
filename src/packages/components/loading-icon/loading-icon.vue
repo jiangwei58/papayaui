@@ -22,6 +22,6 @@ const ns = useNamespace('loading-icon')
 defineProps(loadingIconProps)
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './loading-icon.scss';
 </style>

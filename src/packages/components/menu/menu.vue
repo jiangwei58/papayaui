@@ -84,6 +84,6 @@ provide<MenuProvideData>(`${ns.b()}-provide`, {
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './menu.scss';
 </style>

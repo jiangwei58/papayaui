@@ -236,6 +236,6 @@ module.exports = {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './swipe-cell.scss';
 </style>

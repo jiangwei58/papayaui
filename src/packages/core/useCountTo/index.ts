@@ -1,4 +1,4 @@
-import { computed, reactive, ref } from 'vue'
+import { computed, onUnmounted, reactive, ref } from 'vue'
 import type { IncludeRefs } from '../../types'
 
 export interface UseCountToProps {
@@ -152,6 +152,10 @@ export function useCountTo(props: IncludeRefs<UseCountToProps>) {
     progress = 0
     numValue.value = ownProps.startNum
   }
+
+  onUnmounted(() => {
+    reset()
+  })
 
   return {
     numValue,

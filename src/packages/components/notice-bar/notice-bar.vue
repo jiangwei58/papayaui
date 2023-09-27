@@ -83,6 +83,6 @@ watch(
 )
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './notice-bar.scss';
 </style>

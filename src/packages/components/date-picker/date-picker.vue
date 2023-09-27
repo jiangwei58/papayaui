@@ -110,6 +110,6 @@ const onCancel = () => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './date-picker.scss';
 </style>

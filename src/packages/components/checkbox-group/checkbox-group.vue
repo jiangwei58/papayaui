@@ -47,6 +47,6 @@ provide<CheckboxProvideData>(`${ns.b()}-provide`, {
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './checkbox-group.scss';
 </style>

@@ -47,6 +47,6 @@ const onOk = () => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './env-view.scss';
 </style>

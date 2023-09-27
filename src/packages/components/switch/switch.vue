@@ -63,6 +63,6 @@ const onToggle = () => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './switch.scss';
 </style>

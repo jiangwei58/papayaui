@@ -37,6 +37,6 @@ const ns = useNamespace('empty')
 defineProps(emptyProps)
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './empty.scss';
 </style>

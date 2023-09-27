@@ -13,6 +13,6 @@ const ns = useNamespace('cell-group')
 defineProps(cellGroupProps)
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './cell-group.scss';
 </style>

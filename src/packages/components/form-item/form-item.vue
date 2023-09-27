@@ -41,4 +41,4 @@ if (instance && p_children?.value) {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss"></style>

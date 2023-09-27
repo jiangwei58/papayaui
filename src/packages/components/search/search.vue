@@ -48,6 +48,6 @@ const onUpdate = (value: string) => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './search.scss';
 </style>

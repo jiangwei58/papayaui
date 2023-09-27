@@ -44,6 +44,6 @@ const onChange = () => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './sort-label.scss';
 </style>

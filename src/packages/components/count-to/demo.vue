@@ -12,11 +12,8 @@
   <DocDemoBlock title="自定义格式化值" card>
     <Demo4 />
   </DocDemoBlock>
-  <DocDemoBlock title="日期倒计时" card>
-    <Demo5 />
-  </DocDemoBlock>
   <DocDemoBlock title="自定义控制" card>
-    <Demo6 />
+    <Demo5 />
   </DocDemoBlock>
   <pa-safe-bottom />
 </template>
@@ -28,7 +25,6 @@ import Demo2 from '../../demos/count-to/demo-2.vue'
 import Demo3 from '../../demos/count-to/demo-3.vue'
 import Demo4 from '../../demos/count-to/demo-4.vue'
 import Demo5 from '../../demos/count-to/demo-5.vue'
-import Demo6 from '../../demos/count-to/demo-6.vue'
 </script>
 
 <style lang="scss" scoped></style>

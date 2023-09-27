@@ -47,6 +47,6 @@ provide<SidebarProvideData>(`${ns.b()}-provide`, {
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './sidebar.scss';
 </style>

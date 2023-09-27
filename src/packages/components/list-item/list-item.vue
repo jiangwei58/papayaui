@@ -22,6 +22,6 @@ defineProps(listItemProps)
 const emit = defineEmits(listItemEmits)
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './list-item.scss';
 </style>

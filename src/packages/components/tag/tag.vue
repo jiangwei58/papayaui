@@ -36,6 +36,6 @@ const customStyle = computed<CSSProperties>(() => {
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './tag.scss';
 </style>

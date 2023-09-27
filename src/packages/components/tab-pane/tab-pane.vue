@@ -52,10 +52,8 @@ const init = () => {
 init()
 </script>
 
-<style lang="scss" scoped>
-@import './tab-pane.scss';
-</style>
 <style lang="scss">
+@import './tab-pane.scss';
 /* #ifdef MP */
 :host {
   width: 100%;

@@ -74,10 +74,8 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss" scoped>
-@import './tabbar-item.scss';
-</style>
 <style lang="scss">
+@import './tabbar-item.scss';
 /* #ifdef MP */
 // 由于小程序都使用shadow DOM形式实现，需要给影子宿主设置flex: 1才能让其撑开
 :host {

@@ -54,6 +54,6 @@ const onLoad = () => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './image.scss';
 </style>

@@ -11,7 +11,7 @@ const ns = useNamespace('skeleton-title')
 defineProps(skeletonTitleProps)
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../../styles/vars.scss';
 
 .#{$prefix}-skeleton-title {
