@@ -8,12 +8,12 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { countDownDuration } from '../../components'
+import type { CountDownDuration } from '../../components'
 
 const time = 1000 * 60 * 30
-const timeData = ref<countDownDuration>()
+const timeData = ref<CountDownDuration>()
 
-const onChange = (duration: countDownDuration) => {
+const onChange = (duration: CountDownDuration) => {
   timeData.value = duration
 }
 </script>
