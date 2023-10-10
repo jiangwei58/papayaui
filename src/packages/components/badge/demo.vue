@@ -14,6 +14,9 @@
   <DocDemoBlock title="自定义位置" card>
     <Demo5 />
   </DocDemoBlock>
+  <DocDemoBlock title="边框" card>
+    <Demo7 />
+  </DocDemoBlock>
   <DocDemoBlock title="独立展示" card>
     <Demo6 />
   </DocDemoBlock>
@@ -28,6 +31,7 @@ import Demo3 from '../../demos/badge/demo-3.vue'
 import Demo4 from '../../demos/badge/demo-4.vue'
 import Demo5 from '../../demos/badge/demo-5.vue'
 import Demo6 from '../../demos/badge/demo-6.vue'
+import Demo7 from '../../demos/badge/demo-7.vue'
 </script>
 
 <style lang="scss">
@@ -35,12 +39,11 @@ import Demo6 from '../../demos/badge/demo-6.vue'
   :deep(.pa-badge) {
     margin-right: 42px;
   }
-
-  &-block {
-    width: 40px;
-    height: 40px;
-    background-color: rgb(238, 238, 238);
-    border-radius: 3px;
-  }
+}
+:deep(.demo-badge-block) {
+  width: 40px;
+  height: 40px;
+  background-color: rgb(238, 238, 238);
+  border-radius: 3px;
 }
 </style>

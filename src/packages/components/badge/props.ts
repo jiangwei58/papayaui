@@ -1,5 +1,4 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
-import { defaultNamespace } from '../../core/useNamespace'
 
 export const badgeProps = {
   /**
@@ -9,10 +8,7 @@ export const badgeProps = {
   /**
    * 徽标背景颜色
    */
-  color: {
-    type: [String, Number] as PropType<CSSProperties['color']>,
-    default: `var(--${defaultNamespace}-color-danger)`,
-  },
+  color: [String, Number] as PropType<CSSProperties['color']>,
   /**
    * 是否展示为小点
    */
@@ -39,6 +35,14 @@ export const badgeProps = {
     type: Boolean,
     default: true,
   },
+  /**
+   * 是否显示边框
+   */
+  border: Boolean,
+  /**
+   * 边框颜色
+   */
+  borderColor: [String, Number] as PropType<CSSProperties['color']>,
 }
 
 export type BadgeProps = ExtractPropTypes<typeof badgeProps>

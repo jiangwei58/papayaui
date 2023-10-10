@@ -1,14 +1,19 @@
 <template>
-  <view :class="[ns.b(), ns.is('dot', dot), ns.is('fixed', !!$slots.default)]">
+  <view
+    :class="[ns.b(), ns.is('dot', dot), ns.is('border', border), ns.is('fixed', !!$slots.default)]"
+  >
     <slot></slot>
     <view
       v-if="visible"
       :class="ns.e('content')"
-      :style="{
-        backgroundColor: color,
-        top: getUnitValue(offset[1].toString()),
-        right: getUnitValue(offset[0].toString()),
-      }"
+      :style="
+        ns.style({
+          backgroundColor: color,
+          top: getUnitValue(offset[1].toString()),
+          right: getUnitValue(offset[0].toString()),
+          borderColor,
+        })
+      "
     >
       <slot v-if="$slots.content" name="content"></slot>
       <text v-else>{{ value }}</text>
