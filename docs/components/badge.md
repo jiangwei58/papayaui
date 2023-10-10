@@ -93,6 +93,20 @@
 </view>
 
 ```
+## 边框
+
+```html [template]
+
+<view class="demo-badge">
+  <pa-badge content="6" border>
+    <view class="demo-badge-block"></view>
+  </pa-badge>
+  <pa-badge content="99" border border-color="#000">
+    <view class="demo-badge-block"></view>
+  </pa-badge>
+</view>
+
+```
 ## 独立展示
 
 ```html [template]
