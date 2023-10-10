@@ -2,22 +2,30 @@
 .#{$prefix}-badge {
   position: relative;
   display: inline-block;
+
   &__content {
     position: relative;
     display: flex;
     flex-direction: row;
-    line-height: 11px;
+    line-height: _var(badge-font-size, 11px);
     text-align: center;
-    font-size: 11px;
+    font-size: _var(badge-font-size, 11px);
     color: #fff;
-    padding: 2px 5px;
+    padding: _var(badge-padding, 2px 5px);
     border-radius: 100px;
+    background-color: _var(badge-color, _var(color-danger));
   }
+
   &--dot &__content {
     padding: 0;
     width: 8px;
     height: 8px;
   }
+
+  &--border &__content {
+    border: _var(badge-border-width, 1px) solid _var(badge-border-color, #fff);
+  }
+
   &--fixed &__content {
     position: absolute;
     transform: translate(50%, -50%);
