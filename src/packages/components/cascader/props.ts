@@ -1,7 +1,7 @@
-import type { ExtractPropTypes, CSSProperties, PropType } from 'vue'
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
 import type { TreeNode, UseTreeFieldNames } from '../../core/useTree'
 import { defaultFieldNames } from '../../core/useTree'
-import { isArray, isObject, pick } from '../../utils'
+import { isArray, isObject } from '../../utils'
 import { bottomPopupEmits, bottomPopupProps } from '../bottom-popup/props'
 
 export interface CascaderNode<T = any> {
@@ -13,7 +13,7 @@ export type CascaderOption = any
 export type CascaderValue = any
 
 export const cascaderProps = {
-  ...pick(bottomPopupProps, ['show', 'height', 'title', 'safeAreaInsetBottom']),
+  ...bottomPopupProps,
   /**
    * 值
    */

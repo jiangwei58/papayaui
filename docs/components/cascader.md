@@ -304,9 +304,16 @@ const onChangeVisible = () => {
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | ----- | --- | --- |
 | show | 是否显示 | boolean |  false |
+| zIndex | z-index层级 | number |  999 |
+| overlay | 是否显示遮罩 | boolean |  true |
+| bgColor | 背景色 | CSSProperties['background-color'] | - |
+| safeAreaInsetBottom | 是否适配底部安全区 | boolean |  true |
 | title | 标题 | string | - |
 | height | 弹窗高度 | string |  '80vh' |
-| safeAreaInsetBottom | 是否适配底部安全区 | boolean |  true |
+| round | 是否圆角 | (boolean \| string)[] |  true |
+| closeable | 是否显示关闭按钮 | boolean |  true |
+| closeOnClickOverlay | 点击遮罩是否关闭弹窗 | boolean |  true |
+| duration | 动画的执行时间，单位ms | string \| number |  300 |
 | modelValue | 值 | CascaderValue[] | - |
 | options | 可选项数据源 | CascaderOption[] |  () => [] |
 | fieldNames | 自定义 options 结构中的字段 | Partial\<UseTreeFieldNames\<CascaderOption\>\> |  () => defaultFieldNames |

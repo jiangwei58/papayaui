@@ -3,7 +3,15 @@ import { pick } from '../../utils'
 import { popupEmits, popupProps } from '../popup/props'
 
 export const bottomPopupProps = {
-  ...pick(popupProps, ['show', 'zIndex', 'overlay', 'bgColor', 'safeAreaInsetBottom']),
+  ...pick(popupProps, [
+    'show',
+    'zIndex',
+    'overlay',
+    'bgColor',
+    'safeAreaInsetBottom',
+    'closeOnClickOverlay',
+    'duration',
+  ]),
   /**
    * 标题
    */
@@ -31,6 +39,7 @@ export const bottomPopupProps = {
   },
   /**
    * 是否可以点击空白处关闭
+   * @deprecated 即将移除，统一使用 `closeOnClickOverlay`属性
    */
   maskCloseAble: popupProps.closeOnClickOverlay,
 }
