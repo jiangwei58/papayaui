@@ -80,7 +80,8 @@ const text = computed(() => {
 | height | 弹窗高度 | string |  '80vh' |
 | round | 是否圆角 | (boolean \| string)[] |  true |
 | closeable | 是否显示关闭按钮 | boolean |  true |
-| maskCloseAble | 是否可以点击空白处关闭 | boolean | - |
+| closeOnClickOverlay | 点击遮罩是否关闭弹窗 | boolean |  true |
+| duration | 动画的执行时间，单位ms | string \| number |  300 |
 
 <!--props end-->
 

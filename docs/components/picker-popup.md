@@ -223,9 +223,16 @@ const onLoad = (query?: string, pageNumber?: number, pageSize?: number) => {
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | ----- | --- | --- |
 | show | 是否显示 | boolean |  false |
+| zIndex | z-index层级 | number |  999 |
+| overlay | 是否显示遮罩 | boolean |  true |
+| bgColor | 背景色 | CSSProperties['background-color'] | - |
 | safeAreaInsetBottom | 是否适配底部安全区 | boolean |  true |
 | title | 标题 | string | - |
 | height | 弹窗高度 | string |  '80vh' |
+| round | 是否圆角 | (boolean \| string)[] |  true |
+| closeable | 是否显示关闭按钮 | boolean |  true |
+| closeOnClickOverlay | 点击遮罩是否关闭弹窗 | boolean |  true |
+| duration | 动画的执行时间，单位ms | string \| number |  300 |
 | modelValue | 选择的值 | OptionValue\|OptionValue[] | - |
 | data | 选项数据 | Option[] |  () => [] |
 | labelKey | 数据标题的字段名 | string |  'label' |
