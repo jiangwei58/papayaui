@@ -62,13 +62,13 @@
   // 只要双数和能被5除尽的数
   @if $i % 2 == 0 or $i % 5 == 0 {
     .gap-#{$i} {
-      gap: $i + rpx;
+      gap: $i + $pixelUnit;
     }
     .gap-x-#{$i} {
-      column-gap: $i + rpx;
+      column-gap: $i + $pixelUnit;
     }
     .gap-y-#{$i} {
-      row-gap: $i + rpx;
+      row-gap: $i + $pixelUnit;
     }
   }
 }

@@ -60,7 +60,7 @@
 // 定义圆角
 @for $i from 3 through 35 {
   .rounded-#{$i} {
-    border-radius: #{$i}rpx;
+    border-radius: $i + $pixelUnit;
   }
 }
 

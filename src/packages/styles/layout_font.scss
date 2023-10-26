@@ -1,14 +1,14 @@
-// 定义字体(rpx单位)
+// 定义字体大小
 @for $i from 20 through 65 {
   .text-#{$i} {
-    font-size: #{$i}rpx;
+    font-size: $i + $pixelUnit;
   }
 }
 
 // 定义字体行高
 @for $i from 10 through 65 {
   .leading-#{$i} {
-    line-height: #{$i}rpx;
+    line-height: $i + $pixelUnit;
   }
 }
 
