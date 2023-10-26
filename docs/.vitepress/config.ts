@@ -62,7 +62,7 @@ export default defineConfig({
           { text: 'Margin和Padding', link: '/inbuiltStyle/margin.md' },
           { text: 'Font 字体', link: '/inbuiltStyle/font.md' },
           { text: 'TextAlign 文本对齐', link: '/inbuiltStyle/textAlign.md' },
-          { text: '文本行数限制', link: '/inbuiltStyle/ellipsis.md' },
+          { text: '文本内容省略', link: '/inbuiltStyle/ellipsis.md' },
           { text: 'Border 边框', link: '/inbuiltStyle/border.md' },
         ],
       },

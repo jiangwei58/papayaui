@@ -47,12 +47,12 @@
 
 | 类名 (0-80) | 属性                                          |
 | ----------- | --------------------------------------------- |
-| `p-${x}`    | margin: `${x}`                                |
-| `pl-${x}`   | margin-left: `${x}`                           |
-| `pr-${x}`   | margin-right: `${x}`                          |
-| `pt-${x}`   | margin-top: `${x}`                            |
-| `pb-${x}`   | margin-bottom: `${x}`                         |
-| `px-${x}`   | margin-left: `${x}`<br />margin-right: `${x}` |
+| `m-${x}`    | margin: `${x}`                                |
+| `ml-${x}`   | margin-left: `${x}`                           |
+| `mr-${x}`   | margin-right: `${x}`                          |
+| `mt-${x}`   | margin-top: `${x}`                            |
+| `mb-${x}`   | margin-bottom: `${x}`                         |
+| `mx-${x}`   | margin-left: `${x}`<br />margin-right: `${x}` |
 | `my-${x}`   | margin-top: `${x}`<br />margin-bottom: `${x}` |
 
 | 类名 (0-80) | 属性                                            |
