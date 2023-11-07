@@ -1,0 +1,19 @@
+@import '../../styles/vars.scss';
+
+.#{$prefix}-circle {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+
+  &__text {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    color: _var(circle-text-color, _var(color-black));
+    font-weight: _var(circle-font-weight, 500);
+    font-size: _var(circle-font-size, 14px);
+    line-height: _var(circle-text-line-height, 20px);
+    transform: translateY(-50%);
+  }
+}
