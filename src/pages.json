@@ -244,6 +244,13 @@
       "type": "show"
     },
     {
+      "path": "packages/components/circle/demo",
+      "style": {
+        "navigationBarTitleText": "Circle 环形进度条"
+      },
+      "type": "show"
+    },
+    {
       "path": "packages/components/collapse/demo",
       "style": {
         "navigationBarTitleText": "Collapse 折叠面板"

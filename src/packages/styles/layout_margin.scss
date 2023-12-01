@@ -3,37 +3,37 @@
   // 只要双数和能被5除尽的数
   @if $i % 2 == 0 or $i % 5 == 0 {
     .m-#{$i} {
-      margin: $i + rpx !important;
+      margin: $i + $pixelUnit !important;
     }
 
     .p-#{$i} {
-      padding: $i + rpx !important;
+      padding: $i + $pixelUnit !important;
     }
 
     .mx-#{$i} {
-      margin-left: $i + rpx;
-      margin-right: $i + rpx;
+      margin-left: $i + $pixelUnit;
+      margin-right: $i + $pixelUnit;
     }
     .my-#{$i} {
-      margin-top: $i + rpx;
-      margin-bottom: $i + rpx;
+      margin-top: $i + $pixelUnit;
+      margin-bottom: $i + $pixelUnit;
     }
     .px-#{$i} {
-      padding-left: $i + rpx;
-      padding-right: $i + rpx;
+      padding-left: $i + $pixelUnit;
+      padding-right: $i + $pixelUnit;
     }
     .py-#{$i} {
-      padding-top: $i + rpx;
-      padding-bottom: $i + rpx;
+      padding-top: $i + $pixelUnit;
+      padding-bottom: $i + $pixelUnit;
     }
 
     @each $short, $long in l left, t top, r right, b bottom {
       .m#{$short}-#{$i} {
-        margin-#{$long}: $i + rpx !important;
+        margin-#{$long}: $i + $pixelUnit !important;
       }
 
       .p#{$short}-#{$i} {
-        padding-#{$long}: $i + rpx !important;
+        padding-#{$long}: $i + $pixelUnit !important;
       }
     }
   }

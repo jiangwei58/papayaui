@@ -9,7 +9,7 @@
 }
 </style>
 
-范围：1-5
+格式：line-length-${x}, 范围：1-5
 
 ::: info 示例
 

@@ -4,6 +4,7 @@
 
 - 💪 Vue 3 Composition API
 - 🔥 Written in TypeScript
+- 🧀 [Document](https://jiangwei58.github.io/papayaui)
 
 ## 准备工作
 
@@ -83,8 +84,6 @@ pnpm install async-validator dayjs
     // ...
     "types": ["papayaui/global"]
   },
-  // 防止组件props类型识别错误
-  "include": ["node_modules/papayaui/components/*/*.vue"]
 }
 ```
 

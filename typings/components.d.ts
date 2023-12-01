@@ -10,6 +10,7 @@ declare module 'vue' {
     PaCheckbox: typeof import('../src/packages/components/checkbox/checkbox.vue')['default']
     PaCheckboxBtns: typeof import('../src/packages/components/checkbox-btns/checkbox-btns.vue')['default']
     PaCheckboxGroup: typeof import('../src/packages/components/checkbox-group/checkbox-group.vue')['default']
+    PaCircle: typeof import('../src/packages/components/circle/circle.vue')['default']
     PaCollapse: typeof import('../src/packages/components/collapse/collapse.vue')['default']
     PaCollapseItem: typeof import('../src/packages/components/collapse-item/collapse-item.vue')['default']
     PaContainer: typeof import('../src/packages/components/container/container.vue')['default']

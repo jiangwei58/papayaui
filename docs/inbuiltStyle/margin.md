@@ -20,10 +20,10 @@
 <view class="mr-30"></view>
 ```
 <div class="wrapper flex">
-  <div style="margin:20px"></div>
-  <div style="margin-top:30px"></div>
-  <div style="margin-left:30px"></div>
-  <div style="margin-right:30px"></div>
+  <div class="m-20"></div>
+  <div class="mt-30"></div>
+  <div class="ml-30"></div>
+  <div class="mr-30"></div>
 </div>
 :::
 
@@ -37,22 +37,22 @@
 <view class="pl-20"></view>
 <view class="pr-20"></view>
 ```
-<div class="wrapper">
-  <div style="padding:20px">内容内容内容</div>
-  <div style="padding-top:20px;margin-top:20px">内容内容内容</div>
-  <div style="padding-left:20px;margin-top:20px">内容内容内容</div>
-  <div style="padding-right:20px;margin-top:20px">内容内容内容</div>
+<div class="wrapper flex flex-col gap-20">
+  <div class="p-20">内容内容内容</div>
+  <div class="pt-20">内容内容内容</div>
+  <div class="pl-20">内容内容内容</div>
+  <div class="pr-20">内容内容内容</div>
 </div>
 :::
 
 | 类名 (0-80) | 属性                                          |
 | ----------- | --------------------------------------------- |
-| `p-${x}`    | margin: `${x}`                                |
-| `pl-${x}`   | margin-left: `${x}`                           |
-| `pr-${x}`   | margin-right: `${x}`                          |
-| `pt-${x}`   | margin-top: `${x}`                            |
-| `pb-${x}`   | margin-bottom: `${x}`                         |
-| `px-${x}`   | margin-left: `${x}`<br />margin-right: `${x}` |
+| `m-${x}`    | margin: `${x}`                                |
+| `ml-${x}`   | margin-left: `${x}`                           |
+| `mr-${x}`   | margin-right: `${x}`                          |
+| `mt-${x}`   | margin-top: `${x}`                            |
+| `mb-${x}`   | margin-bottom: `${x}`                         |
+| `mx-${x}`   | margin-left: `${x}`<br />margin-right: `${x}` |
 | `my-${x}`   | margin-top: `${x}`<br />margin-bottom: `${x}` |
 
 | 类名 (0-80) | 属性                                            |
