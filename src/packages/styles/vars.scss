@@ -1,5 +1,5 @@
-$prefix: pa;
-$pixelUnit: rpx;
+$prefix: pa !default;
+$pixelUnit: rpx !default;
 
 @function _var($varName, $default: null) {
   @if ($default == null) {

@@ -20,11 +20,11 @@
 ```
 
 <div class="border">1</div>
-<div class="border-top" style="margin-top:20px">2</div>
-<div class="border-bottom" style="margin-top:20px">3</div>
-<div class="border-left" style="margin-top:20px">4</div>
-<div class="border-right" style="margin-top:20px">5</div>
-<div class="border-top-bottom" style="margin-top:20px">6</div>
+<div class="border-top mt-20">2</div>
+<div class="border-bottom mt-20">3</div>
+<div class="border-left mt-20">4</div>
+<div class="border-right mt-20">5</div>
+<div class="border-top-bottom mt-20">6</div>
 :::
 
 ## 圆角
@@ -36,11 +36,6 @@
   color: #fff;
   background-color: var(--pa-color-primary);
   margin-top: 20px;
-}
-@for $i from 3 through 35 {
-  .rounded-#{$i} {
-    border-radius: #{$i}px;
-  }
 }
 </style>
 

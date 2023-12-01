@@ -5,16 +5,8 @@
 格式：`text-${x}`, 范围: 20-65
 
 <style lang="scss" scoped>
-@for $i from 20 through 65 {
-  .text-#{$i} {
-    font-size: #{$i}px;
-    line-height: normal;
-  }
-}
-@for $i from 10 through 65 {
-  .leading-#{$i} {
-    line-height: #{$i}px;
-  }
+[class*="text-"] {
+  line-height: normal;
 }
 </style>
 

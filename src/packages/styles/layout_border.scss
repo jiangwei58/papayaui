@@ -63,6 +63,12 @@
     border-radius: $i + $pixelUnit;
   }
 }
+.rounded-none {
+  border-radius: 0;
+}
+.rounded-full {
+  border-radius: 9999px;
+}
 
 // 盒子模型
 .box-border {

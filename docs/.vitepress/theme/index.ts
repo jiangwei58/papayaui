@@ -2,8 +2,8 @@
 import { EnhanceAppContext } from 'vitepress'
 import Theme from 'vitepress/theme'
 import { h } from 'vue'
-import '../../../src/packages/styles/index.scss'
 import Simulator from './Simulator.vue'
+import './index.scss'
 import './style.css'
 
 export default {

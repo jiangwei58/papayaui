@@ -29,7 +29,7 @@
 </view>
 ```
 
-<div class="wrapper grid grid-cols-6" style="gap:20px">
+<div class="wrapper grid grid-cols-6 gap-20">
   <div></div>
   <div></div>
   <div></div>
@@ -40,7 +40,7 @@
 
 <br />
 
-<div class="wrapper grid grid-cols-6" style="gap:20px">
+<div class="wrapper grid grid-cols-6 gap-20">
   <div class="col-span-2"></div>
   <div class="col-start-4"></div>
   <div></div>
