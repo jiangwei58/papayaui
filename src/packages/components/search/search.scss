@@ -1,17 +1,22 @@
 @import '../../styles/vars.scss';
 .#{$prefix}-search {
-  @include _setVar(field-input-color, _var(search-input-color, _var(color-black)));
-  @include _setVar(cell-bg-color, transparent);
-  @include _setVar(cell-title-color, _var(search-icon-color, _var(color-black-3)));
-  @include _setVar(cell-padding-x, _var(search-input-padding-x, 8px));
-  @include _setVar(cell-padding-y, _var(search-input-padding-y, 8px));
   padding: _var(search-padding, 10px 12px);
   background-color: _var(search-bg-color, #fff);
-  &-input {
+
+  &__content {
     flex: 1;
     background-color: _var(search-input-bg-color, _var(color-gray));
     border-radius: _var(search-input-radius, 3px);
   }
+
+  &__input {
+    @include _setVar(field-input-color, _var(search-input-color, _var(color-black)));
+    @include _setVar(cell-bg-color, transparent);
+    @include _setVar(cell-title-color, _var(search-icon-color, _var(color-black-3)));
+    @include _setVar(cell-padding-x, _var(search-input-padding-x, 8px));
+    @include _setVar(cell-padding-y, _var(search-input-padding-y, 5px));
+  }
+
   &--round &-input {
     border-radius: 100px;
   }
