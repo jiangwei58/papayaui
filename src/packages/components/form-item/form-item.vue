@@ -4,9 +4,17 @@
     :title="label"
     :error-message="errorMessage"
     v-bind="$props"
+    :label="desc"
     @click="emit('click')"
   />
-  <Cell v-else :title="label" :error-message="errorMessage" v-bind="$props" @click="emit('click')">
+  <Cell
+    v-else
+    :title="label"
+    :error-message="errorMessage"
+    v-bind="$props"
+    :label="desc"
+    @click="emit('click')"
+  >
     <slot />
   </Cell>
 </template>
