@@ -43,6 +43,8 @@ export interface MenuItemOption {
   text: string
   /** 标识符 */
   value: MenuItemOptionValue
+  /** 右侧文字 */
+  valueText?: string
 }
 
 export type MenuItemOptionValue = number | string

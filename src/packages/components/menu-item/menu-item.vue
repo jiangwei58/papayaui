@@ -14,6 +14,7 @@
         :key="item.value"
         :class="ns.is('active', isSelected(item.value))"
         :title="item.text"
+        :value="item.valueText"
         clickable
         @click="onChange(item)"
       >
