@@ -13,11 +13,13 @@
           active: typeof modelValue !== 'undefined' ? isSelected(item[valueKey]) : false,
         },
       ]"
-      :style="{
-        backgroundColor: bgColor,
-        borderColor: bgColor,
-        borderRadius: getUnitValue(typeof round === 'boolean' ? (round ? '100' : '0') : round),
-      }"
+      :style="
+        ns.style({
+          backgroundColor: bgColor,
+          borderColor: bgColor,
+          borderRadius: getUnitValue(typeof round === 'boolean' ? (round ? '100' : '0') : round),
+        })
+      "
       @tap="onSelect(item, index)"
     >
       <slot v-if="$slots.default" :item="item" :index="index" />
