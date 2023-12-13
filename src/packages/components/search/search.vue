@@ -24,6 +24,7 @@
         :clearable="clearable"
         @update:model-value="onUpdate"
         @confirm="emit('confirm', $event)"
+        @blur="emit('blur', $event)"
         @clear="emit('clear')"
         @click-input="emit('click-input')"
       />

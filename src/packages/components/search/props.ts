@@ -51,6 +51,7 @@ export const searchEmits = {
   'update:modelValue': (value: string) => isString(value),
   change: (value: string) => isString(value),
   confirm: (value: EventDetail<{ value: string }>) => isObject(value),
+  blur: (value: unknown) => isObject(value),
   clear: () => true,
   'click-input': () => true,
 }

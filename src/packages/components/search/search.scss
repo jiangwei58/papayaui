@@ -17,7 +17,7 @@
     @include _setVar(cell-padding-y, _var(search-input-padding-y, 5px));
   }
 
-  &--round &-input {
+  &--round &__content {
     border-radius: 100px;
   }
 }
