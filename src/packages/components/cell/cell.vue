@@ -17,7 +17,10 @@
       :style="{ flex: titleWidth ? `0 ${getUnitValue(titleWidth)}` : '1' }"
     >
       <slot v-if="$slots.title" name="title" />
-      <text v-else>{{ title }}</text>
+      <template v-else>
+        <text>{{ title }}</text>
+        <view v-if="label" :class="ns.e('label')">{{ label }}</view>
+      </template>
     </view>
     <view :class="[ns.e('value'), valueClass]">
       <slot v-if="$slots.default" />
