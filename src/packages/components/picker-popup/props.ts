@@ -85,6 +85,10 @@ export const pickerPopupProps = {
    */
   resetAfterConfirm: Boolean,
   /**
+   * 是否显示确认按钮，多选时强制开启
+   */
+  showConfirm: Boolean,
+  /**
    * 是否允许用户创建新条目，需配合 showSearch 使用
    */
   allowCreate: Boolean,
