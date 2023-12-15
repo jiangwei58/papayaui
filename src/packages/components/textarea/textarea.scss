@@ -33,7 +33,7 @@
   }
 
   &--auto-height {
-    line-height: _var(textarea-line-height, _var(textarea-font-size));
+    line-height: _var(textarea-line-height, _var(textarea-font-size, 14px));
   }
 
   &--disabled {
