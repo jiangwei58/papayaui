@@ -22,11 +22,11 @@
         <view v-if="label" :class="ns.e('label')">{{ label }}</view>
       </template>
     </view>
-    <view :class="[ns.e('value'), valueClass]">
+    <view :class="[ns.e('value'), valueClass]" :style="{ textAlign: valueAlign }">
       <slot v-if="$slots.default" />
       <text v-else :selectable="selectable" :user-select="selectable">{{ value }}</text>
 
-      <view v-if="errorMessage" :class="ns.e('error-message')" :style="{ textAlign: valueAlign }">
+      <view v-if="errorMessage" :class="ns.e('error-message')">
         {{ errorMessage }}
       </view>
     </view>
