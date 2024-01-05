@@ -18,7 +18,7 @@
     @closed="emit('closed')"
   >
     <view :class="ns.b('content')">
-      <Search v-if="showSearch" v-model="searchText" :class="ns.b('search')" />
+      <Search v-if="showSearch" v-model="searchText" v-bind="searchProps" :class="ns.b('search')" />
       <view v-if="show" :class="ns.b('tab')">
         <Tabs v-model="tabActive" :tabs="tabList" label-key="name" scrollable shrink />
       </view>

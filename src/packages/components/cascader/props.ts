@@ -3,6 +3,7 @@ import type { TreeNode, UseTreeFieldNames } from '../../core/useTree'
 import { defaultFieldNames } from '../../core/useTree'
 import { isArray, isObject } from '../../utils'
 import { bottomPopupEmits, bottomPopupProps } from '../bottom-popup/props'
+import type { SearchProps } from '../search'
 
 export interface CascaderNode<T = any> {
   props: T
@@ -50,6 +51,13 @@ export const cascaderProps = {
    * 是否显示搜索
    */
   showSearch: Boolean,
+  /**
+   * 搜索框的props
+   */
+  searchProps: {
+    type: Object as PropType<Partial<SearchProps>>,
+    default: () => ({}),
+  },
   /**
    * 动态获取下一级节点数据
    */
