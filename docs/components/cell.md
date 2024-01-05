@@ -78,6 +78,7 @@
 | --- | ----- | --- | --- |
 | title | 标题 | string | - |
 | value | 内容 | string \| number \| boolean |  '' |
+| label | 标题下方的描述信息 | string | - |
 | titleWidth | 标题宽度 | string | - |
 | clickable | 是否开启点击反馈 | boolean | - |
 | selectable | 内容是否可选中 | boolean | - |
@@ -124,8 +125,6 @@
 | 名称 | 说明 |
 | --- | --- |
 | title | - |
-| default | - |
-| right-icon | - |
 
 ## CellGroup Slot
 

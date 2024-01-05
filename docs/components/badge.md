@@ -133,6 +133,8 @@
 | offset | 设置徽标的偏移量，数组的两项分别对应水平和垂直方向的偏移量，默认单位为rpx | Array\<number\|string\> |  () => [0, 0] |
 | showZero | 当 content 为数字 0 或字符串 '0' 时，是否展示徽标 | boolean | - |
 | show | 是否显示 | boolean |  true |
+| border | 是否显示边框 | boolean | - |
+| borderColor | 边框颜色 | CSSProperties['color'] | - |
 
 <!--props end-->
 
