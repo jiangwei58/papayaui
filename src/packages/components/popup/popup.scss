@@ -3,7 +3,7 @@
   &__content {
     position: relative;
     max-width: _var(popup-max-width, 100%);
-    background-color: #fff;
+    background-color: _var(popup-background, #fff);
     border-radius: _var(popup-radius, 0);
   }
 
