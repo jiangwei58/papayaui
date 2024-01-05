@@ -320,6 +320,7 @@ const onChangeVisible = () => {
 | maxLevel | 最大层级，把哪一层级作为叶子节点 | number |  Number.MAX_SAFE_INTEGER |
 | multiple | 是否多选 | boolean |  false |
 | showSearch | 是否显示搜索 | boolean | - |
+| searchProps | 搜索框的props | Partial\<SearchProps\> |  () => ({}) |
 | lazyLoad | 动态获取下一级节点数据 | (node:CascaderNode)=\>CascaderOption[]\|Promise\<CascaderOption[]\> | - |
 | lazySearch | 远程搜索 | (searchText:string)=\>CascaderOption[]\|Promise\<CascaderOption[]\> | - |
 | confirmButtonText | 确定按钮文案，多选时默认数量显示的文案也要自己定义 | string | - |

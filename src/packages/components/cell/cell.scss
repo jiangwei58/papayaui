@@ -24,6 +24,13 @@
     margin-right: _var(cell-icon-left-margin-left, 4px);
   }
 
+  &__label {
+    margin-top: 4px;
+    color: _var(cell-label-color, _var(color-black-3));
+    font-size: _var(cell-label-font-size, 12px);
+    line-height: _var(cell-label-line-height, 18px);
+  }
+
   &__value {
     position: relative;
     overflow: hidden;

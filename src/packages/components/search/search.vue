@@ -6,12 +6,13 @@
   >
     <slot name="before" />
     <view
-      :class="ns.b('input')"
+      :class="ns.e('content')"
       class="flex items-center"
       :style="ns.style({ backgroundColor: inputBackground })"
     >
       <slot name="prefix" />
       <Field
+        :class="ns.e('input')"
         class="flex-1"
         :model-value="modelValue"
         icon="search"
@@ -23,6 +24,7 @@
         :clearable="clearable"
         @update:model-value="onUpdate"
         @confirm="emit('confirm', $event)"
+        @blur="emit('blur', $event)"
         @clear="emit('clear')"
         @click-input="emit('click-input')"
       />

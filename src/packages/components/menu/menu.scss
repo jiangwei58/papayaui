@@ -1,15 +1,15 @@
 @import '../../styles/vars.scss';
 
 .#{$prefix}-menu {
-  $barHeight: 48px;
+  $barHeight: _var(menu-height, 48px);
 
   position: relative;
   &__bar {
     position: relative;
     display: flex;
     height: $barHeight;
-    background-color: #fff;
-    box-shadow: 0 2px 12px rgb(100 101 102 / 12%);
+    background-color: _var(menu-background, #fff);
+    box-shadow: _var(menu-shadow, 0 2px 12px rgb(100 101 102 / 12%));
   }
 
   &__item {
@@ -25,10 +25,10 @@
     position: relative;
     box-sizing: border-box;
     max-width: 100%;
-    padding: 0 8px;
-    color: _var(color-black);
-    font-size: 15px;
-    line-height: 22px;
+    padding: _var(menu-title-padding, 0 8px);
+    color: _var(menu-title-color, _var(color-black));
+    font-size: _var(menu-title-font-size, 15px);
+    line-height: _var(menu-title-line-height, 22px);
 
     &::after {
       position: absolute;

@@ -20,9 +20,11 @@
     @confirm="onOk"
   >
     <view :class="ns.e('content')">
+      <slot name="before" />
       <Search
         v-if="showSearch"
         v-model="searchText"
+        v-bind="searchProps"
         :class="ns.e('search')"
         @change="debounceSearchChange"
       />
@@ -56,7 +58,7 @@
         <ButtonComponent
           v-if="showView.create"
           :class="ns.e('create-button')"
-          :type="props.multiple ? 'default' : 'primary'"
+          :type="showView.confirm ? 'default' : 'primary'"
           ellipsis
           block
           @click="onCreate"
@@ -138,7 +140,7 @@ const filterOptions = computed(() => {
 
 const showView = computed(() => {
   const create = props.allowCreate && !!searchText.value
-  const confirm = props.multiple
+  const confirm = props.multiple || props.showConfirm
   return {
     footer: create || confirm,
     create,
@@ -225,7 +227,7 @@ const onCreate = async () => {
 }
 
 const onSelect = async (value: OptionValue) => {
-  if (_onSelect(value) && !multiple.value) {
+  if (_onSelect(value) && !showView.value.confirm) {
     onOk()
   }
 }

@@ -238,6 +238,7 @@ const onLoad = (query?: string, pageNumber?: number, pageSize?: number) => {
 | labelKey | 数据标题的字段名 | string |  'label' |
 | valueKey | 数据值的字段名 | string |  'value' |
 | showSearch | 是否显示搜索 | boolean | - |
+| searchProps | 搜索框的props | Partial\<SearchProps\> |  () => ({}) |
 | multiple | 是否多选 | boolean |  false |
 | load | 动态获取下一级节点数据 | (query?:string,pageNumber?:number,pageSize?:number,extra?:Record\<string,unknown\>)<br />=\>Option[]\|Promise\<Option[]\> | - |
 | remote | 是否远程搜索 | boolean |  false |
@@ -245,6 +246,7 @@ const onLoad = (query?: string, pageNumber?: number, pageSize?: number) => {
 | initData | 每次打开重新加载数据 | boolean | - |
 | confirmButtonText | 确认按钮的文案 | string |  '确定' |
 | resetAfterConfirm | 确定后是否重置数据 | boolean | - |
+| showConfirm | 是否显示确认按钮，多选时强制开启 | boolean | - |
 | allowCreate | 是否允许用户创建新条目，需配合 showSearch 使用 | boolean | - |
 | beforeCreate | 创建前处理 | (text:string)=\>Option\|Promise\<Option\> | - |
 | itemClass | 列表项的样式类 | string | - |
@@ -275,6 +277,7 @@ const onLoad = (query?: string, pageNumber?: number, pageSize?: number) => {
 
 | 名称 | 说明 |
 | --- | --- |
+| before | - |
 | default | - |
 
 <!--slot end-->

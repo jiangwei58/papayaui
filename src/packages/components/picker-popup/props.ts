@@ -2,6 +2,7 @@ import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
 import type { UseListProps } from '../../core/useList'
 import { isArray, isNumber, isObject, isString } from '../../utils'
 import { bottomPopupEmits, bottomPopupProps } from '../bottom-popup/props'
+import type { SearchProps } from '../search'
 
 export type Option = any
 export type OptionValue = number | string
@@ -37,6 +38,13 @@ export const pickerPopupProps = {
    * 是否显示搜索
    */
   showSearch: Boolean,
+  /**
+   * 搜索框的props
+   */
+  searchProps: {
+    type: Object as PropType<Partial<SearchProps>>,
+    default: () => ({}),
+  },
   /**
    * 是否多选
    */
@@ -84,6 +92,10 @@ export const pickerPopupProps = {
    * 确定后是否重置数据
    */
   resetAfterConfirm: Boolean,
+  /**
+   * 是否显示确认按钮，多选时强制开启
+   */
+  showConfirm: Boolean,
   /**
    * 是否允许用户创建新条目，需配合 showSearch 使用
    */

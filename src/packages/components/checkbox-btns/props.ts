@@ -56,10 +56,7 @@ export const checkboxButtonsProps = {
   /**
    * 背景色
    */
-  bgColor: {
-    type: String,
-    default: '#F2F3F5',
-  },
+  bgColor: String,
   /**
    * 圆角大小, 值为true时半圆角
    */

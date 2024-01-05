@@ -15,6 +15,10 @@ export const cellProps = {
     default: '',
   },
   /**
+   * 标题下方的描述信息
+   */
+  label: String,
+  /**
    * 标题宽度
    */
   titleWidth: String,

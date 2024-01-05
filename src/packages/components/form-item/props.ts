@@ -4,7 +4,7 @@ import { pick } from '../../utils'
 import { cellProps } from '../cell'
 
 export const formItemProps = {
-  ...pick(cellProps, ['suffix']),
+  ...pick(cellProps, ['titleWidth', 'suffix']),
   /**
    * 校验对应的字段名
    */
@@ -13,6 +13,10 @@ export const formItemProps = {
    * 标签名
    */
   label: String,
+  /**
+   * 描述信息
+   */
+  desc: String,
   /**
    * 校验规则
    */

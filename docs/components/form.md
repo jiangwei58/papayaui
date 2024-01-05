@@ -333,6 +333,7 @@ const onDeleteItem = (index: number) => {
 | --- | ----- | --- | --- |
 | prop | 校验对应的字段名 | string | - |
 | label | 标签名 | string | - |
+| desc | 描述信息 | string | - |
 | rules | 校验规则 | FormRuleItem\|FormRuleItem[] | - |
 | suffix | 后缀内容 | string | - |
 
