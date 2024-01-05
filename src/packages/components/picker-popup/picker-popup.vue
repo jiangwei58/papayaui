@@ -20,9 +20,11 @@
     @confirm="onOk"
   >
     <view :class="ns.e('content')">
+      <slot name="before" />
       <Search
         v-if="showSearch"
         v-model="searchText"
+        v-bind="searchProps"
         :class="ns.e('search')"
         @change="debounceSearchChange"
       />
