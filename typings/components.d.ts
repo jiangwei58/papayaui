@@ -48,6 +48,7 @@ declare module 'vue' {
     PaSidebar: typeof import('../src/packages/components/sidebar/sidebar.vue')['default']
     PaSidebarItem: typeof import('../src/packages/components/sidebar-item/sidebar-item.vue')['default']
     PaSkeleton: typeof import('../src/packages/components/skeleton/skeleton.vue')['default']
+    PaSlider: typeof import('../src/packages/components/slider/slider.vue')['default']
     PaSortLabel: typeof import('../src/packages/components/sort-label/sort-label.vue')['default']
     PaSteps: typeof import('../src/packages/components/steps/steps.vue')['default']
     PaSticky: typeof import('../src/packages/components/sticky/sticky.vue')['default']
