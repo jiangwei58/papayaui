@@ -140,9 +140,9 @@ export interface GetObjectUrlParams {
   /** 操作方法，例如 GET，POST，DELETE，HEAD 等 HTTP 方法，默认为 GET */
   Method?: string
   /** 签名中要签入的请求参数，{key: 'val'} 的格式 */
-  Query?: string
+  Query?: object
   /** 签名中要签入的请求头部，{key: 'val'} 的格式 */
-  Headers?: string
+  Headers?: object
   /** 签名几秒后失效，默认为 900 秒 */
   Expires?: number
 }
@@ -249,6 +249,13 @@ export class PaCOS {
     const cosConfig = await this.getConfig()
     const Key = `${cosConfig.prefix}/${params?.Key ?? filePath.replace(/^.+\/(.+)$/, '$1')}`
     return new Promise<UploadFileResult>((resolve, reject) => {
+      console.log('uploadFile params', {
+        Bucket: cosConfig.bucket,
+        Region: cosConfig.region,
+        FilePath: filePath,
+        ...params,
+        Key,
+      })
       this.cos.uploadFile(
         {
           Bucket: cosConfig.bucket,
@@ -259,6 +266,7 @@ export class PaCOS {
         },
         (err: COSError | null, data: UploadFileResult) => {
           if (err) {
+            console.error(err)
             reject(err)
             return
           }
