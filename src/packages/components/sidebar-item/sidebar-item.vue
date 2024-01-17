@@ -10,7 +10,8 @@
     @tap="onSelect"
   >
     <Badge :show="dot || !isUndefined(badge)" :dot="dot" :content="badge">
-      <text :class="ns.e('text')">{{ title }}</text>
+      <slot v-if="$slots.title" name="title" />
+      <text v-else :class="ns.e('text')">{{ title }}</text>
     </Badge>
   </view>
 </template>
