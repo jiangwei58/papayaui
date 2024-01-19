@@ -24,7 +24,7 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    padding: 0 4px;
+    padding: _var(tabs-item-padding, 0 4px);
     color: _var(tabs-color, _var(color-black-2));
     font-size: _var(tabs-font-size, 14px);
     line-height: _var(tabs-line-height, 20px);
@@ -39,7 +39,7 @@
     width: _var(tabs-line-width, $tabs-line-width);
     height: _var(tabs-line-height, 3px);
     background-color: _var(color-primary);
-    border-radius: 3rpx;
+    border-radius: _var(tabs-line-radius, 3rpx);
   }
 
   &__content {
@@ -61,7 +61,7 @@
   }
   &--scrollable &__item {
     flex: 1 0 auto;
-    padding: 0 12px;
+    padding: _var(tabs-item-scrollable-padding, 0 12px);
   }
 
   &--animated &__content {
