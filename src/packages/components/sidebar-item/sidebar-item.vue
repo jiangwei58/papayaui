@@ -13,6 +13,8 @@
       <slot v-if="$slots.title" name="title" />
       <text v-else :class="ns.e('text')">{{ title }}</text>
     </Badge>
+
+    <slot v-if="$slots.after" name="after" />
   </view>
 </template>
 
