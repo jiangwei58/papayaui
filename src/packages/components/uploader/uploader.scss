@@ -28,8 +28,8 @@
       position: absolute;
       top: 0;
       right: 0;
-      width: _var(uploader-delete-width, 15%);
-      height: _var(uploader-delete-height, 15%);
+      width: _var(uploader-delete-width, 14px);
+      height: _var(uploader-delete-height, 14px);
       background-color: _var(uploader-delete-bg, rgba(0, 0, 0, 0.7));
       border-radius: 0 _var(uploader-preview-radius, 4px) 0 12px;
       font-size: _var(uploader-delete-icon-size, 12px);

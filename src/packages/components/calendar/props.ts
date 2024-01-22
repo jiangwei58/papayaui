@@ -165,7 +165,7 @@ export const calendarWrapperEmits = {
 export const calendarEmits = {
   ...popupEmits,
   confirm: (value: CalendarValue) => isDate(value) || isArray(value),
-  select: (value: CalendarValue) => isDate(value) || isArray(value),
+  select: (value: Date) => isDate(value),
 }
 
 export type CalendarProps = ExtractPropTypes<typeof calendarProps>

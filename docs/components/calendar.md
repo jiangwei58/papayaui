@@ -361,7 +361,7 @@ const onConfirm = (value: Date | Date[]) => {
 | 事件名 | 参数 |
 | --- | --- |
 | confirm | (value: CalendarValue)  |
-| select | (value: CalendarValue)  |
+| select | (value: Date)  |
 | update:show | (value: PopupProps['show'])  |
 | open | ()  |
 | opened | ()  |

@@ -118,6 +118,13 @@
       "type": "form"
     },
     {
+      "path": "packages/components/slider/demo",
+      "style": {
+        "navigationBarTitleText": "Slider 滑块"
+      },
+      "type": "form"
+    },
+    {
       "path": "packages/components/radio/demo",
       "style": {
         "navigationBarTitleText": "Radio 单选框"
