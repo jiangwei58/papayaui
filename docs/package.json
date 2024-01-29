@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "文档网站",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs:dev": "vitepress dev",
@@ -13,6 +14,6 @@
   "license": "ISC",
   "devDependencies": {
     "vite": "^4.2.1",
-    "vitepress": "^1.0.0-alpha.65"
+    "vitepress": "^1.0.0-rc.40"
   }
 }
