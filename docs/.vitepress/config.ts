@@ -51,7 +51,8 @@ export default defineConfig({
         items: [
           { text: '安装', link: '/guide/install.md' },
           { text: '定制主题', link: '/guide/theme.md' },
-          { text: '请求', link: '/guide/request.md' },
+          { text: '网络请求', link: '/guide/request.md' },
+          { text: '工具函数', link: '/guide/util.md' },
         ],
       },
       {

@@ -29,7 +29,8 @@ fetch.request({
 ::: info 请求拦截
 
 > [!TIP]
-> 返回 false 会阻止请求，支持 Promise
+> 返回 false 会阻止请求，支持 Promise。
+> 多个时会顺序执行，后面执行的 config 是前面返回的值
 
 ```ts
 request.interceptor.request.use((config) => {
@@ -53,7 +54,8 @@ request.interceptor.request.use(async (config) => {
 ::: info 响应拦截
 
 > [!TIP]
-> 返回 false 代表请求失败，可以用对应请求的 catch 处理，支持 Promise
+> 返回 false 代表请求失败，可以用对应请求的 catch 处理，支持 Promise。
+> 多个时会顺序执行，response 值是一致的
 
 ```ts
 request.interceptor.response.use((response) => {
