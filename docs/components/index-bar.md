@@ -75,3 +75,16 @@ const indexes = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-index-bar-sidebar-z-index | 2 |
+| --pa-index-bar-index-font-weight | 500 |
+| --pa-index-bar-index-font-size | 10px |
+| --pa-index-bar-index-line-height | 16px |
+
+<!--cssVar end-->
+

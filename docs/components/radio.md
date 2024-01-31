@@ -176,3 +176,19 @@ const options = new Array(3).fill(0).map((_item, index) => ({
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-radio-size | 20px |
+| --pa-radio-display | flex |
+| --pa-radio-margin | 0 |
+| --pa-radio-font-size | 16px |
+| --pa-radio-label-color | var(--pa-color-black) |
+| --pa-radio-checked-color | var(--pa-color-primary) |
+| --pa-radio-checked-color | var(--pa-color-primary) |
+
+<!--cssVar end-->
+

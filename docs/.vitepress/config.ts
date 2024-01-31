@@ -51,14 +51,18 @@ export default defineConfig({
         items: [
           { text: '安装', link: '/guide/install.md' },
           { text: '定制主题', link: '/guide/theme.md' },
+          { text: '网络请求', link: '/guide/request.md' },
+          { text: '工具函数', link: '/guide/util.md' },
         ],
       },
       {
         text: '内置样式',
         items: [
           { text: '介绍', link: '/inbuiltStyle/introduction.md' },
+          { text: 'Color 颜色', link: '/inbuiltStyle/color.md' },
           { text: 'Flex布局', link: '/inbuiltStyle/flex.md' },
           { text: 'Grid布局', link: '/inbuiltStyle/grid.md' },
+          { text: 'Float 浮动', link: '/inbuiltStyle/float.md' },
           { text: 'Margin和Padding', link: '/inbuiltStyle/margin.md' },
           { text: 'Font 字体', link: '/inbuiltStyle/font.md' },
           { text: 'TextAlign 文本对齐', link: '/inbuiltStyle/textAlign.md' },

@@ -5,6 +5,7 @@ import { main as genCodesMain } from './genCodes'
 import { main as genEventMain } from './genEvent'
 import { main as genPropsMain } from './genProps'
 import { main as genSlotMain } from './genSlot'
+import { main as genCssVarMain } from './genCssVar'
 import { main as initMain } from './init'
 
 export interface PluginOptions {
@@ -73,6 +74,8 @@ async function main() {
   await genEventMain(params)
 
   await genSlotMain(params)
+
+  await genCssVarMain(params)
 
   console.log('generate completed')
 }

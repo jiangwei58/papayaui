@@ -83,3 +83,16 @@ const subtract = () => {
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-circle-text-color | var(--pa-color-black) |
+| --pa-circle-font-weight | 500 |
+| --pa-circle-font-size | 14px |
+| --pa-circle-text-line-height | 20px |
+
+<!--cssVar end-->
+

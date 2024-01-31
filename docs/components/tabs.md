@@ -259,3 +259,24 @@ const onChange = (item: CustomTabItem) => {
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-tabs-height | 44px |
+| --pa-tabs-bg-color | #fff |
+| --pa-tabs-item-padding | 0 4px |
+| --pa-tabs-color | var(--pa-color-black-2) |
+| --pa-tabs-font-size | 14px |
+| --pa-tabs-line-height | 20px |
+| --pa-tabs-line-width | 40px |
+| --pa-tabs-line-width | 40px |
+| --pa-tabs-line-height | 3px |
+| --pa-tabs-line-radius | 3rpx |
+| --pa-tabs-color-active | var(--pa-color-black) |
+| --pa-tabs-item-scrollable-padding | 0 12px |
+
+<!--cssVar end-->
+

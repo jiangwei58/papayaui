@@ -14,10 +14,11 @@ export async function main({ targetDirPath, componentDirNames }: PluginOptions) 
         const camelCaseName = getCamelCaseName(componentName, true)
         const markdownText =
           `# ${camelCaseName}\n\n` +
-          `## 示例\n\n${getTag('codes')}\n${getTag('codes', false)}\n\n` +
+          `${getTag('codes')}\n${getTag('codes', false)}\n\n` +
           `## ${camelCaseName} Props\n\n${getTag('props')}\n${getTag('props', false)}\n\n` +
           `## ${camelCaseName} Event\n\n${getTag('event')}\n${getTag('event', false)}\n\n` +
-          `## ${camelCaseName} Slot\n\n${getTag('slot')}\n${getTag('slot', false)}\n\n`
+          `## ${camelCaseName} Slot\n\n${getTag('slot')}\n${getTag('slot', false)}\n\n` +
+          `## 样式变量\n\n${getTag('cssVar')}\n${getTag('cssVar', false)}\n\n`
 
         return writeFile(path, markdownText, { encoding: 'utf-8' }).then(() => {
           console.log(`create ${componentName}.md completed`)

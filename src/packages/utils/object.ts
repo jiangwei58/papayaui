@@ -11,6 +11,18 @@ export const pick = <T extends object, U extends keyof T>(object: T, keys: Array
 }
 
 /**
+ * @description 反向版 pick，这个方法返回忽略属性之外的自身和继承的可枚举属性
+ */
+export const omit = <T extends object, U extends keyof T>(object: T, keys: Array<U>) => {
+  return (Object.keys(object) as U[]).reduce((newObject, key) => {
+    if (!keys.includes(key)) {
+      newObject[key] = object[key]
+    }
+    return newObject
+  }, {} as Pick<T, U>)
+}
+
+/**
  * @description 递归合并 sources 来源对象自身和继承的可枚举属性到 object 目标对象
  */
 export const merge = <T extends object>(...sources: Partial<T>[]) => {

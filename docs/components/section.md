@@ -64,3 +64,17 @@
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-section-padding | 12px 10px |
+| --pa-section-bg-color | transparent |
+| --pa-section-line-color | var(--pa-color-primary) |
+| --pa-section-font-size | 14px |
+| --pa-section-color | var(--pa-color-black) |
+
+<!--cssVar end-->
+

@@ -143,3 +143,13 @@ const onChange = (value: SidebarValue) => {
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-sidebar-width | 80px |
+
+<!--cssVar end-->
+

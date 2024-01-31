@@ -137,3 +137,11 @@ import src from '../../images/demo.jpeg' // 推荐使用图片链接
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+:see_no_evil:
+
+<!--cssVar end-->
+

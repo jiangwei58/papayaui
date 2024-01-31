@@ -176,3 +176,13 @@ const current = ref<number>(0)
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-steps-icon-size | 20px |
+
+<!--cssVar end-->
+

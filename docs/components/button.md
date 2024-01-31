@@ -163,3 +163,42 @@ const onClick = () => {
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-button-height | 44px |
+| --pa-button-line-height | 1.2 |
+| --pa-button-margin | 0 |
+| --pa-button-border-width | 1px |
+| --pa-button-border-color | transparent |
+| --pa-button-border-radius | 5px |
+| --pa-button-color | var(--pa-color-black) |
+| --pa-button-background | #fff |
+| --pa-button-border-color | #ebedf0 |
+| --pa-button-primary-color | #fff |
+| --pa-button-primary-background | var(--pa-color-primary) |
+| --pa-button-primary-border-color | var(--pa-color-primary) |
+| --pa-button-warning-color | #fff |
+| --pa-button-warning-background | var(--pa-color-warning) |
+| --pa-button-warning-border-color | var(--pa-color-warning) |
+| --pa-button-danger-color | #fff |
+| --pa-button-danger-background | var(--pa-color-danger) |
+| --pa-button-danger-border-color | var(--pa-color-danger) |
+| --pa-button-large-height | 50px |
+| --pa-button-large-font-size | 16px |
+| --pa-button-font-size | 14px |
+| --pa-button-padding | 0 15px |
+| --pa-button-small-height | 32px |
+| --pa-button-small-font-size | 12px |
+| --pa-button-padding | 0 8px |
+| --pa-button-mini-height | 24px |
+| --pa-button-mini-font-size | 10px |
+| --pa-button-padding | 0 4px |
+| --pa-button-disabled-background | #c8c9cc |
+| --pa-button-disabled-border-color | #c8c9cc |
+
+<!--cssVar end-->
+

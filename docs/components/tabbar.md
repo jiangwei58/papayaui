@@ -241,3 +241,14 @@ const active = ref(0)
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-tabbar-height | 48px |
+| --pa-tabbar-background-color | #fff |
+
+<!--cssVar end-->
+

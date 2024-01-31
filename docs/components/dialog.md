@@ -287,3 +287,23 @@ const onChooseAvatar = (e: EventDetail<{ avatarUrl: string }>) => {
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-dialog-radius | 16px |
+| --pa-dialog-header-padding-top | 26px |
+| --pa-dialog-font-size | 16px |
+| --pa-dialog-header-font-weight | 500 |
+| --pa-dialog-header-line-height | 24px |
+| --pa-dialog-message-max-height | 60vh |
+| --pa-dialog-message-padding | 26px 24px |
+| --pa-dialog-message-font-size | 14px |
+| --pa-dialog-message-line-height | 20px |
+| --pa-dialog-button-height | 48px |
+| --pa-dialog-round-button-height | 36px |
+
+<!--cssVar end-->
+
