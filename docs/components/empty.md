@@ -62,3 +62,14 @@
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-empty-padding | 32px 0 |
+| --pa-empty-image-size | 160px |
+
+<!--cssVar end-->
+

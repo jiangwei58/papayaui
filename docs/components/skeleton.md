@@ -89,3 +89,13 @@ const loaded = ref(false)
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-skeleton-padding | 0 16px |
+
+<!--cssVar end-->
+

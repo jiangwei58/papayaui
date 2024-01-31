@@ -108,3 +108,16 @@ const onClose = () => {
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-tag-font-size | 12px |
+| --pa-tag-line-height | 16px |
+| --pa-tag-height | auto |
+| --pa-tag-padding | 0 4px |
+
+<!--cssVar end-->
+

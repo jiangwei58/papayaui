@@ -381,3 +381,13 @@ const onConfirm = (value: Date | Date[]) => {
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-calendar-color | var(--pa-color-primary) |
+
+<!--cssVar end-->
+

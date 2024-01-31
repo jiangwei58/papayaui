@@ -135,3 +135,15 @@ const onOpen = () => {
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-popup-max-width | 100% |
+| --pa-popup-background | #fff |
+| --pa-popup-radius | 0 |
+
+<!--cssVar end-->
+

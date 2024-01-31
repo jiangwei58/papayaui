@@ -118,3 +118,15 @@ const reset = () => {
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-count-down-color | var(--pa-color-black) |
+| --pa-count-down-font-size | 14px |
+| --pa-count-down-line-height | 20px |
+
+<!--cssVar end-->
+

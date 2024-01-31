@@ -175,3 +175,17 @@ const value = ref('')
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-input-height | 24px |
+| --pa-input-font-size | 14px |
+| --pa-input-color | var(--pa-color-black) |
+| --pa-input-placeholder-color | var(--pa-color-disabled) |
+| --pa-input-disabled-color | var(--pa-color-disabled) |
+
+<!--cssVar end-->
+

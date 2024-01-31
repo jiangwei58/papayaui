@@ -250,3 +250,25 @@ const fileList = ref([
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-uploader-preview-margin | 0 10px 10px 0 |
+| --pa-uploader-size | 100px |
+| --pa-uploader-size | 100px |
+| --pa-uploader-preview-radius | 4px |
+| --pa-uploader-delete-width | 14px |
+| --pa-uploader-delete-height | 14px |
+| --pa-uploader-delete-bg | rgba(0, 0, 0, 0.7) |
+| --pa-uploader-preview-radius | 4px |
+| --pa-uploader-delete-icon-size | 12px |
+| --pa-uploader-size | 100px |
+| --pa-uploader-size | 100px |
+| --pa-uploader-preview-margin | 0 10px 10px 0 |
+| --pa-uploader-preview-radius | 4px |
+
+<!--cssVar end-->
+

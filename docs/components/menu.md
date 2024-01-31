@@ -183,3 +183,20 @@ const state = reactive({
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-menu-height | 48px |
+| --pa-menu-background | #fff |
+| --pa-menu-shadow | 0 2px 12px rgb(100 101 102 / 12%) |
+| --pa-menu-title-padding | 0 8px |
+| --pa-menu-title-color | var(--pa-color-black) |
+| --pa-menu-title-font-size | 15px |
+| --pa-menu-title-line-height | 22px |
+| --pa-menu-active-color | var(--pa-color-primary) |
+
+<!--cssVar end-->
+

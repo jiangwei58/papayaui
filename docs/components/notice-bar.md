@@ -93,3 +93,20 @@
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-notice-bar-height | 40px |
+| --pa-notice-bar-padding | 0 16px |
+| --pa-notice-bar-color | #ed6a0c |
+| --pa-notice-bar-font-size | 14px |
+| --pa-notice-bar-line-height | 24px |
+| --pa-notice-bar-background | #fffbe8 |
+| --pa-notice-bar-icon-size | 16px |
+| --pa-notice-bar-wrapable-padding | 8px 16px |
+
+<!--cssVar end-->
+

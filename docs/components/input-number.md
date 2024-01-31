@@ -180,3 +180,22 @@ const value = ref(999)
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-input-number-height | 28px |
+| --pa-input-number-bg-color | #f2f3f5 |
+| --pa-input-number-disabled-color | #c8c9cc |
+| --pa-input-number-disabled-bg-color | #f2f3f5 |
+| --pa-input-number-round | 4px |
+| --pa-input-number-width | 32px |
+| --pa-input-number-font-size | 14px |
+| --pa-input-number-color | var(--pa-color-black) |
+| --pa-input-number-placeholder-color | #c8c9cc |
+| --pa-input-number-color | var(--pa-color-primary) |
+
+<!--cssVar end-->
+

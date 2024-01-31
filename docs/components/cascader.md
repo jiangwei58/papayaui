@@ -363,3 +363,11 @@ const onChangeVisible = () => {
 
 <!--slot end-->
 
+## 样式变量
+
+<!--cssVar start-->
+
+:see_no_evil:
+
+<!--cssVar end-->
+
