@@ -227,6 +227,7 @@ const onCreate = async () => {
 }
 
 const onSelect = async (value: OptionValue) => {
+  emit('select', value)
   if (_onSelect(value) && !showView.value.confirm) {
     onOk()
   }

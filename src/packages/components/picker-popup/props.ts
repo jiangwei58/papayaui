@@ -118,6 +118,7 @@ export const pickerPopupEmits = {
   ...bottomPopupEmits,
   'update:modelValue': (value: OptionValue | OptionValue[]) =>
     isString(value) || isNumber(value) || isArray(value),
+  select: (item: Option) => isObject(item),
   change: (item: Option | Option[]) => isObject(item) || isArray(item),
   /**
    * 新增选项
