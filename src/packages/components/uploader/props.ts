@@ -7,6 +7,7 @@ export type FileItem = {
   type?: 'image' | 'video'
   status?: 'ready' | 'uploading' | 'success' | 'error'
   deletable?: boolean
+  thumbUrl?: string
 }
 
 export const uploaderProps = {

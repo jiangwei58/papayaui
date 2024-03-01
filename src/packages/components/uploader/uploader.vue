@@ -6,7 +6,7 @@
         <view v-for="(file, index) in fileList" :key="index" :class="ns.e('preview')">
           <view :class="ns.e('preview-image')" :style="sizeStyle">
             <ImageComponent
-              :src="file.url"
+              :src="file.thumbUrl ?? file.url"
               width="100%"
               height="100%"
               mode="aspectFill"
@@ -133,6 +133,13 @@ const onPreview = (file: FileItem, index: number) => {
   uni.previewMedia({
     sources: props.fileList,
     current: index,
+    fail: () => {
+      // 前面的API可能存在兼容问题，失败时使用降级方法
+      uni.previewImage({
+        urls: props.fileList.map((file) => file.url),
+        current: index,
+      })
+    },
   })
   // #endif
   // #ifndef MP
