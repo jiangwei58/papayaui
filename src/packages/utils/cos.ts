@@ -230,7 +230,7 @@ export class PaCOS {
   }
 
   async getAuthorization(options: any) {
-    if (this.cosAuthorization && this.cosAuthorization.expiredTime < Date.now() / 1000) {
+    if (this.cosAuthorization && this.cosAuthorization.expiredTime > Date.now() / 1000) {
       return this.cosAuthorization
     }
     const authorization = await this.config.getAuthorization(options)
@@ -249,13 +249,6 @@ export class PaCOS {
     const cosConfig = await this.getConfig()
     const Key = `${cosConfig.prefix}/${params?.Key ?? filePath.replace(/^.+\/(.+)$/, '$1')}`
     return new Promise<UploadFileResult>((resolve, reject) => {
-      console.log('uploadFile params', {
-        Bucket: cosConfig.bucket,
-        Region: cosConfig.region,
-        FilePath: filePath,
-        ...params,
-        Key,
-      })
       this.cos.uploadFile(
         {
           Bucket: cosConfig.bucket,
