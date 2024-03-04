@@ -14,6 +14,10 @@
     line-height: $height;
   }
 
+  &__input {
+    text-align: _var(input-text-align, right);
+  }
+
   &__placeholder {
     color: _var(input-placeholder-color, _var(color-disabled));
   }
