@@ -51,3 +51,24 @@ export const throttle = (
     }
   }
 }
+
+/**
+ * 节流（异步）
+ * @description 主要是防止异步函数并发调用，此情况内部只会调用一次，其他调用复用第一次调用的结果
+ * @param fn - 函数
+ */
+export function throttleAsync<T extends (...args: any[]) => any | Promise<any>>(fn: T) {
+  let funcPromise: ReturnType<T> | null = null
+  return async (...innerArgs: any[]): Promise<Awaited<ReturnType<T>>> => {
+    if (!funcPromise) {
+      funcPromise = fn(innerArgs)
+      try {
+        const result = await funcPromise
+        return result as Awaited<ReturnType<T>>
+      } finally {
+        funcPromise = null
+      }
+    }
+    return funcPromise
+  }
+}
