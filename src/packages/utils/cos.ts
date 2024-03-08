@@ -198,6 +198,9 @@ export class PaCOS {
   private cosConfig: COSConfig | null = null
   private cosAuthorization: COSAuthorization | null = null
 
+  private configPromise: ReturnType<PaCOSConfig['getConfig']> | null = null
+  private cosAuthorizationPromise: ReturnType<PaCOSConfig['getAuthorization']> | null = null
+
   constructor(config: PaCOSConfig) {
     this.config = config
 
@@ -224,18 +227,34 @@ export class PaCOS {
 
   async getConfig() {
     if (this.cosConfig) return this.cosConfig
-    const config = await this.config.getConfig()
-    this.cosConfig = config
-    return config
+    if (!this.configPromise) {
+      this.configPromise = this.config.getConfig()
+      try {
+        const config = await this.configPromise
+        this.cosConfig = config
+        return config
+      } finally {
+        this.configPromise = null
+      }
+    }
+    return this.configPromise
   }
 
   async getAuthorization(options: any) {
     if (this.cosAuthorization && this.cosAuthorization.expiredTime > Date.now() / 1000) {
       return this.cosAuthorization
     }
-    const authorization = await this.config.getAuthorization(options)
-    this.cosAuthorization = authorization
-    return authorization
+    if (!this.cosAuthorizationPromise) {
+      this.cosAuthorizationPromise = this.config.getAuthorization(options)
+      try {
+        const authorization = await this.cosAuthorizationPromise
+        this.cosAuthorization = authorization
+        return authorization
+      } finally {
+        this.cosAuthorizationPromise = null
+      }
+    }
+    return this.cosAuthorizationPromise
   }
 
   /**
