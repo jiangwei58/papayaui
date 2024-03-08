@@ -26,6 +26,7 @@
           v-if="showUpload && fileList.length < maxCount"
           :class="ns.e('upload')"
           :style="sizeStyle"
+          :hover-class="ns.em('upload', 'hover')"
           @tap="onChooseFile"
         >
           <IconComponent name="camera" :class="ns.e('upload-icon')" />

@@ -5,11 +5,8 @@
   >
     <view
       v-if="controls"
-      :class="[
-        ns.b('icon'),
-        ns.b('minus'),
-        ns.is('icon-disabled', disabled || safeNumberVal <= min),
-      ]"
+      :class="[ns.b('icon'), ns.b('minus'), ns.is('icon-disabled', minusDisabled)]"
+      :hover-class="minusDisabled ? 'none' : ns.bm('icon', 'hover')"
       @tap="onReduce()"
     >
       <IconComponent name="move" />
@@ -48,11 +45,8 @@
 
     <view
       v-if="controls"
-      :class="[
-        ns.b('icon'),
-        ns.b('plus'),
-        ns.is('icon-disabled', disabled || safeNumberVal >= max),
-      ]"
+      :class="[ns.b('icon'), ns.b('plus'), ns.is('icon-disabled', plusDisabled)]"
+      :hover-class="plusDisabled ? 'none' : ns.bm('icon', 'hover')"
       @tap="onAdd()"
     >
       <IconComponent name="add" />
@@ -97,6 +91,9 @@ const {
   decimalLength,
 })
 
+const minusDisabled = computed(() => props.disabled || safeNumberVal.value <= min.value)
+const plusDisabled = computed(() => props.disabled || safeNumberVal.value >= max.value)
+
 const onUpdate = (value: number) => {
   if (!props.asyncChange) {
     emit('update:modelValue', value, props.name)
@@ -105,13 +102,13 @@ const onUpdate = (value: number) => {
 }
 
 const onAdd = () => {
-  if (props.disabled || safeNumberVal.value >= max.value) return
+  if (plusDisabled.value) return
   const newVal = _onAdd(!props.asyncChange)
   onUpdate(newVal)
 }
 
 const onReduce = () => {
-  if (props.disabled || safeNumberVal.value <= min.value) return
+  if (minusDisabled.value) return
   const newVal = _onReduce(!props.asyncChange)
   onUpdate(newVal)
 }

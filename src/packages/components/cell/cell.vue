@@ -8,6 +8,7 @@
       `items-${center ? 'center' : 'start'}`,
       customClass,
     ]"
+    :hover-class="clickable || isLink ? ns.m('hover') : 'none'"
     @click="onClick"
   >
     <IconComponent v-if="icon" :class="ns.e('icon')" :name="icon" />
