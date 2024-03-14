@@ -1,6 +1,6 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
 import type { UseListProps } from '../../core/useList'
-import { isArray, isNumber, isObject, isString } from '../../utils'
+import { isArray, isNumber, isString, isUndefined } from '../../utils'
 import { bottomPopupEmits, bottomPopupProps } from '../bottom-popup/props'
 import type { SearchProps } from '../search'
 
@@ -118,8 +118,8 @@ export const pickerPopupEmits = {
   ...bottomPopupEmits,
   'update:modelValue': (value: OptionValue | OptionValue[]) =>
     isString(value) || isNumber(value) || isArray(value),
-  select: (item: Option) => isObject(item),
-  change: (item: Option | Option[]) => isObject(item) || isArray(item),
+  select: (item: Option) => !isUndefined(item),
+  change: (item: Option | Option[]) => !isUndefined(item),
   /**
    * 新增选项
    */
