@@ -12,7 +12,6 @@
     :style="customStyle"
     :hover-class="ns.m('hover')"
     :disabled="disabled"
-    :plain="plain"
     :open-type="openType"
     @getphonenumber="emit('getphonenumber', $event)"
     @getuserinfo="emit('getuserinfo', $event)"
