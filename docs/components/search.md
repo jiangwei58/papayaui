@@ -156,6 +156,8 @@ const text = ref<string>('')
 | update:modelValue | (value: string)  |
 | change | (value: string)  |
 | confirm | (value: EventDetail\<{ value: string }\>)  |
+| focus | (value: unknown)  |
+| blur | (value: unknown)  |
 | clear | ()  |
 | click-input | ()  |
 

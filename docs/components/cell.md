@@ -7,6 +7,7 @@
 ```html [template]
 
 <pa-cell title="单元格" value="内容" />
+<pa-cell title="单元格" label="描述信息" value="内容" />
 
 ```
 ## 卡片风格
@@ -15,7 +16,7 @@
 
 <pa-cell-group inset>
   <pa-cell title="单元格" value="内容" />
-  <pa-cell title="单元格" value="内容" />
+  <pa-cell title="单元格" label="描述信息" value="内容" />
 </pa-cell-group>
 
 ```
@@ -65,6 +66,7 @@
   value="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
   center
 />
+<pa-cell title="单元格" label="描述信息" value="内容" center />
 
 ```
 
@@ -146,11 +148,14 @@
 | --pa-cell-color | var(--pa-color-black-3) |
 | --pa-cell-font-size | 14px |
 | --pa-cell-line-height | 24px |
+| --pa-cell-title-flex | 1 |
+| --pa-cell-value-flex | 1 |
 | --pa-cell-title-color | var(--pa-color-black) |
 | --pa-cell-icon-left-margin-left | 4px |
 | --pa-cell-label-color | var(--pa-color-black-3) |
 | --pa-cell-label-font-size | 12px |
 | --pa-cell-label-line-height | 18px |
+| --pa-cell-value-text-align | right |
 | --pa-cell-suffix-margin-left | 5rpx |
 | --pa-cell-suffix-color | inherit |
 | --pa-cell-icon-right-margin-left | 4px |

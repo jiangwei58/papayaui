@@ -139,7 +139,8 @@ const onChange = (value: SidebarValue) => {
 
 | 名称 | 说明 |
 | --- | --- |
-
+| title | - |
+| after | - |
 
 <!--slot end-->
 

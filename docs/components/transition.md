@@ -67,6 +67,7 @@ const onShow = async (newMode: TransitionMode) => {
 | mode | 使用的动画模式 | TransitionMode |  'fade' |
 | duration | 动画的执行时间，单位ms | string \| number |  300 |
 | timingFunction | 使用的动画过渡函数 | CSSProperties['transitionTimingFunction'] |  'ease-out' |
+| destroyOnClose | 关闭是否销毁内部元素 | boolean |  true |
 | customClass | 自定义class | string | - |
 | customStyle | 自定义样式 | CSSProperties | - |
 
