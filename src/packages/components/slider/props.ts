@@ -70,6 +70,12 @@ export const sliderProps = {
     default: false,
   },
   /**
+   * 格式化值
+   */
+  formatter: {
+    type: Function as PropType<(value: number) => number | string>,
+  },
+  /**
    * 进度条颜色
    */
   activeColor: String,

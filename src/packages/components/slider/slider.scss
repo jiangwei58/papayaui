@@ -77,7 +77,7 @@
     height: 100%;
     color: _var(slider-button-tip-font-color, _var(color-black));
     font-size: _var(slider-button-tip-font-size, 12px);
-    transform: translate3d(0, -100%, 0);
+    transform: _var(slider-button-tip-transform, translate3d(0, -100%, 0));
     user-select: none;
   }
 

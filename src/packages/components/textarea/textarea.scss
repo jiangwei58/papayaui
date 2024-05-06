@@ -18,6 +18,7 @@
     color: inherit;
     line-height: inherit;
     height: _var(textarea-height, $line-height * 3);
+    text-align: _var(textarea-text-align, left);
   }
 
   &__placeholder {

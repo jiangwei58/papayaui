@@ -141,6 +141,7 @@ const formData = ref({
 | --pa-textarea-color | var(--pa-color-black) |
 | --pa-textarea-line-height | 24px |
 | --pa-textarea-height | 24px * 3 |
+| --pa-textarea-text-align | left |
 | --pa-textarea-placeholder-color | var(--pa-color-disabled) |
 | --pa-textarea-font-size | 14px |
 | --pa-textarea-line-height | var(--pa-textarea-font-size, 14px) |

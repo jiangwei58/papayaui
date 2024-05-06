@@ -68,7 +68,7 @@ const checked = ref<boolean>(true)
 ```ts [script]
 
 import { ref } from 'vue'
-import { SwitchValue } from '../..'
+import type { SwitchValue } from '../..'
 
 const checked = ref<boolean>(true)
 const loading = ref<boolean>(false)

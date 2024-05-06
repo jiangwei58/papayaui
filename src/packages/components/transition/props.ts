@@ -28,26 +28,45 @@ export type TransitionMode =
   | 'slide-right'
 
 export const transitionProps = {
-  /** 是否展示组件 */
+  /**
+   * 是否展示组件
+   */
   show: Boolean,
-  /** 使用的动画模式 */
+  /**
+   * 使用的动画模式
+   */
   mode: {
     type: String as PropType<TransitionMode>,
     default: 'fade',
   },
-  /** 动画的执行时间，单位ms */
+  /**
+   * 动画的执行时间，单位ms
+   */
   duration: {
     type: [String, Number],
     default: 300,
   },
-  /** 使用的动画过渡函数 */
+  /**
+   * 使用的动画过渡函数
+   */
   timingFunction: {
     type: String as PropType<CSSProperties['transitionTimingFunction']>,
     default: 'ease-out',
   },
-  /** 自定义class */
+  /**
+   * 关闭是否销毁内部元素
+   */
+  destroyOnClose: {
+    type: Boolean,
+    default: true,
+  },
+  /**
+   * 自定义class
+   */
   customClass: String,
-  /** 自定义样式 */
+  /**
+   * 自定义样式
+   */
   customStyle: Object as PropType<CSSProperties>,
 }
 

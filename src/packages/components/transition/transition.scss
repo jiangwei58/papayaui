@@ -1,0 +1,108 @@
+@import '../../styles/vars.scss';
+
+$transform-zoom-scale: scale(0.95);
+
+.#{$prefix} {
+  &-transition {
+    &-hide {
+      display: none !important;
+    }
+  }
+
+  &-fade-enter-active,
+  &-fade-leave-active {
+    transition-property: opacity;
+  }
+
+  &-fade-enter,
+  &-fade-leave-to {
+    opacity: 0;
+  }
+
+  &-fade-zoom-enter,
+  &-fade-zoom-leave-to {
+    transform: $transform-zoom-scale;
+    opacity: 0;
+  }
+
+  &-fade-zoom-enter-active,
+  &-fade-zoom-leave-active {
+    transition-property: transform, opacity;
+  }
+
+  &-fade-down-enter-active,
+  &-fade-down-leave-active,
+  &-fade-left-enter-active,
+  &-fade-left-leave-active,
+  &-fade-right-enter-active,
+  &-fade-right-leave-active,
+  &-fade-up-enter-active,
+  &-fade-up-leave-active {
+    transition-property: opacity, transform;
+  }
+
+  &-fade-up-enter,
+  &-fade-up-leave-to {
+    transform: translate3d(0, 100%, 0);
+    opacity: 0;
+  }
+
+  &-fade-down-enter,
+  &-fade-down-leave-to {
+    transform: translate3d(0, -100%, 0);
+    opacity: 0;
+  }
+
+  &-fade-left-enter,
+  &-fade-left-leave-to {
+    transform: translate3d(-100%, 0, 0);
+    opacity: 0;
+  }
+
+  &-fade-right-enter,
+  &-fade-right-leave-to {
+    transform: translate3d(100%, 0, 0);
+    opacity: 0;
+  }
+
+  &-slide-down-enter-active,
+  &-slide-down-leave-active,
+  &-slide-left-enter-active,
+  &-slide-left-leave-active,
+  &-slide-right-enter-active,
+  &-slide-right-leave-active,
+  &-slide-up-enter-active,
+  &-slide-up-leave-active {
+    transition-property: transform;
+  }
+
+  &-slide-up-enter,
+  &-slide-up-leave-to {
+    transform: translate3d(0, 100%, 0);
+  }
+
+  &-slide-down-enter,
+  &-slide-down-leave-to {
+    transform: translate3d(0, -100%, 0);
+  }
+
+  &-slide-left-enter,
+  &-slide-left-leave-to {
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  &-slide-right-enter,
+  &-slide-right-leave-to {
+    transform: translate3d(100%, 0, 0);
+  }
+
+  &-zoom-enter-active,
+  &-zoom-leave-active {
+    transition-property: transform;
+  }
+
+  &-zoom-enter,
+  &-zoom-leave-to {
+    transform: $transform-zoom-scale;
+  }
+}

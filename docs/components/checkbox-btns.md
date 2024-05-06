@@ -36,7 +36,7 @@ const getData = (count: number) => {
 
 import { ref } from 'vue'
 
-const selectedValue = ref<number>([0, 1])
+const selectedValue = ref<number[]>([0, 1])
 
 const getData = (count: number) => {
   return new Array(count).fill(0).map((_item, index) => {
@@ -115,7 +115,7 @@ const getData = (count: number) => {
 | labelKey | 标题对应字段名 | string |  'label' |
 | valueKey | 内容对应字段名 | string |  'value' |
 | multiple | 是否多选 | boolean |  false |
-| bgColor | 背景色 | string |  '#F2F3F5' |
+| bgColor | 背景色 | string | - |
 | round | 圆角大小, 值为true时半圆角 | boolean \| string |  '4rpx' |
 | inverse | 是否支持反选 | boolean |  true |
 

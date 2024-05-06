@@ -1,5 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import { isString } from '../../utils'
+import { cellProps } from '../cell'
 
 export type InputType = 'text' | 'number'
 export type InputValue = string | number
@@ -52,10 +53,7 @@ export const inputProps = {
   /**
    * 内容对齐方式
    */
-  inputAlign: {
-    type: String as PropType<'left' | 'center' | 'right'>,
-    default: 'right',
-  },
+  inputAlign: cellProps.valueAlign,
   /**
    * 是否禁用
    */

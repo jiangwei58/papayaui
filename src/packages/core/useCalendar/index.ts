@@ -89,7 +89,7 @@ export function useCalendar(props: IncludeRefs<UseCalendarProps>) {
     return new Array(date.daysInMonth()).fill(0).map<DayItem>((_, dayIndex) => {
       const day = date.add(dayIndex, 'day').startOf('day')
       const type = getDayType(day)
-      const dayItem = {
+      const dayItem: DayItem = {
         date: day,
         type,
         text: day.date().toString(),
@@ -149,7 +149,7 @@ export function useCalendar(props: IncludeRefs<UseCalendarProps>) {
           // 最多可选天数
           if (
             typeof state.maxRange !== 'undefined' &&
-            Math.abs(selectedItems.value[0].diff(value, 'day')) > state.maxRange
+            Math.abs(selectedItems.value[0].diff(value, 'day')) >= state.maxRange
           ) {
             value = selectedItems.value[0].add(state.maxRange - 1, 'day')
           }
@@ -173,7 +173,7 @@ export function useCalendar(props: IncludeRefs<UseCalendarProps>) {
       const timestamps = Array.isArray(newVal) ? newVal : [newVal]
       onClear()
       timestamps.forEach((timestamp) => {
-        onSelect(dayjs(timestamp))
+        onSelect(dayjs(timestamp).startOf('day'))
       })
     },
     {

@@ -50,7 +50,9 @@ const customStyle = computed(() => {
   if (props.height && !props.autoHeight) {
     style.height = getUnitValue(props.height)
   }
-  style.textAlign = props.inputAlign
+  if (props.inputAlign !== textareaProps.inputAlign.default) {
+    style.textAlign = props.inputAlign
+  }
   return style
 })
 

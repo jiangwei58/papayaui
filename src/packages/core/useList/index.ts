@@ -23,13 +23,19 @@ export interface UseListData<T> {
   limit?: number
 }
 
+export interface UseListOptions {
+  /** 请求时的key，并发时用于判断是否是最新请求 */
+  key?: string
+}
+
 export type UseListResult<T> = Pick<UseListData<T>, 'list'> &
-  Partial<Pick<UseListData<T>, 'pageNumber' | 'pageSize'>>
+  Partial<Pick<UseListData<T>, 'pageNumber' | 'pageSize'>> &
+  Pick<UseListOptions, 'key'>
 
 export type UseListProps<T> = Partial<Pick<UseListData<T>, 'pageNumber' | 'pageSize' | 'limit'>>
 
 export function useList<T = any>(props: UseListProps<T> = {}) {
-  const state: UseListData<T> = reactive({
+  const state: UseListData<T> & UseListOptions = reactive({
     list: [],
     loadStatus: LoadStatusEnum.LOADMORE,
     pageNumber: 0,
@@ -58,6 +64,7 @@ export function useList<T = any>(props: UseListProps<T> = {}) {
 
   const getListData = async (
     fun: () => UseListResult<T> | Promise<UseListResult<T>>,
+    options: UseListOptions = {},
   ): Promise<void> => {
     if (
       state.loadStatus === LoadStatusEnum.LOADING ||
@@ -70,9 +77,16 @@ export function useList<T = any>(props: UseListProps<T> = {}) {
     if (state.pageNumber === 0) {
       state.list = []
     }
+    if (options.key) {
+      state.key = options.key
+    }
 
     try {
       const res = await fun()
+      // 根据key确定是否是最新请求
+      if (res.key && res.key !== state.key) {
+        return
+      }
       if (typeof res.pageNumber === 'number') {
         state.pageNumber = res.pageNumber
       }

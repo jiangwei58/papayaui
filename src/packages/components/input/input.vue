@@ -5,12 +5,7 @@
   >
     <slot name="prefix" />
 
-    <view
-      v-if="showMask"
-      :class="[ns.e('mask')]"
-      :style="{ textAlign: inputAlign }"
-      @tap.stop="onFocus"
-    >
+    <view v-if="showMask" :class="[ns.e('mask')]" :style="customStyle" @tap.stop="onFocus">
       {{ inputValue }}
     </view>
 
@@ -22,7 +17,7 @@
       :disabled="readonly || disabled"
       :placeholder="placeholder"
       :placeholder-class="ns.e('placeholder')"
-      :style="{ textAlign: inputAlign }"
+      :style="customStyle"
       :maxlength="maxLength"
       :focus="inputSelection.focus"
       :selection-start="inputSelection.start"
@@ -50,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, type CSSProperties } from 'vue'
 import { formatNumericTypeString, minAndMax, useNamespace } from '../../core'
 import type { EventDetail } from '../../types'
 import IconComponent from '../icon/icon.vue'
@@ -70,6 +65,14 @@ const inputValue = computed<string>({
     _value.value = value?.toString() ?? ''
     emit('update:modelValue', _value.value)
   },
+})
+
+const customStyle = computed(() => {
+  const style: CSSProperties = {}
+  if (props.inputAlign !== inputProps.inputAlign.default) {
+    style.textAlign = props.inputAlign
+  }
+  return style
 })
 
 const inputSelection = ref({ focus: false, start: -1, end: -1 })

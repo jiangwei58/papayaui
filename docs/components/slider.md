@@ -161,6 +161,7 @@ const marks = {
 | showTag | 是否显示当前进度标签 | boolean |  false |
 | showRange | 是否显示范围值 | boolean |  false |
 | marks | 是否显示刻度标记 | Record\<number,string\> |  false |
+| formatter | 格式化值 | (value:number)=\>number\|string | - |
 | activeColor | 进度条颜色 | string | - |
 | inactiveColor | 进度条非激活态颜色 | string | - |
 
@@ -207,6 +208,7 @@ const marks = {
 | --pa-slider-button-shadow | 0 1px 2px rgba(0, 0, 0, 0.5 |
 | --pa-slider-button-tip-font-color | var(--pa-color-black) |
 | --pa-slider-button-tip-font-size | 12px |
+| --pa-slider-button-tip-transform | translate3d(0, -100%, 0 |
 | --pa-slider-margin | 0 15px |
 | --pa-slider-disabled-opacity | 0.5 |
 

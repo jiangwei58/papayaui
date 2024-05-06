@@ -264,14 +264,7 @@ const onValidate = async () => {
     >
       <view class="flex">
         <pa-field v-model="item.name" placeholder="请输入" only-input />
-        <pa-button
-          type="danger"
-          width="100"
-          height="50"
-          block
-          :custom-style="{ padding: 0, marginLeft: '10px' }"
-          @click="onDeleteItem(index)"
-        >
+        <pa-button type="danger" size="small" class="ml-10" @click="onDeleteItem(index)">
           删除
         </pa-button>
       </view>

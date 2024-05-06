@@ -1,0 +1,106 @@
+function getClassNames(name) {
+  return {
+    enter: name + '-enter ' + name + '-enter-active',
+    'enter-to': name + '-enter-to ' + name + '-enter-active',
+    leave: name + '-leave ' + name + '-leave-active',
+    'leave-to': name + '-leave-to ' + name + '-leave-active',
+  }
+}
+
+function onOptionsChange(newValue, _oldValue, _ownInstance, instance) {
+  if (typeof newValue === 'undefined') return
+  var state = instance.getState()
+  state.mainClass = newValue.mainClass
+  state.prefix = newValue.prefix
+  state.mode = newValue.mode
+  state.duration = newValue.duration
+}
+
+function onShowChange(newValue, _oldValue, ownInstance, instance) {
+  if (typeof newValue === 'undefined') return
+  var state = instance.getState()
+  var classNames = getClassNames(state.prefix + '-' + state.mode)
+  classNames.hide = state.mainClass + '-hide'
+
+  if (newValue) {
+    enter(ownInstance, instance, classNames)
+  } else {
+    leave(ownInstance, instance, classNames)
+  }
+}
+
+function enter(ownInstance, instance, classNames) {
+  var state = instance.getState()
+  var clearClassNames = [classNames.hide, classNames.leave, classNames['leave-to']]
+  clearClassNames.forEach(function (className) {
+    instance.removeClass(className)
+  })
+  // 进入前
+  ownInstance.callMethod('beforeEnter')
+  instance.setStyle({
+    'transition-duration': '0ms',
+  })
+  // 进入动画
+  ownInstance.callMethod('enter')
+  instance.addClass(classNames.enter)
+
+  instance.requestAnimationFrame(function () {
+    instance.removeClass(classNames.enter)
+    instance.setStyle({
+      'transition-duration': state.duration + 'ms',
+    })
+    // 进入动画中
+    instance.addClass(classNames['enter-to'])
+    state.transitionEnded = false
+
+    state._enterTimer = instance.setTimeout(function () {
+      if (state.transitionEnded) return
+      state.transitionEnded = true
+      state._enterTimer = null
+      // 进入动画完成
+      instance.removeClass(classNames['enter-to'])
+      ownInstance.callMethod('afterEnter')
+    }, state.duration)
+  })
+}
+
+function leave(ownInstance, instance, classNames) {
+  var state = instance.getState()
+  var clearClassNames = [classNames.enter, classNames['enter-to']]
+  clearClassNames.forEach(function (className) {
+    instance.removeClass(className)
+  })
+  if (state._enterTimer) {
+    instance.clearTimeout(state._enterTimer)
+    state._enterTimer = null
+  }
+  // 离开前
+  ownInstance.callMethod('beforeLeave')
+
+  instance.requestAnimationFrame(function () {
+    // 离开动画
+    ownInstance.callMethod('leave')
+    instance.addClass(classNames.leave)
+
+    instance.requestAnimationFrame(function () {
+      instance.removeClass(classNames.leave)
+      // 离开动画中
+      instance.addClass(classNames['leave-to'])
+      state.transitionEnded = false
+
+      instance.setTimeout(function () {
+        if (state.transitionEnded) return
+        state.transitionEnded = true
+        // 离开动画完成
+        instance.removeClass(classNames['leave-to'])
+        instance.addClass(classNames.hide)
+        ownInstance.callMethod('afterLeave')
+      }, state.duration)
+    })
+  })
+}
+
+module.exports = {
+  onOptionsChange: onOptionsChange,
+  onShowChange: onShowChange,
+}

@@ -8,13 +8,14 @@
       `items-${center ? 'center' : 'start'}`,
       customClass,
     ]"
+    :hover-class="clickable || isLink ? ns.m('hover') : 'none'"
     @click="onClick"
   >
     <IconComponent v-if="icon" :class="ns.e('icon')" :name="icon" />
     <view
       v-if="!!title || $slots.title"
       :class="[ns.e('title'), titleClass]"
-      :style="{ flex: titleWidth ? `0 ${getUnitValue(titleWidth)}` : '1' }"
+      :style="ns.style({ flex: titleWidth ? `0 ${getUnitValue(titleWidth)}` : undefined })"
     >
       <slot v-if="$slots.title" name="title" />
       <template v-else>
@@ -22,7 +23,14 @@
         <view v-if="label" :class="ns.e('label')">{{ label }}</view>
       </template>
     </view>
-    <view :class="[ns.e('value'), valueClass]" :style="{ textAlign: valueAlign }">
+    <view
+      :class="[ns.e('value'), valueClass]"
+      :style="
+        ns.style({
+          textAlign: valueAlign !== cellProps.valueAlign.default ? valueAlign : undefined,
+        })
+      "
+    >
       <slot v-if="$slots.default" />
       <text v-else :selectable="selectable" :user-select="selectable">{{ value }}</text>
 

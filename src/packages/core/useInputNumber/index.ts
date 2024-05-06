@@ -98,7 +98,9 @@ export const formatNumericTypeString = (
   decimalLength = 0,
 ) => {
   // 根据整数位和小数位处理值
-  value = String(value).replace(/[^0-9.]/g, '')
+  value = String(value)
+    .replace(/^\./, '')
+    .replace(/[^0-9.]/g, '')
   const valSplit = value.split('.').slice(0, 2)
   valSplit[0] = valSplit[0].slice(0, intLength)
   if (typeof valSplit[1] !== 'undefined' && decimalLength) {

@@ -1,6 +1,6 @@
 <template>
   <view :class="ns.b('container')">
-    <text v-if="showRange" :class="ns.e('min')">{{ min }}</text>
+    <text v-if="showRange" :class="ns.e('min')">{{ formatVal(min) }}</text>
     <view
       :class="[ns.b(), ns.is('show-range', showRange), ns.is('disabled', disabled)]"
       :style="ns.style({ backgroundColor: inactiveColor })"
@@ -34,14 +34,14 @@
             <slot v-if="$slots.button" name="button" />
             <view v-else :class="ns.e('button')">
               <text v-if="showTag" :class="ns.e('button-number')">{{
-                Array.isArray(modelValue) ? modelValue[index] : modelValue
+                Array.isArray(modelValue) ? formatVal(modelValue[index]) : formatVal(modelValue)
               }}</text>
             </view>
           </view>
         </template>
       </view>
     </view>
-    <text v-if="showRange" :class="ns.e('max')">{{ max }}</text>
+    <text v-if="showRange" :class="ns.e('max')">{{ formatVal(max) }}</text>
   </view>
 </template>
 
@@ -84,6 +84,10 @@ export default defineComponent({
       return value <= props.modelValue
     }
 
+    const formatVal = (value: number) => {
+      return typeof props.formatter === 'function' ? props.formatter(value) : value
+    }
+
     const updateModelValue = (value: number | number[]) => {
       isDragging = true
       // TODO: wxs的bug，为0时会变成{}, 要特殊处理
@@ -114,6 +118,7 @@ export default defineComponent({
       wxsProps,
       wxsModelValue,
       isWithinRange,
+      formatVal,
       updateModelValue,
       emitChange,
     }
@@ -161,7 +166,8 @@ function touchmove(event, ownInstance) {
   ] : calcValueByOffsetPercent(offset.right, state.min, state.max, state.step)
   state._modelValue = newModelValue
   // 值没有变化不触发事件
-  if (newModelValue.toString() !== state.modelValue.toString()) {
+  if (newModelValue.toString() !== state.__valueStr) {
+    state.__valueStr = newModelValue.toString()
     ownInstance.callMethod('updateModelValue', newModelValue)
   }
   return false
@@ -177,7 +183,8 @@ function touchend(event, ownInstance) {
 function calcOffsetPercent(offsetX, width, step) {
   if (offsetX <= 0) return 0
   var percentage = Math.floor((offsetX / width) * 100)
-  percentage = percentage - (percentage % step)
+  var remain = percentage % step
+  percentage = percentage - remain + (remain >= step / 2 ? step : 0)
   return percentage
 }
 

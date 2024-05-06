@@ -55,7 +55,7 @@
     background-color: #f7f8fa;
     border-radius: _var(uploader-preview-radius, 4px);
 
-    &:active {
+    &--hover {
       background-color: _var(color-gray);
     }
 

@@ -10,9 +10,11 @@
   font-size: _var(cell-font-size, 14px);
   line-height: _var(cell-line-height, 24px);
   overflow: hidden;
-  &__title,
+  &__title {
+    flex: _var(cell-title-flex, 1);
+  }
   &__value {
-    flex: 1;
+    flex: _var(cell-value-flex, 1);
   }
 
   &__icon,
@@ -34,7 +36,7 @@
   &__value {
     position: relative;
     overflow: hidden;
-    text-align: right;
+    text-align: _var(cell-value-text-align, right);
     vertical-align: middle;
     word-wrap: break-word;
     @include _setVar(textarea-padding, 0);
@@ -51,7 +53,8 @@
     transform: rotate(_var(cell-icon-right-rotate, 0));
   }
 
-  &__icon, &__icon-right {
+  &__icon,
+  &__icon-right {
     font-size: _var(cell-icon-size, 16px);
   }
 
@@ -61,7 +64,7 @@
     text-align: left;
   }
 
-  &--clickable:active {
+  &--hover {
     background-color: _var(color-gray);
   }
 

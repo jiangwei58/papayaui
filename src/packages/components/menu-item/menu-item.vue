@@ -112,7 +112,7 @@ const toggle = (show = !visible.value) => {
     visibleEnded.value = false
   } else {
     // 关闭弹窗的时候如果有展开的节点立即关闭，没有的话等待动画完毕再关闭
-    if (menuProvide.isMenuItemShow && !visible.value) {
+    if (menuProvide.isMenuItemShow.value && !visible.value) {
       visibleEnded.value = true
     }
   }

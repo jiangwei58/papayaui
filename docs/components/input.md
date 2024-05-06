@@ -111,7 +111,7 @@ const value = ref('')
 <pa-cell>
   <pa-input placeholder="后置插槽">
     <template #suffix>
-      <pa-button size="mini" block class="ml-16">获取验证码</pa-button>
+      <pa-button size="mini" class="ml-16">获取验证码</pa-button>
     </template>
   </pa-input>
 </pa-cell>
@@ -184,6 +184,7 @@ const value = ref('')
 | --pa-input-height | 24px |
 | --pa-input-font-size | 14px |
 | --pa-input-color | var(--pa-color-black) |
+| --pa-input-text-align | right |
 | --pa-input-placeholder-color | var(--pa-color-disabled) |
 | --pa-input-disabled-color | var(--pa-color-disabled) |
 
