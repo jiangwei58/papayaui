@@ -130,7 +130,7 @@ const onLoad = (node: CascaderNode<NodeItem>) => {
       resolve(
         new Array(20).fill(0).map((_item, index) => {
           const path = node.props ? `${node.props.value}-${index}` : index.toString()
-          return { label: `节点${path}`, value: path, leaf: node.level === 2 } as NodeItem
+          return { label: `节点${path}`, value: path, leaf: node.level === 9 } as NodeItem
         }),
       )
     }, 300)
@@ -325,6 +325,7 @@ const onChangeVisible = () => {
 | lazySearch | 远程搜索 | (searchText:string)=\>CascaderOption[]\|Promise\<CascaderOption[]\> | - |
 | confirmButtonText | 确定按钮文案，多选时默认数量显示的文案也要自己定义 | string | - |
 | resetButtonText | 重置按钮文案 | string |  '重置' |
+| emptyText | 数据为空时的提示文案 | string |  '无数据' |
 | resetAfterConfirm | 确定后是否重置数据 | boolean | - |
 | showConfirm | 是否显示底部确认重置按钮，多选时强制开启 | boolean | - |
 | allowEmpty | 是否允许空值，只在显示底部操作按钮时有效（通常使用场景是未选中值时允许确认） | boolean | - |

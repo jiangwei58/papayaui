@@ -10,7 +10,7 @@
     <view v-if="loading" :class="ns.e('loading')">
       <loadmore :status="LoadStatusEnum.LOADING" />
     </view>
-    <view v-if="!searchData.length && !loading" :class="ns.e('empty')">无数据</view>
+    <view v-if="!searchData.length && !loading" :class="ns.e('empty')">{{ emptyText }}</view>
     <SafeBottom v-if="safeAreaInsetBottom" />
   </scroll-view>
 </template>

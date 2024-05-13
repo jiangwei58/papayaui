@@ -245,6 +245,7 @@ const onLoad = (query?: string, pageNumber?: number, pageSize?: number) => {
 | pagination | 是否支持分页 | boolean\|UseListProps\<Option\> |  false |
 | initData | 每次打开重新加载数据 | boolean | - |
 | confirmButtonText | 确认按钮的文案 | string |  '确定' |
+| emptyText | 数据为空时的提示文案 | string |  '无数据' |
 | resetAfterConfirm | 确定后是否重置数据 | boolean | - |
 | showConfirm | 是否显示确认按钮，多选时强制开启 | boolean | - |
 | allowCreate | 是否允许用户创建新条目，需配合 showSearch 使用 | boolean | - |
