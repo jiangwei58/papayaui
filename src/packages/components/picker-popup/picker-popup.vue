@@ -44,7 +44,7 @@
         <LoadMore
           v-if="!filterOptions.length || !!pagination"
           :status="loadStatus"
-          :config="{ nomore: isEmpty ? '无数据' : '没有更多了' }"
+          :config="{ nomore: isEmpty ? emptyText : '没有更多了' }"
           :full-page="isEmpty"
           :show-text="!onlyOnePage"
           @next="onScrollNext"

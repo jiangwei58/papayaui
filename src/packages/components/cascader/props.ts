@@ -82,6 +82,13 @@ export const cascaderProps = {
     default: '重置',
   },
   /**
+   * 数据为空时的提示文案
+   */
+  emptyText: {
+    type: String,
+    default: '无数据',
+  },
+  /**
    * 确定后是否重置数据
    */
   resetAfterConfirm: Boolean,
@@ -127,6 +134,10 @@ export const cascaderSearchViewProps = {
     required: true,
   },
   searchText: {
+    type: String,
+    required: true,
+  },
+  emptyText: {
     type: String,
     required: true,
   },

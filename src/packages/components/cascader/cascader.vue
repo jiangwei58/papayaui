@@ -47,7 +47,7 @@
         <view v-if="loading" :class="ns.e('loading')">
           <loadmore :status="LoadStatusEnum.LOADING" />
         </view>
-        <view v-if="!currentData.length && !loading" :class="ns.e('empty')">无数据</view>
+        <view v-if="!currentData.length && !loading" :class="ns.e('empty')">{{ emptyText }}</view>
         <SafeBottom v-if="safeAreaInsetBottom && !localState.hasConfirm" />
       </scroll-view>
       <SearchView
@@ -56,6 +56,7 @@
         :options="treeData"
         :field-names="_fieldNames"
         :search-text="searchText"
+        :empty-text="emptyText"
         :lazy-search="lazySearch"
         :is-selected="isSelected"
         :safe-area-inset-bottom="safeAreaInsetBottom && !localState.hasConfirm"

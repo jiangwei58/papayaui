@@ -6,6 +6,62 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "32312",
+      "name": "refresh",
+      "font_class": "refresh",
+      "unicode": "e6a4",
+      "unicode_decimal": 59044
+    },
+    {
+      "icon_id": "4766469",
+      "name": "file-excel",
+      "font_class": "file-excel",
+      "unicode": "e7b8",
+      "unicode_decimal": 59320
+    },
+    {
+      "icon_id": "4766472",
+      "name": "file-pdf",
+      "font_class": "file-pdf",
+      "unicode": "e7ba",
+      "unicode_decimal": 59322
+    },
+    {
+      "icon_id": "4766474",
+      "name": "file-markdown",
+      "font_class": "file-markdown",
+      "unicode": "e7bb",
+      "unicode_decimal": 59323
+    },
+    {
+      "icon_id": "4766476",
+      "name": "file-ppt",
+      "font_class": "file-ppt",
+      "unicode": "e7bc",
+      "unicode_decimal": 59324
+    },
+    {
+      "icon_id": "4766477",
+      "name": "file-word",
+      "font_class": "file-word",
+      "unicode": "e7bd",
+      "unicode_decimal": 59325
+    },
+    {
+      "icon_id": "4766478",
+      "name": "file",
+      "font_class": "file",
+      "unicode": "e7be",
+      "unicode_decimal": 59326
+    },
+    {
+      "icon_id": "4766479",
+      "name": "file-zip",
+      "font_class": "file-zip",
+      "unicode": "e7bf",
+      "unicode_decimal": 59327
+    },
+    {
       "icon_id": "30421",
       "name": "order",
       "font_class": "order",

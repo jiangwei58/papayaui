@@ -45,6 +45,7 @@ import { ref } from 'vue'
 // 仅做本地示例，使用时请用网络图片
 import img1 from '../../images/demo2.jpeg'
 import img2 from '../../images/demo3.jpg'
+import type { FileItem } from '../..'
 
 let src1 = ''
 let src2 = ''
@@ -58,7 +59,7 @@ src1 = img1
 src2 = img2
 // #endif
 
-const fileList = ref([
+const fileList = ref<FileItem[]>([
   {
     url: src1,
   },
@@ -194,6 +195,50 @@ const fileList = ref([
 ])
 
 ```
+## 其他文件类型
+
+```html [template]
+
+<pa-uploader v-model:file-list="fileList" />
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+import type { FileItem } from '../..'
+
+const fileList = ref<FileItem[]>([
+  {
+    url: '',
+    type: 'word',
+  },
+  {
+    url: '',
+    type: 'excel',
+  },
+  {
+    url: '',
+    type: 'ppt',
+  },
+  {
+    url: '',
+    type: 'pdf',
+  },
+  {
+    url: '',
+    type: 'markdown',
+  },
+  {
+    url: '',
+    type: 'zip',
+  },
+  {
+    url: '',
+    type: 'file',
+  },
+])
+
+```
 
 <!--codes end-->
 
@@ -260,6 +305,9 @@ const fileList = ref([
 | --pa-uploader-size | 100px |
 | --pa-uploader-size | 100px |
 | --pa-uploader-preview-radius | 4px |
+| --pa-uploader-preview-file-size | 36px |
+| --pa-uploader-preview-file-color | var(--pa-color-black-3) |
+| --pa-uploader-preview-file-text-size | 14px |
 | --pa-uploader-delete-width | 14px |
 | --pa-uploader-delete-height | 14px |
 | --pa-uploader-delete-bg | rgba(0, 0, 0, 0.7) |

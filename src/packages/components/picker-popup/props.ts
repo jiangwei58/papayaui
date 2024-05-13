@@ -89,6 +89,13 @@ export const pickerPopupProps = {
     default: '确定',
   },
   /**
+   * 数据为空时的提示文案
+   */
+  emptyText: {
+    type: String,
+    default: '无数据',
+  },
+  /**
    * 确定后是否重置数据
    */
   resetAfterConfirm: Boolean,

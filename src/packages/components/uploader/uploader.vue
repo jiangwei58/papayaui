@@ -4,14 +4,22 @@
       <slot v-if="$slots.default" />
       <template v-else>
         <view v-for="(file, index) in fileList" :key="index" :class="ns.e('preview')">
-          <view :class="ns.e('preview-image')" :style="sizeStyle">
+          <view
+            :class="[ns.e('preview-image'), ns.e(`preview-type-${file.type ?? 'image'}`)]"
+            :style="sizeStyle"
+          >
             <ImageComponent
+              v-if="!file.type || file.type === 'image' || file.type === 'video'"
               :src="file.thumbUrl ?? file.url"
               width="100%"
               height="100%"
               mode="aspectFill"
               @click="onPreview(file, index)"
             />
+            <template v-else>
+              <IconComponent :name="(file.type !== 'file' ? `file-` : '') + file.type" />
+              <text>{{ file.type }}</text>
+            </template>
           </view>
           <view
             v-if="deletable && file.deletable !== false"
@@ -42,7 +50,7 @@ import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
 import IconComponent from '../icon/icon.vue'
 import ImageComponent from '../image/image.vue'
-import type { FileItem } from './props'
+import type { FileItem, FileMediaType } from './props'
 import { uploaderProps, uploaderEmits } from './props'
 
 const ns = useNamespace('uploader')
@@ -129,26 +137,27 @@ const afterRead = (fileList: FileItem[]) => {
 }
 
 const onPreview = (file: FileItem, index: number) => {
-  if (!props.previewFullImage) return
-  // #ifdef MP
-  uni.previewMedia({
-    sources: props.fileList,
-    current: index,
-    fail: () => {
-      // 前面的API可能存在兼容问题，失败时使用降级方法
-      uni.previewImage({
-        urls: props.fileList.map((file) => file.url),
-        current: index,
-      })
-    },
-  })
-  // #endif
-  // #ifndef MP
-  uni.previewImage({
-    urls: props.fileList.map((file) => file.url),
-    current: index,
-  })
-  // #endif
+  if (props.previewFullImage && ['image', 'video'].includes(file.type ?? 'image')) {
+    // #ifdef MP
+    uni.previewMedia({
+      sources: props.fileList.map((file) => ({ url: file.url, type: file.type as FileMediaType })),
+      current: index,
+      fail: () => {
+        // 前面的API可能存在兼容问题，失败时使用降级方法
+        uni.previewImage({
+          urls: props.fileList.map((file) => file.url),
+          current: index,
+        })
+      },
+    })
+    // #endif
+    // #ifndef MP
+    uni.previewImage({
+      urls: props.fileList.map((file) => file.url),
+      current: index,
+    })
+    // #endif
+  }
   emit('click-preview', file, index)
 }
 

@@ -24,6 +24,43 @@
       overflow: hidden;
     }
 
+    &-type-word,
+    &-type-excel,
+    &-type-ppt,
+    &-type-pdf,
+    &-type-markdown,
+    &-type-zip,
+    &-type-file {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #f7f8fa;
+      font-size: _var(uploader-preview-file-size, 36px);
+      color: _var(uploader-preview-file-color, _var(color-black-3));
+      text {
+        font-size: _var(uploader-preview-file-text-size, 14px);
+      }
+    }
+    &-type-word {
+      color: #285898;
+    }
+    &-type-excel {
+      color: #15723b;
+    }
+    &-type-ppt {
+      color: #cd3f2b;
+    }
+    &-type-pdf {
+      color: #b40009;
+    }
+    &-type-markdown {
+      color: #6188bd;
+    }
+    &-type-zip {
+      color: #f2bb3c;
+    }
+
     &-delete {
       position: absolute;
       top: 0;

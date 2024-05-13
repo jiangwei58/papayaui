@@ -1,10 +1,12 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import { isArray, isNumber, isObject } from '../../utils'
 
+export type FileMediaType = 'image' | 'video'
+export type FileOtherType = 'word' | 'excel' | 'ppt' | 'pdf' | 'markdown' | 'zip' | 'file'
 export type FileItem = {
   name?: string
   url: string
-  type?: 'image' | 'video'
+  type?: FileMediaType | FileOtherType
   status?: 'ready' | 'uploading' | 'success' | 'error'
   deletable?: boolean
   thumbUrl?: string
