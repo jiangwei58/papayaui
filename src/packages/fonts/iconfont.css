@@ -1,8 +1,8 @@
 @font-face {
   font-family: "pa-icon"; /* Project id 3668565 */
-  src: url('iconfont.woff2?t=1692684761658') format('woff2'),
-       url('iconfont.woff?t=1692684761658') format('woff'),
-       url('iconfont.ttf?t=1692684761658') format('truetype');
+  src: url('iconfont.woff2?t=1715567017689') format('woff2'),
+       url('iconfont.woff?t=1715567017689') format('woff'),
+       url('iconfont.ttf?t=1715567017689') format('truetype');
 }
 
 .pa-icon {
@@ -11,6 +11,38 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.pa-icon-refresh:before {
+  content: "\e6a4";
+}
+
+.pa-icon-file-excel:before {
+  content: "\e7b8";
+}
+
+.pa-icon-file-pdf:before {
+  content: "\e7ba";
+}
+
+.pa-icon-file-markdown:before {
+  content: "\e7bb";
+}
+
+.pa-icon-file-ppt:before {
+  content: "\e7bc";
+}
+
+.pa-icon-file-word:before {
+  content: "\e7bd";
+}
+
+.pa-icon-file:before {
+  content: "\e7be";
+}
+
+.pa-icon-file-zip:before {
+  content: "\e7bf";
 }
 
 .pa-icon-order:before {

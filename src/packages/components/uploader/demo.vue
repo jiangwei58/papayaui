@@ -27,6 +27,10 @@
     <Demo7 />
   </DocDemoBlock>
 
+  <DocDemoBlock title="其他文件类型" card>
+    <Demo8 />
+  </DocDemoBlock>
+
   <pa-safe-bottom />
 </template>
 
@@ -38,6 +42,7 @@ import Demo4 from '../../demos/uploader/demo-4.vue'
 import Demo5 from '../../demos/uploader/demo-5.vue'
 import Demo6 from '../../demos/uploader/demo-6.vue'
 import Demo7 from '../../demos/uploader/demo-7.vue'
+import Demo8 from '../../demos/uploader/demo-8.vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
 </script>
 
