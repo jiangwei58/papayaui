@@ -10,7 +10,7 @@
     :show="visible"
     :duration="duration"
     :mode="animateMode"
-    :custom-class="`${ns.b()} ${customClass}`"
+    :custom-class="`${ns.b()} ${customClass ?? ''}`"
     :custom-style="transitionStyle"
     @click="onContentClick"
     @before-enter="onBeforeEnter"
