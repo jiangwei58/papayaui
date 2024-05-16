@@ -169,6 +169,7 @@ function enter(ownInstance, instance, classNames) {
     instance.removeClass(className)
   })
   // 进入前
+  state._status = 'enter'
   ownInstance.callMethod('beforeEnter')
   instance.setStyle({
     'transition-duration': '0ms',
@@ -186,10 +187,8 @@ function enter(ownInstance, instance, classNames) {
     instance.addClass(classNames['enter-to'])
     state.transitionEnded = false
 
-    state._enterTimer = instance.setTimeout(function () {
-      if (state.transitionEnded) return
-      state.transitionEnded = true
-      state._enterTimer = null
+    instance.setTimeout(function () {
+      if (state._status !== 'enter') return
       // 进入动画完成
       instance.removeClass(classNames['enter-to'])
       ownInstance.callMethod('afterEnter')
@@ -203,11 +202,8 @@ function leave(ownInstance, instance, classNames) {
   clearClassNames.forEach(function (className) {
     instance.removeClass(className)
   })
-  if (state._enterTimer) {
-    instance.clearTimeout(state._enterTimer)
-    state._enterTimer = null
-  }
   // 离开前
+  state._status = 'leave'
   ownInstance.callMethod('beforeLeave')
 
   instance.requestAnimationFrame(function () {
@@ -222,6 +218,7 @@ function leave(ownInstance, instance, classNames) {
       state.transitionEnded = false
 
       instance.setTimeout(function () {
+        if (state._status !== 'leave') return
         if (state.transitionEnded) return
         state.transitionEnded = true
         // 离开动画完成
