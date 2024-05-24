@@ -1,37 +1,39 @@
 <template>
   <view :class="ns.b()">
     <view :class="[ns.e('wrapper'), ns.is('disabled', disabled)]">
-      <slot v-if="$slots.default" />
-      <template v-else>
-        <view v-for="(file, index) in fileList" :key="index" :class="ns.e('preview')">
-          <view
-            :class="[ns.e('preview-image'), ns.e(`preview-type-${file.type ?? 'image'}`)]"
-            :style="sizeStyle"
-          >
-            <ImageComponent
-              v-if="!file.type || file.type === 'image' || file.type === 'video'"
-              :src="file.thumbUrl ?? file.url"
-              width="100%"
-              height="100%"
-              mode="aspectFill"
-              @click="onPreview(file, index)"
-            />
-            <template v-else>
-              <IconComponent :name="(file.type !== 'file' ? `file-` : '') + file.type" />
-              <text>{{ file.type }}</text>
-            </template>
-          </view>
-          <view
-            v-if="deletable && file.deletable !== false"
-            :class="ns.e('preview-delete')"
-            @tap="onDelete(file, index)"
-          >
-            <IconComponent name="close" :class="ns.e('preview-delete-icon')" />
-          </view>
-        </view>
-
+      <view v-for="(file, index) in fileList" :key="index" :class="ns.e('preview')">
         <view
-          v-if="showUpload && fileList.length < maxCount"
+          :class="[ns.e('preview-image'), ns.e(`preview-type-${file.type ?? 'image'}`)]"
+          :style="sizeStyle"
+          @click="onPreview(file, index)"
+        >
+          <ImageComponent
+            v-if="!file.type || file.type === 'image' || file.type === 'video'"
+            :src="file.thumbUrl ?? file.url"
+            width="100%"
+            height="100%"
+            mode="aspectFill"
+          />
+          <template v-else>
+            <IconComponent :name="(file.type !== 'file' ? `file-` : '') + file.type" />
+            <text>{{ file.type }}</text>
+          </template>
+        </view>
+        <view
+          v-if="deletable && file.deletable !== false"
+          :class="ns.e('preview-delete')"
+          @tap="onDelete(file, index)"
+        >
+          <IconComponent name="close" :class="ns.e('preview-delete-icon')" />
+        </view>
+      </view>
+
+      <template v-if="showUpload && fileList.length < maxCount">
+        <view v-if="$slots.default" :class="ns.e('slot')">
+          <slot />
+        </view>
+        <view
+          v-else
           :class="ns.e('upload')"
           :style="sizeStyle"
           :hover-class="ns.em('upload', 'hover')"
@@ -171,6 +173,13 @@ const onDelete = async (file: FileItem, index: number) => {
     })
     .catch(() => {})
 }
+
+defineExpose({
+  chooseFile: onChooseFile,
+  beforeRead,
+  afterRead,
+  deleteFile: onDelete,
+})
 </script>
 
 <style lang="scss">

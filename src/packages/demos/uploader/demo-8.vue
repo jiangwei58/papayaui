@@ -1,5 +1,5 @@
 <template>
-  <pa-uploader v-model:file-list="fileList" />
+  <pa-uploader v-model:file-list="fileList" @click-preview="onPreview" />
 </template>
 
 <script setup lang="ts">
@@ -36,4 +36,11 @@ const fileList = ref<FileItem[]>([
     type: 'file',
   },
 ])
+
+const onPreview = (file: FileItem, index: number) => {
+  uni.showToast({
+    title: `预览第${index + 1}个文件，是${file.type}文件`,
+    icon: 'none',
+  })
+}
 </script>

@@ -151,9 +151,13 @@ const scrollToMonth = async () => {
     scrollTop.value = 0
     await nextTick()
   }
-  const start = Array.isArray(defaultDate.value) ? defaultDate.value[0] : defaultDate.value
+  const first = Array.isArray(defaultDate.value) ? defaultDate.value[0] : defaultDate.value
+  let firstDate = dayjs(first)
+  if (!firstDate.isValid()) {
+    firstDate = months.value[0].date
+  }
   months.value.forEach((item, index) => {
-    if (item.date.diff(dayjs(start).startOf('month')) === 0) {
+    if (item.date.diff(firstDate.startOf('month')) === 0) {
       monthCurrent.value = index
       scrollTop.value = monthTops.value[index]
     }
