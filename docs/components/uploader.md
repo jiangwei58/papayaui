@@ -45,7 +45,6 @@ import { ref } from 'vue'
 // 仅做本地示例，使用时请用网络图片
 import img1 from '../../images/demo2.jpeg'
 import img2 from '../../images/demo3.jpg'
-import type { FileItem } from '../..'
 
 let src1 = ''
 let src2 = ''
@@ -59,7 +58,7 @@ src1 = img1
 src2 = img2
 // #endif
 
-const fileList = ref<FileItem[]>([
+const fileList = ref([
   {
     url: src1,
   },
@@ -138,17 +137,36 @@ const onOversize = () => {
 
 ```html [template]
 
-<pa-uploader v-model:file-list="fileList">
-  <pa-button type="primary" icon="plus">上传文件</pa-button>
+<pa-uploader ref="uploaderRef" v-model:file-list="fileList">
+  <pa-button type="primary" icon="plus" @click="onCustomUpload">自定义上传</pa-button>
+  <pa-button type="primary" icon="plus" class="ml-20" @click="onUpload">复用原上传</pa-button>
 </pa-uploader>
 
 ```
 ```ts [script]
 
 import { ref } from 'vue'
-import type { FileItem } from '../..'
+import type { UploaderInstance, FileItem } from '../..'
 
+const uploaderRef = ref<UploaderInstance>()
 const fileList = ref<FileItem[]>([])
+
+const onCustomUpload = () => {
+  uni.chooseImage({
+    count: 10,
+    success: ({ tempFilePaths }) => {
+      const paths = Array.isArray(tempFilePaths) ? tempFilePaths : [tempFilePaths]
+      paths.forEach((path) => {
+        fileList.value.push({ url: path })
+      })
+    },
+  })
+}
+
+const onUpload = () => {
+  // 可以调用组件原有的选择文件功能，适用于想在原有基础上补充分支逻辑的情况
+  uploaderRef.value?.chooseFile()
+}
 
 ```
 ## 禁用文件上传
@@ -199,7 +217,7 @@ const fileList = ref([
 
 ```html [template]
 
-<pa-uploader v-model:file-list="fileList" />
+<pa-uploader v-model:file-list="fileList" @click-preview="onPreview" />
 
 ```
 ```ts [script]
@@ -237,6 +255,13 @@ const fileList = ref<FileItem[]>([
     type: 'file',
   },
 ])
+
+const onPreview = (file: FileItem, index: number) => {
+  uni.showToast({
+    title: `预览第${index + 1}个文件，是${file.type}文件`,
+    icon: 'none',
+  })
+}
 
 ```
 
