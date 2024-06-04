@@ -31,6 +31,10 @@
     <Demo8 />
   </DocDemoBlock>
 
+  <DocDemoBlock title="自定义预览" card>
+    <Demo9 />
+  </DocDemoBlock>
+
   <pa-safe-bottom />
 </template>
 
@@ -43,6 +47,7 @@ import Demo5 from '../../demos/uploader/demo-5.vue'
 import Demo6 from '../../demos/uploader/demo-6.vue'
 import Demo7 from '../../demos/uploader/demo-7.vue'
 import Demo8 from '../../demos/uploader/demo-8.vue'
+import Demo9 from '../../demos/uploader/demo-9.vue'
 import DocDemoBlock from '../../doc/doc-demo-block.vue'
 </script>
 
