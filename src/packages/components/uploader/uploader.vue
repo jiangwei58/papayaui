@@ -3,6 +3,7 @@
     <view :class="[ns.e('wrapper'), ns.is('disabled', disabled)]">
       <view v-for="(file, index) in fileList" :key="index" :class="ns.e('preview')">
         <view
+          v-if="!$slots.file"
           :class="[ns.e('preview-image'), ns.e(`preview-type-${file.type ?? 'image'}`)]"
           :style="sizeStyle"
           @click="onPreview(file, index)"
@@ -19,6 +20,8 @@
             <text>{{ file.type }}</text>
           </template>
         </view>
+        <slot v-else name="file" :file="file" :index="index" :style="sizeStyle" />
+
         <view
           v-if="deletable && file.deletable !== false"
           :class="ns.e('preview-delete')"

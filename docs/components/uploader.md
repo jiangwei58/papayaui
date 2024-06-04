@@ -264,6 +264,49 @@ const onPreview = (file: FileItem, index: number) => {
 }
 
 ```
+## 自定义预览
+
+```html [template]
+
+<pa-uploader v-model:file-list="fileList" preview-size="100px">
+  <template #file="{ file, index, style }">
+    <view class="file-item" :style="style">
+      <image :src="file.url" :style="style" />
+      <view class="mark">图片{{ index + 1 }}</view>
+    </view>
+  </template>
+</pa-uploader>
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+// 仅做本地示例，使用时请用网络图片
+import img1 from '../../images/demo2.jpeg'
+import img2 from '../../images/demo3.jpg'
+
+let src1 = ''
+let src2 = ''
+// #ifdef MP
+const fileManager = uni.getFileSystemManager()
+src1 = 'data:image/jpeg;base64,' + fileManager.readFileSync(img1, 'base64')
+src2 = 'data:image/jpeg;base64,' + fileManager.readFileSync(img2, 'base64')
+// #endif
+// #ifdef H5
+src1 = img1
+src2 = img2
+// #endif
+
+const fileList = ref([
+  {
+    url: src1,
+  },
+  {
+    url: src2,
+  },
+])
+
+```
 
 <!--codes end-->
 
