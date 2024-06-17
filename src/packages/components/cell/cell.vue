@@ -31,8 +31,10 @@
         })
       "
     >
-      <slot v-if="$slots.default" />
-      <text v-else :selectable="selectable" :user-select="selectable">{{ value }}</text>
+      <text v-if="!$slots.default" :selectable="selectable" :user-select="selectable">
+        {{ value }}
+      </text>
+      <slot v-else />
 
       <view v-if="errorMessage" :class="ns.e('error-message')">
         {{ errorMessage }}

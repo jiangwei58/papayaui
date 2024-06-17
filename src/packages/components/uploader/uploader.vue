@@ -90,13 +90,10 @@ const onChooseFile = () => {
   })
 }
 
-const beforeValid = <T extends object>(
-  files: T,
-  fun?: (files: T) => boolean | Promise<unknown>,
-) => {
+const beforeValid = <T extends object>(files: T, fn?: (files: T) => boolean | Promise<unknown>) => {
   return new Promise<void>((resolve, reject) => {
-    if (typeof fun === 'function') {
-      const res = fun(files)
+    if (typeof fn === 'function') {
+      const res = fn(files)
       if (res === false) {
         return reject()
       }
