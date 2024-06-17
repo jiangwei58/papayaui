@@ -22,13 +22,12 @@
   top: 0;
   pointer-events: none;
   box-sizing: border-box;
-  -webkit-transform-origin: 0 0;
   transform-origin: 0 0;
   // 多加0.1%，能解决有时候边框缺失的问题
   width: 199.8%;
   height: 199.7%;
-  transform: scale(0.5, 0.5);
-  border: 0 solid #e4e7ed;
+  transform: scale(0.5);
+  border: 0 solid _var(color-border);
   z-index: 2;
 }
 

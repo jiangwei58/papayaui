@@ -1,46 +1,58 @@
 <template>
-  <view :class="[ns.b(), ns.is('show', show)]">
-    <view v-show="show" :class="ns.b('overlay')" @tap="onVisibleChange(false)"></view>
-    <view @tap.stop="onVisibleChange()">
-      <slot></slot>
-    </view>
-    <view
-      v-show="show"
-      class="light bottom"
-      :class="ns.b('wrapper')"
-      :style="{
-        width: getUnitValue(width),
-        opacity: tooltipRect.height && tooltipContentWidth ? '1' : '0',
-        top: tooltipRect.top + tooltipRect.height + 12 + 'px',
-        left: (contentLeft < 0 ? 0 : contentLeft) + 'px',
-        zIndex,
-      }"
-    >
-      <view v-if="text" class="text-28 leading-40" style="max-width: 420rpx">
-        {{ text }}
+  <view v-show="show" :class="ns.e('overlay')" @tap="onClickOverlay"></view>
+  <view :class="ns.e('wrapper')" @tap.stop="onVisibleChange()">
+    <slot name="reference" />
+  </view>
+  <view v-show="show" :class="[ns.e('content'), ns.m(theme), ns.m('bottom')]" :style="contentStyle">
+    <template v-if="!$slots.default">
+      <view
+        v-for="(action, index) in actions"
+        :key="index"
+        :class="[
+          ns.e('action'),
+          ns.is('with-icon', !!action.icon),
+          ns.is('disabled', action.disabled),
+        ]"
+        :style="ns.style({ color: action.color })"
+        :hover-class="ns.m('action-active')"
+        @tap.stop="onSelect(action, index)"
+      >
+        <IconComponent
+          v-if="action.icon"
+          :class="ns.e('action-icon')"
+          :class-prefix="iconPrefix"
+          :name="action.icon"
+        />
+        <view :class="[ns.e('action-text'), { 'border-bottom': index < actions.length - 1 }]">
+          {{ action.text }}
+        </view>
       </view>
-      <slot name="popover-content"></slot>
-      <view :class="ns.b('arrow')" :style="{ transform: `translateX(${arrowLeft}px)` }"></view>
-    </view>
+    </template>
+    <slot v-else />
+
+    <view :class="ns.e('arrow')" :style="{ transform: `translateX(${arrowLeft}px)` }"></view>
   </view>
 </template>
 
 <script lang="ts" setup>
-import { getUnitValue } from '../../utils'
 import { computed, getCurrentInstance, nextTick, ref, watch } from 'vue'
-import useRect from '../../hooks/useRect'
 import useNamespace from '../../core/useNamespace'
-import { popoverProps } from './props'
+import useRect from '../../hooks/useRect'
+import { getUnitValue } from '../../utils'
+import IconComponent from '../icon/icon.vue'
+import type { PopoverAction } from './props'
+import { popoverEmits, popoverProps } from './props'
 
 const ns = useNamespace('popover')
 
-defineProps(popoverProps)
+const props = defineProps(popoverProps)
+const emit = defineEmits(popoverEmits)
 
 const show = ref<boolean>(false)
 
 const instance = getCurrentInstance()
 
-const tooltipRect = ref<Required<UniApp.NodeInfo>>({
+const wrapperRect = ref<Required<UniApp.NodeInfo>>({
   left: 0,
   right: 0,
   top: 0,
@@ -48,31 +60,41 @@ const tooltipRect = ref<Required<UniApp.NodeInfo>>({
   width: 0,
   height: 0,
 } as Required<UniApp.NodeInfo>)
-const tooltipContentWidth = ref<number>(0)
+const contentWidth = ref<number>(0)
 
-const contentLeft = computed<number>(() => {
-  return (
-    (tooltipRect.value.left || 0) -
-    tooltipContentWidth.value / 2 +
-    (tooltipRect.value.width || 0) / 2
-  )
+const contentOffsetLeft = computed<number>(() => {
+  const { left = 0, width = 0 } = wrapperRect.value
+  const offsetLeft = left + width / 2 - contentWidth.value / 2
+  return offsetLeft
 })
 
 const arrowLeft = computed(() => {
-  return contentLeft.value < 0 ? contentLeft.value : 0
+  return contentOffsetLeft.value < 0 ? contentOffsetLeft.value : 0
+})
+
+const contentStyle = computed(() => {
+  return {
+    opacity: wrapperRect.value.height && contentWidth ? '1' : '0',
+    top: getUnitValue(wrapperRect.value.top + wrapperRect.value.height + props.offset[1], 'px'),
+    left: getUnitValue(
+      (contentOffsetLeft.value < 0 ? 0 : contentOffsetLeft.value) + props.offset[0],
+      'px',
+    ),
+    zIndex: props.zIndex,
+  }
 })
 
 watch(show, (newVal) => {
   if (instance && newVal) {
     nextTick(() => {
-      useRect(instance, `.${ns.b()}`).then((res) => {
+      useRect(instance, `.${ns.e('wrapper')}`).then((res) => {
         if (res) {
-          tooltipRect.value = res
+          wrapperRect.value = res
         }
       })
-      useRect(instance, `.${ns.b('wrapper')}`).then((res) => {
+      useRect(instance, `.${ns.e('content')}`).then((res) => {
         if (res) {
-          tooltipContentWidth.value = res.width || 0
+          contentWidth.value = res.width || 0
         }
       })
     })
@@ -81,6 +103,21 @@ watch(show, (newVal) => {
 
 const onVisibleChange = (visible = !show.value) => {
   show.value = visible
+}
+
+const onClickOverlay = () => {
+  emit('click-overlay')
+  if (props.closeOnClickOverlay) {
+    onVisibleChange(false)
+  }
+}
+
+const onSelect = (action: PopoverAction, index: number) => {
+  if (action.disabled) return
+  emit('select', action, index)
+  if (props.closeOnClickAction) {
+    onVisibleChange(false)
+  }
 }
 </script>
 

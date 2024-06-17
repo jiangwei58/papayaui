@@ -1,10 +1,10 @@
 @import '../../styles/vars.scss';
 .#{$prefix}-popover {
-  $arrowSize: 20rpx;
-  $darkColor: #323233;
+  $arrowSize: _var(popover-arrow-size, 6px);
+  $darkColor: #4c4c4c;
+  $lightColor: #fff;
 
-  position: relative;
-  &-overlay {
+  &__overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -12,18 +12,23 @@
     height: 100vh;
     background-color: transparent;
   }
-  &-wrapper {
+
+  &__wrapper {
+    display: inline-block;
+  }
+
+  &__content {
     position: fixed;
     left: 0;
     top: 0;
     margin: 0;
     padding: 0;
-    border-radius: 8rpx;
+    border-radius: _var(popover-radius, 8px);
     opacity: 0.2;
     box-shadow: 0px 0px 5px #dcdee0;
   }
 
-  &-arrow {
+  &__arrow {
     position: absolute;
     width: $arrowSize;
     height: $arrowSize;
@@ -34,29 +39,84 @@
       height: $arrowSize;
       z-index: -1;
       content: ' ';
+      border-width: 1px;
+      border-style: solid;
+      border-bottom-color: transparent !important;
+      border-right-color: transparent !important;
       transform: rotate(45deg);
       box-sizing: border-box;
     }
   }
 
-  &-wrapper.light {
-    color: $darkColor;
-    background: #fff;
-  }
-  &-wrapper.light &-arrow {
-    &::before {
-      border: 1px solid #fff;
-      background: #fff;
-      border-bottom-color: transparent !important;
-      border-right-color: transparent !important;
+  &__action {
+    position: relative;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    width: _var(popover-action-width, 128px);
+    height: _var(popover-action-height, 44px);
+    padding: 0 _var(popover-action-padding, 16px);
+    font-size: _var(popover-action-font-size, 14px);
+    line-height: _var(popover-action-line-height, 20px);
+    cursor: pointer;
+    @include _setVar(color-border, #ebedf0);
+
+    &-icon {
+      margin-right: 8px;
+      font-size: _var(popover-action-icon-size, 20px);
+    }
+
+    &-text {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
     }
   }
 
-  &-wrapper.bottom &-arrow {
-    $top: calc($arrowSize / 2);
+  @each $theme in light, dark {
+    $color: $darkColor;
+    $backgroundColor: $lightColor;
+    @if $theme == dark {
+      $color: $lightColor;
+      $backgroundColor: $darkColor;
+    }
+
+    &--#{$theme} {
+      color: _var(popover-#{$theme}-text-color, $color);
+      background: _var(popover-#{$theme}-background, $backgroundColor);
+    }
+    &--#{$theme} &__arrow {
+      &::before {
+        border-color: _var(popover-#{$theme}-background, $backgroundColor);
+        background: _var(popover-#{$theme}-background, $backgroundColor);
+      }
+    }
+  }
+
+  &--bottom &__arrow {
+    $top: calc($arrowSize / -2);
     left: 50%;
-    top: -$top;
-    margin-left: -$top;
+    top: $top;
+    margin-left: $top;
     border-top-left-radius: 2px;
+  }
+
+  &--with-icon &__action-text {
+    justify-content: flex-start;
+  }
+
+  &--light &--action-active {
+    background-color: #f2f3f5;
+  }
+  &--dark &--action-active {
+    background-color: #444;
+  }
+
+  &--disabled {
+    color: _var(color-disabled);
+    background-color: transparent !important;
+    cursor: not-allowed;
   }
 }

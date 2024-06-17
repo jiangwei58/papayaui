@@ -20,6 +20,7 @@ $color-text-black-3: #969799;
 
 $color-active: $color-gray;
 $color-disabled: #c8c9cc;
+$color-border: #e4e7ed;
 
 $colors: (
   primary: $color-primary,
@@ -35,4 +36,5 @@ $colors: (
   red: $color-danger,
   active: $color-active,
   disabled: $color-disabled,
+  border: $color-border,
 );
