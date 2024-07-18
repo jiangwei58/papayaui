@@ -31,7 +31,7 @@ const ns = useNamespace('cascader-search-view')
 const props = defineProps(cascaderSearchViewProps)
 const emit = defineEmits(cascaderSearchViewEmits)
 
-const { options, fieldNames, searchText, lazySearch } = toRefs(props)
+const { options, fieldNames, searchText, lazySearch, maxLevel } = toRefs(props)
 
 const searchData = ref<SearchNode[]>([])
 const loading = ref<boolean>(false)
@@ -42,7 +42,7 @@ watch(searchText, (newVal) => {
 
 const getFlattenTreeData = (data: CascaderOption[], remote?: boolean, filterStr?: string) => {
   const result: SearchNode[] = []
-  const loop = (list: CascaderOption[], prefixLabel = '', parentPath = '') => {
+  const loop = (list: CascaderOption[], prefixLabel = '', parentPath = '', level = 0) => {
     list.forEach((item, index) => {
       const newItem = item as any
       const node: SearchNode = {
@@ -51,8 +51,8 @@ const getFlattenTreeData = (data: CascaderOption[], remote?: boolean, filterStr?
         __label: `${prefixLabel}${prefixLabel ? '/' : ''}${newItem[fieldNames.value.label]}`,
         __remoteSearch: !!remote,
       }
-      if (newItem[fieldNames.value.children]?.length) {
-        loop(newItem[fieldNames.value.children], node.__label, node.__path)
+      if (newItem[fieldNames.value.children]?.length && level < maxLevel.value - 1) {
+        loop(newItem[fieldNames.value.children], node.__label, node.__path, level + 1)
       } else {
         ;(filterStr ? node.__label.includes(filterStr) : true) && result.push(node)
       }

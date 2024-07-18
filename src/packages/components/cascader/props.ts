@@ -149,6 +149,7 @@ export const cascaderSearchViewProps = {
     required: true,
   },
   safeAreaInsetBottom: Boolean,
+  maxLevel: cascaderProps.maxLevel,
 } as const
 
 export interface SearchNode extends TreeNode<CascaderOption> {
