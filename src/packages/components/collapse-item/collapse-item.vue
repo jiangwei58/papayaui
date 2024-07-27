@@ -2,7 +2,7 @@
   <view
     :class="[
       ns.b(),
-      ns.is('border', _index !== 0 && props.border),
+      ns.is('border', index !== 0 && props.border),
       ns.is('expanded', expanded),
       ns.is('disabled', disabled),
       ns.is('readonly', readonly),
@@ -14,8 +14,8 @@
       :title="title"
       :icon="icon"
       :value="value"
-      :is-link="isLink"
-      :border="props.border"
+      :is-link="isLink && !disabled"
+      :border="border"
       @click.stop="onClick"
     >
       <template #title>
@@ -36,94 +36,100 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch, type CSSProperties, type Ref } from 'vue'
-import { getCurrentInstance, inject, onMounted, ref, toRefs } from 'vue'
-import useNamespace, { defaultNamespace } from '../../core/useNamespace'
+import { computed, getCurrentInstance, onMounted, ref, type CSSProperties } from 'vue'
+import useNamespace from '../../core/useNamespace'
 import { useRect } from '../../hooks'
-import { noop } from '../../utils'
+import { getParentInstance } from '../../utils/component'
 import Cell from '../cell/cell.vue'
-import type { CollapseProvideData } from '../collapse/collapse.vue'
-import type { CollapseItemProps } from './props'
-import { collapseItemProps } from './props'
-
-export interface CollapseItemInstance {
-  index: Ref<number>
-  /** 唯一标识符 */
-  name?: Ref<CollapseItemProps['name']>
-  /** 打开状态 */
-  expanded: Ref<boolean>
-  /** 禁用状态 */
-  disabled: Ref<boolean>
-  /** 切换打开状态 */
-  toggle: (show?: boolean) => void
-}
+import { CollapseExpose, CollapseProps } from '../collapse'
+import { collapseItemProps, CollapseItemValue } from './props'
 
 const ns = useNamespace('collapse-item')
 
-const instance = getCurrentInstance()
-
 const props = defineProps(collapseItemProps)
 
-const { name, disabled } = toRefs(props)
-const _index = ref<number>(0)
+const instance = getCurrentInstance()
+const parent = getParentInstance<CollapseProps, CollapseExpose>(instance, 'collapse')
 
-const collapseProvide = inject<CollapseProvideData>(`${defaultNamespace}-collapse-provide`, {
-  modelValue: ref([]),
-  setChildren: noop,
-  onChildExpand: noop,
-})
-
-const itemId = computed(() => name?.value ?? _index.value)
-const expanded = computed(() => collapseProvide.modelValue.value.includes(itemId.value))
+const index = ref<number | undefined>()
+const name = computed(() => props.name ?? index.value ?? 0)
+const expanded = ref(false)
 const wrapperAnimation = ref<CSSProperties>()
+let animating = false
 
 const getRect = () => {
   if (!instance) return Promise.resolve(null)
   return useRect(instance, `.${ns.e('content')}`)
 }
 
-const toggle = async (show = !expanded.value) => {
+const updateExpanded = () => {
+  if (!parent || animating) return
+
+  const parentVal = parent.exposed.modelValue.value
+  const newExpanded = parent.props.accordion
+    ? parentVal === name.value
+    : (parentVal as CollapseItemValue[]).includes(name.value)
+  if (newExpanded !== expanded.value) {
+    setContentAnimate(newExpanded)
+  }
+  expanded.value = newExpanded
+}
+
+const setContentAnimate = async (show: boolean, duration = 300) => {
   const rect = await getRect()
   if (!rect) return
-  const height = show ? rect.height : 0
 
+  animating = true
   const animation = uni.createAnimation({
+    duration: 0,
     timingFunction: 'ease-in-out',
   })
-  animation.height(height).step({
-    duration: 300,
-  })
+  if (show) {
+    animation.height(rect.height).step({
+      duration,
+    })
+    animation.height('auto').step()
+  } else {
+    animation.height(rect.height).step()
+    // TODO: 这里第二步动画需要延迟执行，否则执行后无效果
+    setTimeout(() => {
+      animation.height(0).step({
+        duration,
+      })
+      wrapperAnimation.value = animation.export()
+    }, 16)
+  }
   wrapperAnimation.value = animation.export()
+  setTimeout(() => {
+    animating = false
+  }, duration)
 }
 
 const onClick = () => {
   if (props.disabled || props.readonly) return
-  collapseProvide.onChildExpand(itemId.value, !expanded.value)
-  toggle()
+  parent?.exposed.onChange(name.value, !expanded.value)
+}
+
+const init = () => {
+  if (parent && parent.exposed) {
+    // 操作父组件的children对象，按照添加顺序记录子组件的index
+    index.value = parent.exposed.children.value.length
+    parent.exposed.children.value.push({
+      name,
+      expanded,
+      updateExpanded,
+    })
+  }
 }
 
 onMounted(() => {
-  // 将自身组件实例添加到父组件
-  if (instance) {
-    collapseProvide.setChildren({
-      index: _index,
-      name,
-      expanded,
-      disabled,
-      toggle,
-    })
-    toggle(expanded.value)
-  }
-})
-
-watch(expanded, (newVal, oldVal) => {
-  if (newVal !== oldVal) {
-    toggle(newVal)
-  }
+  init()
+  updateExpanded()
 })
 
 defineExpose({
-  toggle,
+  updateExpanded,
+  setContentAnimate,
 })
 </script>
 

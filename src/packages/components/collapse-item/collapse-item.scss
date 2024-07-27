@@ -33,7 +33,7 @@
     transform: scaleY(0.5);
   }
 
-  &--expanded &__title {
+  &--expanded > &__title {
     @include _setVar(cell-icon-right-rotate, -90deg);
   }
 
