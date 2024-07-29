@@ -14,6 +14,10 @@
   <DocDemoBlock title="自定义标题内容">
     <Demo4 />
   </DocDemoBlock>
+
+  <DocDemoBlock title="嵌套使用">
+    <Demo5 />
+  </DocDemoBlock>
   <pa-safe-bottom />
 </template>
 
@@ -23,6 +27,7 @@ import Demo1 from '../../demos/collapse/demo-1.vue'
 import Demo2 from '../../demos/collapse/demo-2.vue'
 import Demo3 from '../../demos/collapse/demo-3.vue'
 import Demo4 from '../../demos/collapse/demo-4.vue'
+import Demo5 from '../../demos/collapse/demo-5.vue'
 </script>
 
 <style lang="scss" scoped></style>
