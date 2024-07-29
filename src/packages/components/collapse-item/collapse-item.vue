@@ -41,8 +41,8 @@ import useNamespace from '../../core/useNamespace'
 import { useRect } from '../../hooks'
 import { getParentInstance } from '../../utils/component'
 import Cell from '../cell/cell.vue'
-import { CollapseExpose, CollapseProps } from '../collapse'
-import { collapseItemProps, CollapseItemValue } from './props'
+import type { CollapseExpose, CollapseProps } from '../collapse'
+import { collapseItemProps, type CollapseItemValue } from './props'
 
 const ns = useNamespace('collapse-item')
 
