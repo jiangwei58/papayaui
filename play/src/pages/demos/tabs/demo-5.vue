@@ -7,7 +7,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import type { TabItem } from '../..'
+import type { TabItem } from 'papayaui'
 
 const tabActive = ref<number>(0)
 

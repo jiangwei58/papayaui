@@ -15,7 +15,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import iconsJSON from '../../fonts/iconfont.json'
+import iconsJSON from 'papayaui/fonts/iconfont.json'
 
 const icons = ref<string[]>(iconsJSON.glyphs.map((item) => item.font_class))
 

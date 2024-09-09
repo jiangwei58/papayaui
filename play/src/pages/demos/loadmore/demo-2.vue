@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { LoadStatusEnum } from '../../core/useList'
+import { LoadStatusEnum } from 'papayaui'
 
 const customConfig = { loadmore: '给我上划', loading: '努力加载...', nomore: '真的没有了' }
 </script>

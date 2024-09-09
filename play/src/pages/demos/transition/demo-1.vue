@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { nextTick, ref } from 'vue'
-import type { TransitionMode } from '../..'
+import type { TransitionMode } from 'papayaui'
 
 const show = ref<boolean>(true)
 const mode = ref<TransitionMode>('fade')

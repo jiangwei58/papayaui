@@ -19,7 +19,7 @@
  */
 import dayjs from 'dayjs'
 import { ref } from 'vue'
-import type { CalendarType } from '../../components/calendar'
+import type { CalendarType } from 'papayaui'
 
 const visible = ref<boolean>(false)
 const type = ref<CalendarType>('single')

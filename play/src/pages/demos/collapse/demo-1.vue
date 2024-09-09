@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { CollapseItemValue } from '../..'
+import type { CollapseItemValue } from 'papayaui'
 
 const collapseValue = ref<number[]>([0])
 

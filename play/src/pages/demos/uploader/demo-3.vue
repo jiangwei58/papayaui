@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 // 仅做本地示例，使用时请用网络图片
-import img1 from '../../images/demo2.jpeg'
+import img1 from '../../../images/demo2.jpeg'
 
 let src1 = ''
 // #ifdef MP

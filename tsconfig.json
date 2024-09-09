@@ -1,16 +1,4 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.json",
-  "compilerOptions": {
-    "sourceMap": true,
-    "lib": ["esnext", "dom"],
-    "types": ["@dcloudio/types"],
-    "ignoreDeprecations": "5.0"
-  },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "typings/components.d.ts"
-  ]
+  "files": [],
+  "references": [{ "path": "./tsconfig.base.json" }, { "path": "./tsconfig.play.json" }]
 }

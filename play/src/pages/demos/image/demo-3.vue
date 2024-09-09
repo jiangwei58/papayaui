@@ -6,5 +6,5 @@
 </template>
 
 <script lang="ts" setup>
-import src from '../../images/demo.jpeg' // 推荐使用图片链接
+import src from '../../../images/demo.jpeg' // 推荐使用图片链接
 </script>

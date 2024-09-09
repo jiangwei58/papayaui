@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { DatePickerColumnType } from '../..'
+import type { DatePickerColumnType } from 'papayaui'
 
 const formatter = (type: DatePickerColumnType, value: string) => {
   if (type === 'year') {

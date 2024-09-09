@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { UploaderInstance, FileItem } from '../..'
+import type { UploaderInstance, FileItem } from 'papayaui'
 
 const uploaderRef = ref<UploaderInstance>()
 const fileList = ref<FileItem[]>([])

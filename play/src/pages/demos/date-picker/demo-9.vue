@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { DatePickerColumnType, DatePickerOption } from '../..'
+import type { DatePickerColumnType, DatePickerOption } from 'papayaui'
 
 const filter = (type: DatePickerColumnType, options: DatePickerOption[]) => {
   if (type === 'minute') {

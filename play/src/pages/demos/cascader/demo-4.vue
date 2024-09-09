@@ -16,7 +16,7 @@
  * @description 通过 `fieldNames` 属性可以自定义字段名
  */
 import { ref } from 'vue'
-import type { CascaderNode } from '../..'
+import type { CascaderNode } from 'papayaui'
 
 interface NodeItem {
   name: string

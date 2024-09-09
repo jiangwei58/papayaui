@@ -10,7 +10,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import type { CountToInstance } from '../..'
+import type { CountToInstance } from 'papayaui'
 
 const countToRef = ref<CountToInstance>()
 </script>

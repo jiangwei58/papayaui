@@ -12,7 +12,7 @@ const onConfirm = (date: Date) => {
   const newVal = dayjs(date)
   uni.showToast({
     icon: 'none',
-    title: `当前选中的值是：${newVal.format('YYYY-MM-DD HH:mm:ss')}`,
+    title: `当前选中的值是1：${newVal.format('YYYY-MM-DD HH:mm:ss')}`,
   })
 }
 </script>

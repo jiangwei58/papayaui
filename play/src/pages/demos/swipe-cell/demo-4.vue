@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { SwipeCellOption, SwipeCellProps } from '../..'
+import type { SwipeCellOption, SwipeCellProps } from 'papayaui'
 
 const options: SwipeCellOption[] = [
   {

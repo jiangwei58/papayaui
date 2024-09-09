@@ -5,5 +5,5 @@
 </template>
 
 <script lang="ts" setup>
-import { LoadStatusEnum } from '../../core/useList'
+import { LoadStatusEnum } from 'papayaui'
 </script>

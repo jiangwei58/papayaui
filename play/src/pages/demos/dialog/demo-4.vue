@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { DialogProps } from '../../components/dialog/props'
+import type { DialogProps } from 'papayaui'
 
 const visible = ref(false)
 const dialogProps = ref<Partial<DialogProps>>({})

@@ -29,7 +29,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import type { FormInstance, FormRules } from '../..'
+import type { FormInstance, FormRules } from 'papayaui'
 
 interface FormData {
   name: string

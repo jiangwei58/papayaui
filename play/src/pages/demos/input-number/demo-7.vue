@@ -4,7 +4,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { sleep } from '../../utils'
+import { sleep } from 'papayaui'
 
 const num = ref(1)
 

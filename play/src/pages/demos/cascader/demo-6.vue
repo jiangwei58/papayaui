@@ -15,7 +15,7 @@
  * @description 通过 lazy-search 属性指定远程搜索方法，返回的数据格式为 field-names 数组数据
  */
 import { ref } from 'vue'
-import type { CascaderNode } from '../..'
+import type { CascaderNode } from 'papayaui'
 
 interface NodeItem {
   label: string

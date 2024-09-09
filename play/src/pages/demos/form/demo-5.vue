@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { FormInstance } from '../..'
+import type { FormInstance } from 'papayaui'
 
 const formRef = ref<FormInstance>()
 

@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { ActionType } from '../../components/dialog/props'
+import type { ActionType } from 'papayaui'
 
 const visible = ref(false)
 

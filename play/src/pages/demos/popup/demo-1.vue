@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import type { PopupPosition } from '../..'
+import type { PopupPosition } from 'papayaui'
 
 const visible = ref<boolean>(false)
 const position = ref<PopupPosition>('bottom')

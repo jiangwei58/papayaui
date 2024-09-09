@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { CascaderNode } from '../..'
+import type { CascaderNode } from 'papayaui'
 
 interface NodeItem {
   label: string

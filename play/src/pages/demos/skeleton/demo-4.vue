@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import src from '../../images/demo.jpeg'
+import src from '../../../images/demo.jpeg'
 
 const loaded = ref(false)
 </script>

@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { EventDetail } from '../../types'
+import type { EventDetail } from 'papayaui'
 
 const visible = ref(false)
 const avatarUrl = ref<string>()

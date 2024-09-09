@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { SwitchValue } from '../..'
+import type { SwitchValue } from 'papayaui'
 
 const checked = ref<boolean>(true)
 const loading = ref<boolean>(false)

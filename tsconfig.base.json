@@ -1,0 +1,8 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "lib": ["esnext", "dom"],
+    "ignoreDeprecations": "5.0"
+  },
+  "include": ["packages/papayaui/**/*.ts", "packages/papayaui/**/*.vue"]
+}

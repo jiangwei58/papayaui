@@ -17,7 +17,7 @@
  */
 import dayjs from 'dayjs'
 import { ref } from 'vue'
-import type { DayItem } from '../../core'
+import type { DayItem } from 'papayaui'
 
 const visible = ref<boolean>(false)
 const minDate = dayjs('2023-6-1').valueOf()

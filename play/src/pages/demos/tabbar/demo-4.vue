@@ -8,26 +8,42 @@
   >
     <pa-tabbar-item text="首页" info="6">
       <template #icon="{ active }">
-        <image v-if="active" src="../../images/menu_active.png" style="width: 25px; height: 25px" />
-        <image v-else src="../../images/menu_normal.png" style="width: 25px; height: 25px" />
+        <image
+          v-if="active"
+          src="../../../images/menu_active.png"
+          style="width: 25px; height: 25px"
+        />
+        <image v-else src="../../../images/menu_normal.png" style="width: 25px; height: 25px" />
       </template>
     </pa-tabbar-item>
     <pa-tabbar-item text="订单">
       <template #icon="{ active }">
-        <image v-if="active" src="../../images/cart_active.png" style="width: 25px; height: 25px" />
-        <image v-else src="../../images/cart_normal.png" style="width: 25px; height: 25px" />
+        <image
+          v-if="active"
+          src="../../../images/cart_active.png"
+          style="width: 25px; height: 25px"
+        />
+        <image v-else src="../../../images/cart_normal.png" style="width: 25px; height: 25px" />
       </template>
     </pa-tabbar-item>
     <pa-tabbar-item text="消息">
       <template #icon="{ active }">
-        <image v-if="active" src="../../images/sale_active.png" style="width: 25px; height: 25px" />
-        <image v-else src="../../images/sale_normal.png" style="width: 25px; height: 25px" />
+        <image
+          v-if="active"
+          src="../../../images/sale_active.png"
+          style="width: 25px; height: 25px"
+        />
+        <image v-else src="../../../images/sale_normal.png" style="width: 25px; height: 25px" />
       </template>
     </pa-tabbar-item>
     <pa-tabbar-item text="我的">
       <template #icon="{ active }">
-        <image v-if="active" src="../../images/user_active.png" style="width: 25px; height: 25px" />
-        <image v-else src="../../images/user_normal.png" style="width: 25px; height: 25px" />
+        <image
+          v-if="active"
+          src="../../../images/user_active.png"
+          style="width: 25px; height: 25px"
+        />
+        <image v-else src="../../../images/user_normal.png" style="width: 25px; height: 25px" />
       </template>
     </pa-tabbar-item>
   </pa-tabbar>

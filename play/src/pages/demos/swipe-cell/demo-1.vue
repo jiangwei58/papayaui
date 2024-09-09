@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { SwipeCellOption } from '../..'
+import type { SwipeCellOption } from 'papayaui'
 
 const options: SwipeCellOption[] = [{ text: '删除' }]
 
