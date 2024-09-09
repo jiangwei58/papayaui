@@ -93,7 +93,7 @@ const tabActive = ref<number>(0)
 ```ts [script]
 
 import { ref } from 'vue'
-import type { TabItem } from '../..'
+import type { TabItem } from 'papayaui'
 
 const tabActive = ref<number>(0)
 

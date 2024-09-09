@@ -62,7 +62,7 @@ const onConfirm = (date: Date) => {
 ```
 ```ts [script]
 
-import type { DatePickerColumnType } from '../..'
+import type { DatePickerColumnType } from 'papayaui'
 
 const formatter = (type: DatePickerColumnType, value: string) => {
   if (type === 'year') {
@@ -85,7 +85,7 @@ const formatter = (type: DatePickerColumnType, value: string) => {
 ```
 ```ts [script]
 
-import type { DatePickerColumnType } from '../..'
+import type { DatePickerColumnType } from 'papayaui'
 
 const formatter = (type: DatePickerColumnType, value: string) => {
   if (type === 'year') {
@@ -152,7 +152,7 @@ const onConfirm = (date: Date) => {
 ```
 ```ts [script]
 
-import type { DatePickerColumnType, DatePickerOption } from '../..'
+import type { DatePickerColumnType, DatePickerOption } from 'papayaui'
 
 const filter = (type: DatePickerColumnType, options: DatePickerOption[]) => {
   if (type === 'minute') {

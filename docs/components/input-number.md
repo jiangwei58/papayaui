@@ -82,7 +82,7 @@ const value = ref(1)
 ```ts [script]
 
 import { ref } from 'vue'
-import { sleep } from '../../utils'
+import { sleep } from 'papayaui'
 
 const num = ref(1)
 

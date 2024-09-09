@@ -37,7 +37,7 @@
 ```ts [script]
 
 import { ref } from 'vue'
-import type { CountDownDuration } from '../../components'
+import type { CountDownDuration } from 'papayaui'
 
 const time = 1000 * 60 * 30
 const timeData = ref<CountDownDuration>()

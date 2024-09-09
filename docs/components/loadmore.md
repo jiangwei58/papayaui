@@ -13,7 +13,7 @@
 ```
 ```ts [script]
 
-import { LoadStatusEnum } from '../../core/useList'
+import { LoadStatusEnum } from 'papayaui'
 
 ```
 ## 自定义文案
@@ -27,7 +27,7 @@ import { LoadStatusEnum } from '../../core/useList'
 ```
 ```ts [script]
 
-import { LoadStatusEnum } from '../../core/useList'
+import { LoadStatusEnum } from 'papayaui'
 
 const customConfig = { loadmore: '给我上划', loading: '努力加载...', nomore: '真的没有了' }
 
@@ -42,7 +42,7 @@ const customConfig = { loadmore: '给我上划', loading: '努力加载...', nom
 ```
 ```ts [script]
 
-import { LoadStatusEnum } from '../../core/useList'
+import { LoadStatusEnum } from 'papayaui'
 
 ```
 

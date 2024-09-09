@@ -11,7 +11,7 @@
 ```
 ```ts [script]
 
-import src from '../../images/demo.jpeg' // 推荐使用图片链接
+import src from '../../../images/demo.jpeg' // 推荐使用图片链接
 
 ```
 ## 填充模式
@@ -28,7 +28,7 @@ import src from '../../images/demo.jpeg' // 推荐使用图片链接
 ```
 ```ts [script]
 
-import src from '../../images/demo.jpeg' // 推荐使用图片链接
+import src from '../../../images/demo.jpeg' // 推荐使用图片链接
 
 const modeList = [
   'scaleToFill',
@@ -53,7 +53,7 @@ const modeList = [
 ```
 ```ts [script]
 
-import src from '../../images/demo.jpeg' // 推荐使用图片链接
+import src from '../../../images/demo.jpeg' // 推荐使用图片链接
 
 ```
 ## 加载中

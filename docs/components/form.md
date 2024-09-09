@@ -26,7 +26,7 @@
 ```ts [script]
 
 import { reactive, ref } from 'vue'
-import type { FormInstance, FormRules } from '../..'
+import type { FormInstance, FormRules } from 'papayaui'
 
 interface FormData {
   name: string
@@ -89,7 +89,7 @@ const onValidate = async () => {
 ```ts [script]
 
 import { reactive, ref } from 'vue'
-import type { FormInstance, FormRules } from '../..'
+import type { FormInstance, FormRules } from 'papayaui'
 
 interface FormData {
   name: string
@@ -146,7 +146,7 @@ const onValidate = async () => {
  * @description 可以用 validateField 方法来校验单个字段，参数为 prop 值，通常在需要及时反馈校验状态的情况使用
  */
 import { reactive, ref } from 'vue'
-import type { FormInstance, FormRules } from '../..'
+import type { FormInstance, FormRules } from 'papayaui'
 
 interface FormData {
   name: string
@@ -212,7 +212,7 @@ const onValidate = async () => {
  * @description 可以用 validateField 方法来校验单个字段，参数为 prop 值，通常在需要及时反馈校验状态的情况使用
  */
 import { reactive, ref } from 'vue'
-import type { FormInstance, FormRules } from '../..'
+import type { FormInstance, FormRules } from 'papayaui'
 
 interface FormData {
   object: {
@@ -281,7 +281,7 @@ const onValidate = async () => {
 ```ts [script]
 
 import { ref } from 'vue'
-import type { FormInstance } from '../..'
+import type { FormInstance } from 'papayaui'
 
 const formRef = ref<FormInstance>()
 
