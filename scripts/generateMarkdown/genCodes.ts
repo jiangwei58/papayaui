@@ -82,15 +82,10 @@ function code2Markdown(codes: CodeItem[]) {
   return text
 }
 
-export async function main({
-  sourceDirPath,
-  targetDirPath,
-  demoDirPath,
-  componentDirNames,
-}: PluginOptions) {
+export async function main({ targetDirPath, demoDirPath, componentDirNames }: PluginOptions) {
   try {
     for (const componentDirName of componentDirNames) {
-      const filePath = resolve(sourceDirPath, `./${componentDirName}/demo.vue`)
+      const filePath = resolve(demoDirPath, `./${componentDirName}/index.vue`)
       const fileCode = await readFile(filePath, { encoding: 'utf-8' }).catch(() => null)
       if (!fileCode) continue
 

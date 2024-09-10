@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import { useData, useRoute } from 'vitepress'
 import { onMounted, ref, watch } from 'vue'
-import pageConfig from '../../../src/pages.json'
+import pageConfig from '../../../play/src/pages.json'
 
 const simulatorRef = ref<HTMLIFrameElement>()
 
@@ -26,7 +26,7 @@ const hideScroller = (el: HTMLIFrameElement) => {
 }
 
 const updatePath = () => {
-  const name = route.data.relativePath.replace('.md', '')
+  const [_type, name] = route.data.relativePath.replace('.md', '').split('/')
   const demoPath = pageConfig.pages.find((page) => page.path.includes(name))
   if (demoPath) {
     src.value = `${baseUrl}#/${demoPath.path}`

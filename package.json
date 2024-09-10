@@ -11,13 +11,8 @@
     "gen:docs": "tsx scripts/generateMarkdown/index.ts",
     "build:package": "bash internal/build.sh",
     "build:docs": "bash internal/build-docs.sh",
-    "build:h5-simulator": "uni build --base=/papayaui/",
-    "release": "bash internal/publish.sh",
-    "test": "vitest",
-    "type-check": "vue-tsc --noEmit"
-  },
-  "dependencies": {
-    "vue": "^3.2.45"
+    "build:h5-simulator": "pnpm -C play build:h5-simulator",
+    "release": "bash internal/publish.sh"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.4.8",
@@ -35,6 +30,7 @@
     "prettier": "^2.5.1",
     "ts-morph": "^19.0.0",
     "tsx": "^3.12.7",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "vue": "^3.4.21"
   }
 }

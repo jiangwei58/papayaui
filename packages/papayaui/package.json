@@ -16,11 +16,14 @@
     "vue-tsc": "^1.0.24"
   },
   "peerDependencies": {
-    "@dcloudio/uni-app": "3.0.0-4020420240722002",
-    "vue": "^3.2.45"
+    "vue": "^3.4.21",
+    "sass": "^1.49.10"
   },
   "keywords": [
-    "uniapp"
+    "uniapp",
+    "papaya",
+    "ui",
+    "vue"
   ],
   "repository": {
     "type": "git",

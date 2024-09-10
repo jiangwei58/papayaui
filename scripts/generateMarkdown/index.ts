@@ -33,9 +33,9 @@ export function getCamelCaseName(name: string, firstUpperCase = false) {
 
 async function main() {
   const __filename = fileURLToPath(import.meta.url)
-  const directoryPath = path.resolve(__filename, '../../../src/packages/components')
+  const directoryPath = path.resolve(__filename, '../../../packages/papayaui/components')
   const docDirectoryPath = path.resolve(__filename, '../../../docs/components')
-  const demoDirectoryPath = path.resolve(__filename, '../../../src/packages/demos')
+  const demoDirectoryPath = path.resolve(__filename, '../../../play/src/pages/demos')
 
   const files = await readdir(directoryPath)
   const relevanceMap = {

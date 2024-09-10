@@ -12,7 +12,7 @@ const main = () => {
 
   const writeFilePath = path.resolve(
     url.fileURLToPath(import.meta.url),
-    '../../src/packages/global.d.ts',
+    '../../packages/papayaui/global.d.ts',
   )
   fs.writeFileSync(writeFilePath, dataStr)
   console.log(`created ${writeFilePath} completed`)
