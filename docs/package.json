@@ -1,9 +1,6 @@
 {
-  "name": "doc",
-  "version": "1.0.0",
-  "description": "文档网站",
-  "main": "index.js",
-  "type": "module",
+  "name": "@papayaui/docs",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs:dev": "vitepress dev",
