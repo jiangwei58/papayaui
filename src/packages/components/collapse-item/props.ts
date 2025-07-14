@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, PropType, Ref } from 'vue'
 
 export const collapseItemProps = {
   /**
@@ -50,3 +50,12 @@ export const collapseItemProps = {
 export type CollapseItemValue = string | number
 
 export type CollapseItemProps = ExtractPropTypes<typeof collapseItemProps>
+
+export interface CollapseItemInstance {
+  /** 唯一标识符 */
+  name: Ref<NonNullable<CollapseItemProps['name']>>
+  /** 打开状态 */
+  expanded: Ref<boolean>
+  /** 切换打开状态 */
+  updateExpanded: () => void
+}

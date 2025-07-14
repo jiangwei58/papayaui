@@ -57,6 +57,7 @@
         :field-names="_fieldNames"
         :search-text="searchText"
         :empty-text="emptyText"
+        :max-level="maxLevel"
         :lazy-search="lazySearch"
         :is-selected="isSelected"
         :safe-area-inset-bottom="safeAreaInsetBottom && !localState.hasConfirm"

@@ -37,7 +37,7 @@
           :use-slot="!!$slots.default"
           :custom-class="itemClass"
           :custom-style="itemStyle"
-          @click="onSelect(item[valueKey])"
+          @click="onSelect(item[valueKey], item)"
         >
           <slot v-if="$slots.default" :item="item" :isCreate="!!item.__isCreate" />
         </ListItem>
@@ -221,13 +221,13 @@ const onCreate = async () => {
   }
   newOption.__isCreate = true
   createOptions.value.unshift(newOption)
-  onSelect(searchText.value)
+  onSelect(searchText.value, newOption)
   emit('create', searchText.value)
   onClearSearch()
 }
 
-const onSelect = async (value: OptionValue) => {
-  emit('select', value)
+const onSelect = async (value: OptionValue, item: Option) => {
+  emit('select', value, item)
   if (_onSelect(value) && !showView.value.confirm) {
     onOk()
   }

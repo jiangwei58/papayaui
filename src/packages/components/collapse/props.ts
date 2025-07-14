@@ -1,6 +1,6 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, PropType, Ref } from 'vue'
 import { isUndefined } from '../../utils'
-import type { CollapseItemValue } from '../collapse-item/props'
+import type { CollapseItemInstance, CollapseItemValue } from '../collapse-item/props'
 
 export const collapseProps = {
   /**
@@ -29,3 +29,9 @@ export const collapseEmits = {
 
 export type CollapseProps = ExtractPropTypes<typeof collapseProps>
 export type CollapseEmits = typeof collapseEmits
+
+export type CollapseExpose = {
+  children: Ref<CollapseItemInstance[]>
+  modelValue: Ref<CollapseItemValue | CollapseItemValue[] | undefined>
+  onChange: (name: CollapseItemValue, expanded: boolean) => void
+}

@@ -125,7 +125,7 @@ export const pickerPopupEmits = {
   ...bottomPopupEmits,
   'update:modelValue': (value: OptionValue | OptionValue[]) =>
     isString(value) || isNumber(value) || isArray(value),
-  select: (item: Option) => !isUndefined(item),
+  select: (value: OptionValue, _item: Option) => !isUndefined(value),
   change: (item: Option | Option[]) => !isUndefined(item),
   /**
    * 新增选项
