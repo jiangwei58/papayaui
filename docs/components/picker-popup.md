@@ -262,7 +262,7 @@ const onLoad = (query?: string, pageNumber?: number, pageSize?: number) => {
 | 事件名 | 参数 |
 | --- | --- |
 | update:modelValue | (value: OptionValue \| OptionValue[])  |
-| select | (item: Option)  |
+| select | (value: OptionValue, item: Option)  |
 | change | (item: Option \| Option[])  |
 | create | (text: string) |
 | update:show | (value: PopupProps['show'])  |
