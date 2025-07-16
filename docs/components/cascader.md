@@ -360,7 +360,9 @@ const onChangeVisible = () => {
 
 | 名称 | 说明 |
 | --- | --- |
-| default | - |
+| before | 标题后，内容区前插槽 |
+| after-search | 搜索框后插槽 |
+| default | 列表项插槽 |
 
 <!--slot end-->
 
