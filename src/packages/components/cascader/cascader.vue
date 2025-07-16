@@ -18,7 +18,9 @@
     @closed="emit('closed')"
   >
     <view :class="ns.b('content')">
+      <slot name="before" />
       <Search v-if="showSearch" v-model="searchText" v-bind="searchProps" :class="ns.b('search')" />
+      <slot name="after-search" />
       <view v-if="show" :class="ns.b('tab')">
         <Tabs v-model="tabActive" :tabs="tabList" label-key="name" scrollable shrink />
       </view>
