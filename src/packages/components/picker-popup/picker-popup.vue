@@ -228,7 +228,19 @@ const onCreate = async () => {
 
 const onSelect = async (value: OptionValue, item: Option) => {
   emit('select', value, item)
-  if (_onSelect(value) && !showView.value.confirm) {
+
+  // 多选或者开启确认按钮时，只设置选中数据
+  if (showView.value.confirm) {
+    _onSelect(value)
+    return
+  }
+  // 单选时，选中已选中的节点时直接关闭弹窗
+  if (isSelected(value)) {
+    onClose()
+    return
+  }
+  // 单选时，节点选择成功时修改数据并关闭弹窗
+  if (_onSelect(value)) {
     onOk()
   }
 }
