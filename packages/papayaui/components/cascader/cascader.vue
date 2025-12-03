@@ -18,7 +18,9 @@
     @closed="emit('closed')"
   >
     <view :class="ns.b('content')">
+      <slot name="before" />
       <Search v-if="showSearch" v-model="searchText" v-bind="searchProps" :class="ns.b('search')" />
+      <slot name="after-search" />
       <view v-if="show" :class="ns.b('tab')">
         <Tabs v-model="tabActive" :tabs="tabList" label-key="name" scrollable shrink />
       </view>
@@ -250,7 +252,18 @@ const onSelectSearch = (item: SearchNode) => {
 }
 
 const onSelectFinish = (item: TreeNode<CascaderOption>) => {
-  if (setSelect(item) && !localState.value.hasConfirm) {
+  // 多选或者开启确认按钮时，只设置选中数据
+  if (localState.value.hasConfirm) {
+    setSelect(item)
+    return
+  }
+  // 单选时，选中已选中的节点时直接关闭弹窗
+  if (isSelected(item[_fieldNames.value.value])) {
+    onClose()
+    return
+  }
+  // 单选时，节点选择成功时修改数据并关闭弹窗
+  if (setSelect(item)) {
     onConfirm()
   }
 }

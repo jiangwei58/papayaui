@@ -37,7 +37,7 @@
           :use-slot="!!$slots.default"
           :custom-class="itemClass"
           :custom-style="itemStyle"
-          @click="onSelect(item[valueKey])"
+          @click="onSelect(item[valueKey], item)"
         >
           <slot v-if="$slots.default" :item="item" :isCreate="!!item.__isCreate" />
         </ListItem>
@@ -221,14 +221,26 @@ const onCreate = async () => {
   }
   newOption.__isCreate = true
   createOptions.value.unshift(newOption)
-  onSelect(searchText.value)
+  onSelect(searchText.value, newOption)
   emit('create', searchText.value)
   onClearSearch()
 }
 
-const onSelect = async (value: OptionValue) => {
-  emit('select', value)
-  if (_onSelect(value) && !showView.value.confirm) {
+const onSelect = async (value: OptionValue, item: Option) => {
+  emit('select', value, item)
+
+  // 多选或者开启确认按钮时，只设置选中数据
+  if (showView.value.confirm) {
+    _onSelect(value)
+    return
+  }
+  // 单选时，选中已选中的节点时直接关闭弹窗
+  if (isSelected(value)) {
+    onClose()
+    return
+  }
+  // 单选时，节点选择成功时修改数据并关闭弹窗
+  if (_onSelect(value)) {
     onOk()
   }
 }
