@@ -8,7 +8,7 @@
  * -------------------------------------------------------------------------- */
 
 :root {
-  --vp-layout-max-width: 1920px;
+  --vp-layout-max-width: 100vw;
   --vp-c-brand: #646cff;
   --vp-c-brand-light: #747bff;
   --vp-c-brand-lighter: #9499ff;
@@ -96,6 +96,7 @@
   background-color: var(--vp-c-mute-darker);
   border-radius: 6px;
 }
+
 .pa-layout .content {
   padding-left: 0;
   padding-right: 0;

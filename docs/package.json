@@ -1,6 +1,7 @@
 {
   "name": "@papayaui/docs",
   "private": true,
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs:dev": "vitepress dev",
@@ -13,7 +14,7 @@
     "papayaui": "workspace:*"
   },
   "devDependencies": {
-    "vite": "^4.2.1",
-    "vitepress": "^1.0.0-rc.40"
+    "vite": "^5.2.8",
+    "vitepress": "^1.6.0"
   }
 }
