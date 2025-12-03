@@ -1,4 +1,6 @@
-import type CountDown from './count-down.vue'
+import CountDown from './count-down.vue'
 
 export type CountDownInstance = InstanceType<typeof CountDown>
 export * from './props'
+
+export default CountDown

@@ -1,4 +1,6 @@
-import type Slider from './slider.vue'
+import Slider from './slider.vue'
 
 export type SliderInstance = InstanceType<typeof Slider>
 export * from './props'
+
+export default Slider

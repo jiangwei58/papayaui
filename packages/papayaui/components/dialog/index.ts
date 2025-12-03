@@ -1,4 +1,6 @@
-import type Dialog from './dialog.vue'
+import Dialog from './dialog.vue'
 
 export type DialogInstance = InstanceType<typeof Dialog>
 export * from './props'
+
+export default Dialog

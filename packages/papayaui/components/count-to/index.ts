@@ -1,4 +1,6 @@
-import type CountTo from './count-to.vue'
+import CountTo from './count-to.vue'
 
 export type CountToInstance = InstanceType<typeof CountTo>
 export * from './props'
+
+export default CountTo

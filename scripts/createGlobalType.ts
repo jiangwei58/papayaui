@@ -1,19 +1,18 @@
 import fs from 'fs'
-import url from 'url'
 import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const main = () => {
-  const filePath = path.resolve(url.fileURLToPath(import.meta.url), '../../typings/components.d.ts')
+  const filePath = path.resolve(__dirname, '../typings/components.d.ts')
   let dataStr = fs.readFileSync(filePath).toString()
 
-  dataStr = dataStr
-    .replace(`module 'vue'`, `module '@vue/runtime-core'`)
-    .replace(/\.\.\/src\/packages/g, 'papayaui')
+  // 将相对路径替换为以 papayaui 开头的绝对路径
+  dataStr = dataStr.replace(/\.\.\/packages\/papayaui\/components\//g, 'papayaui/components/')
 
-  const writeFilePath = path.resolve(
-    url.fileURLToPath(import.meta.url),
-    '../../packages/papayaui/global.d.ts',
-  )
+  const writeFilePath = path.resolve(__dirname, '../packages/papayaui/global.d.ts')
   fs.writeFileSync(writeFilePath, dataStr)
   console.log(`created ${writeFilePath} completed`)
 }

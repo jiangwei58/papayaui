@@ -1,4 +1,6 @@
-import type Section from './section.vue'
+import Section from './section.vue'
 
 export type SectionInstance = InstanceType<typeof Section>
 export * from './props'
+
+export default Section
