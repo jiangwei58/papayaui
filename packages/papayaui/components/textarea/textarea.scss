@@ -6,7 +6,7 @@
   position: relative;
   display: flex;
   width: 100%;
-  background-color: #fff;
+  background-color: _var(textarea-background-color, #fff);
   padding: _var(textarea-padding, 10px 25px);
   font-size: _var(textarea-font-size, 14px);
   color: _var(textarea-color, _var(color-black));

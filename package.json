@@ -12,6 +12,7 @@
     "build:package": "bash internal/build.sh",
     "build:docs": "bash internal/build-docs.sh",
     "build:h5-simulator": "pnpm -C play build:h5-simulator",
+    "version": "tsx scripts/version.ts",
     "release": "bash internal/publish.sh"
   },
   "devDependencies": {
