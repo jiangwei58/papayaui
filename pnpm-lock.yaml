@@ -79,8 +79,8 @@ importers:
         specifier: ^4.2.5
         version: 4.2.5
       cos-wx-sdk-v5:
-        specifier: ^1.4.10
-        version: 1.4.10
+        specifier: ^1.8.0
+        version: 1.8.0
       dayjs:
         specifier: ^1.11.1
         version: 1.11.1
@@ -5045,11 +5045,6 @@ packages:
       - typescript
     dev: true
 
-  /@xmldom/xmldom@0.8.11:
-    resolution: {integrity: sha512-cQzWCtO6C8TQiYl1ruKNn2U6Ao4o4WBBcbL61yJl84x+j5sOWWFU9X7DpND8XZG3daDppSsigMdfAIl2upQBRw==}
-    engines: {node: '>=10.0.0'}
-    dev: false
-
   /abab@2.0.6:
     resolution: {integrity: sha512-j2afSsaIENvHZN2B8GOpF566vZ5WVk5opAiMTvWgaQT8DkbOqsTfvNAvHoRGU2zzP8cPoqys+xHTRDWW8L+/BA==}
     deprecated: Use your platform's native atob() and btoa() methods instead
@@ -5739,10 +5734,11 @@ packages:
     resolution: {integrity: sha512-c3Q2VVkGAUyupsjRnaNX6u8Dq2vAdzm9iuPj5FW0fRxzlxgq9Q39MDq10IvmQSpLgHQNyQzQmOo6bgGHmH3NNg==}
     requiresBuild: true
 
-  /cos-wx-sdk-v5@1.4.10:
-    resolution: {integrity: sha512-q2/VtECCHAKUhrOxWq43BEpAgFY+0vexu/M3Cf3JV7fWaoJ+wLqeVvaOM1EZzMd3NS1nbAjqCCpuaVna67sFWg==}
+  /cos-wx-sdk-v5@1.8.0:
+    resolution: {integrity: sha512-CP4TKANIX5KvN6fjkPrFhdEfXjyBSExwBemRr2Ofa7ObN+Z8S62/eo6/d0WVKxSbneoPaXJzkf4AwZz7HOQXXg==}
+    requiresBuild: true
     dependencies:
-      '@xmldom/xmldom': 0.8.11
+      fast-xml-parser: 4.5.0
       mime: 2.6.0
     dev: false
 
@@ -6472,6 +6468,13 @@ packages:
   /fast-levenshtein@2.0.6:
     resolution: {integrity: sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==}
     dev: true
+
+  /fast-xml-parser@4.5.0:
+    resolution: {integrity: sha512-/PlTQCI96+fZMAOLMZK4CWG1ItCbfZ/0jx7UIJFChPNrx7tcEgerUgWbeieCM9MfHInUDyK8DWYZ+YrywDJuTg==}
+    hasBin: true
+    dependencies:
+      strnum: 1.1.2
+    dev: false
 
   /fastq@1.19.1:
     resolution: {integrity: sha512-GwLTyxkCXjXbxqIhTsMI2Nui8huMPtnxg7krajPJAjnEG/iiOS7i+zCtWGZR9G0NBKbXKh6X9m9UIsYX/N6vvQ==}
@@ -8967,6 +8970,10 @@ packages:
     resolution: {integrity: sha512-8r3mkIM/2+PpjHoOtiAW8Rg3jJLHaV7xPwG+YRGrv6FP0wwk/toTpATxWYOW0BKdWwl82VT2tFYi5DlROa0Mxg==}
     dependencies:
       js-tokens: 9.0.1
+
+  /strnum@1.1.2:
+    resolution: {integrity: sha512-vrN+B7DBIoTTZjnPNewwhx6cBA/H+IS7rfW68n7XxC1y7uoiGQBxaKzqucGUgavX15dJgiGztLJ8vxuEzwqBdA==}
+    dev: false
 
   /superjson@2.2.6:
     resolution: {integrity: sha512-H+ue8Zo4vJmV2nRjpx86P35lzwDT3nItnIsocgumgr0hHMQ+ZGq5vrERg9kJBo5AWGmxZDhzDo+WVIJqkB0cGA==}
