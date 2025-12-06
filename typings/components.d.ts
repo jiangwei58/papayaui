@@ -66,6 +66,7 @@ declare module 'vue' {
     PaTransition: typeof import('../packages/papayaui/components/transition/transition.vue')['default']
     PaUploader: typeof import('../packages/papayaui/components/uploader/uploader.vue')['default']
     PaWatermark: typeof import('../packages/papayaui/components/watermark/watermark.vue')['default']
+    PaSegmented: typeof import('../packages/papayaui/components/segmented/segmented.vue')['default']
   }
 }
 

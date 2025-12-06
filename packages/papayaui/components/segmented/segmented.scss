@@ -1,0 +1,115 @@
+@import '../../styles/vars.scss';
+
+.#{$prefix}-segmented {
+  @include _setVar(segmented-bg-color, #f5f5f5);
+  @include _setVar(segmented-item-color, rgba(0, 0, 0, 0.65));
+  @include _setVar(segmented-item-active-color, rgba(0, 0, 0, 0.88));
+  @include _setVar(segmented-item-disabled-color, #a8abb2);
+  @include _setVar(segmented-indicator-bg, #ffffff);
+  @include _setVar(segmented-border-radius, 8px);
+  @include _setVar(segmented-padding, 2px);
+  @include _setVar(segmented-duration, 0.3s);
+
+  // 尺寸变量
+  @include _setVar(segmented-height-small, 24px);
+  @include _setVar(segmented-height-medium, 32px);
+  @include _setVar(segmented-height-large, 40px);
+  @include _setVar(segmented-font-size-small, 12px);
+  @include _setVar(segmented-font-size-medium, 14px);
+  @include _setVar(segmented-font-size-large, 16px);
+
+  position: relative;
+  display: inline-flex;
+  background-color: _var(segmented-bg-color);
+  border-radius: _var(segmented-border-radius);
+  padding: _var(segmented-padding);
+  box-sizing: border-box;
+
+  &__item {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px;
+    color: _var(segmented-item-color);
+    font-size: _var(segmented-font-size-medium);
+    text-align: center;
+    cursor: pointer;
+    transition: color _var(segmented-duration);
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  &__item-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  &__item-icon {
+    font-size: 1.2em;
+  }
+
+  &__indicator {
+    position: absolute;
+    top: _var(segmented-padding);
+    left: _var(segmented-padding);
+    z-index: 0;
+    height: calc(100% - #{_var(segmented-padding)} * 2);
+    background-color: _var(segmented-indicator-bg);
+    border-radius: calc(#{_var(segmented-border-radius)} - #{_var(segmented-padding)});
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02),
+      0 2px 4px 0 rgba(0, 0, 0, 0.02);
+    transition: transform _var(segmented-duration) cubic-bezier(0.645, 0.045, 0.355, 1),
+      width _var(segmented-duration) cubic-bezier(0.645, 0.045, 0.355, 1),
+      opacity _var(segmented-duration);
+  }
+
+  // 尺寸变体
+  &--small {
+    @include _setVar(segmented-font-size-medium, #{_var(segmented-font-size-small)});
+    height: _var(segmented-height-small);
+
+    .#{$prefix}-segmented__item {
+      padding: 0 8px;
+    }
+  }
+
+  &--medium {
+    height: _var(segmented-height-medium);
+  }
+
+  &--large {
+    @include _setVar(segmented-font-size-medium, #{_var(segmented-font-size-large)});
+    height: _var(segmented-height-large);
+
+    .#{$prefix}-segmented__item {
+      padding: 0 16px;
+    }
+  }
+
+  // 块级样式
+  &--block {
+    display: flex;
+    width: 100%;
+
+    .#{$prefix}-segmented__item {
+      flex: 1;
+    }
+  }
+
+  // 激活状态
+  &--active {
+    color: _var(segmented-item-active-color);
+    font-weight: 500;
+  }
+
+  // 禁用状态
+  &--disabled {
+    cursor: not-allowed;
+    color: _var(segmented-item-disabled-color);
+  }
+}

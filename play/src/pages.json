@@ -216,6 +216,13 @@
       "type": "nav"
     },
     {
+      "path": "pages/demos/segmented/index",
+      "style": {
+        "navigationBarTitleText": "Segmented 分段控制器"
+      },
+      "type": "nav"
+    },
+    {
       "path": "pages/demos/dialog/index",
       "style": {
         "navigationBarTitleText": "Dialog 弹出框"
