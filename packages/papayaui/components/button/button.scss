@@ -3,7 +3,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: _var(button-width, auto);
   height: _var(button-height, 44px);
+  min-width: _var(button-min-width, auto);
+  min-height: _var(button-min-height, auto);
   line-height: _var(button-line-height, 1.2);
   margin: _var(button-margin, 0);
   border-width: _var(button-border-width, 1px);

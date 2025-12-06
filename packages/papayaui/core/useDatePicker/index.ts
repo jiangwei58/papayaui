@@ -73,16 +73,25 @@ export function useDatePicker(props: IncludeRefs<UseDatePickerProps> = {}) {
   const indexes = ref<number[]>(new Array(state.columnsType.length).fill(0))
 
   const columns = computed(() => {
-    let currentDate = getSelectedDate(indexes.value)
+    let currentDate = dayjs()
 
     // 按从大到小维度生成数据，确保在任何顺序下低维度可以依赖高纬度的数据
     return columnsSort.reduce<DatePickerOption[][]>((result, type) => {
       if (!state.columnsType.includes(type)) return result
-      const [start, end, newDate] = getTypeRange(type, currentDate, state.minDate, state.maxDate)
-      currentDate = newDate
+      const [start, end] = getTypeRange(type, currentDate.toDate(), state.minDate, state.maxDate)
       const colIndex = state.columnsType.indexOf(type)
+
       if (colIndex !== -1) {
-        result[colIndex] = generateOptions(type, start, end, _props.formatter, _props.filter)
+        // 生成当前列的选项
+        const options = generateOptions(type, start, end, _props.formatter, _props.filter)
+        result[colIndex] = options
+
+        // 如果当前列有选中的索引，且对应的选项有效，更新 currentDate 以供下一维度使用
+        const selectedIndex = indexes.value[colIndex]
+        const selectedOption = options[selectedIndex]
+        if (selectedOption) {
+          currentDate = currentDate.set(getType(type), selectedOption.value)
+        }
       }
       return result
     }, [])

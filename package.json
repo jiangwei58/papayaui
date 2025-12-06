@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "dev": "pnpm -C play dev:mp-weixin",
+    "dev:h5": "pnpm -C play dev:h5",
     "gen:docs": "tsx scripts/generateMarkdown/index.ts",
     "build:package": "bash internal/build.sh",
     "build:docs": "bash internal/build-docs.sh",
