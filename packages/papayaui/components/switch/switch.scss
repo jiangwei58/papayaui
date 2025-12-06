@@ -1,20 +1,21 @@
 @import '../../styles/vars.scss';
 .#{$prefix}-switch {
-  @include _setVar(switch-default-bg-color, #e6e6e6);
-  @include _setVar(switch-node-size, 24px);
-  @include _setVar(switch-gap, 4px);
-  @include _setVar(switch-width, calc(#{_var(switch-node-size)} * 2 + #{_var(switch-gap)}));
-  @include _setVar(switch-duration, 0.4s);
+  // 声明 scss 变量用于复用
+  $node-size: _var(switch-node-size, 24px);
+  $gap: _var(switch-gap, 4px);
+  $width: _var(switch-width, calc(#{$node-size} * 2 + #{$gap}));
+  $duration: _var(switch-duration, 0.4s);
+  $default-bg-color: _var(switch-default-bg-color, #e6e6e6);
 
   position: relative;
   display: inline-flex;
   align-items: center;
-  font-size: _var(switch-size, #{_var(switch-node-size)});
-  width: _var(switch-width);
-  padding: _var(switch-gap) 0;
-  background-color: _var(switch-default-bg-color);
+  font-size: _var(switch-size, #{$node-size});
+  width: $width;
+  padding: $gap 0;
+  background-color: $default-bg-color;
   border-radius: 100px;
-  transition: background-color _var(switch-duration);
+  transition: background-color $duration;
 
   &__bg {
     position: absolute;
@@ -22,10 +23,10 @@
     right: 0;
     width: calc(100% - (1em / 2));
     height: 100%;
-    background-color: _var(switch-default-bg-color);
+    background-color: $default-bg-color;
     border-radius: 100px;
     transform: scale(1);
-    transition: transform _var(switch-duration) ease;
+    transition: transform $duration ease;
   }
 
   &__node {
@@ -34,8 +35,8 @@
     padding: 3px;
     background-color: #fff;
     border-radius: 50%;
-    transform: translateX(#{_var(switch-gap)});
-    transition: transform _var(switch-duration) cubic-bezier(0.3, 1.05, 0.4, 1.05);
+    transform: translateX(#{$gap});
+    transition: transform $duration cubic-bezier(0.3, 1.05, 0.4, 1.05);
 
     display: flex;
     align-items: center;
@@ -54,7 +55,7 @@
   &--on &__node {
     background-color: #fff;
     // 正确计算 node 在开启状态下的位置：总宽度 - node 大小 - 两边的 gap
-    transform: translateX(calc(#{_var(switch-width)} - 1em - #{_var(switch-gap)}));
+    transform: translateX(calc(#{$width} - 1em - #{$gap}));
   }
 
   &--disabled {
