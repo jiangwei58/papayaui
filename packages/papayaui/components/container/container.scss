@@ -1,9 +1,9 @@
 @import '../../styles/vars.scss';
 .#{$prefix}-container {
-  width: 100%;
-  min-height: 100vh;
+  width: _var(container-width, 100%);
+  min-height: _var(container-min-height, 100vh);
   &-header {
-    width: 100%;
+    width: _var(container-header-width, 100%);
   }
 
   &-body {
@@ -12,11 +12,12 @@
 
   &-bottom-fixed {
     position: fixed;
-    width: 100%;
+    width: _var(container-bottom-fixed-width, 100%);
     left: 0;
     bottom: 0;
-    z-index: 98;
-    background-color: #fff;
+    z-index: _var(container-bottom-fixed-z-index, 98);
+    padding: _var(container-bottom-fixed-padding, 0);
+    background-color: _var(container-bottom-fixed-bg-color, #fff);
   }
 
   &--safe-bottom {
