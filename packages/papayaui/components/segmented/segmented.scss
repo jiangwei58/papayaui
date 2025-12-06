@@ -1,0 +1,105 @@
+@import '../../styles/vars.scss';
+
+.#{$prefix}-segmented {
+  // 声明 scss 变量用于复用
+  $padding: _var(segmented-padding, 2px);
+  $border-radius: _var(segmented-border-radius, 8px);
+  $duration: _var(segmented-duration, 0.3s);
+
+  position: relative;
+  display: inline-flex;
+  align-self: flex-start;
+  background-color: _var(segmented-bg-color, #f5f5f5);
+  border-radius: $border-radius;
+  padding: $padding;
+  box-sizing: border-box;
+
+  &__item {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px;
+    color: _var(segmented-item-color, rgba(0, 0, 0, 0.65));
+    font-size: _var(segmented-font-size-medium, 14px);
+    text-align: center;
+    cursor: pointer;
+    transition: color $duration;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  &__item-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  &__item-icon {
+    font-size: 1.2em;
+  }
+
+  &__indicator {
+    position: absolute;
+    top: $padding;
+    left: $padding;
+    z-index: 0;
+    height: calc(100% - #{$padding} * 2);
+    background-color: _var(segmented-indicator-bg, #ffffff);
+    border-radius: calc(#{$border-radius} - #{$padding});
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02),
+      0 2px 4px 0 rgba(0, 0, 0, 0.02);
+    transition: transform $duration cubic-bezier(0.645, 0.045, 0.355, 1),
+      width $duration cubic-bezier(0.645, 0.045, 0.355, 1), opacity $duration;
+  }
+
+  // 尺寸变体
+  &--small {
+    $font-size-small: _var(segmented-font-size-small, 12px);
+    height: _var(segmented-height-small, 24px);
+
+    .#{$prefix}-segmented__item {
+      padding: 0 8px;
+      font-size: $font-size-small;
+    }
+  }
+
+  &--medium {
+    height: _var(segmented-height-medium, 32px);
+  }
+
+  &--large {
+    $font-size-large: _var(segmented-font-size-large, 16px);
+    height: _var(segmented-height-large, 40px);
+
+    .#{$prefix}-segmented__item {
+      padding: 0 16px;
+      font-size: $font-size-large;
+    }
+  }
+
+  // 块级样式
+  &--block {
+    display: flex;
+    width: 100%;
+
+    .#{$prefix}-segmented__item {
+      flex: 1;
+    }
+  }
+
+  // 激活状态
+  &--active {
+    color: _var(segmented-item-active-color, rgba(0, 0, 0, 0.88));
+    font-weight: 500;
+  }
+
+  // 禁用状态
+  &--disabled {
+    cursor: not-allowed;
+    color: _var(segmented-item-disabled-color, #a8abb2);
+  }
+}

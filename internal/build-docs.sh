@@ -6,7 +6,7 @@ mkdir -p ./docs/public
 
 rm -rf ./docs/public/*
 
-mv ./dist/build/h5/* ./docs/public/
+mv ./play/dist/build/h5/* ./docs/public/
 
 mv ./docs/public/index.html ./docs/public/mobile.html
 

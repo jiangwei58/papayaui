@@ -71,7 +71,7 @@ const active = ref(0)
 ```ts [script]
 
 import { ref } from 'vue'
-import type { SidebarValue } from '../..'
+import type { SidebarValue } from 'papayaui'
 
 const active = ref(0)
 

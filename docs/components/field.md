@@ -98,7 +98,6 @@ const value = ref<string>()
 
 | 名称 | 默认值 |
 | --- | --- |
-| --pa-cell-line-height | 24px |
 | --pa-field-input-color | var(--pa-color-primary) |
 | --pa-field-input-placeholder-color | var(--pa-color-disabled) |
 

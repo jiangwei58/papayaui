@@ -1,6 +1,6 @@
 import { DefaultTheme, defineConfig } from 'vitepress'
-import pageConfig from '../../src/pages.json'
-import packageJSON from '../../package.json'
+import pageConfig from '../../play/src/pages.json'
+import packageJSON from '../../packages/papayaui/package.json'
 
 const getComponents = () => {
   const group: Record<string, { title: string; index: number }> = {
@@ -23,7 +23,7 @@ const getComponents = () => {
         items: [],
       }
     }
-    if (page.path.startsWith('packages')) {
+    if (page.path.startsWith('pages/demos')) {
       data[classify.index].items?.push({
         text: page.style.navigationBarTitleText,
         link: `/components/${page.path.split('/')[2]}.md`,

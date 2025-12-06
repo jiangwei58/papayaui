@@ -12,7 +12,7 @@
 ```ts [script]
 
 import { ref } from 'vue'
-import type { FileItem } from '../..'
+import type { FileItem } from 'papayaui'
 
 const fileList = ref<FileItem[]>([])
 
@@ -43,8 +43,8 @@ const onAfterRead = (files: FileItem | FileItem[]) => {
 
 import { ref } from 'vue'
 // 仅做本地示例，使用时请用网络图片
-import img1 from '../../images/demo2.jpeg'
-import img2 from '../../images/demo3.jpg'
+import img1 from '../../../images/demo2.jpeg'
+import img2 from '../../../images/demo3.jpg'
 
 let src1 = ''
 let src2 = ''
@@ -79,7 +79,7 @@ const fileList = ref([
 
 import { ref } from 'vue'
 // 仅做本地示例，使用时请用网络图片
-import img1 from '../../images/demo2.jpeg'
+import img1 from '../../../images/demo2.jpeg'
 
 let src1 = ''
 // #ifdef MP
@@ -108,7 +108,7 @@ const fileList = ref([
 
 import { ref } from 'vue'
 // 仅做本地示例，使用时请用网络图片
-import img1 from '../../images/demo2.jpeg'
+import img1 from '../../../images/demo2.jpeg'
 
 let src1 = ''
 // #ifdef MP
@@ -146,7 +146,7 @@ const onOversize = () => {
 ```ts [script]
 
 import { ref } from 'vue'
-import type { UploaderInstance, FileItem } from '../..'
+import type { UploaderInstance, FileItem } from 'papayaui'
 
 const uploaderRef = ref<UploaderInstance>()
 const fileList = ref<FileItem[]>([])
@@ -187,8 +187,8 @@ const onUpload = () => {
 
 import { ref } from 'vue'
 // 仅做本地示例，使用时请用网络图片
-import img1 from '../../images/demo2.jpeg'
-import img2 from '../../images/demo3.jpg'
+import img1 from '../../../images/demo2.jpeg'
+import img2 from '../../../images/demo3.jpg'
 
 let src1 = ''
 let src2 = ''
@@ -223,7 +223,7 @@ const fileList = ref([
 ```ts [script]
 
 import { ref } from 'vue'
-import type { FileItem } from '../..'
+import type { FileItem } from 'papayaui'
 
 const fileList = ref<FileItem[]>([
   {
@@ -282,8 +282,8 @@ const onPreview = (file: FileItem, index: number) => {
 
 import { ref } from 'vue'
 // 仅做本地示例，使用时请用网络图片
-import img1 from '../../images/demo2.jpeg'
-import img2 from '../../images/demo3.jpg'
+import img1 from '../../../images/demo2.jpeg'
+import img2 from '../../../images/demo3.jpg'
 
 let src1 = ''
 let src2 = ''
@@ -369,22 +369,16 @@ const fileList = ref([
 
 | 名称 | 默认值 |
 | --- | --- |
-| --pa-uploader-preview-margin | 0 10px 10px 0 |
 | --pa-uploader-size | 100px |
-| --pa-uploader-size | 100px |
-| --pa-uploader-preview-radius | 4px |
-| --pa-uploader-preview-file-size | 36px |
-| --pa-uploader-preview-file-color | var(--pa-color-black-3) |
-| --pa-uploader-preview-file-text-size | 14px |
-| --pa-uploader-delete-width | 14px |
-| --pa-uploader-delete-height | 14px |
 | --pa-uploader-delete-bg | rgba(0, 0, 0, 0.7) |
+| --pa-uploader-delete-height | 14px |
+| --pa-uploader-delete-width | 14px |
+| --pa-uploader-preview-margin | 0 10px 10px 0 |
 | --pa-uploader-preview-radius | 4px |
 | --pa-uploader-delete-icon-size | 12px |
-| --pa-uploader-size | 100px |
-| --pa-uploader-size | 100px |
-| --pa-uploader-preview-margin | 0 10px 10px 0 |
-| --pa-uploader-preview-radius | 4px |
+| --pa-uploader-preview-file-color | var(--pa-color-black-3) |
+| --pa-uploader-preview-file-size | 36px |
+| --pa-uploader-preview-file-text-size | 14px |
 
 <!--cssVar end-->
 

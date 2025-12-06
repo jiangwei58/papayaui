@@ -1,8 +1,6 @@
 {
-  "name": "doc",
-  "version": "1.0.0",
-  "description": "文档网站",
-  "main": "index.js",
+  "name": "@papayaui/docs",
+  "private": true,
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,8 +10,11 @@
   },
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "papayaui": "workspace:*"
+  },
   "devDependencies": {
-    "vite": "^4.2.1",
-    "vitepress": "^1.0.0-rc.40"
+    "vite": "^5.2.8",
+    "vitepress": "^1.6.0"
   }
 }

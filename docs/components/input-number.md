@@ -82,7 +82,7 @@ const value = ref(1)
 ```ts [script]
 
 import { ref } from 'vue'
-import { sleep } from '../../utils'
+import { sleep } from 'papayaui'
 
 const num = ref(1)
 
@@ -186,16 +186,15 @@ const value = ref(999)
 
 | 名称 | 默认值 |
 | --- | --- |
+| --pa-input-number-color | var(--pa-color-black) |
 | --pa-input-number-height | 28px |
-| --pa-input-number-bg-color | #f2f3f5 |
-| --pa-input-number-disabled-color | #c8c9cc |
-| --pa-input-number-disabled-bg-color | #f2f3f5 |
 | --pa-input-number-round | 4px |
 | --pa-input-number-width | 32px |
+| --pa-input-number-bg-color | #f2f3f5 |
+| --pa-input-number-disabled-color | #c8c9cc |
 | --pa-input-number-font-size | 14px |
-| --pa-input-number-color | var(--pa-color-black) |
-| --pa-input-number-placeholder-color | #c8c9cc |
-| --pa-input-number-color | var(--pa-color-primary) |
+| --pa-input-number-placeholder-color | var(--pa-input-number-disabled-color, #c8c9cc) |
+| --pa-input-number-disabled-bg-color | #f2f3f5 |
 
 <!--cssVar end-->
 

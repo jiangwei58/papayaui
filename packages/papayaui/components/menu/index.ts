@@ -1,0 +1,6 @@
+import Menu from './menu.vue'
+
+export type MenuInstance = InstanceType<typeof Menu>
+export * from './props'
+
+export default Menu

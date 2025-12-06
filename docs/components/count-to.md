@@ -18,7 +18,7 @@
 ```ts [script]
 
 import { ref } from 'vue'
-import type { CountToInstance } from '../..'
+import type { CountToInstance } from 'papayaui'
 
 const countToRef = ref<CountToInstance>()
 
@@ -39,7 +39,7 @@ const countToRef = ref<CountToInstance>()
 ```ts [script]
 
 import { ref } from 'vue'
-import type { CountToInstance } from '../..'
+import type { CountToInstance } from 'papayaui'
 
 const countToRef = ref<CountToInstance>()
 
@@ -60,7 +60,7 @@ const countToRef = ref<CountToInstance>()
 ```ts [script]
 
 import { ref } from 'vue'
-import type { CountToInstance } from '../..'
+import type { CountToInstance } from 'papayaui'
 
 const countToRef = ref<CountToInstance>()
 
@@ -82,7 +82,7 @@ const countToRef = ref<CountToInstance>()
 ```ts [script]
 
 import { ref } from 'vue'
-import type { CountToInstance } from '../..'
+import type { CountToInstance } from 'papayaui'
 
 const countToRef = ref<CountToInstance>()
 
@@ -110,7 +110,7 @@ const formatter = (num: number) => {
 ```ts [script]
 
 import { ref } from 'vue'
-import type { CountToInstance } from '../..'
+import type { CountToInstance } from 'papayaui'
 
 const countToRef = ref<CountToInstance>()
 

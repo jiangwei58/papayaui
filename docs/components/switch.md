@@ -68,7 +68,7 @@ const checked = ref<boolean>(true)
 ```ts [script]
 
 import { ref } from 'vue'
-import type { SwitchValue } from '../..'
+import type { SwitchValue } from 'papayaui'
 
 const checked = ref<boolean>(true)
 const loading = ref<boolean>(false)
@@ -158,7 +158,11 @@ const checked = ref<string>('开')
 
 | 名称 | 默认值 |
 | --- | --- |
-| --pa-switch-size | 24px |
+| --pa-switch-duration | 0.4s |
+| --pa-switch-gap | 4px |
+| --pa-switch-size | var(--pa-switch-node-size, 24px) |
+| --pa-switch-width | calc(var(--pa-switch-node-size, 24px) * 2 + var(--pa-switch-gap, 4px)) |
+| --pa-switch-default-bg-color | #e6e6e6 |
 
 <!--cssVar end-->
 

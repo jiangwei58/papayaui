@@ -245,13 +245,12 @@ const options = new Array(3).fill(0).map((_item, index) => ({
 
 | 名称 | 默认值 |
 | --- | --- |
-| --pa-checkbox-size | 20px |
 | --pa-checkbox-display | flex |
 | --pa-checkbox-margin | 0 |
+| --pa-checkbox-size | 20px |
+| --pa-checkbox-checked-color | var(--pa-color-primary) |
 | --pa-checkbox-font-size | 16px |
 | --pa-checkbox-label-color | var(--pa-color-black) |
-| --pa-checkbox-checked-color | var(--pa-color-primary) |
-| --pa-checkbox-checked-color | var(--pa-color-primary) |
 
 <!--cssVar end-->
 

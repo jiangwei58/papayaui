@@ -1,0 +1,64 @@
+@import '../../styles/vars.scss';
+.#{$prefix}-switch {
+  // 声明 scss 变量用于复用
+  $node-size: _var(switch-node-size, 24px);
+  $gap: _var(switch-gap, 4px);
+  $width: _var(switch-width, calc(#{$node-size} * 2 + #{$gap}));
+  $duration: _var(switch-duration, 0.4s);
+  $default-bg-color: _var(switch-default-bg-color, #e6e6e6);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  font-size: _var(switch-size, #{$node-size});
+  width: $width;
+  padding: $gap 0;
+  background-color: $default-bg-color;
+  border-radius: 100px;
+  transition: background-color $duration;
+
+  &__bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100% - (1em / 2));
+    height: 100%;
+    background-color: $default-bg-color;
+    border-radius: 100px;
+    transform: scale(1);
+    transition: transform $duration ease;
+  }
+
+  &__node {
+    width: 1em;
+    height: 1em;
+    padding: 3px;
+    background-color: #fff;
+    border-radius: 50%;
+    transform: translateX(#{$gap});
+    transition: transform $duration cubic-bezier(0.3, 1.05, 0.4, 1.05);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &--on {
+    background-color: _var(color-primary);
+    border-color: _var(color-primary);
+  }
+
+  &--on &__bg {
+    transform: scale(0);
+  }
+
+  &--on &__node {
+    background-color: #fff;
+    // 正确计算 node 在开启状态下的位置：总宽度 - node 大小 - 两边的 gap
+    transform: translateX(calc(#{$width} - 1em - #{$gap}));
+  }
+
+  &--disabled {
+    opacity: 0.6;
+  }
+}

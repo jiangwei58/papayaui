@@ -112,7 +112,7 @@ const onConfirm = (value: Date | Date[]) => {
  */
 import dayjs from 'dayjs'
 import { ref } from 'vue'
-import type { CalendarType } from '../../components/calendar'
+import type { CalendarType } from 'papayaui'
 
 const visible = ref<boolean>(false)
 const type = ref<CalendarType>('single')
@@ -235,7 +235,7 @@ const onConfirm = (value: Date | Date[]) => {
  */
 import dayjs from 'dayjs'
 import { ref } from 'vue'
-import type { DayItem } from '../../core'
+import type { DayItem } from 'papayaui'
 
 const visible = ref<boolean>(false)
 const minDate = dayjs('2023-6-1').valueOf()

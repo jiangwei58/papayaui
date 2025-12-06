@@ -181,12 +181,12 @@ const value = ref('')
 
 | 名称 | 默认值 |
 | --- | --- |
-| --pa-input-height | 24px |
-| --pa-input-font-size | 14px |
 | --pa-input-color | var(--pa-color-black) |
-| --pa-input-text-align | right |
-| --pa-input-placeholder-color | var(--pa-color-disabled) |
+| --pa-input-height | 24px |
 | --pa-input-disabled-color | var(--pa-color-disabled) |
+| --pa-input-font-size | 14px |
+| --pa-input-placeholder-color | var(--pa-color-disabled) |
+| --pa-input-text-align | right |
 
 <!--cssVar end-->
 

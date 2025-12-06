@@ -70,11 +70,11 @@
 
 | 名称 | 默认值 |
 | --- | --- |
+| --pa-section-color | var(--pa-color-black) |
 | --pa-section-padding | 12px 10px |
 | --pa-section-bg-color | transparent |
-| --pa-section-line-color | var(--pa-color-primary) |
 | --pa-section-font-size | 14px |
-| --pa-section-color | var(--pa-color-black) |
+| --pa-section-line-color | var(--pa-color-primary) |
 
 <!--cssVar end-->
 

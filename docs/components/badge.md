@@ -165,12 +165,11 @@
 
 | 名称 | 默认值 |
 | --- | --- |
-| --pa-badge-font-size | 11px |
-| --pa-badge-font-size | 11px |
-| --pa-badge-padding | 2px 5px |
 | --pa-badge-color | var(--pa-color-danger) |
-| --pa-badge-border-width | 1px |
+| --pa-badge-padding | 2px 5px |
 | --pa-badge-border-color | #fff |
+| --pa-badge-border-width | 1px |
+| --pa-badge-font-size | 11px |
 
 <!--cssVar end-->
 

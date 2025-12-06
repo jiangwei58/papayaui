@@ -22,7 +22,7 @@
 ```ts [script]
 
 import { ref } from 'vue'
-import type { PopupPosition } from '../..'
+import type { PopupPosition } from 'papayaui'
 
 const visible = ref<boolean>(false)
 const position = ref<PopupPosition>('bottom')
@@ -141,9 +141,9 @@ const onOpen = () => {
 
 | 名称 | 默认值 |
 | --- | --- |
-| --pa-popup-max-width | 100% |
 | --pa-popup-background | #fff |
 | --pa-popup-radius | 0 |
+| --pa-popup-max-width | 100% |
 
 <!--cssVar end-->
 

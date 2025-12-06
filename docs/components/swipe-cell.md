@@ -13,7 +13,7 @@
 ```
 ```ts [script]
 
-import type { SwipeCellOption } from '../..'
+import type { SwipeCellOption } from 'papayaui'
 
 const options: SwipeCellOption[] = [{ text: '删除' }]
 
@@ -43,7 +43,7 @@ const onOpen = () => {
 ```
 ```ts [script]
 
-import type { SwipeCellOption } from '../..'
+import type { SwipeCellOption } from 'papayaui'
 
 const options: SwipeCellOption[] = [{ text: '删除' }]
 
@@ -59,7 +59,7 @@ const options: SwipeCellOption[] = [{ text: '删除' }]
 ```
 ```ts [script]
 
-import type { SwipeCellOption, SwipeCellProps } from '../..'
+import type { SwipeCellOption, SwipeCellProps } from 'papayaui'
 
 const options: SwipeCellOption[] = [
   {
@@ -92,7 +92,7 @@ const onClick = (name: string | number, index: number, item: SwipeCellOption) =>
 ```
 ```ts [script]
 
-import type { SwipeCellOption, SwipeCellProps } from '../..'
+import type { SwipeCellOption, SwipeCellProps } from 'papayaui'
 
 const options: SwipeCellOption[] = [
   {

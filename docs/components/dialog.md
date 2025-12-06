@@ -101,7 +101,7 @@ const onOpen = () => {
 ```ts [script]
 
 import { ref } from 'vue'
-import type { DialogProps } from '../../components/dialog/props'
+import type { DialogProps } from 'papayaui'
 
 const visible = ref(false)
 const dialogProps = ref<Partial<DialogProps>>({})
@@ -133,7 +133,7 @@ const onOpen = (props: Partial<DialogProps> = {}) => {
 ```ts [script]
 
 import { ref } from 'vue'
-import type { ActionType } from '../../components/dialog/props'
+import type { ActionType } from 'papayaui'
 
 const visible = ref(false)
 
@@ -163,7 +163,7 @@ const onBeforeClose = (action: ActionType) => {
 <pa-dialog v-model:show="visible" title="标题">
   <view class="flex flex-col items-center justify-center pt-20 pb-50">
     <view class="text-28 color-black-2">这是自定义内容</view>
-    <image src="../../images/demo.jpeg" style="width: 80px; height: 80px" />
+    <image src="../../../images/demo.jpeg" style="width: 80px; height: 80px" />
   </view>
 </pa-dialog>
 
@@ -215,7 +215,7 @@ const onOpen = () => {
 ```ts [script]
 
 import { ref } from 'vue'
-import type { EventDetail } from '../../types'
+import type { EventDetail } from 'papayaui'
 
 const visible = ref(false)
 const avatarUrl = ref<string>()
@@ -294,15 +294,15 @@ const onChooseAvatar = (e: EventDetail<{ avatarUrl: string }>) => {
 | 名称 | 默认值 |
 | --- | --- |
 | --pa-dialog-radius | 16px |
-| --pa-dialog-header-padding-top | 26px |
+| --pa-dialog-button-height | 48px |
 | --pa-dialog-font-size | 16px |
+| --pa-dialog-message-padding | 26px 24px |
 | --pa-dialog-header-font-weight | 500 |
 | --pa-dialog-header-line-height | 24px |
-| --pa-dialog-message-max-height | 60vh |
-| --pa-dialog-message-padding | 26px 24px |
+| --pa-dialog-header-padding-top | 26px |
 | --pa-dialog-message-font-size | 14px |
 | --pa-dialog-message-line-height | 20px |
-| --pa-dialog-button-height | 48px |
+| --pa-dialog-message-max-height | 60vh |
 | --pa-dialog-round-button-height | 36px |
 
 <!--cssVar end-->

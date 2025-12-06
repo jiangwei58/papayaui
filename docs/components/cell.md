@@ -142,28 +142,26 @@
 
 | 名称 | 默认值 |
 | --- | --- |
-| --pa-cell-padding-y | 10px |
-| --pa-cell-padding-x | 16px |
-| --pa-cell-bg-color | #fff |
 | --pa-cell-color | var(--pa-color-black-3) |
+| --pa-cell-bg-color | #fff |
 | --pa-cell-font-size | 14px |
-| --pa-cell-line-height | 24px |
-| --pa-cell-title-flex | 1 |
-| --pa-cell-value-flex | 1 |
-| --pa-cell-title-color | var(--pa-color-black) |
-| --pa-cell-icon-left-margin-left | 4px |
+| --pa-cell-icon-size | 16px |
 | --pa-cell-label-color | var(--pa-color-black-3) |
+| --pa-cell-line-height | 24px |
+| --pa-cell-padding-x | 16px |
+| --pa-cell-padding-y | 10px |
+| --pa-cell-suffix-color | inherit |
+| --pa-cell-title-color | var(--pa-color-black) |
+| --pa-cell-title-flex | 1 |
+| --pa-cell-value-color | var(--pa-color-primary) |
+| --pa-cell-value-flex | 1 |
+| --pa-cell-icon-right-rotate | 0 |
 | --pa-cell-label-font-size | 12px |
 | --pa-cell-label-line-height | 18px |
-| --pa-cell-value-text-align | right |
 | --pa-cell-suffix-margin-left | 5rpx |
-| --pa-cell-suffix-color | inherit |
+| --pa-cell-value-text-align | right |
+| --pa-cell-icon-left-margin-left | 4px |
 | --pa-cell-icon-right-margin-left | 4px |
-| --pa-cell-icon-right-rotate | 0 |
-| --pa-cell-icon-size | 16px |
-| --pa-cell-value-color | var(--pa-color-primary) |
-| --pa-cell-padding-x | 16px |
-| --pa-cell-padding-x | 16px |
 
 <!--cssVar end-->
 

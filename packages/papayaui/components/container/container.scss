@@ -1,0 +1,26 @@
+@import '../../styles/vars.scss';
+.#{$prefix}-container {
+  width: _var(container-width, 100%);
+  min-height: _var(container-min-height, 100vh);
+  &-header {
+    width: _var(container-header-width, 100%);
+  }
+
+  &-body {
+    position: relative;
+  }
+
+  &-bottom-fixed {
+    position: fixed;
+    width: _var(container-bottom-fixed-width, 100%);
+    left: 0;
+    bottom: 0;
+    z-index: _var(container-bottom-fixed-z-index, 98);
+    padding: _var(container-bottom-fixed-padding, 0);
+    background-color: _var(container-bottom-fixed-bg-color, #fff);
+  }
+
+  &--safe-bottom {
+    @include safeBottomPadding();
+  }
+}
