@@ -114,10 +114,10 @@ const onClose = () => {
 
 | 名称 | 默认值 |
 | --- | --- |
-| --pa-tag-font-size | 12px |
-| --pa-tag-line-height | 16px |
 | --pa-tag-height | auto |
 | --pa-tag-padding | 0 4px |
+| --pa-tag-font-size | 12px |
+| --pa-tag-line-height | 16px |
 
 <!--cssVar end-->
 

@@ -194,23 +194,23 @@ const marks = {
 
 | 名称 | 默认值 |
 | --- | --- |
-| --pa-slider-background-color | #ebedf0 |
-| --pa-slider-active-background | var(--pa-color-primary) |
-| --pa-slider-height | 4px |
-| --pa-slider-tip-font-color | var(--pa-color-black) |
-| --pa-slider-tip-font-size | 12px |
 | --pa-slider-duration | 0.2s |
-| --pa-slider-button-width | 24px |
-| --pa-slider-button-height | 24px |
+| --pa-slider-height | 4px |
+| --pa-slider-margin | 0 15px |
+| --pa-slider-active-background | var(--pa-color-primary) |
+| --pa-slider-background-color | #ebedf0 |
 | --pa-slider-button-background | #fff |
 | --pa-slider-button-border | 1px solid transparent |
+| --pa-slider-button-height | 24px |
 | --pa-slider-button-radius | 50% |
-| --pa-slider-button-shadow | 0 1px 2px rgba(0, 0, 0, 0.5 |
+| --pa-slider-button-shadow | 0 1px 2px rgba(0, 0, 0, 0.5) |
+| --pa-slider-button-width | 24px |
+| --pa-slider-disabled-opacity | 0.5 |
+| --pa-slider-button-tip-transform | translate3d(0, -100%, 0) |
+| --pa-slider-tip-font-color | var(--pa-color-black) |
+| --pa-slider-tip-font-size | 12px |
 | --pa-slider-button-tip-font-color | var(--pa-color-black) |
 | --pa-slider-button-tip-font-size | 12px |
-| --pa-slider-button-tip-transform | translate3d(0, -100%, 0 |
-| --pa-slider-margin | 0 15px |
-| --pa-slider-disabled-opacity | 0.5 |
 
 <!--cssVar end-->
 

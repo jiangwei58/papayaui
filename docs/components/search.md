@@ -184,10 +184,10 @@ const text = ref<string>('')
 | --- | --- |
 | --pa-search-padding | 10px 12px |
 | --pa-search-bg-color | #fff |
-| --pa-search-input-bg-color | var(--pa-color-gray) |
-| --pa-search-input-radius | 3px |
-| --pa-search-input-color | var(--pa-color-black) |
 | --pa-search-icon-color | var(--pa-color-black-3) |
+| --pa-search-input-color | var(--pa-color-black) |
+| --pa-search-input-radius | 3px |
+| --pa-search-input-bg-color | var(--pa-color-gray) |
 | --pa-search-input-padding-x | 8px |
 | --pa-search-input-padding-y | 5px |
 

@@ -81,10 +81,10 @@ const indexes = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 
 | 名称 | 默认值 |
 | --- | --- |
-| --pa-index-bar-sidebar-z-index | 2 |
-| --pa-index-bar-index-font-weight | 500 |
 | --pa-index-bar-index-font-size | 10px |
+| --pa-index-bar-index-font-weight | 500 |
 | --pa-index-bar-index-line-height | 16px |
+| --pa-index-bar-sidebar-z-index | 2 |
 
 <!--cssVar end-->
 

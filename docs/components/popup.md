@@ -141,9 +141,9 @@ const onOpen = () => {
 
 | 名称 | 默认值 |
 | --- | --- |
-| --pa-popup-max-width | 100% |
 | --pa-popup-background | #fff |
 | --pa-popup-radius | 0 |
+| --pa-popup-max-width | 100% |
 
 <!--cssVar end-->
 

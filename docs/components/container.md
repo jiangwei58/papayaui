@@ -91,7 +91,15 @@ const updateHeight = () => {
 
 <!--cssVar start-->
 
-:see_no_evil:
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-container-width | 100% |
+| --pa-container-header-width | 100% |
+| --pa-container-min-height | 100vh |
+| --pa-container-bottom-fixed-padding | 0 |
+| --pa-container-bottom-fixed-width | 100% |
+| --pa-container-bottom-fixed-bg-color | #fff |
+| --pa-container-bottom-fixed-z-index | 98 |
 
 <!--cssVar end-->
 

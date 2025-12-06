@@ -148,14 +148,14 @@ const getData = (count: number) => {
 
 | 名称 | 默认值 |
 | --- | --- |
-| --pa-checkbox-btns-font-size | 14px |
-| --pa-checkbox-btns-color | var(--pa-color-black) |
 | --pa-checkbox-btns-background | var(--pa-color-gray) |
-| --pa-checkbox-btns-border-color | var(--pa-color-gray) |
+| --pa-checkbox-btns-color | var(--pa-color-black) |
 | --pa-checkbox-btns-padding | 7px 4px |
-| --pa-checkbox-btns-border-width | 2rpx |
+| --pa-checkbox-btns-active-background | rgba(0, 156, 93, 0.1) |
 | --pa-checkbox-btns-active-color | var(--pa-color-primary) |
-| --pa-checkbox-btns-active-background | rgba(0, 156, 93, 0.1 |
+| --pa-checkbox-btns-border-color | var(--pa-color-gray) |
+| --pa-checkbox-btns-border-width | 2rpx |
+| --pa-checkbox-btns-font-size | 14px |
 | --pa-checkbox-btns-active-border-color | var(--pa-color-primary) |
 
 <!--cssVar end-->

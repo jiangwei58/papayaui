@@ -111,7 +111,20 @@ const actions2 = ref([{ text: '选项一', disabled: true }, { text: '选项二'
 
 <!--cssVar start-->
 
-:see_no_evil:
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-popover-radius | 8px |
+| --pa-popover-action-height | 44px |
+| --pa-popover-action-padding | 16px |
+| --pa-popover-action-width | 128px |
+| --pa-popover-arrow-size | 6px |
+| --pa-popover-dark-background | #4c4c4c |
+| --pa-popover-light-background | #fff |
+| --pa-popover-action-font-size | 14px |
+| --pa-popover-action-icon-size | 20px |
+| --pa-popover-action-line-height | 20px |
+| --pa-popover-dark-text-color | #fff |
+| --pa-popover-light-text-color | #4c4c4c |
 
 <!--cssVar end-->
 

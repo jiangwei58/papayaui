@@ -189,14 +189,14 @@ const state = reactive({
 
 | 名称 | 默认值 |
 | --- | --- |
-| --pa-menu-height | 48px |
 | --pa-menu-background | #fff |
-| --pa-menu-shadow | 0 2px 12px rgb(100 101 102 / 12%) |
-| --pa-menu-title-padding | 0 8px |
+| --pa-menu-height | 48px |
+| --pa-menu-shadow | 0 2px 12px rgba(100, 101, 102, 0.12) |
+| --pa-menu-active-color | var(--pa-color-primary) |
 | --pa-menu-title-color | var(--pa-color-black) |
+| --pa-menu-title-padding | 0 8px |
 | --pa-menu-title-font-size | 15px |
 | --pa-menu-title-line-height | 22px |
-| --pa-menu-active-color | var(--pa-color-primary) |
 
 <!--cssVar end-->
 
