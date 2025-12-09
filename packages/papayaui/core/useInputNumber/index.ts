@@ -16,6 +16,8 @@ export interface UseInputNumberProps {
   intLength?: number
   /** 小数位长度 */
   decimalLength?: number
+  /** 是否允许输入负数 */
+  allowNegative?: boolean
 }
 
 export function useInputNumber(props: IncludeRefs<UseInputNumberProps>) {
@@ -28,6 +30,7 @@ export function useInputNumber(props: IncludeRefs<UseInputNumberProps>) {
     step: _props.step ?? 1,
     intLength: _props.intLength ?? Number.MAX_SAFE_INTEGER.toString().length,
     decimalLength: _props.decimalLength ?? 0,
+    allowNegative: _props.allowNegative ?? false,
   })
 
   const numberVal = ref<number | null>(
@@ -52,7 +55,7 @@ export function useInputNumber(props: IncludeRefs<UseInputNumberProps>) {
   )
 
   const getFormatVal = (text: InputNumberValue) => {
-    return formatNumericTypeString(text, state.intLength, state.decimalLength)
+    return formatNumericTypeString(text, state.intLength, state.decimalLength, state.allowNegative)
   }
 
   const onUpdate = (type: 'add' | 'reduce', updateValue = true) => {
@@ -96,13 +99,25 @@ export const formatNumericTypeString = (
   value: InputNumberValue,
   intLength = Number.MAX_SAFE_INTEGER.toString().length,
   decimalLength = 0,
+  allowNegative = false,
 ) => {
   // 根据整数位和小数位处理值
-  value = String(value)
+  const strValue = String(value)
+
+  // 移除所有非数字和点的字符
+  value = strValue
     .replace(/^\./, '')
-    .replace(/[^0-9.]/g, '')
+    .replace(allowNegative ? /[^0-9.-]/g : /[^0-9.]/g, '')
+    // 如果允许负数，只保留第一个负号，且只能在开头
+    .replace(allowNegative ? /(?!^)-/g : /-/g, '')
+
   const valSplit = value.split('.').slice(0, 2)
-  valSplit[0] = valSplit[0].slice(0, intLength)
+  // 处理整数部分（保留负号）
+  const intPart = valSplit[0]
+  const hasNegativeSign = intPart.startsWith('-')
+  const intDigits = intPart.replace('-', '')
+  valSplit[0] = (hasNegativeSign ? '-' : '') + intDigits.slice(0, intLength)
+
   if (typeof valSplit[1] !== 'undefined' && decimalLength) {
     valSplit[1] = valSplit[1].slice(0, decimalLength)
   } else {

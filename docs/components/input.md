@@ -18,6 +18,16 @@
 <pa-cell title="最大最小值">
   <pa-input v-model.number="value" type="number" :min="2" :max="99" placeholder="请输入" />
 </pa-cell>
+<pa-cell title="允许输入负数">
+  <pa-input
+    v-model.number="negativeValue"
+    type="number"
+    :min="-100"
+    :max="100"
+    allow-negative
+    placeholder="请输入"
+  />
+</pa-cell>
 
 ```
 ```ts [script]
@@ -28,6 +38,7 @@
 import { ref } from 'vue'
 
 const value = ref<number>()
+const negativeValue = ref<number>()
 
 ```
 ## 禁用和只读

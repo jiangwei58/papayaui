@@ -22,6 +22,10 @@ const inputNumberProps = {
    * 小数位长度
    */
   decimalLength: Number,
+  /**
+   * 是否允许输入负数
+   */
+  allowNegative: Boolean,
 }
 
 export const inputProps = {

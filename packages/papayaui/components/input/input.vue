@@ -91,7 +91,7 @@ const onInput = (e: Event) => {
   let value = (e as unknown as EventDetail<{ value: string }>).detail.value
   // 数值类型处理，整数或小数
   if (props.type === 'number') {
-    value = formatNumericTypeString(value, props.intLength, props.decimalLength)
+    value = formatNumericTypeString(value, props.intLength, props.decimalLength, props.allowNegative)
   }
   // 格式化函数处理
   if (typeof props.formatter === 'function') {

@@ -11,6 +11,17 @@
   <pa-cell title="最大最小值">
     <pa-input v-model.number="value" type="number" :min="2" :max="99" placeholder="请输入" />
   </pa-cell>
+  <pa-cell title="允许输入负数">
+    <pa-input
+      v-model.number="negativeValue"
+      type="number"
+      :min="-100"
+      :max="100"
+      :decimal-length="2"
+      allow-negative
+      placeholder="请输入"
+    />
+  </pa-cell>
 </template>
 
 <script setup lang="ts">
@@ -20,4 +31,5 @@
 import { ref } from 'vue'
 
 const value = ref<number>()
+const negativeValue = ref<number>()
 </script>
