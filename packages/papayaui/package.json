@@ -1,6 +1,6 @@
 {
   "name": "papayaui",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "适用于uniapp的ui扩展库",
   "main": "index.ts",
   "module": "index.ts",
