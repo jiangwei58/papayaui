@@ -57,40 +57,6 @@ const writePackageJson = (filePath: string, data: Record<string, any>): void => 
 }
 
 /**
- * 生成发布用的 package.json（移植自 createPackage.ts）
- */
-const createPackageJson = (sourceData: Record<string, any>): void => {
-  const packageData = { ...sourceData }
-
-  // 设置 main 字段
-  packageData.main = 'index.ts'
-
-  // 只保留特定的依赖
-  const allowedDependencies = ['async-validator', 'dayjs', 'cos-wx-sdk-v5']
-  for (const key in packageData.dependencies) {
-    if (!allowedDependencies.includes(key)) {
-      delete packageData.dependencies[key]
-    }
-  }
-
-  // 删除不需要的字段
-  delete packageData.scripts
-  delete packageData.devDependencies
-
-  // 添加 files 字段
-  packageData.files = ['*']
-
-  // 确保目录存在
-  const dirPath = path.dirname(PACKAGE_JSON_PATH)
-  if (!fs.existsSync(dirPath)) {
-    fs.mkdirSync(dirPath, { recursive: true })
-  }
-
-  writePackageJson(PACKAGE_JSON_PATH, packageData)
-  console.log(`✓ Package created: ${PACKAGE_JSON_PATH}`)
-}
-
-/**
  * 主函数
  */
 const main = () => {
@@ -121,9 +87,6 @@ const main = () => {
     writePackageJson(filePath, data)
     console.log(`✓ Version updated: ${oldVersion} -> ${newVersion}`)
     console.log(`✓ Updated file: ${filePath}`)
-
-    // 生成发布用的 package.json
-    createPackageJson(data)
   } catch (error) {
     console.error('Error:', error instanceof Error ? error.message : String(error))
     process.exit(1)

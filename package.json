@@ -10,7 +10,7 @@
     "dev": "pnpm -C play dev:mp-weixin",
     "dev:h5": "pnpm -C play dev:h5",
     "gen:docs": "tsx scripts/generateMarkdown/index.ts",
-    "build:package": "bash internal/build.sh",
+    "build:package": "tsx scripts/build.ts",
     "build:docs": "bash internal/build-docs.sh",
     "build:h5-simulator": "pnpm -C play build:h5-simulator",
     "version": "tsx scripts/version.ts",
