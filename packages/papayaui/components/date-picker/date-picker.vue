@@ -47,11 +47,11 @@
 
 <script lang="ts" setup>
 import { computed, toRefs } from 'vue'
-import type { DatePickerColumnType } from '../../core/useDatePicker'
-import { useDatePicker } from '../../core/useDatePicker'
-import useNamespace from '../../core/useNamespace'
-import type { EventDetail } from '../../types'
-import { getUnitValue } from '../../utils'
+import type { DatePickerColumnType } from '@papayaui/core'
+import { useDatePicker } from '@papayaui/core'
+import { useNamespace } from '@papayaui/core'
+import type { EventDetail } from '@papayaui/types'
+import { getUnitValue } from '@papayaui/utils'
 import { datePickerEmits, datePickerProps } from './props'
 
 const ns = useNamespace('date-picker')

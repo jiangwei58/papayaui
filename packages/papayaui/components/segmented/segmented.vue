@@ -30,8 +30,8 @@ import {
   toRefs,
   type CSSProperties,
 } from 'vue'
-import useNamespace from '../../core/useNamespace'
-import { useSelect } from '../../core/useSelect'
+import { useNamespace } from '@papayaui/core'
+import { useSelect } from '@papayaui/core'
 import Icon from '../icon/icon.vue'
 import { segmentedEmits, segmentedProps, type SegmentedOption, type SegmentedValue } from './props'
 

@@ -1,5 +1,5 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
-import { isBoolean, pick } from '../../utils'
+import { isBoolean, pick } from '@papayaui/utils'
 import { transitionProps } from '../transition/props'
 
 export type PopupPosition = 'top' | 'bottom' | 'left' | 'right' | 'center'

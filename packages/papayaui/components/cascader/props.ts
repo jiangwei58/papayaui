@@ -1,7 +1,7 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
-import type { TreeNode, UseTreeFieldNames } from '../../core/useTree'
-import { defaultFieldNames } from '../../core/useTree'
-import { isArray, isObject } from '../../utils'
+import type { TreeNode, UseTreeFieldNames } from '@papayaui/core'
+import { defaultFieldNames } from '@papayaui/core'
+import { isArray, isObject } from '@papayaui/utils'
 import { bottomPopupEmits, bottomPopupProps } from '../bottom-popup/props'
 import type { SearchProps } from '../search'
 

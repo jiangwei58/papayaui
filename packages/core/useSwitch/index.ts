@@ -1,5 +1,5 @@
+import type { IncludeRefs } from '@papayaui/types'
 import { computed, reactive, ref, watch } from 'vue'
-import type { IncludeRefs } from '../../types'
 
 export type SwitchValue = boolean | string | number
 

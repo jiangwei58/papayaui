@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType, CSSProperties } from 'vue'
-import { isNumber, isObject } from '../../utils'
+import { isNumber, isObject } from '@papayaui/utils'
 
 export const countToProps = {
   /**

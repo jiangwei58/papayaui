@@ -1,6 +1,6 @@
-import type { CSSProperties, ComputedRef, Ref, ShallowRef } from 'vue'
-import { computed, isRef, ref, shallowRef, watch } from 'vue'
-import type { EventDetail, MaybeRef } from '../../types'
+import type { EventDetail } from '@papayaui/types'
+import type { ComputedRef, CSSProperties, Ref, ShallowRef } from 'vue'
+import { computed, isRef, MaybeRef, ref, shallowRef, watch } from 'vue'
 
 type UseVirtualElementSizes = {
   /**

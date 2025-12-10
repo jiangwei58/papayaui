@@ -1,4 +1,4 @@
-import { getGlobalOptions } from '../../utils/config'
+import { getGlobalOptions } from '@papayaui/utils'
 import type { ExtractPropTypes, PropType } from 'vue'
 import { getCurrentInstance } from 'vue'
 

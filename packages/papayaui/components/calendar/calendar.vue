@@ -43,9 +43,9 @@
 <script lang="ts" setup>
 import type { Dayjs } from 'dayjs'
 import { nextTick, onMounted, ref, watch } from 'vue'
-import type { DayItem } from '../../core/useCalendar'
-import useNamespace from '../../core/useNamespace'
-import { getUnitValue } from '../../utils'
+import type { DayItem } from '@papayaui/core'
+import { useNamespace } from '@papayaui/core'
+import { getUnitValue } from '@papayaui/utils'
 import CalendarWrapper from '../calendar/calendar-wrapper.vue'
 import Popup from '../popup/popup.vue'
 import { calendarEmits, calendarProps, type CalendarWrapperProps } from './props'

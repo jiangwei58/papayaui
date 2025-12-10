@@ -1,6 +1,6 @@
+import type { IncludeRefs } from '@papayaui/types'
 import type { Ref } from 'vue'
 import { computed, ref, toRef, watch } from 'vue'
-import type { IncludeRefs } from '../../types'
 
 export interface UseSelectProps<T, V> {
   /** 选项数据 */

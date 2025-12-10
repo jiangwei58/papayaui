@@ -13,8 +13,8 @@
 </template>
 
 <script lang="ts" setup>
-import useNamespace from '../../core/useNamespace'
-import { getUnitValue } from '../../utils'
+import { useNamespace } from '@papayaui/core'
+import { getUnitValue } from '@papayaui/utils'
 import { loadingIconProps } from './props'
 
 const ns = useNamespace('loading-icon')

@@ -46,8 +46,8 @@
 
 <script setup lang="ts">
 import { computed, ref, type CSSProperties } from 'vue'
-import { formatNumericTypeString, minAndMax, useNamespace } from '../../core'
-import type { EventDetail } from '../../types'
+import { formatNumericTypeString, minAndMax, useNamespace } from '@papayaui/core'
+import type { EventDetail } from '@papayaui/types'
 import IconComponent from '../icon/icon.vue'
 import { inputEmits, inputProps } from './props'
 

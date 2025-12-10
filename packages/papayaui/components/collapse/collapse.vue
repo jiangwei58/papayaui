@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 import type { CollapseItemInstance, CollapseItemValue } from '../collapse-item/props'
 import { collapseEmits, collapseProps } from './props'
 

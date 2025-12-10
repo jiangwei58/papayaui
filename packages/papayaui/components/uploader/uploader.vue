@@ -51,8 +51,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import useNamespace from '../../core/useNamespace'
-import { getUnitValue } from '../../utils'
+import { useNamespace } from '@papayaui/core'
+import { getUnitValue } from '@papayaui/utils'
 import IconComponent from '../icon/icon.vue'
 import ImageComponent from '../image/image.vue'
 import type { FileItem, FileMediaType } from './props'

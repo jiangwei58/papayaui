@@ -15,8 +15,8 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { LoadStatusEnum } from '../../core'
-import useNamespace from '../../core/useNamespace'
+import { LoadStatusEnum } from '@papayaui/core'
+import { useNamespace } from '@papayaui/core'
 import LoadingIcon from '../loading-icon/loading-icon.vue'
 import { loadMoreEmits, type LoadStatus } from './props'
 import { loadMoreProps } from './props'

@@ -16,8 +16,8 @@
 
 <script lang="ts">
 import { computed, defineComponent, reactive, toRefs, watch } from 'vue'
-import useNamespace, { defaultNamespace } from '../../core/useNamespace'
-import { noop } from '../../utils'
+import { useNamespace, defaultNamespace } from '@papayaui/core'
+import { noop } from '@papayaui/utils'
 import { transitionEmits, transitionProps } from './props'
 
 export default defineComponent({

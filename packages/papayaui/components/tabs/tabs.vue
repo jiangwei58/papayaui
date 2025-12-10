@@ -52,9 +52,9 @@ import {
   watch,
   type CSSProperties,
 } from 'vue'
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 import { useRect } from '../../hooks'
-import { getUnitValue } from '../../utils'
+import { getUnitValue } from '@papayaui/utils'
 import { tabsEmits, tabsProps, type TabItem } from './props'
 
 const ns = useNamespace('tabs')

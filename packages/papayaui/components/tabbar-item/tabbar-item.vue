@@ -12,9 +12,9 @@
 
 <script setup lang="ts">
 import { computed, getCurrentInstance, onMounted, ref, type CSSProperties } from 'vue'
-import { useNamespace } from '../../core'
-import { isUndefined } from '../../utils'
-import { getParentInstance } from '../../utils/component'
+import { useNamespace } from '@papayaui/core'
+import { isUndefined } from '@papayaui/utils'
+import { getParentInstance } from '@papayaui/utils'
 import Badge from '../badge/badge.vue'
 import IconComponent from '../icon/icon.vue'
 import type { TabbarExpose, TabbarProps } from '../tabbar/props'

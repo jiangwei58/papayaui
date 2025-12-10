@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 import { cellGroupProps } from './props'
 
 const ns = useNamespace('cell-group')

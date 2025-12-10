@@ -14,7 +14,7 @@
 <script lang="ts" setup>
 import type { CSSProperties } from 'vue'
 import { computed } from 'vue'
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 import TransitionComponent from '../transition/transition.vue'
 import { overlayEmits, overlayProps } from './props'
 

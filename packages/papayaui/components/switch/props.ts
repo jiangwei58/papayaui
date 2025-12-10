@@ -1,5 +1,5 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
-import type { SwitchValue } from '../../core/useSwitch'
+import type { SwitchValue } from '@papayaui/core'
 
 export const switchProps = {
   /**

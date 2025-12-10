@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import type { InputNumberValue } from '../../core/useInputNumber'
-import type { EventDetail } from '../../types'
-import { isObject } from '../../utils'
+import type { InputNumberValue } from '@papayaui/core'
+import type { EventDetail } from '@papayaui/types'
+import { isObject } from '@papayaui/utils'
 
 export const inputNumberProps = {
   /**

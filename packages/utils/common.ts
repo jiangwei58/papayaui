@@ -1,5 +1,4 @@
-import { isRef } from 'vue'
-import type { MaybeRef } from '../types'
+import { isRef, MaybeRef } from 'vue'
 
 /** 判断传入的值，是否带有单位，如果没有，就默认用rpx单位 */
 export const getUnitValue = (val: number | string, unit = 'rpx'): string => {

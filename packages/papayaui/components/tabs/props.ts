@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType, Ref } from 'vue'
-import { isNumber, isObject, isString } from '../../utils'
+import { isNumber, isObject, isString } from '@papayaui/utils'
 import type { TabPaneProps } from '../tab-pane/props'
-import type { IncludeRefs } from '../../types'
+import type { IncludeRefs } from '@papayaui/types'
 
 export const tabsProps = {
   /**

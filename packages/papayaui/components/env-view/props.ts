@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import { isString } from '../../utils'
+import { isString } from '@papayaui/utils'
 
 export const envViewProps = {
   modelValue: String,

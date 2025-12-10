@@ -15,8 +15,8 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import useNamespace from '../../core/useNamespace'
-import { getUnitValue } from '../../utils'
+import { useNamespace } from '@papayaui/core'
+import { getUnitValue } from '@papayaui/utils'
 import { iconEmits, iconProps } from './props'
 
 const ns = useNamespace('icon')

@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import type { RadioValue } from '../radio/props'
-import { isNumber, isString } from '../../utils'
+import { isNumber, isString } from '@papayaui/utils'
 
 export const radioGroupProps = {
   /**

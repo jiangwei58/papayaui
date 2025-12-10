@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import { isNumber, isString } from '../../utils'
+import { isNumber, isString } from '@papayaui/utils'
 
 export const menuItemProps = {
   /**

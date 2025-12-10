@@ -1,5 +1,4 @@
-import { computed, isRef, shallowRef, toRaw, triggerRef, watch } from 'vue'
-import type { MaybeRef } from '../../types'
+import { computed, isRef, MaybeRef, shallowRef, toRaw, triggerRef, watch } from 'vue'
 
 export interface UseTreeProps<T extends object> {
   /**

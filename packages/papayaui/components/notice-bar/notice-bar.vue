@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { computed, getCurrentInstance, ref, watch } from 'vue'
-import { useNamespace } from '../../core'
+import { useNamespace } from '@papayaui/core'
 import { useRect } from '../../hooks'
 import IconComponent from '../icon/icon.vue'
 import { noticeBarProps, noticeBarEmits } from './props'

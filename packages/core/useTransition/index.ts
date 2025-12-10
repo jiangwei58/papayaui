@@ -1,6 +1,5 @@
-import { computed, nextTick, reactive, toRef, watch, type CSSProperties } from 'vue'
-import type { MaybeRef } from '../../types'
-import { getRefValue, sleep } from '../../utils'
+import { getRefValue, sleep } from '@papayaui/utils'
+import { computed, MaybeRef, nextTick, reactive, toRef, watch, type CSSProperties } from 'vue'
 import { defaultNamespace } from '../useNamespace'
 
 export type TransitionStatus = 'enter' | 'leave' | null

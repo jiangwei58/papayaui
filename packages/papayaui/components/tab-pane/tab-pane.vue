@@ -6,8 +6,8 @@
 
 <script setup lang="ts">
 import { computed, getCurrentInstance, ref, toRefs } from 'vue'
-import { useNamespace } from '../../core'
-import { getParentInstance } from '../../utils/component'
+import { useNamespace } from '@papayaui/core'
+import { getParentInstance } from '@papayaui/utils'
 import type { TabsExpose, TabsProps } from '../tabs/props'
 import { tabPaneProps } from './props'
 

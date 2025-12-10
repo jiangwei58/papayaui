@@ -31,8 +31,8 @@
 <script lang="ts" setup>
 import { computed, type ComponentInternalInstance } from 'vue'
 import { inject } from 'vue'
-import useNamespace, { defaultNamespace } from '../../core/useNamespace'
-import { getUnitValue, noop } from '../../utils'
+import { useNamespace, defaultNamespace } from '@papayaui/core'
+import { getUnitValue, noop } from '@papayaui/utils'
 import type { CheckboxProvideData } from '../checkbox-group/checkbox-group.vue'
 import IconComponent from '../icon/icon.vue'
 import type { CheckboxProps } from './props'

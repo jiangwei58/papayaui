@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import { pick } from '../../utils'
+import { pick } from '@papayaui/utils'
 import { popupEmits, popupProps } from '../popup'
 
 export type ActionType = 'confirm' | 'cancel'

@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import type { FormRuleItem } from '../../core/useForm'
-import { pick } from '../../utils'
+import type { FormRuleItem } from '@papayaui/core'
+import { pick } from '@papayaui/utils'
 import { cellProps } from '../cell'
 
 export const formItemProps = {

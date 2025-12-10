@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 
 const ns = useNamespace('safe-bottom')
 </script>

@@ -18,8 +18,8 @@
 
 <script setup lang="ts">
 import { getCurrentInstance, onMounted, watch } from 'vue'
-import { useNamespace } from '../../core'
-import { getUnitValue } from '../../utils'
+import { useNamespace } from '@papayaui/core'
+import { getUnitValue } from '@papayaui/utils'
 import { circleProps } from './props'
 
 const ns = useNamespace('circle')

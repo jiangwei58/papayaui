@@ -1,5 +1,5 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
-import { isObject } from '../../utils'
+import { isObject } from '@papayaui/utils'
 
 export const iconProps = {
   /**

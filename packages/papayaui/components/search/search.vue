@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts" setup>
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 import Field from '../field/field.vue'
 import { searchEmits, searchProps } from './props'
 

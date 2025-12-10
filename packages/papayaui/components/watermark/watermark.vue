@@ -12,7 +12,7 @@
 
 <script lang="ts" setup>
 import { onMounted, ref, toRefs, watch } from 'vue'
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 import { watermarkProps } from './props'
 
 const ns = useNamespace('watermark')

@@ -1,5 +1,4 @@
-import { computed, ref } from 'vue'
-import type { MaybeRef } from '../../types'
+import { computed, MaybeRef, ref } from 'vue'
 import type { TreeNode, UseTreeProps } from '../useTree'
 import { useTree } from '../useTree'
 

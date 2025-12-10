@@ -1,9 +1,8 @@
 import type { Plugin, App, ComponentInternalInstance } from 'vue'
-import type { CellProps } from '../components'
-import { defaultNamespace } from '../core'
+import { defaultNamespace } from '@papayaui/core'
 
 export interface GlobalOptions {
-  cell?: Partial<Pick<CellProps, 'selectable'>> | undefined
+  cell?: { selectable?: boolean } | undefined
 }
 
 export const GLOBAL_OPTION_KEY = `$${defaultNamespace}Options`

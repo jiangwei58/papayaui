@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts" setup>
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 import { emptyProps } from './props'
 
 const ns = useNamespace('empty')

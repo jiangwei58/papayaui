@@ -1,6 +1,6 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
-import type { LoadStatusEnum } from '../../core'
-import { defaultNamespace } from '../../core/useNamespace'
+import type { LoadStatusEnum } from '@papayaui/core'
+import { defaultNamespace } from '@papayaui/core'
 
 export const loadMoreProps = {
   /**

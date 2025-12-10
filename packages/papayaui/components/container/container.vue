@@ -34,7 +34,7 @@
 
 <script lang="ts" setup>
 import { computed, getCurrentInstance, nextTick, onMounted, ref, useSlots, watch } from 'vue'
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 import useRect from '../../hooks/useRect'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'
 import sticky from '../sticky/sticky.vue'

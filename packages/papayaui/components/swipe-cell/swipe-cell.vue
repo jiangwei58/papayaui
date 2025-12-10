@@ -43,9 +43,9 @@
 
 <script lang="ts">
 import { defineComponent, getCurrentInstance, onMounted, ref, watch } from 'vue'
-import useNamespace, { defaultNamespace } from '../../core/useNamespace'
+import { useNamespace, defaultNamespace } from '@papayaui/core'
 import useRect from '../../hooks/useRect'
-import { getUnitValue } from '../../utils'
+import { getUnitValue } from '@papayaui/utils'
 import ButtonComponent from '../button/button.vue'
 import type { SwipeCellStatus } from './props'
 import { swipeCellEmits, swipeCellProps } from './props'

@@ -12,7 +12,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 import type { Sort } from './props'
 import { sortLabelEmits, sortLabelProps, SortTypeEnum } from './props'
 

@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts" setup>
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 import { sectionEmits, sectionProps } from './props'
 
 const ns = useNamespace('section')

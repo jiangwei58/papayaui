@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import { skeletonTitleProps } from './props'
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 
 const ns = useNamespace('skeleton-title')
 

@@ -51,7 +51,7 @@
 <script lang="ts" setup>
 import type { CSSProperties } from 'vue'
 import { getCurrentInstance, onMounted, ref, useSlots, watch } from 'vue'
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 import { useRect } from '../../hooks'
 import IconComponent from '../icon/icon.vue'
 import type { StepStatus } from './props'

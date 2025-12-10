@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts" setup>
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 import LoadMore from '../loadmore/loadmore.vue'
 import type { LoadStatus } from '../loadmore/props'
 

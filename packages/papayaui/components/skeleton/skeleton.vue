@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { skeletonProps } from './props'
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 import SkeletonAvatar from './skeleton-avatar.vue'
 import SkeletonParagraph from './skeleton-paragraph.vue'
 import SkeletonTitle from './skeleton-title.vue'

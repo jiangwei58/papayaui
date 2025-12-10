@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, Ref } from 'vue'
-import { isNumber, isString } from '../../utils'
+import { isNumber, isString } from '@papayaui/utils'
 
 export const tabbarProps = {
   /**

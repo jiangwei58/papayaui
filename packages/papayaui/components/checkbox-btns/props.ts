@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import { isNumber } from '../../utils'
+import { isNumber } from '@papayaui/utils'
 
 export type CheckboxItem = any
 export type CheckboxButtonValue = any

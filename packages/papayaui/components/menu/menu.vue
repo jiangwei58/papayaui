@@ -17,7 +17,7 @@
 <script lang="ts" setup>
 import type { Ref } from 'vue'
 import { computed, getCurrentInstance, onMounted, provide, ref } from 'vue'
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 import { useRect } from '../../hooks'
 import type { MenuItemInstance } from '../menu-item/menu-item.vue'
 import type { MenuProps } from './props'

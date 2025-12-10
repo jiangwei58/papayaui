@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType, CSSProperties } from 'vue'
-import { isNumber, isString, pick } from '../../utils'
+import { isNumber, isString, pick } from '@papayaui/utils'
 import { badgeProps } from '../badge/props'
 import type { SidebarValue } from '../sidebar/props'
 

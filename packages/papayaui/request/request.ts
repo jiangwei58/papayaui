@@ -1,5 +1,5 @@
+import { merge } from '@papayaui/utils'
 import interceptor from './request.interceptor'
-import { merge } from '../utils'
 
 export interface RequestConfig extends UniApp.RequestOptions {
   /** 基础url地址 */

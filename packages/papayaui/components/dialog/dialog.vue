@@ -55,8 +55,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useNamespace } from '../../core'
-import { getUnitValue } from '../../utils'
+import { useNamespace } from '@papayaui/core'
+import { getUnitValue } from '@papayaui/utils'
 import ButtonComponent from '../button/button.vue'
 import Popup from '../popup/popup.vue'
 import { dialogEmits, dialogProps, type ActionType } from './props'

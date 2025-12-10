@@ -1,7 +1,7 @@
+import type { IncludeRefs } from '@papayaui/types'
 import type { ConfigType, Dayjs } from 'dayjs'
 import dayjs from 'dayjs'
 import { computed, reactive, ref, watch } from 'vue'
-import type { IncludeRefs } from '../../types'
 
 export type FirstDayOfWeekType = 0 | 1 | 2 | 3 | 4 | 5 | 6
 

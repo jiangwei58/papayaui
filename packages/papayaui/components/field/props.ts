@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import type { EventDetail } from '../../types'
-import { isObject, isString, pick } from '../../utils'
+import type { EventDetail } from '@papayaui/types'
+import { isObject, isString, pick } from '@papayaui/utils'
 import { cellProps } from '../cell/props'
 
 export const fieldProps = {

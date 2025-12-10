@@ -30,8 +30,8 @@
 
 <script lang="ts" setup>
 import { computed, inject, type ComponentInternalInstance } from 'vue'
-import useNamespace, { defaultNamespace } from '../../core/useNamespace'
-import { getUnitValue, noop } from '../../utils'
+import { useNamespace, defaultNamespace } from '@papayaui/core'
+import { getUnitValue, noop } from '@papayaui/utils'
 import IconComponent from '../icon/icon.vue'
 import type { RadioProvideData } from '../radio-group/radio-group.vue'
 import type { RadioProps } from './props'

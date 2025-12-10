@@ -82,10 +82,10 @@
 
 <script lang="ts" setup>
 import { computed, ref, toRefs, watch } from 'vue'
-import { useList, LoadStatusEnum } from '../../core/useList'
-import useNamespace from '../../core/useNamespace'
-import { useSelect } from '../../core/useSelect'
-import { debounce } from '../../utils'
+import { useList, LoadStatusEnum } from '@papayaui/core'
+import { useNamespace } from '@papayaui/core'
+import { useSelect } from '@papayaui/core'
+import { debounce } from '@papayaui/utils'
 import BottomPopup from '../bottom-popup/bottom-popup.vue'
 import ButtonComponent from '../button/button.vue'
 import ListItem from '../list-item/list-item.vue'

@@ -16,10 +16,10 @@
 
 <script setup lang="ts">
 import { computed, getCurrentInstance, onMounted, provide, ref } from 'vue'
-import { useNamespace } from '../../core'
+import { useNamespace } from '@papayaui/core'
 import { useRect } from '../../hooks'
-import type { EventDetail } from '../../types'
-import { throttle } from '../../utils'
+import type { EventDetail } from '@papayaui/types'
+import { throttle } from '@papayaui/utils'
 import type { IndexBarProps } from './props'
 import { indexBarProps } from './props'
 

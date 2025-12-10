@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 import IconComponent from '../icon/icon.vue'
 import { listItemEmits, listItemProps } from './props'
 

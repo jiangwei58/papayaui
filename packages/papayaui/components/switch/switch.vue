@@ -14,9 +14,9 @@
 <script lang="ts" setup>
 import type { CSSProperties } from 'vue'
 import { computed, toRefs } from 'vue'
-import useNamespace from '../../core/useNamespace'
-import { useSwitch } from '../../core/useSwitch'
-import { getUnitValue } from '../../utils'
+import { useNamespace } from '@papayaui/core'
+import { useSwitch } from '@papayaui/core'
+import { getUnitValue } from '@papayaui/utils'
 import LoadingIcon from '../loading-icon/loading-icon.vue'
 import { switchEmits, switchProps } from './props'
 

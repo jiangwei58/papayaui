@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import { isArray, isNumber } from '../../utils'
+import { isArray, isNumber } from '@papayaui/utils'
 
 export type SliderValue = number | number[]
 

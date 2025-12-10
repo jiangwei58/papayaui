@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType, Ref } from 'vue'
-import { isUndefined } from '../../utils'
+import { isUndefined } from '@papayaui/utils'
 import type { CollapseItemInstance, CollapseItemValue } from '../collapse-item/props'
 
 export const collapseProps = {

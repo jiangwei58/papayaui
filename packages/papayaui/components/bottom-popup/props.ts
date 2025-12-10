@@ -1,5 +1,5 @@
 import type { ExtractPropTypes } from 'vue'
-import { pick } from '../../utils'
+import { pick } from '@papayaui/utils'
 import { popupEmits, popupProps } from '../popup/props'
 
 export const bottomPopupProps = {

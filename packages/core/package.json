@@ -1,0 +1,19 @@
+{
+  "name": "@papayaui/core",
+  "private": true,
+  "scripts": {
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@papayaui/types": "workspace:^",
+    "@papayaui/utils": "workspace:*",
+    "async-validator": "^4.2.5",
+    "dayjs": "^1.11.1"
+  },
+  "devDependencies": {
+    "vitest": "^4.0.15"
+  },
+  "peerDependencies": {
+    "vue": "^3.4.21"
+  }
+}

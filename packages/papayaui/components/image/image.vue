@@ -33,8 +33,8 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import useNamespace from '../../core/useNamespace'
-import { getUnitValue } from '../../utils'
+import { useNamespace } from '@papayaui/core'
+import { getUnitValue } from '@papayaui/utils'
 import IconComponent from '../icon/icon.vue'
 import { imageEmits, imageProps } from './props'
 

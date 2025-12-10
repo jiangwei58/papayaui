@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import { isArray } from '../../utils'
+import { isArray } from '@papayaui/utils'
 
 export const pickerViewProps = {
   /**

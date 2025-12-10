@@ -1,5 +1,5 @@
 import type { ExtractPropTypes } from 'vue'
-import { isObject } from '../../utils'
+import { isObject } from '@papayaui/utils'
 
 export type CountDownDuration = {
   // 剩余天数

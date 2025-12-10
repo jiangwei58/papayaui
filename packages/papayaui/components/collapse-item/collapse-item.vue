@@ -37,9 +37,9 @@
 
 <script setup lang="ts">
 import { computed, getCurrentInstance, onMounted, ref, type CSSProperties } from 'vue'
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 import { useRect } from '../../hooks'
-import { getParentInstance } from '../../utils/component'
+import { getParentInstance } from '@papayaui/utils'
 import Cell from '../cell/cell.vue'
 import type { CollapseExpose, CollapseProps } from '../collapse'
 import { collapseItemProps, type CollapseItemValue } from './props'

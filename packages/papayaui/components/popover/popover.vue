@@ -36,9 +36,9 @@
 
 <script lang="ts" setup>
 import { computed, getCurrentInstance, nextTick, ref, watch } from 'vue'
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 import useRect from '../../hooks/useRect'
-import { getUnitValue } from '../../utils'
+import { getUnitValue } from '@papayaui/utils'
 import IconComponent from '../icon/icon.vue'
 import type { PopoverAction } from './props'
 import { popoverEmits, popoverProps } from './props'

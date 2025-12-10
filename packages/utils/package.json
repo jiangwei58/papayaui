@@ -1,0 +1,11 @@
+{
+  "name": "@papayaui/utils",
+  "private": true,
+  "dependencies": {
+    "@papayaui/core": "workspace:*",
+    "cos-wx-sdk-v5": "^1.8.0"
+  },
+  "peerDependencies": {
+    "vue": "^3.4.21"
+  }
+}

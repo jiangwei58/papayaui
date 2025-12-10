@@ -22,9 +22,9 @@
 </template>
 
 <script lang="ts" setup>
+import { useNamespace } from '@papayaui/core'
+import { getUnitValue } from '@papayaui/utils'
 import { computed } from 'vue'
-import useNamespace from '../../core/useNamespace'
-import { getUnitValue } from '../../utils'
 import { badgeProps } from './props'
 
 const ns = useNamespace('badge')

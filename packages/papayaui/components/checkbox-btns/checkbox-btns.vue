@@ -30,9 +30,9 @@
 
 <script lang="ts" setup>
 import { toRefs } from 'vue'
-import useNamespace from '../../core/useNamespace'
-import { useSelect } from '../../core/useSelect'
-import { getUnitValue } from '../../utils'
+import { useNamespace } from '@papayaui/core'
+import { useSelect } from '@papayaui/core'
+import { getUnitValue } from '@papayaui/utils'
 import type { CheckboxButtonValue, CheckboxItem } from './props'
 import { checkboxButtonsEmits, checkboxButtonsProps } from './props'
 

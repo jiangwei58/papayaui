@@ -9,7 +9,7 @@
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import { computed, onMounted } from 'vue'
-import { useCountTo, useNamespace } from '../../core'
+import { useCountTo, useNamespace } from '@papayaui/core'
 import { countDownEmits, countDownProps } from './props'
 
 dayjs.extend(duration)

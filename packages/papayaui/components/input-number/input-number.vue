@@ -57,10 +57,10 @@
 <script lang="ts" setup>
 import { computed, nextTick, ref, toRefs } from 'vue'
 import type { EventDetail } from '../..'
-import type { InputNumberValue } from '../../core/useInputNumber'
-import { useInputNumber, minAndMax } from '../../core/useInputNumber'
-import useNamespace from '../../core/useNamespace'
-import { getUnitValue } from '../../utils'
+import type { InputNumberValue } from '@papayaui/core'
+import { useInputNumber, minAndMax } from '@papayaui/core'
+import { useNamespace } from '@papayaui/core'
+import { getUnitValue } from '@papayaui/utils'
 import IconComponent from '../icon/icon.vue'
 import { inputNumberEmits, inputNumberProps } from './props'
 

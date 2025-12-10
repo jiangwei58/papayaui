@@ -1,5 +1,5 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
-import { isBoolean, isUndefined } from '../../utils'
+import { isBoolean, isUndefined } from '@papayaui/utils'
 
 export const checkboxProps = {
   /**

@@ -1,10 +1,12 @@
-import { installer } from './utils/config'
+import { installer } from '@papayaui/utils'
 
 export * from './components'
-export * from './core'
 export * from './hooks'
 export * from './request'
-export * from './types'
-export * from './utils'
+
+// 重导出独立包
+export * from '@papayaui/core'
+export * from '@papayaui/types'
+export * from '@papayaui/utils'
 
 export default installer

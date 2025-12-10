@@ -30,9 +30,9 @@
 <script lang="ts" setup>
 import type { CSSProperties, Ref } from 'vue'
 import { computed, getCurrentInstance, inject, onMounted, ref, toRefs } from 'vue'
-import useNamespace, { defaultNamespace } from '../../core/useNamespace'
-import { useSelect } from '../../core/useSelect'
-import { noop } from '../../utils'
+import { useNamespace, defaultNamespace } from '@papayaui/core'
+import { useSelect } from '@papayaui/core'
+import { noop } from '@papayaui/utils'
 import Cell from '../cell/cell.vue'
 import IconComponent from '../icon/icon.vue'
 import type { MenuProvideData } from '../menu/menu.vue'

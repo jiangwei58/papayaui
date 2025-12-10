@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import { skeletonAvatarProps } from './props'
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 
 const ns = useNamespace('skeleton-avatar')
 

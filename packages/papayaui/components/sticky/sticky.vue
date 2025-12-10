@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
 import { computed, getCurrentInstance, nextTick, onMounted, ref } from 'vue'
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 import { useRect } from '../../hooks'
 import { stickyProps } from './props'
 

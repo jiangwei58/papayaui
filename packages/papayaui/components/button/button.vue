@@ -38,8 +38,8 @@
 <script lang="ts" setup>
 import type { CSSProperties, StyleValue } from 'vue'
 import { computed, ref } from 'vue'
-import useNamespace from '../../core/useNamespace'
-import { getUnitValue, isUndefined } from '../../utils'
+import { useNamespace } from '@papayaui/core'
+import { getUnitValue, isUndefined } from '@papayaui/utils'
 import IconComponent from '../icon/icon.vue'
 import LoadingIcon from '../loading-icon/loading-icon.vue'
 import { buttonEmits, buttonProps } from './props'

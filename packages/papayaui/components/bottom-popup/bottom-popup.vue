@@ -39,8 +39,8 @@
 </template>
 
 <script lang="ts" setup>
+import { useNamespace } from '@papayaui/core'
 import { toRefs } from 'vue'
-import useNamespace from '../../core/useNamespace'
 import Popup from '../popup/popup.vue'
 import { bottomPopupEmits, bottomPopupProps } from './props'
 

@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 import { computed, getCurrentInstance, onMounted, ref, type CSSProperties } from 'vue'
-import { useNamespace } from '../../core'
+import { useNamespace } from '@papayaui/core'
 import { useRect } from '../../hooks'
 import { tabbarEmits, tabbarProps, type TabbarExpose } from './props'
 

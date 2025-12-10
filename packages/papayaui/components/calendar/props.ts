@@ -1,7 +1,7 @@
 import type { Dayjs } from 'dayjs'
 import type { ExtractPropTypes, PropType } from 'vue'
-import type { DayItem, FirstDayOfWeekType } from '../../core/useCalendar'
-import { isArray, isDate, isObject, pick } from '../../utils'
+import type { DayItem, FirstDayOfWeekType } from '@papayaui/core'
+import { isArray, isDate, isObject, pick } from '@papayaui/utils'
 import { popupEmits, popupProps } from '../popup/props'
 
 export type CalendarValue = Date | Date[]

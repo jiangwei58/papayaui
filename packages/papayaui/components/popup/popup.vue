@@ -30,8 +30,8 @@
 <script lang="ts" setup>
 import type { CSSProperties } from 'vue'
 import { computed, ref, toRefs, watch } from 'vue'
-import useNamespace from '../../core/useNamespace'
-import { getUnitValue, noop } from '../../utils'
+import { useNamespace } from '@papayaui/core'
+import { getUnitValue, noop } from '@papayaui/utils'
 import IconComponent from '../icon/icon.vue'
 import Overlay from '../overlay/overlay.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'

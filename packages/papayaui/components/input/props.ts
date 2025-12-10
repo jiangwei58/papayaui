@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import { isString } from '../../utils'
+import { isString } from '@papayaui/utils'
 import { cellProps } from '../cell'
 
 export type InputType = 'text' | 'number'

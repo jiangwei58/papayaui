@@ -3,9 +3,9 @@
 </template>
 
 <script setup lang="ts">
-import { noop } from '../../utils'
+import { noop } from '@papayaui/utils'
 import { getCurrentInstance, inject, onMounted } from 'vue'
-import { useNamespace } from '../../core'
+import { useNamespace } from '@papayaui/core'
 import { useRect } from '../../hooks'
 import type { IndexBarProvideData } from '../index-bar/index-bar.vue'
 import { indexAnchorProps } from './props'

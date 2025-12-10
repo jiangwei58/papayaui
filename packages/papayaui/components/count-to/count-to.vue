@@ -6,8 +6,8 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, toRefs } from 'vue'
-import { useCountTo } from '../../core/useCountTo'
-import useNamespace from '../../core/useNamespace'
+import { useCountTo } from '@papayaui/core'
+import { useNamespace } from '@papayaui/core'
 import { countToEmits, countToProps } from './props'
 
 const ns = useNamespace('count-to')

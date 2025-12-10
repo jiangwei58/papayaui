@@ -23,10 +23,10 @@
 </template>
 
 <script lang="ts" setup>
-import { getUnitValue } from '../../utils'
+import { getUnitValue } from '@papayaui/utils'
 import { computed, getCurrentInstance, nextTick, ref, watch } from 'vue'
 import useRect from '../../hooks/useRect'
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 import { tooltipProps } from './props'
 
 const ns = useNamespace('tooltip')

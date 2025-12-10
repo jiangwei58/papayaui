@@ -6,8 +6,8 @@
 
 <script lang="ts" setup>
 import { provide, toRefs, type Ref } from 'vue'
-import useNamespace from '../../core/useNamespace'
-import { useSelect } from '../../core/useSelect'
+import { useNamespace } from '@papayaui/core'
+import { useSelect } from '@papayaui/core'
 import type { RadioValue } from '../radio/props'
 import { radioGroupEmits, radioGroupProps } from './props'
 

@@ -17,9 +17,9 @@
 
 <script lang="ts" setup>
 import { ref, toRefs, watch } from 'vue'
-import { LoadStatusEnum } from '../../core/useList'
-import useNamespace from '../../core/useNamespace'
-import { debounce } from '../../utils'
+import { LoadStatusEnum } from '@papayaui/core'
+import { useNamespace } from '@papayaui/core'
+import { debounce } from '@papayaui/utils'
 import ListItem from '../list-item/list-item.vue'
 import Loadmore from '../loadmore/loadmore.vue'
 import SafeBottom from '../safe-bottom/safe-bottom.vue'

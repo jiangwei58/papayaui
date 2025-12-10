@@ -1,5 +1,5 @@
+import type { IncludeRefs } from '@papayaui/types'
 import { computed, onUnmounted, reactive, ref } from 'vue'
-import type { IncludeRefs } from '../../types'
 
 export interface UseCountToProps {
   /** 开始值 */

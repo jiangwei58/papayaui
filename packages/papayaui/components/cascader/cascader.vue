@@ -92,11 +92,11 @@
 
 <script lang="ts" setup>
 import { computed, nextTick, ref, toRaw, toRefs, watch } from 'vue'
-import { useCascader } from '../../core/useCascader'
-import { LoadStatusEnum } from '../../core/useList'
-import useNamespace from '../../core/useNamespace'
-import type { TreeNode } from '../../core/useTree'
-import type { EventDetail } from '../../types'
+import { useCascader } from '@papayaui/core'
+import { LoadStatusEnum } from '@papayaui/core'
+import { useNamespace } from '@papayaui/core'
+import type { TreeNode } from '@papayaui/core'
+import type { EventDetail } from '@papayaui/types'
 import BottomPopup from '../bottom-popup/bottom-popup.vue'
 import ButtonComponent from '../button/button.vue'
 import ListItem from '../list-item/list-item.vue'

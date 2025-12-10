@@ -6,8 +6,8 @@
 
 <script lang="ts" setup>
 import { provide, ref, toRefs } from 'vue'
-import { useNamespace } from '../../core'
-import { useSelect } from '../../core/useSelect'
+import { useNamespace } from '@papayaui/core'
+import { useSelect } from '@papayaui/core'
 import type { SidebarItemInstance } from '../sidebar-item/sidebar-item.vue'
 import { sidebarEmits, sidebarProps } from './props'
 

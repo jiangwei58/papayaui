@@ -20,8 +20,8 @@
 
 <script lang="ts" setup>
 import { computed, inject, onMounted, ref, type Ref } from 'vue'
-import { defaultNamespace, useNamespace } from '../../core'
-import { isUndefined, noop } from '../../utils'
+import { defaultNamespace, useNamespace } from '@papayaui/core'
+import { isUndefined, noop } from '@papayaui/utils'
 import Badge from '../badge/badge.vue'
 import type { SidebarProvideData, SidebarValue } from '../sidebar/sidebar.vue'
 import { sidebarItemEmits, sidebarItemProps } from './props'

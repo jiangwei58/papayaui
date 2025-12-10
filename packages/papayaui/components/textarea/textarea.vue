@@ -35,9 +35,9 @@
 
 <script lang="ts" setup>
 import { computed, type CSSProperties } from 'vue'
-import useNamespace from '../../core/useNamespace'
-import type { EventDetail } from '../../types'
-import { getUnitValue } from '../../utils'
+import { useNamespace } from '@papayaui/core'
+import type { EventDetail } from '@papayaui/types'
+import { getUnitValue } from '@papayaui/utils'
 import { textareaEmits, textareaProps } from './props'
 
 const ns = useNamespace('textarea')

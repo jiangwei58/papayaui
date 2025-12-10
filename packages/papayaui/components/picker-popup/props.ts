@@ -1,6 +1,6 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
-import type { UseListProps } from '../../core/useList'
-import { isArray, isNumber, isString, isUndefined } from '../../utils'
+import type { UseListProps } from '@papayaui/core'
+import { isArray, isNumber, isString, isUndefined } from '@papayaui/utils'
 import { bottomPopupEmits, bottomPopupProps } from '../bottom-popup/props'
 import type { SearchProps } from '../search'
 

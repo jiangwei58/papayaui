@@ -1,0 +1,7 @@
+{
+  "name": "@papayaui/types",
+  "private": true,
+  "peerDependencies": {
+    "vue": "^3.4.21"
+  }
+}

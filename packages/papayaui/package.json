@@ -5,8 +5,10 @@
   "main": "index.ts",
   "module": "index.ts",
   "dependencies": {
+    "@papayaui/core": "workspace:*",
+    "@papayaui/types": "workspace:*",
+    "@papayaui/utils": "workspace:*",
     "async-validator": "^4.2.5",
-    "cos-wx-sdk-v5": "^1.8.0",
     "dayjs": "^1.11.1"
   },
   "devDependencies": {

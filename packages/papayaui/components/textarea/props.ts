@@ -1,5 +1,5 @@
 import type { ExtractPropTypes } from 'vue'
-import { isString } from '../../utils'
+import { isString } from '@papayaui/utils'
 import { cellProps } from '../cell/props'
 
 export const textareaProps = {

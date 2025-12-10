@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import { isUndefined } from '../../utils'
+import { isUndefined } from '@papayaui/utils'
 import { iconProps } from '../icon'
 
 export type PopoverTheme = 'light' | 'dark'

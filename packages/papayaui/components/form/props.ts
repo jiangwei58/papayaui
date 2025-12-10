@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import type { FormRules } from '../../core/useForm'
+import type { FormRules } from '@papayaui/core'
 
 export const formProps = {
   /**

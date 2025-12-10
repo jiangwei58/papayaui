@@ -30,9 +30,9 @@
 
 <script lang="ts" setup>
 import { ref, toRefs, watch } from 'vue'
-import useNamespace from '../../core/useNamespace'
-import type { EventDetail } from '../../types'
-import { getUnitValue } from '../../utils'
+import { useNamespace } from '@papayaui/core'
+import type { EventDetail } from '@papayaui/types'
+import { getUnitValue } from '@papayaui/utils'
 import type { PickerViewColumnItem } from './props'
 import { pickerViewEmits, pickerViewProps } from './props'
 

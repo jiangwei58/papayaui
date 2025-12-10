@@ -47,7 +47,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref, watch } from 'vue'
-import useNamespace from '../../core/useNamespace'
+import { useNamespace } from '@papayaui/core'
 import { sliderEmits, sliderProps } from './props'
 
 export default defineComponent({

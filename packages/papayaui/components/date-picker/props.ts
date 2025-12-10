@@ -1,10 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import type {
-  DatePickerColumnType,
-  DatePickerFilter,
-  DatePickerFormatter,
-} from '../../core/useDatePicker'
-import { isDate } from '../../utils'
+import type { DatePickerColumnType, DatePickerFilter, DatePickerFormatter } from '@papayaui/core'
+import { isDate } from '@papayaui/utils'
 
 export const datePickerProps = {
   /**

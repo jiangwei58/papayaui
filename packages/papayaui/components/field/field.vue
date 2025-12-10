@@ -57,9 +57,9 @@
 </template>
 
 <script lang="ts" setup>
-import useNamespace from '../../core/useNamespace'
-import type { EventDetail } from '../../types'
-import { getUnitValue } from '../../utils'
+import { useNamespace } from '@papayaui/core'
+import type { EventDetail } from '@papayaui/types'
+import { getUnitValue } from '@papayaui/utils'
 import Cell from '../cell/cell.vue'
 import IconComponent from '../icon/icon.vue'
 import { fieldEmits, fieldProps } from './props'

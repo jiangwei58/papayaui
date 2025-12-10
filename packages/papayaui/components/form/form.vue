@@ -6,9 +6,9 @@
 
 <script lang="ts" setup>
 import { computed, provide, ref, toRefs } from 'vue'
-import type { FormItemExtraParams, FormRules } from '../../core/useForm'
-import { useFormValidate } from '../../core/useForm'
-import useNamespace from '../../core/useNamespace'
+import type { FormItemExtraParams, FormRules } from '@papayaui/core'
+import { useFormValidate } from '@papayaui/core'
+import { useNamespace } from '@papayaui/core'
 import type { FormItemInstance } from '../form-item/form-item.vue'
 import { formEmits, formProps } from './props'
 

@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import { isArray, isNumber, isObject } from '../../utils'
+import { isArray, isNumber, isObject } from '@papayaui/utils'
 
 export type FileMediaType = 'image' | 'video'
 export type FileOtherType = 'word' | 'excel' | 'ppt' | 'pdf' | 'markdown' | 'zip' | 'file'

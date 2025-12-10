@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import type { CheckboxValue } from '../checkbox/props'
-import { isArray, isString } from '../../utils'
+import { isArray, isString } from '@papayaui/utils'
 
 export const checkboxGroupProps = {
   /**
