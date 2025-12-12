@@ -15,7 +15,7 @@ const ns = useNamespace('tab__pane')
 
 const props = defineProps(tabPaneProps)
 
-const { title, disabled } = toRefs(props)
+const { title, disabled, titleSlot } = toRefs(props)
 
 const instance = getCurrentInstance()
 const parent = getParentInstance<TabsProps, TabsExpose>(instance, 'tabs')
@@ -45,6 +45,7 @@ const init = () => {
       name,
       title,
       disabled,
+      titleSlot,
     })
   }
 }

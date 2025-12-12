@@ -195,6 +195,59 @@ const onChange = (item: CustomTabItem) => {
 }
 
 ```
+## 自定义标题
+
+```html [template]
+
+<pa-tabs v-model="tabActive">
+  <pa-tab-pane name="home" title="首页" title-slot="home-title">
+    <view class="content">首页内容</view>
+  </pa-tab-pane>
+  
+  <pa-tab-pane name="hot" title="热门" title-slot="hot-title">
+    <view class="content">热门内容</view>
+  </pa-tab-pane>
+  
+  <pa-tab-pane name="message" title="消息" title-slot="message-title">
+    <view class="content">消息内容</view>
+  </pa-tab-pane>
+  
+  <pa-tab-pane name="user" title="我的">
+    <view class="content">个人中心</view>
+  </pa-tab-pane>
+
+  <template #home-title>
+    <view class="custom-tab-title">
+      <text class="tab-icon">🏠</text>
+      <text>首页</text>
+    </view>
+  </template>
+  
+  <template #hot-title>
+    <view class="custom-tab-title">
+      <text>热门</text>
+      <view class="red-dot"></view>
+    </view>
+  </template>
+  
+  <template #message-title>
+    <view class="custom-tab-title">
+      <text>消息</text>
+      <view class="badge">
+        <text class="badge-text">99+</text>
+      </view>
+    </view>
+  </template>
+</pa-tabs>
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const tabActive = ref<string>('home')
+
+```
 
 <!--codes end-->
 
@@ -222,6 +275,7 @@ const onChange = (item: CustomTabItem) => {
 | name | 标签名称，作为匹配的标识符 | string \| number | - |
 | title | 标题 | string |  '' |
 | disabled | 是否禁用标签 | boolean | - |
+| titleSlot | 自定义标题插槽名称 | string | - |
 
 <!--props end-->
 
@@ -249,6 +303,7 @@ const onChange = (item: CustomTabItem) => {
 
 | 名称 | 说明 |
 | --- | --- |
+| item.titleSlot | - |
 | default | - |
 
 ## TabPane Slot

@@ -61,7 +61,7 @@ export const tabsEmits = {
   click: (item: any) => isObject(item),
 }
 
-export type TabItem = Required<TabPaneProps>
+export type TabItem = Required<Omit<TabPaneProps, 'titleSlot'>> & Pick<TabPaneProps, 'titleSlot'>
 export type TabItemValue = TabItem['name']
 
 export type TabsProps = ExtractPropTypes<typeof tabsProps>
