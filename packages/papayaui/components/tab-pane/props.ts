@@ -16,6 +16,10 @@ export const tabPaneProps = {
    * 是否禁用标签
    */
   disabled: Boolean,
+  /**
+   * 自定义标题插槽名称
+   */
+  titleSlot: String,
 }
 
 export type TabPaneProps = ExtractPropTypes<typeof tabPaneProps>

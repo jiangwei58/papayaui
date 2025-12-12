@@ -31,6 +31,10 @@
     <Demo8 />
   </DocDemoBlock>
 
+  <DocDemoBlock title="自定义标题">
+    <Demo9 />
+  </DocDemoBlock>
+
   <pa-safe-bottom />
 </template>
 
@@ -44,6 +48,7 @@ import Demo5 from './demo-5.vue'
 import Demo6 from './demo-6.vue'
 import Demo7 from './demo-7.vue'
 import Demo8 from './demo-8.vue'
+import Demo9 from './demo-9.vue'
 </script>
 
 <style lang="scss">

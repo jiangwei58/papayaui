@@ -25,7 +25,13 @@
           ]"
           @click="onChangeTab(item, index)"
         >
-          {{ item.title }}
+          <slot
+            v-if="item.titleSlot && $slots[item.titleSlot]"
+            :name="item.titleSlot"
+            :item="item"
+            :index="index"
+          />
+          <text v-else>{{ item.title }}</text>
         </view>
         <view :class="ns.e('line')" :style="lineStyle"></view>
       </view>
@@ -81,6 +87,7 @@ const navList = computed<TabItem[]>(() => {
         title: tab[props.labelKey as keyof typeof tab] ?? '',
         name: props.valueKey ? tab[props.valueKey as keyof typeof tab] : index,
         disabled: tab['disabled' as keyof typeof tab] ?? false,
+        titleSlot: tab['titleSlot' as keyof typeof tab],
       }
     })
   }
@@ -151,13 +158,13 @@ const updateScrollLeft = async () => {
 
 const onChangeTab = (item: TabItem, _index: number) => {
   if (item.disabled) return
-  
+
   // 如果值没有变化，只触发 click 事件
   if (modelValue.value === item.name) {
     emit('click', item)
     return
   }
-  
+
   emit('update:modelValue', item.name)
   emit('change', item)
   emit('click', item)
