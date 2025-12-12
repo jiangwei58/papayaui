@@ -151,6 +151,13 @@ const updateScrollLeft = async () => {
 
 const onChangeTab = (item: TabItem, _index: number) => {
   if (item.disabled) return
+  
+  // 如果值没有变化，只触发 click 事件
+  if (modelValue.value === item.name) {
+    emit('click', item)
+    return
+  }
+  
   emit('update:modelValue', item.name)
   emit('change', item)
   emit('click', item)
