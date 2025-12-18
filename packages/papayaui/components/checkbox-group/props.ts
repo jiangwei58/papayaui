@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import type { CheckboxValue } from '../checkbox/props'
 import { isArray, isString } from '../../utils'
 
@@ -37,4 +37,6 @@ export const checkboxGroupEmits = {
 }
 
 export type CheckboxGroupProps = ExtractPropTypes<typeof checkboxGroupProps>
+export type CheckboxGroupPropsPublic = ExtractPublicPropTypes<typeof checkboxGroupProps>
+
 export type CheckboxGroupEmits = typeof checkboxGroupEmits

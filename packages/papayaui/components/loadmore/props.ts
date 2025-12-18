@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { CSSProperties, ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import type { LoadStatusEnum } from '../../core'
 import { defaultNamespace } from '../../core/useNamespace'
 
@@ -55,4 +55,6 @@ export const loadMoreEmits = {
 export type LoadStatus = Record<LoadStatusEnum, string>
 
 export type LoadMoreProps = ExtractPropTypes<typeof loadMoreProps>
+export type LoadMorePropsPublic = ExtractPublicPropTypes<typeof loadMoreProps>
+
 export type LoadMoreEmits = typeof loadMoreEmits

@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import { isArray, isNumber } from '../../utils'
 
 export type SliderValue = number | number[]
@@ -91,4 +91,6 @@ export const sliderEmits = {
 }
 
 export type SliderProps = ExtractPropTypes<typeof sliderProps>
+export type SliderPropsPublic = ExtractPublicPropTypes<typeof sliderProps>
+
 export type SliderEmits = typeof sliderEmits

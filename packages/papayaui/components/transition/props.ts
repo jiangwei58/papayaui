@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { CSSProperties, ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 
 /**
  * 动画内置的动画模式有如下：
@@ -87,4 +87,6 @@ export const transitionEmits = {
 }
 
 export type TransitionProps = ExtractPropTypes<typeof transitionProps>
+export type TransitionPropsPublic = ExtractPublicPropTypes<typeof transitionProps>
+
 export type TransitionEmits = typeof transitionEmits

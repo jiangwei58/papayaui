@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { CSSProperties, ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import { isBoolean, isUndefined } from '../../utils'
 
 export const checkboxProps = {
@@ -60,4 +60,6 @@ export const checkboxEmits = {
 export type CheckboxValue = string | number | boolean
 
 export type CheckboxProps = ExtractPropTypes<typeof checkboxProps>
+export type CheckboxPropsPublic = ExtractPublicPropTypes<typeof checkboxProps>
+
 export type CheckboxEmits = typeof checkboxEmits

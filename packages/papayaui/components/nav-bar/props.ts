@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import { isNumber } from '../../utils'
 
 export const navBarProps = {
@@ -43,4 +43,6 @@ export const navBarEmits = {
 }
 
 export type NavBarProps = ExtractPropTypes<typeof navBarProps>
+export type NavBarPropsPublic = ExtractPublicPropTypes<typeof navBarProps>
+
 export type NavBarEmits = typeof navBarEmits

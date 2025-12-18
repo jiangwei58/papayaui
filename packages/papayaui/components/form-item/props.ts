@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import type { FormRuleItem } from '../../core/useForm'
 import { pick } from '../../utils'
 import { cellProps } from '../cell'
@@ -28,4 +28,6 @@ export const formItemEmits = {
 }
 
 export type FormItemProps = ExtractPropTypes<typeof formItemProps>
+export type FormItemPropsPublic = ExtractPublicPropTypes<typeof formItemProps>
+
 export type FormItemEmits = typeof formItemEmits

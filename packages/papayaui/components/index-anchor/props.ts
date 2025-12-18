@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes } from 'vue'
 
 export const indexAnchorProps = {
   /**
@@ -11,3 +11,4 @@ export const indexAnchorProps = {
 }
 
 export type IndexAnchorProps = ExtractPropTypes<typeof indexAnchorProps>
+export type IndexAnchorPropsPublic = ExtractPublicPropTypes<typeof indexAnchorProps>

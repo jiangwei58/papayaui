@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes } from 'vue'
 import { isObject } from '../../utils'
 
 export type CountDownDuration = {
@@ -50,4 +50,6 @@ export const countDownEmits = {
 }
 
 export type CountDownProps = ExtractPropTypes<typeof countDownProps>
+export type CountDownPropsPublic = ExtractPublicPropTypes<typeof countDownProps>
+
 export type CountDownEmits = typeof countDownEmits

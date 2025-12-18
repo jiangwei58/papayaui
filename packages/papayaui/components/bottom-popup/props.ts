@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes } from 'vue'
 import { pick } from '../../utils'
 import { popupEmits, popupProps } from '../popup/props'
 
@@ -49,4 +49,6 @@ export const bottomPopupEmits = {
 }
 
 export type BottomPopupProps = ExtractPropTypes<typeof bottomPopupProps>
+export type BottomPopupPropsPublic = ExtractPublicPropTypes<typeof bottomPopupProps>
+
 export type BottomPopupEmits = typeof bottomPopupEmits

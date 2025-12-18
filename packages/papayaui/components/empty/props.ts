@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 
 export const emptyProps = {
   /**
@@ -18,3 +18,4 @@ export const emptyProps = {
 }
 
 export type EmptyProps = ExtractPropTypes<typeof emptyProps>
+export type EmptyPropsPublic = ExtractPublicPropTypes<typeof emptyProps>

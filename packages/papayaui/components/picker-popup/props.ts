@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { CSSProperties, ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import type { UseListProps } from '../../core/useList'
 import { isArray, isNumber, isString, isUndefined } from '../../utils'
 import { bottomPopupEmits, bottomPopupProps } from '../bottom-popup/props'
@@ -134,4 +134,6 @@ export const pickerPopupEmits = {
 }
 
 export type PickerPopupProps = ExtractPropTypes<typeof pickerPopupProps>
+export type PickerPopupPropsPublic = ExtractPublicPropTypes<typeof pickerPopupProps>
+
 export type PickerPopupEmits = typeof pickerPopupEmits

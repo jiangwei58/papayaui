@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import type { InputNumberValue } from '../../core/useInputNumber'
 import type { EventDetail } from '../../types'
 import { isObject } from '../../utils'
@@ -120,4 +120,6 @@ export const inputNumberEmits = {
 }
 
 export type InputNumberProps = ExtractPropTypes<typeof inputNumberProps>
+export type InputNumberPropsPublic = ExtractPublicPropTypes<typeof inputNumberProps>
+
 export type InputNumberEmits = typeof inputNumberEmits

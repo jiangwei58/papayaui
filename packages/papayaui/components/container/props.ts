@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes } from 'vue'
 import { watermarkProps } from '../watermark/props'
 
 export const containerProps = {
@@ -56,3 +56,4 @@ export const containerProps = {
 }
 
 export type ContainerProps = ExtractPropTypes<typeof containerProps>
+export type ContainerPropsPublic = ExtractPublicPropTypes<typeof containerProps>

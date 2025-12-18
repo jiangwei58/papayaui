@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes } from 'vue'
 
 export const tabPaneProps = {
   /**
@@ -23,3 +23,4 @@ export const tabPaneProps = {
 }
 
 export type TabPaneProps = ExtractPropTypes<typeof tabPaneProps>
+export type TabPanePropsPublic = ExtractPublicPropTypes<typeof tabPaneProps>

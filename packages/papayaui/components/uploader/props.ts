@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import { isArray, isNumber, isObject } from '../../utils'
 
 export type FileMediaType = 'image' | 'video'
@@ -137,4 +137,6 @@ export const uploaderEmits = {
 }
 
 export type UploaderProps = ExtractPropTypes<typeof uploaderProps>
+export type UploaderPropsPublic = ExtractPublicPropTypes<typeof uploaderProps>
+
 export type UploaderEmits = typeof uploaderEmits

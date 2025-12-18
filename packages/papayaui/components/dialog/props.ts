@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import { pick } from '../../utils'
 import { popupEmits, popupProps } from '../popup'
 
@@ -74,4 +74,6 @@ export const dialogEmits = {
 }
 
 export type DialogProps = ExtractPropTypes<typeof dialogProps>
+export type DialogPropsPublic = ExtractPublicPropTypes<typeof dialogProps>
+
 export type DialogEmits = typeof dialogEmits

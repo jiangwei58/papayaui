@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { CSSProperties, ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import { isBoolean, pick } from '../../utils'
 import { transitionProps } from '../transition/props'
 
@@ -100,4 +100,6 @@ export const popupEmits = {
 }
 
 export type PopupProps = ExtractPropTypes<typeof popupProps>
+export type PopupPropsPublic = ExtractPublicPropTypes<typeof popupProps>
+
 export type PopupEmits = typeof popupEmits

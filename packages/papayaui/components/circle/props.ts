@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes } from 'vue'
 
 export const circleProps = {
   /**
@@ -57,3 +57,4 @@ export const circleProps = {
 }
 
 export type CircleProps = ExtractPropTypes<typeof circleProps>
+export type CirclePropsPublic = ExtractPublicPropTypes<typeof circleProps>

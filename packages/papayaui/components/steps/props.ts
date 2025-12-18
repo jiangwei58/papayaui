@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import { isNumber } from '../../utils'
 
 export const stepsProps = {
@@ -39,4 +39,6 @@ export type StepItem = {
 }
 
 export type StepsProps = ExtractPropTypes<typeof stepsProps>
+export type StepsPropsPublic = ExtractPublicPropTypes<typeof stepsProps>
+
 export type StepsEmits = typeof stepsEmits

@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 
 export const indexBarProps = {
   /**
@@ -32,3 +32,4 @@ export const indexBarProps = {
 }
 
 export type IndexBarProps = ExtractPropTypes<typeof indexBarProps>
+export type IndexBarPropsPublic = ExtractPublicPropTypes<typeof indexBarProps>

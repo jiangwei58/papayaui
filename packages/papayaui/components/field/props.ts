@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import type { EventDetail } from '../../types'
 import { isObject, isString, pick } from '../../utils'
 import { cellProps } from '../cell/props'
@@ -119,4 +119,6 @@ export const fieldEmits = {
 }
 
 export type FieldProps = ExtractPropTypes<typeof fieldProps>
+export type FieldPropsPublic = ExtractPublicPropTypes<typeof fieldProps>
+
 export type FieldEmits = typeof fieldEmits

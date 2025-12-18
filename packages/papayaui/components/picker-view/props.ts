@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import { isArray } from '../../utils'
 
 export const pickerViewProps = {
@@ -63,4 +63,6 @@ export const pickerViewEmits = {
 export type PickerViewColumnItem = string | Record<string, any>
 
 export type PickerViewProps = ExtractPropTypes<typeof pickerViewProps>
+export type PickerViewPropsPublic = ExtractPublicPropTypes<typeof pickerViewProps>
+
 export type PickerViewEmits = typeof pickerViewEmits

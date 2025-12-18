@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes } from 'vue'
 import { isString } from '../../utils'
 import { cellProps } from '../cell/props'
 
@@ -123,4 +123,6 @@ export const textareaEmits = {
 }
 
 export type TextareaProps = ExtractPropTypes<typeof textareaProps>
+export type TextareaPropsPublic = ExtractPublicPropTypes<typeof textareaProps>
+
 export type TextareaEmits = typeof textareaEmits

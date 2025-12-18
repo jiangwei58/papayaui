@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import { isString } from '../../utils'
 
 export const envViewProps = {
@@ -22,4 +22,6 @@ export interface EnvListItem {
 }
 
 export type EnvViewProps = ExtractPropTypes<typeof envViewProps>
+export type EnvViewPropsPublic = ExtractPublicPropTypes<typeof envViewProps>
+
 export type EnvViewEmits = typeof envViewEmits

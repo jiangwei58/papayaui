@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { CSSProperties, ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import type { SwitchValue } from '../../core/useSwitch'
 
 export const switchProps = {
@@ -51,4 +51,6 @@ export const switchEmits = {
 }
 
 export type SwitchProps = ExtractPropTypes<typeof switchProps>
+export type SwitchPropsPublic = ExtractPublicPropTypes<typeof switchProps>
+
 export type SwitchEmits = typeof switchEmits

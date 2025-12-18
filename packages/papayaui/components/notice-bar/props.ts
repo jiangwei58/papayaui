@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 
 export const noticeBarProps = {
   /**
@@ -60,4 +60,6 @@ export const noticeBarEmits = {
 }
 
 export type NoticeBarProps = ExtractPropTypes<typeof noticeBarProps>
+export type NoticeBarPropsPublic = ExtractPublicPropTypes<typeof noticeBarProps>
+
 export type NoticeBarEmits = typeof noticeBarEmits

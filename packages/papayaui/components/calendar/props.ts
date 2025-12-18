@@ -1,5 +1,5 @@
 import type { Dayjs } from 'dayjs'
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import type { DayItem, FirstDayOfWeekType } from '../../core/useCalendar'
 import { isArray, isDate, isObject, pick } from '../../utils'
 import { popupEmits, popupProps } from '../popup/props'
@@ -169,6 +169,10 @@ export const calendarEmits = {
 }
 
 export type CalendarProps = ExtractPropTypes<typeof calendarProps>
+export type CalendarPropsPublic = ExtractPublicPropTypes<typeof calendarProps>
+
 export type CalendarWrapperProps = ExtractPropTypes<typeof calendarWrapperProps>
+export type CalendarWrapperPropsPublic = ExtractPublicPropTypes<typeof calendarWrapperProps>
+
 export type CalendarEmits = typeof calendarEmits
 export type CalendarWrapperEmits = typeof calendarWrapperEmits

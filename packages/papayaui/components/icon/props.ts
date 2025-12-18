@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { CSSProperties, ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import { isObject } from '../../utils'
 
 export const iconProps = {
@@ -37,4 +37,6 @@ export const iconEmits = {
 }
 
 export type IconProps = ExtractPropTypes<typeof iconProps>
+export type IconPropsPublic = ExtractPublicPropTypes<typeof iconProps>
+
 export type IconEmits = typeof iconEmits

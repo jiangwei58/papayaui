@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType, CSSProperties } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType, CSSProperties } from 'vue'
 import { isNumber, isString } from '../../utils'
 
 export const sidebarProps = {
@@ -24,4 +24,6 @@ export const sidebarEmits = {
 export type SidebarValue = string | number
 
 export type SidebarProps = ExtractPropTypes<typeof sidebarProps>
+export type SidebarPropsPublic = ExtractPublicPropTypes<typeof sidebarProps>
+
 export type SidebarEmits = typeof sidebarEmits

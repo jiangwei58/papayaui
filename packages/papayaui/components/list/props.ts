@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import type { LoadStatus } from '../loadmore/props'
 
 export const listProps = {
@@ -16,3 +16,4 @@ export const listProps = {
 }
 
 export type ListProps = ExtractPropTypes<typeof listProps>
+export type ListPropsPublic = ExtractPublicPropTypes<typeof listProps>

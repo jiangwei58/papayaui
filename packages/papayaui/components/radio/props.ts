@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { CSSProperties, ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import { isNumber, isString } from '../../utils'
 
 export const radioProps = {
@@ -51,4 +51,6 @@ export const radioEmits = {
 export type RadioValue = string | number
 
 export type RadioProps = ExtractPropTypes<typeof radioProps>
+export type RadioPropsPublic = ExtractPublicPropTypes<typeof radioProps>
+
 export type RadioEmits = typeof radioEmits

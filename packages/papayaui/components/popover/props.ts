@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import { isUndefined } from '../../utils'
 import { iconProps } from '../icon'
 
@@ -78,4 +78,6 @@ export const popoverEmits = {
 }
 
 export type PopoverProps = ExtractPropTypes<typeof popoverProps>
+export type PopoverPropsPublic = ExtractPublicPropTypes<typeof popoverProps>
+
 export type PopoverEmits = typeof popoverEmits
