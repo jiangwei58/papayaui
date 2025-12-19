@@ -34,7 +34,7 @@ const ns = useNamespace('menu')
 
 const props = defineProps(menuProps)
 
-const systemInfo = uni.getSystemInfoSync()
+const systemInfo = uni.getWindowInfo()
 const instance = getCurrentInstance()
 
 const children = ref<MenuItemInstance[]>([])

@@ -55,7 +55,7 @@ watch(
 )
 
 const initMP = () => {
-  const ratio = uni.getSystemInfoSync().pixelRatio
+  const ratio = uni.getWindowInfo().pixelRatio
   const query = uni.createSelectorQuery()
   query
     .in(instance)
