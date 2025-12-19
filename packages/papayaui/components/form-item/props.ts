@@ -4,7 +4,7 @@ import { pick } from '../../utils'
 import { cellProps } from '../cell'
 
 export const formItemProps = {
-  ...pick(cellProps, ['titleWidth', 'suffix']),
+  ...pick(cellProps, ['titleWidth', 'suffix', 'value']),
   /**
    * 校验对应的字段名
    */
