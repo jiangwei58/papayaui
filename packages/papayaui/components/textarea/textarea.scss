@@ -4,13 +4,19 @@
   $line-height: 24px;
 
   position: relative;
-  display: flex;
+  display: block;
   width: 100%;
   background-color: _var(textarea-background-color, #fff);
-  padding: _var(textarea-padding, 10px 25px);
+  padding: _var(textarea-padding, 12px 12px);
   font-size: _var(textarea-font-size, 14px);
   color: _var(textarea-color, _var(color-black));
   line-height: _var(textarea-line-height, $line-height);
+
+  &__body {
+    display: flex;
+    align-items: start;
+    width: 100%;
+  }
 
   &__textarea {
     width: inherit;
@@ -26,11 +32,19 @@
   }
 
   &__limit {
-    position: absolute;
-    right: 15px;
-    bottom: 12px;
-    font-size: _var(textarea-font-size, 14px);
-    color: gray;
+    font-size: _var(textarea-limit-font-size, 12px);
+    line-height: _var(textarea-limit-font-size, 12px);
+    color: _var(textarea-limit-color, gray);
+    text-align: _var(textarea-limit-text-align, right);
+    margin-top: _var(textarea-limit-margin-top, 4px);
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    font-size: _var(textarea-icon-font-size, 16px);
+    color: _var(color-disabled);
+    line-height: inherit;
+    margin-left: _var(textarea-icon-margin-left, 8px);
   }
 
   &--auto-height {

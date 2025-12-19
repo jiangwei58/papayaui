@@ -34,6 +34,10 @@ export const textareaProps = {
    */
   disabled: Boolean,
   /**
+   * 是否显示清除控件
+   */
+  clearable: Boolean,
+  /**
    * 最大输入长度，设置为 -1 的时候不限制最大长度
    */
   maxlength: {
@@ -118,6 +122,7 @@ export const textareaEmits = {
   focus: (_value: Event) => true,
   blur: (_value: Event) => true,
   confirm: (_value: Event) => true,
+  clear: () => true,
   linechange: (_value: Event) => true,
   keyboardheightchange: (_value: Event) => true,
 }

@@ -5,6 +5,9 @@
   <DocDemoBlock title="显示字数统计">
     <Demo2 />
   </DocDemoBlock>
+  <DocDemoBlock title="清除按钮">
+    <Demo6 />
+  </DocDemoBlock>
   <DocDemoBlock title="自动增高">
     <Demo3 />
   </DocDemoBlock>
@@ -24,6 +27,7 @@ import Demo2 from './demo-2.vue'
 import Demo3 from './demo-3.vue'
 import Demo4 from './demo-4.vue'
 import Demo5 from './demo-5.vue'
+import Demo6 from './demo-6.vue'
 </script>
 
 <style lang="scss" scoped></style>
