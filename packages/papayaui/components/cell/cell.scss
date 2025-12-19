@@ -60,8 +60,8 @@
 
   &__error-message {
     color: _var(color-error);
-    font-size: 12px;
-    text-align: left;
+    font-size: _var(cell-error-message-font-size, 12px);
+    text-align: _var(cell-error-message-text-align, left);
   }
 
   &--hover {
@@ -74,9 +74,9 @@
 
   &--required::before {
     position: absolute;
-    left: 8px;
-    color: #ee0a24;
-    font-size: 14px;
+    left: _var(cell-required-left, 8px);
+    color: _var(cell-required-color, #ee0a24);
+    font-size: _var(cell-required-font-size, 14px);
     content: '*';
   }
 
@@ -88,7 +88,7 @@
     right: _var(cell-padding-x, $padding-x);
     bottom: 0;
     left: _var(cell-padding-x, $padding-x);
-    border-bottom: 1px solid #ebedf0;
+    border-bottom: 1px solid _var(cell-border-bottom-color, #ebedf0);
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
   }
