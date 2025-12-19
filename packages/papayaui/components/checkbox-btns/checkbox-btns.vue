@@ -11,6 +11,7 @@
         ns.b('button'),
         {
           active: typeof modelValue !== 'undefined' ? isSelected(item[valueKey]) : false,
+          disabled: disabled,
         },
       ]"
       :style="
@@ -57,6 +58,7 @@ const {
 })
 
 const onSelect = (item: CheckboxItem, index: number) => {
+  if (props.disabled) return
   _onSelect(item[valueKey.value])
   emit('update:modelValue', selectedValues.value)
   emit('change', selectedItems.value, index)

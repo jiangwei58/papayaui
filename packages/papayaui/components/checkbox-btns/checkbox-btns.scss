@@ -14,5 +14,9 @@
       background-color: _var(checkbox-btns-active-background, rgba(0, 156, 93, 0.1)) !important;
       border-color: _var(checkbox-btns-active-border-color, _var(color-primary)) !important;
     }
+    &.disabled {
+      opacity: _var(checkbox-btns-disabled-opacity, 0.8);
+      cursor: not-allowed;
+    }
   }
 }
