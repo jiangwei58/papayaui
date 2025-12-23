@@ -157,6 +157,7 @@ const value = ref('')
 | max | 最大值 | number | - |
 | intLength | 整数位长度 | number | - |
 | decimalLength | 小数位长度 | number | - |
+| allowNegative | 是否允许输入负数 | boolean | - |
 
 <!--props end-->
 

@@ -20,7 +20,7 @@ const onConfirm = (date: Date) => {
   const newVal = dayjs(date)
   uni.showToast({
     icon: 'none',
-    title: `当前选中的值是：${newVal.format('YYYY-MM-DD HH:mm:ss')}`,
+    title: `当前选中的值是1：${newVal.format('YYYY-MM-DD HH:mm:ss')}`,
   })
 }
 
@@ -31,7 +31,7 @@ const onConfirm = (date: Date) => {
 
 <pa-cell title="选择年月日" :value="dateText" clickable @click="datePickerShow = true" />
 <pa-popup v-model:show="datePickerShow" position="bottom">
-  <pa-date-picker title="选择年月日" @confirm="onConfirm" />
+  <pa-date-picker title="选择年月日" @cancel="datePickerShow = false" @confirm="onConfirm" />
 </pa-popup>
 
 ```

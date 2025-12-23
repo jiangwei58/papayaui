@@ -30,6 +30,20 @@ import { ref } from 'vue'
 const text = ref('')
 
 ```
+## 清除按钮
+
+```html [template]
+
+<pa-textarea v-model="text" clearable />
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const text = ref('')
+
+```
 ## 自动增高
 
 ```html [template]
@@ -87,6 +101,7 @@ const formData = ref({
 | inputAlign | 值对齐方式 | 'left'\|'center'\|'right' |  'left' |
 | readonly | 是否只读 | boolean | - |
 | disabled | 是否禁用 | boolean | - |
+| clearable | 是否显示清除控件 | boolean | - |
 | maxlength | 最大输入长度，设置为 -1 的时候不限制最大长度 | number |  140 |
 | autoHeight | 是否自动增高，设置auto-height时，style.height不生效 | boolean |  false |
 | showCount | 是否显示统计字数 | boolean | - |
@@ -115,6 +130,7 @@ const formData = ref({
 | focus | (value: Event)  |
 | blur | (value: Event)  |
 | confirm | (value: Event)  |
+| clear | ()  |
 | linechange | (value: Event)  |
 | keyboardheightchange | (value: Event)  |
 
@@ -138,13 +154,19 @@ const formData = ref({
 | --- | --- |
 | --pa-textarea-color | var(--pa-color-black) |
 | --pa-textarea-height | 72px |
-| --pa-textarea-padding | 10px 25px |
+| --pa-textarea-padding | 12px 12px |
 | --pa-textarea-background-color | #fff |
 | --pa-textarea-disabled-color | #c8c9cc |
 | --pa-textarea-font-size | 14px |
+| --pa-textarea-limit-color | gray |
 | --pa-textarea-line-height | 24px |
 | --pa-textarea-placeholder-color | var(--pa-color-disabled) |
 | --pa-textarea-text-align | left |
+| --pa-textarea-icon-font-size | 16px |
+| --pa-textarea-icon-margin-left | 8px |
+| --pa-textarea-limit-font-size | 12px |
+| --pa-textarea-limit-margin-top | 4px |
+| --pa-textarea-limit-text-align | right |
 
 <!--cssVar end-->
 

@@ -99,6 +99,29 @@ const getData = (count: number) => {
 }
 
 ```
+## 禁用状态
+
+```html [template]
+
+<pa-checkbox-btns v-model="selectedValue" :options="getData(6)" disabled />
+
+```
+```ts [script]
+
+import { ref } from 'vue'
+
+const selectedValue = ref<number>(0)
+
+const getData = (count: number) => {
+  return new Array(count).fill(0).map((_item, index) => {
+    return {
+      label: `选项${index}`,
+      value: index,
+    }
+  })
+}
+
+```
 
 <!--codes end-->
 
@@ -118,6 +141,7 @@ const getData = (count: number) => {
 | bgColor | 背景色 | string | - |
 | round | 圆角大小, 值为true时半圆角 | boolean \| string |  '4rpx' |
 | inverse | 是否支持反选 | boolean |  true |
+| disabled | 是否禁用 | boolean |  false |
 
 <!--props end-->
 
@@ -155,6 +179,7 @@ const getData = (count: number) => {
 | --pa-checkbox-btns-active-color | var(--pa-color-primary) |
 | --pa-checkbox-btns-border-color | var(--pa-color-gray) |
 | --pa-checkbox-btns-border-width | 2rpx |
+| --pa-checkbox-btns-disabled-opacity | 0.8 |
 | --pa-checkbox-btns-font-size | 14px |
 | --pa-checkbox-btns-active-border-color | var(--pa-color-primary) |
 
