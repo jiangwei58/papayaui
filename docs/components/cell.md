@@ -150,16 +150,22 @@
 | --pa-cell-line-height | 24px |
 | --pa-cell-padding-x | 16px |
 | --pa-cell-padding-y | 10px |
+| --pa-cell-required-color | #ee0a24 |
+| --pa-cell-required-left | 8px |
 | --pa-cell-suffix-color | inherit |
 | --pa-cell-title-color | var(--pa-color-black) |
 | --pa-cell-title-flex | 1 |
 | --pa-cell-value-color | var(--pa-color-primary) |
 | --pa-cell-value-flex | 1 |
+| --pa-cell-border-bottom-color | #ebedf0 |
 | --pa-cell-icon-right-rotate | 0 |
 | --pa-cell-label-font-size | 12px |
 | --pa-cell-label-line-height | 18px |
+| --pa-cell-required-font-size | 14px |
 | --pa-cell-suffix-margin-left | 5rpx |
 | --pa-cell-value-text-align | right |
+| --pa-cell-error-message-font-size | 12px |
+| --pa-cell-error-message-text-align | left |
 | --pa-cell-icon-left-margin-left | 4px |
 | --pa-cell-icon-right-margin-left | 4px |
 
