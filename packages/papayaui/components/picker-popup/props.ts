@@ -39,6 +39,10 @@ export const pickerPopupProps = {
    */
   showSearch: Boolean,
   /**
+   * 搜索文本
+   */
+  searchValue: String,
+  /**
    * 搜索框的props
    */
   searchProps: {
@@ -125,6 +129,7 @@ export const pickerPopupEmits = {
   ...bottomPopupEmits,
   'update:modelValue': (value: OptionValue | OptionValue[]) =>
     isString(value) || isNumber(value) || isArray(value),
+  'update:searchValue': (value: string) => isString(value),
   select: (value: OptionValue, _item: Option) => !isUndefined(value),
   change: (item: Option | Option[]) => !isUndefined(item),
   /**

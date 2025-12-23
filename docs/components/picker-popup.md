@@ -238,6 +238,7 @@ const onLoad = (query?: string, pageNumber?: number, pageSize?: number) => {
 | labelKey | 数据标题的字段名 | string |  'label' |
 | valueKey | 数据值的字段名 | string |  'value' |
 | showSearch | 是否显示搜索 | boolean | - |
+| searchValue | 搜索文本 | string | - |
 | searchProps | 搜索框的props | Partial\<SearchProps\> |  () => ({}) |
 | multiple | 是否多选 | boolean |  false |
 | load | 动态获取下一级节点数据 | (query?:string,pageNumber?:number,pageSize?:number,extra?:Record\<string,unknown\>)<br />=\>Option[]\|Promise\<Option[]\> | - |
@@ -262,6 +263,7 @@ const onLoad = (query?: string, pageNumber?: number, pageSize?: number) => {
 | 事件名 | 参数 |
 | --- | --- |
 | update:modelValue | (value: OptionValue \| OptionValue[])  |
+| update:searchValue | (value: string)  |
 | select | (value: OptionValue, item: Option)  |
 | change | (item: Option \| Option[])  |
 | create | (text: string) |
