@@ -1,5 +1,5 @@
 import { getGlobalOptions } from '../../utils/config'
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import { getCurrentInstance } from 'vue'
 
 export const cellProps = {
@@ -93,4 +93,6 @@ export const cellEmits = {
 }
 
 export type CellProps = ExtractPropTypes<typeof cellProps>
+export type CellPropsPublic = ExtractPublicPropTypes<typeof cellProps>
+
 export type CellEmits = typeof cellEmits

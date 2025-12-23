@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { CSSProperties, ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import { transitionProps } from '../transition/props'
 
 export const overlayProps = {
@@ -32,4 +32,6 @@ export const overlayEmits = {
 }
 
 export type OverlayProps = ExtractPropTypes<typeof overlayProps>
+export type OverlayPropsPublic = ExtractPublicPropTypes<typeof overlayProps>
+
 export type OverlayEmits = typeof overlayEmits

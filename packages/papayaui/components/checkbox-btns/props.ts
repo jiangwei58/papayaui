@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import { isNumber } from '../../utils'
 
 export type CheckboxItem = any
@@ -72,6 +72,13 @@ export const checkboxButtonsProps = {
     type: Boolean,
     default: true,
   },
+  /**
+   * 是否禁用
+   */
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 }
 
 export const checkboxButtonsEmits = {
@@ -80,4 +87,6 @@ export const checkboxButtonsEmits = {
 }
 
 export type CheckboxButtonsProps = ExtractPropTypes<typeof checkboxButtonsProps>
+export type CheckboxButtonsPropsPublic = ExtractPublicPropTypes<typeof checkboxButtonsProps>
+
 export type CheckboxButtonsEmits = typeof checkboxButtonsEmits

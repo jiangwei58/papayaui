@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { CSSProperties, ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import { isObject } from '../../utils'
 
 export const sectionProps = {
@@ -20,4 +20,6 @@ export const sectionEmits = {
 }
 
 export type SectionProps = ExtractPropTypes<typeof sectionProps>
+export type SectionPropsPublic = ExtractPublicPropTypes<typeof sectionProps>
+
 export type SectionEmits = typeof sectionEmits

@@ -4,7 +4,7 @@
       ns.b(),
       ns.m(theme),
       ns.is('single', leftMenu.length === 1),
-      ns.is('development', systemInfo.platform === 'devtools'),
+      ns.is('development', deviceInfo.platform === 'devtools'),
     ]"
     :style="{ backgroundColor: bgColor, paddingTop: getUnitValue(statusBarHeight, 'px') }"
   >
@@ -32,13 +32,14 @@
 
 <script lang="ts" setup>
 import type { CSSProperties } from 'vue'
-import { computed, defineProps } from 'vue'
+import { computed } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
 import IconComponent from '../icon/icon.vue'
 import { navBarEmits, navBarProps } from './props'
 
-const systemInfo = uni.getSystemInfoSync()
+const windowInfo = uni.getWindowInfo()
+const deviceInfo = uni.getDeviceInfo()
 let menuButtonInfo: UniApp.GetMenuButtonBoundingClientRectRes = {
   top: 0,
   left: 0,
@@ -57,11 +58,11 @@ const props = defineProps(navBarProps)
 const emit = defineEmits(navBarEmits)
 
 const statusBarHeight = computed(() => {
-  return props.safeAreaInsetTop ? (systemInfo.statusBarHeight as number) : 0
+  return props.safeAreaInsetTop ? (windowInfo.statusBarHeight as number) : 0
 })
 
 const contentHeight = computed(() => {
-  return systemInfo.platform === 'ios' ? 44 : 48
+  return deviceInfo.platform === 'ios' ? 44 : 48
 })
 
 const capsuleMenuStyle = computed<CSSProperties>(() => {

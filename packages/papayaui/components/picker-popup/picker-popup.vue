@@ -82,7 +82,8 @@
 
 <script lang="ts" setup>
 import { computed, ref, toRefs, watch } from 'vue'
-import { useList, LoadStatusEnum } from '../../core/useList'
+import { LoadStatusEnum, useList } from '../../core/useList'
+import { useModel } from '../../core/useModel'
 import useNamespace from '../../core/useNamespace'
 import { useSelect } from '../../core/useSelect'
 import { debounce } from '../../utils'
@@ -102,7 +103,7 @@ const emit = defineEmits(pickerPopupEmits)
 
 const { show, data, modelValue, labelKey, valueKey, multiple, pagination } = toRefs(props)
 
-const searchText = ref<string>('')
+const searchText = useModel<string>(props, 'searchValue', emit, '')
 const createOptions = ref<Option[]>([])
 
 const {

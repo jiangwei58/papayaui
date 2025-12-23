@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes } from 'vue'
 import { isString } from '../../utils'
 
 export const sortLabelProps = {
@@ -36,4 +36,6 @@ export enum SortTypeEnum {
 }
 
 export type SortLabelProps = ExtractPropTypes<typeof sortLabelProps>
+export type SortLabelPropsPublic = ExtractPublicPropTypes<typeof sortLabelProps>
+
 export type SortLabelEmits = typeof sortLabelEmits

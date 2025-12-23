@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType, CSSProperties } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType, CSSProperties } from 'vue'
 import { isNumber, isObject } from '../../utils'
 
 export const countToProps = {
@@ -62,4 +62,6 @@ export const countToEmits = {
 }
 
 export type CountToProps = ExtractPropTypes<typeof countToProps>
+export type CountToPropsPublic = ExtractPublicPropTypes<typeof countToProps>
+
 export type CountToEmits = typeof countToEmits

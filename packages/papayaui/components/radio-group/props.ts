@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import type { RadioValue } from '../radio/props'
 import { isNumber, isString } from '../../utils'
 
@@ -34,4 +34,6 @@ export const radioGroupEmits = {
 }
 
 export type RadioGroupProps = ExtractPropTypes<typeof radioGroupProps>
+export type RadioGroupPropsPublic = ExtractPublicPropTypes<typeof radioGroupProps>
+
 export type RadioGroupEmits = typeof radioGroupEmits

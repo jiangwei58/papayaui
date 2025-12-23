@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { CSSProperties, ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 
 export const loadingIconProps = {
   /**
@@ -12,3 +12,4 @@ export const loadingIconProps = {
 }
 
 export type LoadingIconProps = ExtractPropTypes<typeof loadingIconProps>
+export type LoadingIconPropsPublic = ExtractPublicPropTypes<typeof loadingIconProps>

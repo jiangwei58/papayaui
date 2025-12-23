@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, Ref } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, Ref } from 'vue'
 import { isNumber, isString } from '../../utils'
 
 export const tabbarProps = {
@@ -54,6 +54,8 @@ export const tabbarEmits = {
 }
 
 export type TabbarProps = ExtractPropTypes<typeof tabbarProps>
+export type TabbarPropsPublic = ExtractPublicPropTypes<typeof tabbarProps>
+
 export type TabbarEmits = typeof tabbarEmits
 
 export type TabbarExpose = {

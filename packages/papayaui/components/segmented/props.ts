@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 
 export type SegmentedValue = string | number
 
@@ -58,4 +58,6 @@ export const segmentedEmits = {
 }
 
 export type SegmentedProps = ExtractPropTypes<typeof segmentedProps>
+export type SegmentedPropsPublic = ExtractPublicPropTypes<typeof segmentedProps>
+
 export type SegmentedEmits = typeof segmentedEmits

@@ -6,7 +6,7 @@
   box-sizing: border-box;
   padding: _var(sidebar-padding, 20px 12px);
   overflow: hidden;
-  color: _var(color-black);
+  color: _var(sidebar-item-color, _var(color-black));
   font-size: _var(sidebar-font-size, 14px);
   line-height: _var(sidebar-line-height, 20px);
   background-color: _var(sidebar-bg-color, #f7f8fa);
@@ -14,7 +14,8 @@
   user-select: none;
 
   &--active {
-    background-color: #fff;
+    color: _var(sidebar-item-active-color, _var(color-primary));
+    background-color: _var(sidebar-item-active-bg-color, #fff);
     &::before {
       position: absolute;
       top: 50%;

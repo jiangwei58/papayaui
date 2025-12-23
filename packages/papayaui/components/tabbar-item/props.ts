@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import { badgeProps } from '../badge'
 import { iconProps } from '../icon'
 
@@ -41,3 +41,4 @@ export const tabbarItemProps = {
 }
 
 export type TabbarItemProps = ExtractPropTypes<typeof tabbarItemProps>
+export type TabbarItemPropsPublic = ExtractPublicPropTypes<typeof tabbarItemProps>

@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import type {
   DatePickerColumnType,
   DatePickerFilter,
@@ -101,4 +101,6 @@ export const datePickerEmits = {
 export type ColumnItem = string | Record<string, any>
 
 export type DatePickerProps = ExtractPropTypes<typeof datePickerProps>
+export type DatePickerPropsPublic = ExtractPublicPropTypes<typeof datePickerProps>
+
 export type DatePickerEmits = typeof datePickerEmits

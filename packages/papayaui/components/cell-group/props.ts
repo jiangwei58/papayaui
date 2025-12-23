@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes } from 'vue'
 
 export const cellGroupProps = {
   /**
@@ -8,3 +8,4 @@ export const cellGroupProps = {
 }
 
 export type CellGroupProps = ExtractPropTypes<typeof cellGroupProps>
+export type CellGroupPropsPublic = ExtractPublicPropTypes<typeof cellGroupProps>

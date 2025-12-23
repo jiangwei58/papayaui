@@ -24,12 +24,12 @@ import type { ComponentInternalInstance, Ref } from 'vue'
 import { getCurrentInstance, inject, ref } from 'vue'
 import { defaultNamespace } from '../../core'
 import Cell from '../cell/cell.vue'
-import type { FormItemProps } from './props'
+import type { FormItemPropsPublic } from './props'
 import { formItemEmits, formItemProps } from './props'
 
 export interface FormItemInstance extends Omit<ComponentInternalInstance, 'props'> {
   errorMessage: Ref<string>
-  props: FormItemProps
+  props: FormItemPropsPublic
 }
 
 defineProps(formItemProps)

@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { CSSProperties, ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 
 export const badgeProps = {
   /**
@@ -46,3 +46,4 @@ export const badgeProps = {
 }
 
 export type BadgeProps = ExtractPropTypes<typeof badgeProps>
+export type BadgePropsPublic = ExtractPublicPropTypes<typeof badgeProps>

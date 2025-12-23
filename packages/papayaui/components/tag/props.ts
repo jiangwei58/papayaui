@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { CSSProperties, ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 
 export const tagProps = {
   /**
@@ -39,4 +39,6 @@ export const tagEmits = {
 }
 
 export type TagProps = ExtractPropTypes<typeof tagProps>
+export type TagPropsPublic = ExtractPublicPropTypes<typeof tagProps>
+
 export type TagEmits = typeof tagEmits

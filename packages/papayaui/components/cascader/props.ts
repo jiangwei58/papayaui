@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { CSSProperties, ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import type { TreeNode, UseTreeFieldNames } from '../../core/useTree'
 import { defaultFieldNames } from '../../core/useTree'
 import { isArray, isObject } from '../../utils'
@@ -162,7 +162,11 @@ export const cascaderSearchViewEmits = {
 }
 
 export type CascaderProps = ExtractPropTypes<typeof cascaderProps>
+export type CascaderPropsPublic = ExtractPublicPropTypes<typeof cascaderProps>
+
 export type CascaderEmits = typeof cascaderEmits
 
 export type CascaderSearchViewProps = ExtractPropTypes<typeof cascaderSearchViewProps>
+export type CascaderSearchViewPropsPublic = ExtractPublicPropTypes<typeof cascaderSearchViewProps>
+
 export type CascaderSearchViewEmits = typeof cascaderSearchViewEmits

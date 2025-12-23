@@ -45,7 +45,7 @@ const createWatermark = (text: string | string[]) => {
 }
 
 const initMP = (textList: string[]) => {
-  const ratio = uni.getSystemInfoSync().pixelRatio
+  const ratio = uni.getWindowInfo().pixelRatio
   const canvasWidth = `${(props.gapX + props.width) * ratio}`
   const canvasHeight = `${(props.gapY + props.height) * ratio}`
   const markWidth = props.width * ratio

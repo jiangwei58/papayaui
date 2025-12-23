@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { CSSProperties, ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import type { EventDetail } from '../../types'
 import { isObject, isString, pick } from '../../utils'
 import { fieldProps } from '../field/props'
@@ -58,4 +58,6 @@ export const searchEmits = {
 }
 
 export type SearchProps = ExtractPropTypes<typeof searchProps>
+export type SearchPropsPublic = ExtractPublicPropTypes<typeof searchProps>
+
 export type SearchEmits = typeof searchEmits

@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType, Ref } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType, Ref } from 'vue'
 import { isNumber, isObject, isString } from '../../utils'
 import type { TabPaneProps } from '../tab-pane/props'
 import type { IncludeRefs } from '../../types'
@@ -65,6 +65,8 @@ export type TabItem = Required<Omit<TabPaneProps, 'titleSlot'>> & Pick<TabPanePr
 export type TabItemValue = TabItem['name']
 
 export type TabsProps = ExtractPropTypes<typeof tabsProps>
+export type TabsPropsPublic = ExtractPublicPropTypes<typeof tabsProps>
+
 export type TabsEmits = typeof tabsEmits
 
 export type TabsExpose = {

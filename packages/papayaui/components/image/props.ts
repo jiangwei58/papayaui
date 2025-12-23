@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes } from 'vue'
 
 export const imageProps = {
   /**
@@ -46,4 +46,6 @@ export const imageEmits = {
 }
 
 export type ImageProps = ExtractPropTypes<typeof imageProps>
+export type ImagePropsPublic = ExtractPublicPropTypes<typeof imageProps>
+
 export type ImageEmits = typeof imageEmits

@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { CSSProperties, ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import type { ButtonProps } from '../button'
 
 export const swipeCellProps = {
@@ -59,4 +59,6 @@ export type SwipeCellOption = {
 export type SwipeCellStatus = 'open' | 'close'
 
 export type SwipeCellProps = ExtractPropTypes<typeof swipeCellProps>
+export type SwipeCellPropsPublic = ExtractPublicPropTypes<typeof swipeCellProps>
+
 export type SwipeCellEmits = typeof swipeCellEmits

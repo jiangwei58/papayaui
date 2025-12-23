@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import { isString } from '../../utils'
 import { cellProps } from '../cell'
 
@@ -121,4 +121,6 @@ export const inputEmits = {
 }
 
 export type InputProps = ExtractPropTypes<typeof inputProps>
+export type InputPropsPublic = ExtractPublicPropTypes<typeof inputProps>
+
 export type InputEmits = typeof inputEmits

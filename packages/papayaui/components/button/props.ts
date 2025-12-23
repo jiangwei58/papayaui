@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { CSSProperties, ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 
 export const buttonProps = {
   /**
@@ -142,4 +142,6 @@ export const buttonEmits = {
 }
 
 export type ButtonProps = ExtractPropTypes<typeof buttonProps>
+export type ButtonPropsPublic = ExtractPublicPropTypes<typeof buttonProps>
+
 export type ButtonEmits = typeof buttonEmits

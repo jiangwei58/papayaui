@@ -57,7 +57,7 @@ const onToggle = () => {
   if (typeof _onToggle() === 'undefined') return
   emit('update:modelValue', checked.value)
   emit('change', checked.value)
-  if (uni.getSystemInfoSync().platform !== 'devtools') {
+  if (uni.getDeviceInfo().platform !== 'devtools') {
     uni.vibrateShort({})
   }
 }

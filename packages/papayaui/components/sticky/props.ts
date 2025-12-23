@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes } from 'vue'
 
 export const stickyProps = {
   /**
@@ -37,3 +37,4 @@ export const stickyProps = {
 }
 
 export type StickyProps = ExtractPropTypes<typeof stickyProps>
+export type StickyPropsPublic = ExtractPublicPropTypes<typeof stickyProps>

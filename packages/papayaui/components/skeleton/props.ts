@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import { pick } from '../../utils'
 
 export const skeletonProps = {
@@ -66,3 +66,4 @@ export const skeletonParagraphProps = {
 }
 
 export type SkeletonProps = ExtractPropTypes<typeof skeletonProps>
+export type SkeletonPropsPublic = ExtractPublicPropTypes<typeof skeletonProps>

@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes } from 'vue'
 
 export const tooltipProps = {
   /**
@@ -18,3 +18,4 @@ export const tooltipProps = {
 }
 
 export type TooltipProps = ExtractPropTypes<typeof tooltipProps>
+export type TooltipPropsPublic = ExtractPublicPropTypes<typeof tooltipProps>

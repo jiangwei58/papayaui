@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType, Ref } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType, Ref } from 'vue'
 import { isUndefined } from '../../utils'
 import type { CollapseItemInstance, CollapseItemValue } from '../collapse-item/props'
 
@@ -28,6 +28,8 @@ export const collapseEmits = {
 }
 
 export type CollapseProps = ExtractPropTypes<typeof collapseProps>
+export type CollapsePropsPublic = ExtractPublicPropTypes<typeof collapseProps>
+
 export type CollapseEmits = typeof collapseEmits
 
 export type CollapseExpose = {

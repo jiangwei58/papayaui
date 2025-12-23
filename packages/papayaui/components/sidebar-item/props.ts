@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType, CSSProperties } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType, CSSProperties } from 'vue'
 import { isNumber, isString, pick } from '../../utils'
 import { badgeProps } from '../badge/props'
 import type { SidebarValue } from '../sidebar/props'
@@ -36,4 +36,6 @@ export const sidebarItemEmits = {
 }
 
 export type SidebarItemProps = ExtractPropTypes<typeof sidebarItemProps>
+export type SidebarItemPropsPublic = ExtractPublicPropTypes<typeof sidebarItemProps>
+
 export type SidebarItemEmits = typeof sidebarItemEmits

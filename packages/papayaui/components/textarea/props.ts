@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes } from 'vue'
 import { isString } from '../../utils'
 import { cellProps } from '../cell/props'
 
@@ -33,6 +33,10 @@ export const textareaProps = {
    * 是否禁用
    */
   disabled: Boolean,
+  /**
+   * 是否显示清除控件
+   */
+  clearable: Boolean,
   /**
    * 最大输入长度，设置为 -1 的时候不限制最大长度
    */
@@ -118,9 +122,12 @@ export const textareaEmits = {
   focus: (_value: Event) => true,
   blur: (_value: Event) => true,
   confirm: (_value: Event) => true,
+  clear: () => true,
   linechange: (_value: Event) => true,
   keyboardheightchange: (_value: Event) => true,
 }
 
 export type TextareaProps = ExtractPropTypes<typeof textareaProps>
+export type TextareaPropsPublic = ExtractPublicPropTypes<typeof textareaProps>
+
 export type TextareaEmits = typeof textareaEmits

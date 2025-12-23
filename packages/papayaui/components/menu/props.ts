@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import { pick } from '../../utils'
 import { transitionProps } from '../transition/props'
 import { popupProps } from '../popup/props'
@@ -29,3 +29,4 @@ export const menuProps = {
 }
 
 export type MenuProps = ExtractPropTypes<typeof menuProps>
+export type MenuPropsPublic = ExtractPublicPropTypes<typeof menuProps>

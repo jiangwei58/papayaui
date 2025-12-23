@@ -1,4 +1,4 @@
-import { isRef } from 'vue'
+import { computed, isRef, ref, Ref } from 'vue'
 import type { MaybeRef } from '../types'
 
 /** 判断传入的值，是否带有单位，如果没有，就默认用rpx单位 */
@@ -82,4 +82,18 @@ export function getRefValue<T>(
 ): T | undefined | NonNullable<T> {
   const value = isRef(prop) ? prop.value : prop
   return value ?? defaultValue
+}
+
+/** 将 MaybeRef<T> 转换为 Ref<T> */
+export function toRefValue<T>(value: MaybeRef<T>): Ref<T>
+/** 将 MaybeRef<T | undefined> 转换为 Ref<T>，支持默认值 */
+export function toRefValue<T>(value: MaybeRef<T | undefined>, defaultValue: T): Ref<T>
+export function toRefValue<T>(value: MaybeRef<T | undefined>, defaultValue?: T): Ref<T> {
+  if (typeof defaultValue !== 'undefined') {
+    if (isRef(value)) {
+      return computed(() => value.value ?? defaultValue) as unknown as Ref<T>
+    }
+    return ref(value ?? defaultValue) as Ref<T>
+  }
+  return isRef(value) ? (value as Ref<T>) : (ref(value) as Ref<T>)
 }

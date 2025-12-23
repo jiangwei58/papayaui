@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, CSSProperties, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, CSSProperties, PropType } from 'vue'
 
 export const listItemProps = {
   /**
@@ -34,4 +34,6 @@ export const listItemEmits = {
 }
 
 export type ListItemProps = ExtractPropTypes<typeof listItemProps>
+export type ListItemPropsPublic = ExtractPublicPropTypes<typeof listItemProps>
+
 export type ListItemEmits = typeof listItemEmits

@@ -47,7 +47,7 @@ const emit = defineEmits(popupEmits)
 
 const { show } = toRefs(props)
 
-const systemInfo = uni.getSystemInfoSync()
+const systemInfo = uni.getWindowInfo()
 const visible = ref<boolean>(false)
 
 watch(

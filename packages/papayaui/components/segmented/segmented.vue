@@ -153,7 +153,7 @@ const handleSelect = (option: SegmentedOption, index: number) => {
   emit('change', option.value)
 
   // 触发震动反馈
-  if (uni.getSystemInfoSync().platform !== 'devtools') {
+  if (uni.getDeviceInfo().platform !== 'devtools') {
     uni.vibrateShort({})
   }
 }

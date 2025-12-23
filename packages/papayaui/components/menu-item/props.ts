@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, ExtractPublicPropTypes, PropType } from 'vue'
 import { isNumber, isString } from '../../utils'
 
 export const menuItemProps = {
@@ -50,4 +50,6 @@ export interface MenuItemOption {
 export type MenuItemOptionValue = number | string
 
 export type MenuItemProps = ExtractPropTypes<typeof menuItemProps>
+export type MenuItemPropsPublic = ExtractPublicPropTypes<typeof menuItemProps>
+
 export type MenuItemEmits = typeof menuItemEmits
