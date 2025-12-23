@@ -3,6 +3,7 @@ node_modules/
 unpackage/
 dist/
 wxcomponents/
+coverage/
 
 docs/.vitepress/cache/
 docs/node_modules/
