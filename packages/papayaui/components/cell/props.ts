@@ -15,6 +15,10 @@ export const cellProps = {
     default: '',
   },
   /**
+   * 占位提示，在 value 为 null、undefined、空字符串时显示
+   */
+  placeholder: String,
+  /**
    * 标题下方的描述信息
    */
   label: String,

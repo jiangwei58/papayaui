@@ -42,6 +42,10 @@
     @include _setVar(textarea-padding, 0);
   }
 
+  &__placeholder {
+    color: _var(cell-placeholder-color, _var(color-disabled));
+  }
+
   &__suffix {
     margin-left: _var(cell-suffix-margin-left, 5rpx);
     color: _var(cell-suffix-color, inherit);

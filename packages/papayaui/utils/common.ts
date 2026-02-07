@@ -1,4 +1,5 @@
-import { computed, isRef, ref, Ref } from 'vue'
+import { computed, isRef, ref } from 'vue'
+import type { Ref } from 'vue'
 import type { MaybeRef } from '../types'
 
 /** 判断传入的值，是否带有单位，如果没有，就默认用rpx单位 */
