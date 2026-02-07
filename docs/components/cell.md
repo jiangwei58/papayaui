@@ -8,6 +8,7 @@
 
 <pa-cell title="单元格" value="内容" />
 <pa-cell title="单元格" label="描述信息" value="内容" />
+<pa-cell title="占位提示" placeholder="请输入" value="" />
 
 ```
 ## 卡片风格
@@ -80,6 +81,7 @@
 | --- | ----- | --- | --- |
 | title | 标题 | string | - |
 | value | 内容 | string \| number \| boolean |  '' |
+| placeholder | 占位提示，在 value 为 null、undefined、空字符串时显示 | string | - |
 | label | 标题下方的描述信息 | string | - |
 | titleWidth | 标题宽度 | string | - |
 | clickable | 是否开启点击反馈 | boolean | - |

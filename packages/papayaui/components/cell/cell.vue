@@ -31,8 +31,13 @@
         })
       "
     >
-      <text v-if="!$slots.default" :selectable="selectable" :user-select="selectable">
-        {{ value }}
+      <text
+        v-if="!$slots.default"
+        :class="{ [ns.e('placeholder')]: showPlaceholder }"
+        :selectable="selectable"
+        :user-select="selectable"
+      >
+        {{ showPlaceholder ? placeholder : value }}
       </text>
       <slot v-else />
 
@@ -49,6 +54,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
 import useNamespace from '../../core/useNamespace'
 import { getUnitValue } from '../../utils'
 import IconComponent from '../icon/icon.vue'
@@ -58,6 +64,12 @@ const ns = useNamespace('cell')
 
 const props = defineProps(cellProps)
 const emit = defineEmits(cellEmits)
+
+const showPlaceholder = computed(
+  () =>
+    props.placeholder &&
+    (props.value === null || props.value === undefined || props.value === '')
+)
 
 const onClick = (event: MouseEvent) => {
   if (!props.clickable && !props.isLink) return
