@@ -1,0 +1,4 @@
+interface:
+  display_name: "papayaui 最佳实践"
+  short_description: "uniapp 业务项目中 papayaui 高效页面实践"
+  default_prompt: "使用 $papayaui-best-practices 生成或重构这个 uniapp 页面，优先应用内置样式、pa-container、useList 和 pa-form 的最佳实践。"
