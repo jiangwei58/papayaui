@@ -6,7 +6,8 @@
   "module": "index.ts",
   "scripts": {
     "test": "vitest run",
-    "test-coverage": "vitest run --coverage"
+    "test-coverage": "vitest run --coverage",
+    "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
     "async-validator": "^4.2.5",
