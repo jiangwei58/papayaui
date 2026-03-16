@@ -1,0 +1,41 @@
+@import '../../styles/vars.scss';
+
+.#{$prefix}-date-range-picker {
+  &-inputs {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    background-color: #fff;
+    border-radius: 12rpx;
+    border: 1rpx solid _var(color-border);
+    overflow: hidden;
+  }
+
+  &-input {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 16rpx 20rpx;
+  }
+
+  &-label {
+    font-size: 24rpx;
+    color: _var(color-black);
+    margin-bottom: 8rpx;
+  }
+
+  &-value {
+    font-size: 26rpx;
+    color: _var(color-text);
+  }
+
+  &-separator {
+    margin: 0 12rpx;
+    color: _var(color-text-secondary);
+  }
+}
+
+.btn-hover {
+  opacity: 0.7;
+}
+
