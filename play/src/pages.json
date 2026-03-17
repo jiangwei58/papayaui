@@ -335,6 +335,13 @@
       "type": "show"
     },
     {
+      "path": "pages/demos/tour/index",
+      "style": {
+        "navigationBarTitleText": "Tour 漫游式引导"
+      },
+      "type": "show"
+    },
+    {
       "path": "pages/demos/popover/index",
       "style": {
         "navigationBarTitleText": "Popover 气泡弹出框"
