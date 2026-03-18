@@ -1,12 +1,12 @@
 <template>
-  <view :class="ns.b()">
+  <view :class="[ns.b(), ns.is('readonly', readonly), ns.is('disabled', disabled)]">
     <view :class="ns.b('inputs')">
       <view :class="ns.b('input')" @click="openStart">
         <view v-if="startLabel" :class="ns.b('label')">
           {{ startLabel }}
         </view>
-        <view :class="ns.b('value')">
-          {{ startText || placeholderStart }}
+        <view :class="[ns.b('value'), ns.is('placeholder', !startText)]">
+          {{ startText || startPlaceholder }}
         </view>
       </view>
       <view :class="ns.b('separator')">-</view>
@@ -14,10 +14,16 @@
         <view v-if="endLabel" :class="ns.b('label')">
           {{ endLabel }}
         </view>
-        <view :class="ns.b('value')">
-          {{ endText || placeholderEnd }}
+        <view :class="[ns.b('value'), ns.is('placeholder', !endText)]">
+          {{ endText || endPlaceholder }}
         </view>
       </view>
+      <pa-icon
+        v-if="showClear"
+        name="round-close-fill"
+        :class="ns.b('clear')"
+        @tap.stop="onClear"
+      />
     </view>
 
     <!-- 开始时间选择 -->
@@ -25,13 +31,17 @@
       <pa-date-picker
         v-model="innerStart"
         :columns-type="columnsType"
+        :show-toolbar="showToolbar"
         :show-columns-header="true"
         :min-date="minDate"
         :max-date="maxDate"
         :option-height="optionHeight"
         :visible-option-num="visibleOptionNum"
+        :confirm-button-text="confirmButtonText"
+        :cancel-button-text="cancelButtonText"
         :formatter="formatter"
         :filter="filter"
+        @change="onStartChange"
         @confirm="onStartConfirm"
         @cancel="onStartCancel"
       />
@@ -42,13 +52,17 @@
       <pa-date-picker
         v-model="innerEnd"
         :columns-type="columnsType"
+        :show-toolbar="showToolbar"
         :show-columns-header="true"
         :min-date="endMinDate"
         :max-date="maxDate"
         :option-height="optionHeight"
         :visible-option-num="visibleOptionNum"
+        :confirm-button-text="confirmButtonText"
+        :cancel-button-text="cancelButtonText"
         :formatter="formatter"
         :filter="filter"
+        @change="onEndChange"
         @confirm="onEndConfirm"
         @cancel="onEndCancel"
       />
@@ -74,6 +88,14 @@ const showEndPopup = ref(false)
 
 const innerStart = ref<Date | undefined>(props.start)
 const innerEnd = ref<Date | undefined>(props.end)
+
+/** 是否允许打开弹窗 */
+const canOpenPopup = computed(() => !props.disabled && !props.readonly)
+
+/** 是否显示清空按钮 */
+const showClear = computed(() => {
+  return !props.disabled && !props.readonly && props.clearable && (!!props.start || !!props.end)
+})
 
 watch(
   () => props.start,
@@ -134,33 +156,58 @@ const endText = computed(() =>
   props.end ? dayjs(props.end).format(getFormatByColumnsType()) : '',
 )
 
-const placeholderStart = computed(() => props.startLabel ?? '')
-const placeholderEnd = computed(() => props.endLabel ?? '')
+/** 触发区间变更事件 */
+const emitRangeChange = (start?: Date, end?: Date) => {
+  if (start && end) {
+    emit('change', { start, end })
+  }
+}
+
+/** 触发区间确认事件 */
+const emitRangeConfirm = (start?: Date, end?: Date) => {
+  if (start && end) {
+    emit('confirm', { start, end })
+  }
+}
 
 const openStart = () => {
+  if (!canOpenPopup.value) return
   showStartPopup.value = true
 }
 
 const openEnd = () => {
+  if (!canOpenPopup.value) return
   showEndPopup.value = true
 }
 
-const emitRangeChange = () => {
-  if (props.start && props.end) {
-    emit('change', {
-      start: props.start,
-      end: props.end,
-    })
+/** 清空当前区间值 */
+const onClear = () => {
+  showStartPopup.value = false
+  showEndPopup.value = false
+  emit('update:start', undefined)
+  emit('update:end', undefined)
+  emit('clear')
+}
+
+/** 处理开始时间变更 */
+const onStartChange = (val: Date) => {
+  if (!props.showToolbar) {
+    onStartConfirm(val)
   }
 }
 
 const onStartConfirm = (val: Date) => {
+  const finalStart = val
+  const finalEnd =
+    !props.allowReverse && props.end && dayjs(val).isAfter(props.end) ? val : props.end
+
   emit('update:start', val)
   showStartPopup.value = false
-  if (!props.allowReverse && props.end && dayjs(val).isAfter(props.end)) {
-    emit('update:end', val)
+  if (finalEnd !== props.end) {
+    emit('update:end', finalEnd)
   }
-  emitRangeChange()
+  emitRangeChange(finalStart, finalEnd)
+  emitRangeConfirm(finalStart, finalEnd)
 }
 
 const onStartCancel = () => {
@@ -173,9 +220,18 @@ const onEndConfirm = (val: Date) => {
   if (!props.allowReverse && props.start && dayjs(val).isBefore(props.start)) {
     finalEnd = props.start
   }
+  const finalStart = props.start
   emit('update:end', finalEnd)
   showEndPopup.value = false
-  emitRangeChange()
+  emitRangeChange(finalStart, finalEnd)
+  emitRangeConfirm(finalStart, finalEnd)
+}
+
+/** 处理结束时间变更 */
+const onEndChange = (val: Date) => {
+  if (!props.showToolbar) {
+    onEndConfirm(val)
+  }
 }
 
 const onEndCancel = () => {
