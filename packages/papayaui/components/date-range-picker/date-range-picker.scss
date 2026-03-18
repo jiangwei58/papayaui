@@ -5,9 +5,9 @@
     display: flex;
     align-items: center;
     padding: 0;
-    background-color: #fff;
-    border-radius: 12rpx;
-    border: 1rpx solid _var(color-border);
+    background-color: _var(date-range-picker-background, #fff);
+    border-radius: _var(date-range-picker-border-radius, 12rpx);
+    border: 1rpx solid _var(date-range-picker-border-color, _var(color-border));
     overflow: hidden;
   }
 
@@ -15,23 +15,27 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 16rpx 20rpx;
+    padding: _var(date-range-picker-padding-y, 16rpx) _var(date-range-picker-padding-x, 20rpx);
   }
 
   &-label {
-    font-size: 24rpx;
-    color: _var(color-black);
-    margin-bottom: 8rpx;
+    font-size: _var(date-range-picker-label-font-size, 24rpx);
+    color: _var(date-range-picker-label-color, _var(color-black));
+    margin-bottom: _var(date-range-picker-label-margin-bottom, 8rpx);
   }
 
   &-value {
-    font-size: 26rpx;
-    color: _var(color-text);
+    font-size: _var(date-range-picker-value-font-size, 26rpx);
+    color: _var(date-range-picker-value-color, _var(color-text));
+  }
+
+  &--placeholder {
+    color: _var(date-range-picker-placeholder-color, _var(color-disabled));
   }
 
   &-separator {
-    margin: 0 12rpx;
-    color: _var(color-text-secondary);
+    margin: 0 _var(date-range-picker-separator-margin, 12rpx);
+    color: _var(date-range-picker-separator-color, _var(color-text-secondary));
   }
 }
 

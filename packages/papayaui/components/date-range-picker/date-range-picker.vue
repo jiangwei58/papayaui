@@ -5,8 +5,8 @@
         <view v-if="startLabel" :class="ns.b('label')">
           {{ startLabel }}
         </view>
-        <view :class="ns.b('value')">
-          {{ startText || placeholderStart }}
+        <view :class="[ns.b('value'), ns.is('placeholder', !startText)]">
+          {{ startText || startPlaceholder }}
         </view>
       </view>
       <view :class="ns.b('separator')">-</view>
@@ -14,8 +14,8 @@
         <view v-if="endLabel" :class="ns.b('label')">
           {{ endLabel }}
         </view>
-        <view :class="ns.b('value')">
-          {{ endText || placeholderEnd }}
+        <view :class="[ns.b('value'), ns.is('placeholder', !endText)]">
+          {{ endText || endPlaceholder }}
         </view>
       </view>
     </view>
@@ -133,9 +133,6 @@ const startText = computed(() =>
 const endText = computed(() =>
   props.end ? dayjs(props.end).format(getFormatByColumnsType()) : '',
 )
-
-const placeholderStart = computed(() => props.startLabel ?? '')
-const placeholderEnd = computed(() => props.endLabel ?? '')
 
 const openStart = () => {
   showStartPopup.value = true

@@ -83,6 +83,20 @@ export const dateRangePickerProps = {
    */
   endLabel: String,
   /**
+   * 开始时间占位文字
+   */
+  startPlaceholder: {
+    type: String,
+    default: '开始时间',
+  },
+  /**
+   * 结束时间占位文字
+   */
+  endPlaceholder: {
+    type: String,
+    default: '结束时间',
+  },
+  /**
    * 确认按钮文字
    */
   confirmButtonText: {

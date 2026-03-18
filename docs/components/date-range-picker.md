@@ -23,8 +23,8 @@
 import dayjs from 'dayjs'
 import { ref } from 'vue'
 
-const start = ref<Date>(new Date())
-const end = ref<Date>(dayjs().add(1, 'day').toDate())
+const start = ref<Date | undefined>(undefined)
+const end = ref<Date | undefined>(undefined)
 
 const formatDate = (date?: Date) => {
   if (!date) return ''
@@ -118,6 +118,8 @@ const formatDate = (date?: Date) => {
 | allowReverse | 是否允许结束时间早于开始时间 | boolean |  false |
 | startLabel | 开始时间标签 | string | - |
 | endLabel | 结束时间标签 | string | - |
+| startPlaceholder | 开始时间占位文字 | string |  '开始时间' |
+| endPlaceholder | 结束时间占位文字 | string |  '结束时间' |
 | confirmButtonText | 确认按钮文字 | string |  '确认' |
 | cancelButtonText | 取消按钮文字 | string |  '取消' |
 
@@ -151,7 +153,21 @@ const formatDate = (date?: Date) => {
 
 <!--cssVar start-->
 
-:see_no_evil:
+| 名称 | 默认值 |
+| --- | --- |
+| --pa-date-range-picker-background | #fff |
+| --pa-date-range-picker-border-color | var(--pa-color-border) |
+| --pa-date-range-picker-border-radius | 12rpx |
+| --pa-date-range-picker-label-color | var(--pa-color-black) |
+| --pa-date-range-picker-padding-x | 20rpx |
+| --pa-date-range-picker-padding-y | 16rpx |
+| --pa-date-range-picker-placeholder-color | var(--pa-color-disabled) |
+| --pa-date-range-picker-separator-color | var(--pa-color-text-secondary) |
+| --pa-date-range-picker-separator-margin | 12rpx |
+| --pa-date-range-picker-value-color | var(--pa-color-text) |
+| --pa-date-range-picker-label-font-size | 24rpx |
+| --pa-date-range-picker-label-margin-bottom | 8rpx |
+| --pa-date-range-picker-value-font-size | 26rpx |
 
 <!--cssVar end-->
 

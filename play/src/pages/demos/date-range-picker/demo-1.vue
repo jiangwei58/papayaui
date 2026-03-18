@@ -15,8 +15,8 @@
 import dayjs from 'dayjs'
 import { ref } from 'vue'
 
-const start = ref<Date>(new Date())
-const end = ref<Date>(dayjs().add(1, 'day').toDate())
+const start = ref<Date | undefined>(undefined)
+const end = ref<Date | undefined>(undefined)
 
 const formatDate = (date?: Date) => {
   if (!date) return ''
