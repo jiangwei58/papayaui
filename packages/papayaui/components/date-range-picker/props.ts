@@ -16,6 +16,14 @@ export const dateRangePickerProps = {
    */
   end: Date,
   /**
+   * 开始时间默认值，未设置 start 时打开选择器的初始时间
+   */
+  defaultStartDate: Date,
+  /**
+   * 结束时间默认值，未设置 end 时打开选择器的初始时间
+   */
+  defaultEndDate: Date,
+  /**
    * 选项类型
    */
   columnsType: {

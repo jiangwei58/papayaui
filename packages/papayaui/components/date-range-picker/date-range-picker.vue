@@ -172,11 +172,19 @@ const emitRangeConfirm = (start?: Date, end?: Date) => {
 
 const openStart = () => {
   if (!canOpenPopup.value) return
+  // 没有已选值时，用 defaultStartDate 或当前时间作为选择器初始时间
+  if (!innerStart.value) {
+    innerStart.value = props.defaultStartDate || new Date()
+  }
   showStartPopup.value = true
 }
 
 const openEnd = () => {
   if (!canOpenPopup.value) return
+  // 没有已选值时，用 defaultEndDate 或当前时间作为选择器初始时间
+  if (!innerEnd.value) {
+    innerEnd.value = props.defaultEndDate || new Date()
+  }
   showEndPopup.value = true
 }
 
@@ -211,6 +219,8 @@ const onStartConfirm = (val: Date) => {
 }
 
 const onStartCancel = () => {
+  // 取消时恢复内部值，防止临时默认值影响下次打开
+  innerStart.value = props.start
   showStartPopup.value = false
   emit('cancel')
 }
@@ -235,6 +245,8 @@ const onEndChange = (val: Date) => {
 }
 
 const onEndCancel = () => {
+  // 取消时恢复内部值，防止临时默认值影响下次打开
+  innerEnd.value = props.end
   showEndPopup.value = false
   emit('cancel')
 }
