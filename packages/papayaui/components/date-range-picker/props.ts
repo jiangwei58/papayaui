@@ -4,7 +4,7 @@ import type {
   DatePickerFilter,
   DatePickerFormatter,
 } from '../../core/useDatePicker'
-import { isDate } from '../../utils'
+import { isDate, isUndefined } from '../../utils'
 
 export const dateRangePickerProps = {
   /**
@@ -75,6 +75,18 @@ export const dateRangePickerProps = {
     default: false,
   },
   /**
+   * 是否禁用
+   */
+  disabled: Boolean,
+  /**
+   * 是否只读
+   */
+  readonly: Boolean,
+  /**
+   * 是否显示清空控件
+   */
+  clearable: Boolean,
+  /**
    * 开始时间标签
    */
   startLabel: String,
@@ -113,11 +125,12 @@ export const dateRangePickerProps = {
 } as const
 
 export const dateRangePickerEmits = {
-  'update:start': (value: Date) => isDate(value),
-  'update:end': (value: Date) => isDate(value),
+  'update:start': (value?: Date) => isDate(value) || isUndefined(value),
+  'update:end': (value?: Date) => isDate(value) || isUndefined(value),
   change: (value: { start: Date; end: Date }) => isDate(value.start) && isDate(value.end),
   confirm: (value: { start: Date; end: Date }) => isDate(value.start) && isDate(value.end),
   cancel: () => true,
+  clear: () => true,
 }
 
 export type DateRangePickerProps = ExtractPropTypes<typeof dateRangePickerProps>

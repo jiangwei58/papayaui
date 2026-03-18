@@ -11,6 +11,10 @@
     <Demo3 />
   </DocDemoBlock>
 
+  <DocDemoBlock title="禁用、只读与可清空" card>
+    <Demo4 />
+  </DocDemoBlock>
+
   <pa-safe-bottom />
 </template>
 
@@ -19,6 +23,7 @@ import DocDemoBlock from '../../../components/doc-demo-block.vue'
 import Demo1 from './demo-1.vue'
 import Demo2 from './demo-2.vue'
 import Demo3 from './demo-3.vue'
+import Demo4 from './demo-4.vue'
 </script>
 
 <style lang="scss" scoped></style>

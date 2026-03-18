@@ -1,6 +1,8 @@
 @import '../../styles/vars.scss';
 
 .#{$prefix}-date-range-picker {
+  display: block;
+
   &-inputs {
     display: flex;
     align-items: center;
@@ -16,6 +18,7 @@
     display: flex;
     flex-direction: column;
     padding: _var(date-range-picker-padding-y, 16rpx) _var(date-range-picker-padding-x, 20rpx);
+    min-width: 0;
   }
 
   &-label {
@@ -36,6 +39,37 @@
   &-separator {
     margin: 0 _var(date-range-picker-separator-margin, 12rpx);
     color: _var(date-range-picker-separator-color, _var(color-text-secondary));
+  }
+
+  &-clear {
+    flex-shrink: 0;
+    font-size: _var(date-range-picker-clear-font-size, 32rpx);
+    color: _var(date-range-picker-clear-color, _var(color-disabled));
+    padding-right: _var(date-range-picker-clear-padding-right, 20rpx);
+  }
+
+  &--readonly &-inputs {
+    background-color: _var(date-range-picker-readonly-background, #fff);
+  }
+
+  &--disabled &-inputs {
+    background-color: _var(
+      date-range-picker-disabled-background,
+      _var(color-background-disabled, #f7f8fa)
+    );
+    border-color: _var(date-range-picker-disabled-border-color, _var(color-border));
+  }
+
+  &--readonly &-value,
+  &--readonly &-label,
+  &--readonly &-separator {
+    color: _var(date-range-picker-readonly-color, _var(color-text-secondary));
+  }
+
+  &--disabled &-value,
+  &--disabled &-label,
+  &--disabled &-separator {
+    color: _var(date-range-picker-disabled-color, _var(color-disabled));
   }
 }
 
