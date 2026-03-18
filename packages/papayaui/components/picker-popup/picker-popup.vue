@@ -136,7 +136,9 @@ const filterOptions = computed(() => {
   if (props.remote) return text ? options.value : fullOptions
   // 本地数据情况，直接做过滤
   if (!text) return fullOptions
-  return fullOptions.filter((item) => item[labelKey.value]?.indexOf(text) !== -1)
+  // 优先使用 searchKey，未指定时回退到 labelKey
+  const key = props.searchKey ?? labelKey.value
+  return fullOptions.filter((item) => item[key]?.indexOf(text) !== -1)
 })
 
 const showView = computed(() => {

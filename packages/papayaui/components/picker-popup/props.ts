@@ -35,6 +35,13 @@ export const pickerPopupProps = {
     default: 'value',
   },
   /**
+   * 搜索时使用的字段名，不传则默认使用 labelKey 字段进行搜索
+   */
+  searchKey: {
+    type: String,
+    default: undefined,
+  },
+  /**
    * 是否显示搜索
    */
   showSearch: Boolean,
