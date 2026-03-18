@@ -174,6 +174,13 @@
       "type": "form"
     },
     {
+      "path": "pages/demos/date-range-picker/index",
+      "style": {
+        "navigationBarTitleText": "DateRangePicker 时间区间"
+      },
+      "type": "form"
+    },
+    {
       "path": "pages/demos/uploader/index",
       "style": {
         "navigationBarTitleText": "Uploader 文件上传"
@@ -324,6 +331,13 @@
       "path": "pages/demos/tooltip/index",
       "style": {
         "navigationBarTitleText": "Tooltip 悬浮提示"
+      },
+      "type": "show"
+    },
+    {
+      "path": "pages/demos/tour/index",
+      "style": {
+        "navigationBarTitleText": "Tour 漫游式引导"
       },
       "type": "show"
     },

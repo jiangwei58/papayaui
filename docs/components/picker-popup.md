@@ -237,6 +237,7 @@ const onLoad = (query?: string, pageNumber?: number, pageSize?: number) => {
 | data | 选项数据 | Option[] |  () => [] |
 | labelKey | 数据标题的字段名 | string |  'label' |
 | valueKey | 数据值的字段名 | string |  'value' |
+| searchKey | 搜索时使用的字段名，不传则默认使用 labelKey 字段进行搜索 | string |  undefined |
 | showSearch | 是否显示搜索 | boolean | - |
 | searchValue | 搜索文本 | string | - |
 | searchProps | 搜索框的props | Partial\<SearchProps\> |  () => ({}) |

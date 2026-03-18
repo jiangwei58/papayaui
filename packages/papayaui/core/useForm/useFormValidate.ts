@@ -32,13 +32,14 @@ export function useFormValidate<T = Values>(props: IncludeRefs<UseFormValidatePr
   const rules = toRef(props, 'rules') as Ref<OwnProps['rules']>
   const extraParams = toRef(props, 'extraParams', {}) as Ref<NonNullable<OwnProps['extraParams']>>
 
-  const errorMap = ref<ErrorMap<T>>({})
+  // Vue 的 ref 泛型会对泛型对象做 UnwrapRef，需显式转换避免类型错误
+  const errorMap = ref({}) as Ref<ErrorMap<T>>
 
   const clearValidate = (key?: keyof T | Array<keyof T>) => {
-    const keys = Array.isArray(key) ? key : [key]
-    if (keys.length) {
-      keys.forEach((key) => {
-        delete errorMap.value[key]
+    if (key !== undefined) {
+      const keys = Array.isArray(key) ? key : [key]
+      keys.forEach((k) => {
+        delete errorMap.value[k]
       })
     } else {
       errorMap.value = {}
@@ -55,13 +56,14 @@ export function useFormValidate<T = Values>(props: IncludeRefs<UseFormValidatePr
     return new Promise<{ isValid: boolean; errorMap: ErrorMap<T> }>((resolve) => {
       validator.validate(formData.value as Values, (errors, fields) => {
         Object.keys(filterRules).forEach((key) => {
+          const typedKey = key as keyof T
           if (errors?.length && fields[key]) {
-            errorMap.value[key] = replaceMessage(
+            errorMap.value[typedKey] = replaceMessage(
               fields[key][0].message || '',
-              extraParams.value[key as keyof T],
+              extraParams.value[typedKey],
             )
           } else {
-            delete errorMap.value[key]
+            delete errorMap.value[typedKey]
           }
         })
         resolve({ isValid: !errors?.length, errorMap: errorMap.value })

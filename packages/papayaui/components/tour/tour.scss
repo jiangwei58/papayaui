@@ -1,0 +1,148 @@
+@import '../../styles/vars.scss';
+
+$arrow-size: 8px;
+$bubble-bg: _var(tour-bubble-bg, #ffffff);
+$bubble-radius: _var(tour-bubble-radius, 12px);
+$bubble-shadow: _var(tour-bubble-shadow, 0 4px 20px rgba(0, 0, 0, 0.15));
+$primary-color: _var(tour-primary-color, #1989fa);
+$title-color: _var(tour-title-color, #323233);
+$content-color: _var(tour-content-color, #646566);
+$dot-color: _var(tour-dot-color, #c8c9cc);
+$dot-active-color: _var(tour-dot-active-color, #1989fa);
+
+.#{$prefix}-tour {
+  // 遮罩块（4 块拼接实现镂空效果，或 1 块铺满）
+  &__mask {
+    pointer-events: auto;
+  }
+
+  // 目标高亮边框
+  &__spotlight {
+    box-sizing: border-box;
+    border-radius: _var(tour-spotlight-radius, 8px);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 0 3px rgba(25, 137, 250, 0.3);
+  }
+
+  // 引导气泡容器
+  &__bubble {
+    box-sizing: border-box;
+    padding: 16px;
+    background: $bubble-bg;
+    border-radius: $bubble-radius;
+    box-shadow: $bubble-shadow;
+    transition: opacity 0.2s ease;
+  }
+
+  // 气泡箭头（CSS 三角形）
+  &__arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+
+    // placement=bottom：气泡在目标下方，箭头朝上
+    &--bottom {
+      top: -#{$arrow-size};
+      border-left: $arrow-size solid transparent;
+      border-right: $arrow-size solid transparent;
+      border-bottom: $arrow-size solid $bubble-bg;
+    }
+
+    // placement=top：气泡在目标上方，箭头朝下
+    &--top {
+      bottom: -#{$arrow-size};
+      border-left: $arrow-size solid transparent;
+      border-right: $arrow-size solid transparent;
+      border-top: $arrow-size solid $bubble-bg;
+    }
+
+    // placement=right：气泡在目标右侧，箭头朝左
+    &--right {
+      left: -#{$arrow-size};
+      border-top: $arrow-size solid transparent;
+      border-bottom: $arrow-size solid transparent;
+      border-right: $arrow-size solid $bubble-bg;
+    }
+
+    // placement=left：气泡在目标左侧，箭头朝右
+    &--left {
+      right: -#{$arrow-size};
+      border-top: $arrow-size solid transparent;
+      border-bottom: $arrow-size solid transparent;
+      border-left: $arrow-size solid $bubble-bg;
+    }
+  }
+
+  // 关闭按钮
+  &__close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c8c9cc;
+    font-size: 14px;
+    line-height: 1;
+
+    &:active {
+      opacity: 0.6;
+    }
+  }
+
+  // 标题
+  &__title {
+    padding-right: 24px;
+    margin-bottom: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 22px;
+    color: $title-color;
+  }
+
+  // 描述内容
+  &__content {
+    font-size: 14px;
+    line-height: 20px;
+    color: $content-color;
+    word-break: break-word;
+  }
+
+  // 底部操作区
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
+
+  // 步骤指示点
+  &__indicators {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: $dot-color;
+    transition: all 0.2s ease;
+
+    &--active {
+      width: 16px;
+      border-radius: 3px;
+      background-color: $dot-active-color;
+    }
+  }
+
+  // 操作按钮区
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}

@@ -1,4 +1,5 @@
 import { computed, ref } from 'vue'
+import type { Ref } from 'vue'
 import type { MaybeRef } from '../../types'
 import type { TreeNode, UseTreeProps } from '../useTree'
 import { useTree } from '../useTree'
@@ -16,7 +17,8 @@ export function useCascader<T extends object, V>(props: UseCascaderProps<T>) {
 
   const multiple = ref(props.multiple)
 
-  const selectedMap = ref<Map<V, OwnNode>>(new Map())
+  // Vue 的 ref 泛型会对 Map value 做 UnwrapRefSimple，需显式转换避免类型错误
+  const selectedMap = ref(new Map<V, OwnNode>()) as Ref<Map<V, OwnNode>>
   const selectedValues = computed<V[]>(() => [...selectedMap.value.keys()])
 
   const setSelect = (item: OwnNode) => {
